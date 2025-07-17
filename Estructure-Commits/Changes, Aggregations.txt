@@ -9,3 +9,7 @@ cha('Cambio que se hizo')
 New Add to
 
 add('Lo que se agregó')
+
+Arreglar algun bug
+
+Fix('lo que se arregló')
