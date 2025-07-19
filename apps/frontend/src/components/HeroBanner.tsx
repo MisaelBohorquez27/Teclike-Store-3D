@@ -1,4 +1,5 @@
 import { Navbar } from "@/components/Navbar";
+import Button from "@/components/Button";
 
 export function HeroBanner() {
   return (
@@ -18,9 +19,9 @@ export function HeroBanner() {
           </p>
 
           {/* Botón */}
-          <button className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-8 rounded-lg text-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105">
+          <Button className="w-fit">
             Empezar
-          </button>
+          </Button>
         </section>
       </main>
 

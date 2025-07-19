@@ -1,6 +1,8 @@
 "use client";
 import Link from "next/link";
-import { SearchBar } from "./SearchBar"; // Componente nuevo que crearemos
+import { SearchBar } from "./SearchBar";
+import logo from "../assets/Logo4.png";
+import Button from "@/components/Button";
 
 export function Navbar() {
   return (
@@ -8,9 +10,11 @@ export function Navbar() {
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center py-4">
           {/* Logo */}
-          <Link href="/" className="text-2xl font-bold text-gray-800">
-            Logo
-          </Link>
+          <img
+            src={logo.src} //Arreglar esto en un futuro
+            alt="Logo"
+            className="h-10 w-auto"
+          />
 
           {/* Menú central */}
           <div className="hidden md:flex space-x-8">
@@ -37,9 +41,9 @@ export function Navbar() {
           {/* Barra de búsqueda y login */}
           <div className="flex items-center space-x-4">
             <SearchBar />
-            <button className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
+            <Button className="text-sm">
               Iniciar sesión
-            </button>
+            </Button>
           </div>
         </div>
       </div>
