@@ -15,7 +15,7 @@ export function HeroBanner() {
 
           {/* Subtítulo */}
           <p className="text-xl md:text-2xl text-gray-600 mb-8">
-            Ahorra tiempo y organizados desde ahora
+            Ahorra tiempo y organizalos desde ahora
           </p>
 
           {/* Botón */}
@@ -24,10 +24,6 @@ export function HeroBanner() {
           </Button>
         </section>
       </main>
-
-      <footer className="bg-gray-800 text-white py-6 text-center">
-        <p>www.vective3dstore.com</p>
-      </footer>
     </>
   );
 }

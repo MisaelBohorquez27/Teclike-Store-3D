@@ -13,3 +13,59 @@ body {
   color: var(--color-foreground);
   font-family: var(--font-sans);
 }
+
+/* Estilos de las flechas de la seccion "Mas vendido de la semana"*/
+.swiper-button-next-custom,
+.swiper-button-prev-custom {
+  color: #3B82F6;
+  background: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 9999px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* Estilos de las flechas de Productos Populares*/
+.swiper-button-next-custom::after,
+.swiper-button-prev-custom::after {
+  font-size: 18px;
+  font-weight: bold;
+  content: '';
+  display: inline-block;
+}
+
+.swiper-button-prev-custom::after {
+  content: '‹';
+}
+
+.swiper-button-next-custom::after {
+  content: '›';
+}
+
+/*Seccion de Clientes Review*/
+.swiper-pagination-bullet {
+  background: #9CA3AF !important;
+  opacity: 1 !important;
+}
+
+.swiper-pagination-bullet-active {
+  background: #3B82F6 !important;
+  width: 24px !important;
+  border-radius: 4px !important;
+}
+
+.swiper-pagination-bullet {
+  background: #9CA3AF !important;
+  opacity: 1 !important;
+}
+
+.swiper-pagination-bullet-active {
+  background: #3B82F6 !important;
+  width: 24px !important;
+  border-radius: 4px !important;
+}
+

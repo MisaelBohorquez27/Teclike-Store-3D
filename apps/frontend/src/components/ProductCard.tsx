@@ -1,65 +1,57 @@
+'use client';
+
 type Product = {
   id: number;
-  title: string;
-  tagline?: string;
-  description?: string;
-  features?: string[];
-  stats?: string[];
-  times?: string[];
-  fullDescription: string;
-  priceRange: { min: number; max: number };
-  currency: string;
+  name: string;
+  category: string;
+  price: number;
+  rating: number;
+  image: string;
+  isNew?: boolean;
 };
 
 export function ProductCard({ product }: { product: Product }) {
   return (
-    <div className="bg-gray-50 rounded-xl p-8 flex flex-col md:flex-row gap-8">
-      {/* Columna izquierda */}
-      <div className="md:w-1/2">
-        <h3 className="text-2xl font-bold text-gray-900 mb-2">{product.title}</h3>
-        {product.tagline && (
-          <p className="text-gray-600 italic mb-4">{product.tagline}</p>
-        )}
-        {product.description && (
-          <p className="text-gray-700 mb-6">{product.description}</p>
-        )}
-
-        {product.features && (
-          <ul className="space-y-2 mb-6">
-            {product.features.map((feature, index) => (
-              <li key={index} className="flex items-center">
-                <span className="mr-2">•</span>
-                <span className="text-gray-700">{feature}</span>
-              </li>
-            ))}
-          </ul>
-        )}
-
-        {product.stats && product.times && (
-          <div className="grid grid-cols-4 gap-2 mb-6">
-            {product.stats.map((stat, index) => (
-              <div key={index} className="bg-white p-2 rounded text-center">
-                <span className="font-bold">{stat}</span>
-              </div>
-            ))}
-            {product.times.map((time, index) => (
-              <div key={index} className="col-span-2 text-sm text-gray-500">
-                {time}
-              </div>
-            ))}
-          </div>
+    <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+      {/* Imagen del Producto */}
+      <div className="relative aspect-square">
+        <img 
+          src={product.image} 
+          alt={product.name}
+          className="w-full h-full object-cover"
+        />
+        {product.isNew && (
+          <span className="absolute top-2 right-2 bg-green-500 text-white text-xs px-2 py-1 rounded">
+            Nuevo
+          </span>
         )}
       </div>
-
-      {/* Columna derecha */}
-      <div className="md:w-1/2">
-        <p className="text-gray-600 mb-6">{product.fullDescription}</p>
-        <div className="text-2xl font-bold text-gray-900 mb-6">
-          {product.currency} {product.priceRange.min} - {product.currency} {product.priceRange.max}
+      
+      {/* Detalles del Producto */}
+      <div className="p-4">
+        <div className="flex justify-between items-start">
+          <h3 className="font-semibold text-lg">{product.name}</h3>
+          <span className="text-sm text-gray-500">{product.category}</span>
         </div>
-        <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium w-full">
-          Añadir al carrito
-        </button>
+        
+        <div className="mt-2 flex items-center">
+          {[...Array(5)].map((_, i) => (
+            <span 
+              key={i} 
+              className={`text-sm ${i < product.rating ? 'text-yellow-400' : 'text-gray-300'}`}
+            >
+              ★
+            </span>
+          ))}
+          <span className="text-xs text-gray-500 ml-1">({product.rating})</span>
+        </div>
+        
+        <div className="mt-4 flex justify-between items-center">
+          <span className="font-bold text-gray-900">${product.price.toFixed(2)}</span>
+          <button className="text-blue-600 hover:text-blue-800 text-sm font-medium">
+            Ver detalles
+          </button>
+        </div>
       </div>
     </div>
   );

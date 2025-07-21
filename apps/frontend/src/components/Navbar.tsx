@@ -22,8 +22,9 @@ export function Navbar() {
               Home
             </Link>
             <Link
-              href="/productos"
+              href="/Products"
               className="text-gray-600 hover:text-blue-500"
+              aria-current="page"
             >
               Productos
             </Link>
@@ -36,14 +37,19 @@ export function Navbar() {
             >
               Modelado 3D
             </Link>
+            <Link
+              href="/HelpContact"
+              className="text-gray-600 hover:text-blue-500"
+              aria-current="page"
+            >
+              Ayuda y Contacto
+            </Link>
           </div>
 
           {/* Barra de búsqueda y login */}
           <div className="flex items-center space-x-4">
             <SearchBar />
-            <Button className="text-sm">
-              Iniciar sesión
-            </Button>
+            <Button className="text-sm">Iniciar sesión</Button>
           </div>
         </div>
       </div>
