@@ -7,8 +7,8 @@ export default function ProductPage() {
     <>
       {/* Navbar */}
       <Navbar />
+
       <main className="bg-gray-50 min-h-screen">
-        
         {/* Hero Banner */}
         <section className="bg-gradient-to-r from-blue-600 to-indigo-700 py-20 text-white">
           <div className="container mx-auto px-4 text-center">
