@@ -28,7 +28,10 @@ export function Navbar() {
             >
               Productos
             </Link>
-            <Link href="/ofertas" className="text-gray-600 hover:text-blue-500">
+            <Link 
+            href="/DailyOffers" 
+            className="text-gray-600 hover:text-blue-500"
+            aria-current="page">
               Ofertas del día
             </Link>
             <Link
