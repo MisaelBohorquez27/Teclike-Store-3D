@@ -1,13 +1,12 @@
 "use client";
 import Link from "next/link";
 import { SearchBar } from "./SearchBar";
-import logo from "../assets/Logo4.png";
-import Button from "@/components/Button";
+import logo from "../assets/Logo2.png";
 import { FiShoppingCart } from "react-icons/fi";
 
 export function Navbar() {
   return (
-    <nav className="bg-white border-b border-gray-200">
+    <nav className="bg-[#06162f] text-[#FAF9F6] shadow-md">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center py-4">
           {/* Logo */}
@@ -16,63 +15,49 @@ export function Navbar() {
             alt="Logo"
             className="h-10 w-auto"
           />
-
           {/* Menú central */}
           <div className="hidden md:flex space-x-8">
-            <Link href="/" className="text-gray-600 hover:text-blue-500">
+            <Link href="/" className="hover:opacity-80 transition-opacity">
               Home
             </Link>
             <Link
               href="/Products"
-              className="text-gray-600 hover:text-blue-500"
-              aria-current="page"
+              className="hover:opacity-80 transition-opacity"
             >
               Productos
             </Link>
             <Link
               href="/DailyOffers"
-              className="text-gray-600 hover:text-blue-500"
-              aria-current="page"
+              className="hover:opacity-80 transition-opacity"
             >
               Ofertas del día
             </Link>
-            {/*<Link
-              href="/modelado"
-              className="text-gray-600 hover:text-blue-500"
-            >
-              Modelado 3D
-            </Link>*/}
             <Link
               href="/HelpContact"
-              className="text-gray-600 hover:text-blue-500"
-              aria-current="page"
+              className="hover:opacity-80 transition-opacity"
             >
               Ayuda y Contacto
             </Link>
           </div>
 
-          {/* Barra de búsqueda y login */}
-          <div className="flex items-center space-x-4">
-            <SearchBar />
-            <Button 
-            aria-label="Iniciar sesión"
-            className="text-sm">
-              Iniciar sesión
-            </Button>
-          </div>
-
-          {/* Icono del carrito */}
-          <div className="relative">
+          {/* Barra de búsqueda y acciones */}
+          <div className="flex items-center space-x-6">
+            <SearchBar darkMode />
             <Link
-              href="/Cart"
-              aria-label="Carrito de compras"
-              className="flex items-center space-x-4"
-              aria-current="page"
+              href="/login"
+              className="bg-[#182d50] text-[#FAF9F6] px-4 py-2 rounded-md hover:bg-[#3778d4] hover:bg-opacity-20 transition-colors"
             >
+              Iniciar sesión
+            </Link>
+            <Link href="/Cart" className="relative">
               <FiShoppingCart
-                className="text-gray-600 hover:text-blue-500 cursor-pointer"
                 size={22}
+                className="hover:opacity-80 transition-opacity"
               />
+              {/* Indicador de items en carrito */}
+              <span className="absolute -top-2 -right-2 bg-[#D4AF37] text-[#0F2C59] text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
+                3
+              </span>
             </Link>
           </div>
         </div>
