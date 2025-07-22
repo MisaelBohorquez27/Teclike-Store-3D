@@ -1,4 +1,5 @@
 import { FilterSidebar } from "@/components/FilterSidebar";
+import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
 import { ProductGrid } from "@/components/ProductGrid";
 
@@ -67,6 +68,7 @@ export default function ProductPage() {
           </div>
         </div>
       </main>
+      <Footer />
     </>
   );
 }

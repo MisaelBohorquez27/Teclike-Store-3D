@@ -2,6 +2,7 @@ import { FaqSection } from "@/components/FaqSection";
 import { ContactForm } from "@/components/ContactForm";
 import { ServiceCards } from "@/components/ServiceCards";
 import { Navbar } from "@/components/Navbar";
+import { Footer } from "@/components/Footer";
 
 export default function HelpContactPage() {
   return (
@@ -66,6 +67,7 @@ export default function HelpContactPage() {
           </div>
         </section>
       </main>
+      <Footer />
     </>
   );
 }

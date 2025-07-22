@@ -2,6 +2,7 @@ import { DailyDeals } from "@/components/DailyDeals";
 import { CountdownTimer } from "@/components/CountdownTimer";
 import { HotDeals } from "@/components/HotDeals";
 import { Navbar } from "@/components/Navbar";
+import { Footer } from "@/components/Footer";
 
 export default function DailyDealsPage() {
   return (
@@ -72,6 +73,7 @@ export default function DailyDealsPage() {
           </div>
         </section>
       </main>
+      <Footer />
     </>
   );
 }

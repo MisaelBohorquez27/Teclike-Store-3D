@@ -3,6 +3,7 @@ import Link from "next/link";
 import { SearchBar } from "./SearchBar";
 import logo from "../assets/Logo4.png";
 import Button from "@/components/Button";
+import { FiShoppingCart } from "react-icons/fi";
 
 export function Navbar() {
   return (
@@ -28,18 +29,19 @@ export function Navbar() {
             >
               Productos
             </Link>
-            <Link 
-            href="/DailyOffers" 
-            className="text-gray-600 hover:text-blue-500"
-            aria-current="page">
+            <Link
+              href="/DailyOffers"
+              className="text-gray-600 hover:text-blue-500"
+              aria-current="page"
+            >
               Ofertas del día
             </Link>
-            <Link
+            {/*<Link
               href="/modelado"
               className="text-gray-600 hover:text-blue-500"
             >
               Modelado 3D
-            </Link>
+            </Link>*/}
             <Link
               href="/HelpContact"
               className="text-gray-600 hover:text-blue-500"
@@ -52,7 +54,26 @@ export function Navbar() {
           {/* Barra de búsqueda y login */}
           <div className="flex items-center space-x-4">
             <SearchBar />
-            <Button className="text-sm">Iniciar sesión</Button>
+            <Button 
+            aria-label="Iniciar sesión"
+            className="text-sm">
+              Iniciar sesión
+            </Button>
+          </div>
+
+          {/* Icono del carrito */}
+          <div className="relative">
+            <Link
+              href="/Cart"
+              aria-label="Carrito de compras"
+              className="flex items-center space-x-4"
+              aria-current="page"
+            >
+              <FiShoppingCart
+                className="text-gray-600 hover:text-blue-500 cursor-pointer"
+                size={22}
+              />
+            </Link>
           </div>
         </div>
       </div>
