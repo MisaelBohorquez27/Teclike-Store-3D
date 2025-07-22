@@ -1,8 +1,8 @@
 "use client";
 import { useState } from "react";
-import { CartItem } from "@/components/CartItem";
-import { EmptyCart } from "@/components/EmptyCart";
-import { CheckoutButton } from "@/components/CheckoutButton";
+import { CartItem } from "@/app/Cart/CartItem";
+import { EmptyCart } from "@/app/Cart/EmptyCart";
+import { CheckoutButton } from "@/app/Cart/CheckoutButton";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 

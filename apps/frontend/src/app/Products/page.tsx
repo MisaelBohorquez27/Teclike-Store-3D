@@ -1,7 +1,7 @@
-import { FilterSidebar } from "@/components/FilterSidebar";
+import { FilterSidebar } from "@/app/Products/FilterSidebar";
 import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
-import { ProductGrid } from "@/components/ProductGrid";
+import { ProductGrid } from "@/app/Products/ProductGrid";
 
 export default function ProductPage() {
   return (

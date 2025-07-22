@@ -1,6 +1,6 @@
-import { FaqSection } from "@/components/FaqSection";
-import { ContactForm } from "@/components/ContactForm";
-import { ServiceCards } from "@/components/ServiceCards";
+import { FaqSection } from "@/app/HelpContact/FaqSection";
+import { ContactForm } from "@/app/HelpContact/ContactForm";
+import { ServiceCards } from "@/app/HelpContact/ServiceCards";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 
