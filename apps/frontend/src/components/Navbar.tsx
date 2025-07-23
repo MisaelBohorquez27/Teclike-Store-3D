@@ -1,20 +1,25 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 import { SearchBar } from "./SearchBar";
-import logo from "../assets/Logo2.png";
+import logo from "../../public/logos/Logo2.png"; // Asegúrate de que la ruta sea correcta
 import { FiShoppingCart } from "react-icons/fi";
 
 export function Navbar() {
   return (
     <nav className="bg-[#06162f] text-[#FAF9F6] shadow-md">
-      <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center py-4">
-          {/* Logo */}
-          <img
-            src={logo.src} //Arreglar esto en un futuro
+      <div className="container mx-auto px-3">
+        <div className="flex justify-between items-center py-6">
+          <div className="flex items-center">
+             {/* Logo */}
+          <Image
+            src={logo}
             alt="Logo"
+            width={120}
+            height={40}
             className="h-10 w-auto"
           />
+          </div>
           {/* Menú central */}
           <div className="hidden md:flex space-x-8">
             <Link href="/" className="hover:opacity-80 transition-opacity">

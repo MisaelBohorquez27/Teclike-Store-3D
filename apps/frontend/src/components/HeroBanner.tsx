@@ -1,16 +1,16 @@
 import { Navbar } from "@/components/Navbar";
 import Button from "@/components/Button";
-import desktop from "../assets/escritorio.png";
+import desktop from "../../public/ui/escritorio2.png";
+import Image from "next/image";
 
 export function HeroBanner() {
   return (
     <>
       <Navbar />
-
-      <main className="min-h-screen bg-gradient-to-br from-[#06162f] to-[#072143] flex items-center justify-center p-4 gap-4">
-        <div className="max-w-2xl text-center w-1/2 p-4 rounded-lg">
+      <main className="min-h-screen bg-gradient-to-b from-[#06162f] to-[#072143] flex items-center justify-center px-4 pb-8 gap-4">
+        <div className="w-full max-w-2xl text-left md:w-2/2 pb-6 p-2 pr-0 rounded-lg ml-2 mb-4 mr-4">
           {/* Título */}
-          <h1 className="text-4xl md:text-5xl font-bold text-[#FAF9F6] mb-6 leading-tight">
+          <h1 className="text-4xl md:text-6xl font-bold text-[#FAF9F6] mb-6 leading-tight">
             ¿No sabes cómo ordenar tus productos luego de comprarlos?
           </h1>
 
@@ -28,11 +28,13 @@ export function HeroBanner() {
             Empezar
           </Button>
         </div>
-        <div className="w-1/2 p-4 rounded-lg">
-          <img
-            src={desktop.src} //Arreglar esto en un futuro
+        <div className="w-full md:w-1/3 pl-8 mb-4 ml-6">
+          <Image
+            src={desktop.src}
             alt="Escritorio"
-            className="w-full max-w-md mx-auto mt-8"
+            width={1000}
+            height={400}
+            className="w-full max-w-md mx-auto rounded-lg object-cover"
           />
         </div>
       </main>
