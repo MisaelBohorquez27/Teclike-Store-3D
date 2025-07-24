@@ -1,3 +1,4 @@
+import Button from "./Button";
 import { Rating } from "./Rating"; 
 
 type Offer = {
@@ -28,9 +29,12 @@ export function OfferCard({ offer }: { offer: Offer }) {
 
         <div className="mt-6 flex justify-between items-center">
           <span className="text-2xl font-bold text-gray-800">{offer.price}</span>
-          <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded text-sm font-medium">
+          <Button 
+          variant="addCart"
+          size="small"
+          className="flex items-center justify-center">
             Añadir al carrito
-          </button>
+          </Button>
         </div>
       </div>
     </div>

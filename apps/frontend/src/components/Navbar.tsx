@@ -8,7 +8,7 @@ import { FiShoppingCart } from "react-icons/fi";
 export function Navbar() {
   return (
     <nav className="bg-[#06162f] text-[#FAF9F6] shadow-md">
-      <div className="container mx-auto px-3">
+      <div className="container mx-auto px-4">
         <div className="flex justify-between items-center py-6">
           <div className="flex items-center">
              {/* Logo */}

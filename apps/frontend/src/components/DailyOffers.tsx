@@ -1,3 +1,4 @@
+import Button from "./Button";
 import { OfferCard } from "./OfferCard";
 
 const OFFERS = [
@@ -37,9 +38,13 @@ export function DailyOffers() {
         <p className="text-lg text-gray-600">
           Explora productos a buen precio por tiempo limitado
         </p>
-        <button className="mt-4 bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-md font-medium transition-colors">
+        <Button
+          variant="secondary"
+          size="default"
+          className="mt-4"
+        >
           Ver todas las ofertas
-        </button>
+        </Button>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
