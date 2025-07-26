@@ -13,7 +13,7 @@ type Offer = {
 export function OfferCard({ offer }: { offer: Offer }) {
   return (
     <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow h-full">
-      <div className="p-6 flex flex-col h-full">
+      <div className="px-2 py-6 flex flex-col h-full">
         <div className="flex justify-between items-start">
           <h3 className="text-xl font-semibold text-gray-800">{offer.title}</h3>
           <span className="bg-red-500 text-white text-sm font-bold px-2 py-1 rounded">
@@ -31,7 +31,7 @@ export function OfferCard({ offer }: { offer: Offer }) {
           <span className="text-2xl font-bold text-gray-800">{offer.price}</span>
           <Button 
           variant="addCart"
-          size="small"
+          size="2xs"
           className="flex items-center justify-center">
             Añadir al carrito
           </Button>
