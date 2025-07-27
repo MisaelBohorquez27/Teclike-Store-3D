@@ -1,5 +1,3 @@
-import { FiShoppingCart } from "react-icons/fi";
-import Button from "./Button";
 import { Rating } from "./Rating";
 import CartIcon from "./CartIcon";
 
