@@ -4,6 +4,7 @@ import Image from "next/image";
 import { SearchBar } from "./SearchBar";
 import logo from "../../public/logos/Logo2.png"; // Asegúrate de que la ruta sea correcta
 import { FiShoppingCart } from "react-icons/fi";
+import CartIcon from "./CartIcon";
 
 export function Navbar() {
   return (
@@ -11,14 +12,14 @@ export function Navbar() {
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center py-6">
           <div className="flex items-center">
-             {/* Logo */}
-          <Image
-            src={logo}
-            alt="Logo"
-            width={120}
-            height={40}
-            className="h-10 w-auto"
-          />
+            {/* Logo */}
+            <Image
+              src={logo}
+              alt="Logo"
+              width={120}
+              height={40}
+              className="h-10 w-auto"
+            />
           </div>
           {/* Menú central */}
           <div className="hidden md:flex space-x-8">
@@ -54,16 +55,7 @@ export function Navbar() {
             >
               Iniciar sesión
             </Link>
-            <Link href="/Cart" className="relative">
-              <FiShoppingCart
-                size={22}
-                className="hover:opacity-80 transition-opacity"
-              />
-              {/* Indicador de items en carrito */}
-              <span className="absolute -top-2 -right-2 bg-[#D4AF37] text-[#0F2C59] text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
-                3
-              </span>
-            </Link>
+            <CartIcon />
           </div>
         </div>
       </div>

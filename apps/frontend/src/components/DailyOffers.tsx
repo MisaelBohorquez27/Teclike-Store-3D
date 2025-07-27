@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Button from "./Button";
 import { OfferCard } from "./OfferCard";
 
@@ -31,26 +32,26 @@ const OFFERS = [
 export function DailyOffers() {
   return (
     <section className="container mx-auto px-4 py-16">
-      <div className="text-center mb-12">
-        <h2 className="text-3xl font-bold text-gray-800 mb-2">
-          Ofertas del día
-        </h2>
-        <p className="text-lg text-gray-600">
-          Explora productos a buen precio por tiempo limitado
-        </p>
-        <Button
-          variant="secondary"
-          size="default"
-          className="mt-4"
-        >
-          Ver todas las ofertas
-        </Button>
-      </div>
+      <div className="rounded-xl px-8 bg-[#182d5c] bg-opacity-10 backdrop-blur-md shadow-lg py-14 h-full flex items-center justify-center">
+        <div className="text-center mb-6 md:w-1/3 pr-6">
+          <h2 className="text-6xl font-bold text-[#efefef] mb-2">
+            Ofertas del día
+          </h2>
+          <p className="text-lg text-white px-4">
+            Explora productos a buen precio por tiempo limitado
+          </p>
+          <Link href="/DailyOffers" className="inline-block">
+            <Button variant="secondary" size="default" className="mt-5">
+              Ver todas las ofertas
+            </Button>
+          </Link>
+        </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {OFFERS.map((offer) => (
-          <OfferCard key={offer.id} offer={offer} />
-        ))}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-2/3">
+          {OFFERS.map((offer) => (
+            <OfferCard key={offer.id} offer={offer} />
+          ))}
+        </div>
       </div>
     </section>
   );
