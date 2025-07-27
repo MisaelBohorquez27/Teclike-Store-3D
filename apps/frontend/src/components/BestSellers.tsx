@@ -75,7 +75,7 @@ export function BestSellers() {
               onSwiper={(swiperInstance) => {
                 swiperRef.current = swiperInstance;
               }}
-            >
+            > 
               {BEST_SELLERS.map((product) => (
                 <SwiperSlide key={product.id}>
                   <ProductCard product={product} />
