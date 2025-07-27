@@ -1,5 +1,7 @@
+import { FiShoppingCart } from "react-icons/fi";
 import Button from "./Button";
-import { Rating } from "./Rating"; 
+import { Rating } from "./Rating";
+import CartIcon from "./CartIcon";
 
 type Offer = {
   id: number;
@@ -20,21 +22,20 @@ export function OfferCard({ offer }: { offer: Offer }) {
             {offer.discount}
           </span>
         </div>
-        
+
         <p className="text-gray-600 mt-2 flex-grow">{offer.description}</p>
-        
+
         <div className="mt-4">
           <Rating value={offer.rating} />
         </div>
 
-        <div className="mt-6 flex justify-between items-center">
-          <span className="text-2xl font-bold text-gray-800">{offer.price}</span>
-          <Button 
-          variant="addCart"
-          size="2xs"
-          className="flex items-center justify-center">
-            Añadir al carrito
-          </Button>
+        <div className="mt-6 flex justify-between items-center px-4">
+          <span className="text-2xl font-bold text-gray-800">
+            {offer.price}
+          </span>
+          <div className="bg-gray-50 rounded-2xl p-3 text-center hover:shadow-md transition-shadow border border-gray-100">
+            <CartIcon />
+          </div>
         </div>
       </div>
     </div>
