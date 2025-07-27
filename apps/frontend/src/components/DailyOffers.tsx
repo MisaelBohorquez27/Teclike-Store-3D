@@ -1,6 +1,6 @@
 import Link from "next/link";
-import Button from "./Button";
-import { OfferCard } from "./OfferCard";
+import Button from "@/components/Button";
+import { OfferCard } from "@/components/OfferCard";
 
 const OFFERS = [
   {

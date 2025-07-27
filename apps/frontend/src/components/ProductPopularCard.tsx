@@ -11,7 +11,7 @@ type Product = {
   currency: string;
 };
 
-export function ProductCard({ product }: { product: Product }) {
+export function ProductPopularCard({ product }: { product: Product }) {
   return (
     <div className="bg-gray-50 rounded-xl p-8 flex flex-col md:flex-row gap-8">
       {/* Columna izquierda */}

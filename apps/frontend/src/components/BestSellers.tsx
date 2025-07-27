@@ -1,6 +1,6 @@
 "use client";
 import { useRef, useState } from "react";
-import { ProductCard } from "./ProductPopularCard";
+import { ProductPopularCard } from "./ProductPopularCard";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore from "swiper";
 import { motion } from "framer-motion";
@@ -78,7 +78,7 @@ export function BestSellers() {
             > 
               {BEST_SELLERS.map((product) => (
                 <SwiperSlide key={product.id}>
-                  <ProductCard product={product} />
+                  <ProductPopularCard product={product} />
                 </SwiperSlide>
               ))}
             </Swiper>

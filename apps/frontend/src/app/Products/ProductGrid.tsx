@@ -1,4 +1,4 @@
-import { ProductCard } from '@/app/Products/ProductCard';
+import { ProductCard } from '@/components/ProductCard';
 
 const PRODUCTS = [
   {
