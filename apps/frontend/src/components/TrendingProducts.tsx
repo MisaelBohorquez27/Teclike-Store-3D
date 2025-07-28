@@ -1,10 +1,8 @@
 "use client";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { useRef } from "react";
 import "swiper/css";
 import { Navigation } from "swiper/modules";
 import { useEffect } from "react";
-import CarouselButtons from "./ui/CarouselButtons";
 
 const TRENDING_PRODUCTS = [
   {
@@ -58,8 +56,6 @@ const TRENDING_PRODUCTS = [
 ];
 
 export function TrendingProducts() {
-  const swiperRef = useRef<any>(null);
-
   useEffect(() => {
     // Esto soluciona casos donde Swiper no detecta los botones al primer render
   }, []);
@@ -73,21 +69,22 @@ export function TrendingProducts() {
 
         <div className="relative">
           {/* Botones personalizados */}
-          <CarouselButtons swiper={swiperRef.current} />
-          
-          {/* Swiper */}
+          <div className="swiper-button-prev-custom absolute left-0 top-1/2 transform -translate-y-1/2 z-10" />
+          <div className="swiper-button-next-custom absolute right-0 top-1/2 transform -translate-y-1/2 z-10" />
+
           <Swiper
             modules={[Navigation]}
             spaceBetween={20}
             slidesPerView={1}
+            navigation={{
+              prevEl: ".swiper-button-prev-custom",
+              nextEl: ".swiper-button-next-custom",
+            }}
             breakpoints={{
               640: { slidesPerView: 2 },
               1024: { slidesPerView: 3 },
             }}
             className="pb-12"
-            onSwiper={(swiper) => {
-              swiperRef.current = swiper;
-            }}
           >
             {TRENDING_PRODUCTS.map((product) => (
               <SwiperSlide key={product.id}>

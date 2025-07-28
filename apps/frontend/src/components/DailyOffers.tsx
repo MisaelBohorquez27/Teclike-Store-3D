@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Button from "@/components/ui/PagesButtons";
+import Button from "@/components/Button";
 import { OfferCard } from "@/components/OfferCard";
 
 const OFFERS = [
