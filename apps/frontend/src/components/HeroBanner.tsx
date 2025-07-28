@@ -1,5 +1,5 @@
 import { Navbar } from "@/components/Navbar";
-import Button from "@/components/Button";
+import Button from "@/components/ui/PagesButtons";
 import desktop from "../../public/ui/escritorio2.png";
 import Image from "next/image";
 
