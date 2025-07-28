@@ -5,7 +5,7 @@ import { Footer } from "@/components/Footer";
 import { TrendingProducts } from "@/components/TrendingProducts";
 import { CustomerReviews } from "@/components/CustomerReviews";
 import { BenefitsGrid } from "@/components/BenefitsGrid";
-import { WaveDivider } from "@/components/WaveDivider";
+import { WaveDivider } from "@/components/ui/WaveDivider";
 
 export default function Home() {
   return (

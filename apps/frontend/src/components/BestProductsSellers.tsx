@@ -1,6 +1,6 @@
 import Image from "next/image";
 import mouse from "../../public/products/mouse-x11.png";
-import Button from "./Button";
+import Button from "./ui/PagesButtons";
 
 type Product = {
   id: number;
