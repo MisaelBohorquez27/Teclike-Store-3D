@@ -1,10 +1,11 @@
 "use client";
 import { useRef, useState } from "react";
-import { BestProductsSellers} from "./BestProductsSellers";
+import { BestProductsSellers } from "./BestProductsSellers";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore from "swiper";
 import { motion } from "framer-motion";
 import "swiper/css";
+import CarouselButtons from "./ui/CarouselButtons";
 
 const BEST_SELLERS = [
   {
@@ -39,13 +40,8 @@ const BEST_SELLERS = [
 export function BestSellers() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const swiperRef = useRef<SwiperCore | null>(null);
-
-  const nextSlide = () => {
-    swiperRef.current?.slideNext();
-  };
-
-  const prevSlide = () => {
-    swiperRef.current?.slidePrev();
+  const goToSlide = (index: number) => {
+    swiperRef.current?.slideTo(index);
   };
 
   return (
@@ -67,6 +63,10 @@ export function BestSellers() {
           transition={{ duration: 0.5 }}
         >
           <div className="relative overflow-hidden">
+            {/* Controles del carrusel */}
+            <CarouselButtons swiper={swiperRef.current} />
+
+            {/* Swiper */}
             <Swiper
               spaceBetween={30}
               slidesPerView={1}
@@ -74,27 +74,13 @@ export function BestSellers() {
               onSwiper={(swiperInstance) => {
                 swiperRef.current = swiperInstance;
               }}
-            > 
+            >
               {BEST_SELLERS.map((product) => (
                 <SwiperSlide key={product.id}>
                   <BestProductsSellers product={product} />
                 </SwiperSlide>
               ))}
             </Swiper>
-
-            {/* Controles del carrusel */}
-            <button
-              onClick={prevSlide}
-              className="absolute left-1 top-1/2 -translate-y-1/2 bg-[#6b9ee7] text-[#FAF9F6] p-2 rounded-full shadow-md hover:bg-[#3778d4] z-10"
-            >
-              ❮
-            </button>
-            <button
-              onClick={nextSlide}
-              className="absolute right-1 top-1/2 -translate-y-1/2 bg-[#6b9ee7] text-[#FAF9F6] p-2 rounded-full shadow-md hover:bg-[#3778d4] z-10"
-            >
-              ❯
-            </button>
           </div>
         </motion.div>
 
@@ -103,7 +89,7 @@ export function BestSellers() {
           {BEST_SELLERS.map((_, index) => (
             <button
               key={index}
-              onClick={() => swiperRef.current?.slideTo(index)}
+              onClick={() => goToSlide(index)}
               className={`w-3 h-3 rounded-full ${
                 currentIndex === index ? "bg-blue-600" : "bg-gray-300"
               }`}
