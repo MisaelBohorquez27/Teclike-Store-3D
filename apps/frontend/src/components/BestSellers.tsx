@@ -1,6 +1,6 @@
 "use client";
 import { useRef, useState } from "react";
-import { ProductPopularCard } from "./ProductPopularCard";
+import { BestProductsSellers} from "./BestProductsSellers";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore from "swiper";
 import { motion } from "framer-motion";
@@ -9,14 +9,13 @@ import "swiper/css";
 const BEST_SELLERS = [
   {
     id: 1,
-    title: "Kindle",
+    title: "Mouse X11",
     tagline: "See the difference. Literally.",
     description: "Now with enhanced display features.",
     features: [
       "Glare-free display",
       "Adjustable front light",
       "Weeks of battery life",
-      "Holds thousands of books",
     ],
     fullDescription:
       "Amazon Kindle 16 GB (newest model) - Lightest and most compact Kindle, now with faster page turns...",
@@ -27,7 +26,7 @@ const BEST_SELLERS = [
     id: 2,
     title: "COLLAGEN",
     tagline: "SILENT FACEBOOK MARK OVER TASTE",
-    features: ["SUGAR FREE CREATINE", "MONOHYDRATE for Women"],
+    features: ["Sugar free", "Monohydrate for Women"],
     stats: ["50", "26", "19", "30"],
     times: ["(1/2) 20:00 AM", "(4/3) 21:00 AM"],
     fullDescription:
@@ -78,7 +77,7 @@ export function BestSellers() {
             > 
               {BEST_SELLERS.map((product) => (
                 <SwiperSlide key={product.id}>
-                  <ProductPopularCard product={product} />
+                  <BestProductsSellers product={product} />
                 </SwiperSlide>
               ))}
             </Swiper>
@@ -86,13 +85,13 @@ export function BestSellers() {
             {/* Controles del carrusel */}
             <button
               onClick={prevSlide}
-              className="absolute left-1 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow-md hover:bg-gray-100 z-10"
+              className="absolute left-1 top-1/2 -translate-y-1/2 bg-[#6b9ee7] text-[#FAF9F6] p-2 rounded-full shadow-md hover:bg-[#3778d4] z-10"
             >
               ❮
             </button>
             <button
               onClick={nextSlide}
-              className="absolute right-1 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow-md hover:bg-gray-100 z-10"
+              className="absolute right-1 top-1/2 -translate-y-1/2 bg-[#6b9ee7] text-[#FAF9F6] p-2 rounded-full shadow-md hover:bg-[#3778d4] z-10"
             >
               ❯
             </button>

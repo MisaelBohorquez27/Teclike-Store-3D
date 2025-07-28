@@ -6,29 +6,29 @@ export function BenefitsGrid() {
       title: "Entrega Rápida",
       value: "48h",
       description: "Despacho express en productos seleccionados",
-      icon: <FaShippingFast className="w-12 h-12 mb-4 mx-auto text-[#1b457f]" />,
-      color: "text-[#1b457f]"
+      icon: <FaShippingFast className="w-12 h-12 mb-4 mx-auto text-[#303030]" />,
+      color: "text-[#303030]"
     },
     {
       title: "Garantía Extendida",
       value: "24 meses",
       description: "Cobertura adicional en todos nuestros productos",
-      icon: <FaShieldAlt className="w-12 h-12 mb-4 mx-auto text-[#1b457f]" />,
-      color: "text-[#1b457f]"
+      icon: <FaShieldAlt className="w-12 h-12 mb-4 mx-auto text-[#303030]" />,
+      color: "text-[#303030]"
     },
     {
       title: "Pago Contra Entrega",
       value: "100% seguro",
       description: "Solo pagas al recibir tu pedido",
-      icon: <FaHandHoldingUsd className="w-12 h-12 mb-4 mx-auto text-[#1b457f]" />,
-      color: "text-[#1b457f]"
+      icon: <FaHandHoldingUsd className="w-12 h-12 mb-4 mx-auto text-[#303030]" />,
+      color: "text-[#303030]"
     },
     {
       title: "Descuentos por Fidelidad",
       value: "Hasta 20%",
       description: "Beneficios exclusivos para clientes recurrentes",
-      icon: <FaStar className="w-12 h-12 mb-4 mx-auto text-[#1b457f]" />,
-      color: "text-[#1b457f]"
+      icon: <FaStar className="w-12 h-12 mb-4 mx-auto text-[#303030]" />,
+      color: "text-[#303030]"
     }
   ];
 
@@ -42,10 +42,10 @@ export function BenefitsGrid() {
               className="rounded-xl p-6 text-center"
             >
               {benefit.icon}
-              <div className={`text-4xl font-bold mb-3 ${benefit.color}`}>
+              <div className={`text-xl font-bold mb-3 ${benefit.color}`}>
                 {benefit.value}
               </div>
-              <h3 className="text-xl font-semibold mb-2 text-gray-800">{benefit.title}</h3>
+              <h3 className="text-xl font-semibold mb-2 text-[#206179]">{benefit.title}</h3>
               <p className="text-gray-600">{benefit.description}</p>
             </div>
           ))}

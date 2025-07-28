@@ -1,3 +1,7 @@
+import Image from "next/image";
+import mouse from "../../public/products/mouse-x11.png";
+import Button from "./Button";
+
 type Product = {
   id: number;
   title: string;
@@ -11,15 +15,31 @@ type Product = {
   currency: string;
 };
 
-export function ProductPopularCard({ product }: { product: Product }) {
+export function BestProductsSellers({ product }: { product: Product }) {
   return (
-    <div className="bg-gray-50 rounded-xl p-8 flex flex-col md:flex-row gap-8">
+    <div className="bg-[#ffff] p-8 flex flex-col md:flex-row gap-8">
+      {" "}
+      {/* El color debe ser el mismo del fondo de la pagina */}
       {/* Columna izquierda */}
-      <div className="md:w-1/2">
-        <h3 className="text-2xl font-bold text-gray-900 mb-2">{product.title}</h3>
-        {product.tagline && (
+      <div className="md:w-1/2 p-8">
+        <div className="w-full">
+          <Image
+            src={mouse.src}
+            alt="mouse"
+            width={1000}
+            height={400}
+            className="w-full max-w-3xs mx-auto rounded-lg object-cover"
+          />
+        </div>
+      </div>
+      {/* Columna derecha */}
+      <div className="bg-gray-50 rounded-2xl md:w-1/2 p-8">
+        <h3 className="text-2xl font-bold text-gray-900 mb-2">
+          {product.title}
+        </h3>
+        {/* {product.tagline && (
           <p className="text-gray-600 italic mb-4">{product.tagline}</p>
-        )}
+        )} */}
         {product.description && (
           <p className="text-gray-700 mb-6">{product.description}</p>
         )}
@@ -35,7 +55,7 @@ export function ProductPopularCard({ product }: { product: Product }) {
           </ul>
         )}
 
-        {product.stats && product.times && (
+        {/* {product.stats && product.times && (
           <div className="grid grid-cols-4 gap-2 mb-6">
             {product.stats.map((stat, index) => (
               <div key={index} className="bg-white p-2 rounded text-center">
@@ -48,18 +68,20 @@ export function ProductPopularCard({ product }: { product: Product }) {
               </div>
             ))}
           </div>
-        )}
-      </div>
+        )} */}
 
-      {/* Columna derecha */}
-      <div className="md:w-1/2">
         <p className="text-gray-600 mb-6">{product.fullDescription}</p>
         <div className="text-2xl font-bold text-gray-900 mb-6">
-          {product.currency} {product.priceRange.min} - {product.currency} {product.priceRange.max}
+          {product.currency} {product.priceRange.min} - {product.currency}{" "}
+          {product.priceRange.max}
         </div>
-        <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium w-full">
+        <Button
+          variant="primary"
+          size="lg"
+          className="hover:border-transparent"
+        >
           Añadir al carrito
-        </button>
+        </Button>
       </div>
     </div>
   );

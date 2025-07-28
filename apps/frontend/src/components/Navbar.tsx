@@ -8,7 +8,7 @@ import CartIcon from "./CartIcon";
 
 export function Navbar() {
   return (
-    <nav className="bg-[#06162f] text-[#FAF9F6] shadow-md">
+    <nav className="bg-[#000712] text-[#FAF9F6] shadow-md">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center py-6">
           <div className="flex items-center">
