@@ -2,100 +2,131 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { Autoplay, Pagination } from "swiper/modules";
+import { CarouselIndicators } from "./ui/CarouselIndicators";
+import { useRef, useState } from "react";
+import type SwiperCore from "swiper";
 
 const REVIEWS = [
   {
     id: 1,
     name: "María Fernández",
-    verified: false,
+    product: "Modelo 3D Sala Moderna",
     comment:
-      "Las piezas de Felte EC son hermosas y de excelente calidad. He recibido muchos cumplidos por mi pulsera. Definitivamente compraré más.",
+      "Más de lo esperado. Calidad excepcional y detalles perfectos. Definitivamente superó mis expectativas.",
     rating: 5,
     avatar: "https://example.com/avatar1.jpg",
   },
   {
     id: 2,
     name: "Carlos Mendoza",
-    verified: true,
+    product: "Paquete de Muebles Vintage",
     comment:
-      "Compré un reloj como regalo para mi novia y le encantó. El empaque es muy elegante y el servicio al cliente fue excelente.",
-    rating: 4,
-     avatar: "https://example.com/avatar2.jpg",
+      "Increíblemente versátiles. Los modelos son flexibles y se adaptan perfectamente a mis diseños.",
+    rating: 5,
+    avatar: "https://example.com/avatar2.jpg",
   },
   {
     id: 3,
     name: "Ana Suárez",
-    verified: true,
+    product: "Lámpara Minimalista LED",
     comment:
-      "Me encanta la colección para mujer. Las piezas son únicas y versátiles, perfectas para cualquier ocasión.",
+      "La mejor relación calidad-precio. El modelo 3D era exactamente lo que necesitaba para mi proyecto.",
     rating: 5,
-     avatar: "https://example.com/avatar3.jpg",
+    avatar: "https://example.com/avatar3.jpg",
   },
 ];
 
 export function CustomerReviews() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [swiperReady, setSwiperReady] = useState(false);
+  const swiperRef = useRef<SwiperCore | null>(null);
+
+  const goToSlide = (index: number) => {
+    if (swiperRef.current) {
+      swiperRef.current.slideTo(index);
+    }
+  };
+
+  const handleSwiperInit = (swiperInstance: SwiperCore) => {
+    swiperRef.current = swiperInstance;
+    setSwiperReady(true);
+  };
+
   return (
-    <section className="bg-gray-50 py-16">
+    <section className="bg-white py-16">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
-          Lo que dicen nuestros clientes
-        </h2>
-        <p className="text-lg text-center text-gray-600 mb-12">
-          Experiencias reales de quienes han elegido Vective3D
-        </p>
+        <div className="text-center mb-16">
+          <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
+            Lo que dicen Nuestros Clientes
+          </h2>
+        </div>
 
-        <Swiper
-          modules={[Autoplay, Pagination]}
-          spaceBetween={30}
-          slidesPerView={1}
-          autoplay={{
-            delay: 5000,
-            disableOnInteraction: false,
-          }}
-          pagination={{ clickable: true }}
-          breakpoints={{
-            768: { slidesPerView: 2 },
-            1024: { slidesPerView: 3 },
-          }}
-          className="pb-14" // Espacio para la paginación
-        >
-          {REVIEWS.map((review) => (
-            <SwiperSlide key={review.id}>
-              <div className="bg-white p-8 rounded-xl shadow-sm h-full">
-                <div className="flex items-center mb-4">
-                  <img
-                    src={review.avatar}
-                    alt={review.name}
-                    className="w-10 h-10 rounded-full mr-3"
-                  />
-                  <div
-                    className={`w-3 h-3 rounded-full mr-2 ${
-                      review.verified ? "bg-green-500" : "bg-gray-300"
-                    }`}
-                  ></div>
-                  <h3 className="font-semibold text-gray-800">{review.name}</h3>
+        <div className="relative">
+          <Swiper
+            modules={[Autoplay]}
+            spaceBetween={30}
+            slidesPerView={1}
+            autoplay={{
+              delay: 5000,
+              disableOnInteraction: false,
+            }}
+            onSlideChange={(swiper) => setCurrentIndex(swiper.activeIndex)}
+            onSwiper={handleSwiperInit}
+            breakpoints={{
+              768: { slidesPerView: 1 },
+              1024: { slidesPerView: 1 },
+            }}
+            className="pb-14"
+          >
+            {REVIEWS.map((review) => (
+              <SwiperSlide key={review.id}>
+                <div className="p-6 h-full text-center">
+                  <div className="border-l-2 border-gray-300 pl-6 h-full">
+                    <h3 className="text-xl font-light text-gray-900 mb-2">
+                      {review.product.toUpperCase()}
+                    </h3>
+                    <blockquote className="text-gray-600 mb-4 italic">
+                      "{review.comment}"
+                    </blockquote>
+                    <div className="mb-4 mx-auto">
+                      {[...Array(5)].map((_, i) => (
+                        <span
+                          key={i}
+                          className={`text-xl ${
+                            i < review.rating
+                              ? "text-yellow-600"
+                              : "text-gray-300"
+                          }`}
+                        >
+                          ★
+                        </span>
+                      ))}
+                    </div>
+                    <div>
+                      <img
+                        src={review.avatar}
+                        alt={review.name}
+                        className="w-10 h-10 rounded-full mx-auto"
+                        loading="lazy"
+                      />
+                      <span className="font-medium text-gray-800 mx-auto">
+                        {review.name}
+                      </span>
+                    </div>
+                  </div>
                 </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
 
-                <div className="flex mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <span
-                      key={i}
-                      className={`text-xl ${
-                        i < review.rating ? "text-yellow-400" : "text-gray-300"
-                      }`}
-                    >
-                      ★
-                    </span>
-                  ))}
-                </div>
-
-                <blockquote className="text-gray-600 italic">
-                  "{review.comment}"
-                </blockquote>
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
+          {swiperReady && (
+            <CarouselIndicators
+              items={REVIEWS}
+              currentIndex={currentIndex}
+              onIndicatorClick={goToSlide}
+            />
+          )}
+        </div>
       </div>
     </section>
   );
