@@ -6,7 +6,7 @@ import SwiperCore from "swiper";
 import { motion } from "framer-motion";
 import "swiper/css";
 import CarouselButtons from "./ui/CarouselButtons";
-import { useEffect } from "react";
+import { CarouselIndicators } from "./ui/CarouselIndicators";
 
 const BEST_SELLERS = [
   {
@@ -94,21 +94,11 @@ export function BestSellers() {
           </div>
         </motion.div>
 
-        {/* Indicadores */}
-        <div className="flex justify-center mt-6 space-x-2">
-          {BEST_SELLERS.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => goToSlide(index)}
-              className={`w-3 h-3 rounded-full ${
-                currentIndex === index
-                  ? "bg-[#2963af] w-5 transition-all duration-500 ease-in-out"
-                  : "bg-gray-300 transition-all duration-250 ease-in-out"
-              }`}
-              aria-label={`Ir al slide ${index + 1}`}
-            />
-          ))}
-        </div>
+        <CarouselIndicators
+          items={BEST_SELLERS}
+          currentIndex={currentIndex}
+          onIndicatorClick={goToSlide}
+        />
       </div>
     </section>
   );
