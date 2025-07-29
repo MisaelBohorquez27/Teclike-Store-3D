@@ -1,10 +1,10 @@
 "use client";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import "swiper/css";
 import { Navigation } from "swiper/modules";
-import { useEffect } from "react";
 import CarouselButtons from "./ui/CarouselButtons";
+import type SwiperCore from "swiper";
 
 const TRENDING_PRODUCTS = [
   {
@@ -58,11 +58,13 @@ const TRENDING_PRODUCTS = [
 ];
 
 export function TrendingProducts() {
-  const swiperRef = useRef<any>(null);
+  const [swiperReady, setSwiperReady] = useState(false);
+  const swiperRef = useRef<SwiperCore | null>(null);
 
-  useEffect(() => {
-    // Esto soluciona casos donde Swiper no detecta los botones al primer render
-  }, []);
+  const handleSwiperInit = (swiperInstance: SwiperCore) => {
+    swiperRef.current = swiperInstance;
+    setSwiperReady(true);
+  };
 
   return (
     <section className="relative bg-white py-12">
@@ -72,8 +74,8 @@ export function TrendingProducts() {
         </h2>
 
         <div className="relative">
-          {/* Botones personalizados */}
-          <CarouselButtons swiper={swiperRef.current} />
+          {/* Mostrar controles solo cuando Swiper esté listo */}
+          {swiperReady && <CarouselButtons swiper={swiperRef.current} />}
 
           <Swiper
             modules={[Navigation]}
@@ -84,9 +86,7 @@ export function TrendingProducts() {
               1024: { slidesPerView: 3 },
             }}
             className="pb-12"
-            onSwiper={(swiper) => {
-              swiperRef.current = swiper;
-            }}
+            onSwiper={handleSwiperInit}
           >
             {TRENDING_PRODUCTS.map((product) => (
               <SwiperSlide key={product.id}>
@@ -95,8 +95,8 @@ export function TrendingProducts() {
                     <img
                       src={product.image}
                       alt={product.title}
-                      className="object-cover rounded-t-lg"
-                      style={{ height: "100%", width: "100%" }}
+                      className="object-cover rounded-t-lg w-full h-full"
+                      loading="lazy"
                     />
                   </div>
                   <h3 className="font-semibold text-lg text-gray-800">
