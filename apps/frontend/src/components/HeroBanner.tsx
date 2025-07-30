@@ -11,12 +11,12 @@ export function HeroBanner() {
         <div className="w-full max-w-2xl text-left md:w-2/3 pb-6 p-2 pr-0 rounded-lg ml-2 mb-4 mr-4">
           {/* Título */}
           <h1 className="text-4xl md:text-6xl font-bold text-[#FAF9F6] mb-6 leading-tight">
-            ¿No sabes cómo ordenar tus productos luego de comprarlos?
+            ¿Quieres renovar tus productos antiguos por productos de buena calidad?
           </h1>
 
           {/* Subtítulo */}
           <p className="text-xl md:text-2xl text-[#FAF9F6] opacity-90 mb-8">
-            Ahorra tiempo y organízalos desde ahora
+            Aquí puedes encontrar todo lo que estas buscando
           </p>
 
           {/* Botón */}
