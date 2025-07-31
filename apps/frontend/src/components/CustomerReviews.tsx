@@ -53,13 +53,13 @@ export function CustomerReviews() {
   };
 
   return (
-    <section className="bg-white py-16">
+    <section className="bg-white pb-16 pt-12">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
+        {/* <div className="text-center mb-16">
           <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
             Lo que dicen Nuestros Clientes
           </h2>
-        </div>
+        </div> */}
 
         <div className="relative">
           <Swiper

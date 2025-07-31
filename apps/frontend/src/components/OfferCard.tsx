@@ -31,7 +31,7 @@ export function OfferCard({ offer }: { offer: Offer }) {
           <span className="text-2xl font-bold text-gray-800">
             {offer.price}
           </span>
-          <div className="bg-gray-50 rounded-2xl p-3 text-center hover:shadow-md transition-shadow border border-gray-100">
+          <div className="bg-gray-50 rounded-2xl p-3 flex items-center justify-center hover:shadow-md transition-shadow border border-gray-100">
             <CartIcon />
           </div>
         </div>

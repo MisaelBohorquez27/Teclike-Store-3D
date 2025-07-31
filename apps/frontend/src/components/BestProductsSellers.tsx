@@ -1,6 +1,7 @@
 import Image from "next/image";
 import mouse from "../../public/products/mouse-x11.png";
 import Button from "@/components/ui/PagesButtons";
+import CartIcon from "./CartIcon";
 
 type Product = {
   id: number;
@@ -75,13 +76,19 @@ export function BestProductsSellers({ product }: { product: Product }) {
           {product.currency} {product.priceRange.min} - {product.currency}{" "}
           {product.priceRange.max}
         </div>
-        <Button
-          variant="primary"
-          size="lg"
-          className="hover:border-transparent"
-        >
-          Añadir al carrito
-        </Button>
+        <div className="flex justify-between md:w-2/3">
+          <Button
+            variant="primary"
+            size="lg"
+            className="hover:border-transparent "
+          >
+            Añadir al carrito
+          </Button>
+          <div className="bg-gray-50 rounded-2xl px-4 flex items-center justify-center hover:shadow-md transition-shadow border border-gray-100">
+            <CartIcon />
+          </div>
+        </div>
+        <div className="md:w-1/3"/>        
       </div>
     </div>
   );
