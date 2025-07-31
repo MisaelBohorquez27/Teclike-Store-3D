@@ -13,11 +13,11 @@ export default function Home() {
     <>
       <HeroBanner />
       <BenefitsGrid />
+      <TrendingProducts />
       <DailyOffers />
       <BestSellers />
-      <TrendingProducts />
-      <CustomerReviews />
       <Subscription />
+      <CustomerReviews />
       <FollowUs />
       <Footer />
     </>

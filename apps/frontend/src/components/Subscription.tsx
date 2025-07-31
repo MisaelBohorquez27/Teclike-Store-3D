@@ -22,23 +22,24 @@ export function Subscription() {
   };
 
   return (
-    <section className="relative h-98 py-12 px-4 overflow-hidden">
-      {/* Imagen de fondo - Versión corregida */}
+    <section className="relative h-110 py-2 px-4 overflow-hidden flex justify-center items-center ">
+
+      {/* Imagen de fondo - Versión corregida 
       <div className="absolute inset-0 -z-10">
         <Image
-          src="/ui/escritorio.png" // Asegúrate de que la imagen esté en la carpeta public/ui/
+          src="/ui/fondo4.png" // Asegúrate de que la imagen esté en la carpeta public/ui/
           alt="Fondo decorativo"
           layout="fill"
           objectFit="cover"
           quality={80}
           className="opacity-30"
         />
-      </div>
+      </div>*/}
       
-      <div className="relative z-10 flex justify-center">
+      <div className="mx-auto w-auto">
         <div className="max-w-4xl mx-auto text-center">
           <motion.h2
-            className="text-3xl md:text-4xl font-bold mb-6 text-gray-800"
+            className="text-3xl md:text-4xl font-bold mb-10 text-gray-800"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -57,7 +58,7 @@ export function Subscription() {
           ) : (
             <motion.form
               onSubmit={handleSubmit}
-              className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto"
+              className="flex flex-col gap-4 w-2xl mx-auto"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
@@ -67,7 +68,7 @@ export function Subscription() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Tu correo electrónico"
-                className="flex-grow px-4 py-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="flex-grow px-4 py-3 rounded border bg-white border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               />
               <Button
