@@ -3,7 +3,7 @@ import { ProductCard } from '@/components/ProductCard';
 const PRODUCTS = [
   {
     id: 1,
-    name: "Modelo 3D Sala Moderna",
+    name: "Audifonos Razer",
     title: "Sala Moderna 3D",
     fullDescription: "Modelo 3D de una sala moderna, ideal para proyectos de interiores.",
     category: "Interiores",
@@ -11,12 +11,12 @@ const PRODUCTS = [
     priceRange: "$40 - $60",
     currency: "USD",
     rating: 4.5,
-    image: "/products/living-room.jpg",
+    image: "/products/Audifonos-caja.png",
     isNew: true
   },
   {
     id: 2,
-    name: "Paquete de Muebles Vintage",
+    name: "Mouse X-11",
     title: "Muebles Vintage Pack",
     fullDescription: "Paquete de modelos 3D de muebles vintage para decoración.",
     category: "Muebles",
@@ -24,7 +24,7 @@ const PRODUCTS = [
     priceRange: "$70 - $90",
     currency: "USD",
     rating: 4.2,
-    image: "/products/furniture-pack.jpg"
+    image: "/products/mouse2-x11.png"
   },
   // Añade más productos...
 ];
