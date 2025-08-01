@@ -10,7 +10,7 @@ const REVIEWS = [
   {
     id: 1,
     name: "María Fernández",
-    product: "Modelo 3D Sala Moderna",
+    product: "Teclado Z11 RGB",
     comment:
       "Más de lo esperado. Calidad excepcional y detalles perfectos. Definitivamente superó mis expectativas.",
     rating: 5,
@@ -19,7 +19,7 @@ const REVIEWS = [
   {
     id: 2,
     name: "Carlos Mendoza",
-    product: "Paquete de Muebles Vintage",
+    product: "Kit de limpieza",
     comment:
       "Increíblemente versátiles. Los modelos son flexibles y se adaptan perfectamente a mis diseños.",
     rating: 5,
@@ -28,7 +28,7 @@ const REVIEWS = [
   {
     id: 3,
     name: "Ana Suárez",
-    product: "Lámpara Minimalista LED",
+    product: "Audifonos razer",
     comment:
       "La mejor relación calidad-precio. El modelo 3D era exactamente lo que necesitaba para mi proyecto.",
     rating: 5,
@@ -53,7 +53,7 @@ export function CustomerReviews() {
   };
 
   return (
-    <section className="bg-white pb-16 pt-12">
+    <section className="bg-white pb-16">
       <div className="container mx-auto px-4">
         {/* <div className="text-center mb-16">
           <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
@@ -67,9 +67,10 @@ export function CustomerReviews() {
             spaceBetween={30}
             slidesPerView={1}
             autoplay={{
-              delay: 5000,
+              delay: 3100,
               disableOnInteraction: false,
             }}
+            speed={850}
             onSlideChange={(swiper) => setCurrentIndex(swiper.activeIndex)}
             onSwiper={handleSwiperInit}
             breakpoints={{
@@ -82,10 +83,10 @@ export function CustomerReviews() {
               <SwiperSlide key={review.id}>
                 <div className="p-6 h-full text-center">
                   <div className="border-l-2 border-gray-300 pl-6 h-full">
-                    <h3 className="text-xl font-light text-gray-900 mb-2">
+                    <h3 className="text-2xl font-stretch-extra-expanded font-semibold text-gray-900 mb-6">
                       {review.product.toUpperCase()}
                     </h3>
-                    <blockquote className="text-gray-600 mb-4 italic">
+                    <blockquote className="text-gray-600 mb-4 italic text-lg">
                       "{review.comment}"
                     </blockquote>
                     <div className="mb-4 mx-auto">
@@ -118,14 +119,13 @@ export function CustomerReviews() {
               </SwiperSlide>
             ))}
           </Swiper>
-
-          {swiperReady && (
+          {/*{swiperReady && (
             <CarouselIndicators
               items={REVIEWS}
               currentIndex={currentIndex}
               onIndicatorClick={goToSlide}
             />
-          )}
+          )} */}
         </div>
       </div>
     </section>

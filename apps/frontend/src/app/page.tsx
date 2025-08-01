@@ -16,7 +16,6 @@ export default function Home() {
       <TrendingProducts />
       <DailyOffers />
       <BestSellers />
-      <Subscription />
       <CustomerReviews />
       <FollowUs />
       <Footer />
