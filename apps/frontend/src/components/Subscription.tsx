@@ -3,6 +3,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import Button from "./ui/PagesButtons";
 import Image from "next/image"; // Importa el componente Image de Next.js
+import { FiSend} from "react-icons/fi";
 
 export function Subscription() {
   const [email, setEmail] = useState("");
@@ -22,7 +23,7 @@ export function Subscription() {
   };
 
   return (
-    <div className="relative h-110 pb-10 overflow-hidden flex justify-center">
+    <div className="relative h-110 overflow-hidden flex justify-center items-center">
       {/* Imagen de fondo - Versión corregida 
       <div className="absolute inset-0 -z-10">
         <Image
@@ -35,14 +36,14 @@ export function Subscription() {
         />
       </div>*/}
 
-      <div className="bg-[#cacaca] px-8 pt-20 rounded-lg  max-w-4xl mx-auto text-center">
+      <div className=" bg-gradient-to-b from-[#001a37] to-[#90b8da] px-8 py-8 mb-10 rounded-lg  max-w-4xl mx-auto text-center">
         <motion.h2
-          className="text-3xl md:text-4xl font-bold mb-10 text-[#000]"
+          className="text-3xl md:text-4xl font-bold mb-10 text-[#f9f9f9]"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          Suscríbete para novedades
+          Obtén el 10% de descuento al suscribirte
         </motion.h2>
 
         {isSubscribed ? (
@@ -66,7 +67,7 @@ export function Subscription() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Tu correo electrónico"
-              className="flex-grow px-4 py-3 rounded border bg-white border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="flex-grow px-4 py-3 rounded border bg-white border-black focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
             <Button
@@ -74,7 +75,7 @@ export function Subscription() {
               variant="primary"
               size="xs"
               disabled={isLoading}
-              className="font-bold px-2 py-3 rounded transition-colors disabled:bg-blue-400"
+              className="font-bold px-3 rounded transition-colors disabled:bg-blue-400"
             >
               {isLoading ? (
                 <span className="flex items-center justify-center">
@@ -101,7 +102,10 @@ export function Subscription() {
                   Procesando...
                 </span>
               ) : (
-                "Submit"
+                <FiSend
+                  size={22}
+                  className="hover:opacity-80 transition-opacity"
+                />
               )}
             </Button>
           </motion.form>
