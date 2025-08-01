@@ -1,9 +1,15 @@
+"use client";
 import { FilterSidebar } from "@/app/Products/FilterSidebar";
 import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
 import { ProductGrid } from "@/app/Products/ProductGrid";
+import { Pagination } from "@/components/ui/Pagination";
+import { useState } from "react";
 
 export default function ProductPage() {
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalPages = 10; // Total de páginas disponibles
+
   return (
     <>
       {/* Navbar */}
@@ -11,11 +17,11 @@ export default function ProductPage() {
 
       <main className="bg-gray-50 min-h-screen">
         {/* Hero Banner */}
-        <section className="bg-gradient-to-r from-blue-600 to-indigo-700 py-20 text-white">
+        <section className="bg-gradient-to-b from-[#000712] to-[#00183f] py-20 text-white">
           <div className="container mx-auto px-4 text-center">
-            <h1 className="text-4xl font-bold mb-4">Nuestra Colección</h1>
-            <p className="text-xl opacity-90">
-              Encuentra los mejores productos 3D para tus proyectos
+            <h1 className="text-5xl font-bold mb-4">Nuestra Colección</h1>
+            <p className="text-2xl opacity-90">
+              Encuentra los mejores productos para tus proyectos
             </p>
           </div>
         </section>
@@ -47,23 +53,12 @@ export default function ProductPage() {
               <ProductGrid />
 
               {/* Paginación */}
-              <div className="flex justify-center mt-12">
-                <nav className="flex items-center space-x-2">
-                  <button className="px-3 py-1 rounded border">
-                    ← Anterior
-                  </button>
-                  <button className="px-3 py-1 rounded bg-blue-600 text-white">
-                    1
-                  </button>
-                  <button className="px-3 py-1 rounded border">2</button>
-                  <button className="px-3 py-1 rounded border">3</button>
-                  <span className="px-2">...</span>
-                  <button className="px-3 py-1 rounded border">10</button>
-                  <button className="px-3 py-1 rounded border">
-                    Siguiente →
-                  </button>
-                </nav>
-              </div>
+              <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={(page) => setCurrentPage(page)}
+                className="mt-8" // Clases adicionales si necesitas
+              />
             </div>
           </div>
         </div>
