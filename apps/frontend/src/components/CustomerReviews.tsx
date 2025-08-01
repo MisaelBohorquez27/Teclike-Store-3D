@@ -82,7 +82,7 @@ export function CustomerReviews() {
             {REVIEWS.map((review) => (
               <SwiperSlide key={review.id}>
                 <div className="p-6 h-full text-center">
-                  <div className="border-l-2 border-gray-300 pl-6 h-full">
+                  <div className="border-l-2 border-gray-300 pl-12 h-full pr-6">
                     <h3 className="text-2xl font-stretch-extra-expanded font-semibold text-gray-900 mb-6">
                       {review.product.toUpperCase()}
                     </h3>
