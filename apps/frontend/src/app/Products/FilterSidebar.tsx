@@ -1,5 +1,6 @@
 "use client";
 
+import Button from "@/components/ui/PagesButtons";
 import { useSearchParams } from "next/navigation";
 
 export function FilterSidebar() {
@@ -19,18 +20,17 @@ export function FilterSidebar() {
   ];
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-sm sticky top-4">
-      <h3 className="font-bold text-lg mb-4">Filtrar por</h3>
+    <div className="p-6 rounded-lg">
 
       {/* Filtro por Categoría */}
       <div className="mb-6">
-        <h4 className="font-medium mb-3">Categorías</h4>
+        <h4 className="font-semibold text-lg mb-3 ">Categorías</h4>
         <ul className="space-y-2">
           {categories.map((category) => (
             <li key={category}>
               <label className="flex items-center">
                 <input type="checkbox" className="mr-2 rounded text-blue-600" />
-                <span>{category}</span>
+                <span className="text-gray-700">{category}</span>
               </label>
             </li>
           ))}
@@ -39,7 +39,7 @@ export function FilterSidebar() {
 
       {/* Filtro por Precio */}
       <div className="mb-6">
-        <h4 className="font-medium mb-3">Rango de Precio</h4>
+        <h4 className="font-semibold text-lg mb-3">Rango de Precio</h4>
         <ul className="space-y-2">
           {priceRanges.map((range) => (
             <li key={range.value}>
@@ -49,7 +49,7 @@ export function FilterSidebar() {
                   name="price-range"
                   className="mr-2 text-blue-600"
                 />
-                <span>{range.label}</span>
+                <span className="text-gray-700">{range.label}</span>
               </label>
             </li>
           ))}
@@ -57,9 +57,12 @@ export function FilterSidebar() {
       </div>
 
       {/* Botón de Aplicar Filtros */}
-      <button className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700">
+      <Button 
+      variant="primary"
+      size="s"
+      className="w-full">
         Aplicar Filtros
-      </button>
+      </Button>
     </div>
   );
 }
