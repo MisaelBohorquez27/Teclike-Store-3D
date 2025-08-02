@@ -26,6 +26,30 @@ const PRODUCTS = [
     rating: 4.2,
     image: "/products/mouse2-x11.png"
   },
+  {
+    id: 3,
+    name: "Mouse X-11",
+    title: "Muebles Vintage Pack",
+    fullDescription: "Paquete de modelos 3D de muebles vintage para decoración.",
+    category: "Muebles",
+    price: 79.99,
+    priceRange: "$70 - $90",
+    currency: "USD",
+    rating: 4.2,
+    image: "/products/mouse2-x11.png"
+  },
+  {
+    id: 4,
+    name: "Mouse X-11",
+    title: "Muebles Vintage Pack",
+    fullDescription: "Paquete de modelos 3D de muebles vintage para decoración.",
+    category: "Muebles",
+    price: 79.99,
+    priceRange: "$70 - $90",
+    currency: "USD",
+    rating: 4.2,
+    image: "/products/mouse2-x11.png"
+  },
   // Añade más productos...
 ];
 

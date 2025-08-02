@@ -5,6 +5,7 @@ import { Navbar } from "@/components/Navbar";
 import { ProductGrid } from "@/app/Products/ProductGrid";
 import { Pagination } from "@/components/ui/Pagination";
 import { useState } from "react";
+import { SearchBar } from "@/components/SearchBar";
 
 export default function ProductPage() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -14,7 +15,6 @@ export default function ProductPage() {
     <>
       {/* Navbar */}
       <Navbar />
-
       <main className="bg-gray-50 min-h-screen">
         {/* Hero Banner */}
         <section className="bg-gradient-to-b from-[#000712] to-[#00183f] py-20 text-white">
@@ -25,13 +25,12 @@ export default function ProductPage() {
             </p>
           </div>
         </section>
-
         {/* Contenido Principal */}
         <div className="container mx-auto px-4 py-12">
           <div className="flex flex-col md:flex-row gap-8">
-
             {/* Sidebar de Filtros */}
             <div className="md:w-1/4">
+              <SearchBar />
               <FilterSidebar />
             </div>
 
