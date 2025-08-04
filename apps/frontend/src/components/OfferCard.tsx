@@ -1,4 +1,4 @@
-import { Rating } from "./Rating";
+import { Rating } from "./ui/Rating";
 import CartIcon from "./CartIcon";
 
 type Offer = {

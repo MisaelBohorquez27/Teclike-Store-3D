@@ -39,7 +39,7 @@ export default function HelpContactPage() {
         <section className="container mx-auto px-4 py-16">
           <div className="max-w-7xl mx-auto rounded-xl overflow-hidden">
             <div className="md:flex gap-x-30">
-              <div className="md:w-1/2 text-black">
+              <div className="md:w-1/2 text-black p-4">
                 <h2 className="text-5xl font-bold mb-7">
                   Contacte a nuestro equipo
                 </h2>
@@ -63,7 +63,7 @@ export default function HelpContactPage() {
                   </div>
                 </div>
               </div>
-              <div className="md:w-1/2 p-8 ">
+              <div className="md:w-1/2 p-4">
                 <h2 className="text-2xl font-bold mb-6">Envíanos un Mensaje</h2>
                 <ContactForm />
               </div>

@@ -41,7 +41,7 @@ export function DailyOffers() {
             Explora productos a buen precio por tiempo limitado
           </p>
           <Link href="/DailyOffers" className="inline-block">
-            <Button variant="secondary" size="default" className="mt-5">
+            <Button variant="secondary" size="m" className="mt-5">
               Ver todas las ofertas
             </Button>
           </Link>

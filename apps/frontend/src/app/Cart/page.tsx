@@ -59,7 +59,7 @@ export default function CartPage() {
       <Navbar />
       <main className="bg-gray-50 min-h-screen py-12">
         <div className="container mx-auto px-4">
-          <h1 className="text-3xl font-bold mb-8">Tu Carrito de Compras</h1>
+          <h1 className="text-3xl font-bold mb-8">Carrito</h1>
 
           {cartItems.length === 0 ? (
             <EmptyCart />

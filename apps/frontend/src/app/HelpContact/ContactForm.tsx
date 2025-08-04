@@ -1,70 +1,129 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
+import Button from "@/components/ui/PagesButtons";
+import { useState } from "react";
 
 export function ContactForm() {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
+    name: "",
+    lastname: "",
+    email: "",
+    phone: "",
+    subject: "",
+    message: "",
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Aquí iría la lógica para enviar el formulario
-    console.log('Formulario enviado:', formData);
-    alert('Mensaje enviado con éxito');
+    console.log("Formulario enviado:", formData);
+    alert("Mensaje enviado con éxito");
     setFormData({
-      name: '',
-      email: '',
-      subject: '',
-      message: ''
+      name: "",
+      lastname: "",
+      email: "",
+      phone: "",
+      subject: "",
+      message: "",
     });
   };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      <div>
-        <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-          Nombre Completo
-        </label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          className="w-full px-4 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500"
-          required
-        />
+      <div className="grid grid-cols-2 gap-4">
+        <div>
+          <label
+            htmlFor="name"
+            className="block text-sm font-medium text-gray-700 mb-1"
+          >
+            Nombre
+          </label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Jhon"
+            value={formData.name}
+            onChange={handleChange}
+            className="w-full px-4 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500"
+            required
+          />
+        </div>
+        <div>
+          <label
+            htmlFor="lastname"
+            className="block text-sm font-medium text-gray-700 mb-1"
+          >
+            Apellido
+          </label>
+          <input
+            type="text"
+            id="lastname"
+            name="lastname"
+            placeholder="Doe"
+            value={formData.lastname}
+            onChange={handleChange}
+            className="w-full px-4 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500"
+            required
+          />
+        </div>
       </div>
-      
-      <div>
-        <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-          Correo Electrónico
-        </label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          className="w-full px-4 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500"
-          required
-        />
+      <div className="grid grid-cols-2 gap-4">
+        <div>
+          <label
+            htmlFor="email"
+            className="block text-sm font-medium text-gray-700 mb-1"
+          >
+            Correo Electrónico
+          </label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="ejemplo@correo.com"
+            value={formData.email}
+            onChange={handleChange}
+            className="w-full px-4 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500"
+            required
+          />
+        </div>
+
+        <div>
+          <label
+            htmlFor="phone"
+            className="block text-sm font-medium text-gray-700 mb-1"
+          >
+            Celular (opcional)
+          </label>
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            placeholder="000-000 00 00 000"
+            value={formData.phone}
+            onChange={handleChange}
+            className="w-full px-4 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500"
+          />
+        </div>
       </div>
-      
+
       <div>
-        <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">
+        <label
+          htmlFor="subject"
+          className="block text-sm font-medium text-gray-700 mb-1"
+        >
           Asunto
         </label>
         <select
@@ -82,9 +141,12 @@ export function ContactForm() {
           <option value="otros">Otros</option>
         </select>
       </div>
-      
+
       <div>
-        <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
+        <label
+          htmlFor="message"
+          className="block text-sm font-medium text-gray-700 mb-1"
+        >
           Mensaje
         </label>
         <textarea
@@ -97,13 +159,10 @@ export function ContactForm() {
           required
         ></textarea>
       </div>
-      
-      <button
-        type="submit"
-        className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors font-medium"
-      >
+
+      <Button variant="submit" size="m" type="submit" className="w-full">
         Enviar Mensaje
-      </button>
+      </Button>
     </form>
   );
 }

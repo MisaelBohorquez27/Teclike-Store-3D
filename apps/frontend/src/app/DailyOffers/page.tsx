@@ -15,7 +15,7 @@ export default function DailyDealsPage() {
         <section className="bg-gradient-to-r from-[#003f8d] to-[#53729d] py-16 text-white">
           <div className="container mx-auto px-4 text-center">
             <div className="flex justify-center mb-4">
-              <span className="bg-white text-red-600 px-3 py-1 rounded-full text-sm font-bold">
+              <span className="bg-white text-[#006826] px-3 py-1 rounded-full text-sm font-bold">
                 OFERTAS EXCLUSIVAS
               </span>
             </div>
