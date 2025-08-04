@@ -1,4 +1,4 @@
-import { DealCard } from '@/components/DealCard';
+import { DealCard } from '@/app/DailyOffers/DealCard';
 
 const HOT_DEALS = [
   {

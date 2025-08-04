@@ -53,7 +53,7 @@ export function CustomerReviews() {
   };
 
   return (
-    <section className="bg-white pb-16">
+    <section className="bg-white mb-20 pb-10">
       <div className="container mx-auto px-4">
         {/* <div className="text-center mb-16">
           <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
