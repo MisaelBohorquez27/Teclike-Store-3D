@@ -3,6 +3,7 @@ import { CountdownTimer } from "@/app/DailyOffers/CountdownTimer";
 import { HotDeals } from "@/app/DailyOffers/HotDeals";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { Subscription } from "@/components/Subscription";
 
 export default function DailyDealsPage() {
   return (
@@ -11,7 +12,7 @@ export default function DailyDealsPage() {
       <Navbar />
       <main className="bg-gray-50 min-h-screen">
         {/* Hero Banner */}
-        <section className="bg-gradient-to-r from-red-600 to-orange-500 py-16 text-white">
+        <section className="bg-gradient-to-r from-[#003f8d] to-[#53729d] py-16 text-white">
           <div className="container mx-auto px-4 text-center">
             <div className="flex justify-center mb-4">
               <span className="bg-white text-red-600 px-3 py-1 rounded-full text-sm font-bold">
@@ -25,7 +26,7 @@ export default function DailyDealsPage() {
             <CountdownTimer targetDate={new Date().setHours(24, 0, 0, 0)} />
           </div>
         </section>
-
+        
         {/* Ofertas Flash */}
         <section className="container mx-auto px-4 py-12">
           <h2 className="text-3xl font-bold text-center mb-2">
@@ -51,8 +52,8 @@ export default function DailyDealsPage() {
         </section>
 
         {/* Banner de Suscripción */}
-        <section className="bg-blue-600 text-white py-12">
-          <div className="container mx-auto px-4 text-center">
+        <section className="bg-[#e5e5e5] text-Black py-12">
+          <div className="container mx-auto px-4 flex flex-col items-center text-center">
             <h2 className="text-2xl font-bold mb-4">
               ¿No quieres perderte ninguna oferta?
             </h2>
@@ -60,16 +61,7 @@ export default function DailyDealsPage() {
               Suscríbete y recibe las mejores promociones directamente en tu
               email
             </p>
-            <div className="max-w-md mx-auto rounded-xl flex flex-col md:flex-row gap-3">
-              <input
-                type="email"
-                placeholder="Tu correo electrónico"
-                className="bg-white flex-grow px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500 text-gray-900"
-              />
-              <button className="bg-orange-500 hover:bg-orange-600 px-6 py-3 rounded-lg text-white font-medium transition-colors whitespace-nowrap">
-                Suscribirme
-              </button>
-            </div>
+            <Subscription />
           </div>
         </section>
       </main>
