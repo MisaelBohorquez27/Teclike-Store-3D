@@ -22,7 +22,7 @@ export function HeroBanner() {
           {/* Botón */}
           <Button
             variant="primary"
-            size="lg"
+            size="xl"
             className="hover:border-transparent"
           >
             Empezar

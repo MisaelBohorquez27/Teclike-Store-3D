@@ -79,7 +79,7 @@ export function BestProductsSellers({ product }: { product: Product }) {
         <div className="flex justify-between md:w-2/3">
           <Button
             variant="primary"
-            size="lg"
+            size="m"
             className="hover:border-transparent "
           >
             Añadir al carrito
