@@ -11,7 +11,7 @@ export default function HelpContactPage() {
       <Navbar />
       <main className="bg-gray-50 min-h-screen">
         {/* Hero Banner */}
-        <section className="bg-gradient-to-r from-blue-600 to-indigo-700 py-20 text-white">
+        <section className="bg-gradient-to-r from-[#003f8d] to-[#53729d] py-20 text-white">
           <div className="container mx-auto px-4 text-center">
             <h1 className="text-4xl font-bold mb-4">Ayuda y Contacto</h1>
             <p className="text-xl opacity-90">
@@ -37,13 +37,17 @@ export default function HelpContactPage() {
 
         {/* Sección de Contacto */}
         <section className="container mx-auto px-4 py-16">
-          <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-md overflow-hidden">
-            <div className="md:flex">
-              <div className="md:w-1/2 bg-blue-600 p-8 text-white">
-                <h2 className="text-2xl font-bold mb-4">
-                  Información de Contacto
+          <div className="max-w-7xl mx-auto rounded-xl overflow-hidden">
+            <div className="md:flex gap-x-30">
+              <div className="md:w-1/2 text-black">
+                <h2 className="text-5xl font-bold mb-7">
+                  Contacte a nuestro equipo
                 </h2>
-                <div className="space-y-4">
+                <div className="space-y-6">
+                   <div>
+                    <p className="text-xl mb-5">
+                      Reciba asistencia de primera en sus dudas y problemas.</p>
+                  </div>
                   <div>
                     <h3 className="font-semibold">Correo Electrónico</h3>
                     <p>soporte@vective3d.com</p>
@@ -59,7 +63,7 @@ export default function HelpContactPage() {
                   </div>
                 </div>
               </div>
-              <div className="md:w-1/2 p-8">
+              <div className="md:w-1/2 p-8 ">
                 <h2 className="text-2xl font-bold mb-6">Envíanos un Mensaje</h2>
                 <ContactForm />
               </div>
