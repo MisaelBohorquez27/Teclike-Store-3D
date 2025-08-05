@@ -1,0 +1,56 @@
+Opción 1: Paleta Sofisticada (Enfoque Profesional)
+Ideal para: B2B, diseño de interiores o productos de alta gama.
+
+Azul marino (#0F2C59): Header, botones principales y bordes.
+
+Blanco hueso (#FAF9F6): Fondos y espacios de trabajo.
+
+Azul eléctrico (#3A7BFF): Botones interactivos (ej. "Rotar 3D", "Guardar diseño").
+
+Gris plateado (#C0C0C0): Barras de herramientas y sombras.
+
+Verde esmeralda (#50C878): Confirmaciones (ej. "Producto añadido").
+
+Uso	HEX	RGB	Ejemplo Visual
+Azul marino	#0F2C59	15, 44, 89	https://via.placeholder.com/40/0F2C59/FFFFFF?text=+
+Blanco hueso	#FAF9F6	250, 249, 246	https://via.placeholder.com/40/FAF9F6/000000?text=+
+Azul eléctrico	#3A7BFF	58, 123, 255	https://via.placeholder.com/40/3A7BFF/FFFFFF?text=+
+Gris plateado	#C0C0C0	192, 192, 192	https://via.placeholder.com/40/C0C0C0/000000?text=+
+Verde esmeralda	#50C878	80, 200, 120	https://via.placeholder.com/40/50C878/FFFFFF?text=+
+
+Jerarquía Tipográfica (Font System)
+Títulos:
+Color: #0F2C59 (azul marino)
+
+Font: Playfair Display (700) o EB Garamond (serif elegante).
+
+Tamaños:
+
+H1: 2.5rem (48px)
+
+H2: 2rem (32px)
+
+H3: 1.5rem (24px)
+
+Subtítulos:
+Color: #3A7BFF (azul eléctrico) o #5A6D8A (azul grisáceo para contraste suave).
+
+Font: Lato (600) o Montserrat (semi-bold).
+
+Tamaños:
+
+Subtítulo 1: 1.25rem (20px)
+
+Subtítulo 2: 1rem (16px) con letter-spacing: 0.05em.
+
+Texto Corporativo:
+Color: #4A5568 (gris azulado oscuro) para legibilidad óptima sobre blanco hueso.
+
+Font: Lato (400) o Open Sans (regular).
+
+Tamaño: 1rem (16px) con line-height: 1.6.
+
+Texto Secundario (leyendas, placeholders):
+Color: #718096 (gris medio).
+
+Font: Lato (300) o Open Sans (light).
