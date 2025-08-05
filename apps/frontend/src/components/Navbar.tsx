@@ -47,14 +47,14 @@ export function Navbar() {
     <nav
       className={`fixed top-0 left-0 w-full z-50 transition-transform duration-300 ease-in-out ${
         scrolled ? "-translate-y-full" : "translate-y-0"
-      } bg-[#000712]/90 backdrop-blur-sm shadow-lg`}
+      } Navbar-bg backdrop-bluZ-sm shadow-lg`}
     >
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center py-4">
           {/* Logo y menú hamburguesa (mobile) */}
           <div className="flex items-center">
             <button
-              className="md:hidden mr-4 text-white"
+              className="md:hidden mr-4"
               onClick={() => setIsOpen(!isOpen)}
               aria-label="Menú"
             >
@@ -74,7 +74,7 @@ export function Navbar() {
 
           {/* Menú central */}
           <div
-            className={`absolute md:static top-full left-0 w-full md:w-auto bg-[#000712] md:bg-transparent transition-all duration-300 ${
+            className={`absolute md:static top-full left-0 w-full md:w-auto md:bg-transparent transition-all duration-300 ${
               isOpen ? "block" : "hidden md:block"
             }`}
           >
@@ -94,7 +94,7 @@ export function Navbar() {
             </div>
 
             {/* Icono de búsqueda en mobile */}
-            <button className="md:hidden text-white">
+            <button className="md:hidden">
               <FiSearch size={20} />
             </button>
 
@@ -124,7 +124,7 @@ export function Navbar() {
 const NavLink = ({ href, text }: { href: string; text: string }) => (
   <Link
     href={href}
-    className="block py-2 md:py-0 text-white hover:text-blue-300 transition-colors border-b md:border-0 border-gray-700"
+    className="block py-2 md:py-0 Navbar-text transition-colors border-b md:border-0 border-gray-700"
   >
     {text}
   </Link>
