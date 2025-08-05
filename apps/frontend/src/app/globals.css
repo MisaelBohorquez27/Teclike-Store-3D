@@ -1,23 +1,36 @@
 @import "tailwindcss";
 
+/* src/app/globals.css */
+
 :root {
-    --background: #ffffff;
-    --foreground: #171717;
-    --color-background: var(--background);
-    --color-foreground: var(--foreground);
-    --font-sans: Arial, Helvetica, sans-serif;
+  --breakpoint-sm: 480px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 976px;
+  --color-navy: #0f2c59; /* Azul marino */
+  --color-bone-white: #faf9f6; /* Blanco hueso */
+  --color-electric-blue: #3a7bff; /* Azul eléctrico */
+  --color-silver-gray: #c0c0c0; /* Gris plateado */
+  --color-emerald: #50c878; /* Verde esmeralda */
+
+  /* Puedes agregar también variables semánticas para mayor claridad */
+  --color-primary: var(--color-navy);
+  --color-secondary: var(--color-electric-blue);
+  --color-background: var(--color-bone-white);
+  --color-muted: var(--color-silver-gray);
+  --color-success: var(--color-emerald);
 }
 
+/* Estilos base */
 body {
-  background: var(--color-background);
-  color: var(--color-foreground);
+  background-color: var(--background-cream);
+  color: var(--primary-navy);
   font-family: var(--font-sans);
 }
 
 /* Estilos de las flechas de la seccion "Mas vendido de la semana"*/
 .swiper-button-next-custom,
 .swiper-button-prev-custom {
-  color: #3B82F6;
+  color: #3b82f6;
   background: white;
   width: 40px;
   height: 40px;
@@ -34,32 +47,32 @@ body {
 .swiper-button-prev-custom::after {
   font-size: 18px;
   font-weight: bold;
-  content: '';
+  content: "";
   display: inline-block;
 }
 
 .swiper-button-prev-custom::after {
-  content: '‹';
+  content: "‹";
 }
 
 .swiper-button-next-custom::after {
-  content: '›';
+  content: "›";
 }
 
 /*Seccion de Clientes Review*/
 .swiper-pagination-bullet {
-  background: #9CA3AF !important;
+  background: #9ca3af !important;
   opacity: 1 !important;
 }
 
 .swiper-pagination-bullet-active {
-  background: #3B82F6 !important;
+  background: #3b82f6 !important;
   width: 24px !important;
   border-radius: 4px !important;
 }
 
 .swiper-pagination-bullet {
-  background: #9CA3AF !important;
+  background: #9ca3af !important;
   opacity: 1 !important;
 }
 
@@ -68,4 +81,3 @@ body {
   width: 24px !important;
   border-radius: 4px !important;
 }
-

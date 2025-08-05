@@ -1,64 +1,131 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
+import { useState, useEffect } from "react";
+import { FiMenu, FiX, FiSearch } from "react-icons/fi";
 import { SearchBar } from "./SearchBar";
-import logo from "../../public/logos/Logo2.png"; // Asegúrate de que la ruta sea correcta
-import { FiShoppingCart } from "react-icons/fi";
+import logo from "../../public/logos/Logo2.png";
 import CartIcon from "./CartIcon";
 
 export function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setHidden] = useState(false);
+  const [lastY, setLastY] = useState(0);
+
+  // Efecto para navbar con scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentY = window.scrollY;
+      if (currentY <= 0) {
+        // Arriba del todo: siempre visible
+        setHidden(false);
+      } else if (currentY > lastY) {
+        // Scroll hacia abajo: ocultar
+        setHidden(true);
+      } else {
+        // Scroll hacia arriba: mostrar
+        setHidden(false);
+      }
+      setLastY(currentY);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastY]);
+
+  // Cerrar menú al cambiar tamaño de pantalla
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768) {
+        setIsOpen(false);
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
-    <nav className="bg-[#000712] text-[#FAF9F6] shadow-md h-25">
+    <nav
+      className={`fixed top-0 left-0 w-full z-50 transition-transform duration-300 ease-in-out ${
+        scrolled ? "-translate-y-full" : "translate-y-0"
+      } bg-[#000712]/90 backdrop-blur-sm shadow-lg`}
+    >
       <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center py-6">
+        <div className="flex justify-between items-center py-4">
+          {/* Logo y menú hamburguesa (mobile) */}
           <div className="flex items-center">
-            {/* Logo */}
-            <Image
-              src={logo}
-              alt="Logo"
-              width={120}
-              height={40}
-              className="h-10 w-auto"
-            />
-          </div>
-          {/* Menú central */}
-          <div className="hidden md:flex space-x-8">
-            <Link href="/" className="hover:opacity-80 transition-opacity">
-              Home
-            </Link>
-            <Link
-              href="/Products"
-              className="hover:opacity-80 transition-opacity"
+            <button
+              className="md:hidden mr-4 text-white"
+              onClick={() => setIsOpen(!isOpen)}
+              aria-label="Menú"
             >
-              Productos
-            </Link>
-            <Link
-              href="/DailyOffers"
-              className="hover:opacity-80 transition-opacity"
-            >
-              Ofertas del día
-            </Link>
-            <Link
-              href="/HelpContact"
-              className="hover:opacity-80 transition-opacity"
-            >
-              Ayuda y Contacto
+              {isOpen ? <FiX size={24} /> : <FiMenu size={24} />}
+            </button>
+            <Link href="/" className="flex items-center">
+              <Image
+                src={logo}
+                alt="Logo"
+                width={120}
+                height={40}
+                className="h-10 w-auto"
+                priority
+              />
             </Link>
           </div>
 
+          {/* Menú central */}
+          <div
+            className={`absolute md:static top-full left-0 w-full md:w-auto bg-[#000712] md:bg-transparent transition-all duration-300 ${
+              isOpen ? "block" : "hidden md:block"
+            }`}
+          >
+            <div className="flex flex-col md:flex-row md:space-x-8 p-4 md:p-0">
+              <NavLink href="/" text="Home" />
+              <NavLink href="/Products" text="Productos" />
+              <NavLink href="/DailyOffers" text="Ofertas del día" />
+              <NavLink href="/HelpContact" text="Ayuda y Contacto" />
+            </div>
+          </div>
+
           {/* Barra de búsqueda y acciones */}
-          <div className="flex items-center space-x-6">
-            <SearchBar darkMode />
+          <div className="flex items-center space-x-4 md:space-x-6">
+            {/* SearchBar solo en desktop */}
+            <div className="hidden md:block">
+              <SearchBar darkMode />
+            </div>
+
+            {/* Icono de búsqueda en mobile */}
+            <button className="md:hidden text-white">
+              <FiSearch size={20} />
+            </button>
+
             <Link
               href="/login"
-              className="bg-[#182d50] text-[#FAF9F6] px-4 py-2 rounded-md hover:bg-[#3778d4] hover:bg-opacity-20 transition-colors"
+              className="hidden md:block bg-[#182d50] text-[#FAF9F6] px-4 py-2 rounded-md hover:bg-[#3778d4] hover:bg-opacity-20 transition-colors"
             >
               Iniciar sesión
             </Link>
+
             <CartIcon />
           </div>
         </div>
+
+        {/* SearchBar para mobile (aparece al hacer clic en el icono) */}
+        {isOpen && (
+          <div className="md:hidden p-4">
+            <SearchBar darkMode />
+          </div>
+        )}
       </div>
     </nav>
   );
 }
+
+// Componente auxiliar para los links
+const NavLink = ({ href, text }: { href: string; text: string }) => (
+  <Link
+    href={href}
+    className="block py-2 md:py-0 text-white hover:text-blue-300 transition-colors border-b md:border-0 border-gray-700"
+  >
+    {text}
+  </Link>
+);
