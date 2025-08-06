@@ -4,8 +4,9 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { FiMenu, FiX, FiSearch } from "react-icons/fi";
 import { SearchBar } from "./SearchBar";
-import logo from "../../public/logos/Logo2.png";
+import logo from "../../public/logos/Logo4.png";
 import CartIcon from "./CartIcon";
+import Button from "./ui/PagesButtons";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -43,20 +44,32 @@ export function Navbar() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  // Componente auxiliar para los links
+  const NavLink = ({ href, text }: { href: string; text: string }) => (
+    <Link
+      href={href}
+      className="block py-2 md:py-0 Navbar-text transition-colors border-b md:border-0 border-gray-700"
+      onClick={() => setIsOpen(false)}
+    >
+      {text}
+    </Link>
+  );
+
   return (
     <nav
-      className={`fixed top-0 left-0 w-full z-50 transition-transform duration-300 ease-in-out ${
+      className={`fixed top-0 w-full z-50 Navbar-bg backdrop-blur-sm left-0 transition-transform duration-300 ease-in-out ${
         scrolled ? "-translate-y-full" : "translate-y-0"
-      } Navbar-bg backdrop-bluZ-sm shadow-lg`}
+      }`}
     >
       <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center py-4">
+        <div className="flex justify-between items-center py-4 md:flex">
           {/* Logo y menú hamburguesa (mobile) */}
-          <div className="flex items-center">
+          <div className="flex items-center Navbar-bg md:shrink-0">
             <button
-              className="md:hidden mr-4"
+              className="md:hidden mr-3 p-1"
               onClick={() => setIsOpen(!isOpen)}
               aria-label="Menú"
+              aria-expanded={isOpen}
             >
               {isOpen ? <FiX size={24} /> : <FiMenu size={24} />}
             </button>
@@ -66,7 +79,7 @@ export function Navbar() {
                 alt="Logo"
                 width={120}
                 height={40}
-                className="h-10 w-auto"
+                className="h-8 w-auto md:h-10 sm:h-9"
                 priority
               />
             </Link>
@@ -74,7 +87,7 @@ export function Navbar() {
 
           {/* Menú central */}
           <div
-            className={`absolute md:static top-full left-0 w-full md:w-auto md:bg-transparent transition-all duration-300 ${
+            className={`absolute md:static top-full left-0 w-full md:w-auto Navbar-text bg-[var(--color-background-gradient)] font-semibold md:bg-transparent transition-all duration-300 ${
               isOpen ? "block" : "hidden md:block"
             }`}
           >
@@ -87,23 +100,15 @@ export function Navbar() {
           </div>
 
           {/* Barra de búsqueda y acciones */}
-          <div className="flex items-center space-x-4 md:space-x-6">
+          <div className="flex items-center space-x-3 md:space-x-5">
             {/* SearchBar solo en desktop */}
             <div className="hidden md:block">
-              <SearchBar darkMode />
+              <SearchBar />
             </div>
 
-            {/* Icono de búsqueda en mobile */}
-            <button className="md:hidden">
-              <FiSearch size={20} />
-            </button>
-
-            <Link
-              href="/login"
-              className="hidden md:block bg-[#182d50] text-[#FAF9F6] px-4 py-2 rounded-md hover:bg-[#3778d4] hover:bg-opacity-20 transition-colors"
-            >
-              Iniciar sesión
-            </Link>
+            <Button variant="primary" size="xs">
+              <Link href="/login">Iniciar sesión</Link>
+            </Button>
 
             <CartIcon />
           </div>
@@ -111,21 +116,11 @@ export function Navbar() {
 
         {/* SearchBar para mobile (aparece al hacer clic en el icono) */}
         {isOpen && (
-          <div className="md:hidden p-4">
-            <SearchBar darkMode />
+          <div className="md:hidden px-4 pb-3">
+            <SearchBar />
           </div>
         )}
       </div>
     </nav>
   );
 }
-
-// Componente auxiliar para los links
-const NavLink = ({ href, text }: { href: string; text: string }) => (
-  <Link
-    href={href}
-    className="block py-2 md:py-0 Navbar-text transition-colors border-b md:border-0 border-gray-700"
-  >
-    {text}
-  </Link>
-);

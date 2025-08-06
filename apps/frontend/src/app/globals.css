@@ -49,9 +49,10 @@
 
 /* HeroBanner */
 .hero-bg {
-  background: linear-gradient(180deg,
+  background: linear-gradient(0deg,
       var(--color-background) 0%,
       var(--color-background-gradient) 100%);
+  background: opacity(0.9);
 }
 
 .hero-title {
