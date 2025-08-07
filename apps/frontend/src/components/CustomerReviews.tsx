@@ -53,79 +53,81 @@ export function CustomerReviews() {
   };
 
   return (
-    <section className="bg-white mb-20 pb-10">
-      <div className="container mx-auto px-4">
-        {/* <div className="text-center mb-16">
+    <section className="CustomerReview-bg">
+      <div className="bg-transparent container mx-auto px-4 py-16">
+        <div className="container mx-auto px-4">
+          {/* <div className="text-center mb-16">
           <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
             Lo que dicen Nuestros Clientes
           </h2>
         </div> */}
 
-        <div className="relative">
-          <Swiper
-            modules={[Autoplay]}
-            spaceBetween={30}
-            slidesPerView={1}
-            autoplay={{
-              delay: 3100,
-              disableOnInteraction: false,
-            }}
-            speed={850}
-            onSlideChange={(swiper) => setCurrentIndex(swiper.activeIndex)}
-            onSwiper={handleSwiperInit}
-            breakpoints={{
-              768: { slidesPerView: 1 },
-              1024: { slidesPerView: 1 },
-            }}
-            className="pb-14"
-          >
-            {REVIEWS.map((review) => (
-              <SwiperSlide key={review.id}>
-                <div className="p-6 h-full text-center">
-                  <div className="border-l-2 border-gray-300 pl-12 h-full pr-6">
-                    <h3 className="text-2xl font-stretch-extra-expanded font-semibold text-gray-900 mb-6">
-                      {review.product.toUpperCase()}
-                    </h3>
-                    <blockquote className="text-gray-600 mb-4 italic text-lg">
-                      "{review.comment}"
-                    </blockquote>
-                    <div className="mb-4 mx-auto">
-                      {[...Array(5)].map((_, i) => (
-                        <span
-                          key={i}
-                          className={`text-xl ${
-                            i < review.rating
-                              ? "text-yellow-600"
-                              : "text-gray-300"
-                          }`}
-                        >
-                          ★
+          <div className="relative">
+            <Swiper
+              modules={[Autoplay]}
+              spaceBetween={30}
+              slidesPerView={1}
+              autoplay={{
+                delay: 3100,
+                disableOnInteraction: false,
+              }}
+              speed={850}
+              onSlideChange={(swiper) => setCurrentIndex(swiper.activeIndex)}
+              onSwiper={handleSwiperInit}
+              breakpoints={{
+                768: { slidesPerView: 1 },
+                1024: { slidesPerView: 1 },
+              }}
+              className="pb-14"
+            >
+              {REVIEWS.map((review) => (
+                <SwiperSlide key={review.id}>
+                  <div className="p-6 h-full text-center">
+                    <div className="border-l-2 border-gray-300 pl-12 h-full pr-6">
+                      <h3 className="text-2xl font-stretch-extra-expanded font-semibold text-gray-900 mb-6">
+                        {review.product.toUpperCase()}
+                      </h3>
+                      <blockquote className="text-gray-600 mb-4 italic text-lg">
+                        "{review.comment}"
+                      </blockquote>
+                      <div className="mb-4 mx-auto">
+                        {[...Array(5)].map((_, i) => (
+                          <span
+                            key={i}
+                            className={`text-xl ${
+                              i < review.rating
+                                ? "text-yellow-600"
+                                : "text-gray-300"
+                            }`}
+                          >
+                            ★
+                          </span>
+                        ))}
+                      </div>
+                      <div>
+                        <img
+                          src={review.avatar}
+                          alt={review.name}
+                          className="w-10 h-10 rounded-full mx-auto"
+                          loading="lazy"
+                        />
+                        <span className="font-medium text-gray-800 mx-auto">
+                          {review.name}
                         </span>
-                      ))}
-                    </div>
-                    <div>
-                      <img
-                        src={review.avatar}
-                        alt={review.name}
-                        className="w-10 h-10 rounded-full mx-auto"
-                        loading="lazy"
-                      />
-                      <span className="font-medium text-gray-800 mx-auto">
-                        {review.name}
-                      </span>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-          {/*{swiperReady && (
+                </SwiperSlide>
+              ))}
+            </Swiper>
+            {/*{swiperReady && (
             <CarouselIndicators
               items={REVIEWS}
               currentIndex={currentIndex}
               onIndicatorClick={goToSlide}
             />
           )} */}
+          </div>
         </div>
       </div>
     </section>

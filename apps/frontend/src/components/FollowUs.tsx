@@ -20,8 +20,8 @@ export function FollowUs() {
   ];
 
   return (
-    <section className="bg-[#ffffff] py-14 px-4 flex">
-      <div className="max-w-6xl w-2/3 px-12">
+    <section className="FollowUs-bg py-14 px-4 flex">
+      <div className="bg-transparent max-w-6xl w-2/3 px-12">
         <div className="text-center mb-8">
           <motion.h2
             className="text-3xl md:text-4xl font-bold mb-6 text-[#000]"

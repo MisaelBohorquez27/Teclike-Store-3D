@@ -67,7 +67,7 @@ export function TrendingProducts() {
   };
 
   return (
-    <section className="relative bg-white py-12">
+    <section className="TrendingProducts-bg relative py-12">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold text-gray-900 mb-8">
           Productos Populares

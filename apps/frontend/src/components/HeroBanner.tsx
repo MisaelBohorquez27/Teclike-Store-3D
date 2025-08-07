@@ -6,6 +6,7 @@ import desktop from "../../public/ui/escritorio2.png";
 import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { FloatingObjects } from "./ui/FloatingObjects";
 
 export function HeroBanner() {
   const [isMounted, setIsMounted] = useState(false);
@@ -70,7 +71,7 @@ export function HeroBanner() {
 
             {/* Imagen */}
             <motion.div
-              className="flex-1 flex justify-center lg:justify-end relative w-full max-w-2xl"
+              className="flex-1 flex justify-center lg:justify-end relative w-full max-w-2xl bg-transparent"
               initial={
                 prefersReducedMotion
                   ? { opacity: 1 }
@@ -86,7 +87,7 @@ export function HeroBanner() {
                 height={800}
                 priority
                 quality={90}
-                className="w-full h-auto rounded-xl shadow-2xl object-contain"
+                className="w-full h-auto object-contain bg-transparent"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 800px"
               />
             </motion.div>
