@@ -18,7 +18,7 @@ type Product = {
 
 export function BestProductsSellers({ product }: { product: Product }) {
   return (
-    <div className="bg-[#ffff] p-8 flex flex-col md:flex-row gap-8">
+    <div className="bg-transparent p-8 flex flex-col md:flex-row gap-8">
       {" "}
       {/* El color debe ser el mismo del fondo de la pagina */}
       {/* Columna izquierda */}

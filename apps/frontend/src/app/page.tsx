@@ -1,6 +1,6 @@
 import { DailyOffers } from "@/components/DailyOffers";
 import { HeroBanner } from "@/components/HeroBanner";
-import { BestSellers } from "@/components/BestSellers";
+import { BestSellersWeek } from "@/components/BestSellersWeek";
 import { Footer } from "@/components/Footer";
 import { TrendingProducts } from "@/components/TrendingProducts";
 import { CustomerReviews } from "@/components/CustomerReviews";
@@ -15,7 +15,7 @@ export default function Home() {
       <BenefitsGrid />
       <TrendingProducts />
       <DailyOffers />
-      <BestSellers />
+      <BestSellersWeek />
       <FollowUs />
       <CustomerReviews />
       <Footer />

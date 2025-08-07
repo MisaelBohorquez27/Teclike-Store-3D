@@ -38,7 +38,7 @@ const BEST_SELLERS = [
   },
 ];
 
-export function BestSellers() {
+export function BestSellersWeek() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [swiperReady, setSwiperReady] = useState(false);
   const swiperRef = useRef<SwiperCore | null>(null);
@@ -55,7 +55,7 @@ export function BestSellers() {
   };
 
   return (
-    <section className="bg-white py-16">
+    <section className="BestSellersWeek-bg py-16">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center mb-8">
           <h2 className="text-3xl font-bold text-gray-900">

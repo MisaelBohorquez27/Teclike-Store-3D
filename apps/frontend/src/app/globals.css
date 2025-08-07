@@ -52,7 +52,6 @@
   background: linear-gradient(0deg,
       var(--color-background) 0%,
       var(--color-background-gradient) 100%);
-  background: opacity(0.9);
 }
 
 .hero-title {
@@ -69,4 +68,47 @@
     padding-top: 4rem;
     /* Espacio para navbar */
   }
+}
+
+/* BenefitGrid */
+.BenefitGrid-bg {
+  background: linear-gradient(180deg,
+      var(--color-background) 0%,
+      var(--color-background-gradient) 100%);
+}
+
+/* TrendingProducts */
+.TrendingProducts-bg {
+  background: linear-gradient(0deg,
+      var(--color-background) 0%,
+      var(--color-background-gradient) 100%);
+}
+
+/* DailyOffers */
+.DailyOffers-bg {
+  background: linear-gradient(180deg,
+      var(--color-background) 0%,
+      var(--color-background-gradient) 100%);
+}
+
+/* BestSellersWeek */
+.BestSellersWeek-bg {
+  background: linear-gradient(180deg,
+      var(--color-background) 0%,
+      var(--color-background-gradient) 100%);
+}
+
+
+/* FollowUs */
+.FollowUs-bg {
+  background: linear-gradient(180deg,
+      var(--color-background) 0%,
+      var(--color-background-gradient) 100%);
+}
+
+/* CustomersReview */
+.CustomerReview-bg {
+  background: linear-gradient(180deg,
+      var(--color-background) 0%,
+      var(--color-background-gradient) 100%);
 }
