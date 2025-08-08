@@ -11,6 +11,7 @@
   --navy: #0f2c59;
   --cream: #faf9f6;
   --cream-gradient: #efefec;
+  --cream2: #f1efe9;
   --electric-blue: #3a7bff;
   --silver: #c0c0c0;
   --esmerald: #50c878;
@@ -24,6 +25,7 @@
   --color-primary: var(--navy);
   --color-secondary: var(--electric-blue);
   --color-background: var(--cream);
+  --color-background-card: var(--cream2);
   --color-background-gradient: var(--cream-gradient);
   --color-muted: var(--silver);
   --color-success: var(--esmerald);
@@ -93,11 +95,16 @@
 
 /* BestSellersWeek */
 .BestSellersWeek-bg {
-  background: linear-gradient(180deg,
+  background: linear-gradient(0deg,
       var(--color-background) 0%,
       var(--color-background-gradient) 100%);
 }
 
+.card-bg {
+   background: linear-gradient(0deg,
+      var(--color-background-card) 0%,
+      var(--color-background-gradient) 100%);
+}
 
 /* FollowUs */
 .FollowUs-bg {
@@ -108,7 +115,83 @@
 
 /* CustomersReview */
 .CustomerReview-bg {
+  background: linear-gradient(0deg,
+      var(--color-background) 0%,
+      var(--color-background-gradient) 100%);
+}
+
+/* ProductPage */
+.PageProducts-bg {
   background: linear-gradient(180deg,
+      var(--color-background) 0%,
+      var(--color-background-gradient) 100%);
+}
+
+.Product-title {
+  color: var(--color-black);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.Product-subtitle {
+  color: var(--color-black);
+}
+
+/* DailyOffersPage */
+
+.DailyOffers-title {
+  color: var(--color-black);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.DailyOffers-subtitle {
+  color: var(--color-black);
+}
+
+.DailyOffers-Countdown {
+  background: var(--color-primary);
+  color: var(--color-white);
+}
+.PageDailyOffers-bg {
+  background: linear-gradient(0deg,
+      var(--color-background) 0%,
+      var(--color-background-gradient) 100%);
+}
+.FlashOffers-bg {
+  background: linear-gradient(180deg,
+      var(--color-background) 0%,
+      var(--color-background-gradient) 100%);
+}
+
+.FeatureOffers-bg {
+  background: linear-gradient(180deg,
+      var(--color-background) 0%,
+      var(--color-background-gradient) 100%);
+}
+
+.BannerSubscribe-bg {
+  background: linear-gradient(0deg,
+      var(--color-background) 0%,
+      var(--color-background-gradient) 100%);
+}
+
+/* Help&ContactPage */
+.HelpContact-bg {
+  background: linear-gradient(0deg,
+      var(--color-background) 0%,
+      var(--color-background-gradient) 100%);
+}
+
+.HelpContact-title {
+  color: var(--color-black);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.HelpContact-subtitle {
+  color: var(--color-black);
+}
+
+.Contact-bg {
+  background: linear-gradient(0deg,
       var(--color-background) 0%,
       var(--color-background-gradient) 100%);
 }

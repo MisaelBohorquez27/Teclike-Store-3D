@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import Button from "./ui/PagesButtons";
+import Button from "./PagesButtons";
 import Image from "next/image"; // Importa el componente Image de Next.js
 import { FiSend } from "react-icons/fi";
 
@@ -57,7 +57,7 @@ export function Subscription() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Tu correo electrónico"
-            className="flex-grow px-4 py-3 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="flex-grow px-4 py-3 rounded-lg bg-white border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
           <Button

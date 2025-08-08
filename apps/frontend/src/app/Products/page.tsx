@@ -15,12 +15,12 @@ export default function ProductPage() {
     <>
       {/* Navbar */}
       <Navbar />
-      <main className="bg-gray-50 min-h-screen">
+      <main className="PageProducts-bg min-h-[calc(100vh-4rem)] md:min-h-screen relative overflow-hidden">
         {/* Hero Banner */}
-        <section className="bg-gradient-to-b from-[#000712] to-[#00183f] py-20 text-white">
-          <div className="container mx-auto px-4 text-center">
-            <h1 className="text-5xl font-bold mb-4">Nuestra Colección</h1>
-            <p className="text-2xl opacity-90">
+        <section className="pt-40 pb-20">
+          <div className="container mx-auto px-4 text-center h-full">
+            <h1 className="text-5xl font-bold mb-4 Product-tittle">Nuestra Colección</h1>
+            <p className="text-2xl opacity-90 Product-subtitle">
               Encuentra los mejores productos para tus proyectos
             </p>
           </div>

@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import { FiInstagram } from "react-icons/fi";
 import Image from "next/image";
-import { Subscription } from "./Subscription";
+import { Subscription } from "./ui/Subscription";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
@@ -94,9 +94,9 @@ export function FollowUs() {
       </div>
       <div className="w-1/3">
         <div className="relative h-110 overflow-hidden flex justify-center items-center">
-          <div className="bg-gradient-to-b from-[#001a37] to-[#90b8da] px-8 py-8 mb-10 rounded-lg  max-w-4xl mx-auto text-center">
+          <div className="px-8 py-8 mb-10 rounded-lg  max-w-4xl mx-auto text-center">
             <motion.h2
-              className="text-3xl md:text-4xl font-bold mb-10 text-[#f9f9f9]"
+              className="text-3xl md:text-4xl font-bold mb-10 text-black"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
