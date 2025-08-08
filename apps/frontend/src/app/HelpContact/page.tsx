@@ -9,11 +9,11 @@ export default function HelpContactPage() {
     <>
       {/* Navbar */}
       <Navbar />
-      <main className="bg-gray-50 min-h-screen">
+      <main className="HelpContact-bg min-h-screen">
         {/* Hero Banner */}
-        <section className="bg-gradient-to-r from-[#003f8d] to-[#53729d] py-20 text-white">
+        <section className="pt-36 pb-4 HelpContact-title">
           <div className="container mx-auto px-4 text-center">
-            <h1 className="text-4xl font-bold mb-4">Ayuda y Contacto</h1>
+            <h1 className="text-4xl font-bold mb-4 py-1">Ayuda y Contacto</h1>
             <p className="text-xl opacity-90">
               Estamos aquí para ayudarte en lo que necesites
             </p>
@@ -26,7 +26,7 @@ export default function HelpContactPage() {
         </section>
 
         {/* Sección de Preguntas Frecuentes */}
-        <section className="bg-white py-16">
+        <section className="py-16">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl font-bold text-center mb-12">
               Preguntas Frecuentes
@@ -36,7 +36,11 @@ export default function HelpContactPage() {
         </section>
 
         {/* Sección de Contacto */}
-        <section className="container mx-auto px-4 py-16">
+        <section className="Contact-bg ">
+          <div className="container mx-auto px-4 py-16">
+
+
+          </div>
           <div className="max-w-7xl mx-auto rounded-xl overflow-hidden">
             <div className="md:flex gap-x-30">
               <div className="md:w-1/2 text-black p-4">

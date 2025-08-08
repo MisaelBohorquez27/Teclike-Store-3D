@@ -34,7 +34,7 @@ export function BestProductsSellers({ product }: { product: Product }) {
         </div>
       </div>
       {/* Columna derecha */}
-      <div className="bg-gray-50 rounded-2xl md:w-1/2 p-8">
+      <div className="card-bg rounded-2xl md:w-1/2 p-8">
         <h3 className="text-2xl font-bold text-gray-900 mb-2">
           {product.title}
         </h3>

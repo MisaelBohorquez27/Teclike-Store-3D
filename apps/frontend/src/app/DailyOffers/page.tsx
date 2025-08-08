@@ -3,16 +3,16 @@ import { CountdownTimer } from "@/app/DailyOffers/CountdownTimer";
 import { HotDeals } from "@/app/DailyOffers/HotDeals";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import { Subscription } from "@/components/Subscription";
+import { Subscription } from "@/components/ui/Subscription";
 
 export default function DailyDealsPage() {
   return (
     <>
       {/*NavBar*/}
       <Navbar />
-      <main className="bg-gray-50 min-h-screen">
+      <main className="min-h-screen">
         {/* Hero Banner */}
-        <section className="bg-gradient-to-r from-[#003f8d] to-[#53729d] py-16 text-white">
+        <section className="PageDailyOffers-bg pb-16 pt-30 DailyOffers-title-bg">
           <div className="container mx-auto px-4 text-center">
             <div className="flex justify-center mb-4">
               <span className="bg-white text-[#006826] px-3 py-1 rounded-full text-sm font-bold">
@@ -26,20 +26,22 @@ export default function DailyDealsPage() {
             <CountdownTimer targetDate={new Date().setHours(24, 0, 0, 0)} />
           </div>
         </section>
-        
+
         {/* Ofertas Flash */}
-        <section className="container mx-auto px-4 py-12">
-          <h2 className="text-3xl font-bold text-center mb-2">
-            🔥 Flash Deals
-          </h2>
-          <p className="text-gray-600 text-center mb-8">
-            Ofertas que terminan en las próximas horas
-          </p>
-          <DailyDeals />
+        <section className="FlashOffers-bg">
+          <div className="bg-transparent container mx-auto px-4 py-12">
+            <h2 className="text-3xl font-bold text-center mb-2">
+              🔥 Flash Deals
+            </h2>
+            <p className="text-gray-600 text-center mb-8">
+              Ofertas que terminan en las próximas horas
+            </p>
+            <DailyDeals />
+          </div>
         </section>
 
         {/* Ofertas Destacadas */}
-        <section className="bg-white py-12">
+        <section className="FeatureOffers-bg PageDailyOffers-bg py-12">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl font-bold text-center mb-2">
               ⭐ Ofertas Destacadas
@@ -52,7 +54,7 @@ export default function DailyDealsPage() {
         </section>
 
         {/* Banner de Suscripción */}
-        <section className="bg-[#e5e5e5] text-Black py-12">
+        <section className="BannerSubscribe-bg text-Black py-12">
           <div className="container mx-auto px-4 flex flex-col items-center text-center">
             <h2 className="text-2xl font-bold mb-4">
               ¿No quieres perderte ninguna oferta?
