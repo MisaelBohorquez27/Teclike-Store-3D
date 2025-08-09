@@ -33,12 +33,12 @@ export function DailyOffers() {
   return (
     <section className="DailyOffers-bg">
       <div className="bg-transparent container mx-auto px-4 py-16">
-        <div className="rounded-xl px-8 bg-[#182d5c] bg-opacity-10 backdrop-blur-md shadow-lg py-14 h-full flex items-center justify-center">
+        <div className="DailyOffers-bg2 rounded-xl px-8 bg-opacity-10 backdrop-blur-md shadow-lg py-14 h-full flex items-center justify-center">
           <div className="text-center mb-6 md:w-1/3 pr-6">
-            <h2 className="text-6xl font-bold text-[#efefef] mb-2">
+            <h2 className="TitleColor2 text-6xl font-bold mb-2">
               Ofertas del día
             </h2>
-            <p className="text-lg text-white px-4">
+            <p className="SubtitleColor2 text-lg px-4">
               Explora productos a buen precio por tiempo limitado
             </p>
             <Link href="/DailyOffers" className="inline-block">

@@ -69,7 +69,7 @@ export function TrendingProducts() {
   return (
     <section className="TrendingProducts-bg relative py-12">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-gray-900 mb-8">
+        <h2 className="TitleColor text-3xl font-bold mb-8">
           Productos Populares
         </h2>
 
@@ -99,14 +99,14 @@ export function TrendingProducts() {
                       loading="lazy"
                     />
                   </div>
-                  <h3 className="font-semibold text-lg text-gray-800">
+                  <h3 className="font-semibold text-lg SubtitleColor">
                     {product.title}
                   </h3>
-                  <p className="text-gray-500 text-sm mt-1">
+                  <p className="TitleColor text-sm mt-1">
                     {product.details}
                   </p>
                   <div className="mt-4 flex justify-between items-center">
-                    <span className="text-gray-900 font-bold">
+                    <span className="ColorSubtitle font-bold">
                       {product.currency}
                       {product.price.toFixed(2)}
                     </span>

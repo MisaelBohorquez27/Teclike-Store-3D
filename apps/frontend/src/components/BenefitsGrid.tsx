@@ -38,16 +38,16 @@ export function BenefitsGrid() {
               className="p-6 text-center"
             >
               <benefit.Icon 
-                className="w-10 h-10 md:w-12 md:h-12 mb-4 mx-auto text-gray-800" 
+                className="TitleColor w-10 h-10 md:w-12 md:h-12 mb-4 mx-auto" 
                 aria-hidden="true"
               />
-              <p className="text-lg md:text-xl font-bold mb-2 text-gray-900">
+              <p className="SubtitleColor text-lg md:text-xl font-bold mb-2">
                 {benefit.value}
               </p>
-              <h3 className="text-lg md:text-xl font-semibold mb-2 text-[#206179]">
+              <h3 className="TitleColor color-text text-lg md:text-xl font-semibold mb-2">
                 {benefit.title}
               </h3>
-              <p className="text-gray-600 text-sm md:text-base">
+              <p className="SubtitleColor text-sm md:text-base">
                 {benefit.description}
               </p>
             </div>

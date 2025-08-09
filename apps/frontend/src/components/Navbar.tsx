@@ -64,7 +64,7 @@ export function Navbar() {
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center py-4 md:flex">
           {/* Logo y menú hamburguesa (mobile) */}
-          <div className="flex items-center Navbar-bg md:shrink-0">
+          <div className="flex items-center md:shrink-0">
             <button
               className="md:hidden mr-3 p-1"
               onClick={() => setIsOpen(!isOpen)}

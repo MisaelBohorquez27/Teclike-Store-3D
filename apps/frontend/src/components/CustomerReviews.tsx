@@ -84,10 +84,10 @@ export function CustomerReviews() {
                 <SwiperSlide key={review.id}>
                   <div className="p-6 h-full text-center">
                     <div className="border-l-2 border-gray-300 pl-12 h-full pr-6">
-                      <h3 className="text-2xl font-stretch-extra-expanded font-semibold text-gray-900 mb-6">
+                      <h3 className="TitleColor text-2xl font-stretch-extra-expanded font-semibold mb-6">
                         {review.product.toUpperCase()}
                       </h3>
-                      <blockquote className="text-gray-600 mb-4 italic text-lg">
+                      <blockquote className="SubtitleColor mb-4 italic text-lg">
                         "{review.comment}"
                       </blockquote>
                       <div className="mb-4 mx-auto">
@@ -96,7 +96,7 @@ export function CustomerReviews() {
                             key={i}
                             className={`text-xl ${
                               i < review.rating
-                                ? "text-yellow-600"
+                                ? "text-green-600"
                                 : "text-gray-300"
                             }`}
                           >

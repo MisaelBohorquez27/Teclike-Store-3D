@@ -27,6 +27,7 @@ const BEST_SELLERS = [
   {
     id: 2,
     title: "COLLAGEN",
+    description: "Now with enhanced display features.",
     tagline: "SILENT FACEBOOK MARK OVER TASTE",
     features: ["Sugar free", "Monohydrate for Women"],
     stats: ["50", "26", "19", "30"],
@@ -58,7 +59,7 @@ export function BestSellersWeek() {
     <section className="BestSellersWeek-bg py-16">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center mb-8">
-          <h2 className="text-3xl font-bold text-gray-900">
+          <h2 className="TitleColor text-3xl font-bold">
             Más vendido de la semana
           </h2>
           <button className="text-blue-600 hover:text-blue-800 font-medium">
