@@ -57,8 +57,8 @@ export default function CartPage() {
   return (
     <>
       <Navbar />
-      <main className="bg-gray-50 min-h-screen py-12">
-        <div className="container mx-auto px-4">
+      <main className="Cart-bg min-h-screen pb-12 pt-30">
+        <div className="bg-transparent container mx-auto px-4">
           <h1 className="text-3xl font-bold mb-8">Carrito</h1>
 
           {cartItems.length === 0 ? (
@@ -67,7 +67,7 @@ export default function CartPage() {
             <div className="flex flex-col lg:flex-row gap-8">
               {/* Lista de Productos */}
               <div className="lg:w-2/3">
-                <div className="bg-white rounded-lg shadow-md p-6">
+                <div className="CartProducts-bg rounded-lg shadow-md p-6">
                   <div className="hidden md:grid grid-cols-12 gap-4 mb-4 font-medium text-gray-500">
                     <div className="col-span-5">Producto</div>
                     <div className="col-span-2 text-center">Precio</div>
@@ -90,7 +90,7 @@ export default function CartPage() {
 
               {/* Resumen del Pedido */}
               <div className="lg:w-1/3">
-                <div className="bg-white rounded-lg shadow-md p-6 sticky top-4">
+                <div className="rounded-lg p-6 sticky top-4">
                   <h2 className="text-xl font-bold mb-4">Resumen del Pedido</h2>
 
                   <div className="space-y-3 mb-6">
