@@ -33,6 +33,14 @@
 
 /* ---------- Clases reutilizables ---------- */
 
+/* Botones */
+.Button-bg {
+  background: var(--color-primary);
+}
+.Button-bg:hover {
+  background: var(--color-secondary);
+}
+
 /* Navbar */
 .Navbar-bg {
   background: linear-gradient(180deg,
@@ -192,6 +200,28 @@
 
 .Contact-bg {
   background: linear-gradient(0deg,
+      var(--color-background) 0%,
+      var(--color-background-gradient) 100%);
+}
+
+/* CartPage */
+.Cart-bg {
+  background: linear-gradient(0deg,
+      var(--color-background) 0%,
+      var(--color-background-gradient) 100%);
+}
+
+.Cart-title {
+  color: var(--color-black);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.Cart-subtitle {
+  color: var(--color-black);
+}
+
+.CartProducts-bg {
+  background: linear-gradient(180deg,
       var(--color-background) 0%,
       var(--color-background-gradient) 100%);
 }

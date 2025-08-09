@@ -24,7 +24,7 @@ const Button: FC<ButtonProps> = ({
       className={cn(
         "rounded-lg font-semibold transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
         variant === "primary" &&
-          "bg-[#3778d4] text-[#FAF9F6] hover:bg-[#5ca0ff] border-2 border-transparent",
+          "Button-bg text-[#FAF9F6] border-2 border-transparent",
         variant === "secondary" &&
           "bg-[#3f8efd] text-[#FAF9F6] hover:bg-[#3778d4] border-2 border-transparent",
         variant === "addCart" &&
