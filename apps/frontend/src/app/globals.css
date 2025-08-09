@@ -8,13 +8,23 @@
   --breakpoint-lg: 976px;
 
   /* Paleta Base */
-  --navy: #0f2c59;
-  --cream: #faf9f6;
-  --cream-gradient: #efefec;
-  --cream2: #f1efe9;
-  --electric-blue: #3a7bff;
-  --silver: #c0c0c0;
-  --esmerald: #50c878;
+
+  /* Azul */
+  --navy-blue: #0F2C59;
+  --electric-blue: #4A6BFF;
+  --light-blue: #A7C6FF;
+
+  /* Morado */
+  --purple: #3A237A;
+  --electric-purple: #7B4AFF;
+  --light-purple: #9D7BFF;
+
+  /* Neutros */
+  --black: #000000;
+  --white: #FFFFFF ;
+  --white2: #efefec;
+  --gray: #F5F5F5;
+  --gray2: #333333;
 
   /* Textos */
   --text-primary: #0F2C59;
@@ -22,13 +32,19 @@
   --text-body: #4A5568;
   --text-muted: #718096;
 
-  --color-primary: var(--navy);
-  --color-secondary: var(--electric-blue);
-  --color-background: var(--cream);
-  --color-background-card: var(--cream2);
-  --color-background-gradient: var(--cream-gradient);
-  --color-muted: var(--silver);
-  --color-success: var(--esmerald);
+  --color-primary: var(--navy-blue);
+  --color-primary-hover: var(--electric-blue);
+  --color-primary-accent: var(--light-blue);
+  --color-secondary: var(--purple);
+  --color-secondary-hover: var(--electric-purple);
+  --color-secondary-accent: var(--light-purple);
+  --color-background: var(--white);
+  --color-background-gradient: var(--white2);
+  --color-background-card: var(--gray);
+  --color-text-primary: var(--black);
+  --color-text-primary2: var(--white);
+  --color-text-secondary: var(--gray2);
+  --color-text-secondary2: var(--white2);
 }
 
 /* ---------- Clases reutilizables ---------- */
@@ -38,13 +54,37 @@
   background: var(--color-primary);
 }
 .Button-bg:hover {
-  background: var(--color-secondary);
+  background: var(--color-primary-hover);
+}
+
+/* Titulos-Textos */
+
+.TitleColor {
+  color: var(--color-text-primary);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.TitleColor2 {
+  color: var(--color-text-primary2);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.SubtitleColor {
+  color: var(--color-text-secondary);
+}
+
+.SubtitleColor2 {
+  color: var(--color-text-secondary2);
+}
+
+.TextColor {
+  color: var(--color-text-primary);
 }
 
 /* Navbar */
 .Navbar-bg {
   background: linear-gradient(180deg,
-      var(--color-background) 0%,
+      var(--color-background) 0%, 
       var(--color-background-gradient) 100%);
 }
 
@@ -54,7 +94,7 @@
 }
 
 .Navbar-text:hover {
-  color: var(--color-secondary);
+  color: var(--color-primary-hover);
 }
 
 /* HeroBanner */
@@ -62,15 +102,6 @@
   background: linear-gradient(0deg,
       var(--color-background) 0%,
       var(--color-background-gradient) 100%);
-}
-
-.hero-title {
-  color: var(--color-bo);
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.hero-subtitle {
-  color: var(--color-bone-white);
 }
 
 @media (max-width: 768px) {
@@ -101,6 +132,10 @@
       var(--color-background-gradient) 100%);
 }
 
+.DailyOffers-bg2 {
+  background: var(--color-primary)
+}
+
 /* BestSellersWeek */
 .BestSellersWeek-bg {
   background: linear-gradient(0deg,
@@ -128,9 +163,14 @@
       var(--color-background-gradient) 100%);
 }
 
+/* Footer */
+.Footer-bg {
+  background: var(--color-primary)
+}
+
 /* ProductPage */
 .PageProducts-bg {
-  background: linear-gradient(180deg,
+  background: linear-gradient(0deg,
       var(--color-background) 0%,
       var(--color-background-gradient) 100%);
 }

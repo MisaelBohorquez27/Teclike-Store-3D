@@ -41,12 +41,12 @@ export function HeroBanner() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
             >
-              <h1 className="hero-title text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight">
+              <h1 className="title text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight">
                 Visualiza tu espacio antes de comprar
               </h1>
 
               <motion.p
-                className="hero-subtitle text-xl md:text-2xl opacity-90 mb-8"
+                className="subtitle text-xl md:text-2xl opacity-90 mb-8"
                 initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0 }}
                 animate={{ opacity: 0.9 }}
                 transition={{ delay: 0.2, duration: 0.6 }}

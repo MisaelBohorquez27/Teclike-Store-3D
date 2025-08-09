@@ -35,22 +35,22 @@ export function BestProductsSellers({ product }: { product: Product }) {
       </div>
       {/* Columna derecha */}
       <div className="card-bg rounded-2xl md:w-1/2 p-8">
-        <h3 className="text-2xl font-bold text-gray-900 mb-2">
+        <h3 className="TitleColor text-2xl font-bold mb-2">
           {product.title}
         </h3>
         {/* {product.tagline && (
           <p className="text-gray-600 italic mb-4">{product.tagline}</p>
         )} */}
         {product.description && (
-          <p className="text-gray-700 mb-6">{product.description}</p>
+          <p className="TextColor mb-6">{product.description}</p>
         )}
 
         {product.features && (
-          <ul className="space-y-2 mb-6">
+          <ul className="TextColor space-y-2 mb-6">
             {product.features.map((feature, index) => (
               <li key={index} className="flex items-center">
                 <span className="mr-2">•</span>
-                <span className="text-gray-700">{feature}</span>
+                <span className="">{feature}</span>
               </li>
             ))}
           </ul>
@@ -71,8 +71,8 @@ export function BestProductsSellers({ product }: { product: Product }) {
           </div>
         )} */}
 
-        <p className="text-gray-600 mb-6">{product.fullDescription}</p>
-        <div className="text-2xl font-bold text-gray-900 mb-6">
+        <p className="TextColor mb-6">{product.fullDescription}</p>
+        <div className="TextColor text-2xl font-bold mb-6">
           {product.currency} {product.priceRange.min} - {product.currency}{" "}
           {product.priceRange.max}
         </div>

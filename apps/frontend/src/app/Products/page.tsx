@@ -17,7 +17,7 @@ export default function ProductPage() {
       <Navbar />
       <main className="PageProducts-bg min-h-[calc(100vh-4rem)] md:min-h-screen relative overflow-hidden">
         {/* Hero Banner */}
-        <section className="pt-40 pb-20">
+        <section className="pt-35 pb-20">
           <div className="container mx-auto px-4 text-center h-full">
             <h1 className="text-5xl font-bold mb-4 Product-tittle">Nuestra Colección</h1>
             <p className="text-2xl opacity-90 Product-subtitle">

@@ -2,14 +2,14 @@ import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from 'react-icons/fa';
 
 export function Footer() {
   return (
-    <footer className="bg-gray-900 text-gray-300 pt-16 pb-8">
+    <footer className="TitleColor2 Footer-bg pt-16 pb-8 shadow-lg">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           
           {/* Columna 1: About */}
           <div>
-            <h3 className="text-2xl font-bold text-white mb-6">About Us</h3>
-            <p className="mb-6">
+            <h3 className="TitleColor2 text-2xl font-bold mb-6">About Us</h3>
+            <p className="SubtitleColor2 mb-6">
               We specialize in high-quality 3D models for designers and architects. Our collection helps you bring creative visions to life with precision and style.
             </p>
             <div className="flex space-x-4">
@@ -30,7 +30,7 @@ export function Footer() {
 
           {/* Columna 2: Contacto */}
           <div>
-            <h3 className="text-2xl font-bold text-white mb-6">Get in Touch</h3>
+            <h3 className="text-2xl font-bold mb-6">Get in Touch</h3>
             <address className="not-italic">
               <p className="mb-3">123, Design District,</p>
               <p className="mb-3">Creative City, CC 90210</p>
@@ -41,19 +41,19 @@ export function Footer() {
 
           {/* Columna 3: Enlaces */}
           <div>
-            <h3 className="text-2xl font-bold text-white mb-6">Pages</h3>
+            <h3 className="text-2xl font-bold mb-6">Pages</h3>
             <ul className="space-y-2">
-              <li><a href="#" className="hover:text-white transition-colors flex items-center"> - Home</a></li>
-              <li><a href="#" className="hover:text-white transition-colors flex items-center"> - Sobre Nosotros</a></li>
-              <li><a href="#" className="hover:text-white transition-colors flex items-center"> - Carrito</a></li>
-              <li><a href="#" className="hover:text-white transition-colors flex items-center"> - Novedades</a></li>
-              <li><a href="#" className="hover:text-white transition-colors flex items-center"> - Ayuda y Contacto</a></li>
+              <li><a href="#" className="hover:text-gray-400 transition-colors flex items-center"> - Home</a></li>
+              <li><a href="#" className="hover:text-gray-400 transition-colors flex items-center"> - Sobre Nosotros</a></li>
+              <li><a href="#" className="hover:text-gray-400 transition-colors flex items-center"> - Carrito</a></li>
+              <li><a href="#" className="hover:text-gray-400 transition-colors flex items-center"> - Novedades</a></li>
+              <li><a href="#" className="hover:text-gray-400 transition-colors flex items-center"> - Ayuda y Contacto</a></li>
             </ul>
           </div>
 
           {/* Columna 4: Newsletter */}
           <div>
-            <h3 className="text-2xl font-bold text-white mb-6">Subscribe</h3>
+            <h3 className="text-2xl font-bold TitleColor2 mb-6">Subscribe</h3>
             <p className="mb-4">Subscribe to our mailing list to get the latest updates.</p>
             <div className="flex">
               <input 

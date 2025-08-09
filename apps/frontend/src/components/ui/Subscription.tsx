@@ -57,7 +57,7 @@ export function Subscription() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Tu correo electrónico"
-            className="flex-grow px-4 py-3 rounded-lg bg-white border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="flex-grow px-4 py-3 rounded-lg bg-white border border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
           <Button

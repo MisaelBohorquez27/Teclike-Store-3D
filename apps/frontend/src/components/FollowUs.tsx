@@ -24,7 +24,7 @@ export function FollowUs() {
       <div className="bg-transparent max-w-6xl w-2/3 px-12">
         <div className="text-center mb-8">
           <motion.h2
-            className="text-3xl md:text-4xl font-bold mb-6 text-[#000]"
+            className="TitleColor text-3xl md:text-4xl font-bold mb-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -96,7 +96,7 @@ export function FollowUs() {
         <div className="relative h-110 overflow-hidden flex justify-center items-center">
           <div className="px-8 py-8 mb-10 rounded-lg  max-w-4xl mx-auto text-center">
             <motion.h2
-              className="text-3xl md:text-4xl font-bold mb-10 text-black"
+              className="TitleColor text-3xl md:text-4xl font-bold mb-10"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
