@@ -24,15 +24,15 @@ const Button: FC<ButtonProps> = ({
       className={cn(
         "rounded-lg font-semibold transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
         variant === "primary" &&
-          "Button-bg text-[#FAF9F6] border-2 border-transparent",
+          "Button-bg TextColor2 border-2 border-transparent",
         variant === "secondary" &&
-          "bg-[#3f8efd] text-[#FAF9F6] hover:bg-[#3778d4] border-2 border-transparent",
+          "Button-bg TextColor2 border-2 border-transparent",
         variant === "addCart" &&
-          "bg-[#3f8efd] text-[#FAF9F6] hover:bg-[#3778d4] border-2 border-transparent",
+          "Button-bg TextColor2 border-2 border-transparent",
         variant === "outline" &&
           "bg-transparent text-[#0F2C59] border-2 border-[#0F2C59] hover:bg-[#0F2C59] hover:text-[#FAF9F6]",
         variant === "submit" &&
-          "bg-[#3778d4] text-[#FAF9F6] hover:bg-[#5ca0ff] border-2 border-transparent",
+          "Button-bg TextColor2 border-2 border-transparent",
         size === "2xs" && "px-2 py-1 text-xs font-extralight",
         size === "xs" && "px-3 py-2 md:text-s font-medium",
         size === "s" && "px-4 py-3 md:text-sm font-medium",

@@ -12,7 +12,7 @@ type Product = {
 
 export function ProductCard({ product }: { product: Product }) {
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+    <div className="card-bg rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
       {/* Imagen del Producto */}
       <div className="relative aspect-square">
         <img 

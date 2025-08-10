@@ -10,41 +10,37 @@
   /* Paleta Base */
 
   /* Azul */
-  --navy-blue: #0F2C59;
-  --electric-blue: #4A6BFF;
-  --light-blue: #A7C6FF;
+  --navy-blue: #0f2c59;
+  --electric-blue: #4a6bff;
+  --light-blue: #a7c6ff;
 
   /* Morado */
-  --purple: #3A237A;
-  --electric-purple: #7B4AFF;
-  --light-purple: #9D7BFF;
+  --purple: #3a237a;
+  --electric-purple: #7b4aff;
+  --light-purple: #9d7bff;
 
-  /* Neutros */
-  --black: #000000;
-  --white: #FFFFFF ;
-  --white2: #efefec;
-  --gray: #F5F5F5;
-  --gray2: #333333;
+  /* Neutros -- Del mas oscuro al blanco */
+  --black: #000000;   /* 1 */
+  --gray2: #333333;  /* 2 */
+  --gray: #f5f5f5;  /* 3 */
+  --white2: #efefec;  /* 4 */
+  --white: #ffffff;  /* 5 */
 
-  /* Textos */
-  --text-primary: #0F2C59;
-  --text-secondary: #5A6D8A;
-  --text-body: #4A5568;
-  --text-muted: #718096;
-
+  /* Colores principales */
   --color-primary: var(--navy-blue);
   --color-primary-hover: var(--electric-blue);
   --color-primary-accent: var(--light-blue);
   --color-secondary: var(--purple);
   --color-secondary-hover: var(--electric-purple);
   --color-secondary-accent: var(--light-purple);
-  --color-background: var(--white);
-  --color-background-gradient: var(--white2);
-  --color-background-card: var(--gray);
-  --color-text-primary: var(--black);
-  --color-text-primary2: var(--white);
-  --color-text-secondary: var(--gray2);
-  --color-text-secondary2: var(--white2);
+
+  /* Colores neutros, se lo podría usa para títulos, textos, subtítulos, etc */
+  --color-neutro1: var(--black);
+  --color-neutro2: var(--gray2);
+  --color-neutro3: var(--gray);
+  --color-neutro4: var(--white2);
+  --color-neutro5: var(--white);
+
 }
 
 /* ---------- Clases reutilizables ---------- */
@@ -60,37 +56,47 @@
 /* Titulos-Textos */
 
 .TitleColor {
-  color: var(--color-text-primary);
+  color: var(--color-neutro1);
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .TitleColor2 {
-  color: var(--color-text-primary2);
+  color: var(--color-neutro5);
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .SubtitleColor {
-  color: var(--color-text-secondary);
+  color: var(--color-neutro2);
 }
 
 .SubtitleColor2 {
-  color: var(--color-text-secondary2);
+  color: var(--color-neutro4);
 }
 
-.TextColor {
-  color: var(--color-text-primary);
+.TextColor1 {  /* Texto Negro */
+  color: var(--color-neutro1);
+}
+
+.TextColor2 {  /* Texto Blanco */
+  color: var(--color-neutro5);
+}
+
+.TextColor3 {   /* Texto gris oscuro */
+  color: var(--color-neutro2);
 }
 
 /* Navbar */
 .Navbar-bg {
-  background: linear-gradient(180deg,
-      var(--color-background) 0%, 
-      var(--color-background-gradient) 100%);
+  background: linear-gradient(
+    180deg,
+    var(--color-neutro5) 0%,
+    var(--color-neutro4) 100%
+  );
 }
 
 .Navbar-text {
-    color: var(--color-primary);
-    transition: color 0.3s ease;
+  color: var(--color-primary);
+  transition: color 0.3s ease;
 }
 
 .Navbar-text:hover {
@@ -99,9 +105,11 @@
 
 /* HeroBanner */
 .hero-bg {
-  background: linear-gradient(0deg,
-      var(--color-background) 0%,
-      var(--color-background-gradient) 100%);
+  background: linear-gradient(
+    0deg,
+    var(--color-neutro5) 0%,
+    var(--color-neutro4) 100%
+  );
 }
 
 @media (max-width: 768px) {
@@ -113,155 +121,188 @@
 
 /* BenefitGrid */
 .BenefitGrid-bg {
-  background: linear-gradient(180deg,
-      var(--color-background) 0%,
-      var(--color-background-gradient) 100%);
+  background: linear-gradient(
+    180deg,
+    var(--color-neutro5) 0%,
+    var(--color-neutro4) 100%
+  );
 }
 
 /* TrendingProducts */
 .TrendingProducts-bg {
-  background: linear-gradient(0deg,
-      var(--color-background) 0%,
-      var(--color-background-gradient) 100%);
+  background: linear-gradient(
+    0deg,
+    var(--color-neutro5) 0%,
+    var(--color-neutro4) 100%
+  );
 }
 
 /* DailyOffers */
 .DailyOffers-bg {
-  background: linear-gradient(180deg,
-      var(--color-background) 0%,
-      var(--color-background-gradient) 100%);
+  background: linear-gradient(
+    180deg,
+    var(--color-neutro5) 0%,
+    var(--color-neutro4) 100%
+  );
 }
 
 .DailyOffers-bg2 {
-  background: var(--color-primary)
+  background: var(--color-primary);
 }
 
 /* BestSellersWeek */
 .BestSellersWeek-bg {
-  background: linear-gradient(0deg,
-      var(--color-background) 0%,
-      var(--color-background-gradient) 100%);
+  background: linear-gradient(
+    0deg,
+    var(--color-neutro5) 0%,
+    var(--color-neutro4) 100%
+  );
 }
 
+/* Card */
 .card-bg {
-   background: linear-gradient(0deg,
-      var(--color-background-card) 0%,
-      var(--color-background-gradient) 100%);
+  background: linear-gradient(
+    0deg,
+    var(--color-neutro3) 0%,
+    var(--color-neutro4) 100%
+  );
 }
 
 /* FollowUs */
 .FollowUs-bg {
-  background: linear-gradient(180deg,
-      var(--color-background) 0%,
-      var(--color-background-gradient) 100%);
+  background: linear-gradient(
+    180deg,
+    var(--color-neutro5) 0%,
+    var(--color-neutro4) 100%
+  );
 }
 
 /* CustomersReview */
 .CustomerReview-bg {
-  background: linear-gradient(0deg,
-      var(--color-background) 0%,
-      var(--color-background-gradient) 100%);
+  background: linear-gradient(
+    0deg,
+    var(--color-neutro5) 0%,
+    var(--color-neutro4) 100%
+  );
 }
 
 /* Footer */
 .Footer-bg {
-  background: var(--color-primary)
+  background: var(--color-primary);
 }
 
 /* ProductPage */
 .PageProducts-bg {
-  background: linear-gradient(0deg,
-      var(--color-background) 0%,
-      var(--color-background-gradient) 100%);
+  background: linear-gradient(
+    0deg,
+    var(--color-neutro5) 0%,
+    var(--color-neutro4) 100%
+  );
 }
 
 .Product-title {
-  color: var(--color-black);
+  color: var(--color-neutro1);
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .Product-subtitle {
-  color: var(--color-black);
+  color: var(--color-neutro1);
 }
 
 /* DailyOffersPage */
 
 .DailyOffers-title {
-  color: var(--color-black);
+  color: var(--color-neutro1);
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .DailyOffers-subtitle {
-  color: var(--color-black);
+  color: var(--color-neutro1);
 }
 
 .DailyOffers-Countdown {
   background: var(--color-primary);
-  color: var(--color-white);
+  color: var(--color-neutro5);
 }
 .PageDailyOffers-bg {
-  background: linear-gradient(0deg,
-      var(--color-background) 0%,
-      var(--color-background-gradient) 100%);
+  background: linear-gradient(
+    0deg,
+    var(--color-neutro5) 0%,
+    var(--color-neutro4) 100%
+  );
 }
 .FlashOffers-bg {
-  background: linear-gradient(180deg,
-      var(--color-background) 0%,
-      var(--color-background-gradient) 100%);
+  background: linear-gradient(
+    180deg,
+    var(--color-neutro5) 0%,
+    var(--color-neutro4) 100%
+  );
 }
 
 .FeatureOffers-bg {
-  background: linear-gradient(180deg,
-      var(--color-background) 0%,
-      var(--color-background-gradient) 100%);
+  background: linear-gradient(
+    180deg,
+    var(--color-neutro5) 0%,
+    var(--color-neutro4) 100%
+  );
 }
 
 .BannerSubscribe-bg {
-  background: linear-gradient(0deg,
-      var(--color-background) 0%,
-      var(--color-background-gradient) 100%);
+  background: linear-gradient(
+    0deg,
+    var(--color-neutro5) 0%,
+    var(--color-neutro4) 100%
+  );
 }
 
 /* Help&ContactPage */
 .HelpContact-bg {
-  background: linear-gradient(0deg,
-      var(--color-background) 0%,
-      var(--color-background-gradient) 100%);
+  background: linear-gradient(
+    0deg,
+    var(--color-neutro5) 0%,
+    var(--color-neutro4) 100%
+  );
 }
 
 .HelpContact-title {
-  color: var(--color-black);
+  color: var(--color-neutro1);
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .HelpContact-subtitle {
-  color: var(--color-black);
+  color: var(--color-neutro1);
 }
 
 .Contact-bg {
-  background: linear-gradient(0deg,
-      var(--color-background) 0%,
-      var(--color-background-gradient) 100%);
+  background: linear-gradient(
+    0deg,
+    var(--color-neutro5) 0%,
+    var(--color-neutro4) 100%
+  );
 }
 
 /* CartPage */
 .Cart-bg {
-  background: linear-gradient(0deg,
-      var(--color-background) 0%,
-      var(--color-background-gradient) 100%);
+  background: linear-gradient(
+    0deg,
+    var(--color-neutro5) 0%,
+    var(--color-neutro4) 100%
+  );
 }
 
 .Cart-title {
-  color: var(--color-black);
+  color: var(--color-neutro1);
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .Cart-subtitle {
-  color: var(--color-black);
+  color: var(--color-neutro1);
 }
 
 .CartProducts-bg {
-  background: linear-gradient(180deg,
-      var(--color-background) 0%,
-      var(--color-background-gradient) 100%);
+  background: linear-gradient(
+    180deg,
+    var(--color-neutro5) 0%,
+    var(--color-neutro4) 100%
+  );
 }

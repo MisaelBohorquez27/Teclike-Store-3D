@@ -30,7 +30,7 @@ export function FilterSidebar() {
             <li key={category}>
               <label className="flex items-center">
                 <input type="checkbox" className="mr-2 rounded text-blue-600" />
-                <span className="text-gray-700">{category}</span>
+                <span className="TextColor3">{category}</span>
               </label>
             </li>
           ))}
@@ -49,7 +49,7 @@ export function FilterSidebar() {
                   name="price-range"
                   className="mr-2 text-blue-600"
                 />
-                <span className="text-gray-700">{range.label}</span>
+                <span className="TextColor3">{range.label}</span>
               </label>
             </li>
           ))}
