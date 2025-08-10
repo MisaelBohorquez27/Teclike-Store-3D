@@ -23,7 +23,7 @@ export default function CarouselButtons({ swiper, className = '' }: CarouselButt
       <button
         onClick={prevSlide}
         aria-label="Anterior"
-        className={`absolute left-1 top-1/2 -translate-y-1/2 bg-[#6b9ee7] text-[#FAF9F6] p-2 rounded-full shadow-md hover:bg-[#3778d4] z-10 ${className}`}
+        className={`absolute left-1 top-1/2 -translate-y-1/2 Button-bg TextColor2 p-2 rounded-full shadow-md z-10 ${className}`}
       >
         <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
           <path
@@ -39,7 +39,7 @@ export default function CarouselButtons({ swiper, className = '' }: CarouselButt
       <button
         onClick={nextSlide}
         aria-label="Siguiente"
-        className={`absolute right-1 top-1/2 -translate-y-1/2 bg-[#6b9ee7] text-[#FAF9F6] p-2 rounded-full shadow-md hover:bg-[#3778d4] z-10 ${className}`}
+        className={`absolute right-1 top-1/2 -translate-y-1/2 Button-bg TextColor2 p-2 rounded-full shadow-md z-10 ${className}`}
       >
         <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
           <path

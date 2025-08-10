@@ -30,10 +30,10 @@ export default function DailyDealsPage() {
         {/* Ofertas Flash */}
         <section className="FlashOffers-bg">
           <div className="bg-transparent container mx-auto px-4 py-12">
-            <h2 className="text-3xl font-bold text-center mb-2">
+            <h2 className="TextColor1 text-3xl font-bold text-center mb-2">
               🔥 Flash Deals
             </h2>
-            <p className="text-gray-600 text-center mb-8">
+            <p className="TextColor3 text-center mb-8">
               Ofertas que terminan en las próximas horas
             </p>
             <DailyDeals />
@@ -43,10 +43,10 @@ export default function DailyDealsPage() {
         {/* Ofertas Destacadas */}
         <section className="FeatureOffers-bg PageDailyOffers-bg py-12">
           <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold text-center mb-2">
+            <h2 className="TextColor1 text-3xl font-bold text-center mb-2">
               ⭐ Ofertas Destacadas
             </h2>
-            <p className="text-gray-600 text-center mb-8">
+            <p className="TextColor3 text-center mb-8">
               Los mejores descuentos de la semana
             </p>
             <HotDeals />

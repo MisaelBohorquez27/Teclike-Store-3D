@@ -19,7 +19,7 @@ export default function ProductPage() {
         {/* Hero Banner */}
         <section className="pt-35 pb-20">
           <div className="container mx-auto px-4 text-center h-full">
-            <h1 className="text-5xl font-bold mb-4 Product-tittle">Nuestra Colección</h1>
+            <h1 className="text-5xl font-bold mb-4 Product-title">Nuestra Colección</h1>
             <p className="text-2xl opacity-90 Product-subtitle">
               Encuentra los mejores productos para tus proyectos
             </p>
@@ -37,10 +37,10 @@ export default function ProductPage() {
             {/* Grid de Productos */}
             <div className="md:w-3/4">
               <div className="flex justify-between items-center mb-8">
-                <h2 className="text-2xl font-semibold">Todos los Productos</h2>
+                <h2 className="TitleColor text-2xl font-semibold">Todos los Productos</h2>
                 <div className="flex items-center">
-                  <span className="mr-2">Ordenar por:</span>
-                  <select className="border rounded-md px-3 py-1">
+                  <span className="TextColor1 mr-2">Ordenar por:</span>
+                  <select className="TextColor1 border rounded-md px-3 py-1">
                     <option>Más recientes</option>
                     <option>Precio (menor a mayor)</option>
                     <option>Precio (mayor a menor)</option>

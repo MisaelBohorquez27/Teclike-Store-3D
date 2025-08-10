@@ -13,8 +13,8 @@ export default function HelpContactPage() {
         {/* Hero Banner */}
         <section className="pt-36 pb-4 HelpContact-title">
           <div className="container mx-auto px-4 text-center">
-            <h1 className="text-4xl font-bold mb-4 py-1">Ayuda y Contacto</h1>
-            <p className="text-xl opacity-90">
+            <h1 className="TitleColor text-4xl font-bold mb-4 py-1">Ayuda y Contacto</h1>
+            <p className="TextColor3 text-xl opacity-90">
               Estamos aquí para ayudarte en lo que necesites
             </p>
           </div>
@@ -28,7 +28,7 @@ export default function HelpContactPage() {
         {/* Sección de Preguntas Frecuentes */}
         <section className="py-16">
           <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold text-center mb-12">
+            <h2 className="TextColor text-3xl font-bold text-center mb-12">
               Preguntas Frecuentes
             </h2>
             <FaqSection />
@@ -43,11 +43,11 @@ export default function HelpContactPage() {
           </div>
           <div className="max-w-7xl mx-auto rounded-xl overflow-hidden">
             <div className="md:flex gap-x-30">
-              <div className="md:w-1/2 text-black p-4">
+              <div className="TextColor1 md:w-1/2 p-4">
                 <h2 className="text-5xl font-bold mb-7">
                   Contacte a nuestro equipo
                 </h2>
-                <div className="space-y-6">
+                <div className="TextColor1 space-y-6">
                    <div>
                     <p className="text-xl mb-5">
                       Reciba asistencia de primera en sus dudas y problemas.</p>
