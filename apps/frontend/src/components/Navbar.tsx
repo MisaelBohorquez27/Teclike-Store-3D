@@ -87,7 +87,7 @@ export function Navbar() {
 
           {/* Menú central */}
           <div
-            className={`absolute md:static top-full left-0 w-full md:w-auto Navbar-text bg-[var(--color-background-gradient)] font-semibold md:bg-transparent transition-all duration-300 ${
+            className={`absolute md:static top-full left-0 w-full md:w-auto Navbar-text bg-[var(--color-neutro4)] font-semibold md:bg-transparent transition-all duration-300 ${
               isOpen ? "block" : "hidden md:block"
             }`}
           >

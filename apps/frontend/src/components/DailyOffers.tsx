@@ -32,23 +32,25 @@ const OFFERS = [
 export function DailyOffers() {
   return (
     <section className="DailyOffers-bg">
-      <div className="bg-transparent container mx-auto px-4 py-16">
-        <div className="DailyOffers-bg2 rounded-xl px-8 bg-opacity-10 backdrop-blur-md shadow-lg py-14 h-full flex items-center justify-center">
-          <div className="text-center mb-6 md:w-1/3 pr-6">
-            <h2 className="TitleColor2 text-6xl font-bold mb-2">
+      <div className="bg-transparent container mx-auto px-4 py-8 md:py-16">
+        <div className="DailyOffers-bg2 rounded-xl px-4 md:px-8 bg-opacity-10 backdrop-blur-md shadow-lg py-8 md:py-12 h-full flex flex-col lg:flex-row items-center justify-center">
+          {/* Texto y botón */}
+          <div className="text-center mb-8 lg:mb-0 lg:w-full lg:max-w-md lg:pr-6 xl:pr-12 w-full">
+            <h2 className="TitleColor2 text-4xl sm:text-5xl md:text-6xl font-bold mb-2">
               Ofertas del día
             </h2>
-            <p className="SubtitleColor2 text-lg px-4">
+            <p className="SubtitleColor2 text-base md:text-lg px-2 md:px-4">
               Explora productos a buen precio por tiempo limitado
             </p>
-            <Link href="/DailyOffers" className="inline-block">
-              <Button variant="secondary" size="m" className="mt-5">
+            <Link href="/DailyOffers" className="inline-block mt-4 md:mt-5">
+              <Button variant="secondary" size="m">
                 Ver todas las ofertas
               </Button>
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-2/3">
+          {/* Grid de ofertas */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 w-full lg:w-auto lg:flex-1">
             {OFFERS.map((offer) => (
               <OfferCard key={offer.id} offer={offer} />
             ))}

@@ -20,8 +20,8 @@ export function FollowUs() {
   ];
 
   return (
-    <section className="FollowUs-bg py-14 px-4 flex">
-      <div className="bg-transparent max-w-6xl w-2/3 px-12">
+    <section className="FollowUs-bg py-14 px-4 flex flex-col lg:flex-row">
+      <div className="bg-transparent w-full lg:w-2/3 lg:px-12">
         <div className="text-center mb-8">
           <motion.h2
             className="TitleColor text-3xl md:text-4xl font-bold mb-6"
@@ -50,7 +50,7 @@ export function FollowUs() {
             <SwiperSlide key={post.id} style={{ width: "auto" }}>
               <motion.div
                 whileHover={{ scale: 1.02 }}
-                className="w-48 h-48 md:w-64 md:h-64 rounded-lg overflow-hidden shadow-md"
+                className="w-40 h-40 sm:w-48 sm:h-48 md:w-64 md:h-64 rounded-lg overflow-hidden shadow-md"
               >
                 <a
                   href="https://instagram.com/teclike_ec"
@@ -92,11 +92,11 @@ export function FollowUs() {
           </a>
         </motion.div>
       </div>
-      <div className="w-1/3">
-        <div className="relative h-110 overflow-hidden flex justify-center items-center">
-          <div className="px-8 py-8 mb-10 rounded-lg  max-w-4xl mx-auto text-center">
+      <div className="w-full lg:w-1/3 mt-10 lg:mt-0">
+        <div className="relative lg:h-110 overflow-hidden flex justify-center items-center">
+          <div className="px-4 sm:px-8 py-8 mb-10 rounded-lg max-w-4xl mx-auto text-center">
             <motion.h2
-              className="TitleColor text-3xl md:text-4xl font-bold mb-10"
+              className="TitleColor text-3xl md:text-4xl font-bold mb-6 sm:mb-10"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}

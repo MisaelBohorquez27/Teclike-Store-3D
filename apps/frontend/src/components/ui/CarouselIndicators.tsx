@@ -6,6 +6,7 @@ interface CarouselIndicatorsProps {
   onIndicatorClick: (index: number) => void;
   activeClass?: string;
   inactiveClass?: string;
+  className?: string;
 }
 
 export function CarouselIndicators({
@@ -14,6 +15,7 @@ export function CarouselIndicators({
   onIndicatorClick,
   activeClass = 'bg-[#2963af] w-5',
   inactiveClass = 'bg-gray-300 w-3'
+  
 }: CarouselIndicatorsProps) {
   return (
     <div className="flex justify-center mt-6 space-x-2">
