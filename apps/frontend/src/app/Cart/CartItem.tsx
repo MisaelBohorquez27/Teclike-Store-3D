@@ -15,59 +15,61 @@ type CartItemProps = {
 
 export function CartItem({ item, onUpdateQuantity, onRemove }: CartItemProps) {
   return (
-    <div className="py-4 flex flex-col md:flex-row md:items-center gap-4">
-      {/* Imagen y Nombre */}
-      <div className="flex items-center md:w-5/12">
+    <div className="py-3 sm:py-4 flex flex-col md:flex-row md:items-center gap-3 sm:gap-4">
+      {/* Imagen y Nombre - Ajustado para móvil y desktop */}
+      <div className="flex items-center w-full md:w-5/12">
         <img
           src={item.image}
           alt={item.name}
-          className="w-20 h-20 object-cover rounded mr-4"
+          className="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded mr-3 sm:mr-4"
         />
         <div>
-          <h3 className="font-medium">{item.name}</h3>
+          <h3 className="font-medium text-sm sm:text-base">{item.name}</h3>
           {!item.inStock && (
-            <span className="text-red-500 text-sm">Agotado</span>
+            <span className="text-red-500 text-xs sm:text-sm">Agotado</span>
           )}
         </div>
       </div>
 
-      {/* Precio Unitario */}
-      <div className="md:w-2/12 text-center text-gray-700">
+      {/* Precio Unitario - Optimizado para móvil */}
+      <div className="md:w-2/12 text-center text-gray-700 text-sm sm:text-base">
         ${item.price.toFixed(2)}
       </div>
 
-      {/* Selector de Cantidad */}
+      {/* Selector de Cantidad - Mejorado para tactil */}
       <div className="md:w-3/12 flex justify-center">
         <div className="flex items-center border rounded-md">
           <button
             onClick={() => onUpdateQuantity(item.id, item.quantity - 1)}
-            className="px-3 py-1 text-gray-600 hover:bg-gray-100"
+            className="px-2 sm:px-3 py-1 text-gray-600 hover:bg-gray-100 text-sm sm:text-base"
             disabled={item.quantity <= 1}
           >
             -
           </button>
-          <span className="px-3">{item.quantity}</span>
+          <span className="px-2 sm:px-3 text-sm sm:text-base">
+            {item.quantity}
+          </span>
           <button
             onClick={() => onUpdateQuantity(item.id, item.quantity + 1)}
-            className="px-3 py-1 text-gray-600 hover:bg-gray-100"
+            className="px-2 sm:px-3 py-1 text-gray-600 hover:bg-gray-100 text-sm sm:text-base"
           >
             +
           </button>
         </div>
       </div>
 
-      {/* Precio Total y Eliminar */}
-      <div className="md:w-2/12 flex justify-end items-center space-x-4">
-        <span className="font-medium">
+      {/* Precio Total y Eliminar - Ajuste de tamaño */}
+      <div className="md:w-2/12 flex justify-end items-center space-x-2 sm:space-x-4">
+        <span className="font-medium text-sm sm:text-base">
           ${(item.price * item.quantity).toFixed(2)}
         </span>
         <button
           onClick={() => onRemove(item.id)}
-          className="text-red-500 hover:text-red-700"
+          className="text-red-500 hover:text-red-700 p-1 sm:p-0"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5"
+            className="h-4 w-4 sm:h-5 sm:w-5"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"

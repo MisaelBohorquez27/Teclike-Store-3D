@@ -54,14 +54,8 @@ export function CustomerReviews() {
 
   return (
     <section className="CustomerReview-bg">
-      <div className="bg-transparent container mx-auto px-4 pb-16">
-        <div className="container mx-auto px-4">
-          {/* <div className="text-center mb-16">
-          <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
-            Lo que dicen Nuestros Clientes
-          </h2>
-        </div> */}
-
+      <div className="bg-transparent container mx-auto px-4 sm:px-6 pb-16">
+        <div className="container mx-auto px-0 sm:px-4">
           <div className="relative">
             <Swiper
               modules={[Autoplay]}
@@ -75,26 +69,27 @@ export function CustomerReviews() {
               onSlideChange={(swiper) => setCurrentIndex(swiper.activeIndex)}
               onSwiper={handleSwiperInit}
               breakpoints={{
-                768: { slidesPerView: 1 },
-                1024: { slidesPerView: 1 },
+                640: { slidesPerView: 1, spaceBetween: 20 },
+                768: { slidesPerView: 1, spaceBetween: 25 },
+                1024: { slidesPerView: 1, spaceBetween: 30 },
               }}
-              className="pb-14"
+              className="pb-10 sm:pb-14"
             >
               {REVIEWS.map((review) => (
                 <SwiperSlide key={review.id}>
-                  <div className="p-6 h-full text-center">
-                    <div className="border-l-2 border-gray-300 pl-12 h-full pr-6">
-                      <h3 className="TitleColor text-2xl font-stretch-extra-expanded font-semibold mb-6">
+                  <div className="p-4 sm:p-6 h-full text-center">
+                    <div className="border-l-2 border-gray-300 pl-6 sm:pl-12 h-full pr-4 sm:pr-6">
+                      <h3 className="TitleColor text-xl sm:text-2xl font-stretch-extra-expanded font-semibold mb-4 sm:mb-6">
                         {review.product.toUpperCase()}
                       </h3>
-                      <blockquote className="SubtitleColor mb-4 italic text-lg">
+                      <blockquote className="SubtitleColor mb-4 italic text-base sm:text-lg">
                         "{review.comment}"
                       </blockquote>
                       <div className="mb-4 mx-auto">
                         {[...Array(5)].map((_, i) => (
                           <span
                             key={i}
-                            className={`text-xl ${
+                            className={`text-lg sm:text-xl ${
                               i < review.rating
                                 ? "text-green-600"
                                 : "text-gray-300"
@@ -108,10 +103,10 @@ export function CustomerReviews() {
                         <img
                           src={review.avatar}
                           alt={review.name}
-                          className="w-10 h-10 rounded-full mx-auto"
+                          className="w-8 h-8 sm:w-10 sm:h-10 rounded-full mx-auto"
                           loading="lazy"
                         />
-                        <span className="font-medium text-gray-800 mx-auto">
+                        <span className="font-medium text-gray-800 mx-auto text-sm sm:text-base">
                           {review.name}
                         </span>
                       </div>
@@ -120,13 +115,6 @@ export function CustomerReviews() {
                 </SwiperSlide>
               ))}
             </Swiper>
-            {/*{swiperReady && (
-            <CarouselIndicators
-              items={REVIEWS}
-              currentIndex={currentIndex}
-              onIndicatorClick={goToSlide}
-            />
-          )} */}
           </div>
         </div>
       </div>

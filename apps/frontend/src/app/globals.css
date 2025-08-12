@@ -85,6 +85,15 @@
   color: var(--color-neutro2);
 }
 
+/* Card */
+.Card-bg {
+  background: linear-gradient(
+    0deg,
+    var(--color-neutro3) 0%,
+    var(--color-neutro4) 100%
+  );
+}
+
 /* Navbar */
 .Navbar-bg {
   background: linear-gradient(
@@ -155,15 +164,6 @@
   background: linear-gradient(
     0deg,
     var(--color-neutro5) 0%,
-    var(--color-neutro4) 100%
-  );
-}
-
-/* Card */
-.card-bg {
-  background: linear-gradient(
-    0deg,
-    var(--color-neutro3) 0%,
     var(--color-neutro4) 100%
   );
 }
@@ -306,3 +306,23 @@
     var(--color-neutro4) 100%
   );
 }
+
+/* DealCard */
+
+.DealCard-Discount {
+  background: var(--color-primary-hover);
+  color: var(--color-neutro5);
+}
+
+.DealCard-title {
+  color: var(--color-neutro1);
+}
+
+.DealCard-Price {
+  color: var(--color-primary-hover);
+}
+
+.DealCard-Bar {
+  background: var(--color-primary-hover);
+}
+

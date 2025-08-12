@@ -11,6 +11,7 @@ type CheckoutButtonProps = {
     inStock: boolean;
   }>;
   total: number;
+  className?: string;
 };
 
 export function CheckoutButton({ items, total }: CheckoutButtonProps) {
@@ -27,7 +28,7 @@ export function CheckoutButton({ items, total }: CheckoutButtonProps) {
     <button
       onClick={handleCheckout}
       disabled={hasOutOfStockItems || items.length === 0}
-      className={`w-full py-3 rounded-lg font-medium transition-colors ${
+      className={`w-2xs py-3 rounded-lg font-medium transition-colors md:w-full ${
         hasOutOfStockItems || items.length === 0
           ? "bg-gray-300 cursor-not-allowed"
           : "bg-green-600 hover:bg-green-700 text-white"
