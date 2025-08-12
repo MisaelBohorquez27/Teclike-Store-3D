@@ -41,7 +41,7 @@ const FLASH_DEALS = [
     discountPrice: 79.99,
     discount: 34,
     image: "/deals/furniture-pack.jpg",
-    sold: 45,
+    sold: 25,
     total: 100,
     timeLeft: 3 // horas
   },
@@ -52,7 +52,7 @@ const FLASH_DEALS = [
     discountPrice: 79.99,
     discount: 34,
     image: "/deals/furniture-pack.jpg",
-    sold: 45,
+    sold: 85,
     total: 100,
     timeLeft: 3 // horas
   },
@@ -61,7 +61,7 @@ const FLASH_DEALS = [
 
 export function DailyDeals() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
       {FLASH_DEALS.map((deal) => (
         <DealCard key={deal.id} deal={deal} isFlashDeal />
       ))}
