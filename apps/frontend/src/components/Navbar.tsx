@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { FiMenu, FiX, FiSearch } from "react-icons/fi";
 import { SearchBar } from "./SearchBar";
 import logo from "../../public/logos/Logo4.png";
-import CartIcon from "./CartIcon";
+import CartIcon from "./ui/CartIcon";
 import Button from "./ui/PagesButtons";
 
 export function Navbar() {

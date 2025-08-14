@@ -15,15 +15,17 @@ type CartItemProps = {
 
 export function CartItem({ item, onUpdateQuantity, onRemove }: CartItemProps) {
   return (
-    <div className="py-3 sm:py-4 flex flex-col md:flex-row md:items-center gap-3 sm:gap-4">
+    <div className="py-3 sm:py-4 flex flex-row items-center gap-3 sm:gap-4 h-30 max-h-35">
       {/* Imagen y Nombre - Ajustado para móvil y desktop */}
       <div className="flex items-center w-full md:w-5/12">
-        <img
-          src={item.image}
-          alt={item.name}
-          className="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded mr-3 sm:mr-4"
-        />
-        <div>
+        <div className="w-1/2">
+          <img
+            src={item.image}
+            alt={item.name}
+            className="w-auto h-auto max-w-20 max-h-20 sm:max-w-31 sm:min-h-21 xl:max-w-35 xl:min-h-25 object-cover rounded mr-2 sm:mr-4"
+          />
+        </div>
+        <div className="w-1/2 flex flex-col justify-center items-center">
           <h3 className="font-medium text-sm sm:text-base">{item.name}</h3>
           {!item.inStock && (
             <span className="text-red-500 text-xs sm:text-sm">Agotado</span>

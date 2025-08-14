@@ -1,5 +1,5 @@
 import { Rating } from "./ui/Rating";
-import CartIcon from "./CartIcon";
+import CartIcon from "./ui/CartIcon";
 
 type Offer = {
   id: number;
