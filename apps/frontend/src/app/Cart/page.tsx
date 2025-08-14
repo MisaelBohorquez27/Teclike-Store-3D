@@ -4,32 +4,31 @@ import { CartItem } from "@/app/Cart/CartItem";
 import { EmptyCart } from "@/app/Cart/EmptyCart";
 import { CheckoutButton } from "@/app/Cart/CheckoutButton";
 import { Navbar } from "@/components/Navbar";
-import { Footer } from "@/components/Footer";
 
 export default function CartPage() {
   const [cartItems, setCartItems] = useState([
     {
       id: "1",
-      name: "Modelo 3D Sala Moderna",
+      name: "Mouse",
       price: 49.99,
       quantity: 1,
-      image: "/products/living-room.jpg",
+      image: "/products/mouse-x11.png",
       inStock: true,
     },
     {
       id: "2",
-      name: "Paquete de Muebles Vintage",
+      name: "Teclado",
       price: 79.99,
       quantity: 2,
-      image: "/products/furniture-pack.jpg",
+      image: "/products/teclado-z11.png",
       inStock: true,
     },
     {
       id: "3",
-      name: "Lámpara Minimalista LED",
+      name: "Audifonos",
       price: 29.99,
       quantity: 1,
-      image: "/products/lamp.jpg",
+      image: "/products/audifonos-razer.png",
       inStock: false,
     },
   ]);
@@ -55,8 +54,7 @@ export default function CartPage() {
   const total = subtotal + shipping + tax;
 
   return (
-    <>
-      <Navbar />
+
       <main className="Cart-bg min-h-screen pb-20 sm:pb-12 pt-24 sm:pt-28 md:pt-30">
         <div className="bg-transparent container mx-auto px-4 sm:px-6">
           <h1 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8">
@@ -165,7 +163,5 @@ export default function CartPage() {
           )}
         </div>
       </main>
-      <Footer />
-    </>
   );
 }

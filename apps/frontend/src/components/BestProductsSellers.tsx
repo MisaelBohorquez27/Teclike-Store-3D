@@ -1,7 +1,7 @@
 import Image from "next/image";
 import mouse from "../../public/products/mouse-x11.png";
 import Button from "@/components/ui/PagesButtons";
-import CartIcon from "./CartIcon";
+import CartIcon from "./ui/CartIcon";
 
 type Product = {
   id: number;
