@@ -61,7 +61,7 @@ export function DailyOffers() {
       <div className="bg-transparent container mx-auto px-4 py-8 md:py-16">
         <div className="DailyOffers-bg2 w-full rounded-xl px-4 md:px-8 bg-opacity-10 backdrop-blur-md shadow-lg py-8 md:py-12 h-full flex flex-col lg:flex-row items-center justify-center lg:justify-between">
           {/* Sección de texto */}
-          <div className="text-center mb-8 lg:mb-0 lg:w-full lg:max-w-md lg:pr-6 xl:pr-12">
+          <div className="text-center mb-8 lg:mb-0 lg:max-w-md lg:pr-6 xl:pr-12 lg:w-1/3">
             <h2 className="TitleColor2 text-4xl md:text-5xl lg:text-6xl font-bold mb-2 lg:mb-3">
               Ofertas del día
             </h2>
@@ -76,7 +76,7 @@ export function DailyOffers() {
           </div>
 
           {/* Swiper de ofertas usando el componente reutilizable */}
-          <div className="relative w-full lg:w-2/3 lg:max-w-2xl">
+          <div className="relative w-full lg:w-2/3">
             <CustomSwiper
               items={OFFERS}
               renderItem={(product) => <OfferCard offer={product} />}
