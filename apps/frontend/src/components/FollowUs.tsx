@@ -7,6 +7,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import Button from "./ui/PagesButtons";
+import { BaseSwiper } from "./ui/BaseSwiper";
 
 export function FollowUs() {
   // Array de imágenes de ejemplo (reemplaza con tus propias imágenes)
@@ -34,16 +35,12 @@ export function FollowUs() {
         </div>
 
         {/* Galeria de imagenes */}
-        <Swiper
-          modules={[Autoplay]}
-          slidesPerView={"auto"}
+        <BaseSwiper
+          variant="gallery"
+          slidesPerView="auto"
           spaceBetween={16}
-          autoplay={{
-            delay: 0,
-            disableOnInteraction: false,
-          }}
           speed={3000}
-          loop={true}
+          loop
           className="pb-4"
         >
           {instagramPosts.map((post) => (
@@ -69,7 +66,7 @@ export function FollowUs() {
               </motion.div>
             </SwiperSlide>
           ))}
-        </Swiper>
+        </BaseSwiper>
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
