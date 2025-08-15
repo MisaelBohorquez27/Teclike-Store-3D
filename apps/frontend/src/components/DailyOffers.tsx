@@ -1,13 +1,11 @@
 "use client";
 import Link from "next/link";
-import { Swiper, SwiperSlide } from "swiper/react";
 import { useRef, useState } from "react";
 import type SwiperCore from "swiper";
 import "swiper/css";
 import Button from "@/components/ui/PagesButtons";
 import { OfferCard } from "@/components/OfferCard";
-import { Navigation } from "swiper/modules";
-import CarouselButtons from "./ui/CarouselButtons";
+import { CustomSwiper } from "./ui/CustomSwiper";
 
 const OFFERS = [
   {
@@ -58,20 +56,11 @@ const OFFERS = [
 ];
 
 export function DailyOffers() {
-  const [swiperReady, setSwiperReady] = useState(false);
-  const swiperRef = useRef<SwiperCore | null>(null);
-
-  const handleSwiperInit = (swiperInstance: SwiperCore) => {
-    swiperRef.current = swiperInstance;
-    setSwiperReady(true);
-  };
-
   return (
     <section className="DailyOffers-bg">
       <div className="bg-transparent container mx-auto px-4 py-8 md:py-16">
-        {/* Contenedor principal: en móvil columna, en desktop fila */}
         <div className="DailyOffers-bg2 w-full rounded-xl px-4 md:px-8 bg-opacity-10 backdrop-blur-md shadow-lg py-8 md:py-12 h-full flex flex-col lg:flex-row items-center justify-center lg:justify-between">
-          {/* Texto y botón: en móvil ocupa todo el ancho, en desktop 1/3 */}
+          {/* Sección de texto */}
           <div className="text-center mb-8 lg:mb-0 lg:w-full lg:max-w-md lg:pr-6 xl:pr-12">
             <h2 className="TitleColor2 text-4xl md:text-5xl lg:text-6xl font-bold mb-2 lg:mb-3">
               Ofertas del día
@@ -85,13 +74,12 @@ export function DailyOffers() {
               </Button>
             </Link>
           </div>
-          {/* Swiper de ofertas: en móvil ancho completo, en desktop 2/3 */}
+
+          {/* Swiper de ofertas usando el componente reutilizable */}
           <div className="relative w-full lg:w-2/3 lg:max-w-2xl">
-            <Swiper
-              modules={[Navigation]}
-              spaceBetween={16}
-              slidesPerView={1}
-              navigation={swiperReady}
+            <CustomSwiper
+              items={OFFERS}
+              renderItem={(product) => <OfferCard offer={product} />}
               breakpoints={{
                 0: { slidesPerView: 1.2, spaceBetween: 10 },
                 480: { slidesPerView: 2, spaceBetween: 16 },
@@ -99,20 +87,8 @@ export function DailyOffers() {
                 1024: { slidesPerView: 3, spaceBetween: 24 },
               }}
               className="pb-8 sm:pb-10 md:pb-12"
-              onSwiper={handleSwiperInit}
-            >
-              {OFFERS.map((product) => (
-                <SwiperSlide key={product.id} className="h-auto">
-                  <OfferCard offer={product} />
-                </SwiperSlide>
-              ))}
-            </Swiper>
-            {/* Botones de navegación */}
-            {swiperReady && (
-              <div className="absolute top-1/2 left-0 right-0 transform -translate-y-1/2 flex justify-between z-10 px-2">
-                <CarouselButtons swiper={swiperRef.current} />
-              </div>
-            )}
+              speed={400}
+            />
           </div>
         </div>
       </div>

@@ -1,10 +1,6 @@
 "use client";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { useRef, useState } from "react";
 import "swiper/css";
-import { Navigation } from "swiper/modules";
-import CarouselButtons from "./ui/CarouselButtons";
-import type SwiperCore from "swiper";
+import { CustomSwiper } from "./ui/CustomSwiper";
 
 const TRENDING_PRODUCTS = [
   {
@@ -58,14 +54,6 @@ const TRENDING_PRODUCTS = [
 ];
 
 export function TrendingProducts() {
-  const [swiperReady, setSwiperReady] = useState(false);
-  const swiperRef = useRef<SwiperCore | null>(null);
-
-  const handleSwiperInit = (swiperInstance: SwiperCore) => {
-    swiperRef.current = swiperInstance;
-    setSwiperReady(true);
-  };
-
   return (
     <section className="TrendingProducts-bg relative py-8 sm:py-10 md:py-12">
       <div className="container mx-auto px-4 sm:px-6">
@@ -73,57 +61,48 @@ export function TrendingProducts() {
           Productos Populares
         </h2>
 
-        <div className="relative">
-          {swiperReady && <CarouselButtons swiper={swiperRef.current} />}
-
-          <Swiper
-            modules={[Navigation]}
-            spaceBetween={16}
-            slidesPerView={1}
-            breakpoints={{
-              480: { slidesPerView: 1.5, spaceBetween: 16 },
-              640: { slidesPerView: 2, spaceBetween: 20 },
-              768: { slidesPerView: 2.5, spaceBetween: 20 },
-              1024: { slidesPerView: 3, spaceBetween: 24 },
-              1280: { slidesPerView: 3.5, spaceBetween: 24 },
-            }}
-            className="pb-8 sm:pb-10 md:pb-12"
-            onSwiper={handleSwiperInit}
-          >
-            {TRENDING_PRODUCTS.map((product) => (
-              <SwiperSlide key={product.id} className="h-auto">
-                <div className="border border-gray-200 rounded-lg p-3 sm:p-4 hover:shadow-md transition-shadow h-full flex flex-col">
-                  <div className="relative h-40 sm:h-48 mb-3 sm:mb-4">
-                    <img
-                      src={product.image}
-                      alt={product.title}
-                      className="object-cover rounded-t-lg w-full h-full"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  </div>
-                  <div className="flex-grow">
-                    <h3 className="font-semibold text-base sm:text-lg SubtitleColor">
-                      {product.title}
-                    </h3>
-                    <p className="TitleColor text-xs sm:text-sm mt-1">
-                      {product.details}
-                    </p>
-                  </div>
-                  <div className="mt-3 sm:mt-4 flex justify-between items-center">
-                    <span className="ColorSubtitle font-bold text-sm sm:text-base">
-                      {product.currency}
-                      {product.price.toFixed(2)}
-                    </span>
-                    <button className="text-blue-600 hover:text-blue-800 text-xs sm:text-sm font-medium">
-                      Ver detalles
-                    </button>
-                  </div>
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </div>
+        <CustomSwiper
+          items={TRENDING_PRODUCTS}
+          spaceBetween={16}
+          breakpoints={{
+            0: { slidesPerView: 1.2, spaceBetween: 10, slidesPerGroup: 1 },
+            480: { slidesPerView: 2, spaceBetween: 16, slidesPerGroup: 1 },
+            640: { slidesPerView: 2.7, spaceBetween: 20, slidesPerGroup: 3 },
+            1024: { slidesPerView: 3, spaceBetween: 24, slidesPerGroup: 3 },
+          }}
+          className="pb-8 sm:pb-10 md:pb-12"
+          speed={400}
+          renderItem={(product) => (
+            <div className="border border-gray-200 rounded-lg p-3 sm:p-4 hover:shadow-md transition-shadow h-full flex flex-col">
+              <div className="relative h-40 sm:h-48 mb-3 sm:mb-4">
+                <img
+                  src={product.image}
+                  alt={product.title}
+                  className="object-cover rounded-t-lg w-full h-full"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <div className="flex-grow">
+                <h3 className="font-semibold text-base sm:text-lg SubtitleColor">
+                  {product.title}
+                </h3>
+                <p className="TitleColor text-xs sm:text-sm mt-1">
+                  {product.details}
+                </p>
+              </div>
+              <div className="mt-3 sm:mt-4 flex justify-between items-center">
+                <span className="ColorSubtitle font-bold text-sm sm:text-base">
+                  {product.currency}
+                  {product.price.toFixed(2)}
+                </span>
+                <button className="text-blue-600 hover:text-blue-800 text-xs sm:text-sm font-medium">
+                  Ver detalles
+                </button>
+              </div>
+            </div>
+          )}
+        />
       </div>
     </section>
   );

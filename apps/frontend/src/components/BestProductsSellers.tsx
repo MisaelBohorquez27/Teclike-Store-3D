@@ -6,11 +6,8 @@ import CartIcon from "./ui/CartIcon";
 type Product = {
   id: number;
   title: string;
-  tagline?: string;
   description?: string;
   features?: string[];
-  stats?: string[];
-  times?: string[];
   fullDescription: string;
   priceRange: { min: number; max: number };
   currency: string;
@@ -35,12 +32,7 @@ export function BestProductsSellers({ product }: { product: Product }) {
       </div>
       {/* Columna derecha */}
       <div className="Card-bg rounded-2xl md:w-1/2 p-8">
-        <h3 className="TitleColor text-2xl font-bold mb-2">
-          {product.title}
-        </h3>
-        {/* {product.tagline && (
-          <p className="text-gray-600 italic mb-4">{product.tagline}</p>
-        )} */}
+        <h3 className="TitleColor text-2xl font-bold mb-2">{product.title}</h3>
         {product.description && (
           <p className="TextColor mb-6">{product.description}</p>
         )}
@@ -55,21 +47,6 @@ export function BestProductsSellers({ product }: { product: Product }) {
             ))}
           </ul>
         )}
-
-        {/* {product.stats && product.times && (
-          <div className="grid grid-cols-4 gap-2 mb-6">
-            {product.stats.map((stat, index) => (
-              <div key={index} className="bg-white p-2 rounded text-center">
-                <span className="font-bold">{stat}</span>
-              </div>
-            ))}
-            {product.times.map((time, index) => (
-              <div key={index} className="col-span-2 text-sm text-gray-500">
-                {time}
-              </div>
-            ))}
-          </div>
-        )} */}
 
         <p className="TextColor mb-6">{product.fullDescription}</p>
         <div className="TextColor text-2xl font-bold mb-6">
@@ -88,7 +65,7 @@ export function BestProductsSellers({ product }: { product: Product }) {
             <CartIcon />
           </div>
         </div>
-        <div className="md:w-1/3"/>        
+        <div className="md:w-1/3" />
       </div>
     </div>
   );
