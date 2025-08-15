@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import "swiper/css";
 import CarouselButtons from "./ui/CarouselButtons";
 import { CarouselIndicators } from "./ui/CarouselIndicators";
+import { CustomSwiper } from "./ui/CustomSwiper";
 
 const BEST_SELLERS = [
   {
@@ -40,81 +41,39 @@ const BEST_SELLERS = [
 ];
 
 export function BestSellersWeek() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [swiperReady, setSwiperReady] = useState(false);
-  const swiperRef = useRef<SwiperCore | null>(null);
-
-  const goToSlide = (index: number) => {
-    if (swiperRef.current) {
-      swiperRef.current.slideTo(index);
-    }
-  };
-
-  const handleSwiperInit = (swiperInstance: SwiperCore) => {
-    swiperRef.current = swiperInstance;
-    setSwiperReady(true);
-  };
-
   return (
-   <section className="BestSellersWeek-bg py-8 md:py-16">
-  <div className="container mx-auto px-4 sm:px-6">
-    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 md:mb-8 gap-4 sm:gap-0">
-      <h2 className="TitleColor text-2xl sm:text-3xl font-bold">
-        Más vendido de la semana
-      </h2>
-      <button className="text-blue-600 hover:text-blue-800 font-medium text-base sm:text-lg">
-        Ver todos los productos →
-      </button>
-    </div>
+    <section className="BestSellersWeek-bg py-8 md:py-16">
+      <div className="container mx-auto px-4 sm:px-6">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 md:mb-8 gap-4 sm:gap-0">
+          <h2 className="TitleColor text-2xl sm:text-3xl font-bold">
+            Más vendido de la semana
+          </h2>
+          <button className="text-blue-600 hover:text-blue-800 font-medium text-base sm:text-lg">
+            Ver todos los productos →
+          </button>
+        </div>
 
-    {/* Carrusel */}
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
-    >
-      <div className="relative overflow-hidden">
-        {swiperReady && <CarouselButtons swiper={swiperRef.current} />}
-        
-        <Swiper
-          spaceBetween={20}
-          slidesPerView={1}
-          breakpoints={{
-            640: {
-              spaceBetween: 25,
-              slidesPerView: 1
-            },
-            768: {
-              spaceBetween: 30,
-              slidesPerView: 1
-            },
-            1024: {
-              spaceBetween: 40,
-              slidesPerView: 1
-            }
-          }}
-          speed={400}
-          effect="fade"
-          fadeEffect={{ crossFade: true }}
-          onSlideChange={(swiper) => setCurrentIndex(swiper.activeIndex)}
-          onSwiper={handleSwiperInit}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
         >
-          {BEST_SELLERS.map((product) => (
-            <SwiperSlide key={product.id}>
-              <BestProductsSellers product={product} />
-            </SwiperSlide>
-          ))}
-        </Swiper>
+          <CustomSwiper
+            items={BEST_SELLERS}
+            renderItem={(product) => <BestProductsSellers product={product} />}
+            breakpoints={{
+              640: { spaceBetween: 25, slidesPerView: 1 },
+              768: { spaceBetween: 30, slidesPerView: 1 },
+              1024: { spaceBetween: 40, slidesPerView: 1 },
+            }}
+            speed={400}
+            effect="fade"
+            fadeEffect={{ crossFade: true }}
+            withIndicators
+            className="relative overflow-hidden"
+          />
+        </motion.div>
       </div>
-    </motion.div>
-
-    <CarouselIndicators
-      items={BEST_SELLERS}
-      currentIndex={currentIndex}
-      onIndicatorClick={goToSlide}
-      className="mt-4 md:mt-6"
-    />
-  </div>
-</section>
+    </section>
   );
 }
