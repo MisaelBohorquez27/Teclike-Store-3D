@@ -1,7 +1,7 @@
 export function ProductReviews({ reviews }: { reviews: any[] }) {
   return (
     <div>
-      <h2 className="text-2xl font-bold mb-6">Reseñas</h2>
+      <h2 className="text-2xl font-bold mb-4">Reseñas</h2>
       {reviews.length > 0 ? (
         reviews.map(review => (
           <div key={review.id} className="border-b pb-4 mb-4">
