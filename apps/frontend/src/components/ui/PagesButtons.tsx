@@ -4,7 +4,7 @@ import { FC, ComponentPropsWithoutRef } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 
 interface ButtonProps extends ComponentPropsWithoutRef<typeof motion.button> {
-  variant?: "primary" | "secondary" | "addCart" | "outline" | "submit";
+  variant?: "primary" | "secondary" | "addCart" | "outline" | "submit" | "dark";
   size?: "2xs" | "xs" | "s" | "m" | "xl" | "2xl";
   fullWidth?: boolean;
 }
@@ -30,6 +30,7 @@ const Button: FC<ButtonProps> = ({
         // Variants
         variant === "primary" && "Button-bg TextColor2 border border-transparent",
         variant === "secondary" && "Button-bg TextColor2 border border-transparent",
+        variant === "dark" && "Button-bg-dark TextColor2 border border-transparent",
         variant === "addCart" && "Button-bg TextColor2 border border-transparent",
         variant === "outline" && [
           "bg-transparent text-[#0F2C59] border border-[#0F2C59]",
