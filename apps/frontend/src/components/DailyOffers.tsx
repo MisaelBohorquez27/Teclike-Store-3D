@@ -1,7 +1,5 @@
 "use client";
 import Link from "next/link";
-import { useRef, useState } from "react";
-import type SwiperCore from "swiper";
 import "swiper/css";
 import Button from "@/components/ui/PagesButtons";
 import { OfferCard } from "@/components/OfferCard";
@@ -69,7 +67,7 @@ export function DailyOffers() {
               Explora productos a buen precio por tiempo limitado
             </p>
             <Link href="/DailyOffers" className="inline-block mt-4 md:mt-5">
-              <Button variant="secondary" size="m">
+              <Button variant="dark" size="m">
                 Ver todas las ofertas
               </Button>
             </Link>

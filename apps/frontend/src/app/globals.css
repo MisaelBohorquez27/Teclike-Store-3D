@@ -53,6 +53,10 @@
   background: var(--color-primary-hover);
 }
 
+.Button-bg-dark {
+  background: var(--color-primary-hover);
+}
+
 /* Titulos-Textos */
 
 .TitleColor {

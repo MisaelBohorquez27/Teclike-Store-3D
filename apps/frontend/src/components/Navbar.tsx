@@ -2,7 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { FiMenu, FiX, FiSearch } from "react-icons/fi";
+import { FiMenu, FiX } from "react-icons/fi";
 import { SearchBar } from "./SearchBar";
 import logo from "../../public/logos/Logo4.png";
 import CartIcon from "./ui/CartIcon";
@@ -96,6 +96,7 @@ export function Navbar() {
               <NavLink href="/Products" text="Productos" />
               <NavLink href="/DailyOffers" text="Ofertas del día" />
               <NavLink href="/HelpContact" text="Ayuda y Contacto" />
+              <NavLink href="/ProductDetails" text="Detalles de Productos" />
             </div>
           </div>
 
