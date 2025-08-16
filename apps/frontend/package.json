@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@prisma/client": "^6.11.1",
     "@react-three/drei": "^10.5.1",
     "@react-three/fiber": "^9.2.0",
     "@trpc/client": "^11.4.3",
@@ -39,7 +38,6 @@
     "eslint": "^9",
     "eslint-config-next": "15.3.5",
     "postcss": "^8.5.6",
-    "prisma": "^6.11.1",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
