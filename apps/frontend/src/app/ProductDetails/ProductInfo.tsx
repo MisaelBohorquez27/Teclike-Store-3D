@@ -71,16 +71,16 @@ export function ProductInfo({ product }: { product: any }) {
           <span className="text-gray-600 font-medium">Categorías:</span>
           <span>
             {product.categories?.join(", ") ||
-              "Electrodomésticos, Lavadoras y Secadoras"}
+              "Perifericos, Tecnologias y Gamer"}
           </span>
         </div>
         <div className="flex gap-2">
           <span className="text-gray-600 font-medium">Etiqueta:</span>
-          <span>{product.tag || "INDURAMA"}</span>
+          <span>{product.tag || "Mouse Eyooso X11"}</span>
         </div>
         <div className="flex gap-2">
           <span className="text-gray-600 font-medium">Brand:</span>
-          <span>{product.brand || "Indurama"}</span>
+          <span>{product.brand || "eyooso"}</span>
         </div>
       </div>
       {/* Sección de Pagos */}

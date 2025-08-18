@@ -2,8 +2,6 @@
 import { ProductInfo } from "./ProductInfo";
 import { ProductTabs } from "./ProductTabs";
 import { ProductReviews } from "./ProductReviews";
-import Image from "next/image";
-import { CustomSwiper } from "@/components/ui/CustomSwiper";
 import { ProductGallery } from "./ProductGallery";
 
 // Datos mock de prueba

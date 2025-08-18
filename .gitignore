@@ -33,6 +33,9 @@ Thumbs.db
 .idea/
 *.swp
 *.swo
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
 
 # === Build/Output ===
 dist/
@@ -41,15 +44,13 @@ out/
 .next/
 .cache/
 .coverage/
+.vercel/
 
 # === Base de datos ===
 *.db
 *.sqlite
 *-journal
 /prisma/migrations/
-
-# === Docker ===
-docker-compose.override.yml
 
 # === Python ===
 *.egg-info/
@@ -58,3 +59,8 @@ __pycache__/
 .Python
 pip-log.txt
 pip-delete-this-directory.txt
+.python-version
+
+# Docker
+docker-data/
+docker-compose.override.yml
