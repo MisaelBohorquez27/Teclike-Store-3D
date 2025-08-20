@@ -6,7 +6,18 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
-    "outDir": "dist"
+    "outDir": "dist",
+    "types": [
+      "node"
+    ],
+    "typeRoots": [
+      "./node_modules/@types"
+    ]
   },
-  "include": ["src"]
+  "include": [
+    "src/**/*.ts", "*.ts" ,"seed.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

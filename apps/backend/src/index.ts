@@ -3,19 +3,23 @@ import cors from "cors";
 import dotenv from "dotenv";
 import productsRouter from "./routes/products";
 
+//Cargando variables de entorno
 dotenv.config();
 
+// Creando aplicacion express
 const app = express();
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 5000;
 
-app.use(cors());
-app.use(express.json());
+//Configurando Middleware
+app.use(cors()); // Con esto se permite consultas desde el frontend
+app.use(express.json()); // Aqui para entender json en las peticiones
 
-// Rutas
+// Importas las Rutas y las usas 
 app.use("/products", productsRouter);
 
+//Ruta de prueba para ver si el servidor funciona
 app.get("/healthz", (req, res) => {
-  res.json({ status: "ok" });
+  res.json({ message: 'El servidor está funcionando 🚀'});
 });
 
 app.listen(PORT, () => {
