@@ -1,7 +1,5 @@
 "use client";
 import { FilterSidebar } from "@/app/Products/FilterSidebar";
-import { Footer } from "@/components/Footer";
-import { Navbar } from "@/components/Navbar";
 import { ProductGrid } from "@/app/Products/ProductGrid";
 import { Pagination } from "@/components/ui/Pagination";
 import { useState } from "react";

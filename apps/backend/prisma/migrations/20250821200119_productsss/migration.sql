@@ -1,6 +1,6 @@
 -- CreateTable
 CREATE TABLE "public"."Product" (
-    "id" TEXT NOT NULL,
+    "id" SERIAL NOT NULL,
     "slug" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "description" TEXT,
