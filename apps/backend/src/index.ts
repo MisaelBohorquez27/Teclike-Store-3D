@@ -11,15 +11,20 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 //Configurando Middleware
-app.use(cors()); // Con esto se permite consultas desde el frontend
+app.use(
+  cors({
+    origin: "http://localhost:3000", //este es el frontend
+    credentials: true
+  })
+); // Con esto se permite consultas desde el frontend
 app.use(express.json()); // Aqui para entender json en las peticiones
 
-// Importas las Rutas y las usas 
-app.use("/products", productsRouter);
+// Importas las Rutas y las usas
+app.use("/api/products", productsRouter);
 
 //Ruta de prueba para ver si el servidor funciona
-app.get("/healthz", (req, res) => {
-  res.json({ message: 'El servidor está funcionando 🚀'});
+app.get("/", (req, res) => {
+  res.json({ message: "El servidor está funcionando 🚀" });
 });
 
 app.listen(PORT, () => {

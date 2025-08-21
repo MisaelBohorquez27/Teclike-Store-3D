@@ -1,14 +1,18 @@
 "use client";
 
-type Product = {
+export interface Product {
   id: number;
   name: string;
   category: string;
   price: number;
   rating: number;
   image: string;
-  isNew?: boolean;
+  isNew?: false;
 };
+
+export interface ProductCardProps {
+  product: Product;
+}
 
 export function ProductCard({ product }: { product: Product }) {
   return (

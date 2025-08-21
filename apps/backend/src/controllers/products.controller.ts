@@ -6,6 +6,7 @@ export async function listProducts(req: Request, res: Response) {
     const products = await prisma.product.findMany();
     res.json(products);
   } catch (err) {
+    console.error(err);
     res.status(500).json({ error: "Error fetching products" });
   }
 }
@@ -17,6 +18,7 @@ export async function getProduct(req: Request, res: Response) {
     if (!product) return res.status(404).json({ error: "Not found" });
     res.json(product);
   } catch (err) {
+    console.error(err);
     res.status(500).json({ error: "Error fetching product" });
   }
 }
