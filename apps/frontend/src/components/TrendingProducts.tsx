@@ -1,59 +1,33 @@
 "use client";
+import { useEffect, useState } from "react";
 import "swiper/css";
 import { CustomSwiper } from "./ui/CustomSwiper";
+import { fetchProducts } from "@/services/products";
 
-const TRENDING_PRODUCTS = [
-  {
-    id: 1,
-    title: "Air Jordan 4 Infrared 2022",
-    details: "Size 8",
-    price: 150.0,
-    currency: "$",
-    image: "https://example.com/image1.jpg",
-  },
-  {
-    id: 2,
-    title: "Air Jordan 8 Retro 'BUGS BUNNY'",
-    details: "2013 - Size 8.5 - 305381103 (8170-40)",
-    price: 140.0,
-    currency: "$",
-    image: "https://example.com/image1.jpg",
-  },
-  {
-    id: 3,
-    title: "Nike Air Max 90 Premium",
-    details: "10.5 NEW!!!",
-    price: 109.95,
-    currency: "$",
-    image: "https://example.com/image1.jpg",
-  },
-  {
-    id: 4,
-    title: "Nike Air Max I Premium",
-    details: "Dark Smoke Grey Flash Crimson H.9292.070...",
-    price: 115.0,
-    currency: "$",
-    image: "https://example.com/image1.jpg",
-  },
-  {
-    id: 5,
-    title: "Nike Air Jordan 13 Retro Low",
-    details: "Pure Money White Mt Silver Platinum Si...",
-    price: 100.0,
-    currency: "$",
-    image: "https://example.com/image1.jpg",
-  },
-  {
-    id: 6,
-    title: "Nike / Anthracite",
-    details: "Size 11",
-    price: 160.0,
-    currency: "$",
-    image: "https://example.com/image1.jpg",
-  },
-];
+export interface Product {
+  id: number;
+  name: string;
+  category: string;
+  price: number;
+  rating: number;
+  image: string;
+};
 
 export function TrendingProducts() {
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchProducts()
+      .then(setProducts)
+      .catch((err) => console.error(err))
+      .finally(() => setLoading(false));
+  }, []);
+
+  if (loading) {
+    return <p className="text-center py-8">Cargando productos...</p>;
+  }
+
   return (
     <section className="TrendingProducts-bg relative py-8 sm:py-10 md:py-12">
       <div className="container mx-auto px-4 sm:px-6">
@@ -62,7 +36,7 @@ export function TrendingProducts() {
         </h2>
 
         <CustomSwiper
-          items={TRENDING_PRODUCTS}
+          items={products}
           spaceBetween={16}
           breakpoints={{
             0: { slidesPerView: 1.2, spaceBetween: 10, slidesPerGroup: 1 },
@@ -77,7 +51,7 @@ export function TrendingProducts() {
               <div className="relative h-40 sm:h-48 mb-3 sm:mb-4">
                 <img
                   src={product.image}
-                  alt={product.title}
+                  alt={product.name}
                   className="object-cover rounded-t-lg w-full h-full"
                   loading="lazy"
                   decoding="async"
@@ -85,15 +59,14 @@ export function TrendingProducts() {
               </div>
               <div className="flex-grow">
                 <h3 className="font-semibold text-base sm:text-lg SubtitleColor">
-                  {product.title}
+                  {product.name}
                 </h3>
                 <p className="TitleColor text-xs sm:text-sm mt-1">
-                  {product.details}
+                  {product.category}
                 </p>
               </div>
               <div className="mt-3 sm:mt-4 flex justify-between items-center">
                 <span className="ColorSubtitle font-bold text-sm sm:text-base">
-                  {product.currency}
                   {product.price.toFixed(2)}
                 </span>
                 <button className="text-blue-600 hover:text-blue-800 text-xs sm:text-sm font-medium">

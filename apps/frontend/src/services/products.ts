@@ -35,3 +35,9 @@ export async function fetchProducts(): Promise<Product[]> {
   const data: ProductFromApi[] = await res.json();
   return data.map(mapProduct);
 }
+
+export async function fetchProductBySlug(slug: string) {
+  const res = await fetch(`http://localhost:5000/api/products/slug/${slug}`);
+  if (!res.ok) throw new Error("Error al obtener producto");
+  return res.json();
+}
