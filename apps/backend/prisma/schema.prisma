@@ -19,4 +19,16 @@ model Product {
   assets      Json?    // aquí puedes guardar más datos (ej: modelos 3D)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+
+  Offer Offer[]
+}
+model Offer {
+  id          Int      @id @default(autoincrement())
+  productId   Int
+  product     Product  @relation(fields: [productId], references: [id])
+  discountPct Int
+  startDate   DateTime
+  endDate     DateTime
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
