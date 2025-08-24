@@ -1,12 +1,7 @@
 "use client";
-import { useRef, useState } from "react";
 import { BestProductsSellers } from "./BestProductsSellers";
-import { Swiper, SwiperSlide } from "swiper/react";
-import SwiperCore from "swiper";
 import { motion } from "framer-motion";
 import "swiper/css";
-import CarouselButtons from "./ui/CarouselButtons";
-import { CarouselIndicators } from "./ui/CarouselIndicators";
 import { CustomSwiper } from "./ui/CustomSwiper";
 
 const BEST_SELLERS = [
