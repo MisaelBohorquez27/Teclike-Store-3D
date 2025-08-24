@@ -1,68 +1,140 @@
-// prisma/seeders/seed-products.ts
-import { PrismaClient } from "@prisma/client";
-
-const productsData = [
-  {
-    slug: "rtx-4070-ti",
-    name: "NVIDIA GeForce RTX 4070 Ti",
-    description: "Tarjeta gráfica de última generación para gaming y diseño 3D.",
-    priceCents: 79900,
-    category: "GPU",
-    imageUrl: "https://example.com/images/rtx4070ti.jpg",
-    assets: {
-      model3D: "https://example.com/assets/rtx4070ti.glb",
-      specs: { vram: "12GB GDDR6X", boostClock: "2.61GHz" }
-    }
-  },
-  {
-    slug: "keychron-k6",
-    name: "Teclado Mecánico Keychron K6",
-    description: "Teclado mecánico compacto con Bluetooth y switches hot-swappable.",
-    priceCents: 8900,
-    category: "Periféricos",
-    imageUrl: "https://example.com/images/keychronk6.jpg",
-    assets: { layout: "ANSI", switches: "Gateron Red" }
-  },
-  {
-    slug: "logitech-mx-master-3s",
-    name: "Mouse Logitech MX Master 3S",
-    description: "Mouse ergonómico con scroll electromagnético y conectividad multi-dispositivo.",
-    priceCents: 10900,
-    category: "Periféricos",
-    imageUrl: "https://example.com/images/mxmaster3s.jpg",
-    assets: { dpi: "8000", connectivity: "Bluetooth/USB" }
-  },
-  {
-    slug: "lg-ultrawide-34",
-    name: "Monitor LG UltraWide 34''",
-    description: "Monitor ultrawide QHD de 34 pulgadas, ideal para multitarea y gaming.",
-    priceCents: 45000,
-    category: "Monitores",
-    imageUrl: "https://example.com/images/lgultrawide.jpg",
-    assets: { resolution: "3440x1440", refreshRate: "144Hz" }
-  },
-  {
-    slug: "samsung-ssd-980-pro",
-    name: "Samsung SSD 980 Pro 1TB",
-    description: "SSD NVMe de alta velocidad con tecnología PCIe 4.0.",
-    priceCents: 14900,
-    category: "Almacenamiento",
-    imageUrl: "https://example.com/images/ssd980pro.jpg",
-    assets: { readSpeed: "7000 MB/s", writeSpeed: "5000 MB/s" }
-  }
-];
+// seeders/seed-products.ts
+import { PrismaClient } from '@prisma/client';
 
 export async function seedProducts(prisma: PrismaClient) {
-  console.log("🌱 Insertando productos...");
+  console.log('🛍️ Insertando productos...');
 
-  for (const productData of productsData) {
-    await prisma.product.upsert({
+  const products = [
+    {
+      brand: 'Razer',
+      slug: 'razer-kraken-v3',
+      name: 'Razer Kraken V3 HyperSense',
+      description: 'Gaming headset with haptic technology and immersive 7.1 surround sound',
+      priceCents: 12999,
+      imageUrl: '/products/razer-kraken.png',
+      categories: ['Headsets'],
+      inventory: { stock: 25, isNew: true }
+    },
+    {
+      brand: 'Logitech',
+      slug: 'logitech-g502-x',
+      name: 'Logitech G502 X PLUS',
+      description: 'Wireless gaming mouse with HERO 25K sensor and LIGHTSPEED technology',
+      priceCents: 15999,
+      imageUrl: '/products/logitech-g502.png',
+      categories: ['Mice'],
+      inventory: { stock: 30, isNew: true }
+    },
+    {
+      brand: 'Corsair',
+      slug: 'corsair-k95-rgb',
+      name: 'Corsair K95 RGB Platinum',
+      description: 'Mechanical gaming keyboard with Cherry MX switches and per-key RGB',
+      priceCents: 19999,
+      imageUrl: '/products/corsair-k95.png',
+      categories: ['Keyboards'],
+      inventory: { stock: 15, isNew: false }
+    },
+    {
+      brand: 'SteelSeries',
+      slug: 'steelseries-arctis-pro',
+      name: 'SteelSeries Arctis Pro Wireless',
+      description: 'High-fidelity gaming headset with dual wireless technology',
+      priceCents: 34999,
+      imageUrl: '/products/arctis-pro.png',
+      categories: ['Headsets'],
+      inventory: { stock: 10, isNew: false }
+    },
+    {
+      brand: 'Samsung',
+      slug: 'samsung-odyssey-g7',
+      name: 'Samsung Odyssey G7',
+      description: '32" QHD 240Hz curved gaming monitor with HDR600',
+      priceCents: 69999,
+      imageUrl: '/products/samsung-odyssey.png',
+      categories: ['Monitors'],
+      inventory: { stock: 8, isNew: true }
+    },
+    {
+      brand: 'HyperX',
+      slug: 'hyperx-cloud-alpha',
+      name: 'HyperX Cloud Alpha Wireless',
+      description: 'Wireless gaming headset with 300-hour battery life',
+      priceCents: 17999,
+      imageUrl: '/products/hyperx-cloud.png',
+      categories: ['Headsets'],
+      inventory: { stock: 20, isNew: false }
+    },
+    {
+      brand: 'ASUS',
+      slug: 'asus-rog-azoth',
+      name: 'ASUS ROG Azoth',
+      description: '75% wireless mechanical keyboard with OLED display',
+      priceCents: 24999,
+      imageUrl: '/products/rog-azoth.png',
+      categories: ['Keyboards'],
+      inventory: { stock: 12, isNew: true }
+    },
+    {
+      brand: 'LG',
+      slug: 'lg-ultragear-48',
+      name: 'LG UltraGear 48GQ900',
+      description: '48" 4K OLED gaming monitor with 120Hz refresh rate',
+      priceCents: 129999,
+      imageUrl: '/products/lg-ultragear.png',
+      categories: ['Monitors'],
+      inventory: { stock: 5, isNew: true }
+    }
+  ];
+
+  for (const productData of products) {
+    const product = await prisma.product.upsert({
       where: { slug: productData.slug },
-      update: productData,
-      create: productData,
+      update: {},
+      create: {
+        brand: productData.brand,
+        slug: productData.slug,
+        name: productData.name,
+        description: productData.description,
+        priceCents: productData.priceCents,
+        imageUrl: productData.imageUrl
+      }
     });
-    console.log(`✅ Producto: ${productData.name}`);
-  }
 
-  console.log(`✅ Insertados/actualizados ${productsData.length} productos`);
+    // Crear inventario
+    await prisma.inventory.upsert({
+      where: { productId: product.id },
+      update: {},
+      create: {
+        productId: product.id,
+        stock: productData.inventory.stock,
+        isNew: productData.inventory.isNew
+      }
+    });
+
+    // Conectar categorías
+    for (const categoryName of productData.categories) {
+      const category = await prisma.category.findUnique({
+        where: { slug: categoryName }
+      });
+
+      if (category) {
+        await prisma.categoryProduct.upsert({
+          where: {
+            categoryId_productId: {
+              categoryId: category.id,
+              productId: product.id
+            }
+          },
+          update: {},
+          create: {
+            categoryId: category.id,
+            productId: product.id
+          }
+        });
+      }
+    }
+
+    console.log(`✅ Producto: ${product.name}`);
+  }
 }

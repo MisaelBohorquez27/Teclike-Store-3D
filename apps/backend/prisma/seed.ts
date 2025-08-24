@@ -1,25 +1,43 @@
-// prisma/seed.ts
-import { PrismaClient } from "@prisma/client";
-import { seedProducts } from "./seeders/seed-products";
-
+// seed.ts
+import { PrismaClient } from '@prisma/client';
+import { seedCoreData } from './seeders/seed-core';
+import { seedCategories } from './seeders/seed-categories';
+import { seedProducts } from './seeders/seed-products';
+import { seedUsers } from './seeders/seed-users';
+import { seedOffers } from './seeders/seed-offers';
+import { seedSpecialOffers } from './seeders/seed-special-offers';
+import { seedFlashOffers } from './seeders/seed-flash-offers';
 
 const prisma = new PrismaClient();
 
 async function main() {
-  console.log('🚀 Iniciando seeder de la base de datos...');
+  console.log('🌱 Iniciando seeder de Teclike Store...');
   console.log('==========================================');
 
-  // Ejecutar todos los seeders
+  // Ejecutar seeders en orden
+  await seedCoreData(prisma);
+  console.log('------------------------------------------');
+  await seedCategories(prisma);
+  console.log('------------------------------------------');
   await seedProducts(prisma);
+  console.log('------------------------------------------');
+  await seedUsers(prisma);
+  console.log('------------------------------------------');
+  await seedOffers(prisma);
+  console.log('------------------------------------------');
+  await seedSpecialOffers(prisma);
+  console.log('------------------------------------------');
+  await seedFlashOffers(prisma);
 
   console.log('==========================================');
-  console.log('✅ Todos los seeders completados exitosamente');
-  console.log(`📊 Visita: http://localhost:5555 para ver los datos en Prisma Studio`);
+  console.log('✅ Base de datos poblada exitosamente!');
+  console.log('🎯 Ofertas configuradas para diferentes temporadas');
+  console.log('📊 Visita: http://localhost:5555 para ver los datos en Prisma Studio');
 }
 
 main()
   .catch((e) => {
-    console.error("❌ Error en el seeder:", e);
+    console.error('❌ Error en el seeder:', e);
     process.exit(1);
   })
   .finally(async () => {
