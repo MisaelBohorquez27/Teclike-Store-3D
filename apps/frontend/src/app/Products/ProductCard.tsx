@@ -10,10 +10,6 @@ export interface Product {
   isNew?: false;
 };
 
-export interface ProductCardProps {
-  product: Product;
-}
-
 export function ProductCard({ product }: { product: Product }) {
   return (
     <div className="Card-bg rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">

@@ -4,7 +4,7 @@ import "swiper/css";
 import { CustomSwiper } from "./ui/CustomSwiper";
 import { fetchProducts } from "@/services/products";
 
-export interface Product {
+export interface TrendingProduct {
   id: number;
   name: string;
   category: string;
@@ -14,7 +14,7 @@ export interface Product {
 };
 
 export function TrendingProducts() {
-  const [products, setProducts] = useState<Product[]>([]);
+  const [products, setProducts] = useState<TrendingProduct[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
