@@ -8,6 +8,7 @@ import { seedOffers } from './seeders/seed-offers';
 import { seedSpecialOffers } from './seeders/seed-special-offers';
 import { seedFlashOffers } from './seeders/seed-flash-offers';
 import { DefaultArgs } from '@prisma/client/runtime/library';
+import { seedCategoryRelations } from './seeders/seed-category-Products';
 
 const prisma = new PrismaClient();
 
@@ -30,8 +31,7 @@ async function main() {
   console.log('------------------------------------------');
   await seedFlashOffers(prisma);
   console.log('------------------------------------------');
-  await seedCategoryProductRelations(prisma);
-  console.log('------------------------------------------');
+  await seedCategoryRelations();
 
   console.log('==========================================');
   console.log('✅ Base de datos poblada exitosamente!');
