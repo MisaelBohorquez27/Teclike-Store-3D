@@ -1,69 +1,218 @@
-import { PrismaClient } from '@prisma/client';
-import  categories  from '../data/categories.json';
-import products from '../data/products.json';
-
+import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-async function seedCategoryProductRelations() {
-  // Primero, aseguramos que las categorías existan en la DB
-  for (const category of categories) {
-    await prisma.category.upsert({
-      where: { slug: category.slug },
-      update: {},
-      create: {
-        name: category.name,
-        slug: category.slug,
-        description: category.description,
-      },
-    });
+// Diccionario de palabras clave para cada categoría
+const categoryKeywords: Record<string, string[]> = {
+  headsets: [
+    "headset",
+    "auricular",
+    "headphone",
+    "audífono",
+  ],
+  keyboards: [
+    "keyboard",
+    "teclado",
+    "keychron",
+    "keycap",
+  ],
+  mice: [
+    "mouse",
+    "ratón",
+    "sensor",
+    "dpi",
+  ],
+  monitors: [
+    "monitor",
+    "pantalla",
+    "display",
+    "screen",
+    "ips",
+    "led",
+    "144hz",
+    "4k",
+    "ultrawide",
+  ],
+  webcams: [
+    "webcam",
+    "cámara",
+  ],
+  accessories: [
+    "accesorio",
+    "pad",
+    "mousepad",
+    "stand",
+    "soporte",
+    "cable",
+    "adaptador",
+    "hub",
+  ],
+  "gaming-chairs": [
+    "silla",
+    "chair",
+    "gaming chair",
+  ],
+  consoles: [
+    "console",
+    "playstation",
+    "xbox",
+    "nintendo",
+    "switch",
+    "ps5",
+    "xbox series",
+  ],
+};
+
+// Palabras a excluir (evitar falsos positivos)
+const excludeWords = [
+  "the",
+  "and",
+  "with",
+  "for",
+  "your",
+  "this",
+  "that",
+  "from",
+];
+
+function normalizeText(text: string): string[] {
+  if (!text) return [];
+
+  return text
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "") // Remove accents
+    .replace(/[^a-z0-9\s]/gi, " ") // Replace special chars with spaces
+    .split(/\s+/)
+    .filter((word) => word.length > 2 && !excludeWords.includes(word));
+}
+
+function findMatchingCategories(
+  description: string,
+  productName: string
+): string[] {
+  const words = [...normalizeText(description), ...normalizeText(productName)];
+
+  const matchedCategories = new Set<string>();
+
+  // Buscar coincidencias para cada categoría
+  for (const [categorySlug, keywords] of Object.entries(categoryKeywords)) {
+    const hasMatch = keywords.some((keyword) =>
+      words.some((word) => {
+        // Coincidencia exacta o parcial
+        return word.includes(keyword) || keyword.includes(word);
+      })
+    );
+
+    if (hasMatch) {
+      matchedCategories.add(categorySlug);
+    }
   }
 
-  // Luego, recorremos los productos
-  for (const product of products) {
-    const dbProduct = await prisma.product.findUnique({
-      where: { slug: product.slug },
+  return Array.from(matchedCategories);
+}
+
+export async function seedCategoryRelations() {
+  console.log("🎯 Iniciando seeder automático de relaciones...");
+  console.log("==============================================");
+
+  try {
+    // Obtener todos los productos con sus relaciones existentes
+    const products = await prisma.product.findMany({
+      include: {
+        categoryProducts: {
+          include: {
+            category: true,
+          },
+        },
+      },
     });
 
-    if (!dbProduct) {
-      console.warn(`⚠️ Producto no encontrado: ${product.slug}`);
-      continue;
-    }
+    // Obtener todas las categorías
+    const categories = await prisma.category.findMany();
+    const categoryMap = new Map(categories.map((cat) => [cat.slug, cat]));
 
-    for (const categoryName of product.categories) {
-      const dbCategory = await prisma.category.findUnique({
-        where: { slug: categoryName.toLowerCase() },
-      });
+    let totalRelationsCreated = 0;
+    let productsProcessed = 0;
 
-      if (!dbCategory) {
-        console.warn(`⚠️ Categoría no encontrada: ${categoryName}`);
+    for (const product of products) {
+      productsProcessed++;
+
+      // Obtener categorías existentes para este producto
+      const existingCategorySlugs = product.categoryProducts.map(
+        (cp) => cp.category.slug
+      );
+
+      // Encontrar categorías coincidentes basado en descripción y nombre
+      const matchedCategorySlugs = findMatchingCategories(
+        product.description || "",
+        product.name
+      );
+
+      // Filtrar categorías que ya existen
+      const newCategorySlugs = matchedCategorySlugs.filter(
+        (slug) => !existingCategorySlugs.includes(slug)
+      );
+
+      if (newCategorySlugs.length === 0) {
+        console.log(
+          `⏭️  ${product.name} - Ya tiene todas las categorías necesarias`
+        );
         continue;
       }
 
-      await prisma.categoryProduct.upsert({
-        where: {
-          categoryId_productId: {
-            categoryId: dbCategory.id,
-            productId: dbProduct.id,
-          },
-        },
-        update: {},
-        create: {
-          categoryId: dbCategory.id,
-          productId: dbProduct.id,
-          description: `El producto "${product.name}" pertenece a la categoría "${dbCategory.name}"`,
-        },
-      });
-    }
-  }
+      console.log(`\n📦 ${product.name}`);
+      console.log(
+        `   Descripción: ${product.description?.substring(0, 60)}...`
+      );
+      console.log(
+        `   Categorías detectadas: ${matchedCategorySlugs.join(", ")}`
+      );
+      console.log(`   Nuevas categorías: ${newCategorySlugs.join(", ")}`);
 
-  console.log('✅ Relaciones producto-categoría creadas exitosamente');
+      // Crear nuevas relaciones
+      for (const categorySlug of newCategorySlugs) {
+        const category = categoryMap.get(categorySlug);
+
+        if (category) {
+          try {
+            await prisma.categoryProduct.create({
+              data: {
+                categoryId: category.id,
+                productId: product.id,
+                description: `Auto-generated relation for ${category.name} and ${product.name}`,
+              },
+            });
+            console.log(`   ✅ Relacionado con: ${category.name}`);
+            totalRelationsCreated++;
+          } catch (error) {
+            // Ignorar errores de relaciones duplicadas (puede pasar en concurrencia)
+            if (!error.message.includes("Unique constraint")) {
+              console.log(
+                `   ❌ Error relacionando con ${category.name}: ${error.message}`
+              );
+            }
+          }
+        }
+      }
+    }
+
+    console.log("\n==============================================");
+    console.log("🎉 Seeder completado exitosamente!");
+    console.log(`📊 Productos procesados: ${productsProcessed}`);
+    console.log(`🔗 Relaciones creadas: ${totalRelationsCreated}`);
+  } catch (error) {
+    console.error("❌ Error en el seeder:", error);
+    throw error;
+  }
 }
 
-seedCategoryProductRelations()
+// Ejecutar el seeder
+seedCategoryRelations()
   .catch((e) => {
-    console.error('❌ Error en seeder:', e);
+    console.error("❌ Error fatal:", e);
+    process.exit(1);
   })
-  .finally(() => {
-    prisma.$disconnect();
+  .finally(async () => {
+    await prisma.$disconnect();
   });
