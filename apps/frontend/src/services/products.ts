@@ -41,3 +41,12 @@ export async function fetchProductBySlug(slug: string) {
   if (!res.ok) throw new Error("Error al obtener producto");
   return res.json();
 }
+
+export async function fetchTrendingProducts(): Promise<Product[]> {
+  const res = await fetch("http://localhost:5000/api/products/trending", {
+    cache: "no-store",
+  });
+  if (!res.ok) throw new Error("Error al obtener productos trending");
+  const data: ProductFromApi[] = await res.json();
+  return data.map(mapProduct);
+}

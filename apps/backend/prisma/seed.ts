@@ -1,5 +1,5 @@
 // seed.ts
-import { PrismaClient } from '@prisma/client';
+import { Prisma, PrismaClient } from '@prisma/client';
 import { seedCoreData } from './seeders/seed-core';
 import { seedCategories } from './seeders/seed-categories';
 import { seedProducts } from './seeders/seed-products';
@@ -7,6 +7,7 @@ import { seedUsers } from './seeders/seed-users';
 import { seedOffers } from './seeders/seed-offers';
 import { seedSpecialOffers } from './seeders/seed-special-offers';
 import { seedFlashOffers } from './seeders/seed-flash-offers';
+import { DefaultArgs } from '@prisma/client/runtime/library';
 
 const prisma = new PrismaClient();
 
@@ -28,6 +29,9 @@ async function main() {
   await seedSpecialOffers(prisma);
   console.log('------------------------------------------');
   await seedFlashOffers(prisma);
+  console.log('------------------------------------------');
+  await seedCategoryProductRelations(prisma);
+  console.log('------------------------------------------');
 
   console.log('==========================================');
   console.log('✅ Base de datos poblada exitosamente!');
@@ -43,3 +47,7 @@ main()
   .finally(async () => {
     await prisma.$disconnect();
   });
+
+function seedCategoryProductRelations(prisma: PrismaClient<Prisma.PrismaClientOptions, never, DefaultArgs>) {
+  throw new Error('Function not implemented.');
+}
