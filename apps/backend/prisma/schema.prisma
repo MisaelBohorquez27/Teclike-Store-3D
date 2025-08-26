@@ -210,10 +210,11 @@ model CategoryProduct {
   id         Int @id @default(autoincrement())
   categoryId Int
   productId  Int
+  description String
 
   // Relations
-  category Category @relation(fields: [categoryId], references: [id])
-  product  Product  @relation(fields: [productId], references: [id])
+  category Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  product  Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
 
   @@unique([categoryId, productId])
   @@map("category_products")
