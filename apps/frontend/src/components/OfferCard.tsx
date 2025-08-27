@@ -1,7 +1,7 @@
 import { Rating } from "./ui/Rating";
 import CartIcon from "./ui/CartIcon";
 
-type Offer = {
+export type Offer = {
   id: number;
   title: string;
   name?: string;
@@ -27,7 +27,7 @@ export function OfferCard({ offer }: { offer: Offer }) {
         </div>
 
         <div className="mt-3 sm:mt-4 md:mt-5">
-          <h3 className="text-base sm:text-lg md:text-xl font-semibold text-gray-800">
+          <h3 className="text-base sm:text-lg md:text-xl font-semibold text-gray-800 truncate">
             {offer.title}
           </h3>
           <Rating value={offer.rating} />
