@@ -1,6 +1,12 @@
 // controllers/offers.controller.ts
 import { Request, Response } from "express";
 import prisma from "../prisma";
+import { Offer, Product } from "@prisma/client";
+
+// 🔧 Tipo extendido: Offer con productos incluidos
+type OfferWithProducts = Offer & {
+  offerProducts: { product: Product }[];
+};
 
 function formatCurrency(cents: number, currency: string) {
   return new Intl.NumberFormat("en-US", {
@@ -18,7 +24,7 @@ function computeDiscount(priceCents: number, type: string, value: number) {
     discountLabel = `-${value}%`;
   } else if (type === "fixed") {
     discountedCents = Math.max(0, priceCents - value);
-    discountLabel = `-$${(value / 100).toFixed(0)}`;
+    discountLabel = `-${formatCurrency(value, "USD")}`;
   }
 
   return { discountedCents, discountLabel };
@@ -33,38 +39,61 @@ function shuffle<T>(arr: T[]): T[] {
   return a;
 }
 
+// 🔧 Ajustar fechas para ofertas anuales
+function adjustOfferDates(offer: OfferWithProducts): OfferWithProducts {
+  if (offer.recurrence === "yearly") {
+    const now = new Date();
+    const currentYear = now.getFullYear();
+    const start = new Date(offer.startDate);
+    const end = new Date(offer.endDate);
+
+    start.setFullYear(currentYear);
+    end.setFullYear(currentYear);
+
+    // Si ya terminó este año → mover al próximo
+    if (end < now) {
+      start.setFullYear(currentYear + 1);
+      end.setFullYear(currentYear + 1);
+    }
+
+    return { ...offer, startDate: start, endDate: end };
+  }
+
+  return offer;
+}
+
+function isOfferActive(offer: OfferWithProducts): boolean {
+  const now = new Date();
+  return now >= offer.startDate && now <= offer.endDate;
+}
+
 // 📌 GET /api/offers/featured
 export const getFeaturedOffers = async (req: Request, res: Response) => {
   try {
-    const now = new Date();
-    const month = now.getMonth() + 1; // 1–12
-    const day = now.getDate();
-
-    // 1) Buscar ofertas activas
-    let offers = await prisma.offer.findMany({
-      where: {
-        startDate: { lte: now },
-        endDate: { gte: now },
-      },
-      include: {
-        offerProducts: { include: { product: true } },
-      },
+    // 1) Traer TODAS las ofertas con sus productos
+    let offers: OfferWithProducts[] = await prisma.offer.findMany({
+      include: { offerProducts: { include: { product: true } } },
     });
 
-    // 2) Filtro por temporada
-    if (month === 11 && day >= 25 && day <= 30) {
-      // Black Friday
-      offers = offers.filter((o) => o.name.includes("Black Friday"));
-    } else if (month === 12 && day >= 15 && day <= 25) {
-      // Christmas
-      offers = offers.filter((o) => o.name.includes("Christmas"));
-    } else if ((month === 12 && day >= 26) || (month === 1 && day <= 15)) {
-      // New Year
-      offers = offers.filter((o) => o.name.includes("New Year"));
+    // 2) Ajustar fechas y filtrar activas
+    offers = offers.map(adjustOfferDates).filter(isOfferActive);
+
+    // 3) Separar por recurrencia
+    const yearlyOffers = offers.filter((o) => o.recurrence === "yearly");
+    const dailyOffers = offers.filter((o) => o.recurrence === "daily");
+
+    let selectedOffers: OfferWithProducts[] = [];
+
+    // 🎄 Priorizar las de temporada si hay activas
+    if (yearlyOffers.length > 0) {
+      selectedOffers = yearlyOffers;
+    } else if (dailyOffers.length > 0) {
+      // 🔄 Si no hay de temporada, usar daily
+      selectedOffers = dailyOffers;
     }
 
-    // 3) Si no hay ofertas activas de temporada → usar todas las activas
-    if (offers.length === 0) {
+    // 4) Si no hay NINGUNA → fallback a productos recientes
+    if (selectedOffers.length === 0) {
       const fallbackProducts = await prisma.product.findMany({
         take: 6,
         orderBy: { createdAt: "desc" },
@@ -83,11 +112,12 @@ export const getFeaturedOffers = async (req: Request, res: Response) => {
       return res.json(fallbackItems);
     }
 
-    // 4) Tomar productos de las ofertas filtradas
-    const pairs = offers.flatMap((offer) =>
+    // 5) Construir lista de productos de las ofertas seleccionadas
+    const pairs = selectedOffers.flatMap((offer) =>
       offer.offerProducts.map((op) => ({ offer, product: op.product }))
     );
 
+    // Mezclar y tomar hasta 6 productos
     const selected = shuffle(pairs).slice(0, 6);
 
     const items = selected.map(({ offer, product }) => {
@@ -110,7 +140,7 @@ export const getFeaturedOffers = async (req: Request, res: Response) => {
 
     res.json(items);
   } catch (err) {
-    console.error("❌ Error fetching seasonal offers:", err);
+    console.error("❌ Error fetching featured offers:", err);
     res.status(500).json({ message: "Error al obtener ofertas destacadas" });
   }
 };

@@ -81,6 +81,7 @@ model Offer {
   value     Int
   startDate DateTime
   endDate   DateTime
+  recurrence String? // daily, weekly, monthly, annual
 
   // Relations
   offerProducts OfferProduct[]
