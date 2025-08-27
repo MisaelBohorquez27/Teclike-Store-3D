@@ -5,10 +5,12 @@ export interface Product {
   name: string;
   category: string;
   price: number;
+  currency: string;
   rating: number;
+  description?: string;
   image: string;
   isNew?: false;
-};
+}
 
 export function ProductCard({ product }: { product: Product }) {
   return (
@@ -28,10 +30,10 @@ export function ProductCard({ product }: { product: Product }) {
       </div>
 
       {/* Detalles del Producto */}
-      <div className="p-3 sm:p-4">
-        <div className="flex justify-between items-start gap-2">
-          <h3 className="font-semibold text-base sm:text-lg">{product.name}</h3>
-          <span className="text-xs sm:text-sm text-gray-500">
+      <div className="p-3 sm:p-4 flex flex-col gap-1">
+        <div className="flex justify-between items-start gap-2 h-auto min-h-5">
+          <h3 className="font-semibold text-base sm:text-lg truncate pr-1 sm:pr-2">{product.name}</h3>
+          <span className="text-xs sm:text-sm text-gray-500"> {/* Para visualizar en un futuro */}
             {product.category}
           </span>
         </div>
@@ -48,6 +50,9 @@ export function ProductCard({ product }: { product: Product }) {
             </span>
           ))}
           <span className="text-xs text-gray-500 ml-1">({product.rating})</span>
+        </div>
+        <div className="text-sm text-gray-700 line-clamp-2">
+          <p>{product.description}</p>
         </div>
 
         <div className="mt-3 sm:mt-4 flex justify-between items-center">
