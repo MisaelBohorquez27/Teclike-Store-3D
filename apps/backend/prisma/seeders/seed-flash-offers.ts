@@ -1,5 +1,6 @@
 // seeders/seed-flash-offers.ts
 import { PrismaClient } from '@prisma/client';
+import flashOffers from '../data/offers.json';
 
 export async function seedFlashOffers(prisma: PrismaClient) {
   console.log('⚡ Insertando ofertas flash...');
@@ -7,25 +8,6 @@ export async function seedFlashOffers(prisma: PrismaClient) {
   // Ofertas flash (24 horas)
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
-
-  const flashOffers = [
-    {
-      name: 'Flash Sale - Headsets',
-      type: 'percentage',
-      value: 40,
-      startDate: new Date(),
-      endDate: tomorrow,
-      products: ['razer-kraken-v3', 'steelseries-arctis-pro', 'hyperx-cloud-alpha']
-    },
-    {
-      name: '24 Hour Monitor Deal',
-      type: 'fixed',
-      value: 10000,
-      startDate: new Date(),
-      endDate: tomorrow,
-      products: ['samsung-odyssey-g7', 'lg-ultragear-48']
-    }
-  ];
 
   for (const offerData of flashOffers) {
     const offer = await prisma.offer.upsert({

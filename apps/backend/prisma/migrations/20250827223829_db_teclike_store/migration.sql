@@ -57,6 +57,7 @@ CREATE TABLE "public"."offers" (
     "value" INTEGER NOT NULL,
     "startDate" TIMESTAMP(3) NOT NULL,
     "endDate" TIMESTAMP(3) NOT NULL,
+    "recurrence" TEXT,
 
     CONSTRAINT "offers_pkey" PRIMARY KEY ("id")
 );

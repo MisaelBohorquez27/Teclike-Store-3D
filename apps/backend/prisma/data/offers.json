@@ -1,0 +1,76 @@
+[
+    {
+        "name": "Black Friday Sale",
+        "type": "percentage",
+        "value": 20,
+        "startDate": "2024-11-25T00:00:00Z",
+        "endDate": "2024-11-30T23:59:59Z",
+        "products": [
+            "razer-kraken-v3",
+            "logitech-g502-x",
+            "hyperx-cloud-alpha"
+        ],
+        "recurrence": "yearly"
+    },
+    {
+        "name": "Christmas Sale",
+        "type": "percentage",
+        "value": 30,
+        "startDate": "2024-12-15T00:00:00Z",
+        "endDate": "2024-12-25T23:59:59Z",
+        "products": [
+            "razer-kraken-v3",
+            "logitech-g502-x",
+            "corsair-k95-rgb"
+        ],
+        "recurrence": "yearly"
+    },
+    {
+        "name": "New Year Sale",
+        "type": "fixed",
+        "value": 7500,
+        "startDate": "2024-12-26T00:00:00Z",
+        "endDate": "2025-01-15T23:59:59Z",
+        "products": [
+            "samsung-odyssey-g7",
+            "lg-ultragear-48"
+        ],
+        "recurrence": "yearly"
+    },
+    {
+        "name": "Daily Deals",
+        "type": "percentage",
+        "value": 20,
+        "startDate": "2024-11-27T00:00:00Z",
+        "endDate": "2024-11-27T23:59:59Z",
+        "products": [
+            "lg-ultragear-48",
+            "hyperx-cloud-alpha",
+            "asus-rog-azoth",
+            "steelseries-arctis-pro",
+            "razer-kraken-v3",
+            "logitech-g502-x",
+            "corsair-k95-rgb",
+            "samsung-odyssey-g7"
+        ],
+        "recurrence": "daily"
+    },
+    {
+        "name": "Hot Deals",
+        "type": "percentage",
+        "value": 3,
+        "startDate": "2024-11-27T00:00:00Z",
+        "endDate": "2024-11-27T23:59:59Z",
+        "products": [
+            "lg-ultragear-48",
+            "hyperx-cloud-alpha",
+            "asus-rog-azoth",
+            "steelseries-arctis-pro",
+            "razer-kraken-v3",
+            "logitech-g502-x",
+            "corsair-k95-rgb",
+            "samsung-odyssey-g7"
+        ],
+        "recurrence": "daily"
+    }
+]
