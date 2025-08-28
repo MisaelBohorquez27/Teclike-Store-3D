@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { getFeaturedOffers } from "../controllers/offer.controller";
+import { getOffers } from "../controllers/offer.controller";
 
 const router = Router();
 
-router.get("/", getFeaturedOffers);
+router.get("/", getOffers);
 
 export default router;

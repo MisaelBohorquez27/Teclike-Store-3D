@@ -58,8 +58,8 @@ function adjustOfferDates(offer: OfferWithProducts): OfferWithProducts {
 
     return { ...offer, startDate: start, endDate: end };
   }
-
   return offer;
+  
 }
 
 function isOfferActive(offer: OfferWithProducts): boolean {
@@ -67,8 +67,8 @@ function isOfferActive(offer: OfferWithProducts): boolean {
   return now >= offer.startDate && now <= offer.endDate;
 }
 
-// 📌 GET /api/offers/featured
-export const getFeaturedOffers = async (req: Request, res: Response) => {
+// 📌 GET /api/offers
+export const getOffers = async (req: Request, res: Response) => {
   try {
     // 1) Traer TODAS las ofertas con sus productos
     let offers: OfferWithProducts[] = await prisma.offer.findMany({
