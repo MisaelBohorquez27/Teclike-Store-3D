@@ -4,7 +4,7 @@ import offers from '../data/offers.json';
 
 const prisma = new PrismaClient();
 
-export async function seedOffers() {
+export async function seedOffers(prisma: PrismaClient) {
   console.log('🎯 Insertando ofertas...');
 
   let createdOffers = 0;
@@ -70,7 +70,7 @@ export async function seedOffers() {
 
 // Ejecutar si se llama directamente
 if (require.main === module) {
-  seedOffers()
+  seedOffers(prisma)
     .catch((e) => console.error(e))
     .finally(() => prisma.$disconnect());
 }

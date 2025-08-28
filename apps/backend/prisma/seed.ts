@@ -5,10 +5,9 @@ import { seedCategories } from './seeders/seed-categories';
 import { seedProducts } from './seeders/seed-products';
 import { seedUsers } from './seeders/seed-users';
 import { seedOffers } from './seeders/seed-offers';
-import { seedSpecialOffers } from './seeders/seed-special-offers';
-import { seedFlashOffers } from './seeders/seed-flash-offers';
 import { DefaultArgs } from '@prisma/client/runtime/library';
 import { seedCategoryRelations } from './seeders/seed-category-Products';
+import { seedOrders } from './seeders/seed-orders';
 
 const prisma = new PrismaClient();
 
@@ -27,11 +26,9 @@ async function main() {
   console.log('------------------------------------------');
   await seedOffers(prisma);
   console.log('------------------------------------------');
-  await seedSpecialOffers(prisma);
-  console.log('------------------------------------------');
-  await seedFlashOffers(prisma);
-  console.log('------------------------------------------');
   await seedCategoryRelations();
+  console.log('------------------------------------------');
+  await seedOrders(prisma);
 
   console.log('==========================================');
   console.log('✅ Base de datos poblada exitosamente!');

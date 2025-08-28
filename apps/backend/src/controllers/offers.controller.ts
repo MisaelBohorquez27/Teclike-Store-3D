@@ -103,7 +103,7 @@ export const getOffers = async (req: Request, res: Response) => {
         id: p.id,
         title: p.name,
         name: p.brand,
-        rating: 0,
+        rating: 4.8,
         image: p.imageUrl ?? "/products/default.png",
         discount: "-10%",
         price: formatCurrency(Math.round(p.priceCents * 0.9), p.currency),
