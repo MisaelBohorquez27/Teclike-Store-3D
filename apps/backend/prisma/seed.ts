@@ -8,6 +8,7 @@ import { seedOffers } from './seeders/seed-offers';
 import { DefaultArgs } from '@prisma/client/runtime/library';
 import { seedCategoryRelations } from './seeders/seed-category-Products';
 import { seedOrders } from './seeders/seed-orders';
+import { seedReviews } from './seeders/seed-reviews';
 
 const prisma = new PrismaClient();
 
@@ -29,6 +30,8 @@ async function main() {
   await seedCategoryRelations();
   console.log('------------------------------------------');
   await seedOrders(prisma);
+  console.log('------------------------------------------');
+  await seedReviews(prisma);
 
   console.log('==========================================');
   console.log('✅ Base de datos poblada exitosamente!');

@@ -78,6 +78,7 @@ CREATE TABLE "public"."reviews" (
 CREATE TABLE "public"."users" (
     "id" SERIAL NOT NULL,
     "roleId" INTEGER NOT NULL,
+    "photoURL" TEXT,
     "firstName" TEXT NOT NULL,
     "lastName" TEXT NOT NULL,
     "phone" TEXT NOT NULL,

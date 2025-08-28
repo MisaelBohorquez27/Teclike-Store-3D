@@ -6,6 +6,7 @@ import Button from "@/components/ui/PagesButtons";
 import { OfferCard } from "@/components/OfferCard";
 import { CustomSwiper } from "./ui/CustomSwiper";
 import { Offer } from "./OfferCard";
+import { fetchFeaturedOffers } from "@/services/offers";
 
 export function DailyOffers() {
   const [offers, setOffers] = useState<Offer[]>([]);
@@ -14,8 +15,7 @@ export function DailyOffers() {
   useEffect(() => {
     async function fetchOffers() {
       try {
-        const res = await fetch("http://localhost:5000/api/offers?limit=6");
-        const data = await res.json();
+        const data = await fetchFeaturedOffers();
         setOffers(data);
       } catch (err) {
         console.error("❌ Error fetching offers:", err);

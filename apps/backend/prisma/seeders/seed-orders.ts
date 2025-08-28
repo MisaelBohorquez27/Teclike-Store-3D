@@ -18,7 +18,6 @@ export async function seedOrders(prisma: PrismaClient) {
         totalCents: order.totalCents,
         shippingAddress: order.shippingAddress,
         status: order.status,
-        orderDate: new Date(order.orderDate),
       },
     });
 

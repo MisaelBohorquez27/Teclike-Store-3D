@@ -1,0 +1,38 @@
+[
+  {
+    "userId": 3,
+    "productId": 1,
+    "comment": "El sonido es increíble, muy cómodo para largas sesiones.",
+    "rating": 5
+  },
+  {
+    "userId": 2,
+    "productId": 2,
+    "comment": "El teclado tiene muy buena respuesta, aunque es un poco caro.",
+    "rating": 4
+  },
+  {
+    "userId": 3,
+    "productId": 3,
+    "comment": "Muy buen mouse, preciso y ligero. Aunque el software podría mejorar.",
+    "rating": 4
+  },
+  {
+    "userId": 3,
+    "productId": 4,
+    "comment": "Buen mouse económico, cumple lo que promete.",
+    "rating": 3
+  },
+  {
+    "userId": 2,
+    "productId": 5,
+    "comment": "Excelente sonido, robusto y cómodo. Muy recomendado.",
+    "rating": 5
+  },
+  {
+    "userId": 2,
+    "productId": 6,
+    "comment": "Sonido nítido, pero los materiales no son tan premium como esperaba.",
+    "rating": 4
+  }
+]
