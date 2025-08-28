@@ -1,48 +1,51 @@
 // seeders/seed-users.ts
-import { PrismaClient } from '@prisma/client';
-import * as bcrypt from 'bcrypt';
+import { PrismaClient } from "@prisma/client";
+import * as bcrypt from "bcrypt";
 
 export async function seedUsers(prisma: PrismaClient) {
-  console.log('👥 Insertando usuarios...');
+  console.log("👥 Insertando usuarios...");
 
-  const hashedPassword = await bcrypt.hash('password123', 10);
+  const hashedPassword = await bcrypt.hash("password123", 10);
 
   const users = [
     {
-      firstName: 'Admin',
-      lastName: 'User',
-      email: 'admin@teclike.com',
+      roleId: 1,
+      photoURL: "https://example.com/photo1.jpg",
+      firstName: "Admin",
+      lastName: "User",
+      email: "admin@teclike.com",
       password: hashedPassword,
-      phone: '+1234567890',
-      documentType: 'ID',
-      documentNumber: 'ADMIN001',
-      role: 'Admin'
+      phone: "+1234567890",
+      documentType: "ID",
+      documentNumber: "ADMIN001",
     },
     {
-      firstName: 'John',
-      lastName: 'Doe',
-      email: 'john@teclike.com',
+      roleId: 2,
+      photoURL: "https://example.com/photo2.jpg",
+      firstName: "John",
+      lastName: "Doe",
+      email: "john@teclike.com",
       password: hashedPassword,
-      phone: '+1987654321',
-      documentType: 'ID',
-      documentNumber: 'CUST001',
-      role: 'Customer'
+      phone: "+1987654321",
+      documentType: "ID",
+      documentNumber: "CUST001",
     },
     {
-      firstName: 'Jane',
-      lastName: 'Smith',
-      email: 'jane@teclike.com',
+      roleId: 2,
+      photoURL: "https://example.com/photo3.jpg",
+      firstName: "Jane",
+      lastName: "Smith",
+      email: "jane@teclike.com",
       password: hashedPassword,
-      phone: '+1122334455',
-      documentType: 'Passport',
-      documentNumber: 'CUST002',
-      role: 'Customer'
-    }
+      phone: "+1122334455",
+      documentType: "Passport",
+      documentNumber: "CUST002",
+    },
   ];
 
   for (const userData of users) {
     const role = await prisma.role.findUnique({
-      where: { name: userData.role }
+      where: { id: userData.roleId },
     });
 
     if (role) {
@@ -57,8 +60,8 @@ export async function seedUsers(prisma: PrismaClient) {
           password: userData.password,
           phone: userData.phone,
           documentType: userData.documentType,
-          documentNumber: userData.documentNumber
-        }
+          documentNumber: userData.documentNumber,
+        },
       });
 
       // Crear carrito para el usuario
@@ -66,8 +69,8 @@ export async function seedUsers(prisma: PrismaClient) {
         where: { userId: user.id },
         update: {},
         create: {
-          userId: user.id
-        }
+          userId: user.id,
+        },
       });
 
       console.log(`✅ Usuario: ${user.firstName} ${user.lastName}`);

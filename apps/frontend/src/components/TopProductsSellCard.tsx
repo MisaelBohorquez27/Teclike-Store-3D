@@ -8,7 +8,7 @@ export type TopProductsSell = {
   description?: string;
   price: number;
   currency: string;
-  imageUrl?: string; // opcional si en tu DB tienes imagen
+  imageUrl?: string; // para imagen
 };
 
 export function TopProductsSellCard({ topProductsSell }: { topProductsSell: TopProductsSell }) {

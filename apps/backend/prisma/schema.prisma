@@ -42,9 +42,9 @@ model Order {
   orderDate         DateTime @default(now())
 
   // Relations
-  user       User        @relation(fields: [userId], references: [id])
+  user          User            @relation(fields: [userId], references: [id])
   orderProducts OrderProducts[]
-  payments   Payment[]
+  payments      Payment[]
 
   @@map("orders")
 }
@@ -75,12 +75,12 @@ model Category {
 }
 
 model Offer {
-  id        Int      @id @default(autoincrement())
-  name      String   @unique
-  type      String
-  value     Int
-  startDate DateTime
-  endDate   DateTime
+  id         Int      @id @default(autoincrement())
+  name       String   @unique
+  type       String
+  value      Int
+  startDate  DateTime
+  endDate    DateTime
   recurrence String? // daily, weekly, monthly, annual
 
   // Relations
@@ -105,12 +105,13 @@ model Review {
 }
 
 model User {
-  id             Int    @id @default(autoincrement())
+  id             Int     @id @default(autoincrement())
   roleId         Int
+  photoURL       String?
   firstName      String
   lastName       String
   phone          String
-  email          String @unique
+  email          String  @unique
   password       String
   documentType   String
   documentNumber String
@@ -194,12 +195,12 @@ model OfferProduct {
 }
 
 model OrderProducts {
-  id                   Int @id @default(autoincrement())
-  productId            Int
-  orderId              Int
-  quantity             Int
+  id         Int      @id @default(autoincrement())
+  productId  Int
+  orderId    Int
+  quantity   Int
   priceCents Int
-  createdAt            DateTime @default(now())
+  createdAt  DateTime @default(now())
 
   // Relations
   product Product @relation(fields: [productId], references: [id])
@@ -209,9 +210,9 @@ model OrderProducts {
 }
 
 model CategoryProduct {
-  id         Int @id @default(autoincrement())
-  categoryId Int
-  productId  Int
+  id          Int    @id @default(autoincrement())
+  categoryId  Int
+  productId   Int
   description String
 
   // Relations

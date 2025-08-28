@@ -1,15 +1,15 @@
 // components/ui/ReviewCard.tsx
-export default function ReviewCard({
-  review,
-}: {
-  review: {
-    name: string;
-    product: string;
-    comment: string;
-    rating: number;
-    avatar: string;
-  };
-}) {
+
+export type Review = {
+  id: number;
+  name: string;
+  product: string;
+  comment: string;
+  rating: number;
+  avatar: string;
+};
+
+export function ReviewCard({ review }: { review: Review }) {
   return (
     <div className="p-4 sm:p-6 h-full text-center">
       <div className="border-l-2 border-gray-300 pl-6 sm:pl-12 h-full pr-4 sm:pr-6">

@@ -2,7 +2,7 @@
 import type { Offer } from "@/components/OfferCard"; // ajusta la ruta
 
 export async function fetchFeaturedOffers(limit = 6): Promise<Offer[]> {
-  const res = await fetch(`http://localhost:5000/api/offers/featured?limit=${limit}`, {
+  const res = await fetch(`http://localhost:5000/api/offers?limit=${limit}`, {
     cache: "no-store",
   });
   if (!res.ok) throw new Error("Error al obtener ofertas");
