@@ -4,24 +4,9 @@ const prisma = new PrismaClient();
 
 // Diccionario de palabras clave para cada categoría
 const categoryKeywords: Record<string, string[]> = {
-  headsets: [
-    "headset",
-    "auricular",
-    "headphone",
-    "audífono",
-  ],
-  keyboards: [
-    "keyboard",
-    "teclado",
-    "keychron",
-    "keycap",
-  ],
-  mice: [
-    "mouse",
-    "ratón",
-    "sensor",
-    "dpi",
-  ],
+  headsets: ["headset", "auricular", "headphone", "audífono"],
+  keyboards: ["keyboard", "teclado", "keychron", "keycap"],
+  mice: ["mouse", "ratón", "sensor", "dpi"],
   monitors: [
     "monitor",
     "pantalla",
@@ -33,10 +18,7 @@ const categoryKeywords: Record<string, string[]> = {
     "4k",
     "ultrawide",
   ],
-  webcams: [
-    "webcam",
-    "cámara",
-  ],
+  webcams: ["webcam", "cámara"],
   accessories: [
     "accesorio",
     "pad",
@@ -47,11 +29,7 @@ const categoryKeywords: Record<string, string[]> = {
     "adaptador",
     "hub",
   ],
-  "gaming-chairs": [
-    "silla",
-    "chair",
-    "gaming chair",
-  ],
+  "gaming-chairs": ["silla", "chair", "gaming chair"],
   consoles: [
     "console",
     "playstation",

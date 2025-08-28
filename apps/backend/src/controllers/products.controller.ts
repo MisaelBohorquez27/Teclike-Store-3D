@@ -22,7 +22,7 @@ function formatForCard(p: any) {
 }
 
 // 📌 GET /api/products
-export const listProducts = async (req: Request, res: Response) => {
+export const getProducts = async (req: Request, res: Response) => {
   try {
     const products = await prisma.product.findMany({
       include: {

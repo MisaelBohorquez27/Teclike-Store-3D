@@ -148,7 +148,8 @@ CREATE TABLE "public"."order_items" (
     "productId" INTEGER NOT NULL,
     "orderId" INTEGER NOT NULL,
     "quantity" INTEGER NOT NULL,
-    "priceAtPurchaseCents" INTEGER NOT NULL,
+    "priceCents" INTEGER NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "order_items_pkey" PRIMARY KEY ("id")
 );

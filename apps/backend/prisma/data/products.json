@@ -27,7 +27,7 @@
       "priceCents": 19999,
       "imageUrl": "/products/corsair-k95.png",
       "categories": ["Keyboards"],
-      "inventory": { "stock": 15, "isNew": false }
+      "inventory": { "stock": 15, "isNew": true }
     },
     {
       "brand": "SteelSeries",
@@ -37,7 +37,7 @@
       "priceCents": 34999,
       "imageUrl": "/products/arctis-pro.png",
       "categories": ["Headsets"],
-      "inventory": { "stock": 10, "isNew": false }
+      "inventory": { "stock": 10, "isNew": true }
     },
     {
       "brand": "Samsung",
@@ -57,7 +57,7 @@
       "priceCents": 17999,
       "imageUrl": "/products/hyperx-cloud.png",
       "categories": ["Headsets"],
-      "inventory": { "stock": 20, "isNew": false }
+      "inventory": { "stock": 20, "isNew": true }
     },
     {
       "brand": "ASUS",

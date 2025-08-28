@@ -3,6 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import productsRouter from "./routes/products";
 import offersRouter from "./routes/offers";
+import ordersRouter from "./routes/orders";
 
 //Cargando variables de entorno
 dotenv.config();
@@ -23,6 +24,7 @@ app.use(express.json()); // Aqui para entender json en las peticiones
 // Importas las Rutas y las usas
 app.use("/api/products", productsRouter);
 app.use("/api/offers", offersRouter);
+app.use("/api/topSellingProd", ordersRouter);
 
 //Ruta de prueba para ver si el servidor funciona
 app.get("/", (req, res) => {
