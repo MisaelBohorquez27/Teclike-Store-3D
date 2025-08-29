@@ -7,7 +7,7 @@ import { Subscription } from "@/components/ui/Subscription";
 
 export default function DailyDealsPage() {
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen justify-center mx-auto">
       {/* Hero Banner */}
       <section className="PageDailyOffers-bg pb-12 sm:pb-14 md:pb-16 pt-20 sm:pt-25 md:pt-30 DailyOffers-title-bg">
         <div className="container mx-auto px-4 sm:px-6 text-center">

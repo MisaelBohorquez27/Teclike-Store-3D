@@ -8,9 +8,9 @@ const FLASH_DEALS = [
     discountPrice: 79.99,
     discount: 34,
     image: "/deals/furniture-pack.jpg",
-    sold: 45,
+    sold: 85,
     total: 100,
-    timeLeft: 3 // horas
+    timeLeft: 5 // horas
   },
    {
     id: 2,
