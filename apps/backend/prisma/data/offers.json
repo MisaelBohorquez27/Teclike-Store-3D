@@ -3,8 +3,8 @@
         "name": "Black Friday Sale",
         "type": "percentage",
         "value": 20,
-        "startDate": "2024-11-25T00:00:00Z",
-        "endDate": "2024-11-30T23:59:59Z",
+        "startDate": "2025-11-25T00:00:00Z",
+        "endDate": "2025-11-30T23:59:59Z",
         "products": [
             "razer-kraken-v3",
             "logitech-g502-x",
@@ -29,8 +29,8 @@
         "name": "New Year Sale",
         "type": "fixed",
         "value": 7500,
-        "startDate": "2024-12-26T00:00:00Z",
-        "endDate": "2025-01-15T23:59:59Z",
+        "startDate": "2025-12-26T00:00:00Z",
+        "endDate": "2026-01-15T23:59:59Z",
         "products": [
             "samsung-odyssey-g7",
             "lg-ultragear-48"
@@ -41,8 +41,8 @@
         "name": "Daily Deals",
         "type": "percentage",
         "value": 20,
-        "startDate": "2024-11-27T00:00:00Z",
-        "endDate": "2024-11-27T23:59:59Z",
+        "startDate": "2025-08-29T00:00:00Z",
+        "endDate": "2025-08-29T23:59:59Z",
         "products": [
             "lg-ultragear-48",
             "hyperx-cloud-alpha",
@@ -59,8 +59,8 @@
         "name": "Hot Deals",
         "type": "percentage",
         "value": 3,
-        "startDate": "2024-11-27T00:00:00Z",
-        "endDate": "2024-11-27T23:59:59Z",
+        "startDate": "2025-08-29T00:00:00Z",
+        "endDate": "2025-08-29T23:59:59Z",
         "products": [
             "lg-ultragear-48",
             "hyperx-cloud-alpha",

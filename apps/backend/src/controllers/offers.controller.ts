@@ -20,7 +20,10 @@ function computeDiscount(priceCents: number, type: string, value: number) {
   let discountLabel = "";
 
   if (type === "percentage") {
-    discountedCents = Math.max(0, Math.round(priceCents * (100 - value) / 100));
+    discountedCents = Math.max(
+      0,
+      Math.round((priceCents * (100 - value)) / 100)
+    );
     discountLabel = `-${value}%`;
   } else if (type === "fixed") {
     discountedCents = Math.max(0, priceCents - value);
@@ -43,9 +46,9 @@ function shuffle<T>(arr: T[]): T[] {
 function adjustOfferDates(offer: OfferWithProducts): OfferWithProducts {
   if (offer.recurrence === "yearly") {
     const now = new Date();
-    const currentYear = now.getFullYear();
     const start = new Date(offer.startDate);
     const end = new Date(offer.endDate);
+    const currentYear = now.getFullYear();
 
     start.setFullYear(currentYear);
     end.setFullYear(currentYear);
@@ -57,11 +60,23 @@ function adjustOfferDates(offer: OfferWithProducts): OfferWithProducts {
     }
 
     return { ...offer, startDate: start, endDate: end };
+  } else if (offer.recurrence === "daily") {
+    const now = new Date();
+    const start = new Date(now);
+    const end = new Date(now);
+    const currentDay = now.getDate();
+
+    // Si ya terminó hoy → mover al próximo día
+    if (end < now) {
+      start.setDate(currentDay + 1);
+      end.setDate(currentDay + 1);
+    }
+
+    return { ...offer, startDate: start, endDate: end };
   }
   return offer;
-  
 }
-
+// Verifica si hay una oferta activa, si esta dentro de StartDate y EndDate
 function isOfferActive(offer: OfferWithProducts): boolean {
   const now = new Date();
   return now >= offer.startDate && now <= offer.endDate;
@@ -95,7 +110,7 @@ export const getOffers = async (req: Request, res: Response) => {
     // 4) Si no hay NINGUNA → fallback a productos recientes
     if (selectedOffers.length === 0) {
       const fallbackProducts = await prisma.product.findMany({
-        take: 6,
+        take: 3,
         orderBy: { createdAt: "desc" },
       });
 
