@@ -1,69 +1,32 @@
-import { DealCard } from '@/app/DailyOffers/DealCard';
+"use client";
 
-const FLASH_DEALS = [
-  {
-    id: 1,
-    name: "Paquete de Muebles Modernos",
-    originalPrice: 120.99,
-    discountPrice: 79.99,
-    discount: 34,
-    image: "/deals/furniture-pack.jpg",
-    sold: 85,
-    total: 100,
-    timeLeft: 5 // horas
-  },
-   {
-    id: 2,
-    name: "Paquete de Muebles Modernos",
-    originalPrice: 120.99,
-    discountPrice: 79.99,
-    discount: 34,
-    image: "/deals/furniture-pack.jpg",
-    sold: 45,
-    total: 100,
-    timeLeft: 3 // horas
-  },
-   {
-    id: 3,
-    name: "Paquete de Muebles Modernos",
-    originalPrice: 120.99,
-    discountPrice: 79.99,
-    discount: 34,
-    image: "/deals/furniture-pack.jpg",
-    sold: 45,
-    total: 100,
-    timeLeft: 3 // horas
-  },
-   {
-    id: 4,
-    name: "Paquete de Muebles Modernos",
-    originalPrice: 120.99,
-    discountPrice: 79.99,
-    discount: 34,
-    image: "/deals/furniture-pack.jpg",
-    sold: 25,
-    total: 100,
-    timeLeft: 3 // horas
-  },
-   {
-    id: 5,
-    name: "Paquete de Muebles Modernos",
-    originalPrice: 120.99,
-    discountPrice: 79.99,
-    discount: 34,
-    image: "/deals/furniture-pack.jpg",
-    sold: 85,
-    total: 100,
-    timeLeft: 3 // horas
-  },
-  // Añadir más ofertas...
-];
+import { DealCard, Deal } from "@/app/DailyOffers/DealCard";
+import { useEffect, useState } from "react";
+import { fetchDeals } from "@/services/deals"; // nuevo servicio
 
 export function DailyDeals() {
+  const [deals, setDeals] = useState<Deal[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchDeals()
+      .then((data) => setDeals(data))
+      .catch((err) => console.error("❌ Error cargando ofertas diarias:", err))
+      .finally(() => setLoading(false));
+  }, []);
+
+  if (loading) {
+    return <p className="text-center">Cargando ofertas diarias...</p>;
+  }
+
+  if (deals.length === 0) {
+    return <p className="text-center">No hay ofertas diarias disponibles</p>;
+  }
+
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
-      {FLASH_DEALS.map((deal) => (
-        <DealCard key={deal.id} deal={deal} isFlashDeal />
+      {deals.map((deal, index) => (
+        <DealCard key={`${deal.id}-${index}`} deal={deal} isFlashDeal />
       ))}
     </div>
   );
