@@ -1,16 +1,16 @@
 "use client";
 
 import Button from "@/components/ui/PagesButtons";
+import { Key } from "readline";
 
-type Deal = {
+export type Deal = {
+  reactKey: Key | null | undefined;
   id: number;
   name: string;
   originalPrice: number;
   discountPrice: number;
   discount: number;
   image: string;
-  sold?: number;
-  total?: number;
   timeLeft?: number;
 };
 
@@ -23,7 +23,7 @@ export function DealCard({
 }) {
   return (
     <div className="Card-bg rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-      {/* Badge de Oferta */}
+      {/* Imagen + Descuento */}
       <div className="relative">
         <img
           src={deal.image}
@@ -49,25 +49,7 @@ export function DealCard({
           </span>
         </div>
 
-        {/* Barra de progreso para Flash Deals */}
-        {isFlashDeal && deal.sold && deal.total && (
-          <div className="mb-3">
-            <div className="flex justify-between text-xs text-gray-500 mb-1">
-              <span>
-                Vendidos: {deal.sold}/{deal.total}
-              </span>
-              <span>{Math.round((deal.sold / deal.total) * 100)}%</span>
-            </div>
-            <div className="w-full bg-gray-200 rounded-full h-2">
-              <div
-                className="DealCard-Bar h-2 rounded-full"
-                style={{ width: `${(deal.sold / deal.total) * 100}%` }}
-              ></div>
-            </div>
-          </div>
-        )}
-
-        {/* Tiempo restante */}
+        {/* Tiempo restante (solo flash deals) */}
         {isFlashDeal && deal.timeLeft && (
           <div className="flex items-center text-sm text-gray-500 mb-4">
             <span className="mr-1">⏳</span>

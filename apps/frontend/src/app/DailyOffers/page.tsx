@@ -1,8 +1,6 @@
 import { DailyDeals } from "@/app/DailyOffers/DailyDeals";
 import { CountdownTimer } from "@/app/DailyOffers/CountdownTimer";
 import { HotDeals } from "@/app/DailyOffers/HotDeals";
-import { Navbar } from "@/components/Navbar";
-import { Footer } from "@/components/Footer";
 import { Subscription } from "@/components/ui/Subscription";
 
 export default function DailyDealsPage() {

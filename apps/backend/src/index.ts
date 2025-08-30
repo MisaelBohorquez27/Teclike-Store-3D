@@ -5,6 +5,7 @@ import productsRouter from "./routes/products";
 import offersRouter from "./routes/offers";
 import ordersRouter from "./routes/orders";
 import reviewsRouter from "./routes/reviews";
+import productsWithOfferRouter from "./routes/productsWithOffer";
 
 //Cargando variables de entorno
 dotenv.config();
@@ -27,6 +28,7 @@ app.use("/api/products", productsRouter);
 app.use("/api/offers", offersRouter);
 app.use("/api/topSellingProd", ordersRouter);
 app.use("/api/reviews", reviewsRouter);
+app.use("/api/productsWithOffers", productsWithOfferRouter);
 
 //Ruta de prueba para ver si el servidor funciona
 app.get("/", (req, res) => {
