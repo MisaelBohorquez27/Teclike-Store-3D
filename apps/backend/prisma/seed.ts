@@ -17,11 +17,11 @@ async function main() {
   console.log('==========================================');
 
   // Ejecutar seeders en orden
+  await seedProducts(prisma);
+  console.log('------------------------------------------');
   await seedCoreData(prisma);
   console.log('------------------------------------------');
   await seedCategories(prisma);
-  console.log('------------------------------------------');
-  await seedProducts(prisma);
   console.log('------------------------------------------');
   await seedUsers(prisma);
   console.log('------------------------------------------');

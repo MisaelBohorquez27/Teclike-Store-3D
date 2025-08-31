@@ -8,6 +8,7 @@ import { CustomSwiper } from "./ui/CustomSwiper";
 import { Offer } from "./OfferCard";
 import { fetchFeaturedOffers } from "@/services/offers";
 
+//Podria corregirse en el futuro
 export function DailyOffers() {
   const [offers, setOffers] = useState<Offer[]>([]);
   const [loading, setLoading] = useState(true);

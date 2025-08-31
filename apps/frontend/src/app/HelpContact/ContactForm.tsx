@@ -2,16 +2,21 @@
 
 import Button from "@/components/ui/PagesButtons";
 import { useState } from "react";
+import { sendContactMessage } from "@/services/contact"; // 👈 tu service
 
 export function ContactForm() {
   const [formData, setFormData] = useState({
-    name: "",
-    lastname: "",
+    firstName: "",
+    lastName: "",
     email: "",
     phone: "",
     subject: "",
     message: "",
   });
+
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -25,19 +30,36 @@ export function ContactForm() {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Aquí iría la lógica para enviar el formulario
-    console.log("Formulario enviado:", formData);
-    alert("Mensaje enviado con éxito");
-    setFormData({
-      name: "",
-      lastname: "",
-      email: "",
-      phone: "",
-      subject: "",
-      message: "",
-    });
+    setLoading(true);
+    setError(null);
+    setSuccess(null);
+
+    try {
+      await sendContactMessage({
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        phone: formData.phone ? formData.phone : undefined,
+        subject: formData.subject,
+        message: formData.message,
+      });
+
+      setSuccess("✅ Mensaje enviado con éxito");
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        subject: "",
+        message: "",
+      });
+    } catch (err: any) {
+      setError(err.message || "❌ Error inesperado");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -45,17 +67,17 @@ export function ContactForm() {
       <div className="grid grid-cols-2 gap-4">
         <div>
           <label
-            htmlFor="name"
+            htmlFor="firstName"
             className="block text-sm font-medium text-gray-700 mb-1"
           >
             Nombre
           </label>
           <input
             type="text"
-            id="name"
-            name="name"
-            placeholder="Jhon"
-            value={formData.name}
+            id="firstName"
+            name="firstName"
+            placeholder="John"
+            value={formData.firstName}
             onChange={handleChange}
             className="w-full px-4 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500"
             required
@@ -63,23 +85,24 @@ export function ContactForm() {
         </div>
         <div>
           <label
-            htmlFor="lastname"
+            htmlFor="lastName"
             className="block text-sm font-medium text-gray-700 mb-1"
           >
             Apellido
           </label>
           <input
             type="text"
-            id="lastname"
-            name="lastname"
+            id="lastName"
+            name="lastName"
             placeholder="Doe"
-            value={formData.lastname}
+            value={formData.lastName}
             onChange={handleChange}
             className="w-full px-4 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500"
             required
           />
         </div>
       </div>
+
       <div className="grid grid-cols-2 gap-4">
         <div>
           <label
@@ -111,7 +134,7 @@ export function ContactForm() {
             type="tel"
             id="phone"
             name="phone"
-            placeholder="000-000 00 00 000"
+            placeholder="000-000-0000"
             value={formData.phone}
             onChange={handleChange}
             className="w-full px-4 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500"
@@ -160,9 +183,18 @@ export function ContactForm() {
         ></textarea>
       </div>
 
-      <Button variant="submit" size="m" type="submit" className="w-full">
-        Enviar Mensaje
+      <Button
+        variant="submit"
+        size="m"
+        type="submit"
+        className="w-full"
+        disabled={loading}
+      >
+        {loading ? "Enviando..." : "Enviar Mensaje"}
       </Button>
+
+      {success && <p className="text-green-600">{success}</p>}
+      {error && <p className="text-red-600">{error}</p>}
     </form>
   );
 }

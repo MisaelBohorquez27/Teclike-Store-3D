@@ -1,11 +1,12 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import productsRouter from "./routes/products";
-import offersRouter from "./routes/offers";
-import ordersRouter from "./routes/orders";
-import reviewsRouter from "./routes/reviews";
-import productsWithOfferRouter from "./routes/productsWithOffer";
+import productsRouter from "./routes/products.route";
+import offersRouter from "./routes/offers.route";
+import ordersRouter from "./routes/orders.route";
+import reviewsRouter from "./routes/reviews.route";
+import productsWithOfferRouter from "./routes/productsWithOffer.route";
+import contactRouter from "./routes/contact.route";
 
 //Cargando variables de entorno
 dotenv.config();
@@ -29,6 +30,7 @@ app.use("/api/offers", offersRouter);
 app.use("/api/topSellingProd", ordersRouter);
 app.use("/api/reviews", reviewsRouter);
 app.use("/api/productsWithOffers", productsWithOfferRouter);
+app.use("/api/contact", contactRouter);
 
 //Ruta de prueba para ver si el servidor funciona
 app.get("/", (req, res) => {
