@@ -1,6 +1,10 @@
 "use client";
+import Link from 'next/link';
 
 export interface Product {
+  specifications: {};
+  reviews: never[];
+  brand: string;
   id: number;
   name: string;
   category: string;
@@ -9,7 +13,7 @@ export interface Product {
   rating: number;
   description?: string;
   image: string;
-  isNew?: false;
+  isNew?: boolean;
 }
 
 export function ProductCard({ product }: { product: Product }) {
@@ -33,7 +37,7 @@ export function ProductCard({ product }: { product: Product }) {
       <div className="p-3 sm:p-4 flex flex-col gap-1">
         <div className="flex justify-between items-start gap-2 h-auto min-h-5">
           <h3 className="font-semibold text-base sm:text-lg truncate pr-1 sm:pr-2">{product.name}</h3>
-          <span className="text-xs sm:text-sm text-gray-500"> {/* Para visualizar en un futuro */}
+          <span className="text-xs sm:text-sm text-gray-500">
             {product.category}
           </span>
         </div>
@@ -51,6 +55,7 @@ export function ProductCard({ product }: { product: Product }) {
           ))}
           <span className="text-xs text-gray-500 ml-1">({product.rating})</span>
         </div>
+        
         <div className="text-sm text-gray-700 line-clamp-2">
           <p>{product.description}</p>
         </div>
@@ -59,9 +64,14 @@ export function ProductCard({ product }: { product: Product }) {
           <span className="font-bold text-gray-900 text-sm sm:text-base">
             ${product.price.toFixed(2)}
           </span>
-          <button className="text-blue-600 hover:text-blue-800 text-xs sm:text-sm font-medium">
+          
+          {/* ✅ Botón convertido en enlace */}
+          <Link 
+            href={`/Products/${product.id}`}
+            className="text-blue-600 hover:text-blue-800 text-xs sm:text-sm font-medium transition-colors"
+          >
             Ver detalles
-          </button>
+          </Link>
         </div>
       </div>
     </div>

@@ -2,7 +2,29 @@ import Button from "@/components/ui/PagesButtons";
 import { useState } from "react";
 import { FaClipboardCheck, FaLock, FaShieldAlt } from "react-icons/fa";
 
-export function ProductInfo({ product }: { product: any }) {
+interface Product {
+  id: number;
+  name: string;
+  brand: string;
+  description: string;
+  price: number;
+  currency: string;
+  rating: number;
+  category: string;
+  isNew?: boolean;
+  specifications?: Record<string, string>;
+  reviews?: Array<any>;
+  // Campos adicionales que podrías necesitar
+  sku?: string;
+  categories?: string[];
+  tag?: string;
+}
+
+interface ProductInfoProps {
+  product: Product;
+}
+
+export function ProductInfo({ product }: ProductInfoProps) {
   const [quantity, setQuantity] = useState(1);
 
   const incrementQuantity = () => {
@@ -12,6 +34,12 @@ export function ProductInfo({ product }: { product: any }) {
   const decrementQuantity = () => {
     setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
   };
+
+  // Datos por defecto para campos opcionales
+  const sku = product.sku || `PROD-${product.id.toString().padStart(6, '0')}`;
+  const categories = product.categories || [product.category];
+  const tag = product.tag || product.name;
+
   return (
     <div className="pb-7 flex flex-col gap-6">
       {/* Marca y Nombre */}
@@ -22,9 +50,22 @@ export function ProductInfo({ product }: { product: any }) {
         <h1 className="text-3xl font-bold mt-1">{product.name}</h1>
       </div>
 
+      {/* Rating */}
+      <div className="flex items-center">
+        {[...Array(5)].map((_, i) => (
+          <span
+            key={i}
+            className={`text-lg ${i < Math.floor(product.rating) ? "text-yellow-400" : "text-gray-300"}`}
+          >
+            ★
+          </span>
+        ))}
+        <span className="text-gray-500 ml-2">({product.rating.toFixed(1)})</span>
+      </div>
+
       {/* Precio */}
       <p className="text-2xl font-semibold text-gray-900">
-        ${product.price.toFixed(2)}
+        {product.currency} {product.price.toFixed(2)}
       </p>
 
       {/* Disponibilidad */}
@@ -32,6 +73,13 @@ export function ProductInfo({ product }: { product: any }) {
         <span className="w-3 h-3 bg-green-500 rounded-full"></span>
         <span className="text-green-600 font-medium">Disponible</span>
       </div>
+
+      {/* Descripción */}
+      {product.description && (
+        <div className="text-gray-700">
+          <p>{product.description}</p>
+        </div>
+      )}
 
       {/* Acciones */}
       <div className="flex flex-col sm:flex-row gap-4 mt-2">
@@ -65,27 +113,31 @@ export function ProductInfo({ product }: { product: any }) {
       <div className="mt-4 space-y-2 text-sm">
         <div className="flex gap-2">
           <span className="text-gray-600 font-medium">SKU:</span>
-          <span>{product.sku || "10000347"}</span>
+          <span>{sku}</span>
         </div>
         <div className="flex gap-2">
           <span className="text-gray-600 font-medium">Categorías:</span>
-          <span>
-            {product.categories?.join(", ") ||
-              "Perifericos, Tecnologias y Gamer"}
-          </span>
+          <span>{categories.join(", ")}</span>
         </div>
         <div className="flex gap-2">
           <span className="text-gray-600 font-medium">Etiqueta:</span>
-          <span>{product.tag || "Mouse Eyooso X11"}</span>
+          <span>{tag}</span>
         </div>
         <div className="flex gap-2">
-          <span className="text-gray-600 font-medium">Brand:</span>
-          <span>{product.brand || "eyooso"}</span>
+          <span className="text-gray-600 font-medium">Marca:</span>
+          <span>{product.brand}</span>
         </div>
+        {product.isNew && (
+          <div className="flex gap-2">
+            <span className="text-gray-600 font-medium">Estado:</span>
+            <span className="text-green-600">Nuevo</span>
+          </div>
+        )}
       </div>
+
       {/* Sección de Pagos */}
       <div className="mt-2">
-        <h3 className="text-sm font-medium text-gray-500 mb-2">Payments:</h3>
+        <h3 className="text-sm font-medium text-gray-500 mb-2">Métodos de pago:</h3>
         <div className="flex flex-wrap gap-3 mb-4">
           {/* Klarna */}
           <div className="flex items-center justify-center w-16 h-10 bg-white border rounded-md">
@@ -117,6 +169,7 @@ export function ProductInfo({ product }: { product: any }) {
             <span className="text-xs font-bold">DISC...VER</span>
           </div>
         </div>
+
         {/* Sección de Seguridad y Garantía */}
         <div className="pt-4 border-t">
           <div className="flex flex-col items-start gap-4 text-xs text-gray-600">
