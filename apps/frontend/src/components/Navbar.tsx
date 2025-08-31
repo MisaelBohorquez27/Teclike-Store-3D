@@ -96,7 +96,6 @@ export function Navbar() {
               <NavLink href="/Products" text="Productos" />
               <NavLink href="/DailyOffers" text="Ofertas del día" />
               <NavLink href="/HelpContact" text="Ayuda y Contacto" />
-              <NavLink href="/ProductDetails" text="Detalles de Productos" />
             </div>
           </div>
 

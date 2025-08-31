@@ -1,0 +1,32 @@
+[
+    {
+        "firstName": "Admin",
+        "lastName": "User",
+        "email": "admin@teclike.com",
+        "password": "ejemplo_password_hash",
+        "phone": "+1234567890",
+        "documentType": "ID",
+        "documentNumber": "ADMIN001",
+        "role": "Admin"
+    },
+    {
+        "firstName": "John",
+        "lastName": "Doe",
+        "email": "john@teclike.com",
+        "password": "ejemplo_password_hash",
+        "phone": "+1987654321",
+        "documentType": "ID",
+        "documentNumber": "CUST001",
+        "role": "Customer"
+    },
+    {
+        "firstName": "Jane",
+        "lastName": "Smith",
+        "email": "jane@teclike.com",
+        "password": "ejemplo_password_hash",
+        "phone": "+1122334455",
+        "documentType": "Passport",
+        "documentNumber": "CUST002",
+        "role": "Customer"
+    }
+]
