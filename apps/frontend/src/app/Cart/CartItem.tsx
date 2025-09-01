@@ -4,23 +4,46 @@ type CartItemProps = {
   item: {
     id: string;
     name: string;
-    price: number;
+    price: number | undefined; // Añadimos undefined como posibilidad
     quantity: number;
-    image: string;
+    imageUrl: string;
     inStock: boolean;
+    stock?: number;
   };
   onUpdateQuantity: (id: string, quantity: number) => void;
   onRemove: (id: string) => void;
 };
 
 export function CartItem({ item, onUpdateQuantity, onRemove }: CartItemProps) {
+  // Función segura para formatear precios
+  const formatPrice = (price: number | undefined): string => {
+    if (price === undefined || price === null) {
+      return "$0.00";
+    }
+    return `$${price.toFixed(2)}`;
+  };
+
+  // Función segura para calcular total
+  const calculateTotal = (price: number | undefined, quantity: number): string => {
+    if (price === undefined || price === null) {
+      return "$0.00";
+    }
+    return `$${(price * quantity).toFixed(2)}`;
+  };
+
+  const handleQuantityChange = (newQuantity: number) => {
+    if (newQuantity >= 1 && newQuantity <= (item.stock || Infinity)) {
+      onUpdateQuantity(item.id, newQuantity);
+    }
+  };
+
   return (
     <div className="py-3 sm:py-4 flex flex-row items-center gap-3 sm:gap-4 h-30 max-h-35">
-      {/* Imagen y Nombre - Ajustado para móvil y desktop */}
+      {/* Imagen y Nombre */}
       <div className="flex items-center w-full md:w-5/12">
         <div className="w-1/2">
           <img
-            src={item.image}
+            src={item.imageUrl || "/placeholder-product.jpg"}
             alt={item.name}
             className="w-auto h-auto max-w-20 max-h-20 sm:max-w-31 sm:min-h-21 xl:max-w-35 xl:min-h-25 object-cover rounded mr-2 sm:mr-4"
           />
@@ -30,19 +53,24 @@ export function CartItem({ item, onUpdateQuantity, onRemove }: CartItemProps) {
           {!item.inStock && (
             <span className="text-red-500 text-xs sm:text-sm">Agotado</span>
           )}
+          {item.inStock && item.stock !== undefined && item.stock < 5 && (
+            <span className="text-orange-500 text-xs sm:text-sm">
+              Solo {item.stock} disponibles
+            </span>
+          )}
         </div>
       </div>
 
-      {/* Precio Unitario - Optimizado para móvil */}
+      {/* Precio Unitario */}
       <div className="md:w-2/12 text-center text-gray-700 text-sm sm:text-base">
-        ${item.price.toFixed(2)}
+        {formatPrice(item.price)}
       </div>
 
-      {/* Selector de Cantidad - Mejorado para tactil */}
+      {/* Selector de Cantidad */}
       <div className="md:w-3/12 flex justify-center">
         <div className="flex items-center border rounded-md">
           <button
-            onClick={() => onUpdateQuantity(item.id, item.quantity - 1)}
+            onClick={() => handleQuantityChange(item.quantity - 1)}
             className="px-2 sm:px-3 py-1 text-gray-600 hover:bg-gray-100 text-sm sm:text-base"
             disabled={item.quantity <= 1}
           >
@@ -52,18 +80,19 @@ export function CartItem({ item, onUpdateQuantity, onRemove }: CartItemProps) {
             {item.quantity}
           </span>
           <button
-            onClick={() => onUpdateQuantity(item.id, item.quantity + 1)}
+            onClick={() => handleQuantityChange(item.quantity + 1)}
             className="px-2 sm:px-3 py-1 text-gray-600 hover:bg-gray-100 text-sm sm:text-base"
+            disabled={!item.inStock || (item.stock !== undefined && item.quantity >= item.stock)}
           >
             +
           </button>
         </div>
       </div>
 
-      {/* Precio Total y Eliminar - Ajuste de tamaño */}
+      {/* Precio Total y Eliminar */}
       <div className="md:w-2/12 flex justify-end items-center space-x-2 sm:space-x-4">
         <span className="font-medium text-sm sm:text-base">
-          ${(item.price * item.quantity).toFixed(2)}
+          {calculateTotal(item.price, item.quantity)}
         </span>
         <button
           onClick={() => onRemove(item.id)}

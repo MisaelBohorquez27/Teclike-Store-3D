@@ -1,44 +1,24 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-
-type CheckoutButtonProps = {
-  items: Array<{
-    id: string;
-    name: string;
-    price: number;
-    quantity: number;
-    inStock: boolean;
-  }>;
+interface CheckoutButtonProps {
+  items: any[];
   total: number;
   className?: string;
-};
+}
 
-export function CheckoutButton({ items, total }: CheckoutButtonProps) {
-  const router = useRouter();
-  const hasOutOfStockItems = items.some((item) => !item.inStock);
-
+export function CheckoutButton({ items, total, className = "" }: CheckoutButtonProps) {
   const handleCheckout = () => {
-    // Aquí iría la lógica para procesar el pago
-    // Por ahora solo redirigimos a una página de confirmación
-    router.push("/checkout");
+    // Aquí implementarás la lógica de checkout
+    alert("Funcionalidad de checkout en desarrollo");
   };
 
   return (
     <button
       onClick={handleCheckout}
-      disabled={hasOutOfStockItems || items.length === 0}
-      className={`w-2xs py-3 rounded-lg font-medium transition-colors md:w-full ${
-        hasOutOfStockItems || items.length === 0
-          ? "bg-gray-300 cursor-not-allowed"
-          : "bg-green-600 hover:bg-green-700 text-white"
-      }`}
+      className={`bg-blue-600 text-white py-2 px-6 rounded hover:bg-blue-700 ${className}`}
+      disabled={items.length === 0}
     >
-      {hasOutOfStockItems
-        ? "Hay productos agotados"
-        : items.length === 0
-        ? "Carrito vacío"
-        : `Pagar $${total.toFixed(2)}`}
+      Proceder al pago
     </button>
   );
 }
