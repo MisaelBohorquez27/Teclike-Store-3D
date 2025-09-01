@@ -7,6 +7,7 @@ import ordersRouter from "./routes/orders.route";
 import reviewsRouter from "./routes/reviews.route";
 import productsWithOfferRouter from "./routes/productsWithOffer.route";
 import contactRouter from "./routes/contact.route";
+import cartRouter from "./routes/cart.route";
 
 //Cargando variables de entorno
 dotenv.config();
@@ -31,6 +32,7 @@ app.use("/api/topSellingProd", ordersRouter);
 app.use("/api/reviews", reviewsRouter);
 app.use("/api/productsWithOffers", productsWithOfferRouter);
 app.use("/api/contact", contactRouter);
+app.use("/api/cart", cartRouter);
 
 //Ruta de prueba para ver si el servidor funciona
 app.get("/", (req, res) => {
