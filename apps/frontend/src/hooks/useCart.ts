@@ -1,49 +1,22 @@
+// hooks/useCart.ts
 'use client';
 
 import { useState, useEffect } from 'react';
-
-interface Product {
-  id: number;
-  name: string;
-  description: string;
-  price: number; // Ahora viene del backend como precio normal (no cents)
-  imageUrl?: string;
-  inStock: boolean;
-  stock: number;
-}
-
-interface CartProduct {
-  id: number;
-  productId: number;
-  quantity: number;
-  product: Product;
-}
-
-interface Cart {
-  id: number;
-  userId: number;
-  items: CartProduct[];
-}
+import { fetchCart, CartResponse, CartProduct } from '@/services/cart';
 
 export const useCart = () => {
-  const [cart, setCart] = useState<Cart | null>(null);
+  const [cart, setCart] = useState<CartResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchCart = async () => {
+  const getCart = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`http://localhost:5000/api/cart`);
-
-      if (!response.ok) {
-        throw new Error('Error al obtener el carrito');
-      }
-      
-      const cartData = await response.json();
+      setError(null);
+      const cartData = await fetchCart();
       setCart(cartData);
     } catch (err) {
-      const error = err as Error
-      setError(error.message);
+      setError(err instanceof Error ? err.message : 'Error desconocido');
     } finally {
       setLoading(false);
     }
@@ -51,7 +24,7 @@ export const useCart = () => {
 
   const addToCart = async (productId: number, quantity: number = 1) => {
     try {
-      const response = await fetch('/api/cart/add', {
+      const response = await fetch('http://localhost:5000/api/cart/add', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -68,15 +41,15 @@ export const useCart = () => {
       setCart(updatedCart);
       return updatedCart;
     } catch (err) {
-      const error = err as Error;
-      setError(error.message);
-      throw error;
+      const errorMessage = err instanceof Error ? err.message : 'Error desconocido';
+      setError(errorMessage);
+      throw new Error(errorMessage);
     }
   };
 
   const updateQuantity = async (productId: number, quantity: number) => {
     try {
-      const response = await fetch('/api/cart/update', {
+      const response = await fetch('http://localhost:5000/api/cart/update', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -93,15 +66,15 @@ export const useCart = () => {
       setCart(updatedCart);
       return updatedCart;
     } catch (err) {
-      const error = err as Error;
-      setError(error.message);
-      throw error;
+      const errorMessage = err instanceof Error ? err.message : 'Error desconocido';
+      setError(errorMessage);
+      throw new Error(errorMessage);
     }
   };
 
   const removeFromCart = async (productId: number) => {
     try {
-      const response = await fetch('/api/cart/remove', {
+      const response = await fetch('http://localhost:5000/api/cart/remove', {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -117,15 +90,15 @@ export const useCart = () => {
       setCart(updatedCart);
       return updatedCart;
     } catch (err) {
-      const error = err as Error;
-      setError(error.message);
-      throw error;
+      const errorMessage = err instanceof Error ? err.message : 'Error desconocido';
+      setError(errorMessage);
+      throw new Error(errorMessage);
     }
   };
 
   const clearCart = async () => {
     try {
-      const response = await fetch('/api/cart/clear', {
+      const response = await fetch('http://localhost:5000/api/cart/clear', {
         method: 'DELETE',
       });
       
@@ -136,14 +109,14 @@ export const useCart = () => {
       setCart(null);
       return { message: 'Carrito vaciado correctamente' };
     } catch (err) {
-      const error = err as Error;
-      setError(error.message);
-      throw error;
+      const errorMessage = err instanceof Error ? err.message : 'Error desconocido';
+      setError(errorMessage);
+      throw new Error(errorMessage);
     }
   };
 
   useEffect(() => {
-    fetchCart();
+    getCart();
   }, []);
 
   return {
@@ -154,6 +127,9 @@ export const useCart = () => {
     updateQuantity,
     removeFromCart,
     clearCart,
-    refetch: fetchCart
+    refetch: getCart
   };
 };
+
+// Exportar los tipos para que otros componentes los usen
+export type { CartResponse, CartProduct };
