@@ -1,23 +1,26 @@
+// app/Cart/CartItem.tsx
 "use client";
 
-type CartItemProps = {
-  item: {
-    id: string;
-    name: string;
-    price: number | undefined; // Añadimos undefined como posibilidad
-    quantity: number;
-    imageUrl: string;
-    inStock: boolean;
-    stock?: number;
-  };
+export interface CartItemType {
+  id: string;
+  name: string;
+  price: number | undefined; // Permitir undefined
+  quantity: number;
+  imageUrl: string;
+  inStock: boolean;
+  stock?: number;
+}
+
+interface CartItemProps {
+  item: CartItemType;
   onUpdateQuantity: (id: string, quantity: number) => void;
   onRemove: (id: string) => void;
-};
+}
 
 export function CartItem({ item, onUpdateQuantity, onRemove }: CartItemProps) {
   // Función segura para formatear precios
   const formatPrice = (price: number | undefined): string => {
-    if (price === undefined || price === null) {
+    if (price === undefined || price === null || isNaN(price)) {
       return "$0.00";
     }
     return `$${price.toFixed(2)}`;
@@ -25,7 +28,7 @@ export function CartItem({ item, onUpdateQuantity, onRemove }: CartItemProps) {
 
   // Función segura para calcular total
   const calculateTotal = (price: number | undefined, quantity: number): string => {
-    if (price === undefined || price === null) {
+    if (price === undefined || price === null || isNaN(price)) {
       return "$0.00";
     }
     return `$${(price * quantity).toFixed(2)}`;
@@ -44,12 +47,12 @@ export function CartItem({ item, onUpdateQuantity, onRemove }: CartItemProps) {
         <div className="w-1/2">
           <img
             src={item.imageUrl || "/placeholder-product.jpg"}
-            alt={item.name}
+            alt={item.name || "Producto"}
             className="w-auto h-auto max-w-20 max-h-20 sm:max-w-31 sm:min-h-21 xl:max-w-35 xl:min-h-25 object-cover rounded mr-2 sm:mr-4"
           />
         </div>
         <div className="w-1/2 flex flex-col justify-center items-center">
-          <h3 className="font-medium text-sm sm:text-base">{item.name}</h3>
+          <h3 className="font-medium text-sm sm:text-base">{item.name || "Producto sin nombre"}</h3>
           {!item.inStock && (
             <span className="text-red-500 text-xs sm:text-sm">Agotado</span>
           )}
