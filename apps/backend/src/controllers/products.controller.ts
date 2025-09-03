@@ -26,7 +26,7 @@ export const getProducts = async (req: Request, res: Response) => {
   try {
     const products = await prisma.product.findMany({
       include: {
-        categoryProducts: { include: { category: true } }, // 🔑 relación con categorías
+        categoryProducts: { include: { category: true } }, // relación con categorías
       },
       orderBy: { createdAt: "desc" },
     });
@@ -39,7 +39,7 @@ export const getProducts = async (req: Request, res: Response) => {
 };
 
 // 📌 GET /api/products/:id
-// controllers/products.controller.ts
+
 export const getProductById = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
