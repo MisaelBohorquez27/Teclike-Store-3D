@@ -15,9 +15,9 @@ export function SearchBar({ darkMode = false }: { darkMode?: boolean }) {
       text-sm sm:text-base
       pl-10 pr-4
     `}
-      />
+      /> 
       <span
-        className={`absolute left-3 top-1/2 transform -translate-y-1/2 ${
+        className={`absolute right-4 top-1/2 transform -translate-y-1/2 ${
           darkMode ? "text-[#D4AF37]" : "text-gray-400"
         } text-lg sm:text-xl`}
       >

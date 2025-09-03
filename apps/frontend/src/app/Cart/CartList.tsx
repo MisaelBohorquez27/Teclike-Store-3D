@@ -97,7 +97,7 @@ export default function CartList({
         </div>
 
         {/* Botón para vaciar carrito (solo desktop) */}
-        <div className="mt-4 flex justify-end hidden sm:block">
+        <div className="mt-4 flex justify-end sm:block">
           <button
             onClick={handleClearCart}
             className="text-red-500 hover:text-red-700 flex items-center text-sm"

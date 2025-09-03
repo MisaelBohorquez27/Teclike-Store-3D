@@ -4,7 +4,7 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 // Obtener el carrito del usuario con información de stock
-const getCart = async (req: Request, res: Response) => {
+export const getCart = async (req: Request, res: Response) => {
   try {
     const userId = 1; // Usuario temporal hasta implementar autenticación
 
@@ -36,6 +36,7 @@ const getCart = async (req: Request, res: Response) => {
         quantity: item.quantity,
         product: {
           ...item.product,
+          price: item.product.priceCents / 100, // Convertir priceCents a precio normal
           inStock: item.product.inventory
             ? item.product.inventory.stock > 0
             : false,
@@ -52,7 +53,7 @@ const getCart = async (req: Request, res: Response) => {
 };
 
 // Agregar producto al carrito con verificación de stock
-const addToCart = async (req: Request, res: Response) => {
+export const addToCart = async (req: Request, res: Response) => {
   try {
     const userId = 1; // Usuario temporal
     const { productId, quantity = 1 } = req.body;
@@ -195,7 +196,7 @@ const addToCart = async (req: Request, res: Response) => {
 };
 
 // Actualizar cantidad de un producto en el carrito con verificación de stock
-const updateCartItem = async (req: Request, res: Response) => {
+export const updateCartItem = async (req: Request, res: Response) => {
   try {
     const userId = 1; // Usuario temporal
     const { productId, quantity } = req.body;
@@ -312,7 +313,7 @@ const updateCartItem = async (req: Request, res: Response) => {
 };
 
 // Eliminar producto del carrito
-const removeFromCart = async (req: Request, res: Response) => {
+export const removeFromCart = async (req: Request, res: Response) => {
   try {
     const userId = 1; // Usuario temporal
     const { productId } = req.body;
@@ -399,7 +400,7 @@ const removeFromCart = async (req: Request, res: Response) => {
 };
 
 // Vaciar el carrito
-const clearCart = async (req: Request, res: Response) => {
+export const clearCart = async (req: Request, res: Response) => {
   try {
     const userId = 1; // Usuario temporal
 
@@ -424,10 +425,26 @@ const clearCart = async (req: Request, res: Response) => {
   }
 };
 
-module.exports = {
-  getCart,
-  addToCart,
-  updateCartItem,
-  removeFromCart,
-  clearCart,
+{/* Usar la api de formateo de moneda en un futuro
+  // En tu archivo de utilidades o servicio de formato
+const formatCurrency = (amountInCents, currencyCode) => {
+  // `Intl.NumberFormat` maneja los decimales y el símbolo
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: currencyCode,
+  }).format(amountInCents / 100);
 };
+
+// En tu controller del backend
+// ...
+const cartWithFormattedPrices = {
+  ...cart,
+  items: cart.cartProducts.map((item) => ({
+    // ...
+    product: {
+      ...item.product,
+      // Usar la función centralizada para formatear
+      price: formatCurrency(item.product.priceCents, item.product.currencyCode),
+    },
+  })),
+}; */}
