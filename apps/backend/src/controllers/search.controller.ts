@@ -53,17 +53,38 @@ export const searchProducts = async (req: Request, res: Response) => {
 
 export const getSearchSuggestions = async (req: Request, res: Response) => {
   try {
-    const { q: query } = req.query;
-    const limit = parseInt(req.query.limit as string) || 5;
+    const { q: query, limit } = req.query;
 
-    if (!query || typeof query !== 'string' || query.length < 2) {
+    // Validaciones
+    if (!query || typeof query !== 'string') {
+      return res.status(400).json({
+        success: false,
+        message: "Parámetro de búsqueda requerido"
+      });
+    }
+
+    if (query.trim().length < 2) {
       return res.json([]);
     }
 
-    const suggestions = await SearchService.getSearchSuggestions(query, limit);
+    const limitNumber = limit ? parseInt(limit as string) : 5;
+    
+    if (isNaN(limitNumber) || limitNumber < 1 || limitNumber > 20) {
+      return res.status(400).json({
+        success: false,
+        message: "Límite debe ser entre 1 y 20"
+      });
+    }
+
+    const suggestions = await SearchService.getSearchSuggestions(query, limitNumber);
+
     res.json(suggestions);
+
   } catch (error) {
-    console.error("❌ Error obteniendo sugerencias:", error);
-    res.json([]); // Devolver array vacío en caso de error
+    console.error("❌ Error en getSearchSuggestions:", error);
+    res.status(500).json({
+      success: false,
+      message: "Error interno del servidor"
+    });
   }
 };

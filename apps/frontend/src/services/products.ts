@@ -13,7 +13,7 @@ export async function fetchProducts(): Promise<Product[]> {
 }
 
 export async function fetchProductById(id: number): Promise<Product> {
-  const res = await fetch(`http://localhost:5000/api/products/${id}`, {
+  const res = await fetch(`http://localhost:5000/api/products/id/${id}`, {
     cache: "no-store",
   });
 
