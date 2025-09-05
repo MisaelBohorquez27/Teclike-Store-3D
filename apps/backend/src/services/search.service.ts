@@ -1,5 +1,5 @@
 // services/searchService.ts
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -36,7 +36,7 @@ export class SearchService {
       maxPrice,
       inStock,
       limit = 10,
-      page = 1
+      page = 1,
     } = params;
 
     const searchTerm = query.trim().toLowerCase();
@@ -44,7 +44,7 @@ export class SearchService {
 
     // Construir condiciones WHERE
     const whereConditions: any = {
-      AND: []
+      AND: [],
     };
 
     // Búsqueda por texto
@@ -54,28 +54,28 @@ export class SearchService {
           {
             name: {
               contains: searchTerm,
-              mode: 'insensitive' as const
-            }
+              mode: "insensitive" as const,
+            },
           },
           {
             description: {
               contains: searchTerm,
-              mode: 'insensitive' as const
-            }
+              mode: "insensitive" as const,
+            },
           },
           {
             slug: {
               contains: searchTerm,
-              mode: 'insensitive' as const
-            }
+              mode: "insensitive" as const,
+            },
           },
           {
             brand: {
               contains: searchTerm,
-              mode: 'insensitive' as const
-            }
-          }
-        ]
+              mode: "insensitive" as const,
+            },
+          },
+        ],
       });
     }
 
@@ -87,11 +87,11 @@ export class SearchService {
             category: {
               name: {
                 equals: category,
-                mode: 'insensitive' as const
-              }
-            }
-          }
-        }
+                mode: "insensitive" as const,
+              },
+            },
+          },
+        },
       });
     }
 
@@ -105,8 +105,8 @@ export class SearchService {
     if (inStock !== undefined) {
       whereConditions.AND.push({
         inventory: {
-          stock: inStock ? { gt: 0 } : { equals: 0 }
-        }
+          stock: inStock ? { gt: 0 } : { equals: 0 },
+        },
       });
     }
 
@@ -116,21 +116,22 @@ export class SearchService {
       include: {
         categoryProducts: {
           include: {
-            category: true
-          }
+            category: true,
+          },
         },
         inventory: true,
-        reviews: true
+        reviews: true,
       },
       skip,
-      take: limit
+      take: limit,
     });
 
     // Calcular relevancia y formatear resultados
-    const results = products.map(product => {
+    const results = products.map((product) => {
       const score = this.calculateRelevanceScore(product, searchTerm);
-      const primaryCategory = product.categoryProducts?.[0]?.category?.name ?? "Uncategorized";
-      
+      const primaryCategory =
+        product.categoryProducts?.[0]?.category?.name ?? "Uncategorized";
+
       return {
         id: product.id,
         name: product.name,
@@ -139,11 +140,13 @@ export class SearchService {
         imageUrl: product.imageUrl ?? undefined,
         category: primaryCategory,
         inStock: (product.inventory?.stock || 0) > 0,
-        rating: product.reviews.length > 0 
-          ? product.reviews.reduce((sum, r) => sum + r.rating, 0) / product.reviews.length
-          : 0,
+        rating:
+          product.reviews.length > 0
+            ? product.reviews.reduce((sum, r) => sum + r.rating, 0) /
+              product.reviews.length
+            : 0,
         reviewCount: product.reviews.length,
-        score
+        score,
       };
     });
 
@@ -151,14 +154,17 @@ export class SearchService {
     return results.sort((a, b) => b.score - a.score);
   }
 
-  private static calculateRelevanceScore(product: any, searchTerm: string): number {
+  private static calculateRelevanceScore(
+    product: any,
+    searchTerm: string
+  ): number {
     if (!searchTerm) return 0;
 
     let score = 0;
     const productName = product.name.toLowerCase();
-    const productDescription = product.description?.toLowerCase() || '';
+    const productDescription = product.description?.toLowerCase() || "";
     const productSlug = product.slug.toLowerCase();
-    const productBrand = product.brand?.toLowerCase() || '';
+    const productBrand = product.brand?.toLowerCase() || "";
 
     // Ponderaciones para diferentes tipos de coincidencia
     const weights = {
@@ -166,7 +172,7 @@ export class SearchService {
       startsWith: 5,
       contains: 3,
       wordBoundary: 4,
-      categoryMatch: 2
+      categoryMatch: 2,
     };
 
     // Coincidencia exacta
@@ -184,55 +190,48 @@ export class SearchService {
     if (productBrand.includes(searchTerm)) score += weights.contains;
 
     // Coincidencia con límites de palabra (más relevante)
-    const wordRegex = new RegExp(`\\b${searchTerm}\\b`, 'i');
+    const wordRegex = new RegExp(`\\b${searchTerm}\\b`, "i");
     if (wordRegex.test(productName)) score += weights.wordBoundary;
     if (wordRegex.test(productDescription)) score += weights.wordBoundary;
 
     return score;
   }
 
-  static async getSearchSuggestions(query: string, limit: number = 5): Promise<string[]> {
+  static async getSearchSuggestions(
+    query: string,
+    limit: number = 5
+  ): Promise<any[]> {
     if (!query || query.length < 2) return [];
 
     const products = await prisma.product.findMany({
       where: {
         OR: [
-          {
-            name: {
-              contains: query,
-              mode: 'insensitive' as const
-            }
-          },
-          {
-            slug: {
-              contains: query,
-              mode: 'insensitive' as const
-            }
-          }
-        ]
+          { name: { contains: query, mode: "insensitive" } },
+          { slug: { contains: query, mode: "insensitive" } },
+        ],
       },
       select: {
+        id: true,
         name: true,
-        slug: true
+        slug: true,
+        priceCents: true,
+        imageUrl: true,
+        categoryProducts: {
+          include: { category: true },
+        },
+        inventory: true,
       },
-      take: limit * 2 // Tomar más para diversidad
+      take: limit,
     });
 
-    // Extraer sugerencias únicas
-    const suggestions = new Set<string>();
-    
-    products.forEach(product => {
-      // Sugerir nombres de productos
-      suggestions.add(product.name);
-      
-      // Sugerir partes del slug (si son descriptivas)
-      if (product.slug.includes('-')) {
-        product.slug.split('-').forEach(part => {
-          if (part.length > 2) suggestions.add(part);
-        });
-      }
-    });
-
-    return Array.from(suggestions).slice(0, limit);
+    return products.map((p) => ({
+      id: p.id,
+      name: p.name,
+      slug: p.slug,
+      price: p.priceCents / 100,
+      imageUrl: p.imageUrl ?? undefined,
+      category: p.categoryProducts?.[0]?.category?.name ?? "Uncategorized",
+      inStock: (p.inventory?.stock || 0) > 0,
+    }));
   }
 }

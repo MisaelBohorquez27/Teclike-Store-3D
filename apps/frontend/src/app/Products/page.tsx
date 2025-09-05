@@ -4,6 +4,7 @@ import { ProductGrid } from "@/app/Products/ProductGrid";
 import { Pagination } from "@/components/ui/Pagination";
 import { useState } from "react";
 import { SearchBar } from "@/components/SearchBar";
+import { SearchBar2 } from "@/components/Search/SearchBar2";
 
 export default function ProductPage() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -29,7 +30,7 @@ export default function ProductPage() {
           {/* Sidebar de Filtros */}
           <div className="w-full lg:w-1/4">
             <div className="flex justify-center lg:justify-start">
-              <SearchBar />
+              <SearchBar2/>
             </div>
             <FilterSidebar />
           </div>

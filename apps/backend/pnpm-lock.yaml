@@ -32,6 +32,9 @@ importers:
       joi:
         specifier: ^18.0.0
         version: 18.0.1
+      lodash:
+        specifier: ^4.17.21
+        version: 4.17.21
       nodemailer:
         specifier: ^7.0.6
         version: 7.0.6
@@ -45,6 +48,9 @@ importers:
       '@types/joi':
         specifier: ^17.2.3
         version: 17.2.3
+      '@types/lodash':
+        specifier: ^4.17.20
+        version: 4.17.20
       '@types/node':
         specifier: ^20.19.7
         version: 20.19.11
@@ -480,6 +486,9 @@ packages:
   '@types/joi@17.2.3':
     resolution: {integrity: sha512-dGjs/lhrWOa+eO0HwgxCSnDm5eMGCsXuvLglMghJq32F6q5LyyNuXb41DHzrg501CKNOSSAHmfB7FDGeUnDmzw==}
     deprecated: This is a stub types definition. joi provides its own type definitions, so you do not need this installed.
+
+  '@types/lodash@4.17.20':
+    resolution: {integrity: sha512-H3MHACvFUEiujabxhaI/ImO6gUrd8oOurg7LQtS7mbwIXA/cUqWrvBsaeJ23aZEPk1TAYkurjfMbSELfoCXlGA==}
 
   '@types/mime@1.3.5':
     resolution: {integrity: sha512-/pyBZWSLD2n0dcHE3hq8s8ZvcETHtEuF+3E7XVt0Ig2nvsVQXdghHVcEkIWjy9A0wKfTn97a/PSDYohKIlnP/w==}
@@ -1925,6 +1934,8 @@ snapshots:
   '@types/joi@17.2.3':
     dependencies:
       joi: 18.0.1
+
+  '@types/lodash@4.17.20': {}
 
   '@types/mime@1.3.5': {}
 

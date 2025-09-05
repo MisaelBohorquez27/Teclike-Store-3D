@@ -4,9 +4,11 @@ import prisma from "../prisma";
 
 // Transformador → convierte Product + Category al formato que espera el frontend
 function formatForCard(p: any) {
-  const primaryCategory = p.categoryProducts?.[0]?.category?.name ?? "Uncategorized";
+  const primaryCategory =
+    p.categoryProducts?.[0]?.category?.name ?? "Uncategorized";
   const isNew =
-    (Date.now() - new Date(p.createdAt).getTime()) / (1000 * 60 * 60 * 24) <= 30;
+    (Date.now() - new Date(p.createdAt).getTime()) / (1000 * 60 * 60 * 24) <=
+    30;
 
   return {
     id: p.id,
@@ -14,7 +16,7 @@ function formatForCard(p: any) {
     category: primaryCategory,
     price: p.priceCents / 100,
     currency: p.currency,
-    rating: 5, // placeholder hasta que tengas reviews
+    rating: p.rating, // placeholder hasta que tengas reviews
     description: p.description,
     image: p.imageUrl ?? "/placeholder.png",
     isNew,
@@ -51,10 +53,10 @@ export const getProductById = async (req: Request, res: Response) => {
     const product = await prisma.product.findUnique({
       where: { id: Number(id) },
       include: {
-        categoryProducts: { 
-          include: { 
-            category: true 
-          } 
+        categoryProducts: {
+          include: {
+            category: true,
+          },
         },
         reviews: {
           include: {
@@ -62,13 +64,13 @@ export const getProductById = async (req: Request, res: Response) => {
               select: {
                 id: true,
                 firstName: true,
-                email: true // o solo el nombre si prefieres
-              }
-            }
+                email: true, // o solo el nombre si prefieres
+              },
+            },
           },
           orderBy: {
-            reviewDate: 'desc'
-          }
+            reviewDate: "desc",
+          },
         },
         // Agregar imágenes si tienes una tabla separada
         // images: true,
@@ -80,14 +82,92 @@ export const getProductById = async (req: Request, res: Response) => {
     }
 
     // Formatear las reviews
-    const formattedReviews = product.reviews.map(review => ({
+    const formattedReviews = product.reviews.map((review) => ({
       id: review.id,
       user: review.user.firstName, // Usar el nombre del usuario
       rating: review.rating,
       comment: review.comment,
-      date: review.reviewDate.toISOString().split('T')[0] // Formato YYYY-MM-DD
+      date: review.reviewDate.toISOString().split("T")[0], // Formato YYYY-MM-DD
     }));
 
+    const formattedProduct = {
+      id: product.id,
+      name: product.name,
+      brand: product.brand,
+      description: product.description,
+      price: product.priceCents / 100,
+      currency: product.currency,
+      image: product.imageUrl ?? "/placeholder.png",
+      category:
+        product.categoryProducts?.[0]?.category?.name ?? "Uncategorized",
+      isNew:
+        (Date.now() - new Date(product.createdAt).getTime()) /
+          (1000 * 60 * 60 * 24) <=
+        30,
+      rating:
+        product.reviews.length > 0
+          ? product.reviews.reduce((sum, review) => sum + review.rating, 0) /
+            product.reviews.length
+          : 5, // Rating promedio o 5 si no hay reviews
+      reviews: formattedReviews,
+      specifications: {
+        Marca: product.brand,
+        Categoría:
+          product.categoryProducts?.[0]?.category?.name ?? "Uncategorized",
+        Precio: `${product.currency} ${(product.priceCents / 100).toFixed(2)}`,
+        Estado:
+          (Date.now() - new Date(product.createdAt).getTime()) /
+            (1000 * 60 * 60 * 24) <=
+          30
+            ? "Nuevo"
+            : "Usado",
+      },
+      createdAt: product.createdAt,
+      updatedAt: product.updatedAt,
+    };
+
+    res.json(formattedProduct);
+  } catch (error) {
+    console.error("❌ Error fetching product by ID:", error);
+    res.status(500).json({ message: "Error al obtener el producto" });
+  }
+};
+
+// controllers/products.controller.ts
+export const getProductBySlug = async (req: Request, res: Response) => {
+  try {
+    const { slug } = req.params;
+
+    const product = await prisma.product.findUnique({
+      where: { slug },
+      include: {
+        categoryProducts: { 
+          include: { 
+            category: true 
+          } 
+        },
+        reviews: {
+          include: {
+            user: {
+              select: {
+                id: true,
+                firstName: true,
+                email: true
+              }
+            }
+          },
+          orderBy: {
+            reviewDate: 'desc'
+          }
+        },
+      },
+    });
+
+    if (!product) {
+      return res.status(404).json({ message: "Producto no encontrado" });
+    }
+
+    // Usar la misma lógica de formato que getProductById
     const formattedProduct = {
       id: product.id,
       name: product.name,
@@ -100,8 +180,14 @@ export const getProductById = async (req: Request, res: Response) => {
       isNew: (Date.now() - new Date(product.createdAt).getTime()) / (1000 * 60 * 60 * 24) <= 30,
       rating: product.reviews.length > 0 
         ? product.reviews.reduce((sum, review) => sum + review.rating, 0) / product.reviews.length
-        : 5, // Rating promedio o 5 si no hay reviews
-      reviews: formattedReviews,
+        : 5,
+      reviews: product.reviews.map(review => ({
+        id: review.id,
+        user: review.user.firstName,
+        rating: review.rating,
+        comment: review.comment,
+        date: review.reviewDate.toISOString().split('T')[0]
+      })),
       specifications: {
         Marca: product.brand,
         Categoría: product.categoryProducts?.[0]?.category?.name ?? "Uncategorized",
@@ -114,7 +200,7 @@ export const getProductById = async (req: Request, res: Response) => {
 
     res.json(formattedProduct);
   } catch (error) {
-    console.error("❌ Error fetching product by ID:", error);
+    console.error("❌ Error fetching product by slug:", error);
     res.status(500).json({ message: "Error al obtener el producto" });
   }
 };

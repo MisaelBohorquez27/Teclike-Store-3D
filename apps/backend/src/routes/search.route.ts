@@ -1,13 +1,9 @@
-// routes/search.ts
-import express from 'express';
-import { searchProducts, getSearchSuggestions } from '../controllers/search.controller';
+import { Router } from "express";
+import { searchProducts, getSearchSuggestions } from "../controllers/search.controller";
 
-const router = express.Router();
+const router = Router();
 
-// Búsqueda principal de productos
-router.get('/products', searchProducts);
-
-// Sugerencias de búsqueda (para autocompletado)
-router.get('/suggestions', getSearchSuggestions);
+router.get("/", searchProducts); // /api/search?q=...
+router.get("/suggestions", getSearchSuggestions); // /api/search/suggestions?q=...
 
 export default router;
