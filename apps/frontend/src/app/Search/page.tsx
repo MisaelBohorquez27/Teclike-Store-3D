@@ -36,6 +36,9 @@ export default function SearchPage() {
       .finally(() => setLoading(false));
   }, [query, page]);
 
+  if (loading) return <p className="text-center ">Cargando resultados...</p>; //arreglar esto, se sale de la pantalla
+  if (!query) return <p className="text-center">Por favor ingresa un término de búsqueda.</p>;
+
   return (
     <main className="PageProducts-bg min-h-[calc(100vh-4rem)] md:min-h-screen relative overflow-hidden">
       {/* HeroBanner de la página */}
