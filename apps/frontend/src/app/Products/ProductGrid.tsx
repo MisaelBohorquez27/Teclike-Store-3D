@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ProductCard, Product } from "@/app/Products/ProductCard";
+import { ProductCard } from "@/app/Products/ProductCard";
 import { fetchProducts } from "@/services/products";
+import { Product } from "@/types/products";
 
 export function ProductGrid({ query }: { query: string }) {
   const [products, setProducts] = useState<Product[]>([]);

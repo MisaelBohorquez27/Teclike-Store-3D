@@ -3,7 +3,8 @@ import { useState } from "react";
 import { FilterSidebar } from "@/app/Products/FilterSidebar";
 import { ProductGrid } from "@/app/Products/ProductGrid";
 import { Pagination } from "@/components/ui/Pagination";
-import { SearchBar2 } from "@/components/Search/SearchBar2";
+import { ProductHero } from "./ProductHero";
+import { SearchBar3 } from "@/components/ui/SearchBar3";
 
 export default function ProductPage() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -13,16 +14,7 @@ export default function ProductPage() {
   return (
     <main className="PageProducts-bg min-h-[calc(100vh-4rem)] md:min-h-screen relative overflow-hidden">
       {/* Hero Banner */}
-      <section className="pt-20 sm:pt-28 md:pt-35 pb-12 sm:pb-16 md:pb-20">
-        <div className="container mx-auto px-4 sm:px-6 text-center h-full">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 Product-title">
-            Nuestra Colección
-          </h1>
-          <p className="text-xl sm:text-2xl opacity-90 Product-subtitle">
-            Encuentra los mejores productos para tus proyectos
-          </p>
-        </div>
-      </section>
+      <ProductHero />
 
       {/* Contenido Principal */}
       <div className="container mx-auto px-4 sm:px-6 py-8 sm:py-10 md:py-12">
@@ -30,7 +22,7 @@ export default function ProductPage() {
           {/* Sidebar de Filtros */}
           <div className="w-full lg:w-1/4">
             <div className="flex justify-center lg:justify-start">
-              <SearchBar2 query={query} setQuery={setQuery} /> 
+              <SearchBar3 /> 
             </div>
             <FilterSidebar />
           </div>
