@@ -1,6 +1,7 @@
-import { fetchSearchSuggestions, SearchSuggestion } from "@/services/searchSuggestions";
+import { fetchSearchSuggestions } from "@/services/searchSuggestions";
 import { useState, useCallback } from "react";
 import { debounce } from "lodash";
+import { SearchSuggestion } from "@/types/searchSuggestions";
 
 export function useSearch() {
   const [query, setQuery] = useState("");

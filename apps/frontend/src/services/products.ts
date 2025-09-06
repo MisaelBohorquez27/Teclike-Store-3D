@@ -1,4 +1,4 @@
-import { Product } from "@/app/Products/ProductCard";
+import { Product } from "@/types/products";
 
 // Obtener productos (todos o por búsqueda)
 export async function fetchProducts(query?: string): Promise<Product[]> {

@@ -4,7 +4,6 @@ import Button from "@/components/ui/PagesButtons";
 import { useSearchParams } from "next/navigation";
 
 export function FilterSidebar() {
-  const searchParams = useSearchParams();
   const categories = [
     "Interiores",
     "Muebles",
