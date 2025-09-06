@@ -2,22 +2,25 @@
 
 import { useEffect, useState } from "react";
 import { ProductCard, Product } from "@/app/Products/ProductCard";
-import { fetchProducts} from "@/services/products";
+import { fetchProducts } from "@/services/products";
 
-export function ProductGrid() {
+export function ProductGrid({ query }: { query: string }) {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchProducts()
+    setLoading(true);
+
+    fetchProducts(query) // 👈 ahora acepta query
       .then(setProducts)
       .catch((err) => console.error(err))
       .finally(() => setLoading(false));
-  }, []);
+  }, [query]);
 
-  if (loading) {
-    return <p className="text-center">Cargando productos...</p>;
-  }
+  if (loading) return <p className="text-center">Cargando productos...</p>;
+
+  if (products.length === 0)
+    return <p className="text-center">No se encontraron productos</p>;
 
   return (
     <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-5 md:gap-6">

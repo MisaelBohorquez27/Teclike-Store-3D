@@ -1,13 +1,4 @@
-// components/ui/ReviewCard.tsx
-
-export type Review = {
-  id: number;
-  name: string;
-  product: string;
-  comment: string;
-  rating: number;
-  avatar: string;
-};
+import { Review } from "../../types/review";
 
 export function ReviewCard({ review }: { review: Review }) {
   return (

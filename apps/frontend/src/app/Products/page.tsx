@@ -1,14 +1,14 @@
 "use client";
+import { useState } from "react";
 import { FilterSidebar } from "@/app/Products/FilterSidebar";
 import { ProductGrid } from "@/app/Products/ProductGrid";
 import { Pagination } from "@/components/ui/Pagination";
-import { useState } from "react";
-import { SearchBar } from "@/components/SearchBar";
 import { SearchBar2 } from "@/components/Search/SearchBar2";
 
 export default function ProductPage() {
   const [currentPage, setCurrentPage] = useState(1);
-  const totalPages = 10; // Total de páginas disponibles
+  const [query, setQuery] = useState(""); // <-- Estado de búsqueda
+  const totalPages = 10; // 🔹 Este vendrá del backend más adelante
 
   return (
     <main className="PageProducts-bg min-h-[calc(100vh-4rem)] md:min-h-screen relative overflow-hidden">
@@ -30,7 +30,7 @@ export default function ProductPage() {
           {/* Sidebar de Filtros */}
           <div className="w-full lg:w-1/4">
             <div className="flex justify-center lg:justify-start">
-              <SearchBar2/>
+              <SearchBar2 query={query} setQuery={setQuery} /> 
             </div>
             <FilterSidebar />
           </div>
@@ -54,7 +54,8 @@ export default function ProductPage() {
               </div>
             </div>
 
-            <ProductGrid />
+            {/* 🔹 Ahora ProductGrid recibe el query */}
+            <ProductGrid query={query} />
 
             {/* Paginación */}
             <Pagination

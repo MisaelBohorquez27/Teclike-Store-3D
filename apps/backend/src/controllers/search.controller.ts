@@ -1,6 +1,7 @@
 // controllers/searchController.ts
 import { Request, Response } from "express";
-import { SearchService, SearchParams } from "../services/search.service";
+import { SearchService } from "../services/search.service";
+import { SearchParams } from "../types/search";
 
 export const searchProducts = async (req: Request, res: Response) => {
   try {
