@@ -8,7 +8,7 @@ import { SearchBar3 } from "@/components/ui/SearchBar3";
 
 export default function ProductPage() {
   const [currentPage, setCurrentPage] = useState(1);
-  const [query, setQuery] = useState(""); // <-- Estado de búsqueda
+  const [query] = useState(""); // <-- Estado de búsqueda
   const totalPages = 10; // 🔹 Este vendrá del backend más adelante
 
   return (
