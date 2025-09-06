@@ -1,5 +1,5 @@
 // services/search.ts
-import { SearchSuggestion } from "./searchSuggestions";
+import { SearchSuggestion } from "../types/searchSuggestions";
 
 export interface SearchResult extends SearchSuggestion {
   rating: number;

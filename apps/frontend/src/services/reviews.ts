@@ -1,5 +1,5 @@
 // src/services/reviews.ts
-import type { Review } from "../components/ui/ReviewCard"; // ajusta la ruta
+import type { Review } from "../types/review"; // ajusta la ruta
 
 export async function fetchFeaturedReviews(limit = 6): Promise<Review[]> {
   const res = await fetch(`http://localhost:5000/api/reviews?limit=${limit}`, {

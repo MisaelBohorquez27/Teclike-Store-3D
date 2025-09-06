@@ -1,13 +1,4 @@
-export interface SearchSuggestion {
-  id: number;
-  name: string;
-  slug: string;
-  price: number;
-  imageUrl?: string;
-  category: string;
-  inStock: boolean;
-}
-
+import { SearchSuggestion } from "../types/searchSuggestions";
 export async function fetchSearchSuggestions(query: string, limit = 5): Promise<SearchSuggestion[]> {
   const res = await fetch(
     `http://localhost:5000/api/search/suggestions?q=${encodeURIComponent(query)}&limit=${limit}`

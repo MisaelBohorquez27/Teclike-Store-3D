@@ -1,75 +1,64 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { useSearch } from "@/hooks/search.hook";
+import { useState, useEffect } from "react";
 import { SearchInput } from "./SearchInput";
-import { SearchSuggestions } from "./SearchSuggestion";
+import { fetchSearchSuggestions, SearchSuggestion } from "@/services/searchSuggestions";
 
 interface SearchBarProps {
+  query: string;
+  setQuery: (val: string) => void;
   darkMode?: boolean;
-  placeholder?: string;
-  className?: string;
 }
 
-export function SearchBar2({
-  darkMode = false,
-  placeholder = "Buscar productos...",
-  className = "",
-}: SearchBarProps) {
-  const router = useRouter();
-  const {
-    query,
-    setQuery,
-    suggestions,
-    isLoading,
-    showSuggestions,
-    setShowSuggestions,
-    search,
-  } = useSearch();
+export function SearchBar2({ query, setQuery, darkMode = false }: SearchBarProps) {
+  const [suggestions, setSuggestions] = useState<SearchSuggestion[]>([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
 
-  const [selectedIndex, setSelectedIndex] = useState(-1);
+  useEffect(() => {
+    if (query.length < 2) {
+      setSuggestions([]);
+      return;
+    }
+    const timeout = setTimeout(async () => {
+      try {
+        const res = await fetchSearchSuggestions(query);
+        setSuggestions(res);
+        setShowSuggestions(true);
+      } catch (err) {
+        console.error("Error al obtener sugerencias", err);
+      }
+    }, 300);
 
-  const handleSearchSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!query.trim()) return;
-    router.push(`/search?q=${encodeURIComponent(query)}`);
-    setShowSuggestions(false);
-  };
-
-  const handleSuggestionClick = (s: any) => {
-    router.push(`/products/${s.slug}`);
-    setQuery("");
-    setShowSuggestions(false);
-  };
+    return () => clearTimeout(timeout);
+  }, [query]);
 
   return (
-    <div className={`relative ${className}`}>
-      <form onSubmit={handleSearchSubmit}>
-        <SearchInput
-          query={query}
-          setQuery={setQuery}
-          placeholder={placeholder}
-          darkMode={darkMode}
-          onFocus={() => setShowSuggestions(true)}
-          onChange={(value) => {
-            setQuery(value);
-            search(value);
-          }}
-          onKeyDown={() => {}}
-        />
-      </form>
+    <div className="relative w-full max-w-md">
+      <SearchInput
+        query={query}
+        setQuery={setQuery}
+        onFocus={() => setShowSuggestions(true)}
+        onChange={setQuery}
+        onKeyDown={(e) => e.key === "Escape" && setShowSuggestions(false)}
+        placeholder="Buscar productos..."
+        darkMode={darkMode}
+      />
 
-      {showSuggestions && (
-        <SearchSuggestions
-          suggestions={suggestions}
-          query={query}
-          isLoading={isLoading}
-          selectedIndex={selectedIndex}
-          onSelect={handleSuggestionClick}
-          onHover={setSelectedIndex}
-          darkMode={darkMode}
-        />
+      {showSuggestions && suggestions.length > 0 && (
+        <ul className="absolute w-full bg-white shadow-lg rounded-lg mt-1 z-50">
+          {suggestions.map((s) => (
+            <li
+              key={s.id}
+              onClick={() => {
+                setQuery(s.name);
+                setShowSuggestions(false);
+              }}
+              className="px-4 py-2 cursor-pointer hover:bg-gray-100"
+            >
+              {s.name}
+            </li>
+          ))}
+        </ul>
       )}
     </div>
   );
