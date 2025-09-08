@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { useSearch } from "../../hooks/search.hook";
 import { SearchSuggestion } from "@/types/searchSuggestions";
@@ -129,7 +129,7 @@ export function SearchBar3({
   };
 
   return (
-    <div className={`relative ${className}`}>
+    <div className={`relative w-full max-w-xs sm:max-w-sm md:max-w-md ${className}`}>
       <form 
         onSubmit={handleSubmit} 
         className={`relative flex items-center ${getContainerStyles()}`}
