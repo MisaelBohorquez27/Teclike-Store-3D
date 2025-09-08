@@ -204,3 +204,40 @@ export const getProductBySlug = async (req: Request, res: Response) => {
     res.status(500).json({ message: "Error al obtener el producto" });
   }
 };
+
+// 📌 GET /api/products/paginated?page=1&limit=12
+export const getPaginatedProducts = async (req: Request, res: Response) => {
+  try {
+    const page = parseInt(req.query.page as string) || 1;
+    const limit = parseInt(req.query.limit as string) || 12;
+    const skip = (page - 1) * limit;
+
+    const [products, total] = await Promise.all([
+      prisma.product.findMany({
+        skip,
+        take: limit,
+        orderBy: { createdAt: "desc" },
+        include: {
+          categoryProducts: { include: { category: true } },
+        },
+      }),
+      prisma.product.count(),
+    ]);
+
+    const totalPages = Math.ceil(total / limit);
+
+    res.json({
+      data: products.map(formatForCard),
+      pagination: {
+        page,
+        limit,
+        total,
+        totalPages,
+        hasMore: page < totalPages,
+      },
+    });
+  } catch (error) {
+    console.error("❌ Error paginando productos:", error);
+    res.status(500).json({ message: "Error al obtener productos paginados" });
+  }
+};
