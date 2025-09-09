@@ -88,5 +88,35 @@
       "imageUrl": "/products/eyooso-x11.png",
       "categories": ["Mice"],
       "inventory": { "stock": 50, "isNew": true }
+    },
+       {
+      "brand": "Razer",
+      "slug": "mouse-razer-viper-v3-pro",
+      "name": "Mouse Razer Viper V3 Pro",
+      "description": "Ergonomic gaming mouse with customizable RGB lighting",
+      "priceCents": 4777,
+      "imageUrl": "/products/razer-viper-v3-pro.png",
+      "categories": ["Mice"],
+      "inventory": { "stock": 50, "isNew": true }
+    },
+       {
+      "brand": "Logitech",
+      "slug": "mouse-logitech-g305-lightspeed",
+      "name": "Mouse Logitech G305 LIGHTSPEED",
+      "description": "Ergonomic gaming mouse with customizable RGB lighting",
+      "priceCents": 4888,
+      "imageUrl": "/products/logitech-g305-lightspeed.png",
+      "categories": ["Mice"],
+      "inventory": { "stock": 50, "isNew": true }
+    },
+       {
+      "brand": "Logitech",
+      "slug": "mouse-logitech-g-pro-x-superlight-2",
+      "name": "Mouse Logitech G PRO X SUPERLIGHT 2",
+      "description": "Ergonomic gaming mouse with customizable RGB lighting",
+      "priceCents": 5888,
+      "imageUrl": "/products/logitech-g-pro-x-superlight-2.png",
+      "categories": ["Mice"],
+      "inventory": { "stock": 50, "isNew": true }
     }
 ]

@@ -205,7 +205,8 @@ export const getProductBySlug = async (req: Request, res: Response) => {
   }
 };
 
-// 📌 GET /api/products/paginated?page=1&limit=12
+// controllers/productController.ts
+
 export const getPaginatedProducts = async (req: Request, res: Response) => {
   try {
     const page = parseInt(req.query.page as string) || 1;
@@ -217,9 +218,6 @@ export const getPaginatedProducts = async (req: Request, res: Response) => {
         skip,
         take: limit,
         orderBy: { createdAt: "desc" },
-        include: {
-          categoryProducts: { include: { category: true } },
-        },
       }),
       prisma.product.count(),
     ]);
@@ -227,7 +225,7 @@ export const getPaginatedProducts = async (req: Request, res: Response) => {
     const totalPages = Math.ceil(total / limit);
 
     res.json({
-      data: products.map(formatForCard),
+      items: products.map(formatForCard),
       pagination: {
         page,
         limit,
@@ -236,8 +234,8 @@ export const getPaginatedProducts = async (req: Request, res: Response) => {
         hasMore: page < totalPages,
       },
     });
-  } catch (error) {
-    console.error("❌ Error paginando productos:", error);
+  } catch (err) {
+    console.error("❌ Error paginando productos:", err);
     res.status(500).json({ message: "Error al obtener productos paginados" });
   }
 };

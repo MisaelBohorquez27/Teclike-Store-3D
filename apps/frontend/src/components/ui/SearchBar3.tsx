@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { useSearch } from "../../hooks/search.hook";
 import { SearchSuggestion } from "@/types/searchSuggestions";
