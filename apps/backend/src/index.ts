@@ -36,6 +36,7 @@ app.use("/api/productsWithOffers", productsWithOfferRouter);
 app.use("/api/contact", contactRouter);
 app.use("/api/cart", cartRouter);
 app.use("/api/search", searchRoutes);
+app.use("/api/paginated", productsRoutes);
 
 //Ruta de prueba para ver si el servidor funciona
 app.get("/", (req, res) => {
