@@ -3,7 +3,7 @@ import { useState } from "react";
 import { ProductGrid } from "@/app/Products/ProductGrid";
 import { ProductHero } from "./ProductHero";
 import { SearchBar3 } from "@/components/ui/SearchBar3";
-import ProductList from "./[id]/ProductList";
+import { ProductList } from "./ProductList";
 
 export default function ProductPage() {
   const [query] = useState(""); // <-- Estado de búsqueda

@@ -141,10 +141,10 @@ export const getProductBySlug = async (req: Request, res: Response) => {
     const product = await prisma.product.findUnique({
       where: { slug },
       include: {
-        categoryProducts: { 
-          include: { 
-            category: true 
-          } 
+        categoryProducts: {
+          include: {
+            category: true,
+          },
         },
         reviews: {
           include: {
@@ -152,13 +152,13 @@ export const getProductBySlug = async (req: Request, res: Response) => {
               select: {
                 id: true,
                 firstName: true,
-                email: true
-              }
-            }
+                email: true,
+              },
+            },
           },
           orderBy: {
-            reviewDate: 'desc'
-          }
+            reviewDate: "desc",
+          },
         },
       },
     });
@@ -176,26 +176,38 @@ export const getProductBySlug = async (req: Request, res: Response) => {
       price: product.priceCents / 100,
       currency: product.currency,
       image: product.imageUrl ?? "/placeholder.png",
-      category: product.categoryProducts?.[0]?.category?.name ?? "Uncategorized",
-      isNew: (Date.now() - new Date(product.createdAt).getTime()) / (1000 * 60 * 60 * 24) <= 30,
-      rating: product.reviews.length > 0 
-        ? product.reviews.reduce((sum, review) => sum + review.rating, 0) / product.reviews.length
-        : 5,
-      reviews: product.reviews.map(review => ({
+      category:
+        product.categoryProducts?.[0]?.category?.name ?? "Uncategorized",
+      isNew:
+        (Date.now() - new Date(product.createdAt).getTime()) /
+          (1000 * 60 * 60 * 24) <=
+        30,
+      rating:
+        product.reviews.length > 0
+          ? product.reviews.reduce((sum, review) => sum + review.rating, 0) /
+            product.reviews.length
+          : 5,
+      reviews: product.reviews.map((review) => ({
         id: review.id,
         user: review.user.firstName,
         rating: review.rating,
         comment: review.comment,
-        date: review.reviewDate.toISOString().split('T')[0]
+        date: review.reviewDate.toISOString().split("T")[0],
       })),
       specifications: {
         Marca: product.brand,
-        Categoría: product.categoryProducts?.[0]?.category?.name ?? "Uncategorized",
-        "Precio": `${product.currency} ${(product.priceCents / 100).toFixed(2)}`,
-        "Estado": (Date.now() - new Date(product.createdAt).getTime()) / (1000 * 60 * 60 * 24) <= 30 ? "Nuevo" : "Usado"
+        Categoría:
+          product.categoryProducts?.[0]?.category?.name ?? "Uncategorized",
+        Precio: `${product.currency} ${(product.priceCents / 100).toFixed(2)}`,
+        Estado:
+          (Date.now() - new Date(product.createdAt).getTime()) /
+            (1000 * 60 * 60 * 24) <=
+          30
+            ? "Nuevo"
+            : "Usado",
       },
       createdAt: product.createdAt,
-      updatedAt: product.updatedAt
+      updatedAt: product.updatedAt,
     };
 
     res.json(formattedProduct);
@@ -215,6 +227,7 @@ export const getPaginatedProducts = async (req: Request, res: Response) => {
 
     const [products, total] = await Promise.all([
       prisma.product.findMany({
+        include: { categoryProducts: { include: { category: true } } },
         skip,
         take: limit,
         orderBy: { createdAt: "desc" },
