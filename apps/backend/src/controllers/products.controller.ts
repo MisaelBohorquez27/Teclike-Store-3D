@@ -1,6 +1,8 @@
 // controllers/products.controller.ts
 import { Request, Response } from "express";
 import prisma from "../prisma";
+import { SearchParams } from "../types/search";
+import { SearchService } from "../services/search.service";
 
 // Transformador → convierte Product + Category al formato que espera el frontend
 function formatForCard(p: any) {
@@ -102,12 +104,12 @@ export const getProductById = async (req: Request, res: Response) => {
         product.categoryProducts?.[0]?.category?.name ?? "Uncategorized",
       isNew:
         (Date.now() - new Date(product.createdAt).getTime()) /
-          (1000 * 60 * 60 * 24) <=
+        (1000 * 60 * 60 * 24) <=
         30,
       rating:
         product.reviews.length > 0
           ? product.reviews.reduce((sum, review) => sum + review.rating, 0) /
-            product.reviews.length
+          product.reviews.length
           : 5, // Rating promedio o 5 si no hay reviews
       reviews: formattedReviews,
       specifications: {
@@ -118,7 +120,7 @@ export const getProductById = async (req: Request, res: Response) => {
         Estado:
           (Date.now() - new Date(product.createdAt).getTime()) /
             (1000 * 60 * 60 * 24) <=
-          30
+            30
             ? "Nuevo"
             : "Usado",
       },
@@ -180,12 +182,12 @@ export const getProductBySlug = async (req: Request, res: Response) => {
         product.categoryProducts?.[0]?.category?.name ?? "Uncategorized",
       isNew:
         (Date.now() - new Date(product.createdAt).getTime()) /
-          (1000 * 60 * 60 * 24) <=
+        (1000 * 60 * 60 * 24) <=
         30,
       rating:
         product.reviews.length > 0
           ? product.reviews.reduce((sum, review) => sum + review.rating, 0) /
-            product.reviews.length
+          product.reviews.length
           : 5,
       reviews: product.reviews.map((review) => ({
         id: review.id,
@@ -202,7 +204,7 @@ export const getProductBySlug = async (req: Request, res: Response) => {
         Estado:
           (Date.now() - new Date(product.createdAt).getTime()) /
             (1000 * 60 * 60 * 24) <=
-          30
+            30
             ? "Nuevo"
             : "Usado",
       },
@@ -250,5 +252,81 @@ export const getPaginatedProducts = async (req: Request, res: Response) => {
   } catch (err) {
     console.error("❌ Error paginando productos:", err);
     res.status(500).json({ message: "Error al obtener productos paginados" });
+  }
+};
+
+export const getProductss = async (req: Request, res: Response) => {
+  try {
+    // Query params comunes
+    const {
+      q: query,
+      category,
+      minPrice,
+      maxPrice,
+      inStock,
+      page = "1",
+      limit = "12",
+    } = req.query;
+
+    const pageNum = parseInt(page as string) || 1;
+    const limitNum = parseInt(limit as string) || 12;
+    const skip = (pageNum - 1) * limitNum;
+
+    // 🟢 Caso 1: hay búsqueda (`q`)
+    if (query && typeof query === "string" && query.trim().length >= 2) {
+      const searchParams = {
+        query: query.trim(),
+        category: category as string,
+        minPrice: minPrice ? parseFloat(minPrice as string) : undefined,
+        maxPrice: maxPrice ? parseFloat(maxPrice as string) : undefined,
+        inStock: inStock ? inStock === "true" : undefined,
+        limit: limitNum,
+        page: pageNum,
+      };
+
+      const results = await SearchService.searchProducts(searchParams);
+
+      return res.json({
+        items: results.map(formatForCard), // ✅ para mantener formato
+        pagination: {
+          page: searchParams.page,
+          limit: searchParams.limit,
+          total: results.length, 
+          hasMore: results.length === searchParams.limit,
+        },
+      });
+    }
+
+    // 🟢 Caso 2: sin búsqueda → devolver todos los productos con paginación
+    const [products, total] = await Promise.all([
+      prisma.product.findMany({
+        include: { categoryProducts: { include: { category: true } } },
+        skip,
+        take: limitNum,
+        orderBy: { createdAt: "desc" },
+      }),
+      prisma.product.count(),
+    ]);
+
+    const totalPages = Math.ceil(total / limitNum);
+
+    return res.json({
+      items: products.map((p) => ({
+        ...formatForCard(p),
+        price: p.priceCents ?? 0,
+      })),
+      pagination: {
+        page: pageNum,
+        limit: limitNum,
+        total,
+        totalPages,
+        hasMore: pageNum < totalPages,
+      },
+    });
+  } catch (error) {
+    console.error("❌ Error obteniendo productos:", error);
+    return res.status(500).json({
+      message: "Error al obtener productos",
+    });
   }
 };

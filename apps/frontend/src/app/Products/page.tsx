@@ -4,6 +4,7 @@ import { ProductGrid } from "@/app/Products/ProductGrid";
 import { ProductHero } from "./ProductHero";
 import { SearchBar3 } from "@/components/ui/SearchBar3";
 import { ProductList } from "./ProductList";
+import { ProductList2 } from "../Search/ProductList2";
 
 export default function ProductPage() {
   const [query] = useState(""); // <-- Estado de búsqueda
@@ -33,7 +34,7 @@ export default function ProductPage() {
           </div>
           <div className="w-full mt-10">
             <h2> Product con paginacion </h2>
-            <ProductList />
+            <ProductList2 />
           </div>
         </div>
       </div>
