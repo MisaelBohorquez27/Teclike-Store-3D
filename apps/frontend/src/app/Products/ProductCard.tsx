@@ -1,7 +1,6 @@
 "use client";
-import { Product } from '@/types/products';
-import Link from 'next/link';
-
+import { Product } from "@/types/products";
+import Link from "next/link";
 
 export function ProductCard({ product }: { product: Product }) {
   return (
@@ -23,7 +22,9 @@ export function ProductCard({ product }: { product: Product }) {
       {/* Detalles del Producto */}
       <div className="p-3 sm:p-4 flex flex-col gap-1">
         <div className="flex justify-between items-start gap-2 h-auto min-h-5">
-          <h3 className="font-semibold text-base sm:text-lg truncate pr-1 sm:pr-2">{product.name}</h3>
+          <h3 className="font-semibold text-base sm:text-lg truncate pr-1 sm:pr-2">
+            {product.name}
+          </h3>
           <span className="text-xs sm:text-sm text-gray-500">
             {product.category}
           </span>
@@ -42,18 +43,21 @@ export function ProductCard({ product }: { product: Product }) {
           ))}
           <span className="text-xs text-gray-500 ml-1">({product.rating})</span>
         </div>
-        
+
         <div className="text-sm text-gray-700 line-clamp-2">
           <p>{product.description}</p>
         </div>
 
         <div className="mt-3 sm:mt-4 flex justify-between items-center">
           <span className="font-bold text-gray-900 text-sm sm:text-base">
-            ${product.price.toFixed(2)}
+            $
+            {product.price !== null && product.price !== undefined
+              ? `$${product.price.toFixed(2)}`
+              : "Precio no disponible"}
           </span>
-          
+
           {/* ✅ Botón convertido en enlace */}
-          <Link 
+          <Link
             href={`/Products/${product.id}`}
             className="text-blue-600 hover:text-blue-800 text-xs sm:text-sm font-medium transition-colors"
           >

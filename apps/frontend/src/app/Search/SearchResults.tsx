@@ -1,0 +1,59 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { ProductCard } from "@/app/Products/ProductCard";
+import { Product } from "@/types/products";
+import Pagination from "@/components/ui/Pagination";
+import { fetchSearchResults } from "@/services/NewProductService";
+
+export function SearchResults({ query }: { query: string }) {
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+
+  // 🔹 Podrías hacerlo configurable, pero fijo está bien
+  const postsPerPage = 6;
+
+  useEffect(() => {
+    if (!query || query.trim().length < 2) return;
+
+    setLoading(true);
+
+    fetchSearchResults(query, { page: currentPage, limit: postsPerPage })
+      .then((res) => {
+        setProducts(res.items);
+        setTotalPages(res.pagination.totalPages);
+      })
+      .catch((err) => console.error("❌ Error en búsqueda:", err))
+      .finally(() => setLoading(false));
+  }, [query, currentPage, postsPerPage]);
+
+  if (loading) return <p className="text-center">Buscando productos...</p>;
+  if (products.length === 0)
+    return (
+      <p className="text-center">No se encontraron resultados para "{query}"</p>
+    );
+
+  return (
+    <div>
+      <div className="flex flex-col justify-between items-start sm:items-center mb-6 md:mb-8 gap-4 sm:gap-0">
+        <h2 className="TitleColor text-xl sm:text-2xl font-semibold py-10">
+          Resultados para: <span className="text-blue-600">{query}</span>
+        </h2>
+
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-5 md:gap-6">
+          {products.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
+
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
+        />
+      </div>
+    </div>
+  );
+}
