@@ -52,7 +52,7 @@ export function ProductCard({ product }: { product: Product }) {
           <span className="font-bold text-gray-900 text-sm sm:text-base">
             $
             {product.price !== null && product.price !== undefined
-              ? `$${product.price.toFixed(2)}`
+              ? `${product.price.toFixed(2)}`
               : "Precio no disponible"}
           </span>
 

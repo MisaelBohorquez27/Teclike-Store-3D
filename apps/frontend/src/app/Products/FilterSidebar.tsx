@@ -4,11 +4,11 @@ import Button from "@/components/ui/PagesButtons";
 
 export function FilterSidebar() {
   const categories = [
-    "Interiores",
-    "Muebles",
-    "Electrónica",
-    "Decoración",
-    "Exteriores",
+    "Mice",
+    "Keyboards",
+    "Headsets",
+    "Monitors",
+    "Consoles",
   ];
   const priceRanges = [
     { label: "Menos de $50", value: "0-50" },
