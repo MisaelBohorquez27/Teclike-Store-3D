@@ -1,7 +1,6 @@
 // controllers/products.controller.ts
 import { Request, Response } from "express";
 import prisma from "../prisma";
-import { SearchParams } from "../types/search";
 import { SearchService } from "../services/search.service";
 
 // Transformador → convierte Product + Category al formato que espera el frontend
@@ -104,12 +103,12 @@ export const getProductById = async (req: Request, res: Response) => {
         product.categoryProducts?.[0]?.category?.name ?? "Uncategorized",
       isNew:
         (Date.now() - new Date(product.createdAt).getTime()) /
-        (1000 * 60 * 60 * 24) <=
+          (1000 * 60 * 60 * 24) <=
         30,
       rating:
         product.reviews.length > 0
           ? product.reviews.reduce((sum, review) => sum + review.rating, 0) /
-          product.reviews.length
+            product.reviews.length
           : 5, // Rating promedio o 5 si no hay reviews
       reviews: formattedReviews,
       specifications: {
@@ -120,7 +119,7 @@ export const getProductById = async (req: Request, res: Response) => {
         Estado:
           (Date.now() - new Date(product.createdAt).getTime()) /
             (1000 * 60 * 60 * 24) <=
-            30
+          30
             ? "Nuevo"
             : "Usado",
       },
@@ -182,12 +181,12 @@ export const getProductBySlug = async (req: Request, res: Response) => {
         product.categoryProducts?.[0]?.category?.name ?? "Uncategorized",
       isNew:
         (Date.now() - new Date(product.createdAt).getTime()) /
-        (1000 * 60 * 60 * 24) <=
+          (1000 * 60 * 60 * 24) <=
         30,
       rating:
         product.reviews.length > 0
           ? product.reviews.reduce((sum, review) => sum + review.rating, 0) /
-          product.reviews.length
+            product.reviews.length
           : 5,
       reviews: product.reviews.map((review) => ({
         id: review.id,
@@ -204,7 +203,7 @@ export const getProductBySlug = async (req: Request, res: Response) => {
         Estado:
           (Date.now() - new Date(product.createdAt).getTime()) /
             (1000 * 60 * 60 * 24) <=
-            30
+          30
             ? "Nuevo"
             : "Usado",
       },
@@ -287,11 +286,14 @@ export const getProductss = async (req: Request, res: Response) => {
       const results = await SearchService.searchProducts(searchParams);
 
       return res.json({
-        items: results.map(formatForCard), // ✅ para mantener formato
+        items: results.map((p) => ({
+          ...formatForCard(p),
+          price: p.price ?? 0,
+        })), // ✅ para mantener formato
         pagination: {
           page: searchParams.page,
           limit: searchParams.limit,
-          total: results.length, 
+          total: results.length,
           hasMore: results.length === searchParams.limit,
         },
       });
@@ -313,7 +315,8 @@ export const getProductss = async (req: Request, res: Response) => {
     return res.json({
       items: products.map((p) => ({
         ...formatForCard(p),
-        price: p.priceCents ?? 0,
+        priceCents: p.priceCents ?? 0,
+        price: p.priceCents / 100,
       })),
       pagination: {
         page: pageNum,

@@ -22,16 +22,6 @@ export default function ProductPage() {
             <SearchBar3 />
           </div>
 
-          {/* Grid de Productos */}
-          <div className="w-full">
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 md:mb-8 gap-4 sm:gap-0">
-              <h2 className="TitleColor text-xl sm:text-2xl font-semibold">
-                Todos los Productos
-              </h2>
-            </div>
-            {/* 🔹 Ahora ProductGrid recibe el query */}
-            <ProductGrid query={query} />
-          </div>
           <div className="w-full mt-10">
             <h2> Product con paginacion </h2>
             <ProductList2 />
