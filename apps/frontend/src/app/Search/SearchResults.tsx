@@ -1,59 +1,69 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { ProductCard } from "@/app/Products/ProductCard";
 import { Product } from "@/types/products";
 import Pagination from "@/components/ui/Pagination";
-import { fetchSearchResults } from "@/services/NewProductService";
+import { fetchProductss } from "@/services/productss";
 
-export function SearchResults({ query }: { query: string }) {
+export function SearchResults() {
+  const searchParams = useSearchParams();
+  const query = searchParams.get("q") || "";
+  const category = searchParams.get("category") || "";
+  const minPrice = searchParams.get("minPrice");
+  const maxPrice = searchParams.get("maxPrice");
+  const page = Number(searchParams.get("page") || "1");
+
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
-  const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
-  // 🔹 Podrías hacerlo configurable, pero fijo está bien
   const postsPerPage = 6;
 
   useEffect(() => {
-    if (!query || query.trim().length < 2) return;
-
     setLoading(true);
 
-    fetchSearchResults(query, { page: currentPage, limit: postsPerPage })
+    fetchProductss(
+      page,
+      postsPerPage,
+      query.trim().length >= 2 ? query : undefined,
+    )
       .then((res) => {
         setProducts(res.items);
         setTotalPages(res.pagination.totalPages);
       })
-      .catch((err) => console.error("❌ Error en búsqueda:", err))
+      .catch((err) => console.error("❌ Error cargando productos:", err))
       .finally(() => setLoading(false));
-  }, [query, currentPage, postsPerPage]);
+  }, [query, category, minPrice, maxPrice, page]);
 
-  if (loading) return <p className="text-center">Buscando productos...</p>;
+  if (loading) return <p className="text-center">Cargando productos...</p>;
   if (products.length === 0)
-    return (
-      <p className="text-center">No se encontraron resultados para "{query}"</p>
-    );
+    return <p className="text-center">No se encontraron productos</p>;
 
   return (
     <div>
-      <div className="flex flex-col justify-between items-start sm:items-center mb-6 md:mb-8 gap-4 sm:gap-0">
+      {query && query.trim().length >= 2 && (
         <h2 className="TitleColor text-xl sm:text-2xl font-semibold py-10">
           Resultados para: <span className="text-blue-600">{query}</span>
         </h2>
+      )}
 
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-5 md:gap-6">
-          {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
-
-        <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={setCurrentPage}
-        />
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-5 md:gap-6">
+        {products.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
       </div>
+
+      <Pagination
+        currentPage={page}
+        totalPages={totalPages}
+        onPageChange={(newPage) => {
+          const params = new URLSearchParams(searchParams.toString());
+          params.set("page", newPage.toString());
+          window.history.pushState(null, "", `?${params.toString()}`);
+        }}
+      />
     </div>
   );
 }

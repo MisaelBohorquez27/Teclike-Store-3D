@@ -263,8 +263,8 @@ export const getProductss = async (req: Request, res: Response) => {
       minPrice,
       maxPrice,
       inStock,
-      page = "1",
-      limit = "12",
+      page,
+      limit,
     } = req.query;
 
     const pageNum = parseInt(page as string) || 1;
@@ -283,17 +283,19 @@ export const getProductss = async (req: Request, res: Response) => {
         page: pageNum,
       };
 
-      const results = await SearchService.searchProducts(searchParams);
+      const { results, total } = await SearchService.searchProducts(searchParams);
 
       return res.json({
         items: results.map((p) => ({
           ...formatForCard(p),
           price: p.price ?? 0,
+          category: p.category ?? "Uncategorized",
         })), // ✅ para mantener formato
         pagination: {
           page: searchParams.page,
           limit: searchParams.limit,
-          total: results.length,
+          total,
+          totalPages: Math.ceil(total / searchParams.limit),
           hasMore: results.length === searchParams.limit,
         },
       });

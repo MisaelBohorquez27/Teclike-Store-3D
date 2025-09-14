@@ -33,7 +33,7 @@ export function ProductList2({ query }: { query?: string }) {
   return (
     <div className="w-full">
       <div className="flex flex-col justify-between items-start sm:items-center mb-6 md:mb-8 gap-4 sm:gap-0">
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
           {products.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}

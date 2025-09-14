@@ -11,8 +11,8 @@ export const searchProducts = async (req: Request, res: Response) => {
       minPrice,
       maxPrice,
       inStock,
-      limit = "10",
-      page = "1"
+      limit,
+      page
     } = req.query;
 
     if (!query || typeof query !== 'string' || query.trim().length < 2) {
@@ -27,8 +27,8 @@ export const searchProducts = async (req: Request, res: Response) => {
       minPrice: minPrice ? parseFloat(minPrice as string) : undefined,
       maxPrice: maxPrice ? parseFloat(maxPrice as string) : undefined,
       inStock: inStock ? inStock === 'true' : undefined,
-      limit: parseInt(limit as string),
-      page: parseInt(page as string)
+      limit: parseInt(limit as string) || 10,
+      page: parseInt(page as string) || 1
     };
 
     const results = await SearchService.searchProducts(searchParams);
@@ -39,8 +39,8 @@ export const searchProducts = async (req: Request, res: Response) => {
       pagination: {
         page: searchParams.page,
         limit: searchParams.limit,
-        total: results.length,
-        hasMore: results.length === searchParams.limit
+        total: results.total,
+        hasMore: results.total > ((searchParams.page ?? 1) * (searchParams.limit ?? 10))
       }
     });
   } catch (error) {

@@ -26,6 +26,7 @@ export async function fetchSearchResults(
 }> {
   const params = new URLSearchParams({
     q: query,
+    category: options?.category || "",
     page: String(options?.page ?? 1),
     limit: String(options?.limit ?? 12),
     ...(options?.category ? { category: options.category } : {}),
