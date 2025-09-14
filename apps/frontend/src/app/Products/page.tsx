@@ -1,10 +1,9 @@
 "use client";
 import { useState } from "react";
-import { ProductGrid } from "@/app/Products/ProductGrid";
 import { ProductHero } from "./ProductHero";
 import { SearchBar3 } from "@/components/ui/SearchBar3";
-import { ProductList } from "./ProductList";
-import { ProductList2 } from "../Search/ProductList2";
+import { ProductList2 } from "./ProductList2";
+import { FilterSidebar } from "./FilterSidebar";
 
 export default function ProductPage() {
   const [query] = useState(""); // <-- Estado de búsqueda
@@ -15,15 +14,22 @@ export default function ProductPage() {
       <ProductHero />
 
       {/* Contenido Principal */}
-      <div className="container mx-auto px-4 sm:px-6 py-8 sm:py-10 md:py-12">
-        <div className="flex flex-col lg:flex-col gap-6 md:gap-8 items-center">
+      <div className="container mx-auto px-4 sm:px-6 py-2">
+        <div className="flex flex-col md:flex-row gap-6 md:gap-8">
           {/* Sidebar de Filtros */}
-          <div className="w-full flex justify-center pb-10">
-            <SearchBar3 />
+          <div className="md:w-1/4 flex-col justify-center py-5 md:justify-start items-center md:items-start">
+            <div className="w-full ">
+              <SearchBar3 />
+            </div>
+            <div className="w-full">
+              <aside>
+                {/* <FilterSidebar /> */}
+                <FilterSidebar />
+              </aside>
+            </div>
           </div>
 
-          <div className="w-full mt-10">
-            <h2> Product con paginacion </h2>
+          <div className="md:w-3/4 mt-5">
             <ProductList2 />
           </div>
         </div>

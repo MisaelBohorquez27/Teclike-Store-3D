@@ -5,7 +5,10 @@ import { SearchParams, SearchResult } from "../types/search";
 const prisma = new PrismaClient();
 
 export class SearchService {
-  static async searchProducts(params: SearchParams): Promise<SearchResult[]> {
+  static async searchProducts(params: SearchParams): Promise<{ 
+    results: SearchResult[]; 
+    total: number; 
+  }> {
     const {
       query,
       category,
@@ -87,6 +90,11 @@ export class SearchService {
       });
     }
 
+    // 🔹 1. contar total de coincidencias (sin paginación)
+    const total = await prisma.product.count({
+      where: whereConditions.AND.length > 0 ? whereConditions : undefined,
+    });
+
     // Ejecutar la consulta
     const products = await prisma.product.findMany({
       where: whereConditions.AND.length > 0 ? whereConditions : undefined,
@@ -128,7 +136,7 @@ export class SearchService {
     });
 
     // Ordenar por relevancia
-    return results.sort((a, b) => b.score - a.score);
+    return { results: results.sort((a, b) => b.score - a.score), total };
   }
 
   private static calculateRelevanceScore(
