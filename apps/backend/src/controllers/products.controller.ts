@@ -301,15 +301,60 @@ export const getProductss = async (req: Request, res: Response) => {
       });
     }
 
-    // 🟢 Caso 2: sin búsqueda → devolver todos los productos con paginación
+    // 🟢 Caso 2: sin búsqueda → aplicar filtros con paginación
+    const whereClause: any = {};
+
+    // Filtrar por categoría
+    if (category && typeof category === "string") {
+      whereClause.categoryProducts = {
+        some: {
+          category: {
+            name: category // Asumiendo que quieres filtrar por nombre de categoría
+          }
+        }
+      };
+    }
+
+    // Filtrar por precio mínimo
+    if (minPrice) {
+      whereClause.priceCents = {
+        ...whereClause.priceCents,
+        gte: parseFloat(minPrice as string) * 100 // Convertir a centavos
+      };
+    }
+
+    // Filtrar por precio máximo
+    if (maxPrice) {
+      whereClause.priceCents = {
+        ...whereClause.priceCents,
+        lte: parseFloat(maxPrice as string) * 100 // Convertir a centavos
+      };
+    }
+
+    // Filtrar por disponibilidad en stock
+    if (inStock) {
+      whereClause.stock = {
+        gt: inStock === "true" ? 0 : 0
+      };
+    }
+
     const [products, total] = await Promise.all([
       prisma.product.findMany({
-        include: { categoryProducts: { include: { category: true } } },
+        where: whereClause,
+        include: { 
+          categoryProducts: { 
+            include: { 
+              category: true 
+            } 
+          } 
+        },
         skip,
         take: limitNum,
         orderBy: { createdAt: "desc" },
       }),
-      prisma.product.count(),
+      prisma.product.count({
+        where: whereClause
+      }),
     ]);
 
     const totalPages = Math.ceil(total / limitNum);

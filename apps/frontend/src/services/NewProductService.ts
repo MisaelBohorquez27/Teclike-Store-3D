@@ -25,51 +25,38 @@ export async function fetchProductsBase(
 }> {
   const params = new URLSearchParams();
 
-  // Paginación
-  params.append("page", String(options.page ?? 1));
-  params.append("limit", String(options.limit ?? 12));
+  // 🔹 Paginación
+  params.set("page", String(options.page ?? 1));
+  params.set("limit", String(options.limit ?? 12));
 
-  // Búsqueda y filtros
-  if (options.q) params.append("q", options.q.trim());
-  if (options.category) params.append("category", options.category);
-  if (options.inStock !== undefined)
-    params.append("inStock", String(options.inStock));
-  if (options.minPrice !== undefined)
-    params.append("minPrice", String(options.minPrice));
-  if (options.maxPrice !== undefined)
-    params.append("maxPrice", String(options.maxPrice));
+  // 🔹 Búsqueda y filtros
+  if (options.q && options.q.trim().length > 0) params.set("q", options.q.trim());
+  if (options.category) params.set("category", options.category);
+  if (options.inStock !== undefined) params.set("inStock", String(options.inStock));
+  if (options.minPrice !== undefined) params.set("minPrice", String(options.minPrice));
+  if (options.maxPrice !== undefined) params.set("maxPrice", String(options.maxPrice));
 
   const res = await fetch(
     `http://localhost:5000/api/productss?${params.toString()}`,
     { cache: "no-store" }
   );
 
-  if (!res.ok) {
-    throw new Error("Error al obtener productos");
-  }
+  if (!res.ok) throw new Error("Error al obtener productos");
 
-  const data = await res.json();
-
-  return {
-    items: data.items,
-    pagination: data.pagination,
-  };
+  return res.json();
 }
 
 /**
- * Wrapper para catálogo general (paginación simple, sin búsqueda)
+ * 🔹 Wrapper para catálogo general (sin búsqueda, solo paginación)
  */
 export const fetchPaginatedProducts = (page = 1, limit = 12) =>
   fetchProductsBase({ page, limit });
 
 /**
- * Wrapper para resultados de búsqueda (con query + filtros)
+ * 🔹 Wrapper para búsqueda + filtros
  */
 export const fetchSearchResults = (
   query: string,
-  options?: Omit<ProductQueryOptions, "q">
-) =>
-  fetchProductsBase({
-    q: query,
-    ...options,
-  });
+  filters?: Omit<ProductQueryOptions, "q">
+) => fetchProductsBase({ q: query, ...filters });
+
