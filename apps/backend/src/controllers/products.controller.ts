@@ -283,7 +283,9 @@ export const getProductss = async (req: Request, res: Response) => {
         page: pageNum,
       };
 
-      const { results, total } = await SearchService.searchProducts(searchParams);
+      const { results, total } = await SearchService.searchProducts(
+        searchParams
+      );
 
       return res.json({
         items: results.map((p) => ({
@@ -306,20 +308,27 @@ export const getProductss = async (req: Request, res: Response) => {
 
     // Filtrar por categoría
     if (category && typeof category === "string") {
-      whereClause.categoryProducts = {
-        some: {
-          category: {
-            name: category // Asumiendo que quieres filtrar por nombre de categoría
-          }
-        }
-      };
+      const categories = category
+        .split(",")
+        .map((c) => c.trim())
+        .filter(Boolean);
+
+      if (categories.length > 0) {
+        whereClause.categoryProducts = {
+          some: {
+            category: {
+              name: { in: categories },
+            },
+          },
+        };
+      }
     }
 
     // Filtrar por precio mínimo
     if (minPrice) {
       whereClause.priceCents = {
         ...whereClause.priceCents,
-        gte: parseFloat(minPrice as string) * 100 // Convertir a centavos
+        gte: parseFloat(minPrice as string) * 100, // Convertir a centavos
       };
     }
 
@@ -327,33 +336,33 @@ export const getProductss = async (req: Request, res: Response) => {
     if (maxPrice) {
       whereClause.priceCents = {
         ...whereClause.priceCents,
-        lte: parseFloat(maxPrice as string) * 100 // Convertir a centavos
+        lte: parseFloat(maxPrice as string) * 100, // Convertir a centavos
       };
     }
 
     // Filtrar por disponibilidad en stock
     if (inStock) {
       whereClause.stock = {
-        gt: inStock === "true" ? 0 : 0
+        gt: inStock === "true" ? 0 : 0,
       };
     }
 
     const [products, total] = await Promise.all([
       prisma.product.findMany({
         where: whereClause,
-        include: { 
-          categoryProducts: { 
-            include: { 
-              category: true 
-            } 
-          } 
+        include: {
+          categoryProducts: {
+            include: {
+              category: true,
+            },
+          },
         },
         skip,
         take: limitNum,
         orderBy: { createdAt: "desc" },
       }),
       prisma.product.count({
-        where: whereClause
+        where: whereClause,
       }),
     ]);
 

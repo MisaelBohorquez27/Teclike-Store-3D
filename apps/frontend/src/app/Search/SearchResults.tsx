@@ -5,8 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { ProductCard } from "@/app/Products/ProductCard";
 import { Product } from "@/types/products";
 import Pagination from "@/components/ui/Pagination";
-import { fetchProductss } from "@/services/productss";
-import { fetchPaginatedProducts } from "@/services/NewProductService";
+import { fetchSearchResults } from "@/services/NewProductService";
 
 export function SearchResults() {
   const searchParams = useSearchParams();
@@ -22,14 +21,14 @@ export function SearchResults() {
 
   useEffect(() => {
     setLoading(true);
-    fetchPaginatedProducts(currentPage, postsPerPage)
+    fetchSearchResults(query, currentPage, postsPerPage)
       .then((res) => {
         setProducts(res.items);
         setTotalPages(res.pagination.totalPages);
       })
       .catch((err) => console.error(err))
       .finally(() => setLoading(false));
-  }, [currentPage, postsPerPage]);
+  }, [query, currentPage, postsPerPage]);
 
   if (loading) return <p className="text-center">Cargando productos...</p>;
   if (products.length === 0)
