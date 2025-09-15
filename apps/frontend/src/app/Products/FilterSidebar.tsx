@@ -53,7 +53,7 @@ export function FilterSidebar() {
     // Reiniciar paginación cuando aplico filtros
     params.set("page", "1");
 
-    router.push(`/Search?${params.toString()}`);
+    router.push(`/Products?${params.toString()}`);
     
   };
 

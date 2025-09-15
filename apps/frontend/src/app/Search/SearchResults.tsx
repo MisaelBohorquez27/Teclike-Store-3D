@@ -6,43 +6,37 @@ import { ProductCard } from "@/app/Products/ProductCard";
 import { Product } from "@/types/products";
 import Pagination from "@/components/ui/Pagination";
 import { fetchProductss } from "@/services/productss";
+import { fetchPaginatedProducts } from "@/services/NewProductService";
 
 export function SearchResults() {
   const searchParams = useSearchParams();
   const query = searchParams.get("q") || "";
-  const category = searchParams.get("category") || "";
-  const minPrice = searchParams.get("minPrice");
-  const maxPrice = searchParams.get("maxPrice");
-  const page = Number(searchParams.get("page") || "1");
 
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
+  // 🔹 Mejor: constante configurable (no necesitas `useState`)
   const postsPerPage = 6;
 
   useEffect(() => {
     setLoading(true);
-
-    fetchProductss(
-      page,
-      postsPerPage,
-      query.trim().length >= 2 ? query : undefined,
-    )
+    fetchPaginatedProducts(currentPage, postsPerPage)
       .then((res) => {
         setProducts(res.items);
         setTotalPages(res.pagination.totalPages);
       })
-      .catch((err) => console.error("❌ Error cargando productos:", err))
+      .catch((err) => console.error(err))
       .finally(() => setLoading(false));
-  }, [query, category, minPrice, maxPrice, page]);
+  }, [currentPage, postsPerPage]);
 
   if (loading) return <p className="text-center">Cargando productos...</p>;
   if (products.length === 0)
     return <p className="text-center">No se encontraron productos</p>;
 
   return (
-    <div>
+    <div className="w-full py-10">
       {query && query.trim().length >= 2 && (
         <h2 className="TitleColor text-xl sm:text-2xl font-semibold py-10">
           Resultados para: <span className="text-blue-600">{query}</span>
@@ -55,14 +49,11 @@ export function SearchResults() {
         ))}
       </div>
 
+      {/* 🔹 Ahora Pagination controla el flujo desde el backend */}
       <Pagination
-        currentPage={page}
+        currentPage={currentPage}
         totalPages={totalPages}
-        onPageChange={(newPage) => {
-          const params = new URLSearchParams(searchParams.toString());
-          params.set("page", newPage.toString());
-          window.history.pushState(null, "", `?${params.toString()}`);
-        }}
+        onPageChange={setCurrentPage}
       />
     </div>
   );
