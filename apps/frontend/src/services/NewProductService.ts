@@ -47,16 +47,20 @@ export async function fetchProductsBase(
 }
 
 /**
- * 🔹 Wrapper para catálogo general (sin búsqueda, solo paginación)
+ * 🔹 Wrapper para catálogo general + filtros
  */
-export const fetchPaginatedProducts = (page = 1, limit = 12) =>
-  fetchProductsBase({ page, limit });
+export const fetchPaginatedProducts = (
+  page: number,
+  limit: number,
+  filters?: Omit<ProductQueryOptions, "q">
+) => fetchProductsBase({ page, limit, ...filters });
 
 /**
- * 🔹 Wrapper para búsqueda + filtros
+ * 🔹 Wrapper para búsqueda 
  */
 export const fetchSearchResults = (
   query: string,
-  filters?: Omit<ProductQueryOptions, "q">
-) => fetchProductsBase({ q: query, ...filters });
+  page: number,
+  limit: number
+) => fetchProductsBase({ q: query, page, limit });
 
