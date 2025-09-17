@@ -1,5 +1,5 @@
 // hooks/useCart.ts
-'use client';
+"use client";
 
 import { useState, useEffect } from 'react';
 import { fetchCart, CartResponse, CartProduct } from '@/services/cart';

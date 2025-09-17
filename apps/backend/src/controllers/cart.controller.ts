@@ -189,9 +189,9 @@ export const addToCart = async (req: Request, res: Response) => {
     };
 
     res.json(transformedCart);
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error al agregar al carrito:", error);
-    res.status(500).json({ message: "Error interno del servidor" });
+    res.status(500).json({ message: "Error interno del servidor", error: error.message });
   }
 };
 
