@@ -6,7 +6,22 @@ import "swiper/css";
 import { CustomSwiper } from "./ui/CustomSwiper";
 import { fetchFeatured } from "@/services/topProdSelling";
 
-export function TopProductSell() {
+interface CartListProps {
+  onAddToCart: (productId: number, quantity: number) => Promise<void>;
+}
+
+export function TopProductSell({ 
+  onAddToCart 
+}: CartListProps) {
+
+  const handleAddToCart = async (id: string, newQuantity: number) => {
+    try {
+      await onAddToCart(parseInt(id), newQuantity);
+    } catch (error) {
+      console.error("Error al agregar al carrito:", error);
+    } 
+  };
+
   const [topProductsSell, setTopProductsSell] = useState<TopProductsSell[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -26,7 +41,7 @@ export function TopProductSell() {
   }, []);
 
   return (
-    <section className="BestSellersWeek-bg py-8 md:py-16">
+    <div className="BestSellersWeek-bg py-8 md:py-16">
       <div className="container mx-auto px-4 sm:px-6">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 md:mb-8 gap-4 sm:gap-0">
           <h2 className="TitleColor text-2xl sm:text-3xl font-bold">
@@ -50,7 +65,11 @@ export function TopProductSell() {
             <CustomSwiper
               items={topProductsSell}
               renderItem={(item) => (
-                <TopProductsSellCard key={item.id} topProductsSell={item} />
+                <TopProductsSellCard
+                  key={item.id}
+                  item={item}
+                  onAddToCart={handleAddToCart}
+                />
               )}
               breakpoints={{
                 640: { spaceBetween: 25, slidesPerView: 1 },
@@ -66,6 +85,6 @@ export function TopProductSell() {
           </motion.div>
         )}
       </div>
-    </section>
+    </div>
   );
 }

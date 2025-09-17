@@ -18,6 +18,7 @@ interface CartItemProps {
 }
 
 export function CartItem({ item, onUpdateQuantity, onRemove }: CartItemProps) {
+
   // Función segura para formatear precios
   const formatPrice = (price: number | undefined): string => {
     if (price === undefined || price === null || isNaN(price)) {
@@ -34,6 +35,7 @@ export function CartItem({ item, onUpdateQuantity, onRemove }: CartItemProps) {
     return `$${(price * quantity).toFixed(2)}`;
   };
 
+  // Manejar cambios de cantidad con validación
   const handleQuantityChange = (newQuantity: number) => {
     if (newQuantity >= 1 && newQuantity <= (item.stock || Infinity)) {
       onUpdateQuantity(item.id, newQuantity);
