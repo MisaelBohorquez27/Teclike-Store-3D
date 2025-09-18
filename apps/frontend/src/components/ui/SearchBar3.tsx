@@ -13,12 +13,12 @@ interface SearchBarProps {
   initialQuery?: string;
 }
 
-export function SearchBar3({ 
-  placeholder = "Buscar productos...", 
-  className = "", 
+export function SearchBar3({
+  placeholder = "Buscar productos...",
+  className = "",
   variant = "default",
   autoFocus = false,
-  initialQuery = ""
+  initialQuery = "",
 }: SearchBarProps) {
   const {
     query,
@@ -27,7 +27,7 @@ export function SearchBar3({
     isLoading,
     showSuggestions,
     setShowSuggestions,
-    search
+    search,
   } = useSearch();
 
   const [selectedIndex, setSelectedIndex] = useState(-1);
@@ -75,13 +75,13 @@ export function SearchBar3({
     switch (e.key) {
       case "ArrowDown":
         e.preventDefault();
-        setSelectedIndex(prev => 
+        setSelectedIndex((prev) =>
           prev < suggestions.length - 1 ? prev + 1 : prev
         );
         break;
       case "ArrowUp":
         e.preventDefault();
-        setSelectedIndex(prev => prev > 0 ? prev - 1 : -1);
+        setSelectedIndex((prev) => (prev > 0 ? prev - 1 : -1));
         break;
       case "Enter":
         e.preventDefault();
@@ -113,7 +113,7 @@ export function SearchBar3({
       case "expanded":
         return "px-6 py-3 text-lg border-2 border-gray-300 focus:border-blue-500 rounded-full";
       default:
-        return "px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent";
+        return "px-4 py-2 h-full border border-transparent rounded-l-lg"; // Cambiar el color del ring
     }
   };
 
@@ -124,14 +124,16 @@ export function SearchBar3({
       case "expanded":
         return "bg-white rounded-full shadow-lg";
       default:
-        return "bg-white rounded-lg";
+        return "bg-white rounded-lg border border-gray-300 focus-within:border-transparent focus-within:ring-2 focus-within:ring-blue-500"; // Cambiar el color del ring
     }
   };
 
   return (
-    <div className={`relative w-full max-w-xs sm:max-w-sm md:max-w-md ${className}`}>
-      <form 
-        onSubmit={handleSubmit} 
+    <div
+      className={`relative w-full max-w-xs sm:max-w-sm md:max-w-md flex ${className}`}
+    >
+      <form
+        onSubmit={handleSubmit}
         className={`relative flex items-center ${getContainerStyles()}`}
       >
         <input
@@ -144,15 +146,15 @@ export function SearchBar3({
           onBlur={handleBlur}
           placeholder={placeholder}
           autoFocus={autoFocus}
-          className={`w-full bg-transparent focus:outline-none ${getVariantStyles()}`}
+          className={`w-full focus:outline-none m-auto h-full ${getVariantStyles()}`}
         />
-        
+
         <button
           type="submit"
           className={`flex-shrink-0 ${
-            variant === "minimal" 
-              ? "text-gray-500 hover:text-gray-700 px-2" 
-              : "bg-blue-600 text-white hover:bg-blue-700 rounded-r-lg px-4 py-2"
+            variant === "minimal"
+              ? "text-gray-500 hover:text-gray-700 px-2"
+              : "bg-gray-100 text-gray-500 rounded-r-lg px-3.5 py-2 h-full hover:bg-gray-200 cursor-pointer"
           }`}
         >
           <svg
