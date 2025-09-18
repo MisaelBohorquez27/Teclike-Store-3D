@@ -14,17 +14,17 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
       <button
         disabled={currentPage === 1}
         onClick={() => onPageChange(currentPage - 1)}
-        className="mx-1 px-3 py-1 border rounded disabled:opacity-50"
+        className="mx-1 px-3 py-1 bg-gray-100 rounded-lg disabled:opacity-60 cursor-pointer disabled:cursor-auto"
       >
-        Anterior
+        Prev
       </button>
 
       {pages.map((page) => (
         <button
           key={page}
           onClick={() => onPageChange(page)}
-          className={`mx-1 px-3 py-1 border rounded ${
-            currentPage === page ? "bg-blue-600 text-white" : ""
+          className={`mx-1 px-3.5 py-1 rounded-lg bg-gray-100 text-black hover:bg-gray-300 ${
+            currentPage === page ? "bg-gray-300 text-black" : ""
           }`}
         >
           {page}
@@ -34,9 +34,9 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
       <button
         disabled={currentPage === totalPages}
         onClick={() => onPageChange(currentPage + 1)}
-        className="mx-1 px-3 py-1 border rounded disabled:opacity-50"
+        className="mx-1 px-3 py-1 bg-gray-100 rounded-lg disabled:opacity-60 cursor-pointer"
       >
-        Siguiente
+        Next
       </button>
     </div>
   );
