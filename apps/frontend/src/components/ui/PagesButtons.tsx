@@ -26,7 +26,7 @@ const Button: FC<ButtonProps> = ({
       className={cn(
         "inline-flex items-center justify-center rounded-lg font-medium transition-all duration-200",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
-        "disabled:opacity-70 disabled:cursor-not-allowed",
+        "disabled:opacity-70 disabled:cursor-not-allowed cursor-pointer",
         // Variants
         variant === "primary" && "Button-bg TextColor2 border border-transparent",
         variant === "secondary" && "Button-bg TextColor2 border border-transparent",
