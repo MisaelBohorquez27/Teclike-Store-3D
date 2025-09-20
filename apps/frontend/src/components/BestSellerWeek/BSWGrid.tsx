@@ -1,9 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
-import { TopProductsSell, TopProductsSellCard } from "./TopProductsSellCard";
+import { TopProductsSell, TopProductsSellCard } from "./BSWCard";
 import { motion } from "framer-motion";
 import "swiper/css";
-import { CustomSwiper } from "./ui/CustomSwiper";
+import { CustomSwiper } from "../ui/CustomSwiper";
 import { fetchFeatured } from "@/services/topProdSelling";
 
 interface CartListProps {

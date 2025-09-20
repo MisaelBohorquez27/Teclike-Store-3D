@@ -1,7 +1,7 @@
 "use client";
 
 import { useCart } from "@/hooks/useCart";
-import { TopProductSell } from "./TopProductsSell";
+import { TopProductSell } from "./BSWGrid";
 
 
 export function TopProductSellPage() {

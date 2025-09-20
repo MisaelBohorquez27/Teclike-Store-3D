@@ -1,14 +1,14 @@
-import { Rating } from "./ui/Rating";
-import CartIcon from "./ui/CartIcon";
+import { Rating } from "../ui/Rating";
+import CartIcon from "../ui/CartIcon";
 
 export type Offer = {
   id: number;
-  title: string;
+  brand: string;
   name?: string;
   rating: number;
   image?: string;
   discount: string;
-  price: string;
+  originalPrice: string;
 };
 
 export function OfferCard({ offer }: { offer: Offer }) {
@@ -28,14 +28,14 @@ export function OfferCard({ offer }: { offer: Offer }) {
 
         <div className="mt-3 sm:mt-4 md:mt-5">
           <h3 className="text-base sm:text-lg md:text-xl font-semibold text-gray-800 truncate">
-            {offer.title}
+            {offer.brand}
           </h3>
           <Rating value={offer.rating} />
         </div>
 
         <div className="mt-2 sm:mt-3 flex justify-between items-center px-2 sm:px-4">
           <span className="text-lg sm:text-xl md:text-2xl font-bold text-gray-800">
-            {offer.price}
+            {offer.originalPrice}
           </span>
           <div className="rounded-xl sm:rounded-2xl p-2 sm:p-3 flex items-center justify-center hover:shadow-md transition-shadow border border-gray-100">
             <CartIcon />

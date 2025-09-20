@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import "swiper/css";
 import Button from "@/components/ui/PagesButtons";
-import { OfferCard } from "@/components/OfferCard";
-import { CustomSwiper } from "./ui/CustomSwiper";
+import { OfferCard } from "@/components/Offers/OfferCard";
+import { CustomSwiper } from "../ui/CustomSwiper";
 import { Offer } from "./OfferCard";
 import { fetchFeaturedOffers } from "@/services/offers";
 
