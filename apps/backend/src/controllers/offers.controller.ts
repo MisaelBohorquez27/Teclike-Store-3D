@@ -42,10 +42,11 @@ function shuffle<T>(arr: T[]): T[] {
   return a;
 }
 
-// 🔧 Ajustar fechas para ofertas anuales
+// 🔧 Ajustar fechas para ofertas recurrentes
 function adjustOfferDates(offer: OfferWithProducts): OfferWithProducts {
+  const now = new Date();
+
   if (offer.recurrence === "yearly") {
-    const now = new Date();
     const start = new Date(offer.startDate);
     const end = new Date(offer.endDate);
     const currentYear = now.getFullYear();
@@ -53,88 +54,77 @@ function adjustOfferDates(offer: OfferWithProducts): OfferWithProducts {
     start.setFullYear(currentYear);
     end.setFullYear(currentYear);
 
-    // Si ya terminó este año → mover al próximo
     if (end < now) {
       start.setFullYear(currentYear + 1);
       end.setFullYear(currentYear + 1);
     }
 
     return { ...offer, startDate: start, endDate: end };
-  } else if (offer.recurrence === "daily") {
-    const now = new Date();
+  }
+
+  if (offer.recurrence === "daily") {
     const start = new Date(now);
     const end = new Date(now);
-    const currentDay = now.getDate();
-
-    // Si ya terminó hoy → mover al próximo día
     if (end < now) {
-      start.setDate(currentDay + 1);
-      end.setDate(currentDay + 1);
+      start.setDate(now.getDate() + 1);
+      end.setDate(now.getDate() + 1);
     }
-
     return { ...offer, startDate: start, endDate: end };
   }
+
   return offer;
 }
-// Verifica si hay una oferta activa, si esta dentro de StartDate y EndDate
+
 function isOfferActive(offer: OfferWithProducts): boolean {
   const now = new Date();
   return now >= offer.startDate && now <= offer.endDate;
 }
 
 // 📌 GET /api/offers
+// Opcional: ?recurrence=daily&limit=6
 export const getOffers = async (req: Request, res: Response) => {
   try {
-    // 1) Traer TODAS las ofertas con sus productos
+    const recurrence = (req.query.recurrence as string) || null;
+    const limit = parseInt(req.query.limit as string) || 6;
+
+    // 1) Traer todas las ofertas o filtrar por recurrencia
     let offers: OfferWithProducts[] = await prisma.offer.findMany({
+      where: recurrence ? { recurrence } : {},
       include: { offerProducts: { include: { product: true } } },
     });
 
     // 2) Ajustar fechas y filtrar activas
     offers = offers.map(adjustOfferDates).filter(isOfferActive);
 
-    // 3) Separar por recurrencia
-    const yearlyOffers = offers.filter((o) => o.recurrence === "yearly");
-    const dailyOffers = offers.filter((o) => o.recurrence === "daily");
-
-    let selectedOffers: OfferWithProducts[] = [];
-
-    // 🎄 Priorizar las de temporada si hay activas
-    if (yearlyOffers.length > 0) {
-      selectedOffers = yearlyOffers;
-    } else if (dailyOffers.length > 0) {
-      // 🔄 Si no hay de temporada, usar daily
-      selectedOffers = dailyOffers;
-    }
-
-    // 4) Si no hay NINGUNA → fallback a productos recientes
-    if (selectedOffers.length === 0) {
+    // 3) Fallback si no hay ninguna oferta activa
+    if (offers.length === 0) {
       const fallbackProducts = await prisma.product.findMany({
-        take: 3,
+        take: limit,
         orderBy: { createdAt: "desc" },
       });
 
-      const fallbackItems = fallbackProducts.map((p) => ({
-        id: p.id,
-        title: p.name,
-        name: p.brand,
-        rating: 4.8,
-        image: p.imageUrl ?? "/products/default.png",
-        discount: "-10%",
-        price: formatCurrency(Math.round(p.priceCents * 0.9), p.currency),
-      }));
-
-      return res.json(fallbackItems);
+      return res.json(
+        fallbackProducts.map((p) => ({
+          id: p.id,
+          title: p.name,
+          name: p.brand,
+          rating: 4.8,
+          image: p.imageUrl ?? "/products/default.png",
+          discount: "-10%",
+          price: formatCurrency(Math.round(p.priceCents * 0.9), p.currency),
+        }))
+      );
     }
 
-    // 5) Construir lista de productos de las ofertas seleccionadas
-    const pairs = selectedOffers.flatMap((offer) =>
+    // 4) Construir lista productos+oferta
+    const pairs = offers.flatMap((offer) =>
       offer.offerProducts.map((op) => ({ offer, product: op.product }))
     );
 
-    // Mezclar y tomar hasta 6 productos
-    const selected = shuffle(pairs).slice(0, 6);
+    // 5) Mezclar y limitar
+    const selected = shuffle(pairs).slice(0, limit);
 
+    // 6) Formatear
     const items = selected.map(({ offer, product }) => {
       const { discountedCents, discountLabel } = computeDiscount(
         product.priceCents,
@@ -150,12 +140,15 @@ export const getOffers = async (req: Request, res: Response) => {
         image: product.imageUrl ?? "/products/default.png",
         discount: discountLabel,
         price: formatCurrency(discountedCents, product.currency),
+        timeLeft: Math.ceil(
+          (new Date(offer.endDate).getTime() - Date.now()) / (1000 * 60 * 60)
+        ), // horas restantes
       };
     });
 
     res.json(items);
   } catch (err) {
-    console.error("❌ Error fetching featured offers:", err);
-    res.status(500).json({ message: "Error al obtener ofertas destacadas" });
+    console.error("❌ Error fetching offers:", err);
+    res.status(500).json({ message: "Error al obtener ofertas" });
   }
 };

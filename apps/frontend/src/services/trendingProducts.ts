@@ -1,5 +1,6 @@
 import { Product } from "@/types/products";
 
+// Tal vez para im futuro, por el momento no se usa
 // Obtener productos destacados (nuevos, mejor valorados, etc.)
 export async function fetchFeaturedProducts(type: 'new' | 'popular' | 'discounted' = 'new', limit: number = 8): Promise<Product[]> {
   try {

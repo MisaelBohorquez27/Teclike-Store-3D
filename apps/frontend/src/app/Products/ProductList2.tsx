@@ -83,11 +83,11 @@ export function ProductList2() {
   return (
     <div className="w-full">
       <div className="flex flex-col md:flex-row gap-6 md:gap-8">
-        <div className="md:w-1/4 flex-col justify-center py-5 md:justify-start items-center md:items-start">
-          <div className="w-full ">
+        <div className="md:w-1/4 flex flex-col justify-center py-5 md:justify-start items-center md:items-start">
+          <div className="w-full flex justify-center">
             <SearchBar3 />
           </div>
-          <div className="w-full">
+          <div className="w-full flex justify-center md:justify-start">
             <aside>
               <FilterSidebar />
             </aside>
