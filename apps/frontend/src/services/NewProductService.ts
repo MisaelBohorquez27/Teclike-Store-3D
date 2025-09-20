@@ -20,7 +20,7 @@ export async function fetchProductsBase(
     limit: number;
     total: number;
     totalPages: number;
-    hasMore: boolean;
+    hasMore: boolean; 
   };
 }> {
   const params = new URLSearchParams();

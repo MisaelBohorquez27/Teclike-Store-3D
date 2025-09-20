@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import "swiper/css";
 import { CustomSwiper } from "./ui/CustomSwiper";
 import { fetchProducts } from "@/services/products";
+import { fetchProductsBase } from "@/services/NewProductService";
 
 export interface TrendingProduct {
   id: number;
@@ -18,8 +19,8 @@ export function TrendingProducts() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchProducts()
-      .then(setProducts)
+    fetchProductsBase()
+      .then((res) => setProducts(res.items))
       .catch((err) => console.error(err))
       .finally(() => setLoading(false));
   }, []);
