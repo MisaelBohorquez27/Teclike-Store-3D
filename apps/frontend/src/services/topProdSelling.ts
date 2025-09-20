@@ -1,5 +1,5 @@
 // src/services/TopProdSelling.ts
-import { TopProductsSell } from "@/components/TopProductsSellCard";
+import { TopProductsSell } from "@/components/BestSellerWeek/BSWCard";
 
 export async function fetchFeatured(limit = 6): Promise<TopProductsSell[]> {
   const res = await fetch(`http://localhost:5000/api/topSellingProd?limit=${limit}`, {

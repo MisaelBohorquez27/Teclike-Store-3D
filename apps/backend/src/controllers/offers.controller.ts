@@ -45,6 +45,10 @@ function shuffle<T>(arr: T[]): T[] {
 // 🔧 Ajustar fechas para ofertas recurrentes
 function adjustOfferDates(offer: OfferWithProducts): OfferWithProducts {
   const now = new Date();
+  const tomorrow = new Date(now);
+  tomorrow.setDate(now.getDate() + 1);
+  tomorrow.setHours(0, 0, 0, 0);
+  const endDay = tomorrow;
 
   if (offer.recurrence === "yearly") {
     const start = new Date(offer.startDate);
@@ -64,7 +68,7 @@ function adjustOfferDates(offer: OfferWithProducts): OfferWithProducts {
 
   if (offer.recurrence === "daily") {
     const start = new Date(now);
-    const end = new Date(now);
+    const end = new Date(endDay);
     if (end < now) {
       start.setDate(now.getDate() + 1);
       end.setDate(now.getDate() + 1);
@@ -134,12 +138,13 @@ export const getOffers = async (req: Request, res: Response) => {
 
       return {
         id: product.id,
-        title: product.name,
-        name: product.brand,
-        rating: 0,
+        brand: product.brand,
+        name: product.name,
+        rating: 5, // temporal
         image: product.imageUrl ?? "/products/default.png",
         discount: discountLabel,
-        price: formatCurrency(discountedCents, product.currency),
+        originalPrice: formatCurrency(product.priceCents, product.currency),
+        discountPrice: formatCurrency(discountedCents, product.currency),
         timeLeft: Math.ceil(
           (new Date(offer.endDate).getTime() - Date.now()) / (1000 * 60 * 60)
         ), // horas restantes

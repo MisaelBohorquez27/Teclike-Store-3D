@@ -7,9 +7,9 @@ export type Deal = {
   reactKey: Key | null | undefined;
   id: number;
   name: string;
-  originalPrice: number;
-  discountPrice: number;
-  discount: number;
+  originalPrice: string;
+  discountPrice: string;
+  discount: string;
   image: string;
   timeLeft?: number;
 };
@@ -31,7 +31,7 @@ export function DealCard({
           className="w-full h-48 object-cover"
         />
         <div className="absolute top-2 right-2 DealCard-Discount text-sm font-bold px-2 py-1 rounded">
-          -{deal.discount}%
+          {deal.discount}
         </div>
       </div>
 
@@ -42,10 +42,10 @@ export function DealCard({
         {/* Precios */}
         <div className="flex items-center space-x-2 mb-3">
           <span className="text-xl font-bold DealCard-Price">
-            ${deal.discountPrice.toFixed(2)}
+            {deal.discountPrice}
           </span>
           <span className="text-gray-500 line-through">
-            ${deal.originalPrice.toFixed(2)}
+            {deal.originalPrice}
           </span>
         </div>
 
