@@ -1,8 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import "swiper/css";
-import { CustomSwiper } from "./ui/CustomSwiper";
-import { fetchProducts } from "@/services/products";
+import { CustomSwiper } from "../ui/CustomSwiper";
 import { fetchProductsBase } from "@/services/NewProductService";
 
 export interface TrendingProduct {

@@ -3,8 +3,9 @@ import { useEffect, useRef, useState } from "react";
 import { SwiperSlide } from "swiper/react";
 import "swiper/css";
 import type SwiperCore from "swiper";
-import { BaseSwiper } from "./ui/BaseSwiper";
-import { ReviewCard, Review } from "./ui/ReviewCard";
+import { BaseSwiper } from "../ui/BaseSwiper";
+import { ReviewCard } from "./ReviewCard";
+import { Review } from "../../types/review";
 import { fetchFeaturedReviews } from "@/services/reviews";
 
 export function CustomerReviews() {

@@ -4,7 +4,7 @@ import { TopProductsSell, TopProductsSellCard } from "./BSWCard";
 import { motion } from "framer-motion";
 import "swiper/css";
 import { CustomSwiper } from "../ui/CustomSwiper";
-import { fetchFeatured } from "@/services/topProdSelling";
+import { fetchFeatured } from "@/services/BestSellerWeek";
 
 interface CartListProps {
   onAddToCart: (productId: number, quantity: number) => Promise<void>;
@@ -48,7 +48,7 @@ export function TopProductSell({
             Más vendido de la semana
           </h2>
           <button className="text-blue-600 hover:text-blue-800 font-medium text-base sm:text-lg">
-            Ver todos los productos →
+            <a href="/Products">Ver todos los productos →</a>
           </button>
         </div>
 
