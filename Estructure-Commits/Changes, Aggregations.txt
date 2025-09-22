@@ -13,3 +13,7 @@ add('Lo que se agregó')
 Arreglar algun bug
 
 Fix('lo que se arregló')
+
+Refactorizar Componentes
+
+ref('Lo que se refactorizó')
