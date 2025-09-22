@@ -1,4 +1,4 @@
-import { DailyOffers } from "@/components/Offers/DailyOffers";
+import { DailyOffers } from "@/components/DailyOffers/DailyOffersPage";
 import { HeroBanner } from "@/components/HeroBanner";
 import { TrendingProducts } from "@/components/TrendingProducts/TrendingProducts";
 import { CustomerReviews } from "@/components/CustomerReview/CustomerReviews";

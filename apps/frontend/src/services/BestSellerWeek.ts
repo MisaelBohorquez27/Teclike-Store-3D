@@ -1,14 +1,16 @@
-// src/services/TopProdSelling.ts
-import { TopProductsSell } from "@/components/BestSellerWeek/BSWCard";
+import { ProductForDetail } from "@/types/productss";
 
-export async function fetchFeatured(limit = 6): Promise<TopProductsSell[]> {
-  const res = await fetch(`http://localhost:5000/api/topSellingProd?limit=${limit}`, {
-    cache: "no-store",
-  });
-
-  if (!res.ok) {
-    throw new Error("Error al obtener productos más vendidos");
+export const fetchFeatured = async (limit = 6): Promise<ProductForDetail[]> => {
+  try {
+    const response = await fetch(`http://localhost:5000/api/topSellingProd?limit=${limit}`);
+    if (!response.ok) {
+      throw new Error(`Error ${response.status}: ${response.statusText}`);
+    }
+    
+    const data = await response.json();
+    return data as ProductForDetail[];
+  } catch (error) {
+    console.error('Error fetching top selling products:', error);
+    throw error;
   }
-
-  return res.json();
-}
+};

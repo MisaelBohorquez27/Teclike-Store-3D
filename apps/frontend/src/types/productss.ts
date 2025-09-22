@@ -1,0 +1,63 @@
+// types/product.ts
+
+// Interfaz base con los campos esenciales que todos los productos comparten.
+export interface BaseProduct {
+  id: number;
+  name: string;
+  slug: string;
+  brand?: string;
+  currency: string;
+}
+
+// Interfaz para la vista de listado o tarjeta de producto.
+// Contiene lo necesario para una vista compacta.
+export interface ProductForCard extends BaseProduct {
+  category: string;
+  price: number;
+  rating: number;
+  reviewCount: number;
+  image: string;
+  isNew?: boolean;
+  inStock?: boolean;
+  
+  // Atributos específicos para ofertas
+  discountPercentage?: number;
+  originalPriceCents?: number;
+}
+
+// Interfaz para la vista de detalle de un producto.
+// Contiene toda la información completa del producto.
+export interface ProductForDetail extends ProductForCard {
+  description: string;
+  imageUrl?: string;
+  specifications?: Record<string, string>;
+  reviews?: any[];
+}
+
+// Tipo para resultados de búsqueda, que se basa en la vista de tarjeta.
+export interface SearchProduct extends ProductForCard {
+  score?: number;
+}
+
+// Tipo genérico para respuestas de API paginadas.
+export interface PaginatedResponse<T> {
+  items: any;
+  data: T[];
+  pagination: {
+    page: number;
+    limit: number;
+    total: number;
+    totalPages: number;
+    hasMore: boolean;
+  };
+}
+
+// Interfaz para los filtros de productos.
+export interface ProductFilters {
+  category?: string;
+  inStock?: boolean;
+  minPrice?: number;
+  maxPrice?: number;
+  sortBy?: string;
+  sortOrder?: 'asc' | 'desc';
+}
