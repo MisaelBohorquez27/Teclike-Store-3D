@@ -21,7 +21,7 @@ export function TopProductsSellCard({ item, onAddToCart }: ProductsProps) {
   return (
     <div className="bg-transparent p-8 flex flex-col md:flex-row gap-8">
       {/* Columna izquierda - Imagen */}
-      <ImageColumn image={item.image} name={item.name} />
+      <ImageColumn image={item.image ?? ""} name={item.name} />
       
       {/* Columna derecha - Contenido */}
       <ContentColumn item={item} onAddToCart={onAddToCart} />
@@ -33,7 +33,7 @@ const ImageColumn = ({ image, name }: { image: string; name: string }) => (
   <div className="md:w-1/2 p-8">
     <div className="w-full">
       <Image
-        src={image || "/products/mouse-x11.png"}
+        src={image || ""}
         alt={name}
         width={1000}
         height={400}
@@ -45,7 +45,7 @@ const ImageColumn = ({ image, name }: { image: string; name: string }) => (
 
 const ContentColumn = ({ item, onAddToCart }: ProductsProps) => (
   <div className="Card-bg rounded-2xl md:w-1/2 p-8 flex flex-col gap-5 justify-center">
-    <ProductInfo name={item.name} description={item.description} />
+    <ProductInfo name={item.name} description={item.description ?? ""} />
     <ProductPrice price={item.price} currency={item.currency} />
     <ProductRating rating={item.rating} reviewCount={item.reviewCount} />
     <AddToCartSection onAddToCart={(quantity: number) => onAddToCart(item.id.toString(), quantity)} inStock={item.inStock} />

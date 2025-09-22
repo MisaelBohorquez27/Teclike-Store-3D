@@ -47,7 +47,6 @@ export function TopProductSell({ onAddToCart }: CartListProps) {
                   key={item.id}
                   item={item}
                   onAddToCart={handleAddToCart}
-                  alt={item.name}
                 />
               )}
               breakpoints={{

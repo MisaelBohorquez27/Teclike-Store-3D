@@ -28,7 +28,7 @@ export interface ProductForCard extends BaseProduct {
 // Interfaz para la vista de detalle de un producto.
 // Contiene toda la información completa del producto.
 export interface ProductForDetail extends ProductForCard {
-  description: string;
+  description?: string;
   imageUrl?: string;
   specifications?: Record<string, string>;
   reviews?: any[];
