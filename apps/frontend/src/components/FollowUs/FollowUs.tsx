@@ -2,11 +2,11 @@
 import { motion } from "framer-motion";
 import { FiInstagram } from "react-icons/fi";
 import Image from "next/image";
-import { Subscription } from "./ui/Subscription";
+import { Subscription } from "../ui/Subscription";
 import { SwiperSlide } from "swiper/react";
 import "swiper/css";
-import Button from "./ui/PagesButtons";
-import { BaseSwiper } from "./ui/BaseSwiper";
+import Button from "../ui/PagesButtons";
+import { BaseSwiper } from "../ui/BaseSwiper";
 
 export function FollowUs() {
   // Array de imágenes de ejemplo (reemplaza con tus propias imágenes)
