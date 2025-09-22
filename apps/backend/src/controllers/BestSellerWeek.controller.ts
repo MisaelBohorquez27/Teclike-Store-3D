@@ -23,22 +23,54 @@ export const getTopSellingProducts = async (req: Request, res: Response) => {
       take: 5, // top 5 más vendidos
     });
 
-    // 2) Buscar info de esos productos
+    // 2) Buscar info completa de esos productos
     const productDetails = await prisma.product.findMany({
       where: {
         id: { in: topProducts.map((p) => p.productId) },
       },
+      include: {
+        categoryProducts: {
+          include: {
+            category: true
+          }
+        },
+        // Incluir relaciones para rating si las tienes
+        reviews: true,
+        // Incluir stock si es una relación o campo directo
+        inventory: true
+      },
     });
 
-    // 3) Mapear al formato esperado
+    // 3) Mapear al formato ProductForCard
     const result = topProducts.map((tp) => {
       const product = productDetails.find((p) => p.id === tp.productId);
+      
+      // Calcular rating promedio
+      const rating = product?.reviews && product.reviews.length > 0 
+        ? product.reviews.reduce((sum, review) => sum + review.rating, 0) / product.reviews.length 
+        : 0;
+      
+      // Obtener categoría
+      const category = product?.categoryProducts?.[0]?.category?.name || "";
+      
+      // Obtener imagen (ajusta según tu estructura de datos)
+      const image = product?.imageUrl || `/products/${product?.id}.jpg` || "/products/mouse-x11.png";
+      
       return {
         id: product?.id ?? 0,
-        title: product?.name ?? "Unknown",
-        description: product?.description ?? "",
+        name: product?.name ?? "Unknown",
+        slug: product?.slug ?? `product-${product?.id}`,
+        category: category,
         price: (product?.priceCents ?? 0) / 100,
         currency: product?.currency ?? "USD",
+        rating: rating,
+        reviewCount: product?.reviews?.length ?? 0,
+        image: image,
+        isNew: product?.createdAt ? 
+          (new Date().getTime() - new Date(product.createdAt).getTime()) < (30 * 24 * 60 * 60 * 1000) : false, // Nuevo si creado hace menos de 30 días
+        inStock: (product?.inventory?.stock ?? 0) > 0,
+        brand: product?.brand ?? "",
+        description: product?.description ?? "",
       };
     });
 
