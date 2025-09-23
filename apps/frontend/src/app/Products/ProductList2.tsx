@@ -1,11 +1,9 @@
 // components/ProductList2.tsx
 "use client";
 
-import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { ProductCard } from "@/app/Products/ProductCard";
 import Pagination from "@/components/ui/Pagination";
-import { fetchProductsBase } from "@/services/NewProductService";
 import { SearchBar3 } from "@/components/ui/SearchBar3";
 import { FilterSidebar } from "./FilterSidebar";
 import { useProductLoader } from "@/hooks/useProductLoader";

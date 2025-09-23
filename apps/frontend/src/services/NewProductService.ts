@@ -1,20 +1,11 @@
 // services/productService.ts
-import { Product } from "@/types/products";
+import { BaseProduct, ProductQueryOptions } from "@/types/productss";
 
-export interface ProductQueryOptions {
-  page?: number;
-  limit?: number;
-  q?: string;
-  category?: string;
-  inStock?: boolean;
-  minPrice?: number;
-  maxPrice?: number;
-}
 
 export async function fetchProductsBase(
   options: ProductQueryOptions = {}
 ): Promise<{
-  items: Product[];
+  items: BaseProduct[];
   pagination: {
     page: number;
     limit: number;
@@ -37,7 +28,7 @@ export async function fetchProductsBase(
   if (options.maxPrice !== undefined) params.set("maxPrice", String(options.maxPrice));
 
   const res = await fetch(
-    `http://localhost:5000/api/productss?${params.toString()}`,
+    `http://localhost:5000/api/products?${params.toString()}`,
     { cache: "no-store" }
   );
 

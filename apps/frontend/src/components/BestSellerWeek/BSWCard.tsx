@@ -46,7 +46,7 @@ const ImageColumn = ({ image, name }: { image: string; name: string }) => (
 const ContentColumn = ({ item, onAddToCart }: ProductsProps) => (
   <div className="Card-bg rounded-2xl md:w-1/2 p-8 flex flex-col gap-5 justify-center">
     <ProductInfo name={item.name} description={item.description ?? ""} />
-    <ProductPrice price={item.price} currency={item.currency} />
+    <ProductPrice price={item.originalPrice} currency={item.currency} />
     <ProductRating rating={item.rating} reviewCount={item.reviewCount} />
     <AddToCartSection onAddToCart={(quantity: number) => onAddToCart(item.id.toString(), quantity)} inStock={item.inStock} />
   </div>
@@ -59,9 +59,9 @@ const ProductInfo = ({ name, description }: { name: string; description: string 
   </div>
 );
 
-const ProductPrice = ({ price, currency }: { price: number; currency: string }) => (
+const ProductPrice = ({ price, currency }: { price: string; currency: string }) => (
   <div className="TextColor text-2xl font-bold mb-4">
-    {currency} {price.toFixed(2)}
+    {currency} {parseFloat(price).toFixed(2)}
   </div>
 );
 

@@ -1,14 +1,4 @@
-interface Review {
-  id: number;
-  user: string;
-  rating: number;
-  comment: string;
-  date: string;
-}
-
-interface ProductReviewsProps {
-  reviews: Review[];
-}
+import { ProductReviewsProps } from "@/types/review";
 
 export function ProductReviews({ reviews }: ProductReviewsProps) {
   // Función para formatear la fecha

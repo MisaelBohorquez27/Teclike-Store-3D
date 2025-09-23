@@ -1,16 +1,25 @@
+// controllers/productController.ts
 import { Request, Response } from "express";
 import prisma from "../prisma";
+
+/* 🔧 Utilidad para formatear precios */
+function formatCurrency(cents: number, currency: string) {
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency,
+  }).format(cents / 100);
+}
 
 export const getTopSellingProducts = async (req: Request, res: Response) => {
   try {
     const oneWeekAgo = new Date();
     oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
 
-    // 1) Agrupamos por producto
+    // 1) Agrupamos ventas por producto (ajusta el modelo si es `orderProduct`)
     const topProducts = await prisma.orderProducts.groupBy({
       by: ["productId"],
       where: {
-        createdAt: { gte: oneWeekAgo },
+        createdAt: { gte: oneWeekAgo }, 
       },
       _sum: {
         quantity: true,
@@ -20,8 +29,12 @@ export const getTopSellingProducts = async (req: Request, res: Response) => {
           quantity: "desc",
         },
       },
-      take: 5, // top 5 más vendidos
+      take: 5,
     });
+
+    if (topProducts.length === 0) {
+      return res.json([]); // nada vendido en la última semana
+    }
 
     // 2) Buscar info completa de esos productos
     const productDetails = await prisma.product.findMany({
@@ -29,50 +42,45 @@ export const getTopSellingProducts = async (req: Request, res: Response) => {
         id: { in: topProducts.map((p) => p.productId) },
       },
       include: {
-        categoryProducts: {
-          include: {
-            category: true
-          }
-        },
-        // Incluir relaciones para rating si las tienes
+        categoryProducts: { include: { category: true } },
         reviews: true,
-        // Incluir stock si es una relación o campo directo
-        inventory: true
+        inventory: true,
       },
     });
 
-    // 3) Mapear al formato ProductForCard
+    // 3) Mapear al formato estándar (igual que en products.controller.ts)
     const result = topProducts.map((tp) => {
       const product = productDetails.find((p) => p.id === tp.productId);
-      
-      // Calcular rating promedio
-      const rating = product?.reviews && product.reviews.length > 0 
-        ? product.reviews.reduce((sum, review) => sum + review.rating, 0) / product.reviews.length 
-        : 0;
-      
-      // Obtener categoría
-      const category = product?.categoryProducts?.[0]?.category?.name || "";
-      
-      // Obtener imagen (ajusta según tu estructura de datos)
-      const image = product?.imageUrl || `/products/${product?.id}.jpg` || "/products/mouse-x11.png";
-      
+      if (!product) return null;
+
+      const rating =
+        product.reviews.length > 0
+          ? product.reviews.reduce((sum, r) => sum + r.rating, 0) /
+            product.reviews.length
+          : 0;
+
+      const category =
+        product.categoryProducts?.[0]?.category?.name ?? "Uncategorized";
+
+      const isNew =
+        new Date().getTime() - new Date(product.createdAt).getTime() <
+        30 * 24 * 60 * 60 * 1000;
+
       return {
-        id: product?.id ?? 0,
-        name: product?.name ?? "Unknown",
-        slug: product?.slug ?? `product-${product?.id}`,
-        category: category,
-        price: (product?.priceCents ?? 0) / 100,
-        currency: product?.currency ?? "USD",
-        rating: rating,
-        reviewCount: product?.reviews?.length ?? 0,
-        image: image,
-        isNew: product?.createdAt ? 
-          (new Date().getTime() - new Date(product.createdAt).getTime()) < (30 * 24 * 60 * 60 * 1000) : false, // Nuevo si creado hace menos de 30 días
-        inStock: (product?.inventory?.stock ?? 0) > 0,
-        brand: product?.brand ?? "",
-        description: product?.description ?? "",
+        id: product.id,
+        name: product.name,
+        brand: product.brand ?? "",
+        slug: product.slug,
+        category,
+        rating,
+        reviewCount: product.reviews.length,
+        image: product.imageUrl ?? "/products/default.png",
+        price: formatCurrency(product.priceCents, product.currency),
+        inStock: (product.inventory?.stock ?? 0) > 0,
+        isNew,
+        description: product.description ?? "",
       };
-    });
+    }).filter(Boolean);
 
     res.json(result);
   } catch (error) {

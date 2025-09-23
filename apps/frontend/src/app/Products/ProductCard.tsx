@@ -53,15 +53,15 @@ export function ProductCard({ product }: { product: ProductForDetail }) {
 
           <div className="mt-3 sm:mt-4 flex justify-between items-center">
             <span className="font-bold text-gray-900 text-sm sm:text-base">
-              $
-              {product.originalPrice !== null && product.originalPrice !== undefined
+              {product.originalPrice !== null &&
+              product.originalPrice !== undefined
                 ? `${product.originalPrice}`
                 : "Precio no disponible"}
             </span>
 
             {/* ✅ Botón convertido en enlace */}
             <button
-              onClick={() => window.location.href = `/Products/${product.id}`}
+              onClick={() => (window.location.href = `/Products/${product.id}`)}
               className="text-blue-600 hover:text-blue-800 text-xs sm:text-sm font-medium transition-colors cursor-pointer"
             >
               Ver detalles

@@ -2,7 +2,7 @@
 'use client';
 
 import { useState, useCallback } from 'react';
-import { fetchPaginatedProducts } from '@/services/NewProductService';
+import { fetchPaginatedProducts } from '@/services/products';
 
 export const usePaginatedProducts = () => {
   const [products, setProducts] = useState<any[]>([]);
