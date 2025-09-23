@@ -1,18 +1,21 @@
 // components/FilterSidebar.tsx
 "use client";
 
-import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Button from "@/components/ui/PagesButtons";
+import { useFilterState } from "@/hooks/useFilterState";
 
 export function FilterSidebar() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const paramsString = searchParams?.toString() ?? "";
-
-  // Estado local para filtros
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-  const [selectedPrice, setSelectedPrice] = useState<string | null>(null);
+  
+  const {
+    selectedCategories,
+    selectedPrice,
+    toggleCategory,
+    setSelectedPrice,
+    applyFilters
+  } = useFilterState(searchParams, router);
 
   const categories = ["Mice", "Keyboards", "Headsets", "Monitors", "Consoles"];
   const priceRanges = [
@@ -21,50 +24,6 @@ export function FilterSidebar() {
     { label: "$100 - $200", value: "100-200" },
     { label: "Más de $200", value: "200-1000" },
   ];
-
-  // Inicializar desde URL
-  useEffect(() => {
-    const cat = searchParams.get("category");
-    setSelectedCategories(cat ? cat.split(",").map((s) => s.trim()).filter(Boolean) : []);
-
-    const min = searchParams.get("minPrice");
-    const max = searchParams.get("maxPrice");
-    if (min && max) setSelectedPrice(`${min}-${max}`);
-    else setSelectedPrice(null);
-  }, [paramsString]);
-
-  const toggleCategory = (category: string) => {
-    setSelectedCategories((prev) =>
-      prev.includes(category) ? prev.filter((c) => c !== category) : [...prev, category]
-    );
-  };
-
-  const applyFilters = () => {
-    const params = new URLSearchParams(searchParams.toString());
-
-    if (selectedCategories.length > 0) {
-      // guardamos CSV: "Mice,Keyboards" (backend puede adaptarse si quieres OR)
-      params.set("category", selectedCategories.join(","));
-    } else {
-      params.delete("category");
-    }
-
-    if (selectedPrice) {
-      const [min, max] = selectedPrice.split("-");
-      params.set("minPrice", min);
-      params.set("maxPrice", max);
-    } else {
-      params.delete("minPrice");
-      params.delete("maxPrice");
-    }
-
-    // reset pagina
-    params.set("page", "1");
-
-    // Mantener la query (q) si existe — no la eliminamos
-    // Redirigir a la ruta que muestra los productos (ajusta si tu ruta es /Products o /products)
-    router.push(`/Products?${params.toString()}`);
-  };
 
   return (
     <div className="p-4 sm:p-5 md:p-6 rounded-lg">

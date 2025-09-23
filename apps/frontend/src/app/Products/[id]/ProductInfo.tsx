@@ -1,30 +1,9 @@
 import Button from "@/components/ui/PagesButtons";
+import { ProductForDetail } from "@/types/productss";
 import { useState } from "react";
 import { FaClipboardCheck, FaLock, FaShieldAlt } from "react-icons/fa";
 
-interface Product {
-  id: number;
-  name: string;
-  brand: string;
-  description: string;
-  price: number;
-  currency: string;
-  rating: number;
-  category: string;
-  isNew?: boolean;
-  specifications?: Record<string, string>;
-  reviews?: Array<any>;
-  // Campos adicionales que podrías necesitar
-  sku?: string;
-  categories?: string[];
-  tag?: string;
-}
-
-interface ProductInfoProps {
-  product: Product;
-}
-
-export function ProductInfo({ product }: ProductInfoProps) {
+export function ProductInfo({ product }: { product: ProductForDetail }) {
   const [quantity, setQuantity] = useState(1);
 
   const incrementQuantity = () => {
@@ -37,7 +16,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
 
   // Datos por defecto para campos opcionales
   const sku = product.sku || `PROD-${product.id.toString().padStart(6, '0')}`;
-  const categories = product.categories || [product.category];
+  const categories = product.category ? [product.category] : [];
   const tag = product.tag || product.name;
 
   return (
@@ -65,7 +44,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
 
       {/* Precio */}
       <p className="text-2xl font-semibold text-gray-900">
-        {product.currency} {product.price.toFixed(2)}
+        {product.currency} {product.discountPrice}
       </p>
 
       {/* Disponibilidad */}

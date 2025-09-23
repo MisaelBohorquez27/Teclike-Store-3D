@@ -13,7 +13,6 @@ export interface BaseProduct {
 // Contiene lo necesario para una vista compacta.
 export interface ProductForCard extends BaseProduct {
   category: string;
-  price: number;
   rating: number;
   reviewCount: number;
   image: string;
@@ -21,8 +20,9 @@ export interface ProductForCard extends BaseProduct {
   inStock?: boolean;
   
   // Atributos específicos para ofertas
-  discountPercentage?: number;
-  originalPriceCents?: number;
+  discount?: string;
+  originalPrice: string;
+  discountPrice?: string;
 }
 
 // Interfaz para la vista de detalle de un producto.
@@ -32,6 +32,8 @@ export interface ProductForDetail extends ProductForCard {
   imageUrl?: string;
   specifications?: Record<string, string>;
   reviews?: any[];
+  sku?: string;
+  tag?: string;
 }
 
 // Tipo para resultados de búsqueda, que se basa en la vista de tarjeta.
