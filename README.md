@@ -40,9 +40,8 @@ Una plataforma moderna de e-commerce especializada en la venta de modelos 3D de 
 - Git
 
 ## 🚀 Instalación Rápida
-
 ```bash
-# Clonar repositorio
+# Clonar repositorio 
 git clone https://github.com/tu-usuario/vective3d-store.git
 cd Teclike
 
@@ -60,7 +59,7 @@ pnpm prisma migrate dev
 # Ejecutar en desarrollo
 cd ../..
 pnpm dev
-
+```
 ## 🏃‍♂️ Comandos Principales
 
 ### Desarrollo
@@ -94,6 +93,7 @@ pnpm --filter db prisma studio
 
 # Resetear base de datos (desarrollo)
 pnpm --filter db prisma migrate reset
+```
 
 ## 👨‍💻 Autor
 
