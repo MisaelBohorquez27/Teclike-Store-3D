@@ -1,8 +1,8 @@
 "use client";
-import { Product } from "@/types/products";
+import { ProductForDetail } from "@/types/productss";
 import Link from "next/link";
 
-export function ProductCard({ product }: { product: Product }) {
+export function ProductCard({ product }: { product: ProductForDetail }) {
   return (
     <Link href={`/Products/${product.id}`}>
       <div className="Card-bg rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow cursor-pointer">
@@ -54,8 +54,8 @@ export function ProductCard({ product }: { product: Product }) {
           <div className="mt-3 sm:mt-4 flex justify-between items-center">
             <span className="font-bold text-gray-900 text-sm sm:text-base">
               $
-              {product.price !== null && product.price !== undefined
-                ? `${product.price.toFixed(2)}`
+              {product.originalPrice !== null && product.originalPrice !== undefined
+                ? `${product.originalPrice}`
                 : "Precio no disponible"}
             </span>
 

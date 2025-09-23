@@ -6,32 +6,11 @@ import { ProductTabs } from "./ProductTabs";
 import { ProductReviews } from "./ProductReviews";
 import { ProductGallery } from "./ProductGallery";
 import { fetchProductById } from "@/services/products";
-
-// Tipo basado en la respuesta real del backend
-interface ProductDetail {
-  id: number;
-  name: string;
-  brand: string;
-  description: string;
-  price: number;
-  currency: string;
-  image: string;
-  category: string;
-  isNew: boolean;
-  rating: number;
-  reviews: Array<{
-    id: number;
-    user: string;
-    rating: number;
-    comment: string;
-    date: string;
-  }>;
-  specifications: Record<string, string>;
-}
+import { ProductForDetail } from "@/types/productss";
 
 export default function ProductPage() {
   const params = useParams();
-  const [product, setProduct] = useState<ProductDetail | null>(null);
+  const [product, setProduct] = useState<ProductForDetail | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -48,12 +27,12 @@ export default function ProductPage() {
         // ✅ Consumir el servicio que ahora incluye reviews
         const productData = await fetchProductById(productId);
         // Map productData to ProductDetail, filling missing fields if necessary
-        const mappedProduct: ProductDetail = {
+        const mappedProduct: ProductForDetail = {
           id: productData.id,
           name: productData.name,
           brand: productData.brand ?? "", // default empty string if missing
           description: productData.description ?? "",
-          price: productData.price,
+          originalPrice: productData.price as unknown as string,
           currency: productData.currency,
           image: productData.image,
           category: productData.category,
@@ -61,6 +40,10 @@ export default function ProductPage() {
           rating: productData.rating ?? 0,
           reviews: productData.reviews ?? [],
           specifications: productData.specifications ?? {},
+          reviewCount: productData.reviewCount ?? 0,
+          slug: productData.slug,
+          inStock: productData.inStock ?? true,
+          
         };
         setProduct(mappedProduct);
       } catch (err) {
@@ -103,7 +86,7 @@ export default function ProductPage() {
           <div className="w-full lg:w-1/2 mt-6 lg:mt-8 p-4 sm:p-8 md:p-10 lg:p-6 rounded-xl">
             <ProductGallery
               images={[product.image]} // Ahora viene del backend
-              description={product.description}
+              description={product.description ?? ""}
             />
           </div>
 
@@ -116,9 +99,9 @@ export default function ProductPage() {
         {/* Reseñas y especificaciones */}
         <div className="rounded-xl px-6 md:px-8">
           <div className="mb-8">
-            <ProductTabs specifications={product.specifications} />
+            <ProductTabs specifications={product.specifications ?? {}} />
           </div>
-          <ProductReviews reviews={product.reviews} />
+          <ProductReviews reviews={product.reviews ?? []} />
         </div>
       </section>
     </main>

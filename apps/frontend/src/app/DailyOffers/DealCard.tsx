@@ -8,7 +8,7 @@ export type Deal = {
   id: number;
   name: string;
   originalPrice: string;
-  finalPrice: string;
+  discountPrice: string;
   discount: string;
   image: string;
   timeLeft?: number;
@@ -42,7 +42,7 @@ export function DealCard({
         {/* Precios */}
         <div className="flex items-center space-x-2 mb-3">
           <span className="text-xl font-bold DealCard-Price">
-            {deal.finalPrice}
+            {deal.discountPrice}
           </span>
           <span className="text-gray-500 line-through">
             {deal.originalPrice}

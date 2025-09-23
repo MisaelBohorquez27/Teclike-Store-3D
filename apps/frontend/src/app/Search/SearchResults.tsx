@@ -3,15 +3,15 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { ProductCard } from "@/app/Products/ProductCard";
-import { Product } from "@/types/products";
 import Pagination from "@/components/ui/Pagination";
 import { fetchSearchResults } from "@/services/NewProductService";
+import { ProductForDetail } from "@/types/productss";
 
 export function SearchResults() {
   const searchParams = useSearchParams();
   const query = searchParams.get("q") || "";
 
-  const [products, setProducts] = useState<Product[]>([]);
+  const [products, setProducts] = useState<ProductForDetail[]>([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -23,7 +23,12 @@ export function SearchResults() {
     setLoading(true);
     fetchSearchResults(query, currentPage, postsPerPage)
       .then((res) => {
-        setProducts(res.items);
+        setProducts(
+          res.items.map((item: any) => ({
+            ...item,
+            originalPrice: item.originalPrice ?? item.price ?? "0",
+          }))
+        );
         setTotalPages(res.pagination.totalPages);
       })
       .catch((err) => console.error(err))
