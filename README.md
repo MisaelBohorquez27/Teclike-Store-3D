@@ -44,7 +44,7 @@ Una plataforma moderna de e-commerce especializada en la venta de modelos 3D de 
 ```bash
 # Clonar repositorio
 git clone https://github.com/tu-usuario/vective3d-store.git
-cd vective3d-store
+cd Teclike
 
 # Instalar dependencias
 pnpm install
@@ -60,3 +60,60 @@ pnpm prisma migrate dev
 # Ejecutar en desarrollo
 cd ../..
 pnpm dev
+
+## 🏃‍♂️ Comandos Principales
+
+### Desarrollo
+```bash
+# Ejecutar todo el proyecto (frontend + backend)
+pnpm dev
+
+# Solo el frontend (Next.js)
+pnpm --filter frontend dev
+
+# Solo el backend (API)
+pnpm --filter backend-api dev
+
+# Ejecutar con Docker
+cd infra
+docker-compose up -d
+
+## Bases de datos
+
+# Generar cliente Prisma
+pnpm --filter db prisma generate
+
+# Crear y ejecutar migraciones
+pnpm --filter db prisma migrate dev
+
+# Ejecutar migraciones existentes
+pnpm --filter db prisma migrate deploy
+
+# Abrir interfaz visual de la BD
+pnpm --filter db prisma studio
+
+# Resetear base de datos (desarrollo)
+pnpm --filter db prisma migrate reset
+
+## 👨‍💻 Autor
+
+**Misael Bohorquez** - Desarrollador Full Stack
+
+[![Portfolio](https://img.shields.io/badge/🌐-Portfolio-2ea44f?style=for-the-badge)](https://EnDesarrollo.com)
+[![LinkedIn](https://img.shields.io/badge/💼-LinkedIn-blue?style=for-the-badge)](https://linkedin.com/in/misael-bohorquez-186360217)
+[![GitHub](https://img.shields.io/badge/🐙-GitHub-black?style=for-the-badge)](https://github.com/MisaelBohorquez27
+[![Email](https://img.shields.io/badge/📧-Email-red?style=for-the-badge)](mailto:misaelbohorquez27@hotmail.com)
+
+### Habilidades Técnicas:
+- **Frontend**: Next.js, React, TypeScript, TailwindCSS
+- **Backend**: Node.js, Express, Prisma, PostgreSQL
+- **DevOps**: Docker, Vercel, Railway, GitHub Actions
+- **Herramientas**: Git, Figma, VS Code, Postman
+
+### ¿Preguntas o colaboraciones?
+¡No dudes en contactarme! Estoy siempre abierto a:
+- 🤝 Colaboraciones en proyectos interesantes
+- 💼 Oportunidades laborales
+- ❓ Preguntas técnicas sobre el proyecto
+- 🐛 Reportar bugs o sugerir mejoras
+
