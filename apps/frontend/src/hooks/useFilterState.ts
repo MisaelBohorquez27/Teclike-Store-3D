@@ -1,7 +1,6 @@
 // components/hooks/useFilterState.ts
 import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
-import { useSearchParams } from "next/navigation";
 
 export function useFilterState(searchParams: URLSearchParams, router: ReturnType<typeof useRouter>) {
   const paramsString = searchParams?.toString() ?? "";

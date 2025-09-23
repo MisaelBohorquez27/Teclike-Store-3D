@@ -1,62 +1,14 @@
 "use client";
-import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { ProductInfo } from "./ProductInfo";
 import { ProductTabs } from "./ProductTabs";
 import { ProductReviews } from "./ProductReviews";
 import { ProductGallery } from "./ProductGallery";
-import { fetchProductById } from "@/services/products";
-import { ProductForDetail } from "@/types/productss";
+import { useProductInfo } from "@/hooks/useProductInfo";
 
 export default function ProductPage() {
   const params = useParams();
-  const [product, setProduct] = useState<ProductForDetail | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const loadProduct = async () => {
-      try {
-        setLoading(true);
-        const productId = Number(params.id);
-        
-        if (isNaN(productId)) {
-          throw new Error("ID de producto inválido");
-        }
-
-        // ✅ Consumir el servicio que ahora incluye reviews
-        const productData = await fetchProductById(productId);
-        // Map productData to ProductDetail, filling missing fields if necessary
-        const mappedProduct: ProductForDetail = {
-          id: productData.id,
-          name: productData.name,
-          brand: productData.brand ?? "", // default empty string if missing
-          description: productData.description ?? "",
-          originalPrice: productData.price as unknown as string,
-          currency: productData.currency,
-          image: productData.image,
-          category: productData.category,
-          isNew: productData.isNew ?? false,
-          rating: productData.rating ?? 0,
-          reviews: productData.reviews ?? [],
-          specifications: productData.specifications ?? {},
-          reviewCount: productData.reviewCount ?? 0,
-          slug: productData.slug,
-          inStock: productData.inStock ?? true,
-          
-        };
-        setProduct(mappedProduct);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : "Error al cargar el producto");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    if (params.id) {
-      loadProduct();
-    }
-  }, [params.id]);
+  const { product, loading, error } = useProductInfo(params.id);
 
   if (loading) {
     return (

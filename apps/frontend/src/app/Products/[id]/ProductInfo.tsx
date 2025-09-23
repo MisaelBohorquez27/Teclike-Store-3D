@@ -44,7 +44,7 @@ export function ProductInfo({ product }: { product: ProductForDetail }) {
 
       {/* Precio */}
       <p className="text-2xl font-semibold text-gray-900">
-        {product.currency} {product.discountPrice}
+        {product.currency} {product.price}
       </p>
 
       {/* Disponibilidad */}

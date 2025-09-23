@@ -1,8 +1,7 @@
 // components/ProductList2/hooks/useProductLoader.ts
 import { useState, useEffect, useCallback } from "react";
-import { useSearchParams } from "next/navigation";
-import { fetchProductsBase } from "@/services/NewProductService";
 import { ProductForDetail } from "@/types/productss";
+import { fetchAllProducts } from "@/services/products";
 
 const POSTS_PER_PAGE = 6;
 
@@ -23,7 +22,7 @@ export function useProductLoader(searchParams: URLSearchParams) {
     setLoading(true);
     try {
       const filters = buildFilters(searchParams, currentPage);
-      const res = await fetchProductsBase(filters);
+      const res = await fetchAllProducts(filters);
       
       const productsForDetail: ProductForDetail[] = res.items.map((product: any) => ({
         ...product,

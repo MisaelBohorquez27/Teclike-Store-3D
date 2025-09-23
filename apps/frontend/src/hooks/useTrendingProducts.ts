@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Product } from "../types/products";
-import { fetchProductsBase } from "@/services/NewProductService";
+import { fetchAllProducts } from "../services/products";
 
 export const useTrendingProducts = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -9,7 +9,7 @@ export const useTrendingProducts = () => {
   useEffect(() => {
     const loadProducts = async () => {
       try {
-        const response = await fetchProductsBase();
+        const response = await fetchAllProducts();
         setProducts(response.items);
       } catch (error) {
         console.error("Error loading trending products:", error);

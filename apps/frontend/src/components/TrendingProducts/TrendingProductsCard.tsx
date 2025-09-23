@@ -26,7 +26,7 @@ export const TrendingProductCard = ({ product }: TrendingProductCardProps) => {
       </div>
       <div className="mt-3 sm:mt-4 flex justify-between items-center">
         <span className="ColorSubtitle font-bold text-sm sm:text-base">
-          {product.price.toFixed(2)}
+          {product.currency} {product.price} 
         </span>
         <button className="text-blue-600 hover:text-blue-800 text-xs sm:text-sm font-medium">
           Ver detalles

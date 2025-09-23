@@ -18,10 +18,11 @@ export interface ProductForCard extends BaseProduct {
   image: string;
   isNew?: boolean;
   inStock?: boolean;
+  price: string;
   
   // Atributos específicos para ofertas
   discount?: string;
-  originalPrice: string;
+  originalPrice?: string;
   discountPrice?: string;
 }
 
@@ -62,4 +63,14 @@ export interface ProductFilters {
   maxPrice?: number;
   sortBy?: string;
   sortOrder?: 'asc' | 'desc';
+}
+
+export interface ProductQueryOptions {
+  page?: number;
+  limit?: number;
+  q?: string;
+  category?: string;
+  inStock?: boolean;
+  minPrice?: number;
+  maxPrice?: number;
 }
