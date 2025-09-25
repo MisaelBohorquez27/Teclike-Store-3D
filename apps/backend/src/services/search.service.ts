@@ -6,16 +6,14 @@ const prisma = new PrismaClient();
 
 export class SearchService {
   static async searchProducts(params: SearchParams): Promise<{ 
-    results: SearchResult[]; 
+    results: any[]; 
     total: number; 
   }> {
     const {
       query,
       category,
-      minPrice,
-      maxPrice,
       inStock,
-      limit = 10,
+      limit = 12,
       page = 1,
     } = params;
 
@@ -75,22 +73,21 @@ export class SearchService {
       });
     }
 
-    if (minPrice !== undefined || maxPrice !== undefined) {
-      const priceCondition: any = {};
-      if (minPrice !== undefined) priceCondition.gte = minPrice * 100; // Convertir a cents
-      if (maxPrice !== undefined) priceCondition.lte = maxPrice * 100;
-      whereConditions.AND.push({ priceCents: priceCondition });
-    }
-
+    // Filtro de stock - manejar diferentes estructuras posibles
     if (inStock !== undefined) {
+      // Opción 1: Si tienes campo stock directo en Product
       whereConditions.AND.push({
-        inventory: {
-          stock: inStock ? { gt: 0 } : { equals: 0 },
-        },
+        OR: [
+          // Intenta con stock directo
+          { stock: inStock ? { gt: 0 } : { equals: 0 } },
+          // O intenta con inventory.stock
+          { inventory: inStock ? { stock: { gt: 0 } } : { stock: { equals: 0 } } },
+          // O si no existe ninguno, ignora el filtro
+        ],
       });
     }
 
-    // 🔹 1. contar total de coincidencias (sin paginación)
+    // Contar total de coincidencias
     const total = await prisma.product.count({
       where: whereConditions.AND.length > 0 ? whereConditions : undefined,
     });
@@ -104,39 +101,65 @@ export class SearchService {
             category: true,
           },
         },
-        inventory: true,
-        reviews: true,
+        reviews: {
+          select: {
+            rating: true,
+          },
+        },
+        inventory: {
+          select: {
+            stock: true,
+          },
+        },
+        _count: {
+          select: {
+            reviews: true,
+          },
+        },
       },
       skip,
       take: limit,
     });
 
-    // Calcular relevancia y formatear resultados
+    // Formatear resultados según lo que espera el controller
     const results = products.map((product) => {
       const score = this.calculateRelevanceScore(product, searchTerm);
       const primaryCategory =
         product.categoryProducts?.[0]?.category?.name ?? "Uncategorized";
 
+      // Calcular rating promedio
+      const avgRating = product.reviews.length > 0
+        ? product.reviews.reduce((sum, r) => sum + r.rating, 0) / product.reviews.length
+        : 0;
+
+      // Determinar stock disponible (manejar diferentes estructuras)
+      const stockQuantity = product.inventory?.stock !== undefined 
+        ? product.inventory.stock 
+        : 0;
+
       return {
         id: product.id,
         name: product.name,
         slug: product.slug,
-        price: product.priceCents / 100,
-        imageUrl: product.imageUrl ?? undefined,
-        category: primaryCategory,
-        inStock: (product.inventory?.stock || 0) > 0,
-        rating:
-          product.reviews.length > 0
-            ? product.reviews.reduce((sum, r) => sum + r.rating, 0) /
-              product.reviews.length
-            : 0,
-        reviewCount: product.reviews.length,
-        score,
+        priceCents: product.priceCents,
+        currency: product.currency || "USD",
+        imageUrl: product.imageUrl,
+        createdAt: product.createdAt,
+        categoryProducts: product.categoryProducts,
+        rating: avgRating,
+        stock: stockQuantity, // Agregar stock para referencia
+        _count: {
+          reviews: product._count?.reviews || 0,
+        },
+        _score: score,
       };
     });
 
     // Ordenar por relevancia
-    return { results: results.sort((a, b) => b.score - a.score), total };
+    return { 
+      results: results.sort((a, b) => b._score - a._score), 
+      total 
+    };
   }
 
   private static calculateRelevanceScore(
@@ -191,32 +214,52 @@ export class SearchService {
     const products = await prisma.product.findMany({
       where: {
         OR: [
-          { name: { contains: query, mode: "insensitive" } },
-          { slug: { contains: query, mode: "insensitive" } },
+          { 
+            name: { 
+              contains: query, 
+              mode: "insensitive" as const 
+            } 
+          },
+          { 
+            slug: { 
+              contains: query, 
+              mode: "insensitive" as const 
+            } 
+          },
         ],
       },
-      select: {
-        id: true,
-        name: true,
-        slug: true,
-        priceCents: true,
-        imageUrl: true,
+      include: {
         categoryProducts: {
-          include: { category: true },
+          include: { 
+            category: true 
+          },
         },
-        inventory: true,
+        inventory: {
+          select: {
+            stock: true,
+          },
+        },
       },
       take: limit,
     });
 
-    return products.map((p) => ({
-      id: p.id,
-      name: p.name,
-      slug: p.slug,
-      price: p.priceCents / 100,
-      imageUrl: p.imageUrl ?? undefined,
-      category: p.categoryProducts?.[0]?.category?.name ?? "Uncategorized",
-      inStock: (p.inventory?.stock || 0) > 0,
-    }));
+    return products.map((product) => {
+      // Determinar stock disponible
+      const stockQuantity = product.inventory?.stock !== undefined 
+        ? product.inventory.stock 
+        : 0;
+
+      return {
+        id: product.id,
+        name: product.name,
+        slug: product.slug,
+        priceCents: product.priceCents,
+        currency: product.currency || "USD",
+        imageUrl: product.imageUrl,
+        category: product.categoryProducts?.[0]?.category?.name ?? "Uncategorized",
+        inStock: stockQuantity > 0,
+        stock: stockQuantity,
+      };
+    });
   }
 }
