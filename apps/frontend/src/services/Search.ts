@@ -2,8 +2,12 @@
 import { SearchSuggestion } from "../types/searchSuggestions";
 
 export interface SearchResult extends SearchSuggestion {
+
   rating: number;
   reviewCount: number;
+  price: number;
+  imageUrl?: string;
+  category: string;
 }
 
 export async function fetchSearchResults(

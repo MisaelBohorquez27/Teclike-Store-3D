@@ -108,6 +108,7 @@ export const getSearchSuggestions = async (req: Request, res: Response) => {
     );
 
     res.json(suggestions);
+    
   } catch (error) {
     console.error("❌ Error en getSearchSuggestions:", error);
     res.status(500).json({

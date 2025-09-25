@@ -147,7 +147,7 @@ export class SearchService {
         createdAt: product.createdAt,
         categoryProducts: product.categoryProducts,
         rating: avgRating,
-        stock: stockQuantity, // Agregar stock para referencia
+        stock: stockQuantity,
         _count: {
           reviews: product._count?.reviews || 0,
         },
@@ -253,11 +253,6 @@ export class SearchService {
         id: product.id,
         name: product.name,
         slug: product.slug,
-        priceCents: product.priceCents,
-        currency: product.currency || "USD",
-        imageUrl: product.imageUrl,
-        category: product.categoryProducts?.[0]?.category?.name ?? "Uncategorized",
-        inStock: stockQuantity > 0,
         stock: stockQuantity,
       };
     });

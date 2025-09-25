@@ -192,24 +192,11 @@ export function SearchBar3({
                   onMouseDown={() => handleSuggestionClick(suggestion)}
                 >
                   <div className="flex items-center">
-                    {suggestion.imageUrl && (
-                      <img
-                        src={suggestion.imageUrl}
-                        alt={suggestion.name}
-                        className="w-8 h-8 object-cover rounded mr-3"
-                      />
-                    )}
                     <div className="flex-1">
                       <p className="font-medium text-sm text-gray-900">
                         {suggestion.name}
                       </p>
-                      <p className="text-xs text-gray-500">
-                        {suggestion.category}
-                      </p>
                     </div>
-                    <span className="font-semibold text-sm text-gray-700">
-                      ${suggestion.price.toFixed(2)}
-                    </span>
                   </div>
                 </li>
               ))}
