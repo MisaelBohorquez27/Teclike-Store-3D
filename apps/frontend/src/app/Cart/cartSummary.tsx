@@ -1,6 +1,6 @@
 // app/Cart/CartSummary.tsx
 "use client";
-import { CartResponse } from "@/services/cart";
+import { CartResponse } from "@/types/cart";
 import { CheckoutButton } from "./CheckoutButton";
 
 interface CartSummaryProps {
@@ -13,7 +13,7 @@ export default function CartSummary({ cart }: CartSummaryProps) {
     if (!cart?.items) return 0;
     
     return cart.items.reduce((sum, item) => {
-      const price = item.product?.price || 0;
+      const price = parseInt(item.product?.price || "0");
       const quantity = item.quantity || 1;
       return sum + (price * quantity);
     }, 0);

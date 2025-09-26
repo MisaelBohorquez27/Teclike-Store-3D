@@ -1,7 +1,10 @@
 // app/Cart/CartList.tsx
 "use client";
-import { CartResponse } from "@/services/cart";
-import { CartItem, CartItemType } from "./CartItem";
+import { CartResponse } from "@/types/cart";
+import { CartItem } from "./CartItem";
+import { ProductForCart } from "@/types/productss";
+import { mapCartItems } from "../utils/cartMapper";
+import { useState } from "react";
 
 interface CartListProps {
   cart: CartResponse;
@@ -11,26 +14,27 @@ interface CartListProps {
   onRefetch: () => Promise<void>;
 }
 
-export default function CartList({ 
-  cart, 
-  onUpdateQuantity, 
-  onRemoveItem, 
+export default function CartList({
+  cart,
+  onUpdateQuantity,
+  onRemoveItem,
   onClearCart,
-  onRefetch 
+  onRefetch,
 }: CartListProps) {
-  
-  const handleUpdateQuantity = async (id: string, newQuantity: number) => {
+  const [loading, setLoading] = useState(false);
+
+  const handleUpdateQuantity = async (id: number, newQuantity: number) => {
     try {
-      await onUpdateQuantity(parseInt(id), newQuantity);
+      await onUpdateQuantity(id, newQuantity);
       await onRefetch();
     } catch (error) {
       console.error("Error al actualizar cantidad:", error);
     }
   };
 
-  const handleRemoveItem = async (id: string) => {
+  const handleRemoveItem = async (id: number) => {
     try {
-      await onRemoveItem(parseInt(id));
+      await onRemoveItem(id);
       await onRefetch();
     } catch (error) {
       console.error("Error al eliminar producto:", error);
@@ -39,29 +43,17 @@ export default function CartList({
 
   const handleClearCart = async () => {
     try {
+      setLoading(true);
       await onClearCart();
       await onRefetch();
-    } catch (error) {
-      console.error("Error al vaciar carrito:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
   // Función segura para mapear items
-  const getLocalItems = (): CartItemType[] => {
-    if (!cart?.items) return [];
-    
-    return cart.items.map(item => ({
-      id: item.productId?.toString() || Math.random().toString(),
-      name: item.product?.name || "Producto sin nombre",
-      price: item.product?.price, // Puede ser undefined
-      quantity: item.quantity || 1,
-      imageUrl: item.product?.imageUrl || "/placeholder-product.jpg",
-      inStock: item.product?.inStock || false,
-      stock: item.product?.stock
-    }));
-  };
 
-  const localItems = getLocalItems();
+  const localItems = mapCartItems(cart);
 
   if (localItems.length === 0) {
     return (
@@ -99,6 +91,7 @@ export default function CartList({
         {/* Botón para vaciar carrito (solo desktop) */}
         <div className="mt-4 flex justify-end sm:block">
           <button
+            disabled={loading}
             onClick={handleClearCart}
             className="text-red-500 hover:text-red-700 flex items-center text-sm"
           >
@@ -116,7 +109,7 @@ export default function CartList({
                 d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
               />
             </svg>
-            Vaciar carrito
+             {loading ? "Vaciando..." : "Vaciar carrito"}
           </button>
         </div>
       </div>

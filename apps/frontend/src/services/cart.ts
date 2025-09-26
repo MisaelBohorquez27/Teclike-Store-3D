@@ -1,26 +1,6 @@
-// services/cart.ts
-export interface CartProduct {
-  id: number;
-  productId: number;
-  quantity: number;
-  product: {
-    id: number;
-    name: string;
-    description: string;
-    price: number;
-    imageUrl?: string;
-    inStock: boolean;
-    stock: number;
-  };
-}
+// services/cart.ts (mantener tu código existente)
+import { CartResponse } from "@/types/cart";
 
-export interface CartResponse {
-  id: number;
-  userId: number;
-  items: CartProduct[];
-}
-
-// services/cart.ts
 export async function fetchCart(): Promise<CartResponse> {
   try {
     const res = await fetch("http://localhost:5000/api/cart", {
@@ -53,7 +33,7 @@ export async function fetchCart(): Promise<CartResponse> {
         id: item.product?.id || 0,
         name: item.product?.name || "Producto sin nombre",
         description: item.product?.description || "",
-        price: item.product?.price || 0, // Valor por defecto
+        price: item.product?.price || 0,
         imageUrl: item.product?.imageUrl,
         inStock: item.product?.inStock || false,
         stock: item.product?.stock || 0,

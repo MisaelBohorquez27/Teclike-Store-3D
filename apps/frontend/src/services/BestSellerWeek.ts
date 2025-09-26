@@ -1,5 +1,4 @@
 import { apiFetch } from "./api";
-
 import { ProductForDetail } from "@/types/productss";
 
 export const fetchFeatured = async (limit = 6): Promise<ProductForDetail[]> => {

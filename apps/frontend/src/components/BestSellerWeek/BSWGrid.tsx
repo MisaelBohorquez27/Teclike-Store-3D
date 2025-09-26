@@ -13,12 +13,8 @@ interface CartListProps {
 export function TopProductSell({ onAddToCart }: CartListProps) {
   const { topProductsSell, loading, error } = useTopProductsSell();
 
-  const handleAddToCart = async (id: string, newQuantity: number) => {
-    try {
-      await onAddToCart(parseInt(id), newQuantity);
-    } catch (error) {
-      console.error("Error al agregar al carrito:", error);
-    } 
+  const handleAddToCart = (id: number, quantity: number) => {
+    onAddToCart(id, quantity);
   };
 
   if (error) {

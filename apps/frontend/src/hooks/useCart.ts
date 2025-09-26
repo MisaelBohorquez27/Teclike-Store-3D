@@ -2,7 +2,8 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import { fetchCart, CartResponse, CartProduct } from '@/services/cart';
+import { CartService } from '@/services/cartService';
+import { CartResponse } from '@/types/cart';
 
 export const useCart = () => {
   const [cart, setCart] = useState<CartResponse | null>(null);
@@ -13,7 +14,7 @@ export const useCart = () => {
     try {
       setLoading(true);
       setError(null);
-      const cartData = await fetchCart();
+      const cartData = await CartService.getCart();
       setCart(cartData);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Error desconocido');
@@ -24,94 +25,53 @@ export const useCart = () => {
 
   const addToCart = async (productId: number, quantity: number = 1) => {
     try {
-      const response = await fetch('http://localhost:5000/api/cart/add', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ productId, quantity }),
-      });
-      
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Error al agregar al carrito');
-      }
-      
-      const updatedCart = await response.json();
+      setError(null);
+      const updatedCart = await CartService.addToCart(productId, quantity);
       setCart(updatedCart);
       return updatedCart;
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Error desconocido';
       setError(errorMessage);
-      throw new Error(errorMessage);
+      throw err;
     }
   };
 
   const updateQuantity = async (productId: number, quantity: number) => {
     try {
-      const response = await fetch('http://localhost:5000/api/cart/update', {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ productId, quantity }),
-      });
-      
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Error al actualizar el carrito');
-      }
-      
-      const updatedCart = await response.json();
+      setError(null);
+      const updatedCart = await CartService.updateQuantity(productId, quantity);
       setCart(updatedCart);
       return updatedCart;
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Error desconocido';
       setError(errorMessage);
-      throw new Error(errorMessage);
+      throw err;
     }
   };
 
   const removeFromCart = async (productId: number) => {
     try {
-      const response = await fetch('http://localhost:5000/api/cart/remove', {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ productId }),
-      });
-      
-      if (!response.ok) {
-        throw new Error('Error al eliminar del carrito');
-      }
-      
-      const updatedCart = await response.json();
+      setError(null);
+      const updatedCart = await CartService.removeFromCart(productId);
       setCart(updatedCart);
       return updatedCart;
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Error desconocido';
       setError(errorMessage);
-      throw new Error(errorMessage);
+      throw err;
     }
   };
 
   const clearCart = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/cart/clear', {
-        method: 'DELETE',
-      });
-      
-      if (!response.ok) {
-        throw new Error('Error al vaciar el carrito');
-      }
-      
+      setError(null);
+      const result = await CartService.clearCart();
       setCart(null);
-      return { message: 'Carrito vaciado correctamente' };
+      return result;
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Error desconocido';
       setError(errorMessage);
-      throw new Error(errorMessage);
+      throw err;
     }
   };
 
@@ -131,5 +91,5 @@ export const useCart = () => {
   };
 };
 
-// Exportar los tipos para que otros componentes los usen
-export type { CartResponse, CartProduct };
+// Exportar el tipo para que otros componentes lo usen
+export type { CartResponse };

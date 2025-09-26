@@ -31,6 +31,7 @@ export interface ProductForCard extends BaseProduct {
 // Interfaz para la vista de detalle de un producto.
 // Contiene toda la información completa del producto.
 export interface ProductForDetail extends ProductForCard {
+  priceInt?: number;
   description?: string;
   specifications?: Record<string, string>;
   reviews?: any[];
@@ -43,17 +44,17 @@ export interface SearchProduct extends ProductForCard {
   score?: number;
 }
 
+// Tipo para productos en el carrito
+
+export interface ProductForCart extends ProductForCard {
+  quantity: number;
+  stock?: number;
+}
+
 // Tipo para productos con ofertas especiales.
 export interface OfferProduct extends ProductForCard {
   reactKey: Key | null | undefined;
   timeLeft?: number; // Tiempo restante para ofertas flash
-}
-
-// Tipo para productos en el carrito de compras.
-export interface CartProduct extends ProductForCard {
-  quantity: number;
-  stock?: number; // Cantidad disponible en inventario
-  price2?: number; // Precio numérico para cálculos
 }
 
 // Tipo genérico para respuestas de API paginadas.

@@ -1,11 +1,10 @@
 // app/Cart/CartItem.tsx
 "use client";
 import React from "react";
-import { CartProduct } from "@/types/productss";
-
+import { ProductForCart } from "@/types/productss";
 
 interface CartItemProps {
-  item: CartProduct;
+  item: ProductForCart;
   onUpdateQuantity: (id: number, quantity: number) => void;
   onRemove: (id: number) => void;
 }

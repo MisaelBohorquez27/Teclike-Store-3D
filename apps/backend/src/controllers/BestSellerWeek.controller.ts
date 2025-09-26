@@ -76,6 +76,7 @@ export const getTopSellingProducts = async (req: Request, res: Response) => {
         reviewCount: product.reviews.length,
         image: product.imageUrl ?? "/products/default.png",
         price: formatCurrency(product.priceCents, product.currency),
+        priceInt: product.priceCents / 100,
         inStock: (product.inventory?.stock ?? 0) > 0,
         isNew,
         description: product.description ?? "",
