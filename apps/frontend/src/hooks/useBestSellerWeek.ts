@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import { ProductForCard } from "@/types/productss";
+import { ProductForDetail } from "@/types/productss";
 import { fetchFeatured } from "@/services/BestSellerWeek";
 
 export const useTopProductsSell = () => {
-  const [topProductsSell, setTopProductsSell] = useState<ProductForCard[]>([]);
+  const [topProductsSell, setTopProductsSell] = useState<ProductForDetail[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 

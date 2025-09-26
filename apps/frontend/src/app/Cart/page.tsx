@@ -42,8 +42,8 @@ export default function CartPage() {
           <div className="flex flex-col-reverse sm:flex-col lg:flex-row gap-6 sm:gap-8">
             <CartList 
               cart={cart} 
-              onUpdateQuantity={updateQuantity}
-              onRemoveItem={removeFromCart}
+              onUpdateQuantity={async (productId: number, quantity: number) => { await updateQuantity(productId, quantity); }}
+              onRemoveItem={async (productId: number) => { await removeFromCart(productId); }}
               onClearCart={async () => { await clearCart(); }}
               onRefetch={refetch}
             />
