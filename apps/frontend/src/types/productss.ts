@@ -1,5 +1,7 @@
 // types/product.ts
 
+import { Key } from "readline";
+
 // Interfaz base con los campos esenciales que todos los productos comparten.
 export interface BaseProduct {
   id: number;
@@ -15,11 +17,11 @@ export interface ProductForCard extends BaseProduct {
   category: string;
   rating: number;
   reviewCount: number;
-  image: string;
+  imageUrl: string;
   isNew?: boolean;
   inStock?: boolean;
   price: string;
-  
+
   // Atributos específicos para ofertas
   discount?: string;
   originalPrice?: string;
@@ -30,7 +32,6 @@ export interface ProductForCard extends BaseProduct {
 // Contiene toda la información completa del producto.
 export interface ProductForDetail extends ProductForCard {
   description?: string;
-  imageUrl?: string;
   specifications?: Record<string, string>;
   reviews?: any[];
   sku?: string;
@@ -40,6 +41,19 @@ export interface ProductForDetail extends ProductForCard {
 // Tipo para resultados de búsqueda, que se basa en la vista de tarjeta.
 export interface SearchProduct extends ProductForCard {
   score?: number;
+}
+
+// Tipo para productos con ofertas especiales.
+export interface OfferProduct extends ProductForCard {
+  reactKey: Key | null | undefined;
+  timeLeft?: number; // Tiempo restante para ofertas flash
+}
+
+// Tipo para productos en el carrito de compras.
+export interface CartProduct extends ProductForCard {
+  quantity: number;
+  stock?: number; // Cantidad disponible en inventario
+  price2?: number; // Precio numérico para cálculos
 }
 
 // Tipo genérico para respuestas de API paginadas.
@@ -62,7 +76,7 @@ export interface ProductFilters {
   minPrice?: number;
   maxPrice?: number;
   sortBy?: string;
-  sortOrder?: 'asc' | 'desc';
+  sortOrder?: "asc" | "desc";
 }
 
 export interface ProductQueryOptions {
