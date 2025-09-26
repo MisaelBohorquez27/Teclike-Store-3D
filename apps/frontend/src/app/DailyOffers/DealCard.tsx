@@ -1,24 +1,13 @@
 "use client";
 
 import Button from "@/components/ui/PagesButtons";
-import { Key } from "readline";
-
-export type Deal = {
-  reactKey: Key | null | undefined;
-  id: number;
-  name: string;
-  originalPrice: string;
-  discountPrice: string;
-  discount: string;
-  image: string;
-  timeLeft?: number;
-};
+import { OfferProduct } from "@/types/productss";
 
 export function DealCard({
   deal,
   isFlashDeal = false,
 }: {
-  deal: Deal;
+  deal: OfferProduct;
   isFlashDeal?: boolean;
 }) {
   return (

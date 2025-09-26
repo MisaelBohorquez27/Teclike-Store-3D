@@ -1,20 +1,13 @@
 // app/Cart/CartItem.tsx
 "use client";
+import React from "react";
+import { CartProduct } from "@/types/productss";
 
-export interface CartItemType {
-  id: string;
-  name: string;
-  price: number | undefined; // Permitir undefined
-  quantity: number;
-  imageUrl: string;
-  inStock: boolean;
-  stock?: number;
-}
 
 interface CartItemProps {
-  item: CartItemType;
-  onUpdateQuantity: (id: string, quantity: number) => void;
-  onRemove: (id: string) => void;
+  item: CartProduct;
+  onUpdateQuantity: (id: number, quantity: number) => void;
+  onRemove: (id: number) => void;
 }
 
 export function CartItem({ item, onUpdateQuantity, onRemove }: CartItemProps) {
@@ -68,7 +61,7 @@ export function CartItem({ item, onUpdateQuantity, onRemove }: CartItemProps) {
 
       {/* Precio Unitario */}
       <div className="md:w-2/12 text-center text-gray-700 text-sm sm:text-base">
-        {formatPrice(item.price)}
+        {formatPrice(typeof item.price === "string" ? parseFloat(item.price) : item.price)}
       </div>
 
       {/* Selector de Cantidad */}
@@ -97,7 +90,7 @@ export function CartItem({ item, onUpdateQuantity, onRemove }: CartItemProps) {
       {/* Precio Total y Eliminar */}
       <div className="md:w-2/12 flex justify-end items-center space-x-2 sm:space-x-4">
         <span className="font-medium text-sm sm:text-base">
-          {calculateTotal(item.price, item.quantity)}
+          {calculateTotal(typeof item.price === "string" ? parseFloat(item.price) : item.price, item.quantity)}
         </span>
         <button
           onClick={() => onRemove(item.id)}

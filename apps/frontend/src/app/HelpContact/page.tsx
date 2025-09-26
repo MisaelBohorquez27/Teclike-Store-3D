@@ -1,8 +1,6 @@
 import { FaqSection } from "@/app/HelpContact/FaqSection";
 import { ContactForm } from "@/app/HelpContact/ContactForm";
 import { ServiceCards } from "@/app/HelpContact/ServiceCards";
-import { Navbar } from "@/components/Navbar";
-import { Footer } from "@/components/Footer";
 
 export default function HelpContactPage() {
   return (
