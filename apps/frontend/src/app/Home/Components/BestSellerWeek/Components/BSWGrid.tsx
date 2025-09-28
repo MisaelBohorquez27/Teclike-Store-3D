@@ -1,10 +1,9 @@
 "use client";
 import { motion } from "framer-motion";
-import { CustomSwiper } from "../ui/CustomSwiper";
-import { useBestSellerWeek } from "../../hooks/useBestSellerWeek";
+import { CustomSwiper } from "@/components/Swipper/CustomSwiper";
+import { useBestSellerWeek } from "@/hooks/useBestSellerWeek";
 import { BestSellersWeekCard } from "./BSWCard";
-import { TopProductsSellLoading } from "./BSWSellLoading";
-import { TopProductsSellError } from "./BSWSellLoading";
+import { TopProductsSellLoading, TopProductsSellError } from "./BSWSellLoading";
 
 interface CartListProps {
   onAddToCart: (productId: number, quantity: number) => Promise<void>;

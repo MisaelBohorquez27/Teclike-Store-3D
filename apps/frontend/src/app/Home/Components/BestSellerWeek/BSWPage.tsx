@@ -1,7 +1,7 @@
 "use client";
 
 import { useCart } from "@/hooks/useCart";
-import { BestSellersWeekGrid } from "./BSWGrid";
+import { BestSellersWeekGrid } from "./Components/BSWGrid";
 
 export function BestSellersWeekPage() {
     const { addToCart } = useCart();

@@ -1,6 +1,6 @@
-import { Rating } from "../ui/Rating";
-import CartIcon from "../ui/CartIcon";
-import { ProductForCard } from "../../types/productss";
+import { Rating } from "@/components/ui/Rating";
+import CartIcon from "@/components/ui/CartIcon";
+import { ProductForCard } from "@/types/productss";
 
 export function OfferCard({ product }: { product: ProductForCard }) {
   return (
@@ -8,7 +8,7 @@ export function OfferCard({ product }: { product: ProductForCard }) {
       <div className="px-2 sm:px-3 py-3 sm:py-4 flex flex-col">
         <div className="relative flex justify-between items-center aspect-square">
           <img
-            src={product.image}
+            src={product.imageUrl}
             alt={product.name}
             className="w-full h-full object-cover"
           />
