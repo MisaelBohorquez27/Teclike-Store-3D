@@ -2,6 +2,7 @@
 "use client";
 import { CartResponse } from "@/types/cart";
 import { CheckoutButton } from "./CheckoutButton";
+import { mapCartItems } from "@/app/utils/cartMapper";
 
 interface CartSummaryProps {
   cart: CartResponse;
@@ -26,16 +27,7 @@ export default function CartSummary({ cart }: CartSummaryProps) {
 
   const getLocalItems = () => {
     if (!cart?.items) return [];
-    
-    return cart.items.map(item => ({
-      id: item.productId?.toString() || Math.random().toString(),
-      name: item.product?.name || "Producto sin nombre",
-      price: item.product?.price || 0,
-      quantity: item.quantity || 1,
-      imageUrl: item.product?.imageUrl || "/placeholder-product.jpg",
-      inStock: item.product?.inStock || false,
-      stock: item.product?.stock
-    }));
+    return mapCartItems(cart);
   };
 
   const localItems = getLocalItems();

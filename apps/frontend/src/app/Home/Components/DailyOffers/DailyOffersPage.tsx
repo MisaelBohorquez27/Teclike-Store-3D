@@ -1,6 +1,6 @@
 "use client";
-import { useDailyOffers } from "../../hooks/useDailyOffers";
-import { DailyOffersContent } from "./DailyOffersContent";
+import { useDailyOffers } from "@/hooks/useDailyOffers";
+import { DailyOffersContent } from "./Components/DailyOffersContent";
 
 export function DailyOffers() {
   const { offers, loading } = useDailyOffers();

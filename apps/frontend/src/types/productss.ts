@@ -37,6 +37,7 @@ export interface ProductForDetail extends ProductForCard {
   reviews?: any[];
   sku?: string;
   tag?: string;
+  stock?: number;
 }
 
 // Tipo para resultados de búsqueda, que se basa en la vista de tarjeta.

@@ -1,7 +1,7 @@
-import { Product } from "../../types/products";
+import { ProductForCard } from "@/types/productss";
 
 interface TrendingProductCardProps {
-  product: Product;
+  product: ProductForCard;
 }
 
 export const TrendingProductCard = ({ product }: TrendingProductCardProps) => {
@@ -9,7 +9,7 @@ export const TrendingProductCard = ({ product }: TrendingProductCardProps) => {
     <div className="border border-gray-200 rounded-lg p-3 sm:p-4 hover:shadow-md transition-shadow h-full flex flex-col">
       <div className="relative h-40 sm:h-48 mb-3 sm:mb-4">
         <img
-          src={product.image}
+          src={product.imageUrl}
           alt={product.name}
           className="object-cover rounded-t-lg w-full h-full"
           loading="lazy"

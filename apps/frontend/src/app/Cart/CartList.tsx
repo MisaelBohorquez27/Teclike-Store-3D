@@ -1,64 +1,37 @@
-// app/Cart/CartList.tsx
 "use client";
-import { CartResponse } from "@/types/cart";
 import { CartItem } from "./CartItem";
-import { ProductForCart } from "@/types/productss";
 import { mapCartItems } from "../utils/cartMapper";
-import { useState } from "react";
+import { useCart } from "@/hooks/useCart";
 
-interface CartListProps {
-  cart: CartResponse;
-  onUpdateQuantity: (productId: number, quantity: number) => Promise<void>;
-  onRemoveItem: (productId: number) => Promise<void>;
-  onClearCart: () => Promise<void>;
-  onRefetch: () => Promise<void>;
-}
+export default function CartList() {
+  const { cart, updateQuantity, removeFromCart, clearCart, refetch, loading, error } = useCart();
 
-export default function CartList({
-  cart,
-  onUpdateQuantity,
-  onRemoveItem,
-  onClearCart,
-  onRefetch,
-}: CartListProps) {
-  const [loading, setLoading] = useState(false);
-
-  const handleUpdateQuantity = async (id: number, newQuantity: number) => {
-    try {
-      await onUpdateQuantity(id, newQuantity);
-      await onRefetch();
-    } catch (error) {
-      console.error("Error al actualizar cantidad:", error);
-    }
-  };
-
-  const handleRemoveItem = async (id: number) => {
-    try {
-      await onRemoveItem(id);
-      await onRefetch();
-    } catch (error) {
-      console.error("Error al eliminar producto:", error);
-    }
-  };
-
-  const handleClearCart = async () => {
-    try {
-      setLoading(true);
-      await onClearCart();
-      await onRefetch();
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // Función segura para mapear items
-
-  const localItems = mapCartItems(cart);
-
-  if (localItems.length === 0) {
+  if (loading) {
     return (
       <div className="w-full lg:w-2/3">
-        <div className="CartProducts-bg rounded-lg shadow-md p-4 sm:p-5 md:p-6 text-center">
+        <div className="CartProducts-bg rounded-lg shadow-md p-6 text-center">
+          <p>Cargando carrito...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="w-full lg:w-2/3">
+        <div className="CartProducts-bg rounded-lg shadow-md p-6 text-center text-red-500">
+          <p>Error: {error}</p>
+        </div>
+      </div>
+    );
+  }
+
+  const localItems = cart ? mapCartItems(cart) : [];
+
+  if (!localItems || localItems.length === 0) {
+    return (
+      <div className="w-full lg:w-2/3">
+        <div className="CartProducts-bg rounded-lg shadow-md p-6 text-center">
           <p>No hay productos en el carrito</p>
         </div>
       </div>
@@ -67,32 +40,35 @@ export default function CartList({
 
   return (
     <div className="w-full lg:w-2/3">
-      <div className="CartProducts-bg rounded-lg shadow-md p-4 sm:p-5 md:p-6">
-        {/* Encabezados de la tabla (solo desktop) */}
-        <div className="hidden md:grid grid-cols-12 gap-3 sm:gap-4 mb-3 sm:mb-4 font-medium text-sm sm:text-base text-gray-500">
+      <div className="CartProducts-bg rounded-lg shadow-md p-6">
+        {/* Encabezados */}
+        <div className="hidden md:grid grid-cols-12 gap-4 mb-4 font-medium text-sm sm:text-base text-gray-500">
           <div className="col-span-5">Producto</div>
           <div className="col-span-2 text-center">Precio</div>
           <div className="col-span-3 text-center">Cantidad</div>
           <div className="col-span-2 text-right">Total</div>
         </div>
 
-        {/* Lista de productos */}
+        {/* Productos */}
         <div className="divide-y">
           {localItems.map((item) => (
             <CartItem
               key={item.id}
               item={item}
-              onUpdateQuantity={handleUpdateQuantity}
-              onRemove={handleRemoveItem}
+              onUpdateQuantity={updateQuantity}
+              onRemove={removeFromCart}
             />
           ))}
         </div>
 
-        {/* Botón para vaciar carrito (solo desktop) */}
+        {/* Botón vaciar carrito */}
         <div className="mt-4 flex justify-end sm:block">
           <button
             disabled={loading}
-            onClick={handleClearCart}
+            onClick={async () => {
+              await clearCart();
+              await refetch();
+            }}
             className="text-red-500 hover:text-red-700 flex items-center text-sm"
           >
             <svg
@@ -109,7 +85,7 @@ export default function CartList({
                 d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
               />
             </svg>
-             {loading ? "Vaciando..." : "Vaciar carrito"}
+            {loading ? "Vaciando..." : "Vaciar carrito"}
           </button>
         </div>
       </div>

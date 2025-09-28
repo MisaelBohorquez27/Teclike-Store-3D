@@ -1,22 +1,10 @@
-import { DailyOffers } from "@/components/DailyOffers/DailyOffersPage";
-import { HeroBanner } from "@/components/HeroBanner";
-import { TrendingProducts } from "@/components/TrendingProducts/TrendingProducts";
-import { CustomerReviews } from "@/components/CustomerReview/CustomerReviews";
-import { BenefitsGrid } from "@/components/Benefits/BenefitsGrid";
-import { FollowUs } from "@/components/FollowUs/FollowUs";
-import { TopProductSellPage } from "@/components/BestSellerWeek/BSWPage";
+import { HomePage } from "./Home/HomePage";
 
 export default function Home() {
 
   return (
     <>
-      <HeroBanner />
-      <BenefitsGrid />
-      <TrendingProducts />
-      <DailyOffers />
-      <TopProductSellPage/>
-      <FollowUs />
-      <CustomerReviews />
+      <HomePage />
     </>
   );
 }

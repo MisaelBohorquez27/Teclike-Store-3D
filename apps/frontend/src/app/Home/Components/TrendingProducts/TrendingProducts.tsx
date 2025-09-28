@@ -1,7 +1,7 @@
 "use client";
-import { CustomSwiper } from "../ui/CustomSwiper";
-import { useTrendingProducts } from "../../hooks/useTrendingProducts";
-import { TrendingProductCard } from "./TrendingProductsCard";
+import { useTrendingProducts } from "@/hooks/useTrendingProducts";
+import { TrendingProductCard } from "./Components/TrendingProductsCard";
+import { CustomSwiper } from "@/components/Swipper/CustomSwiper";
 
 export function TrendingProducts() {
   const { products, loading } = useTrendingProducts();

@@ -1,9 +1,9 @@
 import { Router } from "express";
-import { getTopSellingProducts } from "../controllers/BestSellerWeek.controller";
+import { getBestSellerWeek } from "../controllers/BestSellerWeek.controller";
 
 const router = Router();
 
-router.get("/", getTopSellingProducts);
+router.get("/", getBestSellerWeek);
 
 
 export default router;

@@ -1,9 +1,9 @@
 "use client";
 
 import { useCart } from "@/hooks/useCart";
-import { TopProductSell } from "./BSWGrid";
+import { BestSellersWeekGrid } from "./Components/BSWGrid";
 
-export function TopProductSellPage() {
+export function BestSellersWeekPage() {
     const { addToCart } = useCart();
 
     // Wrap addToCart to match the expected signature and return type
@@ -13,7 +13,7 @@ export function TopProductSellPage() {
 
     return (
         <section>
-            <TopProductSell onAddToCart={handleAddToCart} />
+            <BestSellersWeekGrid onAddToCart={handleAddToCart} />
         </section>
     );
 }

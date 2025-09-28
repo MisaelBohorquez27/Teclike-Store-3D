@@ -37,7 +37,7 @@ export default function ProductPage() {
           {/* Galería de imágenes */}
           <div className="w-full lg:w-1/2 mt-6 lg:mt-8 p-4 sm:p-8 md:p-10 lg:p-6 rounded-xl">
             <ProductGallery
-              images={[product.image]} // Ahora viene del backend
+              images={[product.imageUrl]} // Ahora viene del backend
               description={product.description ?? ""}
             />
           </div>
