@@ -29,7 +29,7 @@ app.use(express.json()); // Aqui para entender json en las peticiones
 // Importas las Rutas y las usas
 app.use("/api/products", productsRouter);
 app.use("/api/offers", offersRouter);
-app.use("/api/topSellingProd", BestSellerWeek);
+app.use("/api/bestSellerWeek", BestSellerWeek);
 app.use("/api/reviews", reviewsRouter);
 app.use("/api/contact", contactRouter);
 app.use("/api/cart", cartRouter);

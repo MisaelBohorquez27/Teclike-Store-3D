@@ -10,7 +10,7 @@ function formatCurrency(cents: number, currency: string) {
   }).format(cents / 100);
 }
 
-export const getTopSellingProducts = async (req: Request, res: Response) => {
+export const getBestSellerWeek = async (req: Request, res: Response) => {
   try {
     const oneWeekAgo = new Date();
     oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
@@ -78,6 +78,7 @@ export const getTopSellingProducts = async (req: Request, res: Response) => {
         price: formatCurrency(product.priceCents, product.currency),
         priceInt: product.priceCents / 100,
         inStock: (product.inventory?.stock ?? 0) > 0,
+        stock: product.inventory?.stock ?? 0,
         isNew,
         description: product.description ?? "",
       };

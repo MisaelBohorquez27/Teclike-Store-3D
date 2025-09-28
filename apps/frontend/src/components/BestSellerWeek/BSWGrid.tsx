@@ -1,8 +1,8 @@
 "use client";
 import { motion } from "framer-motion";
 import { CustomSwiper } from "../ui/CustomSwiper";
-import { useTopProductsSell } from "../../hooks/useBestSellerWeek";
-import { TopProductsSellCard } from "./BSWCard";
+import { useBestSellerWeek } from "../../hooks/useBestSellerWeek";
+import { BestSellersWeekCard } from "./BSWCard";
 import { TopProductsSellLoading } from "./BSWSellLoading";
 import { TopProductsSellError } from "./BSWSellLoading";
 
@@ -10,8 +10,8 @@ interface CartListProps {
   onAddToCart: (productId: number, quantity: number) => Promise<void>;
 }
 
-export function TopProductSell({ onAddToCart }: CartListProps) {
-  const { topProductsSell, loading, error } = useTopProductsSell();
+export function BestSellersWeekGrid({ onAddToCart }: CartListProps) {
+  const { bestSellerWeek, loading, error } = useBestSellerWeek();
 
   const handleAddToCart = (id: number, quantity: number) => {
     onAddToCart(id, quantity);
@@ -28,7 +28,7 @@ export function TopProductSell({ onAddToCart }: CartListProps) {
         
         {loading ? (
           <TopProductsSellLoading />
-        ) : topProductsSell.length === 0 ? (
+        ) : bestSellerWeek.length === 0 ? (
           <EmptyState />
         ) : (
           <motion.div
@@ -37,9 +37,9 @@ export function TopProductSell({ onAddToCart }: CartListProps) {
             transition={{ duration: 0.5 }}
           >
             <CustomSwiper
-              items={topProductsSell}
+              items={bestSellerWeek}
               renderItem={(item) => (
-                <TopProductsSellCard
+                <BestSellersWeekCard
                   key={item.id}
                   item={item}
                   onAddToCart={handleAddToCart}
