@@ -4,7 +4,7 @@ import { CustomSwiper } from "@/components/Swipper/CustomSwiper";
 import { OfferCard } from "./OfferCard";
 import { ProductForCard } from "@/types/productss";
 import { CONFIG } from "../Data/DailyOffersData";
-import { useDailyOffers } from "../Hooks/DailyOfferHook";
+import { useDailyOffers } from "../Hooks/useDailyOffer";
 
 // Types
 interface DailyOffersContentProps {
