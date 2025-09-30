@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { Product } from "../types/products";
+import { ProductForCard } from "../types/productss";
 import { fetchAllProducts } from "../services/products";
 
 export const useTrendingProducts = () => {
-  const [products, setProducts] = useState<Product[]>([]);
+  const [products, setProducts] = useState<ProductForCard[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
