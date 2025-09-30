@@ -1,5 +1,5 @@
 // Constants
-import desktop from "../../public/ui/escritorio2.png";
+import desktop from "./escritorio2.png";
 
 export const HERO_CONFIG = {
   title: "Visualiza tu espacio antes de comprar",

@@ -77,6 +77,7 @@ export const getBestSellerWeek = async (req: Request, res: Response) => {
         image: product.imageUrl ?? "/products/default.png",
         price: formatCurrency(product.priceCents, product.currency),
         priceInt: product.priceCents / 100,
+        currency: product.currency,
         inStock: (product.inventory?.stock ?? 0) > 0,
         stock: product.inventory?.stock ?? 0,
         isNew,

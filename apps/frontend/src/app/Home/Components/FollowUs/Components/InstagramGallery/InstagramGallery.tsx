@@ -3,7 +3,7 @@ import { SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { BaseSwiper } from "@/components/Swipper/BaseSwiper";
 import { InstagramPost } from "./InstagramPost";
-import { InstagramGalleryProps } from "../Types/InstagramProps";
+import { InstagramGalleryProps } from "../../Types/InstagramProps";
 
 export function InstagramGallery({ posts, instagramUrl }: InstagramGalleryProps) {
   return (

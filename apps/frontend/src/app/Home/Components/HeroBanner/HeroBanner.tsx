@@ -3,14 +3,17 @@
 import { Navbar } from "@/components/Navbar";
 import Button from "@/components/ui/PagesButtons";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { useIsMounted } from "@/hooks/useIsMounted";
 import { HERO_CONFIG } from "./Data/HeroData";
-import { animationProps } from "./Props/HeroProps";
+import { getAnimationProps } from "./Props/HeroProps";
 
 export function HeroBanner() {
   const isMounted = useIsMounted();
+  const prefersReducedMotion = useReducedMotion();
+  const animationProps = getAnimationProps(prefersReducedMotion);
 
+  // Evitar el parpadeo en SSR
   if (!isMounted) {
     return (
       <>
