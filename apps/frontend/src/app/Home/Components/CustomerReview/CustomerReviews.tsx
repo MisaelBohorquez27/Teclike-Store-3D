@@ -1,8 +1,8 @@
 "use client";
 import "swiper/css";
 import { SwiperSlide } from "swiper/react";
-import { BaseSwiper } from "../ui/BaseSwiper";
-import { ReviewCard } from "./ReviewCard";
+import { BaseSwiper } from "@/components/Swipper/BaseSwiper";
+import { ReviewCard } from "./Components/ReviewCard";
 import { useReviews } from "@/hooks/useReviews";
 
 export function CustomerReviews() {

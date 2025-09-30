@@ -1,14 +1,9 @@
 "use client";
 import { SwiperSlide } from "swiper/react";
 import "swiper/css";
-import { BaseSwiper } from "../../ui/BaseSwiper";
+import { BaseSwiper } from "@/components/Swipper/BaseSwiper";
 import { InstagramPost } from "./InstagramPost";
-import { InstagramPost as InstagramPostType } from "@/types/FollowUs";
-
-interface InstagramGalleryProps {
-  posts: InstagramPostType[];
-  instagramUrl: string;
-}
+import { InstagramGalleryProps } from "../Types/InstagramProps";
 
 export function InstagramGallery({ posts, instagramUrl }: InstagramGalleryProps) {
   return (

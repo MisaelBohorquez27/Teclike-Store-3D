@@ -1,4 +1,4 @@
-import { Review } from "../../types/review";
+import { Review } from "@/types/review";
 
 export function ReviewCard({ review }: { review: Review }) {
   return (
