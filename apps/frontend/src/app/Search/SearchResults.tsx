@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { ProductCard } from "@/app/Products/ProductCard";
 import Pagination from "@/components/ui/Pagination";
-import { fetchSearchResults } from "@/services/NewProductService";
+import { fetchSearchResults } from "@/services/products";
 import { ProductForDetail } from "@/types/productss";
 
 export function SearchResults() {

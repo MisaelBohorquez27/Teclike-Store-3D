@@ -47,9 +47,16 @@ export interface SearchProduct extends ProductForCard {
 
 // Tipo para productos en el carrito
 
-export interface ProductForCart extends ProductForCard {
+export interface ProductForCart extends BaseProduct {
   quantity: number;
-  stock?: number;
+  imageUrl: string;
+  category: string;
+  rating: number; // Valoración del producto
+  reviewCount: number; // Número de reseñas
+  price: number; // Precio del producto
+  priceString: string; // Precio formateado como cadena
+  stock: number; // Cantidad en stock
+  inStock: boolean; // Disponibilidad
 }
 
 // Tipo para productos con ofertas especiales.

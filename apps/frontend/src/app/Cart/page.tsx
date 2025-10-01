@@ -5,52 +5,100 @@ import { EmptyCart } from "./EmptyCart";
 import CartSummary from "./cartSummary";
 
 export default function CartPage() {
-  const { cart, loading, error, updateQuantity, removeFromCart, clearCart, refetch } = useCart();
+  const {
+    cart,
+    cartItems,
+    loading,
+    error,
+    updateQuantity,
+    removeFromCart,
+    itemCount,
+  } = useCart();
 
-  if (loading) {
+  const renderContent = () => {
+    if (loading) return <CartPageLoading />;
+    if (error) return <CartPageError error={error} />;
+    if (itemCount === 0) return <EmptyCart />;
+
     return (
-      <main className="Cart-bg min-h-screen pb-20 sm:pb-12 pt-24 sm:pt-28 md:pt-30">
-        <div className="bg-transparent container mx-auto px-4 sm:px-6">
-          <h1 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8">Carrito</h1>
-          <div className="text-center py-8">Cargando carrito...</div>
-        </div>
-      </main>
+      <div className="flex flex-col-reverse sm:flex-col lg:flex-row gap-6 sm:gap-8">
+        <CartList 
+        cart={cart} 
+        onUpdateQuantity={async (productId, quantity) => {
+          await updateQuantity(productId, quantity);
+        }}
+        onRemove={async (productId) => {
+          await removeFromCart(productId);
+        }}
+        />
+        <CartSummary 
+        cart={cart} 
+        itemCount={itemCount} />
+      </div>
     );
-  }
-
-  if (error) {
-    return (
-      <main className="Cart-bg min-h-screen pb-20 sm:pb-12 pt-24 sm:pt-28 md:pt-30">
-        <div className="bg-transparent container mx-auto px-4 sm:px-6">
-          <h1 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8">Carrito</h1>
-          <div className="text-center py-8 text-red-500">Error: {error}</div>
-        </div>
-      </main>
-    );
-  }
-
-  const hasItems = cart && cart.items && cart.items.length > 0;
+  };
 
   return (
     <main className="Cart-bg min-h-screen pb-20 sm:pb-12 pt-24 sm:pt-28 md:pt-30">
       <div className="bg-transparent container mx-auto px-4 sm:px-6">
-        <h1 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8">Carrito</h1>
-
-        {!hasItems ? (
-          <EmptyCart />
-        ) : (
-          <div className="flex flex-col-reverse sm:flex-col lg:flex-row gap-6 sm:gap-8">
-            <CartList 
-              cart={cart} 
-              onUpdateQuantity={async (productId: number, quantity: number) => { await updateQuantity(productId, quantity); }}
-              onRemoveItem={async (productId: number) => { await removeFromCart(productId); }}
-              onClearCart={async () => { await clearCart(); }}
-              onRefetch={refetch}
-            />
-            <CartSummary cart={cart} />
-          </div>
-        )}
+        <CartHeader itemCount={itemCount} loading={loading} />
+        {renderContent()}
       </div>
     </main>
   );
 }
+
+// Subcomponents
+const CartHeader = ({
+  itemCount,
+  loading,
+}: {
+  itemCount: number;
+  loading: boolean;
+}) => (
+  <div className="flex justify-between items-center mb-6 sm:mb-8">
+    <h1 className="text-2xl sm:text-3xl font-bold">Carrito de Compras</h1>
+    {!loading && itemCount > 0 && (
+      <span className="text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
+        {itemCount} {itemCount === 1 ? "producto" : "productos"}
+      </span>
+    )}
+  </div>
+);
+
+const CartPageLoading = () => (
+  <div className="text-center py-12">
+    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+    <p className="text-gray-600">Cargando tu carrito...</p>
+  </div>
+);
+
+const CartPageError = ({ error }: { error: string }) => (
+  <div className="text-center py-8">
+    <div className="text-red-500 mb-4">
+      <svg
+        className="w-12 h-12 mx-auto"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z"
+        />
+      </svg>
+    </div>
+    <h3 className="text-lg font-medium text-gray-900 mb-2">
+      Error al cargar el carrito
+    </h3>
+    <p className="text-gray-600 mb-4">{error}</p>
+    <button
+      onClick={() => window.location.reload()}
+      className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+    >
+      Reintentar
+    </button>
+  </div>
+);
