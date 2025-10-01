@@ -6,7 +6,7 @@ interface CheckoutButtonProps {
   className?: string;
 }
 
-export function CheckoutButton({ items, total, className = "" }: CheckoutButtonProps) {
+export function CheckoutButton({ items, className = "" }: CheckoutButtonProps) {
   const handleCheckout = () => {
     // Aquí implementarás la lógica de checkout
     alert("Funcionalidad de checkout en desarrollo");

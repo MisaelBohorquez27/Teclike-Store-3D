@@ -85,7 +85,7 @@ const ProductPrice = ({
   currency: string;
 }) => (
   <div className="TextColor text-2xl font-bold mb-4">
-    {currency} {price.toFixed(2)}
+    {price.toFixed(2)} {currency}
   </div>
 );
 

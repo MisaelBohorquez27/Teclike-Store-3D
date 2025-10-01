@@ -9,7 +9,7 @@ import {
   DEFAULT_INSTAGRAM_URL, 
   DEFAULT_USERNAME, 
   titleAnimation 
-} from "@/types/FollowUs";
+} from "@/types/followUs";
 
 export function FollowUs({ 
   posts = DEFAULT_POSTS, 

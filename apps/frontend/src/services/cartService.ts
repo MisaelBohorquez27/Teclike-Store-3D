@@ -1,157 +1,105 @@
-// services/cartService.ts
 import { CartResponse } from '@/types/cart';
+import { validateCartStructure } from '@/app/utils/cartMapper';
 
 const API_BASE_URL = 'http://localhost:5000/api/cart';
 
- async function fetchCart(): Promise<CartResponse> {
+// Función auxiliar para manejar respuestas HTTP
+const handleResponse = async (response: Response): Promise<any> => {
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({ message: 'Error de servidor' }));
+    throw new Error(errorData.message || `Error HTTP: ${response.status}`);
+  }
+  return response.json();
+};
+
+// Función fetchCart independiente
+export async function fetchCart(): Promise<CartResponse> {
   try {
-    const res = await fetch(`${API_BASE_URL}`, {
-      cache: "no-store",
-    });
-
-    if (!res.ok) {
-      const error = await res.json();
-      throw new Error(error.message || "Error al obtener el carrito");
-    }
-
-    const cartData = await res.json();
-
-    // Validar la estructura de los datos
-    if (!cartData || typeof cartData !== "object") {
-      throw new Error("Formato de respuesta inválido");
-    }
-
-    // Asegurar que items sea un array
-    if (!Array.isArray(cartData.items)) {
-      cartData.items = [];
-    }
-
-    // Validar cada item
-    cartData.items = cartData.items.map((item: any) => ({
-      id: item.id || 0,
-      productId: item.productId || 0,
-      quantity: item.quantity || 1,
-      product: {
-        id: item.product?.id || 0,
-        name: item.product?.name || "Producto sin nombre",
-        description: item.product?.description || "",
-        price: item.product?.price || 0,
-        imageUrl: item.product?.imageUrl,
-        inStock: item.product?.inStock || false,
-        stock: item.product?.stock || 0,
-      },
-    }));
-
-    return cartData;
+    const cartData = await handleResponse(
+      await fetch(`${API_BASE_URL}`, { cache: "no-store" })
+    );
+    return validateCartStructure(cartData);
   } catch (error) {
     console.error("Error en fetchCart:", error);
-    // Devolver un carrito vacío en caso de error
     return {
       id: 0,
       userId: 0,
       items: [],
+      subtotal: 0,
+      tax: 0,
+      shipping: 0,
+      total: 0,
     };
   }
 }
+
 export class CartService {
   static async getCart(): Promise<CartResponse> {
-    return await fetchCart(); // Usa tu función existente
+    return await fetchCart();
   }
 
   static async addToCart(productId: number, quantity: number = 1): Promise<CartResponse> {
-    const response = await fetch(`${API_BASE_URL}/add`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ productId, quantity }),
-    });
-    
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || 'Error al agregar al carrito');
+    try {
+      const cartData = await handleResponse(
+        await fetch(`${API_BASE_URL}/add`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ 
+            productId: Number(productId), 
+            quantity: Math.max(1, quantity) 
+          }),
+        })
+      );
+      return validateCartStructure(cartData);
+    } catch (error) {
+      console.error('Error en addToCart:', error);
+      throw error;
     }
-    
-    const cartData = await response.json();
-    return this.validateCartResponse(cartData);
   }
 
   static async updateQuantity(productId: number, quantity: number): Promise<CartResponse> {
-    const response = await fetch(`${API_BASE_URL}/update`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ productId, quantity }),
-    });
-    
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || 'Error al actualizar el carrito');
+    try {
+      const cartData = await handleResponse(
+        await fetch(`${API_BASE_URL}/update`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ 
+            productId: Number(productId), 
+            quantity: Math.max(0, quantity)
+          }),
+        })
+      );
+      return validateCartStructure(cartData);
+    } catch (error) {
+      console.error('Error en updateQuantity:', error);
+      throw error;
     }
-    
-    const cartData = await response.json();
-    return this.validateCartResponse(cartData);
   }
 
   static async removeFromCart(productId: number): Promise<CartResponse> {
-    const response = await fetch(`${API_BASE_URL}/remove`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ productId }),
-    });
-    
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || 'Error al eliminar del carrito');
+    try {
+      const cartData = await handleResponse(
+        await fetch(`${API_BASE_URL}/remove`, {
+          method: 'DELETE',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ productId: Number(productId) }),
+        })
+      );
+      return validateCartStructure(cartData);
+    } catch (error) {
+      console.error('Error en removeFromCart:', error);
+      throw error;
     }
-    
-    const cartData = await response.json();
-    return this.validateCartResponse(cartData);
   }
 
   static async clearCart(): Promise<{ message: string }> {
-    const response = await fetch(`${API_BASE_URL}/clear`, {
-      method: 'DELETE',
-    });
-    
-    if (!response.ok) {
-      throw new Error('Error al vaciar el carrito');
+    try {
+      return await handleResponse(
+        await fetch(`${API_BASE_URL}/clear`, { method: 'DELETE' })
+      );
+    } catch (error) {
+      console.error('Error en clearCart:', error);
+      throw error;
     }
-    
-    return response.json();
-  }
-
-  // Reutilizar tu lógica de validación existente
-  private static validateCartResponse(cartData: any): CartResponse {
-    // Validar la estructura de los datos
-    if (!cartData || typeof cartData !== "object") {
-      throw new Error("Formato de respuesta inválido");
-    }
-
-    // Asegurar que items sea un array
-    if (!Array.isArray(cartData.items)) {
-      cartData.items = [];
-    }
-
-    // Validar cada item (usando tu misma lógica)
-    cartData.items = cartData.items.map((item: any) => ({
-      id: item.id || 0,
-      productId: item.productId || 0,
-      quantity: item.quantity || 1,
-      product: {
-        id: item.product?.id || 0,
-        name: item.product?.name || "Producto sin nombre",
-        description: item.product?.description || "",
-        price: item.product?.price || 0,
-        imageUrl: item.product?.imageUrl,
-        inStock: item.product?.inStock || false,
-        stock: item.product?.stock || 0,
-      },
-    }));
-
-    return cartData;
   }
 }
