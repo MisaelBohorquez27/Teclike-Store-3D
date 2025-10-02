@@ -10,6 +10,7 @@ import cartRouter from "./routes/cart.route";
 import searchRoutes from "./routes/search.route";
 import PaginatedProducts from "./routes/paginatedProducts.route";
 import checkout from "./routes/chekout.route";
+import uploadRoutes from "./routes/upload.route";
 
 //Cargando variables de entorno
 dotenv.config();
@@ -37,6 +38,7 @@ app.use("/api/cart", cartRouter);
 app.use("/api/search", searchRoutes);
 app.use("/api/paginated", PaginatedProducts);
 app.use("/api/checkout", checkout);
+app.use("/api/upload", uploadRoutes);
 
 //Ruta de prueba para ver si el servidor funciona
 app.get("/", (req, res) => {

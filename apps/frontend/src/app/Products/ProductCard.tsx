@@ -9,7 +9,7 @@ export function ProductCard({ product }: { product: ProductForDetail }) {
         {/* Imagen del Producto */}
         <div className="relative aspect-square">
           <img
-            src={product.image}
+            src={product.imageUrl}
             alt={product.name}
             className="w-full h-full object-cover"
           />

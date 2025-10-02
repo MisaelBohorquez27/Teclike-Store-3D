@@ -1,10 +1,9 @@
 // seeders/seed-products.ts
-import { PrismaClient } from '@prisma/client';
-import products from '../data/products.json';
-
+import { PrismaClient } from "@prisma/client";
+import products from "../data/products.json";
 
 export async function seedProducts(prisma: PrismaClient) {
-  console.log('🛍️ Insertando productos...');
+  console.log("🛍️ Insertando productos...");
 
   for (const productData of products) {
     const product = await prisma.product.upsert({
@@ -16,10 +15,20 @@ export async function seedProducts(prisma: PrismaClient) {
         name: productData.name,
         description: productData.description,
         priceCents: productData.priceCents,
-        imageUrl: productData.imageUrl
-      }
+        imageUrl: productData.imageUrl,
+      },
     });
 
+    // Ejemplo de actualización de un producto específico
+    await prisma.product.update({
+      where: {
+        slug: "mouse-x11", // Usas el slug para encontrar el producto
+      },
+      data: {
+        imageUrl: "https://res.cloudinary.com/dwewy8c7p/image/upload/v1759415343/teclike-image/mewvnmlrl1dnf37ijslt.png", // Nuevo nombre
+      },
+    });
+    
     // Crear inventario
     await prisma.inventory.upsert({
       where: { productId: product.id },
@@ -27,10 +36,10 @@ export async function seedProducts(prisma: PrismaClient) {
       create: {
         productId: product.id,
         stock: productData.inventory.stock,
-        isNew: productData.inventory.isNew
-      }
+        isNew: productData.inventory.isNew,
+      },
     });
-    
+
     console.log(`✅ Producto: ${product.name}`);
   }
 }

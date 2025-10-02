@@ -4,7 +4,7 @@
 import { useState } from "react";
 import { uploadImage } from "@/services/imageUploader"; // ajusta la ruta si es necesario
 
-export default function ImageUploader() {
+export function ImageUploader() {
   const [preview, setPreview] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
