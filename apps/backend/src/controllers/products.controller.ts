@@ -29,7 +29,7 @@ function formatForCard(p: any) {
     currency: p.currency,
     rating: p.rating ?? 0,
     description: p.description,
-    image: p.imageUrl ?? "/placeholder.png",
+    imageUrl: p.imageUrl ?? "/placeholder.png",
     isNew,
   };
 }

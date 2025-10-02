@@ -85,7 +85,7 @@
       "name": "Mouse Eyooso X11",
       "description": "Ergonomic gaming mouse with customizable RGB lighting",
       "priceCents": 4999,
-      "imageUrl": "/products/eyooso-x11.png",
+      "imageUrl": "https://res.cloudinary.com/dwewy8c7p/image/upload/v1759415343/teclike-image/mewvnmlrl1dnf37ijslt.png",
       "categories": ["Mice"],
       "inventory": { "stock": 50, "isNew": true }
     },
