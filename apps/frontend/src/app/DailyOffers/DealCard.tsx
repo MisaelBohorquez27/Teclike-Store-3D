@@ -3,6 +3,9 @@
 import Button from "@/components/ui/PagesButtons";
 import { OfferProduct } from "@/types/productss";
 
+// import type { Deal } from "@/app/DailyOffers/DailyDeals";
+export type Deal = OfferProduct;
+
 export function DealCard({
   deal,
   isFlashDeal = false,
@@ -15,7 +18,7 @@ export function DealCard({
       {/* Imagen + Descuento */}
       <div className="relative">
         <img
-          src={deal.image}
+          src={deal.imageUrl}
           alt={deal.name}
           className="w-full h-48 object-cover"
         />
