@@ -79,10 +79,10 @@ export const useCart = (): UseCartReturn => {
   );
 
   const clearCart = useCallback(async (): Promise<{ message: string }> => {
-    const result = await CartService.clearCart();
-    setCart(null);
-    return result;
-  }, []);
+  const result = await CartService.clearCart();
+  await getCart(); // ← esto asegura que el estado se actualice correctamente
+  return result;
+}, [getCart]);
 
   useEffect(() => {
     getCart();

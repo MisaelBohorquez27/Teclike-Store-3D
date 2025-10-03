@@ -5,24 +5,16 @@ import { useCart } from "@/hooks/useCart";
 
 interface CartListProps {
   cart: CartResponse | null;
-  onUpdateQuantity?: (productId: number, quantity: number) => Promise<void>;
-  onRemove: (productId: number) => Promise<void>;
+  onUpdateQuantity?: (productId: number, quantity: number) => Promise<CartResponse>;
+  onRemove: (productId: number) => Promise<CartResponse>;
 }
 
-export default function CartList({ cart, onUpdateQuantity, onRemove }: CartListProps) {
-  const { clearCart, refetch, loading, error } = useCart();
+export default function CartList({ cart, onUpdateQuantity, onRemove, onClearCart }: CartListProps & { onClearCart: () => void }) {
+  const { loading, error } = useCart();
 
-  // Fallback si no se pasa onUpdateQuantity
-  const safeOnUpdateQuantity = onUpdateQuantity ?? (async () => {});
 
   const handleClearCart = async () => {
-    if (!confirm("¿Estás seguro de que quieres vaciar el carrito?")) return;
-    try {
-      await clearCart();
-      await refetch();
-    } catch (err) {
-      console.error("Error al vaciar carrito:", err);
-    }
+    await onClearCart();
   };
 
   if (loading) return <CartLoadingState />;
@@ -38,7 +30,7 @@ export default function CartList({ cart, onUpdateQuantity, onRemove }: CartListP
           <CartItem
             key={item.id}
             item={item} // ✅ ahora pasa el CartItem del backend
-            onUpdateQuantity={safeOnUpdateQuantity}
+            onUpdateQuantity={onUpdateQuantity!}
             onRemove={onRemove}
           />
         ))}

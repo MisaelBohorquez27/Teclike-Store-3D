@@ -17,6 +17,7 @@ export const getCart = async (req: Request, res: Response) => {
               include: { inventory: true },
             },
           },
+          orderBy: { id: "desc" },
         },
       },
     });
