@@ -17,13 +17,13 @@ async function main() {
   console.log('==========================================');
 
   // Ejecutar seeders en orden
-  await seedProducts(prisma);
+  await seedProducts(prisma); // primero haz un seed a productos
   console.log('------------------------------------------');
   await seedCoreData(prisma);
   console.log('------------------------------------------');
   await seedCategories(prisma);
   console.log('------------------------------------------');
-  await seedUsers(prisma);
+  await seedUsers(prisma); // luego haz un seed hasta aqui
   console.log('------------------------------------------');
   await seedOffers(prisma);
   console.log('------------------------------------------');
@@ -31,7 +31,7 @@ async function main() {
   console.log('------------------------------------------');
   await seedOrders(prisma);
   console.log('------------------------------------------');
-  await seedReviews(prisma);
+  await seedReviews(prisma); // finalmente haz un seed a todos hasta reviews
 
   console.log('==========================================');
   console.log('✅ Base de datos poblada exitosamente!');

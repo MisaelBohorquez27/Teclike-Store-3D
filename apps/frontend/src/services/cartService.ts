@@ -64,7 +64,7 @@ export class CartService {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ 
-            productId: Number(productId), 
+            productId: productId, 
             quantity: Math.max(0, quantity)
           }),
         })

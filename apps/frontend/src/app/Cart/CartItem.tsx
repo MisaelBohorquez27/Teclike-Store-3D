@@ -4,8 +4,8 @@ import { CartResponse } from "@/types/cart";
 
 interface CartItemProps {
   item: CartResponse["items"][number];
-  onUpdateQuantity: (productId: number, quantity: number) => Promise<void>;
-  onRemove: (productId: number) => Promise<void>;
+  onUpdateQuantity: (productId: number, quantity: number) => Promise<CartResponse>;
+  onRemove: (productId: number) => Promise<CartResponse>;
 }
 
 export function CartItem({ item, onUpdateQuantity, onRemove }: CartItemProps) {

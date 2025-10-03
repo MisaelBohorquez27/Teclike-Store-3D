@@ -239,6 +239,7 @@ model CartProduct {
   cartId    Int
   productId Int
   quantity  Int @default(1)
+  createdAt DateTime @default(now())
 
   // Relations
   cart    Cart    @relation(fields: [cartId], references: [id])

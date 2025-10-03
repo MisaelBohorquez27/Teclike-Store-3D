@@ -7,13 +7,22 @@ import CartSummary from "./cartSummary";
 export default function CartPage() {
   const {
     cart,
-    cartItems,
     loading,
     error,
     updateQuantity,
     removeFromCart,
     itemCount,
+    clearCart,
   } = useCart();
+
+  const handleClearCart = async () => {
+    if (!confirm("¿Estás seguro de que quieres vaciar el carrito?")) return;
+    try {
+      await clearCart(); // ← ya incluye getCart internamente
+    } catch (err) {
+      console.error("Error al vaciar carrito:", err);
+    }
+  };
 
   const renderContent = () => {
     if (loading) return <CartPageLoading />;
@@ -22,18 +31,13 @@ export default function CartPage() {
 
     return (
       <div className="flex flex-col-reverse sm:flex-col lg:flex-row gap-6 sm:gap-8">
-        <CartList 
-        cart={cart} 
-        onUpdateQuantity={async (productId, quantity) => {
-          await updateQuantity(productId, quantity);
-        }}
-        onRemove={async (productId) => {
-          await removeFromCart(productId);
-        }}
+        <CartList
+          cart={cart}
+          onUpdateQuantity={updateQuantity}
+          onRemove={removeFromCart}
+          onClearCart={handleClearCart}
         />
-        <CartSummary 
-        cart={cart} 
-        itemCount={itemCount} />
+        <CartSummary cart={cart} itemCount={itemCount} />
       </div>
     );
   };
