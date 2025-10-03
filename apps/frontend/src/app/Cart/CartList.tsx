@@ -5,13 +5,20 @@ import { useCart } from "@/hooks/useCart";
 
 interface CartListProps {
   cart: CartResponse | null;
-  onUpdateQuantity?: (productId: number, quantity: number) => Promise<CartResponse>;
+  onUpdateQuantity?: (
+    productId: number,
+    quantity: number
+  ) => Promise<CartResponse>;
   onRemove: (productId: number) => Promise<CartResponse>;
 }
 
-export default function CartList({ cart, onUpdateQuantity, onRemove, onClearCart }: CartListProps & { onClearCart: () => void }) {
+export default function CartList({
+  cart,
+  onUpdateQuantity,
+  onRemove,
+  onClearCart,
+}: CartListProps & { onClearCart: () => void }) {
   const { loading, error } = useCart();
-
 
   const handleClearCart = async () => {
     await onClearCart();
@@ -26,14 +33,16 @@ export default function CartList({ cart, onUpdateQuantity, onRemove, onClearCart
       <div className="CartProducts-bg rounded-lg shadow-md p-6">
         {/* Encabezados */}
         <CartTableHeader />
-        {cart.items.map((item) => (
-          <CartItem
-            key={item.id}
-            item={item} // ✅ ahora pasa el CartItem del backend
-            onUpdateQuantity={onUpdateQuantity!}
-            onRemove={onRemove}
-          />
-        ))}
+        {[...cart.items]
+          .sort((a, b) => b.id - a.id) // o por createdAt, o por product.name
+          .map((item) => (
+            <CartItem
+              key={item.id}
+              item={item}
+              onUpdateQuantity={onUpdateQuantity!}
+              onRemove={onRemove}
+            />
+          ))}
 
         {/* Botón vaciar carrito */}
         <ClearCartButton loading={loading} onClearCart={handleClearCart} />
@@ -68,7 +77,9 @@ const CartErrorState = ({ error }: { error: string }) => (
 const CartEmptyState = () => (
   <div className="w-full lg:w-2/3">
     <div className="CartProducts-bg rounded-lg shadow-md p-6 text-center">
-      <p className="text-gray-600 text-lg mb-4">No hay productos en el carrito</p>
+      <p className="text-gray-600 text-lg mb-4">
+        No hay productos en el carrito
+      </p>
       <a
         href="/products"
         className="inline-block bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors"
