@@ -2,7 +2,7 @@
 "use client";
 
 import { useState } from "react";
-import { uploadImage } from "@/services/imageUploader"; // ajusta la ruta si es necesario
+import { uploadImage } from "@/services/imageUploader"; 
 
 export function ImageUploader() {
   const [preview, setPreview] = useState<string | null>(null);
