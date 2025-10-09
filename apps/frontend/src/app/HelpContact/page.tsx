@@ -1,6 +1,6 @@
-import { FaqSection } from "@/app/HelpContact/FaqSection";
-import { ContactForm } from "@/app/HelpContact/ContactForm";
-import { ServiceCards } from "@/app/HelpContact/ServiceCards";
+import { FaqSection } from "@/app/HelpContact/components/FaqSection";
+import { ContactForm } from "@/app/HelpContact/components/ContactForm";
+import { ServiceCards } from "@/app/HelpContact/components/ServiceCards";
 
 export default function HelpContactPage() {
   return (
