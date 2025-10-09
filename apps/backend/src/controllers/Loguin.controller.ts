@@ -1,15 +1,18 @@
-import { User } from "@prisma/client";
-import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
 import {Request , Response} from "express";
-const prisma = new PrismaClient();
+import prisma from "../prisma"
+
+
 export async function ValidationUser (req: Request , res:Response){
-    const {email , password}= req.params
+   
+    const email = req.query.email;
+    const password = typeof req.query.password === "string" ? req.query.password : undefined;
+
 try {
         // Buscar usuario por email
-        const user = await prisma.User.findUnique({
+        const user = await prisma.user.findUnique({
             where: {
-                email: email
+                email: String(email)
             }
         });
     // Si no existe el usuario
@@ -17,6 +20,9 @@ try {
             return res.status(404).json({message:"No se encontro el usuario"});
         }
         // Comparar la contraseña hasheada
+        if (!password) {
+            return res.status(400).json({message: "La contraseña es requerida"});
+        }
         const isPasswordValid = await bcrypt.compare(password, user.password);
 
         // Si la contraseña es válida, retornar el usuario
@@ -24,7 +30,7 @@ try {
             return res.status(200).json({message:"Usuario validado",status:true}) ;
         }
          // Si la contraseña no es válida
-        return null;
+        return res.status(401).json({message: "Contraseña incorrecta", status: false});
 
     } catch (error) {
         console.error("Error en validación de usuario:", error);

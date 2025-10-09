@@ -3,6 +3,6 @@ import { ValidationUser } from "../controllers/Loguin.controller";
 
 const router = Router();
 
-router.post("/", ValidationUser);
+router.get("/", ValidationUser);
 
 export default router;
