@@ -1,5 +1,5 @@
 import { CartResponse } from '@/types/cart';
-import { validateCartStructure } from '@/app/utils/cartMapper';
+import { validateCartStructure } from '@/utils/cartMapper';
 
 const API_BASE_URL = 'http://localhost:5000/api/cart';
 

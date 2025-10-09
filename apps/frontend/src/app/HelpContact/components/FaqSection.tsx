@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import faq from '@/data/faq.json';
+import faq from '../data/faq.json';
 
 
 export function FaqSection() {

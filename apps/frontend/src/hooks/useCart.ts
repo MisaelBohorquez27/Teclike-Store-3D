@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { CartService } from '@/services/cartService';
 import { CartResponse } from '@/types/cart';
-import { mapCartItems } from '@/app/utils/cartMapper';
+import { mapCartItems } from '@/utils/cartMapper';
 
 interface UseCartReturn {
   cart: CartResponse | null;
