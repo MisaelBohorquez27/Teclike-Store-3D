@@ -1,5 +1,5 @@
 import { apiFetch } from "./api";
-import type { Deal } from "@/app/DailyOffers/DealCard";
+import type { Deal } from "@/app/DailyOffers/components/DealCard";
 
 export async function fetchDeals(limit = 100): Promise<Deal[]> {
   const data = await apiFetch<Deal[]>(`/offers?limit=${limit}`);
