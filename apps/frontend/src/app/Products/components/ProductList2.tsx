@@ -2,7 +2,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { ProductCard } from "@/app/Products/ProductCard";
+import { ProductCard } from "@/app/Products/components/ProductCard";
 import Pagination from "@/components/ui/Pagination";
 import { SearchBar3 } from "@/components/ui/SearchBar3";
 import { FilterSidebar } from "./FilterSidebar";

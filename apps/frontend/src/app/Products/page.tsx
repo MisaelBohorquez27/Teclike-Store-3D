@@ -1,7 +1,7 @@
 "use client";
 import { ImageUploader } from "@/components/ImageUpload";
-import { ProductHero } from "./ProductHero";
-import { ProductList2 } from "./ProductList2";
+import { ProductHero } from "./components/ProductHero";
+import { ProductList2 } from "./components/ProductList2";
 
 export default function ProductPage() {
 
