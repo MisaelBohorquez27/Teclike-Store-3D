@@ -1,6 +1,6 @@
 "use client";
 import { SearchBar3 } from "@/components/ui/SearchBar3";
-import { ProductHero } from "../Products/ProductHero";
+import { ProductHero } from "../Products/components/ProductHero";
 import { SearchResults } from "./components/SearchResults";
 
 export default function SearchPage() {
