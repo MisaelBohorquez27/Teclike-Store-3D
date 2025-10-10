@@ -101,7 +101,7 @@ pnpm --filter db prisma migrate reset
 
 [![Portfolio](https://img.shields.io/badge/🌐-Portfolio-2ea44f?style=for-the-badge)](https://EnDesarrollo.com)
 [![LinkedIn](https://img.shields.io/badge/💼-LinkedIn-blue?style=for-the-badge)](https://linkedin.com/in/misael-bohorquez-186360217)
-[![GitHub](https://img.shields.io/badge/🐙-GitHub-black?style=for-the-badge)](https://github.com/MisaelBohorquez27
+[![GitHub](https://img.shields.io/badge/🐙-GitHub-black?style=for-the-badge)](https://github.com/MisaelBohorquez27)
 [![Email](https://img.shields.io/badge/📧-Email-red?style=for-the-badge)](mailto:misaelbohorquez27@hotmail.com)
 
 ### Habilidades Técnicas:
