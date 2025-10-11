@@ -1,4 +1,4 @@
-import { SearchResult } from "@/services/Search";
+import { SearchResult } from "@/types/searchSuggestions";
 import Link from "next/dist/client/link";
 
 
