@@ -1,9 +1,9 @@
 "use client";
 import { useParams } from "next/navigation";
-import { ProductInfo } from "./ProductInfo";
-import { ProductTabs } from "./ProductTabs";
-import { ProductReviews } from "./ProductReviews";
-import { ProductGallery } from "./ProductGallery";
+import { ProductInfo } from "./components/ProductInfo";
+import { ProductTabs } from "./components/ProductTabs";
+import { ProductReviews } from "./components/ProductReviews";
+import { ProductGallery } from "./components/ProductGallery";
 import { useProductInfo } from "@/hooks/useProductInfo";
 
 export default function ProductPage() {
