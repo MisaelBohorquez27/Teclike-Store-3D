@@ -2,13 +2,6 @@
 import { Request, Response } from "express";
 import prisma from "../prisma";
 
-/* 🔧 Utilidad para formatear precios */
-function formatCurrency(cents: number, currency: string) {
-  return new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency,
-  }).format(cents / 100);
-}
 
 export const getBestSellerWeek = async (req: Request, res: Response) => {
   try {

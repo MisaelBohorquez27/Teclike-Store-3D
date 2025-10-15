@@ -3,36 +3,6 @@ import { Request, Response } from "express";
 import { SearchService } from "../services/search.service";
 import { SearchParams } from "../types/search";
 
-// 🔹 Formatear precio
-function formatCurrency(cents: number, currency: string) {
-  return new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency,
-  }).format(cents / 100);
-}
-
-// 🔹 Formato "tarjeta"
-function formatForCard(p: any) {
-  const primaryCategory =
-    p.categoryProducts?.[0]?.category?.name ?? "Uncategorized";
-  const isNew =
-    (Date.now() - new Date(p.createdAt).getTime()) / (1000 * 60 * 60 * 24) <=
-    30;
-
-  return {
-    id: p.id,
-    name: p.name,
-    slug: p.slug,
-    price: formatCurrency(p.priceCents, p.currency), // 👈 string
-    image: p.imageUrl ?? "/placeholder.png",
-    category: primaryCategory,
-    rating: p.rating ?? 0,
-    reviewCount: p._count?.reviews ?? 0,
-    score: p._score ?? 0,
-    inStock: p.stock > 0, // 👈 boolean
-  };
-}
-
 export const searchProducts = async (req: Request, res: Response) => {
   try {
     const { q: query, category, inStock, limit, page } = req.query;
@@ -59,7 +29,7 @@ export const searchProducts = async (req: Request, res: Response) => {
 
     return res.json({
       success: true,
-      data: results.map(formatForCard),
+      data: results.map(formatForCardSearch),
       pagination: {
         page: searchParams.page,
         limit: searchParams.limit,
