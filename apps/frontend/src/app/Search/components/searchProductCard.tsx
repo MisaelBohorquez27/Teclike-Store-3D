@@ -1,4 +1,4 @@
-import { SearchResult } from "@/types/searchSuggestions";
+import { SearchResult } from "@/types/search";
 import Link from "next/dist/client/link";
 
 
@@ -43,7 +43,7 @@ export function SearchProductCard({ product }: { product: SearchResult }) {
 
         <div className="mt-3 sm:mt-4 flex justify-between items-center">
           <span className="font-bold text-gray-900 text-sm sm:text-base">
-            ${product.price}
+            {product.price}
           </span>
           
           {/* ✅ Botón convertido en enlace */}

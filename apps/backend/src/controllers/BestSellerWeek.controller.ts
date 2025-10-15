@@ -1,6 +1,7 @@
 // controllers/productController.ts
 import { Request, Response } from "express";
 import prisma from "../prisma";
+import { formatCurrency } from "../utils/formatCurrency";
 
 
 export const getBestSellerWeek = async (req: Request, res: Response) => {

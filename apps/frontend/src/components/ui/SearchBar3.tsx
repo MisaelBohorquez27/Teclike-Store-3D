@@ -3,8 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { useSearch } from "../../hooks/search.hook";
-import { SearchSuggestion } from "@/types/searchSuggestions";
-
+import { SearchSuggestion } from "../../types/search";
 interface SearchBarProps {
   placeholder?: string;
   className?: string;

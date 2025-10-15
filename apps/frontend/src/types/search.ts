@@ -11,7 +11,7 @@ export interface SearchResult extends SearchSuggestion {
 
   rating: number;
   reviewCount: number;
-  price: number;
+  price: string;
   imageUrl?: string;
   category: string;
 }

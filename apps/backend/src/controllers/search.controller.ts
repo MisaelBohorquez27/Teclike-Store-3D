@@ -2,6 +2,7 @@
 import { Request, Response } from "express";
 import { SearchService } from "../services/search.service";
 import { SearchParams } from "../types/search";
+import { formatForCardSearch } from "../mappers/Search.formatter";
 
 export const searchProducts = async (req: Request, res: Response) => {
   try {

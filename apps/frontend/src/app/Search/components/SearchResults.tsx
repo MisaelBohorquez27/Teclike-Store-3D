@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { ProductCard } from "@/app/Products/components/ProductCard";
 import Pagination from "@/components/ui/Pagination";
-import { fetchSearchResults } from "@/services/products";
+import { fetchSearchResults } from "@/services/Search";
 import { ProductForDetail } from "@/types/productss";
 
 export function SearchResults() {
@@ -16,22 +16,29 @@ export function SearchResults() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
-  // 🔹 Mejor: constante configurable (no necesitas `useState`)
   const postsPerPage = 6;
 
   useEffect(() => {
+    if (!query) return;
     setLoading(true);
-    fetchSearchResults(query, currentPage, postsPerPage)
-      .then((res) => {
+
+    fetchSearchResults(query, { page: currentPage, limit: postsPerPage })
+      .then((res: any) => {
+        if (!res.success || !res.data) {
+          setProducts([]);
+          setTotalPages(1);
+          return;
+        }
+
         setProducts(
-          res.items.map((item: any) => ({
+          res.data.map((item: any) => ({
             ...item,
             originalPrice: item.originalPrice ?? item.price ?? "0",
           }))
         );
-        setTotalPages(res.pagination.totalPages);
+        setTotalPages(res.pagination?.totalPages ?? 1);
       })
-      .catch((err) => console.error(err))
+      .catch((err) => console.error("Error en búsqueda:", err))
       .finally(() => setLoading(false));
   }, [query, currentPage, postsPerPage]);
 
@@ -53,7 +60,6 @@ export function SearchResults() {
         ))}
       </div>
 
-      {/* 🔹 Ahora Pagination controla el flujo desde el backend */}
       <Pagination
         currentPage={currentPage}
         totalPages={totalPages}
