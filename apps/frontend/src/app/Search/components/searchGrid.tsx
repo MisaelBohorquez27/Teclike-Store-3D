@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { SearchProductCard } from "./searchProductCard";
-import { SearchResult } from "@/types/searchSuggestions";
+import { SearchResult } from "@/types/search";
 
 export function SearchGrid({
   results,

@@ -1,5 +1,7 @@
+import { formatCurrency } from "../utils/formatCurrency";
+
 // Formato "tarjeta"
-function formatForCardSearch(p: any) {
+export function formatForCardSearch(p: any) {
   const primaryCategory =
     p.categoryProducts?.[0]?.category?.name ?? "Uncategorized";
   const isNew =
@@ -10,12 +12,12 @@ function formatForCardSearch(p: any) {
     id: p.id,
     name: p.name,
     slug: p.slug,
-    price: formatCurrency(p.priceCents, p.currency), // 👈 string
-    image: p.imageUrl ?? "/placeholder.png",
+    price: formatCurrency(p.priceCents, p.currency),
+    imageUrl: p.imageUrl ?? "/placeholder.png",
     category: primaryCategory,
     rating: p.rating ?? 0,
     reviewCount: p._count?.reviews ?? 0,
     score: p._score ?? 0,
-    inStock: p.stock > 0, // 👈 boolean
+    inStock: p.stock > 0,
   };
 }
