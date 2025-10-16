@@ -1,7 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import { FiInstagram } from "react-icons/fi";
-import Button from "@/components/ui/PagesButtons";
+import Button from "@/components/PagesButtons";
 import { fadeInAnimation } from "@/types/followUs";
 import { InstagramButtonProps } from "../../Types/InstagramProps";
 

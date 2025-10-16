@@ -1,6 +1,6 @@
 import Image from "next/image";
-import Button from "@/components/ui/PagesButtons";
-import CartIcon from "@/components/ui/CartIcon";
+import Button from "@/components/PagesButtons";
+import CartIcon from "@/components/CartIcon";
 import { ProductForDetail } from "@/types/productss";
 
 interface ProductsProps {

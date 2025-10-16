@@ -1,6 +1,6 @@
 "use client";
 
-import Button from "@/components/ui/PagesButtons";
+import Button from "@/components/PagesButtons";
 import { OfferProduct } from "@/types/productss";
 
 // import type { Deal } from "@/app/DailyOffers/DailyDeals";

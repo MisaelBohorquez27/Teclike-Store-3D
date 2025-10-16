@@ -2,7 +2,7 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import Button from "@/components/ui/PagesButtons";
+import Button from "@/components/PagesButtons";
 import { useFilterState } from "@/hooks/useFilterState";
 
 export function FilterSidebar() {

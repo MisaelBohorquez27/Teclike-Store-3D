@@ -1,6 +1,6 @@
 "use client";
 
-import Button from "@/components/ui/PagesButtons";
+import Button from "@/components/PagesButtons";
 import { useState } from "react";
 import { sendContactMessage } from "@/services/contact"; // 👈 tu service
 

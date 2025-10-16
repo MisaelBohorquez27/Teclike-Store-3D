@@ -1,5 +1,5 @@
 "use client";
-import { SearchBar3 } from "@/components/ui/SearchBar3";
+import { SearchBar } from "@/components/SearchBar";
 import { ProductHero } from "../Products/components/ProductHero";
 import { SearchResults } from "./components/SearchResults";
 
@@ -10,7 +10,7 @@ export default function SearchPage() {
       <ProductHero />
       <div className="container mx-auto px-4 sm:px-6 pb-15 pt-5 md:pb-20 md:pt-5 max-w-6xl">
         <div className="flex justify-center">
-          <SearchBar3 />
+          <SearchBar />
         </div>
         <div className="w-full flex justify-center">
           {/* Grid de productos */}
