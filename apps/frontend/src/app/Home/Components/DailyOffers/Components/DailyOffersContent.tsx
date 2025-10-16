@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Button from "@/components/ui/PagesButtons";
+import Button from "@/components/PagesButtons";
 import { CustomSwiper } from "@/components/Swipper/CustomSwiper";
 import { OfferCard } from "./OfferCard";
 import { ProductForCard } from "@/types/productss";

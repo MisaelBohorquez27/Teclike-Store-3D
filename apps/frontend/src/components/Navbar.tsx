@@ -4,9 +4,9 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
 import logo from "../../public/logos/Logo4.png";
-import CartIcon from "./ui/CartIcon";
-import Button from "./ui/PagesButtons";
-import { SearchBar3 } from "./ui/SearchBar3";
+import CartIcon from "./CartIcon";
+import Button from "./PagesButtons";
+import { SearchBar } from "./SearchBar";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -103,7 +103,7 @@ export function Navbar() {
           <div className="flex items-center space-x-3 md:space-x-5">
             {/* SearchBar solo en desktop */}
             <div className="hidden md:block">
-              <SearchBar3 />
+              <SearchBar />
             </div>
 
             <Button variant="primary" size="xs">
@@ -117,7 +117,7 @@ export function Navbar() {
         {/* SearchBar para mobile (aparece al hacer clic en el icono) */}
         {isOpen && (
           <div className="md:hidden px-4 pb-3">
-            <SearchBar3 />
+            <SearchBar />
           </div>
         )}
       </div>

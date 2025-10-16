@@ -1,5 +1,5 @@
-import { Rating } from "@/components/ui/Rating";
-import CartIcon from "@/components/ui/CartIcon";
+import { Rating } from "@/components/Rating";
+import CartIcon from "@/components/CartIcon";
 import { ProductForCard } from "@/types/productss";
 
 export function OfferCard({ product }: { product: ProductForCard }) {

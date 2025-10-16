@@ -1,7 +1,7 @@
 "use client";
 
 import { Navbar } from "@/components/Navbar";
-import Button from "@/components/ui/PagesButtons";
+import Button from "@/components/PagesButtons";
 import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { useIsMounted } from "@/hooks/useIsMounted";
