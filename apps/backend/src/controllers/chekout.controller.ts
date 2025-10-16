@@ -1,4 +1,4 @@
-import { transformCart } from "../mappers/Cart.formatter";
+import { transformCart } from "../mappers/cart.formatter";
 import prisma from "../prisma";
 import { Request, Response } from "express";
 

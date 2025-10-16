@@ -1,5 +1,5 @@
 import * as cartRepo from "../repositories/cart.repository";
-import { transformCart } from "../mappers/Cart.formatter";
+import { transformCart } from "../mappers/cart.formatter";
 
 export async function getCart(userId: number) {
   const cart = await cartRepo.findCartWithProducts(userId);
