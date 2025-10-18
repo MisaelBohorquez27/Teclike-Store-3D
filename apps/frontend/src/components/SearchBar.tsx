@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
-import { useSearch } from "@/hooks/search.hook";
+import { useSearch } from "@/hooks/useSearch";
 import { SearchSuggestion } from "@/types/search";
 import {
   getVariantStyles,
