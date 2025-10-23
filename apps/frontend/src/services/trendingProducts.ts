@@ -1,4 +1,4 @@
-import { apiFetch } from "./api";
+import { apiFetch } from "./httpClient";
 import { ProductForCard } from "@/types/productss";
 
 // 🔹 Obtener productos destacados (new, popular, discounted)

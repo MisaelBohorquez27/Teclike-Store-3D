@@ -16,6 +16,7 @@
     "@trpc/react-query": "^11.4.3",
     "@trpc/server": "^11.4.3",
     "@types/swiper": "^6.0.0",
+    "axios": "^1.12.2",
     "clsx": "^2.1.1",
     "framer-motion": "^12.23.6",
     "lodash": "^4.17.21",
