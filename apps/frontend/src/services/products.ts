@@ -1,4 +1,4 @@
-import { apiFetch } from "./api";
+import { apiFetch } from "./httpClient";
 import { PaginatedResponse, ProductForDetail, ProductQueryOptions } from "@/types/productss";
 
 /* -------------------- Base Fetch -------------------- */

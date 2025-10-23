@@ -1,4 +1,4 @@
-import { apiFetch } from "./api";
+import { apiFetch } from "./httpClient";
 import type { Deal } from "@/app/DailyOffers/components/DealCard";
 
 export async function fetchDeals(limit = 100): Promise<Deal[]> {

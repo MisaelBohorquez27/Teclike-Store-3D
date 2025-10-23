@@ -1,5 +1,5 @@
 // src/services/offers.ts
-import { apiFetch } from "./api";
+import { apiFetch } from "./httpClient";
 
 import { ProductForCard } from "@/types/productss";
 
