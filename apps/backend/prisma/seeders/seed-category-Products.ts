@@ -165,9 +165,10 @@ export async function seedCategoryRelations() {
             totalRelationsCreated++;
           } catch (error) {
             // Ignorar errores de relaciones duplicadas (puede pasar en concurrencia)
-            if (!error.message.includes("Unique constraint")) {
+            const message = error instanceof Error ? error.message : String(error);
+            if (!message.includes("Unique constraint")) {
               console.log(
-                `   ❌ Error relacionando con ${category.name}: ${error.message}`
+                `   ❌ Error relacionando con ${category.name}: ${message}`
               );
             }
           }
