@@ -6,3 +6,21 @@ const httpClient = axios.create({
     "Content-Type": "application/json",
   },
 });
+
+httpClient.interceptors.response.use((config) => {
+  const token = localStorage.getItem("authToken");
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+}, (error) => {
+  return Promise.reject(error);
+});
+
+httpClient.interceptors.response.use((response) => {
+  return response;
+}, (error) => {
+  return Promise.reject(error);
+});
+
+export default httpClient;
