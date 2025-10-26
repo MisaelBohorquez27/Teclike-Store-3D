@@ -1,11 +1,17 @@
 // src/services/reviews.ts
 import type { Review } from "../types/review"; // ajusta la ruta
-import { apiFetch } from "./httpClient";
+import httpClient from "./httpClient";
 
 export async function fetchFeaturedReviews(limit = 6): Promise<Review[]> {
-  const data = await apiFetch<Review[]>(
-    `/reviews?limit=${limit}`);
+  const response = await httpClient.get<Review[]>(
+    `/reviews?limit=${limit}`,
+    {
+      params: {
+        limit: limit,
+      }
+    }
+  );
 
-  // Normalizamos para que siempre sea array
-  return Array.isArray(data) ? data : (data as any).data || [];
+  const data = response.data;
+  return Array.isArray(data) ? data : [];
 }
