@@ -1,9 +1,15 @@
-import { apiFetch } from "./httpClient";
+import httpClient from "./httpClient";
 import type { Deal } from "@/app/DailyOffers/components/DealCard";
 
 export async function fetchDeals(limit = 100): Promise<Deal[]> {
-  const data = await apiFetch<Deal[]>(`/offers?limit=${limit}`);
-  
-  // Normalizamos para que siempre sea array
-  return Array.isArray(data) ? data : (data as any).data || [];
+  const response = await httpClient.get<Deal[]>(
+    `/offers?limit=${limit}`,
+    {
+      params: {
+        limit: limit,
+      }
+    }
+  );
+
+  return Array.isArray(response.data) ? response.data : (response.data as any).data || [];
 }
