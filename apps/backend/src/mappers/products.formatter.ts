@@ -6,6 +6,7 @@ export function formatForCard(p: any) {
 
   return {
     id: p.id,
+    slug: p.slug,
     name: p.name,
     category: primaryCategory,
     price: formatCurrency(p.priceCents, p.currency),
