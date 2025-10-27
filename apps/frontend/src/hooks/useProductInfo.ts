@@ -1,45 +1,39 @@
 // hooks/useProductInfo.ts
 import { useState, useEffect } from "react";
-import { fetchProductById } from "@/services/products";
+import { fetchProductBySlug } from "@/services/products";
 import { ProductForDetail } from "@/types/productss";
 
-export function useProductInfo(productIdParam: string | string[] | undefined) {
+export function useProductInfo(productSlug?: string) {
   const [product, setProduct] = useState<ProductForDetail | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const loadProduct = async () => {
-      try {
-        setLoading(true);
-        setError(null);
-        
-        const productId = Number(productIdParam);
-        
-        if (isNaN(productId)) {
-          throw new Error("ID de producto inválido");
-        }
-
-        const productData = await fetchProductById(productId);
-        setProduct(productData);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : "Error al cargar el producto");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    if (productIdParam) {
-      loadProduct();
-    } else {
+    if (!productSlug || productSlug.trim() === "") {
+      setProduct(null);
+      setError("Slug de producto no proporcionado");
       setLoading(false);
-      setError("ID de producto no proporcionado");
+      return;
     }
-  }, [productIdParam]);
 
-  return {
-    product,
-    loading,
-    error
-  };
+    setLoading(true);
+    setError(null);
+
+    fetchProductBySlug(productSlug)
+      .then((data) => {
+        if (!data) {
+          setError("Producto no encontrado");
+          setProduct(null);
+        } else {
+          setProduct(data);
+        }
+      })
+      .catch(() => {
+        setError("Error al cargar el producto");
+        setProduct(null);
+      })
+      .finally(() => setLoading(false));
+  }, [productSlug]);
+
+  return { product, loading, error };
 }
