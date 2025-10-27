@@ -1,4 +1,5 @@
-import { apiFetch } from "./httpClient";
+// src/services/products.service.ts
+import httpClient from "./httpClient";
 import { PaginatedResponse, ProductForDetail, ProductQueryOptions } from "@/types/productss";
 
 /* -------------------- Base Fetch -------------------- */
@@ -10,15 +11,17 @@ async function fetchProductsBase(
     limit: String(options.limit ?? 12),
   };
 
-  if (options.q && options.q.trim().length > 0) params.q = options.q.trim();
+  if (options.q?.trim()) params.q = options.q.trim();
   if (options.category) params.category = options.category;
   if (options.inStock !== undefined) params.inStock = String(options.inStock);
   if (options.minPrice !== undefined) params.minPrice = String(options.minPrice);
   if (options.maxPrice !== undefined) params.maxPrice = String(options.maxPrice);
 
-  return apiFetch<PaginatedResponse<ProductForDetail>>("/products", {
-    ...params,
+  const response = await httpClient.get<PaginatedResponse<ProductForDetail>>("/products", {
+    params,
   });
+
+  return response.data;
 }
 
 /* -------------------- Wrappers -------------------- */
@@ -42,15 +45,13 @@ export const fetchAllProducts = (filters?: Partial<ProductQueryOptions>) =>
   fetchProductsBase({ page: 1, limit: 1000, ...filters });
 
 // 📌 Producto por ID
-export async function fetchProductById(
-  id: number
-): Promise<ProductForDetail> {
-  return apiFetch<ProductForDetail>(`/products/id/${id}`);
+export async function fetchProductById(id: number): Promise<ProductForDetail> {
+  const response = await httpClient.get<ProductForDetail>(`/products/id/${id}`);
+  return response.data;
 }
 
 // 📌 Producto por Slug
-export async function fetchProductBySlug(
-  slug: string
-): Promise<ProductForDetail> {
-  return apiFetch<ProductForDetail>(`/products/slug/${slug}`);
+export async function fetchProductBySlug(slug: string): Promise<ProductForDetail> {
+  const response = await httpClient.get<ProductForDetail>(`/products/slug/${slug}`);
+  return response.data;
 }

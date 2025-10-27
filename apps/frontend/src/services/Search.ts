@@ -1,6 +1,6 @@
 // services/search.ts
 import { SearchResult, SearchSuggestion } from "../types/search";
-import { apiFetch } from "./httpClient";
+import httpClient from "./httpClient";
 
 export async function fetchSearchResults(
   query: string,
@@ -19,7 +19,8 @@ export async function fetchSearchResults(
     ...(options?.inStock && { inStock: String(options.inStock) }),
   });
 
-  return apiFetch<SearchResult[]>(`/search?${params}`);
+  const response = await httpClient.get<SearchResult[]>(`/search?${params}`);
+  return response.data;
 }
 
 export async function fetchSearchSuggestions(
@@ -27,5 +28,6 @@ export async function fetchSearchSuggestions(
   limit = 5
 ): Promise<SearchSuggestion[]> {
   const params = new URLSearchParams({ q: query, limit: String(limit) }).toString();
-  return apiFetch<SearchSuggestion[]>(`/search/suggestions?${params}`);
+  const response = await httpClient.get<SearchSuggestion[]>(`/search/suggestions?${params}`);
+  return response.data;
 }
