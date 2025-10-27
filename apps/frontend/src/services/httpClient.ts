@@ -17,6 +17,8 @@ httpClient.interceptors.response.use((config) => {
   return Promise.reject(error);
 });
 
+// Interceptores para errores
+
 httpClient.interceptors.response.use((response) => {
   return response;
 }, (error) => {

@@ -28,7 +28,7 @@ export const getProductById = async (req: Request, res: Response) => {
 export const getProductBySlug = async (req: Request, res: Response) => {
   try {
     const { slug } = req.params;
-    const product = await getProductBySlugService(slug);
+    const product = await getProductBySlugService(String(slug));
     res.json(product);
   } catch (error) {
     handleError(res, error, "Error al obtener el producto");

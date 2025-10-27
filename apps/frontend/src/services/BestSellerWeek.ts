@@ -1,12 +1,15 @@
-import { apiFetch } from "./httpClient";
+import httpClient from "./httpClient";
 import { ProductForDetail } from "@/types/productss";
 
 export const fetchFeatured = async (limit = 6): Promise<ProductForDetail[]> => {
-  try {
-    const data = await apiFetch(`/bestSellerWeek?limit=${limit}`);
-    return data as ProductForDetail[];
-  } catch (error) {
-    console.error('Error fetching best selling products:', error);
-    throw error;
-  }
+  const response = await httpClient.get<ProductForDetail[]>(
+    `/bestSellerWeek?limit=${limit}`,
+    {
+      params: {
+        limit: limit,
+      }
+    }
+  );
+  const data = response.data;
+  return Array.isArray(data) ? data : [];
 };

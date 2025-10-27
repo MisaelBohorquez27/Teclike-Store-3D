@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export function ProductCard({ product }: { product: ProductForDetail }) {
   return (
-    <Link href={`/Products/${product.id}`}>
+    <Link href={`/Products/${product.slug}`}>
       <div className="Card-bg rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow cursor-pointer">
         {/* Imagen del Producto */}
         <div className="relative aspect-square">
@@ -61,7 +61,7 @@ export function ProductCard({ product }: { product: ProductForDetail }) {
 
             {/* ✅ Botón convertido en enlace */}
             <button
-              onClick={() => (window.location.href = `/Products/${product.id}`)}
+              onClick={() => (window.location.href = `/Products/${product.slug}`)}
               className="text-blue-600 hover:text-blue-800 text-xs sm:text-sm font-medium transition-colors cursor-pointer"
             >
               Ver detalles
