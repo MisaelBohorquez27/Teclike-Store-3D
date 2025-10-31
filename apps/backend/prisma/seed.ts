@@ -5,7 +5,6 @@ import { seedCategories } from './seeders/seed-categories';
 import { seedProducts } from './seeders/seed-products';
 import { seedUsers } from './seeders/seed-users';
 import { seedOffers } from './seeders/seed-offers';
-import { DefaultArgs } from '@prisma/client/runtime/library';
 import { seedCategoryRelations } from './seeders/seed-category-Products';
 import { seedOrders } from './seeders/seed-orders';
 import { seedReviews } from './seeders/seed-reviews';
@@ -47,7 +46,3 @@ main()
   .finally(async () => {
     await prisma.$disconnect();
   });
-
-function seedCategoryProductRelations(prisma: PrismaClient<Prisma.PrismaClientOptions, never, DefaultArgs>) {
-  throw new Error('Function not implemented.');
-}
