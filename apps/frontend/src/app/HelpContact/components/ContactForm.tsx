@@ -4,6 +4,7 @@ import Button from "@/components/PagesButtons";
 import { useState } from "react";
 import { sendContactMessage } from "@/services/contact"; // 👈 tu service
 
+//contact form component
 export function ContactForm() {
   const [formData, setFormData] = useState({
     firstName: "",
