@@ -1,4 +1,6 @@
 export function ServiceCards() {
+
+  // tienes que separar esto
   const services = [
     {
       title: "Soporte Técnico",
