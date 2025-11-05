@@ -7,10 +7,47 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+/*
+  Enums para valores controlados
+*/
+enum OrderStatus {
+  PENDING
+  PAID
+  SHIPPED
+  DELIVERED
+  CANCELLED
+  REFUNDED
+}
+
+enum PaymentStatus {
+  PENDING
+  COMPLETED
+  FAILED
+  REFUNDED
+}
+
+enum OfferType {
+  PERCENTAGE
+  FIXED
+}
+
+enum OfferRecurrence {
+  NONE
+  DAILY
+  WEEKLY
+  MONTHLY
+  ANNUAL
+}
+
+/*
+  Models
+*/
+
 model Product {
   id          Int      @id @default(autoincrement())
   brand       String
   slug        String   @unique
+  sku         String? 
   name        String
   description String?
   priceCents  Int
@@ -23,30 +60,46 @@ model Product {
   inventory        Inventory?
   categoryProducts CategoryProduct[]
   offerProducts    OfferProduct[]
-  orderProducts    OrderProducts[]
+  orderItems       OrderItem[]
   cartProducts     CartProduct[]
   reviews          Review[]
+  images           ProductImage[]
 
   @@map("products")
 }
 
 model Order {
-  id                Int      @id @default(autoincrement())
+  id                Int       @id @default(autoincrement())
   userId            Int
   subtotalCents     Int
   taxCents          Int
   shippingCostCents Int
   totalCents        Int
   shippingAddress   String
-  status            String
-  orderDate         DateTime @default(now())
+  status            OrderStatus @default(PENDING)
+  orderDate         DateTime   @default(now())
 
   // Relations
-  user          User            @relation(fields: [userId], references: [id])
-  orderProducts OrderProducts[]
-  payments      Payment[]
+  user       User        @relation(fields: [userId], references: [id])
+  items      OrderItem[]
+  payments   Payment[]
 
   @@map("orders")
+}
+
+model OrderItem {
+  id         Int      @id @default(autoincrement())
+  productId  Int
+  orderId    Int
+  quantity   Int
+  priceCents Int
+  createdAt  DateTime @default(now())
+
+  // Relations
+  product Product @relation(fields: [productId], references: [id])
+  order   Order   @relation(fields: [orderId], references: [id])
+
+  @@map("order_items")
 }
 
 model Cart {
@@ -56,17 +109,32 @@ model Cart {
   updatedAt DateTime @updatedAt
 
   // Relations
-  user         User          @relation(fields: [userId], references: [id])
+  user         User         @relation(fields: [userId], references: [id])
   cartProducts CartProduct[]
 
   @@map("carts")
 }
 
+model CartProduct {
+  id        Int @id @default(autoincrement())
+  cartId    Int
+  productId Int
+  quantity  Int @default(1)
+  createdAt DateTime @default(now())
+
+  // Relations
+  cart    Cart    @relation(fields: [cartId], references: [id])
+  product Product @relation(fields: [productId], references: [id])
+
+  @@unique([cartId, productId])
+  @@map("cart_products")
+}
+
 model Category {
-  id          Int     @id @default(autoincrement())
-  name        String
-  description String?
-  slug        String  @unique
+  id               Int               @id @default(autoincrement())
+  name             String
+  description      String?
+  slug             String            @unique
 
   // Relations
   categoryProducts CategoryProduct[]
@@ -74,19 +142,46 @@ model Category {
   @@map("categories")
 }
 
+model CategoryProduct {
+  id          Int    @id @default(autoincrement())
+  categoryId  Int
+  productId   Int
+  description String?
+
+  // Relations
+  category Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  product  Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([categoryId, productId])
+  @@map("category_products")
+}
+
 model Offer {
-  id         Int      @id @default(autoincrement())
-  name       String   @unique
-  type       String
+  id         Int             @id @default(autoincrement())
+  name       String          @unique
+  type       OfferType
   value      Int
   startDate  DateTime
   endDate    DateTime
-  recurrence String? // daily, weekly, monthly, annual
+  recurrence OfferRecurrence @default(NONE)
 
   // Relations
   offerProducts OfferProduct[]
 
   @@map("offers")
+}
+
+model OfferProduct {
+  id        Int @id @default(autoincrement())
+  offerId   Int
+  productId Int
+
+  // Relations
+  offer   Offer   @relation(fields: [offerId], references: [id])
+  product Product @relation(fields: [productId], references: [id])
+
+  @@unique([offerId, productId])
+  @@map("offer_products")
 }
 
 model Review {
@@ -110,16 +205,16 @@ model User {
   photoURL       String?
   firstName      String
   lastName       String
-  phone          String
+  phone          String?
   email          String  @unique
   password       String
-  documentType   String
-  documentNumber String
+  documentType   String?
+  documentNumber String?
 
   // Relations
   role          Role          @relation(fields: [roleId], references: [id])
   orders        Order[]
-  carts         Cart[]
+  cart          Cart?         // 1:1 (cada usuario tiene 1 carrito activo)
   reviews       Review[]
   payments      Payment[]
   userAddresses UserAddress[]
@@ -128,20 +223,31 @@ model User {
 }
 
 model Payment {
-  id              Int      @id @default(autoincrement())
+  id              Int           @id @default(autoincrement())
   paymentMethodId Int
-  orderId         Int
+  orderId         Int?
+  userId          Int?
   transactionId   String
   paymentDate     DateTime @default(now())
   amountCents     Int
-  status          String
+  status          PaymentStatus @default(PENDING)
 
   // Relations
   paymentMethod PaymentMethod @relation(fields: [paymentMethodId], references: [id])
-  order         Order         @relation(fields: [orderId], references: [id])
-  User          User[]
+  order         Order?        @relation(fields: [orderId], references: [id])
+  user          User?         @relation(fields: [userId], references: [id])
 
   @@map("payments")
+}
+
+model PaymentMethod {
+  id     Int    @id @default(autoincrement())
+  method String @unique
+
+  // Relations
+  payments Payment[]
+
+  @@map("payment_methods")
 }
 
 model Role {
@@ -159,12 +265,26 @@ model Address {
   street            String
   city              String
   country           String
+  postalCode        String?
   additionalDetails String?
 
   // Relations
   userAddresses UserAddress[]
 
   @@map("addresses")
+}
+
+model UserAddress {
+  id        Int @id @default(autoincrement())
+  userId    Int
+  addressId Int
+
+  // Relations
+  user    User    @relation(fields: [userId], references: [id])
+  address Address @relation(fields: [addressId], references: [id])
+
+  @@unique([userId, addressId])
+  @@map("user_addresses")
 }
 
 model Inventory {
@@ -181,93 +301,15 @@ model Inventory {
   @@map("inventory")
 }
 
-model ContactMessage {
-  id        String   @id @default(uuid())
-  firstName String
-  lastName  String
-  email     String
-  phone     String?
-  subject   String
-  message   String
-  createdAt DateTime @default(now())
-}
-
-model OfferProduct {
-  id        Int @id @default(autoincrement())
-  offerId   Int
+model ProductImage {
+  id        Int    @id @default(autoincrement())
   productId Int
-
-  // Relations
-  offer   Offer   @relation(fields: [offerId], references: [id])
-  product Product @relation(fields: [productId], references: [id])
-
-  @@unique([offerId, productId])
-  @@map("offer_products")
-}
-
-model OrderProducts {
-  id         Int      @id @default(autoincrement())
-  productId  Int
-  orderId    Int
-  quantity   Int
-  priceCents Int
-  createdAt  DateTime @default(now())
-
-  // Relations
-  product Product @relation(fields: [productId], references: [id])
-  order   Order   @relation(fields: [orderId], references: [id])
-
-  @@map("order_items")
-}
-
-model CategoryProduct {
-  id          Int    @id @default(autoincrement())
-  categoryId  Int
-  productId   Int
-  description String
-
-  // Relations
-  category Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
-  product  Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
-
-  @@unique([categoryId, productId])
-  @@map("category_products")
-}
-
-model CartProduct {
-  id        Int @id @default(autoincrement())
-  cartId    Int
-  productId Int
-  quantity  Int @default(1)
+  imageUrl  String
+  imageAlt  String?
   createdAt DateTime @default(now())
 
   // Relations
-  cart    Cart    @relation(fields: [cartId], references: [id])
   product Product @relation(fields: [productId], references: [id])
 
-  @@unique([cartId, productId])
-  @@map("cart_products")
-}
-
-model PaymentMethod {
-  id     Int    @id @default(autoincrement())
-  method String @unique
-
-  // Relations
-  payments Payment[]
-
-  @@map("payment_methods")
-}
-
-model UserAddress {
-  id        Int @id @default(autoincrement())
-  userId    Int
-  addressId Int
-
-  // Relations
-  user    User    @relation(fields: [userId], references: [id])
-  address Address @relation(fields: [addressId], references: [id])
-
-  @@unique([userId, addressId])
-  @@map("user_addresses")
+  @@map("image_products")
 }
