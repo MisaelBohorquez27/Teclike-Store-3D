@@ -19,8 +19,8 @@ export async function getFormattedOffers({ recurrence, limit }: OfferQuery) {
     return fallbackProducts.map(formatFallbackProduct);
   }
 
-  const pairs = offers.flatMap((offer) =>
-    offer.offerProducts.map((op) => ({ offer, product: op.product }))
+  const pairs = offers.flatMap((offer: any) =>
+    offer.offerProducts.map((op: any) => ({ offer, product: op.product }))
   );
 
   const shuffled = shuffle(pairs).slice(0, limit);

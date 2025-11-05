@@ -9,11 +9,11 @@ export async function getBestSellerWeekService() {
   if (topProducts.length === 0) return [];
 
   const productDetails = await bestRepo.getProductDetailsByIds(
-    topProducts.map((p) => p.productId)
+    topProducts.map((p: any) => p.productId)
   );
 
   return topProducts
-    .map((tp) => {
+    .map((tp: any) => {
       const product = productDetails.find((p) => p.id === tp.productId);
       return product ? formatBestSellerProduct(product) : null;
     })
