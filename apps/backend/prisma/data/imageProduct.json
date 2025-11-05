@@ -1,0 +1,20 @@
+[
+    {
+        "productId": 9,
+        "imageUrl": "https://res.cloudinary.com/dwewy8c7p/image/upload/v1759415343/teclike-image/mewvnmlrl1dnf37ijslt.png",
+        "imageAlt": "Asus ROG Azoth Gaming Laptop Front View"
+    },
+
+    {
+        "productId": 9,
+        "imageUrl": "https://res.cloudinary.com/dwewy8c7p/image/upload/v1759718528/razer-BlackSharkV2-X_oeqe9w.png",
+        "imageAlt": "Asus ROG Azoth Gaming Laptop Front View"
+    },
+
+    {
+        "productId": 9,
+        "imageUrl": "https://res.cloudinary.com/dwewy8c7p/image/upload/v1759718809/razer-KrakenV3-HyperSense_ctrspf.png",
+        "imageAlt": "Asus ROG Azoth Gaming Laptop Front View"
+    }
+
+]

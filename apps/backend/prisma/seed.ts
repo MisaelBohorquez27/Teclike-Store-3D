@@ -8,6 +8,7 @@ import { seedOffers } from './seeders/seed-offers';
 import { seedCategoryRelations } from './seeders/seed-category-Products';
 import { seedOrders } from './seeders/seed-orders';
 import { seedReviews } from './seeders/seed-reviews';
+import { seedImageProducts } from './seeders/seed-image-product';
 
 const prisma = new PrismaClient();
 
@@ -31,7 +32,8 @@ async function main() {
   await seedOrders(prisma);
   console.log('------------------------------------------');
   await seedReviews(prisma); // finalmente haz un seed a todos hasta reviews
-
+  console.log('------------------------------------------');
+  await seedImageProducts(prisma);
   console.log('==========================================');
   console.log('✅ Base de datos poblada exitosamente!');
   console.log('🎯 Ofertas configuradas para diferentes temporadas');
