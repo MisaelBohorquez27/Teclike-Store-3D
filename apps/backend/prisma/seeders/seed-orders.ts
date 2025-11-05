@@ -1,8 +1,15 @@
 // prisma/seed-orders.ts
-import { PrismaClient } from "@prisma/client";
+import { OrderStatus, PrismaClient } from "@prisma/client";
 import ordersData from "../data/orders.json";
 
 const prisma = new PrismaClient();
+
+function parseOrderStatus(value?: string): OrderStatus {
+  if (!value) return OrderStatus.PENDING;
+  const normalized = value.toString().trim().toUpperCase();
+  const valid = new Set(Object.values(OrderStatus));
+  return (valid.has(normalized as OrderStatus) ? (normalized as OrderStatus) : OrderStatus.PENDING);
+}
 
 export async function seedOrders(prisma: PrismaClient) {
   console.log("🌱 Seeding orders...");
@@ -17,7 +24,7 @@ export async function seedOrders(prisma: PrismaClient) {
         shippingCostCents: order.shippingCostCents,
         totalCents: order.totalCents,
         shippingAddress: order.shippingAddress,
-        status: order.status,
+        status: parseOrderStatus(order.status),
       },
     });
 
@@ -38,7 +45,7 @@ export async function seedOrders(prisma: PrismaClient) {
         continue;
       }
 
-      await prisma.orderProducts.create({
+      await prisma.orderItem.create({
         data: {
           orderId: createdOrder.id,
           productId,

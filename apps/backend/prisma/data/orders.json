@@ -6,7 +6,6 @@
         "shippingCostCents": 599,
         "totalCents": 14508,
         "shippingAddress": "123 Main Street, Anytown, USA 12345",
-        "status": "Processing",
         "orderProducts": [
             {
                 "productSlug": "razer-kraken-v3",

@@ -1,5 +1,5 @@
 // seeders/seed-offers.ts
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, OfferType, OfferRecurrence } from '@prisma/client';
 import offers from '../data/offers.json';
 
 const prisma = new PrismaClient();
@@ -16,19 +16,19 @@ export async function seedOffers(prisma: PrismaClient) {
       const offer = await prisma.offer.upsert({
         where: { name: offerData.name },
         update: {
-          type: offerData.type,
+          type: offerData.type as OfferType,
           value: offerData.value,
           startDate: new Date(offerData.startDate),
           endDate: new Date(offerData.endDate),
-          recurrence: offerData.recurrence ?? null,
+          recurrence: offerData.recurrence as OfferRecurrence,
         },
         create: {
           name: offerData.name,
-          type: offerData.type,
+          type: offerData.type as OfferType,
           value: offerData.value,
           startDate: new Date(offerData.startDate),
           endDate: new Date(offerData.endDate),
-          recurrence: offerData.recurrence ?? null,
+          recurrence: offerData.recurrence as OfferRecurrence,
         },
       });
 
@@ -58,7 +58,7 @@ export async function seedOffers(prisma: PrismaClient) {
         }
       }
 
-      console.log(`✅ Oferta: ${offer.name} (${offer.type} ${offer.value}${offer.type === 'percentage' ? '%' : '¢'})`);
+      console.log(`✅ Oferta: ${offer.name} (${offer.type} ${offer.value}${offer.type === OfferType.PERCENTAGE ? '%' : '¢'})`);
     } catch (error) {
       console.error(`❌ Error con oferta ${offerData.name}:`, error);
     }
