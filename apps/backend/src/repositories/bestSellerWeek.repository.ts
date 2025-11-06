@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export function getTopSellingProductIds(since: Date) {
-  return prisma.orderProducts.groupBy({
+  return prisma.orderItem.groupBy({
     by: ["productId"],
     where: { createdAt: { gte: since } },
     _sum: { quantity: true },
