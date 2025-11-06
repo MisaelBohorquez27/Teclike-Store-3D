@@ -1,32 +1,23 @@
 "use client";
 
-import { DealCard, Deal } from "@/app/DailyOffers/components/DealCard";
-import { useEffect, useState } from "react";
-import { fetchDeals } from "@/services/deals"; // nuevo servicio
+import { DealCard } from "@/app/DailyOffers/components/DealCard";
+import { useDailyOffers } from "@/hooks/useDailyOffers";
 
 export function DailyDeals() {
-  const [deals, setDeals] = useState<Deal[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetchDeals()
-      .then((data) => setDeals(data))
-      .catch((err) => console.error("❌ Error cargando ofertas diarias:", err))
-      .finally(() => setLoading(false));
-  }, []);
+  const {offers, loading} = useDailyOffers();
 
   if (loading) {
     return <p className="text-center">Cargando ofertas diarias...</p>;
   }
 
-  if (deals.length === 0) {
+  if (offers.length === 0) {
     return <p className="text-center">No hay ofertas diarias disponibles</p>;
   }
 
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
-      {deals.map((deal, index) => (
-        <DealCard key={`${deal.id}-${index}`} deal={deal} isFlashDeal />
+      {offers.map((offer, index) => (
+        <DealCard key={`${offer.id}-${index}`} offer={offer} />
       ))}
     </div>
   );

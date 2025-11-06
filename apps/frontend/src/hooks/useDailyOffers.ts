@@ -7,19 +7,21 @@ export const useDailyOffers = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchOffers = async () => {
+    async function fetchOffers() {
       try {
         const data = await fetchFeaturedOffers();
         setOffers(data);
-      } catch (err) {
-        console.error("❌ Error fetching offers:", err);
+      } catch (error) {
+        console.error("Error fetching featured offers:", error);
       } finally {
         setLoading(false);
       }
-    };
+    }
 
     fetchOffers();
   }, []);
-
-  return { offers, loading };
+  return { 
+    offers,
+    loading
+  };
 };

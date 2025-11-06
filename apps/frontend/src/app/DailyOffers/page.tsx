@@ -37,7 +37,7 @@ export default function DailyDealsPage() {
         </div>
       </section>
 
-      {/* Ofertas Destacadas */}
+      {/* Ofertas Destacadas 
       <section className="FeatureOffers-bg PageDailyOffers-bg py-8 sm:py-10 md:py-12">
         <div className="container mx-auto px-4 sm:px-6">
           <h2 className="TextColor1 text-2xl sm:text-3xl font-bold text-center mb-2">
@@ -48,7 +48,7 @@ export default function DailyDealsPage() {
           </p>
           <HotDeals />
         </div>
-      </section>
+      </section>*/}
 
       {/* Banner de Suscripción */}
       <section className="BannerSubscribe-bg text-Black py-8 sm:py-10 md:py-12">

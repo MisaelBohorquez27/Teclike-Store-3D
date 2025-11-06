@@ -61,7 +61,8 @@ export interface ProductForCart extends BaseProduct {
 
 // Tipo para productos con ofertas especiales.
 export interface OfferProduct extends ProductForCard {
-  reactKey: Key | null | undefined;
+  reactKey?: Key | null | undefined;
+  isFlashDeal?: boolean; // Indica si es una oferta flash
   timeLeft?: number; // Tiempo restante para ofertas flash
 }
 
