@@ -1,7 +1,5 @@
 // types/product.ts
 
-import { Key } from "readline";
-
 // Interfaz base con los campos esenciales que todos los productos comparten.
 export interface BaseProduct {
   id: number;
@@ -57,13 +55,6 @@ export interface ProductForCart extends BaseProduct {
   priceString: string; // Precio formateado como cadena
   stock: number; // Cantidad en stock
   inStock: boolean; // Disponibilidad
-}
-
-// Tipo para productos con ofertas especiales.
-export interface OfferProduct extends ProductForCard {
-  reactKey?: Key | null | undefined;
-  isFlashDeal?: boolean; // Indica si es una oferta flash
-  timeLeft?: number; // Tiempo restante para ofertas flash
 }
 
 // Tipo genérico para respuestas de API paginadas.

@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
-import { ProductForCard } from "@/types/productss";
 import { fetchFeaturedOffers } from "@/services/offers";
+import { ProductWithOffer } from "@/types/offers";
 
-export const useDailyOffers = () => {
-  const [offers, setOffers] = useState<ProductForCard[]>([]);
+export const useDailyOffers = (limit = Number) => {
+  const [offers, setOffers] = useState<ProductWithOffer[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchOffers() {
       try {
-        const data = await fetchFeaturedOffers();
-        setOffers(data);
+        const data = await fetchFeaturedOffers(limit);
+        setOffers(data.data);
       } catch (error) {
         console.error("Error fetching featured offers:", error);
       } finally {

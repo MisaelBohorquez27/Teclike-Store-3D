@@ -1,9 +1,9 @@
 // src/services/offers.ts
-import { OfferProduct } from "@/types/productss";
 import httpClient from "./httpClient";
+import { OffersResponse } from "@/types/offers";
 
-export async function fetchFeaturedOffers(limit = 6): Promise<OfferProduct[]> {
-  const response = await httpClient.get<OfferProduct[]>(
+export async function fetchFeaturedOffers(limit = Number): Promise<OffersResponse> {
+  const response = await httpClient.get<OffersResponse>(
     '/offers',
     {
       params: {
@@ -12,5 +12,5 @@ export async function fetchFeaturedOffers(limit = 6): Promise<OfferProduct[]> {
     }
   );
   const data = response.data; 
-  return Array.isArray(data) ? data : []; 
+  return Array.isArray(data) ? data : { ...data, data: data.data || [] }; 
 }

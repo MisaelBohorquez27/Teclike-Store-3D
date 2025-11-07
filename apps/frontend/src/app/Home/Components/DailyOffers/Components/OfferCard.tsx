@@ -1,8 +1,8 @@
 import { Rating } from "@/components/Rating";
 import CartIcon from "@/components/CartIcon";
-import { ProductForCard } from "@/types/productss";
+import { ProductWithOffer } from "@/types/offers";
 
-export function OfferCard({ product }: { product: ProductForCard }) {
+export function OfferCard({ product }: { product: ProductWithOffer }) {
   return (
     <div className="Card-bg rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow">
       <div className="px-2 sm:px-3 py-3 sm:py-4 flex flex-col">

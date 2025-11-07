@@ -2,13 +2,13 @@ import Link from "next/link";
 import Button from "@/components/PagesButtons";
 import { CustomSwiper } from "@/components/Swipper/CustomSwiper";
 import { OfferCard } from "./OfferCard";
-import { OfferProduct, ProductForCard } from "@/types/productss";
 import { CONFIG } from "../Data/DailyOffersData";
 import { useDailyOffers } from "../Hooks/useDailyOffer";
+import { ProductWithOffer } from "@/types/offers";
 
 // Types
 interface DailyOffersContentProps {
-  offers: OfferProduct[];
+  offers: ProductWithOffer[];
   loading: boolean;
 }
 
@@ -29,7 +29,7 @@ const DailyOffersHeader = () => (
   </div>
 );
 
-const OffersSwiper = ({ offers }: { offers: OfferProduct[] }) => (
+const OffersSwiper = ({ offers }: { offers: ProductWithOffer[] }) => (
   <CustomSwiper
     items={offers}
     renderItem={(product) => <OfferCard product={product} />}
