@@ -24,6 +24,7 @@ export interface OfferWithProducts {
   }>;
 }
 
+// Obtener ofertas activas junto con sus productos asociados
 export async function findActiveOffersWithProducts(recurrence?: OfferRecurrence | null): Promise<OfferWithProducts[]> {
   const now = new Date();
   
@@ -55,6 +56,16 @@ export async function findActiveOffersWithProducts(recurrence?: OfferRecurrence 
               description: true,
               slug: true,
             }
+          },
+          offer: {
+            select: {
+              name: true,
+              type: true,
+              value: true,
+              startDate: true,
+              endDate: true,
+              recurrence: true
+            }
           }
         }
       }
@@ -67,6 +78,7 @@ export async function findActiveOffersWithProducts(recurrence?: OfferRecurrence 
   });
 }
 
+// Productos de respaldo en caso de no haber ofertas activas
 export async function findFallbackProducts(limit: number = 20) {
   return prisma.product.findMany({
     take: limit,
@@ -94,6 +106,7 @@ export async function findAnnualOffers(): Promise<OfferWithProducts[]> {
   return findActiveOffersWithProducts('ANNUAL');
 }
 
+// Productos destacados basados en la cantidad de ofertas asociadas
 export async function findFeaturedProducts(limit: number = 10) {
   return prisma.product.findMany({
     where: {

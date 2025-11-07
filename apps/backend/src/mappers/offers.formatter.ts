@@ -1,4 +1,5 @@
-import { computeDiscount, formatCurrency, getTimeLeft } from "../utils/offersUtils";
+import { formatCurrency } from "../utils/formatCurrency";
+import { computeDiscount, getTimeLeft } from "../utils/offersUtils";
 
 /**
  * Tipo reducido que coincide con lo que devuelve offers.repository (select)
