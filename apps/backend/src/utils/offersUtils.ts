@@ -1,4 +1,5 @@
 import { Offer } from "@prisma/client";
+import { formatCurrency } from "./formatCurrency";
 
 export interface ComputedDiscount {
   discountedCents: number;
@@ -6,11 +7,14 @@ export interface ComputedDiscount {
   discountPercentage: number;
   savings: number;
 }
-
+ // Aqui se calcula el descuento basado en el tipo y valor de la oferta
+ // Solamente estamos considerando moneda estática "USD" para simplificar
 export function computeDiscount(
   originalPriceCents: number,
   discountType: string,
-  discountValue: number
+  discountValue: number,
+  currency: string = "USD"
+
 ): ComputedDiscount {
   let discountedCents = originalPriceCents;
   let discountLabel = "";
@@ -25,7 +29,7 @@ export function computeDiscount(
 
     case "FIXED":
       discountedCents = Math.max(0, originalPriceCents - discountValue);
-      discountLabel = `-${formatCurrency(discountValue)}`;
+      discountLabel = `-${formatCurrency(discountValue, currency)}`;
       discountPercentage = Math.round((discountValue / originalPriceCents) * 100);
       break;
 
@@ -43,13 +47,6 @@ export function computeDiscount(
     discountPercentage,
     savings
   };
-}
-
-export function formatCurrency(cents: number, currency: string = "USD"): string {
-  return new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency,
-  }).format(cents / 100);
 }
 
 export function isOfferActive(offer: Offer): boolean {

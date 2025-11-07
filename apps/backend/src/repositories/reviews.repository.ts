@@ -24,7 +24,7 @@ export function findRecentReviews(take: number) {
 }
 
 export function userPurchasedProduct(userId: number, productId: number) {
-  return prisma.orderProducts.findFirst({
+  return prisma.orderItem.findFirst({
     where: {
       productId,
       order: { userId },

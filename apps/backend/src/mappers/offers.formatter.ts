@@ -1,4 +1,5 @@
-import { computeDiscount, formatCurrency, getTimeLeft } from "../utils/offersUtils";
+import { formatCurrency } from "../utils/formatCurrency";
+import { computeDiscount, getTimeLeft } from "../utils/offersUtils";
 
 /**
  * Tipo reducido que coincide con lo que devuelve offers.repository (select)
@@ -31,7 +32,7 @@ export interface FormattedOfferProduct {
   slug: string;
   description: string | null;
   rating: number;
-  image: string;
+  imageUrl: string;
   discount: string;
   discountPercentage: number;
   originalPrice: string;
@@ -65,7 +66,7 @@ export function formatOfferProduct(pair: OfferProductPair): FormattedOfferProduc
     slug: product.slug,
     description: product.description,
     rating: 4.5,
-    image: product.imageUrl ?? "/products/default.png",
+    imageUrl: product.imageUrl ?? "/products/default.png",
     discount: discountLabel,
     discountPercentage,
     originalPrice: formatCurrency(product.priceCents, product.currency),
@@ -92,7 +93,7 @@ export function formatFallbackProduct(product: SelectedProduct): FormattedOfferP
     slug: product.slug,
     description: product.description,
     rating: 4.2,
-    image: product.imageUrl ?? "/products/default.png",
+    imageUrl: product.imageUrl ?? "/products/default.png",
     discount: `-${discountPercentage}%`,
     discountPercentage,
     originalPrice: formatCurrency(product.priceCents, product.currency),
