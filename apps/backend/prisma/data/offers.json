@@ -1,68 +1,68 @@
 [
-    {
-        "name": "Black Friday Sale",
-        "type": "percentage",
-        "value": 20,
-        "startDate": "2025-11-25T00:00:00Z",
-        "endDate": "2025-11-30T23:59:59Z",
-        "products": [
-            "razer-kraken-v3",
-            "logitech-g502-x",
-            "hyperx-cloud-alpha"
-        ],
-        "recurrence": "yearly"
-    },
-    {
-        "name": "Christmas Sale",
-        "type": "percentage",
-        "value": 30,
-        "startDate": "2025-12-15T00:00:00Z",
-        "endDate": "2025-12-25T23:59:59Z",
-        "products": [
-            "razer-kraken-v3",
-            "logitech-g502-x",
-            "corsair-k95-rgb"
-        ],
-        "recurrence": "yearly"
-    },
-    {
-        "name": "New Year Sale",
-        "type": "fixed",
-        "value": 7500,
-        "startDate": "2025-12-26T00:00:00Z",
-        "endDate": "2026-01-15T23:59:59Z",
-        "products": [
-            "samsung-odyssey-g7",
-            "lg-ultragear-48"
-        ],
-        "recurrence": "yearly"
-    },
-    {
-        "name": "Daily Deals",
-        "type": "percentage",
-        "value": 20,
-        "startDate": "2025-08-29T00:00:00Z",
-        "endDate": "2025-08-29T23:59:59Z",
-        "products": [
-            "asus-rog-azoth",
-            "steelseries-arctis-pro",
-            "razer-kraken-v3",
-            "corsair-k95-rgb",
-            "samsung-odyssey-g7"
-        ],
-        "recurrence": "daily"
-    },
-    {
-        "name": "Hot Deals",
-        "type": "percentage",
-        "value": 3,
-        "startDate": "2025-08-29T00:00:00Z",
-        "endDate": "2025-08-29T23:59:59Z",
-        "products": [
-            "lg-ultragear-48",
-            "hyperx-cloud-alpha",
-            "logitech-g502-x"
-        ],
-        "recurrence": "daily"
-    }
+  {
+    "name": "Black Friday Sale",
+    "type": "PERCENTAGE",
+    "value": 20,
+    "startDate": "2025-11-25T00:00:00Z",
+    "endDate": "2025-11-30T23:59:59Z",
+    "products": [
+      "razer-kraken-v3",
+      "logitech-g502-x",
+      "hyperx-cloud-alpha"
+    ],
+    "recurrence": "ANNUAL"
+  },
+  {
+    "name": "Christmas Sale",
+    "type": "PERCENTAGE",
+    "value": 30,
+    "startDate": "2025-12-15T00:00:00Z",
+    "endDate": "2025-12-25T23:59:59Z",
+    "products": [
+      "razer-kraken-v3",
+      "logitech-g502-x",
+      "corsair-k95-rgb"
+    ],
+    "recurrence": "ANNUAL"
+  },
+  {
+    "name": "New Year Sale",
+    "type": "FIXED",
+    "value": 7500,
+    "startDate": "2025-12-26T00:00:00Z",
+    "endDate": "2026-01-15T23:59:59Z",
+    "products": [
+      "samsung-odyssey-g7",
+      "lg-ultragear-48"
+    ],
+    "recurrence": "ANNUAL"
+  },
+  {
+    "name": "Daily Deals",
+    "type": "PERCENTAGE",
+    "value": 5,
+    "startDate": "2025-08-29T00:00:00Z",
+    "endDate": "2025-08-29T23:59:59Z",
+    "products": [
+      "asus-rog-azoth",
+      "steelseries-arctis-pro",
+      "razer-kraken-v3",
+      "corsair-k95-rgb",
+      "samsung-odyssey-g7"
+    ],
+    "recurrence": "DAILY"
+  },
+  {
+    "name": "Hot Deals",
+    "type": "PERCENTAGE",
+    "value": 10,
+    "startDate": "2025-08-29T00:00:00Z",
+    "endDate": "2025-08-29T23:59:59Z",
+    "products": [
+      "lg-ultragear-48",
+      "hyperx-cloud-alpha",
+      "logitech-g502-x"
+    ],
+    "recurrence": "DAILY"
+  }
 ]
