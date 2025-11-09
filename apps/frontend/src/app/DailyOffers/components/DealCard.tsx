@@ -14,6 +14,7 @@ interface DealCardProps {
   onAddToCart?: (offer: ProductWithOffer) => void;
 }
 
+// Mejora del componente DealCard con opciones de personalización
 export function DealCard({
   offer,
   size = "md",
