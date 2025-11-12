@@ -19,9 +19,21 @@ export function OfferCard({ product }: { product: ProductWithOffer }) {
 
         <div className="mt-3 sm:mt-4 md:mt-5">
           <h3 className="text-base sm:text-lg md:text-xl font-semibold text-gray-800 truncate">
-            {product.brand}
+            {product.name}
           </h3>
-          <Rating value={product.rating} />
+          <Rating
+            value={product.rating}
+            size="lg"
+            showValue={true}
+            showCount={false}
+            count={1250}
+            interactive={false}
+            onChange={(value) => console.log(value)}
+            icon="star"
+            color="yellow"
+            half={false}
+            className="my-4"
+          />
         </div>
 
         <div className="mt-2 sm:mt-3 flex justify-between items-center px-2 sm:px-4">
