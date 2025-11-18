@@ -31,7 +31,6 @@ export default function DailyDealsPage() {
               </span>
             </div>
             
-            {/* Título Principal */}
             <h1 
               id="daily-offers-title"
               className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4 text-white drop-shadow-lg"
@@ -39,12 +38,10 @@ export default function DailyDealsPage() {
               Ofertas del Día
             </h1>
             
-            {/* Subtítulo */}
             <p className="text-lg sm:text-xl lg:text-2xl text-white/90 mb-6 sm:mb-8 max-w-2xl mx-auto leading-relaxed drop-shadow-md">
               Descuentos especiales por tiempo limitado
             </p>
             
-            {/* Countdown Timer */}
             <div className="max-w-md mx-auto">
               <CountdownTimer 
                 targetDate={getTargetDate()} 
