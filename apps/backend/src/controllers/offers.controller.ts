@@ -7,6 +7,7 @@ import {
 } from "../services/offers.service";
 import { handleError } from "../utils/errorHandler";
 
+// Controlador para obtener ofertas
 export const getOffers = async (req: Request, res: Response) => {
   try {
     const recurrence = req.query.recurrence as 'DAILY' | 'ANNUAL' | 'ALL' | undefined;
