@@ -51,12 +51,10 @@ export default function DailyDealsPage() {
         </div>
       </section>
 
-      {/* Ofertas Flash */}
       <section 
         className="FlashOffers-bg relative"
         aria-labelledby="flash-deals-title"
       >
-        {/* Patrón de fondo sutil */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.15)_1px,transparent_0)] bg-[length:20px_20px]" />
         
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
