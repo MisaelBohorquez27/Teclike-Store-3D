@@ -117,7 +117,7 @@ export default function DailyDealsPage() {
             <div className="max-w-3xl mx-auto text-center">
               {/* Icono decorativo */}
               <div className="flex justify-center mb-4 sm:mb-6">
-                <div className="w-12 h-12 sm:w-16 sm:h-16 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
+                <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center backdrop-blur-sm">
                   <span className="text-2xl sm:text-3xl">📧</span>
                 </div>
               </div>
@@ -149,7 +149,7 @@ export default function DailyDealsPage() {
       </section>
 
       {/* Sección de Información Adicional */}
-      <section className="bg-white border-t border-gray-200 py-8 sm:py-12">
+      <section className="border-t border-gray-200 py-8 sm:py-12">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 text-center">
             <div className="p-4 sm:p-6">
