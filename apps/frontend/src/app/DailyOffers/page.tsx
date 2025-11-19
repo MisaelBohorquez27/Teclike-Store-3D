@@ -12,15 +12,14 @@ export default function DailyDealsPage() {
   };
 
   return (
-    <main className="min-h-screen bg-gray-50">
+    <main className="min-h-screen">
       {/* Hero Banner */}
       <section 
         className="PageDailyOffers-bg relative overflow-hidden"
         aria-labelledby="daily-offers-title"
       >
-        <div className="absolute inset-0 bg-gradient-to-b from-black/10 to-black/5" />
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center py-16 sm:py-20 lg:py-24">
+          <div className="text-center pt-16 sm:pt-20 lg:pt-24 pb-12 sm:pb-16 lg:pb-20">
             {/* Badge */}
             <div className="flex justify-center mb-4 sm:mb-5">
               <span 
@@ -32,13 +31,12 @@ export default function DailyDealsPage() {
             </div>
             
             <h1 
-              id="daily-offers-title"
-              className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4 text-white drop-shadow-lg"
+              className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4 daily-offers-title drop-shadow-lg"
             >
               Ofertas del Día
             </h1>
             
-            <p className="text-lg sm:text-xl lg:text-2xl text-white/90 mb-6 sm:mb-8 max-w-2xl mx-auto leading-relaxed drop-shadow-md">
+            <p className="text-lg sm:text-xl lg:text-2xl DailyOffers-subtitle mb-6 sm:mb-8 max-w-2xl mx-auto leading-relaxed drop-shadow-md">
               Descuentos especiales por tiempo limitado
             </p>
             
@@ -52,23 +50,24 @@ export default function DailyDealsPage() {
       </section>
 
       <section 
-        className="FlashOffers-bg relative"
+        className="FlashOffers-bg relative border-t border-gray-200"
         aria-labelledby="flash-deals-title"
       >
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.15)_1px,transparent_0)] bg-[length:20px_20px]" />
         
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="py-12 sm:py-16 lg:py-20">
+          <div className="py-12 sm:py-14 lg:py-16">
             {/* Encabezado */}
             <div className="text-center mb-8 sm:mb-12 lg:mb-16">
               <div className="flex items-center justify-center gap-2 sm:gap-3 mb-3 sm:mb-4">
-                <span className="text-2xl sm:text-3xl animate-bounce">🔥</span>
+                <span className="text-2xl sm:text-3xl ">🔥</span>
                 <h2 
                   id="flash-deals-title"
                   className="TextColor1 text-2xl sm:text-3xl lg:text-4xl font-bold"
                 >
                   Flash Deals
                 </h2>
+                <span className="text-2xl sm:text-3xl ">🔥</span>
               </div>
               <p className="TextColor3 text-base sm:text-lg lg:text-xl max-w-2xl mx-auto leading-relaxed">
                 Ofertas que terminan en las próximas horas • No te quedes sin la tuya
@@ -114,15 +113,12 @@ export default function DailyDealsPage() {
         className="BannerSubscribe-bg relative overflow-hidden"
         aria-labelledby="subscription-title"
       >
-        {/* Efecto de gradiente */}
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-purple-600/10" />
-        
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="py-12 sm:py-16 lg:py-20">
             <div className="max-w-3xl mx-auto text-center">
               {/* Icono decorativo */}
               <div className="flex justify-center mb-4 sm:mb-6">
-                <div className="w-12 h-12 sm:w-16 sm:h-16 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
+                <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center backdrop-blur-sm">
                   <span className="text-2xl sm:text-3xl">📧</span>
                 </div>
               </div>
@@ -154,11 +150,11 @@ export default function DailyDealsPage() {
       </section>
 
       {/* Sección de Información Adicional */}
-      <section className="bg-white border-t border-gray-200 py-8 sm:py-12">
+      <section className="border-t border-gray-200 py-8 sm:py-12">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 text-center">
             <div className="p-4 sm:p-6">
-              <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+              <div className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
                 <span className="text-xl">🚚</span>
               </div>
               <h3 className="font-semibold text-gray-900 mb-2 text-sm sm:text-base">
@@ -170,7 +166,7 @@ export default function DailyDealsPage() {
             </div>
             
             <div className="p-4 sm:p-6">
-              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+              <div className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
                 <span className="text-xl">🛡️</span>
               </div>
               <h3 className="font-semibold text-gray-900 mb-2 text-sm sm:text-base">
@@ -182,7 +178,7 @@ export default function DailyDealsPage() {
             </div>
             
             <div className="p-4 sm:p-6">
-              <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+              <div className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
                 <span className="text-xl">↩️</span>
               </div>
               <h3 className="font-semibold text-gray-900 mb-2 text-sm sm:text-base">
