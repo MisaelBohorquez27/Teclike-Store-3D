@@ -1,8 +1,8 @@
-import { OfferProduct } from "@/types/productss";
+import { ProductWithOffer } from "@/types/offers";
 import httpClient from "./httpClient";
 
-export async function fetchDeals(limit = 100): Promise<OfferProduct[]> {
-  const response = await httpClient.get<OfferProduct[]>(
+export async function fetchDeals(limit = 100): Promise<[ProductWithOffer]> {
+  const response = await httpClient.get<[ProductWithOffer]>(
     `/offers?limit=${limit}`,
     {
       params: {
