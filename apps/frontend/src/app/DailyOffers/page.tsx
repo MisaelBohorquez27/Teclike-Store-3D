@@ -12,13 +12,12 @@ export default function DailyDealsPage() {
   };
 
   return (
-    <main className="min-h-screen bg-gray-50">
+    <main className="min-h-screen">
       {/* Hero Banner */}
       <section 
         className="PageDailyOffers-bg relative overflow-hidden"
         aria-labelledby="daily-offers-title"
       >
-        <div className="absolute inset-0 bg-gradient-to-b from-black/10 to-black/5" />
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center py-16 sm:py-20 lg:py-24">
             {/* Badge */}
@@ -113,9 +112,6 @@ export default function DailyDealsPage() {
         className="BannerSubscribe-bg relative overflow-hidden"
         aria-labelledby="subscription-title"
       >
-        {/* Efecto de gradiente */}
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-purple-600/10" />
-        
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="py-12 sm:py-16 lg:py-20">
             <div className="max-w-3xl mx-auto text-center">
