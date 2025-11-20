@@ -149,7 +149,7 @@ export default function DailyDealsPage() {
         </div>
       </section>
 
-      {/* Sección de Información Adicional */}
+      {/* Sección de Información Adicional para clientes */}
       <section className="border-t border-gray-200 py-8 sm:py-12">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 text-center">
