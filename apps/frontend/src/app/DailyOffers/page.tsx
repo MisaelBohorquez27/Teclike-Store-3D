@@ -23,7 +23,7 @@ export default function DailyDealsPage() {
             {/* Badge */}
             <div className="flex justify-center mb-4 sm:mb-5">
               <span 
-                className="bg-white text-[#006826] px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-bold tracking-wide shadow-lg animate-pulse"
+                className=" text-[#006826] px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-bold tracking-wide animate-pulse"
                 aria-label="Ofertas exclusivas disponibles"
               >
                 🎯 OFERTAS EXCLUSIVAS
