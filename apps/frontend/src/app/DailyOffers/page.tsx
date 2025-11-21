@@ -74,7 +74,6 @@ export default function DailyDealsPage() {
               </p>
             </div>
 
-            {/* Componente de Ofertas Diarias */}
             <div className="relative">
               <DailyDeals />
             </div>
