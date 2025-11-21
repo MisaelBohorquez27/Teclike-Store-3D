@@ -145,6 +145,8 @@ const UnitPrice = ({ price }: { price: number }) => (
   </div>
 );
 
+// Selector de cantidad
+
 const QuantitySelector = ({
   quantity,
   isUpdating,
