@@ -8,6 +8,8 @@ export interface CartItem {
   quantity: number;
   product: ProductForCart;
 }
+
+// Respuesta del carrito desde el backend
 export interface CartResponse {
   id: number;
   userId: number;
