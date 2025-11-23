@@ -73,6 +73,3 @@
     background-color: var(--color-primary-hover);
   }
 }
-
-/* Elimina TODAS tus clases CSS personalizadas antiguas */
-/* Tailwind v4 maneja todo a través del sistema de utilidades */
