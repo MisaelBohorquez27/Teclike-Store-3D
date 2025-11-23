@@ -1,332 +1,75 @@
+/* src/app/globals.css */
 @import "tailwindcss";
 
-/* src/app/globals.css */
-
 :root {
-  --breakpoint-sm: 480px;
-  --breakpoint-md: 768px;
-  --breakpoint-lg: 976px;
+  /* Tu paleta de colores personalizada */
+  --color-navy-blue: #0f2c59;
+  --color-electric-blue: #4a6bff;
+  --color-light-blue: #a7c6ff;
+  --color-purple: #3a237a;
+  --color-electric-purple: #7b4aff;
+  --color-light-purple: #9d7bff;
+  
+  /* Neutros */
+  --color-black: #000000;
+  --color-gray-2: #333333;
+  --color-gray: #f5f5f5;
+  --color-white-2: #efefec;
+  --color-white: #ffffff;
 
-  /* Paleta Base */
+  /* Colores semánticos - Tailwind v4 usa CSS variables */
+  --color-primary: var(--color-navy-blue);
+  --color-primary-hover: var(--color-electric-blue);
+  --color-primary-accent: var(--color-light-blue);
+  --color-secondary: var(--color-purple);
+  --color-secondary-hover: var(--color-electric-purple);
+  --color-secondary-accent: var(--color-light-purple);
+  
+  /* Neutral colors como escala */
+  --color-neutral-1: var(--color-black);
+  --color-neutral-2: var(--color-gray-2);
+  --color-neutral-3: var(--color-gray);
+  --color-neutral-4: var(--color-white-2);
+  --color-neutral-5: var(--color-white);
 
-  /* Azul */
-  --navy-blue: #0f2c59;
-  --electric-blue: #4a6bff;
-  --light-blue: #a7c6ff;
+  /* Gradientes personalizados */
+  --background-gradient-card: linear-gradient(0deg, var(--color-neutral-3) 0%, var(--color-neutral-4) 100%);
+  --background-gradient-navbar: linear-gradient(180deg, var(--color-neutral-5) 0%, var(--color-neutral-4) 100%);
+  --background-gradient-hero: linear-gradient(0deg, var(--color-neutral-5) 0%, var(--color-neutral-4) 100%);
+  --background-gradient-section: linear-gradient(180deg, var(--color-neutral-5) 0%, var(--color-neutral-4) 100%);
 
-  /* Morado */
-  --purple: #3a237a;
-  --electric-purple: #7b4aff;
-  --light-purple: #9d7bff;
-
-  /* Neutros -- Del mas oscuro al blanco */
-  --black: #000000;   /* 1 */
-  --gray2: #333333;  /* 2 */
-  --gray: #f5f5f5;  /* 3 */
-  --white2: #efefec;  /* 4 */
-  --white: #ffffff;  /* 5 */
-
-  /* Colores principales */
-  --color-primary: var(--navy-blue);
-  --color-primary-hover: var(--electric-blue);
-  --color-primary-accent: var(--light-blue);
-  --color-secondary: var(--purple);
-  --color-secondary-hover: var(--electric-purple);
-  --color-secondary-accent: var(--light-purple);
-
-  /* Colores neutros, se lo podría usa para títulos, textos, subtítulos, etc */
-  --color-neutro1: var(--black);
-  --color-neutro2: var(--gray2);
-  --color-neutro3: var(--gray);
-  --color-neutro4: var(--white2);
-  --color-neutro5: var(--white);
-
+  /* Sombras de texto */
+  --text-shadow-default: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* ---------- Clases reutilizables ---------- */
+/* Utilidades personalizadas */
+@layer utilities {
+  .card-bg {
+    background: var(--background-gradient-card);
+  }
 
-/* Botones */
-.Button-bg {
-  background: var(--color-primary);
-}
-.Button-bg:hover {
-  background: var(--color-primary-hover);
-}
+  .navbar-bg {
+    background: var(--background-gradient-navbar);
+  }
 
-.Button-bg-dark {
-  background: var(--color-primary-hover);
-}
-
-/* Titulos-Textos */
-
-.TitleColor {
-  color: var(--color-neutro1);
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.TitleColor2 {
-  color: var(--color-neutro5);
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.SubtitleColor {
-  color: var(--color-neutro2);
-}
-
-.SubtitleColor2 {
-  color: var(--color-neutro4);
-}
-
-.TextColor1 {  /* Texto Negro */
-  color: var(--color-neutro1);
-}
-
-.TextColor2 {  /* Texto Blanco */
-  color: var(--color-neutro5);
-}
-
-.TextColor3 {   /* Texto gris oscuro */
-  color: var(--color-neutro2);
-}
-
-/* Card */
-.Card-bg {
-  background: linear-gradient(
-    0deg,
-    var(--color-neutro3) 0%,
-    var(--color-neutro4) 100%
-  );
-}
-
-/* Navbar */
-.Navbar-bg {
-  background: linear-gradient(
-    180deg,
-    var(--color-neutro5) 0%,
-    var(--color-neutro4) 100%
-  );
-}
-
-.Navbar-text {
-  color: var(--color-primary);
-  transition: color 0.3s ease;
-}
-
-.Navbar-text:hover {
-  color: var(--color-primary-hover);
-}
-
-/* HeroBanner */
-.hero-bg {
-  background: linear-gradient(
-    0deg,
-    var(--color-neutro5) 0%,
-    var(--color-neutro4) 100%
-  );
-}
-
-@media (max-width: 768px) {
   .hero-bg {
-    padding-top: 4rem;
-    /* Espacio para navbar */
+    background: var(--background-gradient-hero);
+  }
+
+  .section-bg {
+    background: var(--background-gradient-section);
+  }
+
+  .text-shadow {
+    text-shadow: var(--text-shadow-default);
+  }
+
+  /* Estados de hover para botones */
+  .btn-primary {
+    background-color: var(--color-primary);
+    color: var(--color-neutral-5);
+  }
+  .btn-primary:hover {
+    background-color: var(--color-primary-hover);
   }
 }
-
-/* BenefitGrid */
-.BenefitGrid-bg {
-  background: linear-gradient(
-    180deg,
-    var(--color-neutro5) 0%,
-    var(--color-neutro4) 100%
-  );
-}
-
-/* TrendingProducts */
-.TrendingProducts-bg {
-  background: linear-gradient(
-    0deg,
-    var(--color-neutro5) 0%,
-    var(--color-neutro4) 100%
-  );
-}
-
-/* DailyOffers */
-.DailyOffers-bg {
-  background: linear-gradient(
-    180deg,
-    var(--color-neutro5) 0%,
-    var(--color-neutro4) 100%
-  );
-}
-
-.DailyOffers-bg2 {
-  background: var(--color-primary);
-}
-
-/* BestSellersWeek */
-.BestSellersWeek-bg {
-  background: linear-gradient(
-    0deg,
-    var(--color-neutro5) 0%,
-    var(--color-neutro4) 100%
-  );
-}
-
-/* FollowUs */
-.FollowUs-bg {
-  background: linear-gradient(
-    180deg,
-    var(--color-neutro5) 0%,
-    var(--color-neutro4) 100%
-  );
-}
-
-/* CustomersReview */
-.CustomerReview-bg {
-  background: linear-gradient(
-    0deg,
-    var(--color-neutro5) 0%,
-    var(--color-neutro4) 100%
-  );
-}
-
-/* Footer */
-.Footer-bg {
-  background: var(--color-primary);
-}
-
-/* ProductPage */
-.PageProducts-bg {
-  background: linear-gradient(
-    0deg,
-    var(--color-neutro5) 0%,
-    var(--color-neutro4) 100%
-  );
-}
-
-.Product-title {
-  color: var(--color-neutro1);
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.Product-subtitle {
-  color: var(--color-neutro1);
-}
-
-/* DailyOffersPage */
-
-.DailyOffers-title {
-  color: var(--color-neutro1);
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.DailyOffers-subtitle {
-  color: var(--color-neutro1);
-}
-
-.DailyOffers-Countdown {
-  background: var(--color-primary);
-  color: var(--color-neutro5);
-}
-.PageDailyOffers-bg {
-  background: linear-gradient(
-    0deg,
-    var(--color-neutro5) 0%,
-    var(--color-neutro4) 100%
-  );
-}
-.FlashOffers-bg {
-  background: linear-gradient(
-    180deg,
-    var(--color-neutro5) 0%,
-    var(--color-neutro4) 100%
-  );
-}
-
-.FeatureOffers-bg {
-  background: linear-gradient(
-    180deg,
-    var(--color-neutro5) 0%,
-    var(--color-neutro4) 100%
-  );
-}
-
-.BannerSubscribe-bg {
-  background: linear-gradient(
-    0deg,
-    var(--color-neutro5) 0%,
-    var(--color-neutro4) 100%
-  );
-}
-
-/* Help&ContactPage */
-.HelpContact-bg {
-  background: linear-gradient(
-    0deg,
-    var(--color-neutro5) 0%,
-    var(--color-neutro4) 100%
-  );
-}
-
-.HelpContact-title {
-  color: var(--color-neutro1);
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.HelpContact-subtitle {
-  color: var(--color-neutro1);
-}
-
-.Contact-bg {
-  background: linear-gradient(
-    0deg,
-    var(--color-neutro5) 0%,
-    var(--color-neutro4) 100%
-  );
-}
-
-/* CartPage */
-.Cart-bg {
-  background: linear-gradient(
-    0deg,
-    var(--color-neutro5) 0%,
-    var(--color-neutro4) 100%
-  );
-}
-
-.Cart-title {
-  color: var(--color-neutro1);
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.Cart-subtitle {
-  color: var(--color-neutro1);
-}
-
-.CartProducts-bg {
-  background: linear-gradient(
-    180deg,
-    var(--color-neutro5) 0%,
-    var(--color-neutro4) 100%
-  );
-}
-
-/* DealCard */
-
-.DealCard-Discount {
-  background: var(--color-primary-hover);
-  color: var(--color-neutro5);
-}
-
-.DealCard-title {
-  color: var(--color-neutro1);
-}
-
-.DealCard-Price {
-  color: var(--color-primary-hover);
-}
-
-.DealCard-Bar {
-  background: var(--color-primary-hover);
-}
-
