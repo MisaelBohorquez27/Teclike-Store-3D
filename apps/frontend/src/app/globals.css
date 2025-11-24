@@ -42,7 +42,6 @@
   --text-shadow-default: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Utilidades personalizadas */
 @layer utilities {
   .card-bg {
     background: var(--background-gradient-card);
