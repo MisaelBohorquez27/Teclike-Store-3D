@@ -136,7 +136,7 @@ export function Footer({
             </nav>
           </div>
 
-          {/* Contact Info con iconos animados */}
+          {/* Contact Info con iconos animadosss */}
           <div>
             <h3 className="text-lg font-semibold mb-6 bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent flex items-center">
               <span className="w-2 h-2 bg-cyan-400 rounded-full mr-2 animate-pulse"></span>
