@@ -6,7 +6,7 @@ import { ProductList2 } from "./components/ProductList2";
 export default function ProductPage() {
 
   return (
-    <main className="PageProducts-bg min-h-[calc(100vh-4rem)] md:min-h-screen relative overflow-hidden">
+    <main className="min-h-[calc(100vh-4rem)] md:min-h-screen relative overflow-hidden">
       {/* Hero Banner */}
       <ProductHero />
       <ImageUploader />

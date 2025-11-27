@@ -1,6 +1,15 @@
 /* src/app/globals.css */
 @import "tailwindcss";
 
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%; 
+    overflow-x: hidden;
+    position: static;
+}
+
 :root {
   /* Light theme (default) */
   --color-navy-blue: #0f2c59;
@@ -33,6 +42,7 @@
   --color-neutral-5: var(--color-white);
 
   /* Gradientes - Light */
+  --background-gradient-global: linear-gradient(180deg, var(--color-neutral-4) 0%, var(--color-neutral-5) 100%);
   --background-gradient-card: linear-gradient(0deg, var(--color-neutral-3) 0%, var(--color-neutral-4) 100%);
   --background-gradient-navbar: linear-gradient(180deg, var(--color-neutral-5) 0%, var(--color-neutral-4) 100%);
   --background-gradient-hero: linear-gradient(0deg, var(--color-neutral-5) 0%, var(--color-neutral-4) 100%);
@@ -63,6 +73,7 @@
   --color-neutral-5: #000000;
 
   /* Gradientes - Dark */
+  --background-gradient-global: linear-gradient(180deg, var(--color-neutral-5) 0%, var(--color-neutral-4) 100%);
   --background-gradient-card: linear-gradient(0deg, var(--color-neutral-3) 0%, var(--color-neutral-4) 100%);
   --background-gradient-navbar: linear-gradient(180deg, var(--color-neutral-4) 0%, var(--color-neutral-5) 100%);
   --background-gradient-hero: linear-gradient(0deg, var(--color-neutral-4) 0%, var(--color-neutral-5) 100%);
@@ -74,7 +85,11 @@
 }
 
 /* Utilidades personalizadas */
-@layer utilities {
+
+  .global-bg {
+    background: var(--background-gradient-global);
+  }
+
   .card-bg {
     background: var(--background-gradient-card);
   }
@@ -127,5 +142,3 @@
   .border-neutral {
     border-color: var(--color-neutral-3);
   }
-
-}

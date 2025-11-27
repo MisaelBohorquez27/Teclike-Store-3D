@@ -67,7 +67,7 @@ export function Navbar() {
   const NavLink = ({ href, text }: { href: string; text: string }) => (
     <Link
       href={href}
-      className="block py-3 px-4 md:py-2 md:px-3 transition-all duration-300 rounded-lg hover:bg-neutral-3 dark:hover:bg-neutral-4 font-medium text-sm md:text-base"
+      className="block py-3 px-4 md:py-2 md:px-3 transition-all duration-300 rounded-lg font-medium text-sm md:text-base"
       onClick={() => setIsOpen(false)}
     >
       {text}
@@ -80,7 +80,7 @@ export function Navbar() {
         className={`fixed top-0 w-full z-50 navbar-bg backdrop-blur-md dark:bg-neutral-4/80 transition-all duration-500 ease-out ${
           scrolled 
             ? "-translate-y-full opacity-0" 
-            : "translate-y-0 opacity-100 shadow-sm"
+            : "translate-y-0 opacity-100"
         }`}
       >
         <div className="container mx-auto px-4">
@@ -206,9 +206,6 @@ export function Navbar() {
           </div>
         )}
       </nav>
-
-      {/* Espacio para el navbar fixed */}
-      <div className="h-16 md:h-20"></div>
     </>
   );
 }
