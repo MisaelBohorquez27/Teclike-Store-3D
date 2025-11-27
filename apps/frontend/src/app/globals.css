@@ -2,7 +2,7 @@
 @import "tailwindcss";
 
 :root {
-  /* Tu paleta de colores personalizada */
+  /* Light theme (default) */
   --color-navy-blue: #0f2c59;
   --color-electric-blue: #4a6bff;
   --color-light-blue: #a7c6ff;
@@ -10,14 +10,14 @@
   --color-electric-purple: #7b4aff;
   --color-light-purple: #9d7bff;
   
-  /* Neutros */
+  /* Neutros - Light */
   --color-black: #000000;
   --color-gray-2: #333333;
   --color-gray: #f5f5f5;
   --color-white-2: #efefec;
   --color-white: #ffffff;
 
-  /* Colores semánticos - Tailwind v4 usa CSS variables */
+  /* Colores semánticos - Light */
   --color-primary: var(--color-navy-blue);
   --color-primary-hover: var(--color-electric-blue);
   --color-primary-accent: var(--color-light-blue);
@@ -25,23 +25,55 @@
   --color-secondary-hover: var(--color-electric-purple);
   --color-secondary-accent: var(--color-light-purple);
   
-  /* Neutral colors como escala sss*/
+  /* Neutral colors - Light */
   --color-neutral-1: var(--color-black);
   --color-neutral-2: var(--color-gray-2);
   --color-neutral-3: var(--color-gray);
   --color-neutral-4: var(--color-white-2);
   --color-neutral-5: var(--color-white);
 
-  /* Gradientes personalizados sss */
+  /* Gradientes - Light */
   --background-gradient-card: linear-gradient(0deg, var(--color-neutral-3) 0%, var(--color-neutral-4) 100%);
   --background-gradient-navbar: linear-gradient(180deg, var(--color-neutral-5) 0%, var(--color-neutral-4) 100%);
   --background-gradient-hero: linear-gradient(0deg, var(--color-neutral-5) 0%, var(--color-neutral-4) 100%);
   --background-gradient-section: linear-gradient(180deg, var(--color-neutral-5) 0%, var(--color-neutral-4) 100%);
 
-  /* Sombras de texto */
+  /* Sombras - Light */
   --text-shadow-default: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
+/* Dark theme */
+@custom-variant dark (&:where(.dark, .dark *));
+
+.dark {
+  /* Colores - Dark */
+  --color-primary: #1e40af; /* Azul más claro para dark */
+  --color-primary-hover: #3b82f6;
+  --color-primary-accent: #93c5fd;
+  --color-secondary: #5b21b6;
+  --color-secondary-hover: #7c3aed;
+  --color-secondary-accent: #a78bfa;
+  
+  /* Neutral colors - Dark (invertidos) */
+  --color-neutral-1: #ffffff;
+  --color-neutral-2: #e5e7eb;
+  --color-neutral-3: #1f2937;
+  --color-neutral-4: #111827;
+  --color-neutral-5: #000000;
+
+  /* Gradientes - Dark */
+  --background-gradient-card: linear-gradient(0deg, var(--color-neutral-3) 0%, var(--color-neutral-4) 100%);
+  --background-gradient-navbar: linear-gradient(180deg, var(--color-neutral-4) 0%, var(--color-neutral-5) 100%);
+  --background-gradient-hero: linear-gradient(0deg, var(--color-neutral-4) 0%, var(--color-neutral-5) 100%);
+  --background-gradient-section: linear-gradient(180deg, var(--color-neutral-4) 0%, var(--color-neutral-5) 100%);
+
+  /* Sombras - Dark */
+  --text-shadow-default: 0 2px 4px rgba(255, 255, 255, 0.1);
+  --shadow-card: 0 4px 6px -1px rgba(255, 255, 255, 0.1);
+}
+
+/* Utilidades personalizadas */
 @layer utilities {
   .card-bg {
     background: var(--background-gradient-card);
@@ -63,12 +95,20 @@
     text-shadow: var(--text-shadow-default);
   }
 
-  /* Estados de hover para botones */
+  /* Botones */
   .btn-primary {
     background-color: var(--color-primary);
     color: var(--color-neutral-5);
   }
   .btn-primary:hover {
     background-color: var(--color-primary-hover);
+  }
+
+  .btn-secondary {
+    background-color: var(--color-secondary);
+    color: var(--color-neutral-5);
+  }
+  .btn-secondary:hover {
+    background-color: var(--color-secondary-hover);
   }
 }
