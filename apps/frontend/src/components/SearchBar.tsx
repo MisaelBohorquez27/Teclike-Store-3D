@@ -168,12 +168,12 @@ export function SearchBar({
       case "expanded":
         return `${base} bg-neutral-3 dark:bg-neutral-4 rounded-xl border-2 border-transparent focus-within:border-primary dark:focus-within:border-primary-hover`;
       default:
-        return `${base} bg-neutral-3 dark:bg-neutral-4 rounded-lg border border-gray-300 dark:border-gray-400 focus-within:ring-1 focus-within:ring-primary focus-within:border-transparent`;
+        return `${base} bg-neutral-3 dark:bg-neutral-4 rounded-lg border border-gray-300 dark:border-gray-400 focus-within:ring-1 focus-within:ring-gray-400 focus-within:border-transparent`;
     }
   };
 
   const getInputStyles = () => {
-    const base = "w-full bg-transparent focus:outline-none placeholder-neutral-2 dark:placeholder-neutral-3 text-neutral-1 dark:text-neutral-2";
+    const base = "w-full bg-transparent focus:outline-none placeholder-neutral-2 dark:placeholder-neutral-3 text-neutral";
     
     switch (variant) {
       case "minimal":
@@ -246,7 +246,7 @@ export function SearchBar({
 
       {/* Panel de sugerencias */}
       {(showRecentSearches || showSearchResults) && isFocused && (
-        <div className="absolute top-full left-0 right-0 mt-2 bg-white dark:bg-neutral-4 border border-neutral-3 dark:border-neutral-4 rounded-xl shadow-2xl z-50 max-h-80 overflow-y-auto animate-in fade-in slide-in-from-top-2 duration-200">
+        <div className="absolute top-full left-0 right-0 mt-2 card-bg dark:bg-neutral-4 border border-neutral-3 dark:border-neutral-4 rounded-xl shadow-2xl z-50 max-h-80 overflow-y-auto animate-in fade-in slide-in-from-top-2 duration-200">
           
           {/* Búsquedas recientes */}
           {showRecentSearches && (
@@ -260,7 +260,7 @@ export function SearchBar({
                   <li key={term}>
                     <button
                       onMouseDown={() => handleSuggestionClick(term)} // aqui abajo se pone el hover para seleccionar
-                      className={`w-full text-left p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-3 transition-colors text-sm ${
+                      className={`w-full text-left p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors text-sm ${
                         index === selectedIndex ? 'bg-neutral-3 dark:bg-neutral-3' : ''
                       }`}
                     >
@@ -278,13 +278,13 @@ export function SearchBar({
               {isLoading ? (
                 <div className="flex items-center justify-center py-4">
                   <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary"></div>
-                  <span className="ml-2 text-sm text-neutral-2 dark:text-neutral-3">
+                  <span className="ml-2 text-sm text-neutral">
                     Buscando...
                   </span>
                 </div>
               ) : suggestions.length > 0 ? (
                 <>
-                  <div className="flex items-center text-sm font-medium text-neutral-2 dark:text-neutral-3 mb-2">
+                  <div className="flex items-center text-sm font-medium text-neutral mb-2">
                     <FiTrendingUp className="mr-2" size={16} />
                     Sugerencias
                   </div>

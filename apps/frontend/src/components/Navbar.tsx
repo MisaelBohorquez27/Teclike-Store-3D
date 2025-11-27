@@ -67,7 +67,7 @@ export function Navbar() {
   const NavLink = ({ href, text }: { href: string; text: string }) => (
     <Link
       href={href}
-      className="block py-3 px-4 md:py-2 md:px-3 text-neutral-1 dark:text-neutral-2 hover:text-primary dark:hover:text-primary-hover transition-all duration-300 rounded-lg hover:bg-neutral-3 dark:hover:bg-neutral-4 font-medium text-sm md:text-base"
+      className="block py-3 px-4 md:py-2 md:px-3 transition-all duration-300 rounded-lg hover:bg-neutral-3 dark:hover:bg-neutral-4 font-medium text-sm md:text-base"
       onClick={() => setIsOpen(false)}
     >
       {text}
@@ -84,7 +84,7 @@ export function Navbar() {
         }`}
       >
         <div className="container mx-auto px-4">
-          <div className="flex justify-between items-center py-3 navbar-content">
+          <div className="flex justify-between items-center py-3 text-neutral">
             
             {/* Logo y menú hamburguesa (mobile) */}
             <div className="flex items-center md:flex-1">
@@ -92,8 +92,7 @@ export function Navbar() {
                 className="md:hidden mr-3 p-2 rounded-lg hover:bg-neutral-3 dark:hover:bg-neutral-4 transition-colors"
                 onClick={(e) => {
                   e.stopPropagation();
-                  setIsOpen(!isOpen);
-                }}
+                  setIsOpen(!isOpen);                }}
                 aria-label="Menú"
                 aria-expanded={isOpen}
               >

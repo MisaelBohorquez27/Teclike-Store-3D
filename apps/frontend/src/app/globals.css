@@ -111,4 +111,21 @@
   .btn-secondary:hover {
     background-color: var(--color-secondary-hover);
   }
+
+  /*` Textos */
+  .text-primary {
+    color: var(--color-primary);
+  }
+  .text-secondary {
+    color: var(--color-secondary);
+  }
+  .text-neutral {
+    color: var(--color-neutral-1);
+  }
+
+  /* Border */
+  .border-neutral {
+    border-color: var(--color-neutral-3);
+  }
+
 }
