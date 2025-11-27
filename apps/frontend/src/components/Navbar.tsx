@@ -77,7 +77,7 @@ export function Navbar() {
   return (
     <>
       <nav
-        className={`fixed top-0 w-full z-50 navbar-bg backdrop-blur-md bg-white/80 dark:bg-neutral-4/80 border-b border-neutral-3 dark:border-neutral-4 transition-all duration-500 ease-out ${
+        className={`fixed top-0 w-full z-50 navbar-bg backdrop-blur-sm bg-white/80 dark:bg-neutral-4/80 transition-all duration-500 ease-out ${
           scrolled 
             ? "-translate-y-full opacity-0" 
             : "translate-y-0 opacity-100 shadow-lg"

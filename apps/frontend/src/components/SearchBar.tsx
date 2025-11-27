@@ -219,7 +219,7 @@ export function SearchBar({
             placeholder={placeholder}
             autoFocus={autoFocus}
             className={getInputStyles()}
-            style={{ paddingLeft: variant === 'minimal' ? '28px' : '40px' }}
+            style={{ paddingLeft: variant === 'minimal' ? '20px' : '30px' }}
           />
 
           {query.length > 0 && (
@@ -260,7 +260,7 @@ export function SearchBar({
                   <li key={term}>
                     <button
                       onMouseDown={() => handleSuggestionClick(term)} // aqui abajo se pone el hover para seleccionar
-                      className={`w-full text-left p-2 rounded-lg hover:bg-neutral-3 dark:hover:bg-neutral-3 transition-colors text-sm ${
+                      className={`w-full text-left p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-3 transition-colors text-sm ${
                         index === selectedIndex ? 'bg-neutral-3 dark:bg-neutral-3' : ''
                       }`}
                     >
