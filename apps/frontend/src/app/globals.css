@@ -18,7 +18,7 @@
   --color-white: #ffffff;
 
   /* Colores semánticos - Light */
-  --color-primary: var(--color-navy-blue);
+  --color-primary: var(--color-navy-blue) ;
   --color-primary-hover: var(--color-electric-blue);
   --color-primary-accent: var(--color-light-blue);
   --color-secondary: var(--color-purple);

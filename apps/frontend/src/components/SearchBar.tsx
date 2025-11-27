@@ -168,7 +168,7 @@ export function SearchBar({
       case "expanded":
         return `${base} bg-neutral-3 dark:bg-neutral-4 rounded-xl border-2 border-transparent focus-within:border-primary dark:focus-within:border-primary-hover`;
       default:
-        return `${base} bg-neutral-3 dark:bg-neutral-4 rounded-lg border border-neutral-3 dark:border-neutral-4 focus-within:ring-2 focus-within:ring-primary focus-within:border-transparent`;
+        return `${base} bg-neutral-3 dark:bg-neutral-4 rounded-lg border border-gray-300 dark:border-gray-400 focus-within:ring-1 focus-within:ring-primary focus-within:border-transparent`;
     }
   };
 
