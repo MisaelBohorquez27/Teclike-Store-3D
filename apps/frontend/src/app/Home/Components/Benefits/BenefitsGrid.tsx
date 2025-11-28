@@ -51,7 +51,8 @@ const BenefitCard = ({ benefit }: { benefit: Benefit }) => (
 
 const BenefitsGridContainer = ({ children }: { children: React.ReactNode }) => (
   <section 
-    className="BenefitGrid-bg py-12 md:py-16 px-4"
+    id="benefits-section"
+    className="section-bg text-neutral py-12 md:py-16 px-4"
     aria-labelledby="benefits-heading"
   >
     <div className="max-w-7xl mx-auto">

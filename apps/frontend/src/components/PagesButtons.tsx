@@ -28,16 +28,14 @@ const Button: FC<ButtonProps> = ({
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
         "disabled:opacity-70 disabled:cursor-not-allowed cursor-pointer",
         // Variants
-        variant === "primary" && "Button-bg TextColor2 border border-transparent",
-        variant === "secondary" && "Button-bg TextColor2 border border-transparent",
-        variant === "dark" && "Button-bg-dark TextColor2 border border-transparent",
-        variant === "addCart" && "Button-bg TextColor2 border border-transparent",
+        variant === "primary" && "btn-primary border border-transparent",
+        variant === "secondary" && "btn-secondary border border-transparent",
+        variant === "addCart" && "btn-addCart border border-transparent",
         variant === "outline" && [
           "bg-transparent text-[#0F2C59] border border-[#0F2C59]",
           "hover:bg-[#0F2C59] hover:text-[#FAF9F6]",
-          "dark:text-[#FAF9F6] dark:border-[#FAF9F6] dark:hover:bg-[#FAF9F6] dark:hover:text-[#0F2C59]"
         ],
-        variant === "submit" && "Button-bg TextColor2 border border-transparent",
+        variant === "submit" && "btn-submit border border-transparent",
         // Sizes
         size === "2xs" && "px-2.5 py-1 text-xs",
         size === "xs" && "px-3 py-1.5 text-sm sm:text-base",

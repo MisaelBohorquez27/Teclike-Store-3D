@@ -4,7 +4,7 @@ import { ProductWithOffer } from "@/types/offers";
 
 export function OfferCard({ product }: { product: ProductWithOffer }) {
   return (
-    <div className="Card-bg rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+    <div className="card-bg text-neutral rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow">
       <div className="px-2 sm:px-3 py-3 sm:py-4 flex flex-col">
         <div className="relative flex justify-between items-center aspect-square">
           <img

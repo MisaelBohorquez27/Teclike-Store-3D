@@ -15,10 +15,10 @@ interface DailyOffersContentProps {
 // Subcomponents
 const DailyOffersHeader = () => (
   <div className="text-center mb-8 lg:mb-0 lg:max-w-md lg:pr-6 xl:pr-12 lg:w-1/3">
-    <h2 className="TitleColor2 text-4xl md:text-5xl lg:text-6xl font-bold mb-2 lg:mb-3">
+    <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-2 lg:mb-3">
       {CONFIG.content.title}
     </h2>
-    <p className="SubtitleColor2 text-base md:text-lg px-2 md:px-0">
+    <p className="text-base md:text-lg px-2 md:px-0">
       {CONFIG.content.description}
     </p>
     <Link href={CONFIG.content.buttonHref} className="inline-block mt-4 md:mt-5">
