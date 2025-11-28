@@ -25,9 +25,8 @@ export function HeroBanner() {
 
   return (
     <main className="hero-bg min-h-[calc(100vh-4rem)] md:min-h-screen relative overflow-hidden">
-      <Navbar />
       <div className="container mx-auto px-4 h-full">
-        <div className="flex flex-col lg:flex-row items-center justify-between h-full gap-8 py-12 md:py-24">
+        <div className="flex flex-col lg:flex-row items-center justify-between h-full gap-8 py-12 md:py-16">
           
           {/* Text Content */}
           <motion.div className="flex-1 max-w-2xl z-10" {...animationProps.text}>
