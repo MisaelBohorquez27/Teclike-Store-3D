@@ -173,7 +173,7 @@ export function SearchBar({
   };
 
   const getInputStyles = () => {
-    const base = "w-full bg-transparent focus:outline-none placeholder-neutral-2 dark:placeholder-neutral-3 text-neutral";
+    const base = "w-full bg-transparent focus:outline-none placeholder-neutral-2 dark:placeholder-neutral-3 text-neutral truncate";
     
     switch (variant) {
       case "minimal":
@@ -181,7 +181,7 @@ export function SearchBar({
       case "expanded":
         return `${base} px-4 py-3 text-lg`;
       default:
-        return `${base} px-3 py-2`;
+        return `${base} px-6 py-2`;
     }
   };
 
@@ -226,7 +226,7 @@ export function SearchBar({
             <button
               type="button"
               onClick={clearSearch}
-              className="absolute right-12 text-neutral-2 dark:text-neutral-3 hover:text-neutral-1 dark:hover:text-neutral-2 p-1 transition-colors"
+              className="absolute right-9 text-neutral-2 dark:text-neutral-3 hover:text-neutral-1 dark:hover:text-neutral-2 p-1 transition-colors"
             >
               <FiX size={variant === 'expanded' ? 20 : 16} />
             </button>
