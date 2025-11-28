@@ -99,6 +99,7 @@ html, body {
 
   .hero-bg {
     background: var(--background-gradient-hero);
+    color: var(--color-neutral-1);
   }
 
   .section-bg {

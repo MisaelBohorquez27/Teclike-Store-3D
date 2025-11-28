@@ -17,7 +17,7 @@ interface SearchBarProps {
 
 export function SearchBar({
   placeholder = "Buscar productos 3D...",
-  className = "",
+  className = "w-full",
   variant = "default",
   autoFocus = false,
   initialQuery = "",
