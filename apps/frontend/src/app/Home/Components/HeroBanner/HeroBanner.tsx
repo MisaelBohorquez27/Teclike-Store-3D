@@ -1,6 +1,5 @@
 "use client";
 
-import { Navbar } from "@/components/Navbar";
 import Button from "@/components/PagesButtons";
 import Image from "next/image";
 import { motion, useReducedMotion, AnimatePresence } from "framer-motion";
@@ -14,12 +13,30 @@ import {
   FiZap,
   FiTrendingUp,
   FiUsers,
+  FiArrowDown,
 } from "react-icons/fi";
 
 export function HeroBanner() {
   const isMounted = useIsMounted();
   const prefersReducedMotion = useReducedMotion();
   const animationProps = getAnimationProps(prefersReducedMotion);
+
+  // Función para hacer scroll suave hacia abajo
+  const scrollToNextSection = () => {
+    const nextSection = document.getElementById('trending-section');
+    if (nextSection) {
+      nextSection.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    } else {
+      // Fallback: scroll por cantidad de píxeles
+      window.scrollBy({ 
+        top: window.innerHeight * 0.8, 
+        behavior: 'smooth' 
+      });
+    }
+  };
 
   // Evitar el parpadeo en SSR
   if (!isMounted) {
@@ -289,23 +306,38 @@ export function HeroBanner() {
 
           {/* Scroll indicator moderno */}
           <motion.div
-            className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+            className="text-neutral absolute bottom-8 left-1/2 transform -translate-x-1/2"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.6 }}
+            onClick={scrollToNextSection}
+            role="button"
+            tabIndex={0}
+            onKeyPress={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                scrollToNextSection();
+              }
+            }}
+            aria-label="Desplazarse hacia abajo"
           >
             <div className="flex flex-col items-center gap-2">
               <motion.div
-                className="text-sm text-neutral-2 dark:text-neutral-3 font-medium"
-                animate={{ opacity: [0.5, 1, 0.5] }}
-                transition={{ duration: 2, repeat: Infinity }}
+                className="text-sm text-neutral-2 font-medium"
+                animate={{ y: [0, 8, 0], opacity: [0.5, 1, 0.5] }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
               >
                 Descubre más
               </motion.div>
               <motion.div
-                className="w-6 h-10 border-2 border-neutral-3 dark:border-neutral-4 rounded-full flex justify-center"
+                className="w-8 h-10 border-2 border-neutral-1 rounded-full flex justify-center items-center cursor-pointer"
                 animate={{
                   y: [0, 8, 0],
+                  opacity: [0.5, 1, 0.5],
                 }}
                 transition={{
                   duration: 2,
@@ -313,18 +345,7 @@ export function HeroBanner() {
                   ease: "easeInOut",
                 }}
               >
-                <motion.div
-                  className="w-1 h-3 bg-primary rounded-full mt-2"
-                  animate={{
-                    opacity: [0, 1, 0],
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                    delay: 0.5,
-                  }}
-                />
+                <FiArrowDown />
               </motion.div>
             </div>
           </motion.div>

@@ -173,7 +173,7 @@ export function SearchBar({
   };
 
   const getInputStyles = () => {
-    const base = "w-full bg-transparent focus:outline-none placeholder-neutral-2 dark:placeholder-neutral-3 text-neutral truncate";
+    const base = "w-full bg-transparent focus:outline-none text-neutral truncate";
     
     switch (variant) {
       case "minimal":
