@@ -57,7 +57,7 @@ export function Subscription() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Tu correo electrónico"
-            className="flex-grow px-4 py-3 rounded-lg bg-white border border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="flex-grow px-4 py-3 rounded-lg card-bg border border-neutral-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
           <Button
@@ -70,7 +70,7 @@ export function Subscription() {
             {isLoading ? (
               <span className="flex items-center justify-center">
                 <svg
-                  className="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
+                  className="animate-spin -ml-1 mr-2 h-4 w-4"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"

@@ -10,11 +10,11 @@ export function CustomerReviews() {
 
   if (loading) {
     return (
-      <section className="CustomerReview-bg">
+      <section className="section-bg-2 text-neutral">
         <div className="bg-transparent container mx-auto px-4 sm:px-6 pb-16">
           <div className="container mx-auto px-0 sm:px-4">
             <div className="relative">
-              <p className="TextColor text-center">Cargando reseñas...</p>
+              <p className="text-center">Cargando reseñas...</p>
             </div>
           </div>
         </div>
@@ -24,11 +24,11 @@ export function CustomerReviews() {
 
   if (reviews.length === 0) {
     return (
-      <section className="CustomerReview-bg">
+      <section className="section-bg-2 text-neutral">
         <div className="bg-transparent container mx-auto px-4 sm:px-6 pb-16">
           <div className="container mx-auto px-0 sm:px-4">
             <div className="relative">
-              <p className="TextColor text-center">No hay reseñas todavía.</p>
+              <p className="text-center">No hay reseñas todavía.</p>
             </div>
           </div>
         </div>
@@ -37,7 +37,7 @@ export function CustomerReviews() {
   }
 
   return (
-    <section className="CustomerReview-bg">
+    <section className="section-bg-2 text-neutral">
       <div className="bg-transparent container mx-auto px-4 sm:px-6 pb-16">
         <div className="container mx-auto px-0 sm:px-4">
           <div className="relative">

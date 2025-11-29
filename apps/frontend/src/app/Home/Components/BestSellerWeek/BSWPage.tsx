@@ -11,7 +11,7 @@ export function BestSellersWeekPage() {
     };
 
     return (
-        <section>
+        <section className="section-bg-2 text-neutral">
             <BestSellersWeekGrid onAddToCart={handleAddToCart} />
         </section>
     );
