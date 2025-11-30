@@ -192,9 +192,9 @@ export function SearchBar({
       case "minimal":
         return `${base} text-neutral-2 dark:text-neutral-3 hover:text-primary dark:hover:text-primary-hover p-1`;
       case "expanded":
-        return `${base} bg-primary hover:bg-primary-hover text-neutral-5 rounded-r-lg p-3`;
+        return `${base} text-neutral-5 rounded-r-lg p-3`;
       default:
-        return `${base} bg-primary hover:bg-primary-hover text-neutral-5 rounded-r-lg px-3 py-2`;
+        return `${base}  text-neutral-5 rounded-r-lg px-3 py-2`;
     }
   };
 
@@ -226,7 +226,7 @@ export function SearchBar({
             <button
               type="button"
               onClick={clearSearch}
-              className="absolute right-9 text-neutral-2 dark:text-neutral-3 hover:text-neutral-1 dark:hover:text-neutral-2 p-1 transition-colors"
+              className="absolute right-9 text-neutral-1 hover:text-neutral p-1 transition-colors"
             >
               <FiX size={variant === 'expanded' ? 20 : 16} />
             </button>
@@ -238,7 +238,7 @@ export function SearchBar({
             aria-label="Buscar"
           >
             <FiSearch 
-            className="text-neutral-2 dark:text-neutral-3 transition-colors"
+            className="text-neutral-1 transition-colors"
             size={variant === 'expanded' ? 20 : 16} />
           </button>
         </div>

@@ -11,12 +11,12 @@ import { CartListProps } from "../Types/BSWTypes";
 // Subcomponents
 const Header = () => (
   <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 md:mb-8 gap-4 sm:gap-0">
-    <h2 className="TitleColor text-2xl sm:text-3xl font-bold">
+    <h2 className="text-2xl sm:text-3xl font-bold">
       {CONTENT.title}
     </h2>
     <a 
       href={CONTENT.viewAllHref}
-      className="text-blue-600 hover:text-blue-800 font-medium text-base sm:text-lg transition-colors duration-200"
+      className="text-links font-medium text-base sm:text-lg transition-colors duration-200"
     >
       {CONTENT.viewAllText}
     </a>

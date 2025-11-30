@@ -30,7 +30,7 @@ export default function CartList({
 
   return (
     <div className="w-full lg:w-2/3">
-      <div className="CartProducts-bg rounded-lg shadow-md p-6">
+      <div className="card-bg text-neutral rounded-lg shadow-md p-6">
         {/* Encabezados */}
         <CartTableHeader />
         {[...cart.items]
@@ -53,15 +53,15 @@ export default function CartList({
 
 const CartLoadingState = () => (
   <div className="w-full lg:w-2/3">
-    <div className="CartProducts-bg rounded-lg shadow-md p-6 text-center">
-      <p className="text-gray-600">Cargando carrito...</p>
+    <div className="section-bg text-neutral rounded-lg shadow-md p-6 text-center">
+      <p className="">Cargando carrito...</p>
     </div>
   </div>
 );
 
 const CartErrorState = ({ error }: { error: string }) => (
   <div className="w-full lg:w-2/3">
-    <div className="CartProducts-bg rounded-lg shadow-md p-6 text-center text-red-500">
+    <div className="section-bg text-neutral rounded-lg shadow-md p-6 text-center text-red-500">
       <p className="font-medium">Error al cargar el carrito</p>
       <p className="text-sm mt-1">{error}</p>
       <button
@@ -76,8 +76,8 @@ const CartErrorState = ({ error }: { error: string }) => (
 
 const CartEmptyState = () => (
   <div className="w-full lg:w-2/3">
-    <div className="CartProducts-bg rounded-lg shadow-md p-6 text-center">
-      <p className="text-gray-600 text-lg mb-4">
+    <div className="section-bg text-neutral rounded-lg shadow-md p-6 text-center">
+      <p className="text-lg mb-4">
         No hay productos en el carrito
       </p>
       <a
@@ -91,7 +91,7 @@ const CartEmptyState = () => (
 );
 
 const CartTableHeader = () => (
-  <div className="hidden md:grid grid-cols-12 gap-4 mb-4 font-medium text-sm sm:text-base text-gray-500">
+  <div className="hidden md:grid grid-cols-12 gap-4 mb-4 font-medium text-sm sm:text-base">
     <div className="col-span-5">Producto</div>
     <div className="col-span-2 text-center">Precio</div>
     <div className="col-span-3 text-center">Cantidad</div>

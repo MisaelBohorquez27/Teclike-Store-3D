@@ -8,8 +8,6 @@ import { HERO_CONFIG } from "./Data/HeroData";
 import { getAnimationProps } from "./Props/HeroProps";
 import {
   FiArrowRight,
-  FiPlay,
-  FiStar,
   FiZap,
   FiTrendingUp,
   FiUsers,
@@ -23,17 +21,17 @@ export function HeroBanner() {
 
   // Función para hacer scroll suave hacia abajo
   const scrollToNextSection = () => {
-    const nextSection = document.getElementById('trending-section');
+    const nextSection = document.getElementById("trending-section");
     if (nextSection) {
-      nextSection.scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start'
+      nextSection.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
       });
     } else {
       // Fallback: scroll por cantidad de píxeles
-      window.scrollBy({ 
-        top: window.innerHeight * 0.8, 
-        behavior: 'smooth' 
+      window.scrollBy({
+        top: window.innerHeight * 0.8,
+        behavior: "smooth",
       });
     }
   };
@@ -56,7 +54,7 @@ export function HeroBanner() {
 
         {/* Gradientes animados */}
         <motion.div
-          className="absolute -top-40 -right-32 w-80 h-80 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20"
+          className="absolute -top-40 -right-32 w-80 h-80 primary-bg rounded-full mix-blend-multiply filter blur-3xl opacity-20"
           animate={{
             scale: [1, 1.2, 1],
             opacity: [0.2, 0.3, 0.2],
@@ -68,7 +66,7 @@ export function HeroBanner() {
           }}
         />
         <motion.div
-          className="absolute -bottom-40 -left-32 w-80 h-80 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20"
+          className="absolute -bottom-40 -left-32 w-80 h-80 rounded-full mix-blend-multiply filter blur-3xl opacity-20"
           animate={{
             scale: [1.2, 1, 1.2],
             opacity: [0.3, 0.2, 0.3],
@@ -306,7 +304,7 @@ export function HeroBanner() {
 
           {/* Scroll indicator moderno */}
           <motion.div
-            className="text-neutral absolute bottom-8 left-1/2 transform -translate-x-1/2"
+            className="text-primary absolute bottom-8 left-1/2 transform -translate-x-1/2"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.6 }}
@@ -314,7 +312,7 @@ export function HeroBanner() {
             role="button"
             tabIndex={0}
             onKeyPress={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
+              if (e.key === "Enter" || e.key === " ") {
                 e.preventDefault();
                 scrollToNextSection();
               }
@@ -323,8 +321,8 @@ export function HeroBanner() {
           >
             <div className="flex flex-col items-center gap-2">
               <motion.div
-                className="text-sm text-neutral-2 font-medium"
-                animate={{ y: [0, 8, 0], opacity: [0.5, 1, 0.5] }}
+                className="text-sm font-medium"
+                animate={{ y: [0, 8, 0] }}
                 transition={{
                   duration: 2,
                   repeat: Infinity,
@@ -334,10 +332,9 @@ export function HeroBanner() {
                 Descubre más
               </motion.div>
               <motion.div
-                className="w-8 h-10 border-2 border-neutral-1 rounded-full flex justify-center items-center cursor-pointer"
+                className="w-12 h-10 border-2 border-primary rounded-full flex justify-center items-center cursor-pointer"
                 animate={{
                   y: [0, 8, 0],
-                  opacity: [0.5, 1, 0.5],
                 }}
                 transition={{
                   duration: 2,

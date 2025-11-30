@@ -17,12 +17,12 @@ export function FollowUs({
   username = DEFAULT_USERNAME 
 }: FollowUsProps) {
   return (
-    <section className="FollowUs-bg py-14 px-4 flex flex-col lg:flex-row">
+    <section className="section-bg text-neutral py-14 px-4 flex flex-col lg:flex-row">
       {/* Instagram Section */}
       <div className="bg-transparent w-full lg:w-2/3 lg:px-12">
         <div className="text-center mb-8">
           <motion.h2
-            className="TitleColor text-3xl md:text-4xl font-bold mb-6"
+            className="text-3xl md:text-4xl font-bold mb-6"
             {...titleAnimation}
           >
             Síguenos en Instagram

@@ -1,6 +1,7 @@
 "use client";
 
 import Button from "@/components/PagesButtons";
+import { Rating } from "@/components/Rating";
 import { ProductWithOffer } from "@/types/offers";
 import { useState } from "react";
 
@@ -151,25 +152,7 @@ export function DealCard({
         </h3>
 
         {/* Rating (opcional) */}
-        {showRating && offer.rating && (
-          <div className="flex items-center mb-2">
-            <div className="flex text-yellow-400">
-              {[...Array(5)].map((_, i) => (
-                <span
-                  key={i}
-                  className={`${
-                    i < Math.floor(offer.rating) ? "text-yellow-400" : "text-gray-300"
-                  } text-sm`}
-                >
-                  ★
-                </span>
-              ))}
-            </div>
-            <span className="text-xs text-gray-500 ml-1">
-              ({offer.rating.toFixed(1)})
-            </span>
-          </div>
-        )}
+        <Rating value={offer.rating} />
 
         {/* Precios */}
         <div className="flex items-center space-x-2 mb-3 mt-auto">

@@ -14,7 +14,7 @@ export default function DailyDealsPage() {
     <main className="min-h-screen">
       {/* Hero Banner */}
       <section 
-        className="PageDailyOffers-bg relative overflow-hidden"
+        className="section-bg-2 text-neutral relative overflow-hidden"
         aria-labelledby="daily-offers-title"
       >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -49,7 +49,7 @@ export default function DailyDealsPage() {
       </section>
 
       <section 
-        className="FlashOffers-bg relative border-t border-gray-200"
+        className="section-bg text-neutral relative border-t border-gray-200"
         aria-labelledby="flash-deals-title"
       >
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.15)_1px,transparent_0)] bg-[length:20px_20px]" />
@@ -108,7 +108,7 @@ export default function DailyDealsPage() {
 
       {/* Banner de Suscripción */}
       <section 
-        className="BannerSubscribe-bg relative overflow-hidden"
+        className="section-bg-2 text-neutral relative overflow-hidden"
         aria-labelledby="subscription-title"
       >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -148,17 +148,17 @@ export default function DailyDealsPage() {
       </section>
 
       {/* Sección de Información Adicional para clientes */}
-      <section className="border-t border-gray-200 py-8 sm:py-12">
+      <section className="section-bg text-neutral py-8 sm:py-12">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 text-center">
             <div className="p-4 sm:p-6">
               <div className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
                 <span className="text-xl">🚚</span>
               </div>
-              <h3 className="font-semibold text-gray-900 mb-2 text-sm sm:text-base">
+              <h3 className="font-semibold mb-2 text-sm sm:text-base">
                 Envío Rápido
               </h3>
-              <p className="text-gray-600 text-xs sm:text-sm">
+              <p className="text-xs sm:text-sm">
                 Recibe tus productos en 24-48 horas
               </p>
             </div>
@@ -167,10 +167,10 @@ export default function DailyDealsPage() {
               <div className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
                 <span className="text-xl">🛡️</span>
               </div>
-              <h3 className="font-semibold text-gray-900 mb-2 text-sm sm:text-base">
+              <h3 className="font-semibold mb-2 text-sm sm:text-base">
                 Pago Seguro
               </h3>
-              <p className="text-gray-600 text-xs sm:text-sm">
+              <p className="text-xs sm:text-sm">
                 Transacciones protegidas y cifradas
               </p>
             </div>
@@ -179,10 +179,10 @@ export default function DailyDealsPage() {
               <div className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
                 <span className="text-xl">↩️</span>
               </div>
-              <h3 className="font-semibold text-gray-900 mb-2 text-sm sm:text-base">
+              <h3 className="font-semibold mb-2 text-sm sm:text-base">
                 Devoluciones
               </h3>
-              <p className="text-gray-600 text-xs sm:text-sm">
+              <p className="text-xs sm:text-sm">
                 30 días para cambiar de opinión
               </p>
             </div>
