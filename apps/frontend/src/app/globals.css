@@ -1,12 +1,13 @@
 /* src/app/globals.css */
 @import "tailwindcss";
 
-html, body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%; 
-    overflow-x: hidden;
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
 }
 
 :root {
@@ -17,7 +18,7 @@ html, body {
   --color-purple: #3a237a;
   --color-electric-purple: #7b4aff;
   --color-light-purple: #9d7bff;
-  
+
   /* Neutros - Light */
   --color-black: #000000;
   --color-gray-2: #333333;
@@ -26,13 +27,13 @@ html, body {
   --color-white: #ffffff;
 
   /* Colores semánticos - Light */
-  --color-primary: var(--color-navy-blue) ;
+  --color-primary: var(--color-navy-blue);
   --color-primary-hover: var(--color-electric-blue);
   --color-primary-accent: var(--color-light-blue);
   --color-secondary: var(--color-purple);
   --color-secondary-hover: var(--color-electric-purple);
   --color-secondary-accent: var(--color-light-purple);
-  
+
   /* Neutral colors - Light */
   --color-neutral-1: var(--color-black);
   --color-neutral-2: var(--color-gray-2);
@@ -41,13 +42,37 @@ html, body {
   --color-neutral-5: var(--color-white);
 
   /* Gradientes - Light */
-  --background-gradient-global: linear-gradient(180deg, var(--color-neutral-4) 0%, var(--color-neutral-5) 100%);
-  --background-gradient-card: linear-gradient(0deg, var(--color-neutral-3) 0%, var(--color-neutral-4) 100%);
-  --background-gradient-navbar: linear-gradient(180deg, var(--color-neutral-5) 0%, var(--color-neutral-4) 100%);
-  --background-gradient-hero: linear-gradient(0deg, var(--color-neutral-5) 0%, var(--color-neutral-4) 100%);
+  --background-gradient-global: linear-gradient(
+    180deg,
+    var(--color-neutral-4) 0%,
+    var(--color-neutral-5) 100%
+  );
+  --background-gradient-card: linear-gradient(
+    0deg,
+    var(--color-neutral-3) 0%,
+    var(--color-neutral-4) 100%
+  );
+  --background-gradient-navbar: linear-gradient(
+    180deg,
+    var(--color-neutral-5) 0%,
+    var(--color-neutral-4) 100%
+  );
+  --background-gradient-hero: linear-gradient(
+    0deg,
+    var(--color-neutral-5) 0%,
+    var(--color-neutral-4) 100%
+  );
 
-  --background-gradient-section: linear-gradient(180deg, var(--color-neutral-5) 0%, var(--color-neutral-4) 100%);
-  --background-gradient-section-2: linear-gradient(0deg, var(--color-neutral-5) 0%, var(--color-neutral-4) 100%);
+  --background-gradient-section: linear-gradient(
+    180deg,
+    var(--color-neutral-5) 0%,
+    var(--color-neutral-4) 100%
+  );
+  --background-gradient-section-2: linear-gradient(
+    0deg,
+    var(--color-neutral-5) 0%,
+    var(--color-neutral-4) 100%
+  );
 
   /* Sombras - Light */
   --text-shadow-default: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -65,7 +90,7 @@ html, body {
   --color-secondary: #5b21b6;
   --color-secondary-hover: #7c3aed;
   --color-secondary-accent: #a78bfa;
-  
+
   /* Neutral colors - Dark (invertidos) */
   --color-neutral-1: #ffffff;
   --color-neutral-2: #e5e7eb;
@@ -74,13 +99,37 @@ html, body {
   --color-neutral-5: #000000;
 
   /* Gradientes - Dark */
-  --background-gradient-global: linear-gradient(180deg, var(--color-neutral-5) 0%, var(--color-neutral-4) 100%);
-  --background-gradient-card: linear-gradient(0deg, var(--color-neutral-3) 0%, var(--color-neutral-4) 100%);
-  --background-gradient-navbar: linear-gradient(180deg, var(--color-neutral-4) 0%, var(--color-neutral-5) 100%);
-  --background-gradient-hero: linear-gradient(0deg, var(--color-neutral-4) 0%, var(--color-neutral-5) 100%);
+  --background-gradient-global: linear-gradient(
+    180deg,
+    var(--color-neutral-5) 0%,
+    var(--color-neutral-4) 100%
+  );
+  --background-gradient-card: linear-gradient(
+    0deg,
+    var(--color-neutral-3) 0%,
+    var(--color-neutral-4) 100%
+  );
+  --background-gradient-navbar: linear-gradient(
+    180deg,
+    var(--color-neutral-4) 0%,
+    var(--color-neutral-5) 100%
+  );
+  --background-gradient-hero: linear-gradient(
+    0deg,
+    var(--color-neutral-4) 0%,
+    var(--color-neutral-5) 100%
+  );
 
-  --background-gradient-section: linear-gradient(180deg, var(--color-neutral-4) 0%, var(--color-neutral-5) 100%);
-  --background-gradient-section-2: linear-gradient(0deg, var(--color-neutral-4) 0%, var(--color-neutral-5) 100%);
+  --background-gradient-section: linear-gradient(
+    180deg,
+    var(--color-neutral-4) 0%,
+    var(--color-neutral-5) 100%
+  );
+  --background-gradient-section-2: linear-gradient(
+    0deg,
+    var(--color-neutral-4) 0%,
+    var(--color-neutral-5) 100%
+  );
 
   /* Sombras - Dark */
   --text-shadow-default: 0 2px 4px rgba(255, 255, 255, 0.1);
@@ -89,85 +138,144 @@ html, body {
 
 /* Utilidades personalizadas */
 
-  .global-bg {
-    background: var(--background-gradient-global);
-  }
+.global-bg {
+  background: var(--background-gradient-global);
+}
 
-  .card-bg {
-    background: var(--background-gradient-card);
-  }
+.card-bg {
+  background: var(--background-gradient-card);
+}
 
-  .navbar-bg {
-    background: var(--background-gradient-navbar);
-  }
+.navbar-bg {
+  background: var(--background-gradient-navbar);
+}
 
-  .hero-bg {
-    background: var(--background-gradient-hero);
+.hero-bg {
+  background: var(--background-gradient-hero);
+  color: var(--color-neutral-1);
+}
+
+.section-bg {
+  background: var(--background-gradient-section);
+}
+
+.section-bg-2 {
+  background: var(--background-gradient-section-2);
+}
+
+.primary-bg {
+  background-color: var(--color-primary);
+}
+
+.card-bg-2 {
+  background-color: var(--color-neutral-4);
+  border-color: var(--color-neutral-3);
+}
+
+.text-shadow {
+  text-shadow: var(--text-shadow-default);
+}
+
+/* Botones */
+.btn-primary {
+  background-color: var(--color-primary);
+  color: var(--color-neutral-5);
+}
+.btn-primary:hover {
+  background-color: var(--color-primary-hover);
+}
+
+.btn-secondary {
+  background-color: var(--color-secondary);
+  color: var(--color-neutral-5);
+}
+.btn-secondary:hover {
+  background-color: var(--color-secondary-hover);
+}
+
+/*Boton de formulario*/
+.btn-form {
+  width: 100%;
+  padding: 0.75rem 1rem; /* py-3 px-4 */
+  border-radius: 0.75rem; /* rounded-xl */
+  font-weight: 600; /* font-semibold */
+  font-size: 0.875rem; /* text-sm */
+  transition: all 0.3s ease;
+  transform: translateZ(0); /* para hover transform */
+  
+  /* Gradiente principal */
+  background: linear-gradient(to right, var(--color-primary), var(--color-primary-hover));
+  color: white;
+}
+
+/* Estados */
+.btn-form:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--color-primary), 0 0 0 4px #1f2937; /* ring + offset */
+}
+
+.btn-form:hover {
+  background: linear-gradient(to right, var(--color-primary), var(--color-primary-accent));
+  transform: scale(1.02);
+  box-shadow: 0 4px 12px rgba(0, 255, 255, 0.25); /* sombra tipo cyan */
+}
+
+/* Estado disabled */
+.btn-form:disabled {
+  background: #4b5563; /* bg-gray-600 */
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+
+/*` Textos */
+.text-primary {
+  color: var(--color-primary);
+}
+.text-secondary {
+  color: var(--color-secondary);
+}
+.text-neutral {
+  color: var(--color-neutral-1);
+}
+
+/* para footer */
+.text-neutral-1 { 
+  color: var(--color-neutral-2);
+  &:hover {
     color: var(--color-neutral-1);
   }
+}
 
-  .section-bg {
-    background: var(--background-gradient-section);
-  }
+.text-neutral-2 {
+  color: var(--color-neutral-4);
+}
 
-  .section-bg-2 {
-    background: var(--background-gradient-section-2);
+.text-links {
+  color: var(--color-primary);
+  &:hover {
+    color: var(--color-primary-hover);
   }
+}
 
-  .primary-bg {
-    background-color: var(--color-primary);
-  }
+.text-gradient-primary {
+  background: linear-gradient(
+    to right,
+    var(--color-primary),
+    var(--color-secondary)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
 
-  .text-shadow {
-    text-shadow: var(--text-shadow-default);
-  }
+/* Border */
+.border-neutral-1 {
+  border-color: var(--color-neutral-1);
+}
 
-  /* Botones */
-  .btn-primary {
-    background-color: var(--color-primary);
-    color: var(--color-neutral-5);
-  }
-  .btn-primary:hover {
-    background-color: var(--color-primary-hover);
-  }
-
-  .btn-secondary {
-    background-color: var(--color-secondary);
-    color: var(--color-neutral-5);
-  }
-  .btn-secondary:hover {
-    background-color: var(--color-secondary-hover);
-  }
-
-  /*` Textos */
-  .text-primary {
-    color: var(--color-primary);
-  }
-  .text-secondary {
-    color: var(--color-secondary);
-  }
-  .text-neutral {
-    color: var(--color-neutral-1);
-  }
-
-  .text-neutral-2 {
-    color: var(--color-neutral-4);
-  }
-
-  .text-links {
-    color: var(--color-primary );
-    &:hover {
-      color: var(--color-primary-hover);
-    }
-  }
-
-  /* Border */
-   .border-neutral-1 {
-    border-color: var(--color-neutral-1);
-  }
-
-  .border-neutral-3 {
-    border-color: var(--color-neutral-3);
-  }
-
- 
+.border-neutral-3 {
+  border-color: var(--color-neutral-3);
+}

@@ -1,3 +1,4 @@
+import { Rating } from "@/components/Rating";
 import { Review } from "@/types/review";
 
 export function ReviewCard({ review }: { review: Review }) {
@@ -10,18 +11,7 @@ export function ReviewCard({ review }: { review: Review }) {
         <blockquote className="mb-4 italic text-base sm:text-lg">
           "{review.comment}"
         </blockquote>
-        <div className="mb-4 mx-auto">
-          {[...Array(5)].map((_, i) => (
-            <span
-              key={i}
-              className={`text-lg sm:text-xl ${
-                i < review.rating ? "text-green-600" : "text-gray-300"
-              }`}
-            >
-              ★
-            </span>
-          ))}
-        </div>
+        <Rating value={review.rating} className="justify-center mb-6" />
         <div>
           <img
             src={review.avatar}

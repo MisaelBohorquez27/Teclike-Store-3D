@@ -2,6 +2,7 @@
 
 import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin, FaEnvelope, FaPhone, FaMapMarkerAlt, FaArrowRight } from 'react-icons/fa';
 import { useState } from 'react';
+import { Subscription } from './Subscription';
 
 interface FooterProps {
   companyName?: string;
@@ -47,24 +48,11 @@ export function Footer({
     ]
   };
 
-  const handleNewsletterSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    
-    // Simular envío
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    console.log("Subscribed:", email);
-    setEmail('');
-    setIsSubmitting(false);
-  };
-
   return (
-    <footer className="relative bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900 text-white overflow-hidden">
+    <footer className="relative section-bg text-neutral bg-gradient-to-br overflow-hidden">
       {/* Efectos de fondo animados */}
       <div className="absolute inset-0">
-        <div className="absolute -top-40 -right-32 w-80 h-80 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
-        <div className="absolute -bottom-40 -left-32 w-80 h-80 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse delay-1000"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-60 h-60 bg-cyan-400 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-bounce"></div>
+        
       </div>
 
       {/* Patrón de grid sutil */}
@@ -79,12 +67,12 @@ export function Footer({
           <div className="xl:col-span-1">
             <div className="mb-8">
               {/* Logo/Title con efecto neón */}
-              <h3 className="text-3xl font-bold mb-4 bg-gradient-to-r from-white via-cyan-200 to-blue-300 bg-clip-text text-transparent drop-shadow-lg">
+              <h3 className="text-3xl font-bold mb-4 text-gradient-primary drop-shadow-lg">
                 {footerData.company.name}
-                <span className="text-cyan-400 text-4xl">.</span>
+                <span className="text-4xl">.</span>
               </h3>
               
-              <p className="text-gray-300 text-sm leading-relaxed mb-6 backdrop-blur-sm bg-white/5 rounded-lg p-4 border border-white/10">
+              <p className="text-sm leading-relaxed mb-6 backdrop-blur-sm  rounded-lg p-4 border card-bg-2">
                 {footerData.company.description}
               </p>
             </div>
@@ -113,8 +101,8 @@ export function Footer({
 
           {/* Quick Links con emojisss */}
           <div>
-            <h3 className="text-lg font-semibold mb-6 bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent flex items-center">
-              <span className="w-2 h-2 bg-cyan-400 rounded-full mr-2 animate-pulse"></span>
+            <h3 className="text-lg font-semibold mb-6 text-gradient-primary flex items-center">
+              <span className="w-2 h-2 primary-bg rounded-full mr-2 animate-pulse"></span>
               Explore
             </h3>
             <nav className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -127,10 +115,10 @@ export function Footer({
                   <span className="text-lg transform group-hover:scale-110 transition-transform">
                     {link.emoji}
                   </span>
-                  <span className="text-gray-300 group-hover:text-white font-medium text-sm">
+                  <span className="text-neutral-1 font-medium text-sm">
                     {link.label}
                   </span>
-                  <FaArrowRight className="ml-auto text-cyan-400 opacity-0 transform -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" size={12} />
+                  <FaArrowRight className="ml-auto text-primary opacity-0 transform -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" size={12} />
                 </a>
               ))}
             </nav>
@@ -138,8 +126,8 @@ export function Footer({
 
           {/* Contact Info con iconos animadosss */}
           <div>
-            <h3 className="text-lg font-semibold mb-6 bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent flex items-center">
-              <span className="w-2 h-2 bg-cyan-400 rounded-full mr-2 animate-pulse"></span>
+            <h3 className="text-lg font-semibold mb-6 text-gradient-primary flex items-center">
+              <span className="w-2 h-2 primary-bg rounded-full mr-2 animate-pulse"></span>
               Contact
             </h3>
             <div className="space-y-4">
@@ -158,12 +146,12 @@ export function Footer({
                   {item.href ? (
                     <a 
                       href={item.href}
-                      className="text-gray-300 group-hover:text-white text-sm leading-relaxed transition-colors flex-1"
+                      className="text-neutral-1 text-sm leading-relaxed transition-colors flex-1"
                     >
                       {item.text}
                     </a>
                   ) : (
-                    <span className="text-gray-300 group-hover:text-white text-sm leading-relaxed transition-colors flex-1">
+                    <span className="text-neutral-1 text-sm leading-relaxed transition-colors flex-1">
                       {item.text}
                     </span>
                   )}
@@ -175,53 +163,15 @@ export function Footer({
           {/* Newsletter con efecto glassmorphism */}
           <div className="lg:col-span-2 xl:col-span-1">
             <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/20 shadow-2xl">
-              <h3 className="text-lg font-semibold mb-4 bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+              <h3 className="text-lg font-semibold mb-4 text-gradient-primary">
                 🚀 Stay Updated
               </h3>
               
-              <p className="text-gray-300 text-sm mb-6">
+              <p className="text-neutral text-sm mb-6">
                 Get exclusive 3D model releases, tips, and special offers delivered to your inbox.
               </p>
               
-              <form onSubmit={handleNewsletterSubmit} className="space-y-4">
-                <div className="relative">
-                  <input 
-                    type="email" 
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="your.email@example.com"
-                    required
-                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all text-sm backdrop-blur-sm"
-                    aria-label="Email for newsletter subscription"
-                  />
-                  <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-cyan-500/10 to-blue-500/10 opacity-0 hover:opacity-100 transition-opacity pointer-events-none"></div>
-                </div>
-                
-                <button 
-                  type="submit"
-                  disabled={isSubmitting}
-                  className={`
-                    w-full py-3 px-4 rounded-xl font-semibold transition-all duration-300 transform
-                    focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 focus:ring-offset-gray-900 text-sm
-                    ${isSubmitting 
-                      ? 'bg-gray-600 cursor-not-allowed' 
-                      : 'bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 hover:scale-[1.02] hover:shadow-lg hover:shadow-cyan-500/25'
-                    }
-                  `}
-                >
-                  {isSubmitting ? (
-                    <span className="flex items-center justify-center">
-                      <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin mr-2"></div>
-                      Subscribing...
-                    </span>
-                  ) : (
-                    <span className="flex items-center justify-center">
-                      Subscribe Now 
-                      <FaArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={12} />
-                    </span>
-                  )}
-                </button>
-              </form>
+              <Subscription />
               
               <p className="text-xs text-gray-400 mt-4 text-center">
                 No spam ever. Unsubscribe anytime.
