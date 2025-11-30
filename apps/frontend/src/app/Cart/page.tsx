@@ -43,7 +43,7 @@ export default function CartPage() {
   };
 
   return (
-    <main className="Cart-bg min-h-screen pb-20 sm:pb-12 pt-24 sm:pt-28 md:pt-30">
+    <main className="section-bg-2 text-neutral min-h-screen pb-20 sm:pb-12 pt-24 sm:pt-28 md:pt-30">
       <div className="bg-transparent container mx-auto px-4 sm:px-6">
         <CartHeader itemCount={itemCount} loading={loading} />
         {renderContent()}
@@ -63,7 +63,7 @@ const CartHeader = ({
   <div className="flex justify-between items-center mb-6 sm:mb-8">
     <h1 className="text-2xl sm:text-3xl font-bold">Carrito de Compras</h1>
     {!loading && itemCount > 0 && (
-      <span className="text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
+      <span className="text-sm px-3 py-1 rounded-full">
         {itemCount} {itemCount === 1 ? "producto" : "productos"}
       </span>
     )}
@@ -73,7 +73,7 @@ const CartHeader = ({
 const CartPageLoading = () => (
   <div className="text-center py-12">
     <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-    <p className="text-gray-600">Cargando tu carrito...</p>
+    <p className="">Cargando tu carrito...</p>
   </div>
 );
 
@@ -94,10 +94,10 @@ const CartPageError = ({ error }: { error: string }) => (
         />
       </svg>
     </div>
-    <h3 className="text-lg font-medium text-gray-900 mb-2">
+    <h3 className="text-lg font-medium mb-2">
       Error al cargar el carrito
     </h3>
-    <p className="text-gray-600 mb-4">{error}</p>
+    <p className=" mb-4">{error}</p>
     <button
       onClick={() => window.location.reload()}
       className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors"

@@ -27,10 +27,10 @@ export function ServiceCards() {
   return (
     <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5 lg:gap-6">
       {services.map((service, index) => (
-        <div key={index} className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow text-center">
+        <div key={index} className="card-bg p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow text-center">
           <div className="text-3xl mb-4">{service.icon}</div>
           <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
-          <p className="text-gray-600">{service.description}</p>
+          <p className="text-neutral-1">{service.description}</p>
         </div>
       ))}
     </div>

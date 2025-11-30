@@ -5,7 +5,7 @@ import { SearchResults } from "./components/SearchResults";
 
 export default function SearchPage() {
   return (
-    <main className="PageProducts-bg min-h-[calc(100vh-4rem)] md:min-h-screen relative overflow-hidden">
+    <main className="section-bg-2 text-neutral min-h-[calc(100vh-4rem)] md:min-h-screen relative overflow-hidden">
       {/* HeroBanner de la página */}
       <ProductHero />
       <div className="container mx-auto px-4 sm:px-6 pb-15 pt-5 md:pb-20 md:pt-5 max-w-6xl">

@@ -69,7 +69,7 @@ export function ContactForm() {
         <div>
           <label
             htmlFor="firstName"
-            className="block text-sm font-medium text-gray-700 mb-1"
+            className="block text-sm font-medium mb-1"
           >
             Nombre
           </label>
@@ -87,7 +87,7 @@ export function ContactForm() {
         <div>
           <label
             htmlFor="lastName"
-            className="block text-sm font-medium text-gray-700 mb-1"
+            className="block text-sm font-medium mb-1"
           >
             Apellido
           </label>
@@ -108,7 +108,7 @@ export function ContactForm() {
         <div>
           <label
             htmlFor="email"
-            className="block text-sm font-medium text-gray-700 mb-1"
+            className="block text-sm font-medium mb-1"
           >
             Correo Electrónico
           </label>
@@ -127,7 +127,7 @@ export function ContactForm() {
         <div>
           <label
             htmlFor="phone"
-            className="block text-sm font-medium text-gray-700 mb-1"
+            className="block text-sm font-medium mb-1"
           >
             Celular (opcional)
           </label>
@@ -146,7 +146,7 @@ export function ContactForm() {
       <div>
         <label
           htmlFor="subject"
-          className="block text-sm font-medium text-gray-700 mb-1"
+          className="block text-sm font-medium mb-1"
         >
           Asunto
         </label>
@@ -169,7 +169,7 @@ export function ContactForm() {
       <div>
         <label
           htmlFor="message"
-          className="block text-sm font-medium text-gray-700 mb-1"
+          className="block text-sm font-medium mb-1"
         >
           Mensaje
         </label>
