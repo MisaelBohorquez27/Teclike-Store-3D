@@ -52,19 +52,14 @@ export function Subscription() {
                          transition-all text-sm backdrop-blur-sm"
               aria-label="Email for newsletter subscription"
             />
-            <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-cyan-500/10 to-blue-500/10 
-                            opacity-0 hover:opacity-100 transition-opacity pointer-events-none"></div>
+            <div
+              className="absolute inset-0 rounded-xl bg-gradient-to-r from-cyan-500/10 to-blue-500/10 
+                            opacity-0 hover:opacity-100 transition-opacity pointer-events-none"
+            ></div>
           </div>
 
           {/* Botón con estados */}
-          <Button
-            variant="form"
-            disabled={isLoading}
-            className={`
-              w-full rounded-xl font-semibold transition-all duration-300 transform text-sm
-            `}
-            size="s"
-          >
+          <Button variant="form" disabled={isLoading} fullWidth>
             {isLoading ? (
               <span className="flex items-center justify-center">
                 <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin mr-2"></div>

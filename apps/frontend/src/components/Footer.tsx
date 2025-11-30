@@ -49,7 +49,7 @@ export function Footer({
   };
 
   return (
-    <footer className="relative section-bg text-neutral bg-gradient-to-br overflow-hidden">
+    <footer className="relative section-bg text-neutral bg-gradient-to-br overflow-hidden border-t border-gray-200">
       {/* Efectos de fondo animados */}
       <div className="absolute inset-0">
         

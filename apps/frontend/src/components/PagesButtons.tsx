@@ -36,7 +36,7 @@ const Button: FC<ButtonProps> = ({
           "hover:bg-[#0F2C59] hover:text-[#FAF9F6]",
         ],
         variant === "submit" && "btn-submit border border-transparent",
-        variant === "form" && "btn-form border border-transparent",
+        variant === "form" && "btn-form",
         // Sizes
         size === "2xs" && "px-2.5 py-1 text-xs",
         size === "xs" && "px-3 py-1.5 text-sm sm:text-base",

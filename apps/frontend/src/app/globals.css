@@ -195,38 +195,29 @@ body {
 
 /*Boton de formulario*/
 .btn-form {
-  width: 100%;
-  padding: 0.75rem 1rem; /* py-3 px-4 */
-  border-radius: 0.75rem; /* rounded-xl */
-  font-weight: 600; /* font-semibold */
-  font-size: 0.875rem; /* text-sm */
-  transition: all 0.3s ease;
-  transform: translateZ(0); /* para hover transform */
-  
-  /* Gradiente principal */
-  background: linear-gradient(to right, var(--color-primary), var(--color-primary-hover));
-  color: white;
+  @apply w-full rounded-xl font-semibold transition-all duration-300 transform text-sm;
+  @apply focus:ring-2 focus:ring-[var(--color-primary)] focus:ring-offset-2 focus:ring-offset-gray-900;
 }
 
-/* Estados */
-.btn-form:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px var(--color-primary), 0 0 0 4px #1f2937; /* ring + offset */
+/* Estado normal */
+.btn-form:not(:disabled) {
+  background: linear-gradient(to right, var(--color-primary), var(--color-secondary));
+  color: #fff;
 }
 
-.btn-form:hover {
-  background: linear-gradient(to right, var(--color-primary), var(--color-primary-accent));
+/* Hover */
+.btn-form:not(:disabled):hover {
+  background: linear-gradient(to right, var(--color-secondary), var(--color-primary));
   transform: scale(1.02);
-  box-shadow: 0 4px 12px rgba(0, 255, 255, 0.25); /* sombra tipo cyan */
+  box-shadow: 0 4px 12px rgba(0, 255, 255, 0.25);
 }
 
-/* Estado disabled */
+/* Disabled */
 .btn-form:disabled {
-  background: #4b5563; /* bg-gray-600 */
+  background: #4b5563; /* gris */
   cursor: not-allowed;
-  box-shadow: none;
-  transform: none;
 }
+
 
 
 /*` Textos */
