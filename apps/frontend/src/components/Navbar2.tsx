@@ -74,8 +74,8 @@ export function Navbar2() {
       <nav
         className={`sticky top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
-            ? "bg-gray backdrop-blur-md shadow-lg py-2"
-            : "bg-gray-50"
+            ? "section-bg backdrop-blur-md shadow-lg py-2"
+            : "section-bg"
         }`}
       >
         <div className="container mx-auto px-1">
