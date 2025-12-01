@@ -2,15 +2,16 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { FiUser } from "react-icons/fi";
+import { FiHelpCircle, FiUser } from "react-icons/fi";
 import logo from "../../public/logos/Logo3.png";
 import Button from "./PagesButtons";
 
 export function Header() {
   return (
-    <div className="relative bg-black text-gray-300 top-0 left-0 right-0 z-50 shadow-sm py-1 flex items-center justify-center">
-      <div className="container px-0 ">
-        <div className="flex justify-between items-center py-3">
+    <div className="relative bg-black text-gray-300 top-0 left-0 right-0 z-50 shadow-sm py-1">
+      {/* Contenedor que ocupa todo el ancho */}
+      <div className="w-full">
+        <div className="flex justify-between items-center py-3 px-4 md:px-8 lg:px-12 xl:px-16">
           {/* Logo */}
           <div className="flex items-center">
             <Link
@@ -33,9 +34,15 @@ export function Header() {
             {/* Contacto */}
             <Link
               href="/HelpContact"
-              className="hover:text-gray-100 font-medium text-sm md:text-base transition-colors hidden md:block"
             >
-              Contacto
+              <Button
+                variant="primary"
+                size="xs"
+                className="bg-gray-800 hover:bg-gray-700 hover:text-gray-100 flex items-center space-x-2 hover:scale-105 transition-transform"
+              >
+                <FiHelpCircle size={16} />
+                <span>Contacto</span>
+              </Button>
             </Link>
 
             {/* Botón Login */}
@@ -43,7 +50,7 @@ export function Header() {
               <Button
                 variant="primary"
                 size="xs"
-                className="hover:bg-cyan-500 hover:text-gray-900 flex items-center space-x-2 hover:scale-105 transition-transform"
+                className="bg-gray-700 hover:bg-cyan-500 hover:text-gray-900 flex items-center space-x-2 hover:scale-105 transition-transform"
               >
                 <FiUser size={16} />
                 <span>Ingresar</span>

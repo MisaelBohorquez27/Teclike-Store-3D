@@ -82,3 +82,12 @@ body {
   --text-shadow-default: 0 2px 4px rgba(0, 0, 0, 0.1);
   --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
+
+@keyframes bounce-once {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+.animate-bounce-once {
+  animation: bounce-once 0.3s ease-in-out;
+}
