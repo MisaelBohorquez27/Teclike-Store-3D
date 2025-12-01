@@ -11,7 +11,7 @@ export default function DailyDealsPage() {
   };
 
   return (
-    <main className="min-h-screen">
+    <main>
       {/* Hero Banner */}
       <section 
         className="section-bg-2 text-neutral relative overflow-hidden"

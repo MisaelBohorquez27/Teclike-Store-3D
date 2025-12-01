@@ -40,13 +40,13 @@ export function HeroBanner() {
   if (!isMounted) {
     return (
       <>
-        <main className="hero-bg min-h-screen" />
+        <section className="hero-bg min-h-screen" />
       </>
     );
   }
 
   return (
-    <div className="relative min-h-screen overflow-hidden">
+    <section className="relative min-h-screen overflow-hidden">
       {/* Efectos de fondo modernos */}
       <div className="absolute inset-0 hero-bg">
         {/* Grid pattern sutil */}
@@ -105,7 +105,7 @@ export function HeroBanner() {
       </div>
 
       <div className="relative z-10">
-        <main className="min-h-[calc(100vh-4rem)] md:min-h-screen relative">
+        <div className="min-h-[calc(100vh-4rem)] md:min-h-screen relative">
           <div className="container mx-auto px-4 h-full">
             <div className="flex flex-col lg:flex-row items-center justify-between h-full gap-8 py-8 md:py-16 lg:py-20">
               {/* Text Content - Mejorado */}
@@ -346,8 +346,8 @@ export function HeroBanner() {
               </motion.div>
             </div>
           </motion.div>
-        </main>
+        </div>
       </div>
-    </div>
+    </section>
   );
 }
