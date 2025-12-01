@@ -79,7 +79,7 @@ export function Navbar2() {
   }) => (
     <Link
       href={href}
-      className={`flex items-center text-gray-300 hover:text-gray-100 gap-2 py-2 px-4 transition-all duration-300 rounded-lg font-medium shadow-2xs`}
+      className={`flex items-center text-gray-300 hover:text-gray-100 gap-2 py-2 px-4 transition-all duration-300 rounded-lg font-medium shadow-2xs hover:scale-105`}
       onClick={() => setIsOpen(false)}
     >
       {Icon && (
@@ -92,9 +92,11 @@ export function Navbar2() {
   return (
     <nav
       className={`sticky md:top-0 left-0 right-0 z-40 transition-all duration-500 py-1.5 flex items-center justify-center ${
-        isScrolled ? "bg-transparent backdrop-blur-md shadow-lg" : "bg-black"
+        isScrolled ? "bg-transparent backdrop-blur-md shadow-lg" : "bg-gray-950"
       }`}
-    >
+    >      
+      {/* Línea decorativa inferior */}
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent" />
       <div className="container px-4 w-full max-w-7xl">
         <div className="flex justify-between items-center py-2 relative">
           {/* Menú Mobile Button */}

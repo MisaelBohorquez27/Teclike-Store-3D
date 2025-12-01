@@ -12,16 +12,16 @@ export default function CartIcon() {
       <div >
         <FiShoppingCart
           size={24}
-          className="text-gray-500 hover:text-cyan-600 transition-colors duration-300"
+          className="text-gray-400 hover:text-cyan-600 transition-colors duration-300"
         />
         
         {itemCount > 0 && (
           <span 
             className="
-              absolute -top-2 -right-2 
+              absolute -top-0.5 -right-1
               bg-gradient-to-r from-cyan-500 to-blue-500 
               text-white text-xs font-bold 
-              min-w-[24px] h-6 px-1
+              min-w-[20px] h-5 px-1
               flex items-center justify-center 
               rounded-full shadow-lg
               animate-bounce-once
