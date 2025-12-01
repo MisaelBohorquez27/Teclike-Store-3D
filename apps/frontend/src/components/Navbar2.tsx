@@ -77,7 +77,7 @@ export function Navbar2() {
   }) => (
     <Link
       href={href}
-      className={`flex items-center text-gray-300 hover:text-gray-100 gap-2 py-2 px-4 transition-all duration-300 rounded-lg font-medium `}
+      className={`flex items-center text-gray-300 hover:text-gray-100 gap-2 py-2 px-4 transition-all duration-300 rounded-lg font-medium shadow-2xs`}
       onClick={() => setIsOpen(false)}
     >
       {Icon && (
@@ -89,13 +89,13 @@ export function Navbar2() {
 
   return (
     <nav
-      className={`sticky md:top-0 left-0 right-0 z-40 transition-all duration-500 py-1 ${
+      className={`sticky md:top-0 left-0 right-0 z-40 transition-all duration-500 py-1.5 flex items-center justify-center ${
         isScrolled
           ? "bg-transparent backdrop-blur-md shadow-lg"
           : "bg-black"
       }`}
     >
-      <div className="container mx-auto px-4">
+      <div className="container px-4">
         <div className="flex justify-center items-center py-2">
           {/* Menú Mobile Button */}
           <button
@@ -112,14 +112,13 @@ export function Navbar2() {
           </button>
 
           {/* Menú central - Desktop */}
-          <div className="hidden md:flex items-center space-x-1">
+          <div className="hidden md:flex items-center space-x-2 justify-center">
             <NavLink href="/" text="Inicio" />
             <NavLink href="/Products" text="Productos" />
             <NavLink href="/DailyOffers" text="Oferta" />
           </div>
-
           {/* Icono Carrito (solo en desktop) */}
-          <div className="hidden md:block absolute right-4">
+          <div className="hidden md:block right-4">
             <div className="hover:scale-110 transition-transform">
               <CartIcon />
             </div>

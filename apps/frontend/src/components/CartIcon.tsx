@@ -6,10 +6,10 @@ export default function CartIcon() {
     <Link href="/Cart" className="relative">
       <FiShoppingCart
         size={22}
-        className="hover:opacity-80 transition-opacity"
+        className="text-gray-300 hover:text-gray-100 transition-opacity"
       />
       {/* Indicador de items en carrito */}
-      <span className="absolute -top-2 -right-2 bg-[#75afff] text-[#0F2C59] text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
+      <span className="absolute -top-2 -right-2 bg-cyan-300 text-[#0F2C59] text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
         3
       </span>
     </Link>

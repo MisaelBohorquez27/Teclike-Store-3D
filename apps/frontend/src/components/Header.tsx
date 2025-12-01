@@ -8,8 +8,8 @@ import Button from "./PagesButtons";
 
 export function Header() {
   return (
-    <div className="relative bg-black text-gray-300 top-0 left-0 right-0 z-50 shadow-sm ">
-      <div className="container mx-auto px-4">
+    <div className="relative bg-black text-gray-300 top-0 left-0 right-0 z-50 shadow-sm py-1 flex items-center justify-center">
+      <div className="container px-0 ">
         <div className="flex justify-between items-center py-3">
           {/* Logo */}
           <div className="flex items-center">
