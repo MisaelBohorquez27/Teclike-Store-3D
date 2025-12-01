@@ -1,25 +1,58 @@
 "use client";
+
 import Link from "next/link";
-import Image from "next/image";
-import { useState, useEffect, useRef } from "react";
-import { FiMenu, FiX, FiUser, FiShoppingBag, FiHeart } from "react-icons/fi";
-import logo from "../../public/logos/Logo4.png";
+import { useState, useEffect } from "react";
+import { FiMenu, FiX, FiHeart, FiShoppingBag } from "react-icons/fi";
 import CartIcon from "./CartIcon";
-import Button from "./PagesButtons";
-import { ThemeToggle } from "./Theme";
 
 export function Navbar2() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [textColor, setTextColor] = useState("text-gray-900 dark:text-gray-300");
 
-    // Detectar scroll para cambiar estilo de navbar
+  // Detectar scroll y cambiar color según el fondo
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      const scrollY = window.scrollY;
+      setIsScrolled(scrollY > 100);
+      
+      // Determinar el color basado en el fondo actual
+      // Esta es una implementación básica - puedes mejorarla según tus secciones
+      const currentSection = getCurrentSection();
+      
+      // Lógica para cambiar color según el fondo de la sección
+      if (isDarkBackground(currentSection)) {
+        setTextColor("text-gray-300");
+      } else {
+        setTextColor("text-gray-900");
+      }
     };
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Función auxiliar para determinar si el fondo es oscuro
+  const isDarkBackground = (sectionId: string | null): boolean => {
+    // Define aquí qué secciones tienen fondo oscuro
+    const darkSections = ['hero', 'about', 'services', 'contact'];
+    return sectionId ? darkSections.includes(sectionId) : false;
+  };
+
+  // Función para obtener la sección actual (simplificada)
+  const getCurrentSection = (): string | null => {
+    const sections = document.querySelectorAll('section[id]');
+    let currentSection = null;
+    
+    sections.forEach(section => {
+      const rect = section.getBoundingClientRect();
+      if (rect.top <= 100 && rect.bottom >= 100) {
+        currentSection = section.id;
+      }
+    });
+    
+    return currentSection;
+  };
 
   // Cerrar menú al cambiar tamaño de pantalla
   useEffect(() => {
@@ -32,22 +65,7 @@ export function Navbar2() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Cerrar menú al hacer clic fuera
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      const target = event.target as HTMLElement;
-      if (isOpen && !target.closest(".navbar-content")) {
-        setIsOpen(false);
-      }
-    };
-
-    if (isOpen) {
-      document.addEventListener("click", handleClickOutside);
-    }
-    return () => document.removeEventListener("click", handleClickOutside);
-  }, [isOpen]);
-
-  // Componente auxiliar para los links - MEJORADO
+  // Componente auxiliar para los links
   const NavLink = ({
     href,
     text,
@@ -59,7 +77,7 @@ export function Navbar2() {
   }) => (
     <Link
       href={href}
-      className="flex items-center gap-2 py-3 px-4 md:py-2 md:px-4 text-neutral-1 dark:text-neutral-2 hover:text-primary dark:hover:text-primary-hover transition-all duration-300 rounded-lg hover:bg-neutral-3 dark:hover:bg-neutral-4 font-medium text-sm md:text-base group"
+      className={`flex items-center text-gray-300 hover:text-gray-100 gap-2 py-2 px-4 transition-all duration-300 rounded-lg font-medium `}
       onClick={() => setIsOpen(false)}
     >
       {Icon && (
@@ -70,154 +88,75 @@ export function Navbar2() {
   );
 
   return (
-    <>
-      <nav
-        className={`sticky top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled
-            ? "section-bg backdrop-blur-md shadow-lg py-2"
-            : "section-bg"
-        }`}
-      >
-        <div className="container mx-auto px-1">
-          <div className="flex justify-between items-center py-2.5">
-            {/* Logo - MEJORADO */}
-            <div className="flex items-center flex-1">
-              <button
-                className="md:hidden mr-3 p-2 rounded-xl hover:bg-neutral-3 dark:hover:bg-neutral-4 transition-all duration-300 hover:scale-105"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setIsOpen(!isOpen);
-                }}
-                aria-label="Menú"
-                aria-expanded={isOpen}
-              >
-                {isOpen ? (
-                  <FiX
-                    size={20}
-                    className="text-neutral-1 dark:text-neutral-2"
-                  />
-                ) : (
-                  <FiMenu
-                    size={20}
-                    className="text-neutral-1 dark:text-neutral-2"
-                  />
-                )}
-              </button>
+    <nav
+      className={`sticky md:top-0 left-0 right-0 z-40 transition-all duration-500 py-1 ${
+        isScrolled
+          ? "bg-transparent backdrop-blur-md shadow-lg"
+          : "bg-black"
+      }`}
+    >
+      <div className="container mx-auto px-4">
+        <div className="flex justify-center items-center py-2">
+          {/* Menú Mobile Button */}
+          <button
+            className="md:hidden absolute left-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-all"
+            onClick={() => setIsOpen(!isOpen)}
+            aria-label="Menú"
+            aria-expanded={isOpen}
+          >
+            {isOpen ? (
+              <FiX size={20} className={textColor} />
+            ) : (
+              <FiMenu size={20} className={textColor} />
+            )}
+          </button>
 
-              <Link
-                href="/"
-                className="flex items-center transition-all duration-300 hover:scale-105 group"
-                onClick={() => setIsOpen(false)}
-              >
-                <Image
-                  src={logo}
-                  alt="Vective3D Logo"
-                  width={140}
-                  height={44}
-                  className="h-9 w-auto md:h-11 brightness-110"
-                  priority
-                />
-                <div className="ml-2 h-6 w-px bg-neutral-3 dark:bg-neutral-4 group-hover:bg-primary transition-colors"></div>
-              </Link>
-            </div>
+          {/* Menú central - Desktop */}
+          <div className="hidden md:flex items-center space-x-1">
+            <NavLink href="/" text="Inicio" />
+            <NavLink href="/Products" text="Productos" />
+            <NavLink href="/DailyOffers" text="Oferta" />
+          </div>
 
-            {/* Menú central - Desktop MEJORADO */}
-            <div className="hidden md:flex items-center space-x-1 flex-1 justify-center">
-              <NavLink href="/" text="Inicio" />
-              <NavLink href="/Products" text="Productos" />
-              <NavLink href="/DailyOffers" text="Ofertas" />
-              <NavLink href="/HelpContact" text="Contacto" />
-            </div>
-
-            {/* Acciones de usuario - SIMPLIFICADO Y MEJORADO */}
-            <div className="flex items-center space-x-4 md:space-x-5 gap-4 flex-1 justify-end">
-              {/* Cart Icon */}
-              <div className="hover:scale-110 transition-transform">
-                <CartIcon />
-              </div>
-
-              {/* Botón Login - MEJORADO */}
-              <Link href="/login" className="hidden sm:block">
-                <Button
-                  variant="primary"
-                  size="xs"
-                  className="flex items-center space-x-2 hover:scale-105 transition-transform"
-                >
-                  <FiUser size={16} />
-                  <span>Ingresar</span>
-                </Button>
-              </Link>
-
-              {/* Icono Login Mobile */}
-              <Link
-                href="/login"
-                className="sm:hidden p-2 rounded-xl hover:bg-neutral-3 dark:hover:bg-neutral-4 transition-all duration-300 hover:scale-110"
-                aria-label="Iniciar sesión"
-                onClick={() => setIsOpen(false)}
-              >
-                <FiUser
-                  size={20}
-                  className="text-neutral-1 dark:text-neutral-2"
-                />
-              </Link>
-
-              {/* Theme Toggle */}
-              <div className="hover:scale-110 transition-transform">
-                <ThemeToggle />
-              </div>
+          {/* Icono Carrito (solo en desktop) */}
+          <div className="hidden md:block absolute right-4">
+            <div className="hover:scale-110 transition-transform">
+              <CartIcon />
             </div>
           </div>
-        </div>
 
-        {/* Menú Mobile - MEJORADO */}
-        {isOpen && (
-          <div className="md:hidden absolute top-full left-0 w-full navbar-bg backdrop-blur-2xl bg-white/98 dark:bg-neutral-4/98 border-t border-neutral-3/50 dark:border-neutral-4/50 shadow-2xl animate-in fade-in slide-in-from-top-2 duration-300">
-            <div className="container mx-auto px-4 py-6">
-              <div className="flex flex-col space-y-3">
-                <NavLink href="/" text="Inicio" icon={FiHeart} />
-                <NavLink
-                  href="/Products"
-                  text="Productos"
-                  icon={FiShoppingBag}
-                />
-                <NavLink href="/DailyOffers" text="Ofertas del Día" />
-                <NavLink href="/HelpContact" text="Ayuda y Contacto" />
-
-                {/* Wishlist Mobile */}
-                <Link
-                  href="/wishlist"
-                  className="flex items-center gap-3 py-3 px-4 text-neutral-1 dark:text-neutral-2 hover:text-red-500 transition-all duration-300 rounded-lg hover:bg-neutral-3 dark:hover:bg-neutral-4 font-medium"
-                  onClick={() => setIsOpen(false)}
-                >
-                  <FiHeart className="w-4 h-4" />
-                  <span>Mi Lista de Deseos</span>
-                </Link>
-
-                {/* Sección de cuenta para mobile */}
-                <div className="pt-4 mt-4 border-t border-neutral-3/50 dark:border-neutral-4/50">
+          {/* Menú Mobile */}
+          {isOpen && (
+            <div className="md:hidden absolute top-full left-0 w-full bg-white dark:bg-gray-900 backdrop-blur-lg border-t border-gray-200 dark:border-gray-800 shadow-xl animate-in fade-in slide-in-from-top-2 duration-300">
+              <div className="container mx-auto px-4 py-4">
+                <div className="flex flex-col space-y-2">
+                  <NavLink href="/" text="Inicio" icon={FiHeart} />
+                  <NavLink href="/Products" text="Productos" icon={FiShoppingBag} />
+                  <NavLink href="/DailyOffers" text="Oferta" />
+                  
+                  {/* Wishlist Mobile */}
                   <Link
-                    href="/login"
-                    className="block w-full py-3 px-4 btn-primary rounded-xl text-center font-semibold transition-all hover:scale-105 shadow-lg"
+                    href="/wishlist"
+                    className={`flex items-center gap-3 py-3 px-4 transition-all duration-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 font-medium ${textColor}`}
                     onClick={() => setIsOpen(false)}
                   >
-                    Iniciar Sesión
+                    <FiHeart className="w-4 h-4" />
+                    <span>Mi Lista de Deseos</span>
                   </Link>
 
-                  <p className="text-center text-xs text-neutral-2 dark:text-neutral-3 mt-3">
-                    ¿No tienes cuenta?{" "}
-                    <Link
-                      href="/register"
-                      className="text-primary hover:text-primary-hover font-medium"
-                    >
-                      Regístrate
-                    </Link>
-                  </p>
+                  {/* Carrito en mobile */}
+                  <div 
+                    className="py-3 px-4"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <CartIcon  />
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        )}
-      </nav>
-    </>
+          )}
+        </div>
+      </div>
+    </nav>
   );
 }
