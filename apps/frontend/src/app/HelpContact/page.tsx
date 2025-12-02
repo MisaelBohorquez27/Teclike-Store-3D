@@ -4,7 +4,7 @@ import { ServiceCards } from "@/app/HelpContact/components/ServiceCards";
 
 export default function HelpContactPage() {
   return (
-    <main className="section-bg-2 text-neutral min-h-screen">
+    <main className=" min-h-screen">
       {/* Hero Banner */}
       <section className="pt-24 sm:pt-28 md:pt-36 pb-4 sm:pb-6 md:pb-8 HelpContact-title">
         <div className="container mx-auto px-4 sm:px-6 text-center">

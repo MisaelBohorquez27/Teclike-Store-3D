@@ -13,6 +13,7 @@ body {
   line-height: 1.5;
 }
 
+
 :root {
   /* Light theme (default) */
   --color-navy-blue: #0f2c59;
@@ -22,14 +23,14 @@ body {
   --color-electric-purple: #7b4aff;
   --color-light-purple: #9d7bff;
 
-  /* Neutros - Light */
+  /* Neutros - dark */
   --color-black: #000000;
   --color-gray-2: #333333;
   --color-gray: #f5f5f5;
   --color-white-2: #efefec;
   --color-white: #ffffff;
 
-  /* Colores semánticos - Light */
+  /* Colores semánticos - dark */
   --color-primary: var(--color-navy-blue);
   --color-primary-hover: var(--color-electric-blue);
   --color-primary-accent: var(--color-light-blue);
@@ -37,7 +38,7 @@ body {
   --color-secondary-hover: var(--color-electric-purple);
   --color-secondary-accent: var(--color-light-purple);
 
-  /* Neutral colors - Light */
+  /* Neutral colors - dark */
   --color-neutral-1: var(--color-black);
   --color-neutral-2: var(--color-gray-2);
   --color-neutral-3: var(--color-gray);
@@ -82,194 +83,11 @@ body {
   --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
-/* Dark theme */
-@custom-variant dark (&:where(.dark, .dark *));
-
-.dark {
-  /* Colores - Dark */
-  --color-primary: #5678e9; /* Azul más claro para dark */
-  --color-primary-hover: #3b82f6;
-  --color-primary-accent: #93c5fd;
-  --color-secondary: #5b21b6;
-  --color-secondary-hover: #7c3aed;
-  --color-secondary-accent: #a78bfa;
-
-  /* Neutral colors - Dark (invertidos) */
-  --color-neutral-1: #ffffff;
-  --color-neutral-2: #e5e7eb;
-  --color-neutral-3: #1f2937;
-  --color-neutral-4: #111827;
-  --color-neutral-5: #000000;
-
-  /* Gradientes - Dark */
-  --background-gradient-global: linear-gradient(
-    180deg,
-    var(--color-neutral-5) 0%,
-    var(--color-neutral-4) 100%
-  );
-  --background-gradient-card: linear-gradient(
-    0deg,
-    var(--color-neutral-3) 0%,
-    var(--color-neutral-4) 100%
-  );
-  --background-gradient-navbar: linear-gradient(
-    180deg,
-    var(--color-neutral-4) 0%,
-    var(--color-neutral-5) 100%
-  );
-  --background-gradient-hero: linear-gradient(
-    0deg,
-    var(--color-neutral-4) 0%,
-    var(--color-neutral-5) 100%
-  );
-
-  --background-gradient-section: linear-gradient(
-    180deg,
-    var(--color-neutral-4) 0%,
-    var(--color-neutral-5) 100%
-  );
-  --background-gradient-section-2: linear-gradient(
-    0deg,
-    var(--color-neutral-4) 0%,
-    var(--color-neutral-5) 100%
-  );
-
-  /* Sombras - Dark */
-  --text-shadow-default: 0 2px 4px rgba(255, 255, 255, 0.1);
-  --shadow-card: 0 4px 6px -1px rgba(255, 255, 255, 0.1);
+@keyframes bounce-once {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
 }
 
-/* Utilidades personalizadas */
-
-.global-bg {
-  background: var(--background-gradient-global);
-}
-
-.card-bg {
-  background: var(--background-gradient-card);
-}
-
-.navbar-bg {
-  background: var(--background-gradient-navbar);
-}
-
-.hero-bg {
-  background: var(--background-gradient-hero);
-  color: var(--color-neutral-1);
-}
-
-.section-bg {
-  background: var(--background-gradient-section);
-}
-
-.section-bg-2 {
-  background: var(--background-gradient-section-2);
-}
-
-.primary-bg {
-  background-color: var(--color-primary);
-}
-
-.card-bg-2 {
-  background-color: var(--color-neutral-4);
-  border-color: var(--color-neutral-3);
-}
-
-.text-shadow {
-  text-shadow: var(--text-shadow-default);
-}
-
-/* Botones */
-.btn-primary {
-  background-color: var(--color-primary);
-  color: var(--color-neutral-5);
-}
-.btn-primary:hover {
-  background-color: var(--color-primary-hover);
-}
-
-.btn-secondary {
-  background-color: var(--color-secondary);
-  color: var(--color-neutral-5);
-}
-.btn-secondary:hover {
-  background-color: var(--color-secondary-hover);
-}
-
-/*Boton de formulario*/
-.btn-form {
-  @apply w-full rounded-xl font-semibold transition-all duration-300 transform text-sm;
-  @apply focus:ring-2 focus:ring-[var(--color-primary)] focus:ring-offset-2 focus:ring-offset-gray-900;
-}
-
-/* Estado normal */
-.btn-form:not(:disabled) {
-  background: linear-gradient(to right, var(--color-primary), var(--color-secondary));
-  color: #fff;
-}
-
-/* Hover */
-.btn-form:not(:disabled):hover {
-  background: linear-gradient(to right, var(--color-secondary), var(--color-primary));
-  transform: scale(1.02);
-  box-shadow: 0 4px 12px rgba(0, 255, 255, 0.25);
-}
-
-/* Disabled */
-.btn-form:disabled {
-  background: #4b5563; /* gris */
-  cursor: not-allowed;
-}
-
-
-
-/*` Textos */
-.text-primary {
-  color: var(--color-primary);
-}
-.text-secondary {
-  color: var(--color-secondary);
-}
-.text-neutral {
-  color: var(--color-neutral-1);
-}
-
-/* para footer */
-.text-neutral-1 { 
-  color: var(--color-neutral-2);
-  &:hover {
-    color: var(--color-neutral-1);
-  }
-}
-
-.text-neutral-2 {
-  color: var(--color-neutral-4);
-}
-
-.text-links {
-  color: var(--color-primary);
-  &:hover {
-    color: var(--color-primary-hover);
-  }
-}
-
-.text-gradient-primary {
-  background: linear-gradient(
-    to right,
-    var(--color-primary),
-    var(--color-secondary)
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  color: transparent;
-}
-
-/* Border */
-.border-neutral-1 {
-  border-color: var(--color-neutral-1);
-}
-
-.border-neutral-3 {
-  border-color: var(--color-neutral-3);
+.animate-bounce-once {
+  animation: bounce-once 0.3s ease-in-out;
 }
