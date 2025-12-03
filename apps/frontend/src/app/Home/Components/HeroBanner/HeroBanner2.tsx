@@ -275,7 +275,7 @@ export function HeroBanner2() {
 
               {/* Trust badges modernos */}
               <motion.div
-                className="flex items-center gap-6 pt-8 border-t border-white/10"
+                className="flex items-center gap-6 pt-8 pb-4 border-t border-white/10"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1 }}
@@ -294,8 +294,8 @@ export function HeroBanner2() {
                     ))}
                   </div>
                   <div className="text-sm">
-                    <div className="font-semibold text-white">+2,500 equipos</div>
-                    <div className="text-gray-400">Confían en nuestra tecnología</div>
+                    <div className="font-semibold text-white">+1k clientes</div>
+                    <div className="text-gray-400">Confían en nosotros</div>
                   </div>
                 </div>
               </motion.div>
@@ -380,7 +380,7 @@ export function HeroBanner2() {
             ease: "easeInOut",
           }}
         >
-          <div className="text-sm font-medium tracking-wider">EXPLORAR TECNOLOGÍA</div>
+          <div className="text-sm font-medium tracking-wider uppercase">EXPLORAR PRODUCTOS</div>
           <motion.div
             className="w-12 h-12 border-2 border-blue-400/50 rounded-full flex justify-center items-center backdrop-blur-sm bg-blue-400/10"
             whileHover={{
