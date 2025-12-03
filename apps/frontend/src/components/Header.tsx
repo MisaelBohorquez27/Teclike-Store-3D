@@ -9,7 +9,7 @@ import { Navbar2 } from "./Navbar2";
 
 export function Header() {
   return (
-    <header className="relative w-full top-0 left-0 right-0 z-50 shadow-lg pt-3.5 pb-2 text-gray-300">
+    <header className="relative w-full top-0 left-0 right-0 z-50 shadow-lg pt-3.5 pb-3 text-gray-300">
       {/* Fondo con degradado elegante */}
       <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950 to-gray-950" />
 
