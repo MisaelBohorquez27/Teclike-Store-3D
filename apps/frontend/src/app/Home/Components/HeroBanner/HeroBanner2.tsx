@@ -208,7 +208,7 @@ export function HeroBanner2() {
                 </h1>
                 
                 <motion.p
-                  className="text-xl md:text-2xl text-gray-300 leading-relaxed max-w-2xl"
+                  className="text-lg md:text-xl text-gray-300 leading-relaxed max-w-2xl"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.5 }}
