@@ -79,7 +79,7 @@ export function Navbar2() {
   }) => (
     <Link
       href={href}
-      className={`flex items-center text-gray-300 hover:text-gray-100 gap-2 py-2 px-4 transition-all duration-300 rounded-lg font-medium shadow-2xs hover:scale-105`}
+      className={`flex items-center text-gray-200 hover:text-white gap-2 py-2 px-4 transition-all duration-300 font-medium hover:scale-105`}
       onClick={() => setIsOpen(false)}
     >
       {Icon && (
@@ -91,14 +91,14 @@ export function Navbar2() {
 
   return (
     <nav
-      className={`sticky md:top-0 left-0 right-0 z-40 transition-all duration-500 py-1.5 flex items-center justify-center ${
-        isScrolled ? "bg-transparent backdrop-blur-md shadow-lg" : "bg-gray-950"
-      }`}
+      className={`fixed w-full md:top-0 left-0 right-0 z-40 transition-all duration-500 flex items-center justify-center bg-transparent`}
     >      
       {/* Línea decorativa inferior */}
       <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent" />
-      <div className="container px-4 w-full max-w-7xl">
-        <div className="flex justify-between items-center py-2 relative">
+      
+      <div className="container px-4 w-full max-w-7xl ">
+        
+        <div className="flex justify-between items-center py-2">
           {/* Menú Mobile Button */}
           <button
             className="md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-all"
@@ -112,17 +112,15 @@ export function Navbar2() {
               <FiMenu size={20} className={textColor} />
             )}
           </button>
-
           {/* Contenedor del menú centrado */}
-          {/* Contenedor del menú centrado */}
-          <div className="hidden md:flex items-center justify-center relative left-1/2 transform -translate-x-1/2">
+          <div className="hidden md:flex items-center justify-center relative left-1/2 transform -translate-x-1/2 backdrop-blur-md bg-gray-950/50 rounded-xl px-4 py-1.5 shadow-lg w-full max-w-md">
             <div className="flex items-center space-x-4">
               <NavLink href="/" text="Inicio" />
               <NavLink href="/Products" text="Productos" />
               <NavLink href="/DailyOffers" text="Oferta" />
 
               {/* CartIcon junto a los links, con espacio extra */}
-              <div className="ml-6 hover:scale-110 transition-transform">
+              <div className="ml-6 mr-2 hover:scale-110 transition-transform">
                 <CartIcon />
               </div>
             </div>
