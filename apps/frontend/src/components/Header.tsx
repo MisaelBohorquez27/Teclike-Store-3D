@@ -5,6 +5,7 @@ import Image from "next/image";
 import { FiHelpCircle, FiUser } from "react-icons/fi";
 import logo from "../../public/logos/Logo3.png";
 import Button from "./PagesButtons";
+import { Navbar2 } from "./Navbar2";
 
 export function Header() {
   return (
@@ -37,6 +38,7 @@ export function Header() {
                 TECLIKE
               </Link>
             </div>
+            <Navbar2 />
 
             {/* Acciones del header */}
             <div className="flex items-center space-x-4 md:space-x-6">

@@ -197,17 +197,13 @@ export function HeroBanner2() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
               >
-                <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-tight">
-                  <span className="uppercase bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
-                    Los
+                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-tight">
+                  <span className="text-white">
+                    Encuentra los
                   </span>
                   <br />
-                  <span className="text-white uppercase">
-                    Mejores
-                  </span>
-                  <br />
-                  <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent uppercase">
-                    Productos
+                  <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+                    Mejores Productos
                   </span>
                 </h1>
                 

@@ -91,8 +91,8 @@ export function Navbar2() {
 
   return (
     <nav
-      className={`sticky md:top-0 left-0 right-0 z-40 transition-all duration-500 py-1.5 flex items-center justify-center ${
-        isScrolled ? "bg-transparent backdrop-blur-md shadow-lg" : "bg-gray-950"
+      className={`fixed md:top-0 left-0 right-0 z-40 transition-all duration-500 py-1.5 flex items-center justify-center ${
+        isScrolled ? "bg-transparent backdrop-blur-md shadow-lg" : "bg-transparent"
       }`}
     >      
       {/* Línea decorativa inferior */}
@@ -112,8 +112,6 @@ export function Navbar2() {
               <FiMenu size={20} className={textColor} />
             )}
           </button>
-
-          {/* Contenedor del menú centrado */}
           {/* Contenedor del menú centrado */}
           <div className="hidden md:flex items-center justify-center relative left-1/2 transform -translate-x-1/2">
             <div className="flex items-center space-x-4">
