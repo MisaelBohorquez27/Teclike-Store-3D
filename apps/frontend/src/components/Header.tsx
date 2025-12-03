@@ -9,7 +9,7 @@ import { Navbar2 } from "./Navbar2";
 
 export function Header() {
   return (
-    <header className="relative w-full top-0 left-0 right-0 z-50 shadow-lg pt-3.5 text-gray-300">
+    <header className="relative w-full top-0 left-0 right-0 z-50 shadow-lg pt-3.5 pb-2 text-gray-300">
       {/* Fondo con degradado elegante */}
       <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950 to-gray-950" />
 
@@ -17,11 +17,10 @@ export function Header() {
       <div className="absolute inset-0 bg-gradient-to-b from-cyan-500/5 via-transparent to-transparent" />
 
       {/* Contenido */}
-      <div className="relative z-10">
         <div className="w-full">
           <div className="flex justify-between items-center py-2 px-4 md:px-8 lg:px-12 xl:px-16">
             {/* Logo con efecto */}
-            <div className="flex items-center">
+            <div className="flex items-center z-50">
               <Link
                 href="/"
                 className="flex items-center transition-all duration-300 hover:scale-105 group relative font-bold gap-2"
@@ -38,9 +37,10 @@ export function Header() {
                 TECLIKE
               </Link>
             </div>
+            <Navbar2 />
 
             {/* Acciones del header */}
-            <div className="flex items-center space-x-4 md:space-x-6">
+            <div className="flex items-center space-x-4 md:space-x-6 z-50">
               {/* Botón Contacto */}
               <Link href="/HelpContact">
                 <Button
@@ -67,7 +67,6 @@ export function Header() {
             </div>
           </div>
         </div>
-      </div>
     </header>
   );
 }
