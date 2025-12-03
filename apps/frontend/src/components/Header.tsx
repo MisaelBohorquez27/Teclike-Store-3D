@@ -9,7 +9,7 @@ import { Navbar2 } from "./Navbar2";
 
 export function Header() {
   return (
-    <div className="relative top-0 left-0 right-0 z-50 shadow-lg pt-3.5 text-gray-300">
+    <header className="relative w-full top-0 left-0 right-0 z-50 shadow-lg pt-3.5 text-gray-300">
       {/* Fondo con degradado elegante */}
       <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950 to-gray-950" />
 
@@ -38,7 +38,6 @@ export function Header() {
                 TECLIKE
               </Link>
             </div>
-            <Navbar2 />
 
             {/* Acciones del header */}
             <div className="flex items-center space-x-4 md:space-x-6">
@@ -69,6 +68,6 @@ export function Header() {
           </div>
         </div>
       </div>
-    </div>
+    </header>
   );
 }

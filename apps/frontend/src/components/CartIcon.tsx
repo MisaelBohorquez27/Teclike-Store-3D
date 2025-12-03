@@ -12,7 +12,7 @@ export default function CartIcon() {
       <div >
         <FiShoppingCart
           size={24}
-          className="text-gray-400 hover:text-cyan-600 transition-colors duration-300"
+          className="text-gray-200 hover:text-cyan-500 transition-colors duration-300"
         />
         
         {itemCount > 0 && (
