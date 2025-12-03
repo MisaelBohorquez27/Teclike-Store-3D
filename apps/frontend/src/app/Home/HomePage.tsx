@@ -6,12 +6,14 @@ import { BenefitsGrid, BenefitsGridWithHeading } from "@/app/Home/Components/Ben
 import { FollowUs } from "@/app/Home/Components/FollowUs/FollowUs";
 import { BestSellersWeekPage } from "@/app/Home/Components/BestSellerWeek/BSWPage";
 import { HeroBanner2 } from "./Components/HeroBanner/HeroBanner2";
+import { InteractiveVideo } from "./Components/Interactive/InteractiveVideo";
 
 export function HomePage() {
 
   return (
     <>
       <HeroBanner2 />
+      <InteractiveVideo />
       <BenefitsGridWithHeading />
       <TrendingProducts />
       <DailyOffers />
