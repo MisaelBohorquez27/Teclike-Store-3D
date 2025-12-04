@@ -213,11 +213,11 @@ export function HeroBanner2() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.5 }}
                 >
-                  Desarrollamos soluciones digitales que revolucionan industrias. 
-                  <span className="text-blue-300 font-semibold"> Inteligencia artificial, </span>
-                  <span className="text-purple-300 font-semibold"> blockchain </span>
+                  Somos una importadora que te ofrece los mejores productos del mercado. 
+                  <span className="text-blue-300 font-semibold"> Con un precio accesible, </span>
+                  <span className="text-purple-300 font-semibold"> de buena calidad </span>
                   y
-                  <span className="text-cyan-300 font-semibold"> realidad extendida</span>.
+                  <span className="text-cyan-300 font-semibold"> confiable</span>.
                 </motion.p>
               </motion.div>
 
@@ -240,7 +240,7 @@ export function HeroBanner2() {
                     whileHover={{ scale: 1.05, y: -5 }}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.7 + index * 0.1 }}
+                    transition={{ delay: 0 + index * 0 }}
                   >
                     <stat.icon className="w-6 h-6 text-blue-400 mx-auto mb-2" />
                     <div className="text-2xl font-bold text-white">{stat.value}</div>
@@ -259,7 +259,7 @@ export function HeroBanner2() {
                 <Button
                   variant="primary"
                   size="xl"
-                  className="group relative overflow-hidden bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 border-0 text-white font-bold py-4 px-8 rounded-2xl hover:scale-105 transition-all duration-300 shadow-2xl hover:shadow-blue-500/25"
+                  className="group relative overflow-hidden bg-gradient-to-r from-blue-950 to-blue-900 hover:from-blue-900 hover:to-blue-800 border-0 text-white font-bold py-4 px-8 rounded-2xl hover:scale-105 transition-all duration-300 shadow-2xl hover:shadow-blue-500/25"
                 >
                   <span className="flex items-center gap-3 relative z-10">
                     {HERO_CONFIG.buttonText}
