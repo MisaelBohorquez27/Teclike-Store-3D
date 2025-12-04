@@ -36,14 +36,14 @@ export function BenefitsGridWithHeading() {
 // Subcomponents
 const BenefitCard = ({ benefit, index }: { benefit: Benefit; index: number }) => (
   <motion.div
-    className="p-6 text-center group hover:transform hover:scale-105 transition-transform duration-300 bg-white/5 backdrop-blur-sm border border-white/10 hover:border-blue-500/30 rounded-2xl"
+    className="p-6 text-center group hover:transform hover:scale-105 transition-transform duration-300 bg-white/3 backdrop-blur-sm border border-white/10 hover:border-blue-500/30 rounded-2xl"
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ delay: 0.1 * index }}
     whileHover={{ scale: 1.05 }}
   >
     <benefit.Icon
-      className="w-6 h-6 md:w-8 md:h-8 mb-4 mx-auto text-blue-400 "
+      className="w-5 h-5 md:w-7 md:h-7 mb-4 mx-auto text-blue-400 "
       aria-hidden={true}
     />
     <h3 className="text-md md:text-lg font-semibold text-white mb-2">
@@ -58,10 +58,10 @@ const BenefitCard = ({ benefit, index }: { benefit: Benefit; index: number }) =>
 const BenefitsGridContainer = ({ children }: { children: React.ReactNode }) => (
   <section
     id="benefits-section"
-    className="bg-gray-950 text-gray-200 py-12 md:py-16 px-4"
+    className="bg-transparent text-gray-200 py-12 md:py-16 px-4"
     aria-labelledby="benefits-heading"
   >
-    <div className="max-w-6xl mx-auto">{children}</div>
+    <div className="max-w-5xl mx-auto">{children}</div>
   </section>
 );
 

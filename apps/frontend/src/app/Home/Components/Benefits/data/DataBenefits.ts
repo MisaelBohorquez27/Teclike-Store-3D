@@ -21,7 +21,7 @@ export const BENEFITS: Benefit[] = [
     Icon: FaHandHoldingUsd,
   },
   {
-    title: "Descuentos por Fidelidad",
+    title: "Descuentos",
     value: "Hasta 20%",
     description: "Beneficios exclusivos para clientes recurrentes",
     Icon: FaStar,

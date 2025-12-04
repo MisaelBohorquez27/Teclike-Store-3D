@@ -16,6 +16,7 @@ import {
   FiCode,
   FiServer,
 } from "react-icons/fi";
+import { BenefitsGrid } from "../Benefits/BenefitsGrid";
 
 export function HeroBanner2() {
   const isMounted = useIsMounted();
@@ -168,8 +169,8 @@ export function HeroBanner2() {
         /> abajo de esto iria el div para la imagen*/}
 
       {/* Contenido principal */}
-      <div className="relative z-10 min-h-screen flex items-start top-40">
-        <div className="container mx-auto px-4">
+      <div className="relative z-10 min-h-screen flex items-start top-30 ">
+        <div className="container mx-auto px-4 w-full max-w-7xl">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Text Content - Mejorado */}
             <motion.div
@@ -319,12 +320,13 @@ export function HeroBanner2() {
               </motion.div>
             </motion.div>
           </div>
+          <BenefitsGrid />
         </div>
       </div>
 
       {/* Scroll indicator futurista */}
       <motion.div
-        className="absolute bottom-18 left-1/2 transform -translate-x-1/2 z-20"
+        className="absolute bottom-20 left-1/2 transform -translate-x-1/2 z-20"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1.8 }}
