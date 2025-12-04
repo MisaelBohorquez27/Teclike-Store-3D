@@ -16,6 +16,7 @@ import {
   FiCode,
   FiServer,
 } from "react-icons/fi";
+import { BenefitsGrid } from "../Benefits/BenefitsGrid";
 
 export function HeroBanner2() {
   const isMounted = useIsMounted();
@@ -40,16 +41,16 @@ export function HeroBanner2() {
   if (!isMounted) {
     return (
       <>
-        <section className="hero-bg min-h-screen" />
+        <section className="bg-gray-950 min-h-screen" />
       </>
     );
   }
 
   return (
-    <section className="relative min-h-screen overflow-hidden bg-black">
-      {/* Fondo de imagen a pantalla completa con overlay tecnológico */}
+    <section className="relative min-h-screen overflow-hidden bg-gray-950">
+
+      {/* Fondo de imagen a pantalla completa con overlay tecnológico 
       <div className="absolute inset-0">
-        {/* Imagen principal de fondo */}
         <Image
           src="/ui/HeroBanner.png"
           alt="Fondo tecnológico futurista"
@@ -58,8 +59,9 @@ export function HeroBanner2() {
           quality={100}
           className="object-cover object-center"
           sizes="100vw"
-        />
-        
+        /> 
+        <div/>
+        */}
         {/* Overlay oscuro con efecto de partículas */}
         <div className="absolute inset-0 bg-black/60 backdrop-blur-[1px]" />
         
@@ -88,7 +90,7 @@ export function HeroBanner2() {
           ))}
         </div>
 
-        {/* Líneas de conexión futuristas */}
+        {/* Líneas de conexión futuristas 
         <div className="absolute inset-0">
           {[...Array(8)].map((_, i) => (
             <motion.div
@@ -111,9 +113,9 @@ export function HeroBanner2() {
               }}
             />
           ))}
-        </div>
+        </div>*/}
 
-        {/* Grid tecnológico animado */}
+        {/* Grid tecnológico animado 
         <motion.div
           className="absolute inset-0 bg-[linear-gradient(rgba(59,130,246,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.05)_1px,transparent_1px)] bg-[size:64px_64px]"
           animate={{
@@ -126,7 +128,7 @@ export function HeroBanner2() {
           }}
         />
 
-        {/* Orbital rings */}
+        {/* Orbital rings 
         <motion.div
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 border border-blue-500/20 rounded-full"
           animate={{
@@ -164,12 +166,11 @@ export function HeroBanner2() {
               ease: "easeInOut",
             },
           }}
-        />
-      </div>
+        /> abajo de esto iria el div para la imagen*/}
 
       {/* Contenido principal */}
-      <div className="relative z-10 min-h-screen flex items-center">
-        <div className="container mx-auto px-4">
+      <div className="relative z-10 min-h-screen flex items-start top-30 ">
+        <div className="container mx-auto px-4 w-full max-w-7xl">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Text Content - Mejorado */}
             <motion.div
@@ -213,40 +214,12 @@ export function HeroBanner2() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.5 }}
                 >
-                  Desarrollamos soluciones digitales que revolucionan industrias. 
-                  <span className="text-blue-300 font-semibold"> Inteligencia artificial, </span>
-                  <span className="text-purple-300 font-semibold"> blockchain </span>
+                  Somos una importadora que te ofrece los mejores productos del mercado. 
+                  <span className="text-blue-300 font-semibold"> Con un precio accesible, </span>
+                  <span className="text-purple-300 font-semibold"> de buena calidad </span>
                   y
-                  <span className="text-cyan-300 font-semibold"> realidad extendida</span>.
+                  <span className="text-cyan-300 font-semibold"> confiable</span>.
                 </motion.p>
-              </motion.div>
-
-              {/* Stats en tiempo real */}
-              <motion.div
-                className="grid grid-cols-2 md:grid-cols-4 gap-4"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6 }}
-              >
-                {[
-                  { icon: FiGlobe, value: "2.5K+", label: "Proyectos Globales" },
-                  { icon: FiCode, value: "99.9%", label: "Uptime" },
-                  { icon: FiUsers, value: "500+", label: "Clientes" },
-                  { icon: FiTrendingUp, value: "200%", label: "Crecimiento" },
-                ].map((stat, index) => (
-                  <motion.div
-                    key={stat.label}
-                    className="text-center p-4 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-blue-500/30 transition-all duration-300"
-                    whileHover={{ scale: 1.05, y: -5 }}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.7 + index * 0.1 }}
-                  >
-                    <stat.icon className="w-6 h-6 text-blue-400 mx-auto mb-2" />
-                    <div className="text-2xl font-bold text-white">{stat.value}</div>
-                    <div className="text-sm text-gray-400">{stat.label}</div>
-                  </motion.div>
-                ))}
               </motion.div>
 
               {/* CTA Buttons mejorados */}
@@ -259,7 +232,7 @@ export function HeroBanner2() {
                 <Button
                   variant="primary"
                   size="xl"
-                  className="group relative overflow-hidden bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 border-0 text-white font-bold py-4 px-8 rounded-2xl hover:scale-105 transition-all duration-300 shadow-2xl hover:shadow-blue-500/25"
+                  className="group relative overflow-hidden bg-gradient-to-r from-blue-950 to-blue-900 hover:from-blue-900 hover:to-blue-800 border-0 text-white font-bold py-4 px-8 rounded-2xl hover:scale-105 transition-all duration-300 shadow-2xl hover:shadow-blue-500/25"
                 >
                   <span className="flex items-center gap-3 relative z-10">
                     {HERO_CONFIG.buttonText}
@@ -269,7 +242,7 @@ export function HeroBanner2() {
                 </Button>
               </motion.div>
 
-              {/* Trust badges modernos */}
+              {/* Trust badges modernos
               <motion.div
                 className="flex items-center gap-6 pt-8 pb-4 border-t border-white/10"
                 initial={{ opacity: 0 }}
@@ -294,7 +267,7 @@ export function HeroBanner2() {
                     <div className="text-gray-400">Confían en nosotros</div>
                   </div>
                 </div>
-              </motion.div>
+              </motion.div> */}
             </motion.div>
 
             {/* Panel de visualización tecnológica */}
@@ -347,12 +320,13 @@ export function HeroBanner2() {
               </motion.div>
             </motion.div>
           </div>
+          <BenefitsGrid />
         </div>
       </div>
 
       {/* Scroll indicator futurista */}
       <motion.div
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20"
+        className="absolute bottom-20 left-1/2 transform -translate-x-1/2 z-20"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1.8 }}

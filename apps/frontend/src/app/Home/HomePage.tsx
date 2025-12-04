@@ -14,7 +14,6 @@ export function HomePage() {
     <>
       <HeroBanner2 />
       <InteractiveVideo />
-      <BenefitsGridWithHeading />
       <TrendingProducts />
       <DailyOffers />
       <BestSellersWeekPage />

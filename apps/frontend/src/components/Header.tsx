@@ -18,7 +18,7 @@ export function Header() {
 
       {/* Contenido */}
         <div className="w-full">
-          <div className="flex justify-between items-center py-2 px-4 md:px-8 lg:px-12 xl:px-16">
+          <div className="flex justify-between items-center py-1 px-4 md:px-8 lg:px-12 xl:px-16">
             {/* Logo con efecto */}
             <div className="flex items-center z-50">
               <Link

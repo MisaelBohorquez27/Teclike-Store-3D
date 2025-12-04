@@ -15,13 +15,13 @@ export const BENEFITS: Benefit[] = [
     Icon: FaShieldAlt,
   },
   {
-    title: "Pago Contra Entrega",
+    title: "Pago Seguro",
     value: "100% seguro",
-    description: "Solo pagas al recibir tu pedido",
+    description: "Puedes pagar al recibir tu pedido",
     Icon: FaHandHoldingUsd,
   },
   {
-    title: "Descuentos por Fidelidad",
+    title: "Descuentos",
     value: "Hasta 20%",
     description: "Beneficios exclusivos para clientes recurrentes",
     Icon: FaStar,

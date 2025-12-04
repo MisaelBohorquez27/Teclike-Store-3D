@@ -138,16 +138,16 @@ export function InteractiveVideo() {
         </motion.div>
       </div>
 
-      {/* Título minimalista */}
+      {/* Título minimalista 
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
         <div className="text-center px-4">
           <motion.h1
             className="text-5xl md:text-7xl lg:text-8xl font-black text-white mb-4 tracking-tight"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
+            transition={{ duration: 5 }}
           >
-            <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-blue-900 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
               INNOVACIÓN
             </span>
           </motion.h1>
@@ -155,12 +155,12 @@ export function InteractiveVideo() {
             className="text-lg md:text-xl text-gray-300 max-w-md mx-auto"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.5, duration: 1 }}
+            transition={{ delay: 0.5, duration: 5 }}
           >
             Tecnología que redefine los límites
           </motion.p>
         </div>
-      </div>
+      </div>*/}
     </section>
   );
 }
