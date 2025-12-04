@@ -40,13 +40,13 @@ export function HeroBanner2() {
   if (!isMounted) {
     return (
       <>
-        <section className="hero-bg min-h-screen" />
+        <section className="bg-gray-950 min-h-screen" />
       </>
     );
   }
 
   return (
-    <section className="relative min-h-screen overflow-hidden bg-black">
+    <section className="relative min-h-screen overflow-hidden bg-gray-950">
 
       {/* Fondo de imagen a pantalla completa con overlay tecnológico 
       <div className="absolute inset-0">
@@ -168,7 +168,7 @@ export function HeroBanner2() {
         /> abajo de esto iria el div para la imagen*/}
 
       {/* Contenido principal */}
-      <div className="relative z-10 min-h-screen flex items-center">
+      <div className="relative z-10 min-h-screen flex items-start top-40">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Text Content - Mejorado */}
@@ -241,7 +241,7 @@ export function HeroBanner2() {
                 </Button>
               </motion.div>
 
-              {/* Trust badges modernos */}
+              {/* Trust badges modernos
               <motion.div
                 className="flex items-center gap-6 pt-8 pb-4 border-t border-white/10"
                 initial={{ opacity: 0 }}
@@ -266,7 +266,7 @@ export function HeroBanner2() {
                     <div className="text-gray-400">Confían en nosotros</div>
                   </div>
                 </div>
-              </motion.div>
+              </motion.div> */}
             </motion.div>
 
             {/* Panel de visualización tecnológica */}
@@ -324,7 +324,7 @@ export function HeroBanner2() {
 
       {/* Scroll indicator futurista */}
       <motion.div
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20"
+        className="absolute bottom-18 left-1/2 transform -translate-x-1/2 z-20"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1.8 }}

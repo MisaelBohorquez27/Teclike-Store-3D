@@ -1,3 +1,6 @@
+"use client";
+
+import { motion } from "framer-motion";
 import { BENEFITS } from "./data/DataBenefits";
 import { Benefit } from "./types/TypesBenefits";
 
@@ -15,13 +18,13 @@ export function BenefitsGridWithHeading() {
   return (
     <BenefitsGridContainer>
       <div className="text-center mb-8 md:mb-12">
-        <h2 
+        <h2
           id="benefits-heading"
-          className="TitleColor text-2xl md:text-3xl font-bold mb-4"
+          className="text-white text-2xl md:text-3xl font-bold mb-4"
         >
           Beneficios Exclusivos
         </h2>
-        <p className="SubtitleColor text-lg md:text-xl max-w-2xl mx-auto">
+        <p className="text-gray-300 text-lg md:text-xl max-w-2xl mx-auto">
           Descubre todas las ventajas de comprar con nosotros
         </p>
       </div>
@@ -31,47 +34,47 @@ export function BenefitsGridWithHeading() {
 }
 
 // Subcomponents
-const BenefitCard = ({ benefit }: { benefit: Benefit }) => (
-  <div className="p-6 text-center group hover:transform hover:scale-105 transition-transform duration-300">
-    <benefit.Icon 
-      className="TitleColor w-10 h-10 md:w-12 md:h-12 mb-4 mx-auto group-hover:scale-110 transition-transform duration-300" 
+const BenefitCard = ({ benefit, index }: { benefit: Benefit; index: number }) => (
+  <motion.div
+    className="p-6 text-center group hover:transform hover:scale-105 transition-transform duration-300 bg-white/5 backdrop-blur-sm border border-white/10 hover:border-blue-500/30 rounded-2xl"
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ delay: 0.1 * index }}
+    whileHover={{ scale: 1.05 }}
+  >
+    <benefit.Icon
+      className="w-6 h-6 md:w-8 md:h-8 mb-4 mx-auto text-blue-400 "
       aria-hidden={true}
     />
-    <p className="SubtitleColor text-lg md:text-xl font-bold mb-2">
-      {benefit.value}
-    </p>
-    <h3 className="TitleColor text-lg md:text-xl font-semibold mb-2">
+    <h3 className="text-md md:text-lg font-semibold text-white mb-2">
       {benefit.title}
     </h3>
-    <p className="SubtitleColor text-sm md:text-base leading-relaxed">
+    <p className="text-gray-300 text-sm md:text-base leading-relaxed">
       {benefit.description}
     </p>
-  </div>
+  </motion.div>
 );
 
 const BenefitsGridContainer = ({ children }: { children: React.ReactNode }) => (
-  <section 
+  <section
     id="benefits-section"
     className="bg-gray-950 text-gray-200 py-12 md:py-16 px-4"
     aria-labelledby="benefits-heading"
   >
-    <div className="max-w-7xl mx-auto">
-      {children}
-    </div>
+    <div className="max-w-6xl mx-auto">{children}</div>
   </section>
 );
 
 const BenefitsList = ({ benefits }: { benefits: Benefit[] }) => (
-  <div 
+  <div
     className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8"
     role="list"
     aria-label="Lista de beneficios"
   >
     {benefits.map((benefit, index) => (
       <div key={`${benefit.title}-${index}`} role="listitem">
-        <BenefitCard benefit={benefit} />
+        <BenefitCard benefit={benefit} index={index} />
       </div>
     ))}
   </div>
 );
-
