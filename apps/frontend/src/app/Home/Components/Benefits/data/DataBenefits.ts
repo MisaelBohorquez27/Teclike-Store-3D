@@ -15,7 +15,7 @@ export const BENEFITS: Benefit[] = [
     Icon: FaShieldAlt,
   },
   {
-    title: "Pago Contra Entrega",
+    title: "Pago Seguro",
     value: "100% seguro",
     description: "Solo pagas al recibir tu pedido",
     Icon: FaHandHoldingUsd,
