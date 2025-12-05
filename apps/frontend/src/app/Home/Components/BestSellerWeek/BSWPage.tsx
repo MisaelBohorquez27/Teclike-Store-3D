@@ -7,12 +7,18 @@ export function BestSellersWeekPage() {
     const { addToCart } = useCart();
 
     const handleAddToCart = async (productId: number, quantity: number) => {
-        await addToCart(productId, quantity);
+        try {
+            await addToCart(productId, quantity);
+            // Puedes agregar feedback visual aquí
+        } catch (error) {
+            console.error("Error al agregar al carrito:", error);
+        }
     };
 
     return (
-        <section className="section-bg-2 text-neutral">
+        <div className="min-h-screen">
+            {/* Grid de mejores vendedores */}
             <BestSellersWeekGrid onAddToCart={handleAddToCart} />
-        </section>
+        </div>
     );
 }
