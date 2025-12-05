@@ -57,7 +57,7 @@ export function OfferCard({ product }: { product: ProductWithOffer }) {
           </div>
 
           {/* Nombre del producto */}
-          <h3 className="font-bold text-lg text-gray-200 mb-2 line-clamp-2 group-hover:text-cyan-400 transition-colors">
+          <h3 className="font-bold text-lg text-gray-200 mb-2 line-clamp-2 group-hover:text-cyan-400 transition-colors truncate">
             {product.name}
           </h3>
 
