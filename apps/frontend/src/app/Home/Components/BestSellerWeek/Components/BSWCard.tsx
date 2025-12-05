@@ -32,11 +32,11 @@ export function BestSellersWeekCard({ item, onAddToCart }: ProductsProps) {
     <motion.div
       whileHover={{ scale: 1.02 }}
       transition={{ type: "spring", stiffness: 300 }}
-      className="bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-md border border-gray-800/50 rounded-3xl p-6 md:p-8 flex flex-col lg:flex-row gap-6 md:gap-8 shadow-xl hover:shadow-2xl hover:shadow-yellow-500/10 transition-all duration-300"
+      className="bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-md border border-gray-800/50 rounded-3xl p-6 md:p-8 flex flex-col lg:flex-row gap-6 md:gap-8 shadow-xl hover:shadow-2xl hover:shadow-yellow-500/10 transition-all duration-50"
     >
       {/* Badge de TOP VENDEDOR */}
-      <div className="absolute -top-3 -left-3 z-20">
-        <div className="flex items-center gap-1 px-3 py-1.5 rounded-full bg-gradient-to-r from-yellow-500 to-amber-500 text-white text-sm font-bold shadow-lg">
+      <div className="absolute top-4 left-4 z-20">
+        <div className="flex items-center gap-1 px-3 py-1.5 rounded-full bg-gradient-to-r from-cyan-500 to-cyan-500 text-gray-200 text-sm font-bold shadow-lg">
           <FiTrendingUp className="w-3 h-3" />
           <span>TOP</span>
         </div>
@@ -47,7 +47,7 @@ export function BestSellersWeekCard({ item, onAddToCart }: ProductsProps) {
 
       {/* Separador decorativo */}
       <div className="hidden lg:block">
-        <div className="w-px h-full bg-gradient-to-b from-transparent via-gray-800/50 to-transparent" />
+        <div className="w-px h-full bg-gradient-to-b from-transparent via-gray-700/50 to-transparent" />
       </div>
 
       {/* Columna derecha - Contenido */}
@@ -95,7 +95,6 @@ const ContentColumn = ({
   <div className="lg:w-3/5 flex flex-col gap-6 justify-center">
     <ProductInfo name={item.name} description={item.description ?? ""} />
     <ProductPrice price={item.priceInt ?? 0} currency={item.currency ?? ""} />
-    <ProductRating rating={item.rating} reviewCount={item.reviewCount} />
     <ProductBenefits />
     <StockIndicator stock={item.stock ?? 0} />
     <AddToCartSection onAddToCart={onAddToCart} inStock={item.stock ?? 0} />
@@ -110,7 +109,7 @@ const ProductInfo = ({
   description: string;
 }) => (
   <div>
-    <h3 className="text-2xl md:text-3xl font-bold text-white mb-3 line-clamp-2">
+    <h3 className="text-2xl md:text-3xl font-bold text-gray-100 mb-3 line-clamp-2">
       {name}
     </h3>
     <p className="text-gray-300 leading-relaxed line-clamp-3">
@@ -129,53 +128,9 @@ const ProductPrice = ({
   <div className="flex items-baseline gap-4">
     <div>
       <div className="text-sm text-gray-400 mb-1">Precio especial</div>
-      <div className="text-4xl md:text-5xl font-bold text-white">
+      <div className="text-3xl md:text-4xl font-bold text-gray-100">
         {currency} {price.toFixed(2)}
       </div>
-    </div>
-    
-    {/* Ahorro estimado */}
-    <div className="px-3 py-1.5 rounded-full bg-gradient-to-r from-green-500/10 to-emerald-500/10 border border-green-500/20">
-      <div className="text-xs text-green-400 font-medium">
-        <span className="text-lg">⚡</span> Mejor precio
-      </div>
-    </div>
-  </div>
-);
-
-const ProductRating = ({
-  rating,
-  reviewCount,
-}: {
-  rating: number;
-  reviewCount: number;
-}) => (
-  <div className="flex flex-wrap items-center gap-4">
-    {/* Stars */}
-    <div className="flex items-center gap-2">
-      <div className="flex">
-        {[...Array(5)].map((_, i) => (
-          <FiStar
-            key={i}
-            className={`w-5 h-5 ${
-              i < Math.floor(rating)
-                ? "text-yellow-400 fill-yellow-400"
-                : "text-gray-600"
-            }`}
-          />
-        ))}
-      </div>
-      <span className="text-2xl font-bold text-white">{rating}</span>
-    </div>
-    
-    {/* Review count */}
-    <div className="text-gray-400">
-      <span className="text-white font-semibold">{reviewCount}</span> reseñas
-    </div>
-    
-    {/* Rating badge */}
-    <div className="px-2 py-1 rounded-md bg-gradient-to-r from-yellow-500/10 to-amber-500/10">
-      <span className="text-yellow-400 text-xs font-medium">EXCELENTE</span>
     </div>
   </div>
 );
@@ -217,8 +172,8 @@ const StockIndicator = ({ stock }: { stock: number }) => (
     
     {/* Stock warning */}
     {stock > 0 && stock < 20 && (
-      <div className="flex items-center gap-2 text-xs text-amber-400">
-        <div className="w-2 h-2 bg-amber-400 rounded-full animate-pulse" />
+      <div className="flex items-center gap-2 text-xs text-cyan-400">
+        <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse" />
         ¡Últimas unidades disponibles!
       </div>
     )}
@@ -252,9 +207,9 @@ const AddToCartSection = ({
       size="m"
       className={`group flex-1 flex items-center justify-center gap-3 ${
         inStock > 0 
-          ? 'bg-gradient-to-r from-yellow-600 to-amber-600 hover:from-yellow-500 hover:to-amber-500' 
+          ? 'bg-gradient-to-r from-cyan-600 to-cyan-600 hover:from-cyan-500 hover:to-cyan-500' 
           : 'bg-gray-800 cursor-not-allowed'
-      } text-white font-bold py-4 px-6 rounded-xl hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-yellow-500/25`}
+      } text-gray-100 font-bold py-4 px-6 rounded-xl hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-yellow-500/25`}
       onClick={() => onAddToCart(1)}
       disabled={inStock <= 0}
     >
@@ -272,7 +227,7 @@ const AddToCartSection = ({
     <motion.div
       whileHover={{ scale: 1.1, rotate: 5 }}
       whileTap={{ scale: 0.95 }}
-      className="p-4 rounded-xl bg-gradient-to-br from-gray-800 to-gray-900 hover:from-gray-700 hover:to-gray-800 border border-gray-700 hover:border-yellow-500/30 shadow-md hover:shadow-lg transition-all duration-300 cursor-pointer"
+      className="p-2 rounded-xl bg-gradient-to-br from-gray-800 to-gray-900 hover:from-gray-700 hover:to-gray-800 border border-gray-700 hover:border-yellow-500/30 shadow-md hover:shadow-lg transition-all duration-100 cursor-pointer"
     >
       <div className="relative">
         <CartIcon />
