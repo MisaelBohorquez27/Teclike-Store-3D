@@ -26,7 +26,7 @@ export function OfferCard({ product }: { product: ProductWithOffer }) {
       </div>
 
       {/* Card principal */}
-      <div className="bg-gradient-to-br from-white to-gray-50 dark:from-gray-900/90 dark:to-gray-800/90 backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50 rounded-2xl p-4 hover:border-cyan-500/50 transition-all duration-300 h-full flex flex-col overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-cyan-500/10">
+      <div className="bg-gradient-to-br from-gray-900/90 to-gray-800/90 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-4 hover:border-cyan-500/50 transition-all duration-300 h-full flex flex-col overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-cyan-500/10">
         
         {/* Contenedor de imagen */}
         <div className="relative h-48 md:h-56 mb-4 rounded-xl overflow-hidden">

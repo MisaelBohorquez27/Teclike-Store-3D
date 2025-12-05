@@ -30,13 +30,13 @@ const DailyOffersHeader = () => (
         {CONFIG.content.title.split(" ")[0]}
       </span>
       <br />
-      <span className="text-white">
+      <span className="text-gray-100">
         {CONFIG.content.title.split(" ").slice(1).join(" ")}
       </span>
     </h1>
 
     {/* Descripción */}
-    <p className="text-gray-300 text-lg md:text-xl leading-relaxed mb-8">
+    <p className="text-gray-200 text-lg md:text-xl leading-relaxed mb-8">
       {CONFIG.content.description}
     </p>
 
@@ -44,7 +44,7 @@ const DailyOffersHeader = () => (
     <Link href={CONFIG.content.buttonHref}>
       <Button
         size="m"
-        className="group relative overflow-hidden bg-gradient-to-r from-cyan-600 via-cyan-600 to-blue-600 hover:from-cyan-500 hover:via-cyan-400 hover:to-blue-400 text-gray-100 hover:text-gray-100 font-bold px-8 py-4 rounded-xl hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-red-500/25"
+        className="group relative overflow-hidden bg-gradient-to-r from-cyan-600 via-cyan-600 to-blue-600 hover:from-cyan-500 hover:via-cyan-400 hover:to-blue-400 text-gray-100 hover:text-gray-100 font-bold px-8 py-4 rounded-xl hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-cyan-500/25"
       >
         <span className="flex items-center gap-3 relative z-10">
           <FiZap className="w-5 h-5" />
@@ -58,12 +58,12 @@ const DailyOffersHeader = () => (
     {/* Stats */}
     <div className="flex flex-wrap gap-4 mt-8">
       {[
-        { value: "500+", label: "Ofertas Activas" },
+        { value: "10+", label: "Ofertas Activas" },
         { value: "95%", label: "Clientes Satisfechos" },
         { value: "24/7", label: "Soporte" },
       ].map((stat, index) => (
         <div key={index} className="text-center">
-          <div className="text-2xl font-bold text-white">{stat.value}</div>
+          <div className="text-2xl font-bold text-gray-100">{stat.value}</div>
           <div className="text-xs text-gray-400">{stat.label}</div>
         </div>
       ))}
@@ -125,7 +125,7 @@ const SwiperContent = ({ offers, loading }: DailyOffersContentProps) => {
             <FiFilter className="w-8 h-8 text-gray-600" />
           </div>
           <div>
-            <h3 className="text-xl font-bold text-white mb-2">
+            <h3 className="text-xl font-bold text-gray-200 mb-2">
               ¡Próximamente!
             </h3>
             <p className="text-gray-400 max-w-sm">{CONFIG.content.emptyText}</p>
@@ -156,15 +156,16 @@ export const DailyOffersContent = ({
   loading,
 }: DailyOffersContentProps) => {
   return (
-    <section className="relative bg-gradient-to-br from-gray-800 via-gray-950 to-gray-900 overflow-hidden rounded-3xl">
+    <section className="relative bg-gray-900/50 backdrop-blur-sm border border-cyan-900/50 overflow-hidden rounded-3xl">
       {/* Efectos de fondo */}
       <div className="absolute inset-0">
         {/* Patrón de grid sutil */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,65,84,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,65,84,0.02)_1px,transparent_1px)] bg-[size:64px_64px]" />
-
-        {/* Efectos de luz */}
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-cyam-500/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl" />
+        <div
+          className="absolute inset-0 
+  bg-[linear-gradient(rgba(0,255,255,0.05)_1px,transparent_1px),
+     linear-gradient(90deg,rgba(0,255,255,0.05)_1px,transparent_1px)] 
+  bg-[size:64px_64px]"
+        />
       </div>
 
       <div className="relative container mx-auto px-4 py-16 md:py-24">
@@ -173,7 +174,7 @@ export const DailyOffersContent = ({
 
           <div className="relative w-full lg:w-2/3 pr-4">
             <SwiperContent offers={offers} loading={loading} />
-            
+
             {/* Indicador de scroll 
             <div className="hidden lg:block absolute -left-8 top-1/2 -translate-y-1/2">
               <div className="text-xs text-gray-500 rotate-90 tracking-widest whitespace-nowrap">
