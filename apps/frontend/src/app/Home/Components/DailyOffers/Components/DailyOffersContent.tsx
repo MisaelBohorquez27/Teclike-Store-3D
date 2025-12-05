@@ -161,12 +161,12 @@ export const DailyOffersContent = ({ offers, loading }: DailyOffersContentProps)
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,65,84,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,65,84,0.02)_1px,transparent_1px)] bg-[size:64px_64px]" />
         
         {/* Efectos de luz */}
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-red-500/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-orange-500/5 rounded-full blur-3xl" />
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-cyam-500/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl" />
       </div>
 
       <div className="relative container mx-auto px-4 py-16 md:py-24">
-        <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12 xl:gap-16">
+        <div className="flex flex-col lg:flex-row items-center gap-6 lg:gap-8 xl:gap-10">
           <DailyOffersHeader />
           
           <div className="relative w-full lg:w-3/5">
