@@ -187,22 +187,6 @@ export const DailyOffersContent = ({
             </div>*/}
           </div>
         </div>
-
-        {/* CTA inferior */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
-          className="text-center mt-16 md:mt-20"
-        >
-          <div className="inline-flex items-center gap-4 p-4 rounded-2xl bg-gradient-to-r from-gray-900/50 to-black/50 backdrop-blur-sm border border-gray-800/50">
-            <FiClock className="w-5 h-5 text-cyan-400 animate-pulse" />
-            <p className="text-gray-300 text-sm md:text-base">
-              <span className="text-white font-semibold">¡Atención!</span> Estas
-              ofertas son por tiempo limitado
-            </p>
-          </div>
-        </motion.div>
       </div>
     </section>
   );
