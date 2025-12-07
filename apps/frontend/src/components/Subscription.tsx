@@ -67,7 +67,7 @@ export function Subscription() {
               </span>
             ) : (
               <span className="flex items-center justify-center">
-                Subscribe Now
+                Subscribete ahora
                 <FaArrowRight
                   className="ml-2 group-hover:translate-x-1 transition-transform"
                   size={12}
