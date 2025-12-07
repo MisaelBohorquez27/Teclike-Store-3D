@@ -10,7 +10,6 @@ interface TrendingProductCardProps {
 
 export const TrendingProductCard = ({ product }: TrendingProductCardProps) => {
   const hasDiscount = product.discountPrice && product.discountPrice < product.price;
-  const discountPercentage = hasDiscount 
 
   return (
     <motion.div
