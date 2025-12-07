@@ -25,7 +25,7 @@ export function FollowUs({
   username = DEFAULT_USERNAME,
 }: FollowUsProps) {
   return (
-    <section className="relative bg-gradient-to-br from-gray-950 via-black to-gray-950 overflow-hidden">
+    <section className="relative bg-gradient-to-br from-gray-950 via-black/50 to-gray-950 overflow-hidden">
       {/* Efectos de fondo */}
       <div className="absolute inset-0">
         {/* Patrón de gradiente */}
@@ -126,15 +126,15 @@ export function FollowUs({
 
           <div className="grid lg:grid-cols-3 gap-8 md:gap-12">
             {/* Instagram Gallery - Ocupa 2/3 */}
-            <div className="lg:col-span-2">
+            <div className="lg:col-span-2 mt-18">
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.4 }}
               >
                 <div className="mb-8">
-                  <h3 className="text-2xl font-bold text-gray-100 mb-4">
-                    Lo último en nuestro Instagram
+                  <h3 className="text-3xl font-bold text-gray-100 mb-4">
+                    Lo último en nuestras redes
                   </h3>
                   <p className="text-gray-400">
                     Contenido fresco y exclusivo cada día
@@ -151,19 +151,6 @@ export function FollowUs({
                   />
                 </motion.div>
               </motion.div>
-              {/* CTA para subir contenido */}
-              <div className="w-full max-w-md p-6 mx-auto rounded-3xl bg-gradient-to-br from-gray-900/30 to-cyan-900/30 backdrop-blur-md border border-blue-500/20 text-center">
-                <h3 className="text-xl font-bold text-white mb-3">
-                  ¡Mencionanos!
-                </h3>
-                <p className="text-gray-300 text-sm mb-4">
-                  Etiquétanos en tus fotos con nuestros productos para aparecer
-                  en nuestro feed
-                </p>
-                <button className="w-full py-3 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white font-semibold rounded-xl transition-all hover:scale-105">
-                  Ver Guía de Menciones
-                </button>
-              </div>
             </div>
 
             {/* Sidebar con contenido adicional - Ocupa 1/3 */}
@@ -225,7 +212,7 @@ export function FollowUs({
                 </div>
               </div>
               {/* Featured Hashtags */}
-              <div className="p-6 rounded-3xl bg-gradient-to-br from-blue-900/30 to-cyan-900/30 backdrop-blur-md border border-cyan-500/20">
+              <div className="pb-6 pl-10 rounded-3xl bg-transparent">
                 <h3 className="text-xl font-bold text-gray-100 mb-4 flex items-center gap-2">
                   <span className="text-2xl">🏷️</span>
                   Hashtags Destacados
@@ -265,7 +252,7 @@ export function FollowUs({
           >
             <div className="text-center mb-8">
               <h3 className="text-2xl font-bold text-white mb-4">
-                ¿Por qué seguirnos en Instagram?
+                ¿Por qué seguirnos?
               </h3>
             </div>
 
