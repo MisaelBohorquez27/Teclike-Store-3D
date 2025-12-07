@@ -139,8 +139,6 @@ export function Footer({
                     size={18}
                     className="transition-transform group-hover:scale-110"
                   />
-                  {/* Efecto de brillo */}
-                  <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-transparent via-white/10 to-transparent -skew-x-12 transform translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
                 </a>
               ))}
             </div>
