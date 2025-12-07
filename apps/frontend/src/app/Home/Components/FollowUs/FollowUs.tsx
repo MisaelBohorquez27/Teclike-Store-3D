@@ -44,8 +44,8 @@ export function FollowUs({
         ))}
 
         {/* Líneas decorativas */}
-        <div className="absolute top-1/4 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-500/20 to-transparent" />
-        <div className="absolute top-3/4 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-500/20 to-transparent" />
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-500/20 to-transparent" />
+        <div className="absolute end-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-500/20 to-transparent" />
       </div>
 
       <div className="relative z-10 py-16 md:py-24">
@@ -243,7 +243,7 @@ export function FollowUs({
             </motion.div>
           </div>
 
-          {/* Sección inferior con beneficios */}
+          {/* Sección inferior con beneficios 
           <motion.div
             className="mt-16 md:mt-20"
             initial={{ opacity: 0, y: 20 }}
@@ -277,7 +277,7 @@ export function FollowUs({
               ].map((benefit, index) => (
                 <div
                   key={index}
-                  className="p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-purple-500/30 transition-all duration-300 hover:scale-105"
+                  className="p-6 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-cyan-500/30 transition-all duration-300 hover:scale-105"
                 >
                   <div className="text-3xl mb-4">{benefit.icon}</div>
                   <h4 className="text-lg font-semibold text-white mb-2">
@@ -287,7 +287,7 @@ export function FollowUs({
                 </div>
               ))}
             </div>
-          </motion.div>
+          </motion.div>*/}
         </div>
       </div>
     </section>
