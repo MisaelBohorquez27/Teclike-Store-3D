@@ -69,7 +69,7 @@ export function CustomerReviews() {
   }
 
   return (
-    <section className="relative overflow-hidden">
+    <section id="Reviews" className="relative overflow-hidden">
       {/* Efectos de fondo */}
       <div className="absolute inset-0 -z-10">
         <Image
@@ -98,10 +98,9 @@ export function CustomerReviews() {
           >
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
               <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
-                Reseñas de
+                Reseñas&nbsp;
               </span>
-              <br />
-              <span className="text-gray-100">nuestros clientes</span>
+              <span className="text-gray-100">de clientes</span>
             </h2>
 
             <p className="text-gray-300 text-lg md:text-xl max-w-2xl mx-auto mb-10">

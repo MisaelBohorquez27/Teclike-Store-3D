@@ -50,16 +50,16 @@ export function TrendingProducts() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12 md:mb-16"
         >
+          {/*  
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-cyan-500/10 to-blue-500/10 border border-cyan-500/20 mb-6">
             <FiTrendingUp className="w-4 h-4 text-cyan-400" />
             <span className="text-cyan-300 text-sm font-medium">TENDENCIA</span>
-          </div>
+          </div>*/}
           
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
             <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
-              Destacados
+              Destacados&nbsp;
             </span>
-            <br />
             <span className="text-white">del Momento</span>
           </h2>
           
