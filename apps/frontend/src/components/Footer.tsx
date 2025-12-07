@@ -82,7 +82,7 @@ export function Footer({
   };
 
   return (
-    <footer className="relative section-bg text-neutral bg-gradient-to-br overflow-hidden border-t border-gray-800">
+    <footer className="relative section-bg text-neutral bg-gradient-to-br overflow-hidden">
       {/* Efectos de fondo */}
       <div className="absolute inset-0">
         {/* Gradiente base */}
@@ -98,7 +98,7 @@ export function Footer({
         <div className="absolute -bottom-64 -right-64 w-128 h-128 bg-blue-500/5 rounded-full blur-3xl" />
 
         {/* Línea decorativa superior */}
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent" />
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-500/30 to-transparent" />
       </div>
 
       {/* Patrón de grid sutil */}
