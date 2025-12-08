@@ -48,7 +48,7 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
         disabled={currentPage === 1}
         onClick={() => onPageChange(currentPage - 1)}
         className={`
-          flex items-center gap-2 px-4 py-2.5 rounded-xl transition-all duration-300
+          flex items-center gap-2 px-4 py-2.5 rounded-xl
           ${currentPage === 1 
             ? "bg-gray-800/30 text-gray-500 cursor-not-allowed" 
             : "bg-gray-900/50 hover:bg-gray-800/50 border border-gray-800/50 hover:border-cyan-500/30 text-white hover:text-cyan-300 cursor-pointer"
@@ -84,7 +84,7 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
             key={page}
             onClick={() => onPageChange(page)}
             className={`
-              px-3.5 py-2 rounded-lg text-sm font-medium transition-all duration-300
+              px-3.5 py-2 rounded-lg text-sm font-medium
               ${currentPage === page
                 ? "bg-gradient-to-r from-cyan-500 to-blue-500 text-white shadow-lg shadow-cyan-500/20"
                 : "bg-gray-900/50 hover:bg-gray-800/50 text-gray-400 hover:text-white border border-gray-800/50 hover:border-gray-700/50"
@@ -105,7 +105,7 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
             )}
             <button
               onClick={() => onPageChange(totalPages)}
-              className="px-3.5 py-2 rounded-lg bg-gray-900/50 hover:bg-gray-800/50 text-gray-400 hover:text-white text-sm font-medium transition-all duration-300 border border-gray-800/50 hover:border-gray-700/50"
+              className="px-3.5 py-2 rounded-lg bg-gray-900/50 hover:bg-gray-800/50 text-gray-400 hover:text-white text-sm font-medium border border-gray-800/50 hover:border-gray-700/50"
             >
               {totalPages}
             </button>
@@ -118,7 +118,7 @@ export default function Pagination({ currentPage, totalPages, onPageChange }: Pa
         disabled={currentPage === totalPages}
         onClick={() => onPageChange(currentPage + 1)}
         className={`
-          flex items-center gap-2 px-4 py-2.5 rounded-xl transition-all duration-300
+          flex items-center gap-2 px-4 py-2.5 rounded-xl
           ${currentPage === totalPages
             ? "bg-gray-800/30 text-gray-500 cursor-not-allowed"
             : "bg-gray-900/50 hover:bg-gray-800/50 border border-gray-800/50 hover:border-cyan-500/30 text-white hover:text-cyan-300 cursor-pointer"
