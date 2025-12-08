@@ -1,74 +1,84 @@
 "use client";
+
 import { ProductForDetail } from "@/types/productss";
 import Link from "next/link";
+import { motion } from "framer-motion";
+import { FiEye, FiStar, FiShoppingBag, FiZap } from "react-icons/fi";
+import { Rating } from "@/components/Rating";
 
 export function ProductCard({ product }: { product: ProductForDetail }) {
+
   return (
-    <Link href={`/Products/${product.slug}`}>
-      <div className="Card-bg rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow cursor-pointer">
-        {/* Imagen del Producto */}
-        <div className="relative aspect-square">
-          <img
-            src={product.imageUrl}
-            alt={product.name}
-            className="w-full h-full object-cover"
-          />
-          {product.isNew && (
-            <span className="absolute top-2 right-2 bg-green-500 text-white text-xs sm:text-sm px-2 py-1 rounded">
-              Nuevo
-            </span>
-          )}
-        </div>
+    <Link href={`/Products/${product.slug}`} className="block">
+      <motion.div
+        whileHover={{ 
+          y: -8,
+          transition: { type: "spring", stiffness: 300 }
+        }}
+        className="group relative h-full"
+      >
+        {/* Card principal */}
+        <div className="bg-gradient-to-br from-gray-900/60 to-black/60 backdrop-blur-sm border border-gray-800/50 rounded-2xl p-4 hover:border-cyan-500/30 transition-all duration-300 h-full flex flex-col overflow-hidden group-hover:shadow-2xl group-hover:shadow-cyan-500/10">
 
-        {/* Detalles del Producto */}
-        <div className="p-3 sm:p-4 flex flex-col gap-1">
-          <div className="flex justify-between items-start gap-2 h-auto min-h-5">
-            <h3 className="font-semibold text-base sm:text-lg truncate pr-1 sm:pr-2">
-              {product.name}
-            </h3>
-            <span className="text-xs sm:text-sm text-gray-500">
-              {product.category}
-            </span>
-          </div>
-
-          <div className="mt-1 sm:mt-2 flex items-center">
-            {[...Array(5)].map((_, i) => (
-              <span
-                key={i}
-                className={`text-xs sm:text-sm ${
-                  i < product.rating ? "text-yellow-400" : "text-gray-300"
-                }`}
-              >
-                ★
-              </span>
-            ))}
-            <span className="text-xs text-gray-500 ml-1">
-              ({product.rating})
-            </span>
-          </div>
-
-          <div className="text-sm text-gray-700 line-clamp-2">
-            <p>{product.description}</p>
-          </div>
-
-          <div className="mt-3 sm:mt-4 flex justify-between items-center">
-            <span className="font-bold text-gray-900 text-sm sm:text-base">
-              {product.originalPrice !== null &&
-              product.originalPrice !== undefined
-                ? `${product.originalPrice}`
-                : "Precio no disponible"}
-            </span>
-
-            {/* ✅ Botón convertido en enlace */}
-            <button
-              onClick={() => (window.location.href = `/Products/${product.slug}`)}
-              className="text-blue-600 hover:text-blue-800 text-xs sm:text-sm font-medium transition-colors cursor-pointer"
-            >
-              Ver detalles
+          {/* Imagen del Producto */}
+          <div className="relative aspect-square mb-4 rounded-xl overflow-hidden">
+            <motion.img
+              src={product.imageUrl}
+              alt={product.name}
+              className="w-full h-full object-scale-down group-hover:scale-110 transition-transform duration-500"
+              loading="lazy"
+              decoding="async"
+            />
+            
+            {/* Overlay de imagen */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            
+            {/* Botón flotante */}
+            <button className="absolute bottom-4 left-1/2 transform -translate-x-1/2 px-4 py-2 bg-white/10 backdrop-blur-md hover:bg-white/20 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300 flex items-center gap-2">
+              <FiEye className="w-4 h-4" />
+              <span>Ver Detalles</span>
             </button>
           </div>
+
+          {/* Contenido */}
+          <div className="flex-grow space-y-3">
+            {/* Categoría */}
+            <div>
+              <span className="text-xs text-cyan-400 font-medium bg-cyan-500/10 px-2 py-1 rounded-full">
+                {product.category}
+              </span>
+            </div>
+
+            {/* Nombre y Rating */}
+            <div>
+              <h3 className="font-bold text-lg text-white mb-2 line-clamp-2 group-hover:text-cyan-300 transition-colors truncate">
+                {product.name}
+              </h3>              
+            </div>
+
+            {/* Descripción */}
+            <p className="text-gray-300 text-sm line-clamp-2 leading-relaxed">
+              {product.description}
+            </p>
+          </div>
+
+          {/* Precio y CTA */}
+          <div className="mt-auto pt-4 border-t border-gray-800/50">
+            <div className="flex justify-between items-center">
+              <div className="flex flex-col">
+                <span className="text-2xl font-bold text-white">
+                  {product.price}
+                </span>
+              </div>
+              
+              <button className="px-4 py-2 bg-gradient-to-r from-gray-800 to-gray-900 hover:from-gray-700 hover:to-gray-800 border border-gray-700 hover:border-cyan-500/30 text-white text-sm font-medium rounded-lg transition-all group-hover:scale-105 flex items-center gap-2">
+                <FiShoppingBag className="w-4 h-4" />
+                <span>Comprar</span>
+              </button>
+            </div>
+          </div>
         </div>
-      </div>
+      </motion.div>
     </Link>
   );
 }

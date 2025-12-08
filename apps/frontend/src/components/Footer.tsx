@@ -61,32 +61,32 @@ export function Footer({
       ],
     },
     contact: {
-      address: "123 Design District, Creative City, CC 90210",
-      email: "support@vective3d.com",
-      phone: "+1 (555) 123-4567",
+      address: "Urdesa, Guayaquil, Ecuador",
+      email: "soporte@teclike.com",
+      phone: "+593 959814905",
     },
     links: [
       { href: "/", label: "Home", emoji: "🏠" },
-      { href: "/products", label: "3D Models", emoji: "🎨" },
-      { href: "/categories", label: "Categories", emoji: "📁" },
-      { href: "/sale", label: "Hot Deals", emoji: "🔥" },
-      { href: "/about", label: "About Us", emoji: "👥" },
-      { href: "/contact", label: "Contact", emoji: "📞" },
+      { href: "/Products", label: "Productos", emoji: "🎨" },
+      { href: "#Reviews", label: "Reseñas", emoji: "📁" },
+      { href: "/DailyOffers", label: "Ofertas", emoji: "🔥" },
+      { href: "#FollowUs", label: "Sobre Nosotros", emoji: "👥" },
+      { href: "/HelpContact", label: "Contacto", emoji: "📞" },
     ],
     legal: [
-      { href: "/privacy", label: "Privacy Policy" },
-      { href: "/terms", label: "Terms of Service" },
-      { href: "/cookies", label: "Cookie Policy" },
-      { href: "/licensing", label: "3D Licensing" },
+      { href: "/", label: "Privacy Policy" },
+      { href: "/", label: "Terms of Service" },
+      { href: "/", label: "Cookie Policy" },
+      { href: "/", label: "3D Licensing" },
     ],
   };
 
   return (
-    <footer className="relative section-bg text-neutral bg-gradient-to-br overflow-hidden border-t border-gray-800">
+    <footer className="relative section-bg text-neutral bg-gradient-to-br overflow-hidden">
       {/* Efectos de fondo */}
       <div className="absolute inset-0">
         {/* Gradiente base */}
-        <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/50 to-black/80" />
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-950/80 via-black/50 to-gray-950/80" />
 
         {/* Patrón de grid sutil */}
         <div className="absolute inset-0 opacity-10">
@@ -98,7 +98,7 @@ export function Footer({
         <div className="absolute -bottom-64 -right-64 w-128 h-128 bg-blue-500/5 rounded-full blur-3xl" />
 
         {/* Línea decorativa superior */}
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent" />
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-500/30 to-transparent" />
       </div>
 
       {/* Patrón de grid sutil */}
@@ -111,7 +111,7 @@ export function Footer({
           <div className="xl:col-span-1">
             <div className="mb-8">
               {/* Logo/Title con efecto neón */}
-              <h3 className="text-3xl font-bold mb-4 text-gradient-primary drop-shadow-lg">
+              <h3 className="text-3xl font-bold mb-4 drop-shadow-lg bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
                 {footerData.company.name}
                 <span className="text-4xl">.</span>
               </h3>
@@ -250,12 +250,11 @@ export function Footer({
             {/* Copyright */}
             <div className="text-center lg:text-left">
               <p className="text-sm text-gray-400">
-                © {currentYear} {footerData.company.name}. Hecho con pasión por
-                el equipo de desarrollo.
+                © {currentYear} {footerData.company.name}. Todos los derechos reservados
               </p>
             </div>
 
-            {/* Legal Links */}
+            {/* Legal Links
             <nav className="flex flex-wrap justify-center lg:justify-end gap-6 text-sm">
               {footerData.legal.map((link) => (
                 <a
@@ -266,6 +265,28 @@ export function Footer({
                   {link.label}
                 </a>
               ))}
+            </nav> */}
+            <nav className="flex flex-wrap justify-center lg:justify-end gap-6 text-sm">
+                <a
+                  className="text-gray-400 hover:text-cyan-300 transition-colors duration-200 hover:underline underline-offset-4 cursor-pointer"
+                >
+                  Política de Privacidad
+                </a>
+                <a
+                  className="text-gray-400 hover:text-cyan-300 transition-colors duration-200 hover:underline underline-offset-4 cursor-pointer"
+                >
+                  Terminos de Servicio
+                </a>
+                <a
+                  className="text-gray-400 hover:text-cyan-300 transition-colors duration-200 hover:underline underline-offset-4 cursor-pointer"
+                >
+                  Política de Cookies
+                </a>
+                <a
+                  className="text-gray-400 hover:text-cyan-300 transition-colors duration-200 hover:underline underline-offset-4 cursor-pointer"
+                >
+                  Licencia
+                </a>
             </nav>
           </div>
         </div>

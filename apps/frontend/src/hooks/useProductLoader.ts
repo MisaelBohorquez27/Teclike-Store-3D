@@ -1,27 +1,61 @@
 // components/ProductList2/hooks/useProductLoader.ts
+"use client";
+
 import { useState, useEffect, useCallback } from "react";
+import { useSearchParams } from "next/navigation";
 import { ProductForDetail } from "@/types/productss";
 import { fetchAllProducts } from "@/services/products";
 
 const POSTS_PER_PAGE = 6;
 
-export function useProductLoader(searchParams: URLSearchParams) {
-  const paramsString = searchParams?.toString() ?? "";
-
+export function useProductLoader() {
+  const searchParams = useSearchParams();
+  
   const [products, setProducts] = useState<ProductForDetail[]>([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
-  // Reiniciar página cuando cambian los params
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [paramsString]);
+  // Extraer parámetros una vez
+  const q = searchParams?.get("q") ?? "";
+  const category = searchParams?.get("category") ?? "";
+  const minPrice = searchParams?.get("minPrice") ?? "";
+  const maxPrice = searchParams?.get("maxPrice") ?? "";
+  const inStock = searchParams?.get("inStock") ?? "";
 
-  const loadProducts = useCallback(async () => {
+  // Construir filtros solo cuando cambian los parámetros
+  const buildFilters = useCallback((page: number = currentPage) => {
+    const filters: any = {
+      page: page,
+      limit: POSTS_PER_PAGE,
+    };
+
+    if (q && q.trim().length >= 1) filters.q = q.trim();
+    if (category) filters.category = category;
+
+    if (minPrice) {
+      const min = Number(minPrice);
+      if (!Number.isNaN(min) && min > 0) filters.minPrice = min;
+    }
+
+    if (maxPrice) {
+      const max = Number(maxPrice);
+      if (!Number.isNaN(max) && max > 0) filters.maxPrice = max;
+    }
+
+    if (inStock !== "") {
+      if (inStock === "true") filters.inStock = true;
+      else if (inStock === "false") filters.inStock = false;
+    }
+
+    return filters;
+  }, [currentPage, q, category, minPrice, maxPrice, inStock]);
+
+  // Función para cargar productos
+  const loadProducts = useCallback(async (page: number = currentPage) => {
     setLoading(true);
     try {
-      const filters = buildFilters(searchParams, currentPage);
+      const filters = buildFilters(page);
       const res = await fetchAllProducts(filters);
       
       const productsForDetail: ProductForDetail[] = res.items.map((product: any) => ({
@@ -31,6 +65,7 @@ export function useProductLoader(searchParams: URLSearchParams) {
       
       setProducts(productsForDetail);
       setTotalPages(res.pagination?.totalPages ?? 1);
+      setCurrentPage(page);
     } catch (err) {
       console.error("❌ Error cargando productos:", err);
       setProducts([]);
@@ -38,52 +73,27 @@ export function useProductLoader(searchParams: URLSearchParams) {
     } finally {
       setLoading(false);
     }
-  }, [currentPage, searchParams]);
+  }, [buildFilters, currentPage]);
 
-  // Cargar productos cuando cambian las dependencias
+  // Cargar productos cuando cambian los filtros
   useEffect(() => {
-    loadProducts();
-  }, [loadProducts]);
+    // Solo cargar si hay cambios reales en los filtros
+    loadProducts(1);
+  }, [q, category, minPrice, maxPrice, inStock]);
+
+  // Cargar productos cuando cambia la página
+  const handlePageChange = useCallback((page: number) => {
+    // Prevenir carga si es la misma página
+    if (page === currentPage) return;
+    
+    loadProducts(page);
+  }, [currentPage, loadProducts]);
 
   return {
     products,
     loading,
     currentPage,
     totalPages,
-    setCurrentPage
+    setCurrentPage: handlePageChange
   };
-}
-
-// Función helper para construir los filtros
-function buildFilters(searchParams: URLSearchParams, currentPage: number) {
-  const q = searchParams.get("q") ?? undefined;
-  const categoryParam = searchParams.get("category") ?? undefined;
-  const minPriceParam = searchParams.get("minPrice");
-  const maxPriceParam = searchParams.get("maxPrice");
-  const inStockParam = searchParams.get("inStock");
-
-  const filters: any = {
-    page: currentPage,
-    limit: POSTS_PER_PAGE,
-  };
-
-  if (q && q.trim().length >= 1) filters.q = q.trim();
-  if (categoryParam) filters.category = categoryParam;
-
-  if (minPriceParam) {
-    const min = Number(minPriceParam);
-    if (!Number.isNaN(min)) filters.minPrice = min;
-  }
-
-  if (maxPriceParam) {
-    const max = Number(maxPriceParam);
-    if (!Number.isNaN(max)) filters.maxPrice = max;
-  }
-
-  if (inStockParam !== null) {
-    if (inStockParam === "true") filters.inStock = true;
-    else if (inStockParam === "false") filters.inStock = false;
-  }
-
-  return filters;
 }

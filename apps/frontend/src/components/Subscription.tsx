@@ -27,7 +27,7 @@ export function Subscription() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-xl"
+          className="bg-cyan-100 border border-cyan-400 text-cyan-700 px-4 py-3 rounded-xl"
         >
           <p>¡Gracias por suscribirte!</p>
         </motion.div>
@@ -45,7 +45,7 @@ export function Subscription() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="your.email@example.com"
+              placeholder="tu.email@ejemplo.com"
               required
               className="w-full px-4 py-3 rounded-xl text-white placeholder-gray-400 
                          focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 

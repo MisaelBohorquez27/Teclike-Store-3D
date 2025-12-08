@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { SwiperSlide } from "swiper/react";
 import { BaseSwiper } from "@/components/Swipper/BaseSwiper";
 import { ReviewCard } from "./Components/ReviewCard";
@@ -68,24 +69,23 @@ export function CustomerReviews() {
   }
 
   return (
-    <section className="relative bg-gradient-to-br from-gray-950 via-black/50 to-gray-950 overflow-hidden">
+    <section id="Reviews" className="relative overflow-hidden">
       {/* Efectos de fondo */}
-      <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-cyan-900/5 via-transparent to-blue-900/5" />
-
-        {/* Grid pattern sutil */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute inset-0 bg-[linear-gradient(rgba(6,182,212,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(6,182,212,0.1)_1px,transparent_1px)] bg-[size:80px_80px]" />
-        </div>
-
-        {/* Efectos de luz */}
-        <div className="absolute -top-32 -left-32 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl" />
-        <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl" />
-
-        {/* Líneas decorativas */}
-        <div className="absolute top-1/3 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-500/10 to-transparent" />
-        <div className="absolute bottom-1/3 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-500/10 to-transparent" />
+      <div className="absolute inset-0 -z-10">
+        <Image
+          src="/ui/HeroBanner.png"
+          alt="Fondo de reseñas"
+          fill
+          priority
+          className="object-cover object-center"
+        />
+        {/* Overlay para contraste */}
+        <div className="absolute inset-0 bg-black/60" />
       </div>
+
+      {/* Efectos de luz opcionales */}
+      <div className="absolute -top-32 -left-32 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl -z-0" />
+      <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl -z-0" />
 
       <div className="relative z-10 py-20 md:py-28">
         <div className="container mx-auto px-4">
@@ -96,16 +96,14 @@ export function CustomerReviews() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
               <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
-                Reseñas de
+                Reseñas&nbsp;
               </span>
-              <br />
-              <span className="text-white">nuestros clientes</span>
+              <span className="text-gray-100">de clientes</span>
             </h2>
 
-            <p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-10">
+            <p className="text-gray-300 text-lg md:text-xl max-w-2xl mx-auto mb-10">
               Historias reales de personas que transformaron su experiencia con
               nuestros productos
             </p>
@@ -150,9 +148,7 @@ export function CustomerReviews() {
 
               <div className="p-4 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10">
                 <FiHeart className="w-6 h-6 text-blue-400 mx-auto mb-2" />
-                <div className="text-2xl font-bold text-white">
-                 96%
-                </div>
+                <div className="text-2xl font-bold text-white">96%</div>
                 <div className="text-xs text-gray-400">Satisfacción</div>
               </div>
             </motion.div>
@@ -165,7 +161,6 @@ export function CustomerReviews() {
             transition={{ delay: 0.4 }}
             className="relative"
           >
-
             <BaseSwiper
               variant="reviews"
               slidesPerView={1}
@@ -226,7 +221,7 @@ export function CustomerReviews() {
                 </div>
               </div>
             </div>
-          </motion.div> */}        
+          </motion.div> */}
         </div>
       </div>
     </section>

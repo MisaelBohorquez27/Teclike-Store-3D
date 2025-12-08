@@ -26,7 +26,7 @@ const DailyOffersHeader = () => (
   >
     {/* Título */}
     <h1 className="text-5xl md:text-6xl lg:text-7xl font-black mb-4 lg:mb-6">
-      <span className="bg-gradient-to-r from-cyan-400 via-cyan-400 to-cyan-400 bg-clip-text text-transparent">
+      <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
         {CONFIG.content.title.split(" ")[0]}
       </span>
       <br />

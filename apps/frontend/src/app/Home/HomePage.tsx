@@ -14,11 +14,11 @@ export function HomePage() {
     <>
       <HeroBanner2 />
       <InteractiveVideo />
+      <FollowUs />
       <TrendingProducts />
       <DailyOffers />
       <BestSellersWeekPage />
-      <FollowUs />
-      <CustomerReviews />
+      <CustomerReviews />   
     </>
   );
 }

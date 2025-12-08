@@ -25,7 +25,7 @@ export function FollowUs({
   username = DEFAULT_USERNAME,
 }: FollowUsProps) {
   return (
-    <section className="relative bg-gradient-to-br from-gray-950 via-black/50 to-gray-950 overflow-hidden">
+    <section id="FollowUs" className="relative bg-gradient-to-br from-gray-950 via-black/50 to-gray-950 overflow-hidden">
       {/* Efectos de fondo */}
       <div className="absolute inset-0">
         {/* Patrón de gradiente */}
@@ -57,18 +57,18 @@ export function FollowUs({
             transition={{ duration: 0.6 }}
             className="text-center mb-12 md:mb-16"
           >
+            {/* Header con estadísticas 
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-blue-500/10 to-cyan-500/10 border border-cyan-500/20 mb-6">
               <FiInstagram className="w-4 h-4 text-cyan-400" />
               <span className="text-cyan-300 text-sm font-bold tracking-wide">
                 COMUNIDAD
               </span>
-            </div>
+            </div>*/}
 
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-              <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent">
-                Únete a Nuestra
+              <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
+                Nuestra&nbsp;
               </span>
-              <br />
               <span className="text-gray-100">Comunidad</span>
             </h2>
 
