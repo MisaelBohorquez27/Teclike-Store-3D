@@ -5,13 +5,14 @@ import Button from "@/components/PagesButtons";
 import { useFilterState } from "@/hooks/useFilterState";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiFilter, FiX, FiCheck, FiDollarSign, FiGrid } from "react-icons/fi";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export function FilterSidebar() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [isMobileOpen, setIsMobileOpen] = useState(false);
-  
+  const [categoryCounts, setCategoryCounts] = useState<Record<string, number>>({});
+
   const {
     selectedCategories,
     selectedPrice,
@@ -28,6 +29,15 @@ export function FilterSidebar() {
     { label: "$200 - $500", value: "200-500"},
     { label: "Más de $500", value: "500-5000"},
   ];
+
+  useEffect(() => {
+    // Generar conteos solo en client (evita hydration mismatch)
+    const counts: Record<string, number> = {};
+    categories.forEach(cat => {
+      counts[cat] = Math.floor(Math.random() * 50) + 1;
+    });
+    setCategoryCounts(counts);
+  }, []);
 
   // Contar filtros activos
   const activeFiltersCount = selectedCategories.length + (selectedPrice ? 1 : 0);
@@ -171,8 +181,7 @@ export function FilterSidebar() {
                         {category}
                       </span>
                       <span className="ml-auto text-xs text-gray-500">
-                        {/* Aquí podrías agregar conteo de productos por categoría */}
-                        {Math.floor(Math.random() * 50) + 1}
+                        {categoryCounts[category] ?? "-"}
                       </span>
                     </label>
                   </motion.div>

@@ -2,24 +2,24 @@
 
 import { ProductForCard } from "@/types/productss";
 import { motion } from "framer-motion";
-import { FiEye, FiShoppingCart, FiStar } from "react-icons/fi";
+import { FiEye, FiShoppingBag, FiShoppingCart, FiStar } from "react-icons/fi";
 
 interface TrendingProductCardProps {
   product: ProductForCard;
 }
 
 export const TrendingProductCard = ({ product }: TrendingProductCardProps) => {
-  const hasDiscount = product.discountPrice && product.discountPrice < product.price;
+  const hasDiscount =
+    product.discountPrice && product.discountPrice < product.price;
 
   return (
     <motion.div
-      whileHover={{ 
+      whileHover={{
         y: -8,
-        transition: { type: "spring", stiffness: 300 }
+        transition: { type: "spring", stiffness: 300 },
       }}
       className="group relative h-full"
     >
-
       {/* Card principal */}
       <div className="bg-gray-900/50 backdrop-blur-sm border border-gray-800/50 rounded-2xl p-4 hover:border-cyan-500/30 transition-all duration-300 h-full flex flex-col overflow-hidden group-hover:shadow-2xl group-hover:shadow-cyan-500/10">
         {/* Imagen con efecto */}
@@ -34,17 +34,17 @@ export const TrendingProductCard = ({ product }: TrendingProductCardProps) => {
             whileHover={{ scale: 1.1 }}
             transition={{ duration: 0.5 }}
           />
-          
+
           {/* Overlay de imagen */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-          
+
           {/* Botones flotantes */}
           <div className="absolute bottom-4 left-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300">
-            <button className="flex-1 flex items-center justify-center gap-2 py-2 px-3 bg-white/10 backdrop-blur-md hover:bg-white/20 text-white text-sm rounded-lg transition-colors">
+            <button className="flex-1 flex items-center justify-center gap-2 py-2 px-3 bg-white/10 backdrop-blur-md hover:bg-white/20 text-white text-sm rounded-lg transition-colors cursor-pointer">
               <FiEye className="w-4 h-4" />
               <span>Ver</span>
             </button>
-            <button className="flex-1 flex items-center justify-center gap-2 py-2 px-3 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400 text-white text-sm rounded-lg transition-all">
+            <button className="flex-1 flex items-center justify-center gap-2 py-2 px-3 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400 text-white text-sm rounded-lg transition-all cursor-pointer">
               <FiShoppingCart className="w-4 h-4" />
               <span>Comprar</span>
             </button>
@@ -80,7 +80,7 @@ export const TrendingProductCard = ({ product }: TrendingProductCardProps) => {
               ))}
             </div>
             <span className="text-xs text-gray-400">
-              ({product.reviewCount|| Math.floor(Math.random() * 100) + 1})
+              ({product.reviewCount || Math.floor(Math.random() * 100) + 1})
             </span>
           </div>
         </div>
@@ -104,9 +104,9 @@ export const TrendingProductCard = ({ product }: TrendingProductCardProps) => {
                 </span>
               )}
             </div>
-            
-            <button className="px-4 py-2 bg-gradient-to-r from-gray-800 to-gray-900 hover:from-gray-700 hover:to-gray-800 border border-gray-700 hover:border-cyan-500/30 text-white text-sm font-medium rounded-lg transition-all group-hover:scale-105">
-              Detalles
+
+            <button className="px-4 py-2 text-white text-sm font-medium rounded-lg transition-all group-hover:scale-105">
+              <FiShoppingBag className="w-4 h-4" />
             </button>
           </div>
         </div>
