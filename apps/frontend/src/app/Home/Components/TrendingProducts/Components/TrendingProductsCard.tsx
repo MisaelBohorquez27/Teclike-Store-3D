@@ -105,7 +105,7 @@ export const TrendingProductCard = ({ product }: TrendingProductCardProps) => {
               )}
             </div>
 
-            <button className="px-4 py-2 text-white text-sm font-medium rounded-lg transition-all group-hover:scale-105">
+            <button className="px-4 py-2 text-gray-100 text-sm font-medium rounded-lg transition-all group-hover:scale-105">
               <FiShoppingBag className="w-4 h-4" />
             </button>
           </div>

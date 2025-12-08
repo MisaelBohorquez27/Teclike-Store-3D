@@ -56,55 +56,12 @@ export default function DailyDealsPage() {
         
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="py-12 sm:py-14 lg:py-16">
-            {/* Encabezado */}
-            <div className="text-center mb-8 sm:mb-12 lg:mb-16">
-              <div className="flex items-center justify-center gap-2 sm:gap-3 mb-3 sm:mb-4">
-                <span className="text-2xl sm:text-3xl ">🔥</span>
-                <h2 
-                  id="flash-deals-title"
-                  className="TextColor1 text-2xl sm:text-3xl lg:text-4xl font-bold"
-                >
-                  Flash Deals
-                </h2>
-                <span className="text-2xl sm:text-3xl ">🔥</span>
-              </div>
-              <p className="TextColor3 text-base sm:text-lg lg:text-xl max-w-2xl mx-auto leading-relaxed">
-                Ofertas que terminan en las próximas horas • No te quedes sin la tuya
-              </p>
-            </div>
-
             <div className="relative">
               <DailyDeals />
             </div>
           </div>
         </div>
       </section>
-
-      {/* Ofertas Destacadas (Comentado por ahora) */}
-      {/*
-      <section 
-        className="FeatureOffers-bg PageDailyOffers-bg py-12 sm:py-16 lg:py-20"
-        aria-labelledby="featured-offers-title"
-      >
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-8 sm:mb-12 lg:mb-16">
-            <div className="flex items-center justify-center gap-2 sm:gap-3 mb-3 sm:mb-4">
-              <span className="text-2xl sm:text-3xl">⭐</span>
-              <h2 
-                id="featured-offers-title"
-                className="TextColor1 text-2xl sm:text-3xl lg:text-4xl font-bold"
-              >
-                Ofertas Destacadas
-              </h2>
-            </div>
-            <p className="TextColor3 text-base sm:text-lg lg:text-xl max-w-2xl mx-auto">
-              Los mejores descuentos de la semana seleccionados para ti
-            </p>
-          </div>
-          <HotDeals />
-        </div>
-      </section>
-      */}
 
       {/* Banner de Suscripción */}
       <section 
