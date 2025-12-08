@@ -28,7 +28,7 @@ interface DealCardProps {
 
 export function DealCard({
   offer,
-  size = "md",
+  size = "lg",
   showTimer = true,
   showBrand = false,
   showRating = false,
@@ -41,7 +41,7 @@ export function DealCard({
   // Configuraciones por tamaño
   const sizeConfig = {
     sm: {
-      image: "h-32",
+      image: "h-38",
       title: "text-sm",
       price: "text-lg",
       discount: "text-xs px-2 py-0.5",
@@ -50,7 +50,7 @@ export function DealCard({
       icon: "w-3 h-3",
     },
     md: {
-      image: "h-40",
+      image: "h-46",
       title: "text-base",
       price: "text-xl",
       discount: "text-sm px-2 py-1",
@@ -59,7 +59,7 @@ export function DealCard({
       icon: "w-4 h-4",
     },
     lg: {
-      image: "h-48",
+      image: "h-50",
       title: "text-lg",
       price: "text-2xl",
       discount: "text-base px-3 py-1.5",
@@ -123,13 +123,13 @@ export function DealCard({
             <motion.div
               whileHover={{ scale: 1.1 }}
               transition={{ duration: 0.5 }}
-              className="w-full h-full"
+              className="w-full h-full group-hover:scale-110 transition-transform duration-500"
             >
               <Image
                 src={offer.imageUrl}
                 alt={offer.name}
                 fill
-                className="object-cover"
+                className="object-scale-down"
                 sizes="(max-width: 768px) 100vw, 
                      (max-width: 1200px) 50vw, 
                      33vw"

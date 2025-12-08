@@ -1,6 +1,7 @@
 import { DailyDeals } from "@/app/DailyOffers/components/DailyDeals";
 import { CountdownTimer } from "@/app/DailyOffers/components/CountdownTimer";
 import { Subscription } from "@/components/Subscription";
+import { FiTruck, FiShield, FiRefreshCw, FiZap, FiMail, FiGift } from "react-icons/fi";
 
 export default function DailyDealsPage() {
   // Configuración de fechas para el countdown
@@ -11,136 +12,248 @@ export default function DailyDealsPage() {
   };
 
   return (
-    <main>
+    <main className="bg-gradient-to-b from-gray-950 via-black to-gray-950">
       {/* Hero Banner */}
-      <section 
-        className="section-bg-2 text-neutral relative overflow-hidden"
+      <section
+        className="relative overflow-hidden"
         aria-labelledby="daily-offers-title"
       >
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center pt-16 sm:pt-20 lg:pt-24 pb-12 sm:pb-16 lg:pb-20">
-            {/* Badge */}
-            <div className="flex justify-center mb-4 sm:mb-5">
-              <span 
-                className=" text-[#006826] px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-bold tracking-wide animate-pulse"
-                aria-label="Ofertas exclusivas disponibles"
-              >
-                🎯 OFERTAS EXCLUSIVAS
+        {/* Efectos de fondo */}
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-gradient-to-br from-cyan-900/20 via-transparent to-blue-900/20" />
+          
+          {/* Efectos de luz */}
+          <div className="absolute top-1/4 -left-32 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl" />
+          <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl" />
+          
+          {/* Patrón sutil */}
+          <div className="absolute inset-0 opacity-10">
+            <div className="absolute inset-0 bg-[linear-gradient(rgba(6,182,212,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(6,182,212,0.1)_1px,transparent_1px)] bg-[size:80px_80px]" />
+          </div>
+        </div>
+
+        <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center pt-20 md:pt-24 lg:pt-28 pb-16 md:pb-20 lg:pb-24">
+            {/* Badge destacado */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-red-500/10 to-orange-500/10 border border-red-500/20 mb-6">
+              <FiZap className="w-4 h-4 text-red-400 animate-pulse" />
+              <span className="text-red-300 text-sm font-bold tracking-wide">
+                OFERTAS RELÁMPAGO
               </span>
             </div>
             
-            <h1 
-              className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4 daily-offers-title drop-shadow-lg"
-            >
-              Ofertas del Día
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-black mb-6">
+              <span className="bg-gradient-to-r from-red-400 via-orange-400 to-yellow-400 bg-clip-text text-transparent">
+                ¡Solo Hoy!
+              </span>
+              <br />
+              <span className="text-white">Precios Inigualables</span>
             </h1>
-            
-            <p className="text-lg sm:text-xl lg:text-2xl DailyOffers-subtitle mb-6 sm:mb-8 max-w-2xl mx-auto leading-relaxed drop-shadow-md">
-              Descuentos especiales por tiempo limitado
+
+            <p className="text-gray-300 text-lg md:text-xl max-w-2xl mx-auto mb-8">
+              Descubre promociones exclusivas que desaparecen en
+              <span className="text-cyan-400 font-semibold mx-1">24 horas</span>
+              • Stock limitado
             </p>
-            
-            <div className="max-w-md mx-auto">
-              <CountdownTimer 
-                targetDate={getTargetDate()} 
-              />
+
+            {/* Countdown Timer mejorado */}
+            <div className="max-w-2xl mx-auto mb-12">
+              <CountdownTimer targetDate={getTargetDate()} />
+            </div>
+
+            {/* Stats de ofertas */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
+              {[
+                { value: "50+", label: "Ofertas Activas", color: "text-cyan-400" },
+                { value: "90%", label: "Descuento Promedio", color: "text-red-400" },
+                { value: "24h", label: "Tiempo Restante", color: "text-orange-400" },
+                { value: "500+", label: "Comprados Hoy", color: "text-green-400" },
+              ].map((stat, index) => (
+                <div
+                  key={index}
+                  className="p-4 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10"
+                >
+                  <div className={`text-2xl md:text-3xl font-bold ${stat.color} mb-1`}>
+                    {stat.value}
+                  </div>
+                  <div className="text-xs text-gray-400">{stat.label}</div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
+
+        {/* Línea decorativa inferior */}
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-red-500/30 to-transparent" />
       </section>
 
-      <section 
-        className="section-bg text-neutral relative border-t border-gray-200"
+      {/* Sección principal de ofertas */}
+      <section
+        className="relative py-16 md:py-20 lg:py-24"
         aria-labelledby="flash-deals-title"
       >
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.15)_1px,transparent_0)] bg-[length:20px_20px]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-transparent" />
         
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="py-12 sm:py-14 lg:py-16">
-            <div className="relative">
-              <DailyDeals />
-            </div>
+        <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Encabezado de sección */}
+          <div className="text-center mb-12 md:mb-16">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
+              <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+                Ofertas Destacadas
+              </span>
+            </h2>
+            <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+              Productos seleccionados con los mayores descuentos del día
+            </p>
+          </div>
+
+          <div className="relative">
+            <DailyDeals />
           </div>
         </div>
       </section>
 
-      {/* Banner de Suscripción */}
-      <section 
-        className="section-bg-2 text-neutral relative overflow-hidden"
+      {/* Banner de Suscripción Modernizado */}
+      <section
+        className="relative py-16 md:py-20 lg:py-24 overflow-hidden"
         aria-labelledby="subscription-title"
       >
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="py-12 sm:py-16 lg:py-20">
-            <div className="max-w-3xl mx-auto text-center">
-              {/* Icono decorativo */}
-              <div className="flex justify-center mb-4 sm:mb-6">
-                <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center backdrop-blur-sm">
-                  <span className="text-2xl sm:text-3xl">📧</span>
+        {/* Fondo con efectos */}
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-gradient-to-br from-cyan-900/30 via-transparent to-blue-900/30" />
+          <div className="absolute -top-32 -right-32 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl" />
+        </div>
+
+        <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-gradient-to-br from-gray-900/80 to-black/80 backdrop-blur-xl border border-gray-800/50 rounded-3xl p-8 md:p-12 shadow-2xl">
+              <div className="text-center">
+                {/* Icono decorativo */}
+                <div className="inline-flex items-center justify-center w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-gradient-to-r from-cyan-500 to-blue-500 mb-6">
+                  <FiMail className="w-8 h-8 md:w-10 md:h-10 text-white" />
+                </div>
+
+                {/* Título y descripción */}
+                <h2
+                  id="subscription-title"
+                  className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4"
+                >
+                  No te pierdas las próximas
+                  <span className="text-cyan-400"> ofertas exclusivas</span>
+                </h2>
+
+                <p className="text-gray-300 text-lg mb-8 leading-relaxed">
+                  Suscríbete y recibe alertas de las mejores promociones antes que nadie.
+                  Ofertas flash, descuentos exclusivos y contenido especial solo para suscriptores.
+                </p>
+
+                {/* Componente de Suscripción */}
+                <div className="max-w-md mx-auto">
+                  <Subscription />
+                </div>
+
+                {/* Beneficios */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
+                  {[
+                    { icon: "🎁", text: "Ofertas exclusivas" },
+                    { icon: "⏰", text: "Alertas tempranas" },
+                    { icon: "🔒", text: "Sin spam" },
+                  ].map((benefit, index) => (
+                    <div
+                      key={index}
+                      className="flex items-center justify-center gap-2 p-3 rounded-xl bg-white/5"
+                    >
+                      <span className="text-xl">{benefit.icon}</span>
+                      <span className="text-sm text-gray-300">{benefit.text}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
-              
-              {/* Título y descripción */}
-              <h2 
-                id="subscription-title"
-                className="text-Black text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4"
-              >
-                ¿No quieres perderte ninguna oferta?
-              </h2>
-              
-              <p className="text-Black/80 text-base sm:text-lg lg:text-xl mb-6 sm:mb-8 leading-relaxed">
-                Suscríbete y recibe las mejores promociones directamente en tu email
-              </p>
-
-              {/* Componente de Suscripción */}
-              <div className="max-w-md mx-auto">
-                <Subscription />
-              </div>
-
-              {/* Texto de seguridad */}
-              <p className="text-Black/60 text-xs sm:text-sm mt-4 sm:mt-6">
-                📍 Sin spam • Puedes cancelar cuando quieras • Protegemos tus datos
-              </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Sección de Información Adicional para clientes */}
-      <section className="section-bg text-neutral py-8 sm:py-12">
+      {/* Sección de Garantías */}
+      <section className="relative py-12 md:py-16 lg:py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 text-center">
-            <div className="p-4 sm:p-6">
-              <div className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
-                <span className="text-xl">🚚</span>
+          <div className="text-center mb-12">
+            <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
+              Compra con
+              <span className="text-green-400"> total confianza</span>
+            </h3>
+            <p className="text-gray-400 max-w-2xl mx-auto">
+              Tu satisfacción es nuestra prioridad. Por eso ofrecemos:
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+            {[
+              {
+                icon: FiTruck,
+                title: "Envío Express",
+                description: "Entrega en 24-48 horas",
+                color: "from-cyan-500 to-blue-500",
+                features: ["Rastreo en tiempo real", "Entrega programada", "Sin costos ocultos"]
+              },
+              {
+                icon: FiShield,
+                title: "Seguridad Garantizada",
+                description: "Transacciones 100% seguras",
+                color: "from-green-500 to-emerald-500",
+                features: ["Pago cifrado", "Protección antifraude", "Certificado SSL"]
+              },
+              {
+                icon: FiRefreshCw,
+                title: "Devolución Flexible",
+                description: "30 días para decidir",
+                color: "from-purple-500 to-pink-500",
+                features: ["Devolución gratuita", "Reembolso rápido", "Sin preguntas"]
+              },
+            ].map((item, index) => (
+              <div
+                key={index}
+                className="group p-6 md:p-8 rounded-2xl bg-gradient-to-br from-gray-900/60 to-black/60 backdrop-blur-sm border border-gray-800/50 hover:border-gray-700/50 transition-all duration-300 hover:scale-105"
+              >
+                <div className="flex flex-col items-center text-center">
+                  {/* Icono */}
+                  <div className={`w-14 h-14 rounded-xl bg-gradient-to-r ${item.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
+                    <item.icon className="w-7 h-7 text-white" />
+                  </div>
+
+                  {/* Título */}
+                  <h4 className="text-xl font-bold text-white mb-2">
+                    {item.title}
+                  </h4>
+
+                  {/* Descripción */}
+                  <p className="text-gray-300 mb-4">
+                    {item.description}
+                  </p>
+
+                  {/* Features */}
+                  <div className="space-y-2">
+                    {item.features.map((feature, idx) => (
+                      <div
+                        key={idx}
+                        className="flex items-center gap-2 text-sm text-gray-400"
+                      >
+                        <div className="w-1.5 h-1.5 rounded-full bg-current" />
+                        <span>{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
-              <h3 className="font-semibold mb-2 text-sm sm:text-base">
-                Envío Rápido
-              </h3>
-              <p className="text-xs sm:text-sm">
-                Recibe tus productos en 24-48 horas
-              </p>
-            </div>
-            
-            <div className="p-4 sm:p-6">
-              <div className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
-                <span className="text-xl">🛡️</span>
-              </div>
-              <h3 className="font-semibold mb-2 text-sm sm:text-base">
-                Pago Seguro
-              </h3>
-              <p className="text-xs sm:text-sm">
-                Transacciones protegidas y cifradas
-              </p>
-            </div>
-            
-            <div className="p-4 sm:p-6">
-              <div className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
-                <span className="text-xl">↩️</span>
-              </div>
-              <h3 className="font-semibold mb-2 text-sm sm:text-base">
-                Devoluciones
-              </h3>
-              <p className="text-xs sm:text-sm">
-                30 días para cambiar de opinión
+            ))}
+          </div>
+
+          {/* CTA adicional */}
+          <div className="text-center mt-12 md:mt-16">
+            <div className="inline-flex items-center gap-3 p-4 rounded-2xl bg-gradient-to-r from-gray-900/50 to-black/50 backdrop-blur-sm border border-gray-800/50">
+              <FiGift className="w-6 h-6 text-cyan-400" />
+              <p className="text-gray-300">
+                <span className="text-white font-semibold">¿Tienes dudas?</span> Nuestro equipo está disponible 24/7 para ayudarte
               </p>
             </div>
           </div>
