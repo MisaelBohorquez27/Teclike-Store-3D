@@ -11,7 +11,7 @@ export default function CartSummary({ cart, itemCount }: CartSummaryProps) {
   if (!cart) {
     return (
       <div className="w-full lg:w-1/3">
-        <div className="CartSummary-bg rounded-lg p-4 sm:p-5 md:p-6 lg:sticky lg:top-4 shadow-lg sm:shadow-none text-center text-gray-500">
+        <div className="bg-gray-200 rounded-lg p-4 sm:p-5 md:p-6 lg:sticky lg:top-4 shadow-lg sm:shadow-none text-center text-gray-500">
           Tu carrito está vacío
         </div>
       </div>
@@ -22,7 +22,7 @@ export default function CartSummary({ cart, itemCount }: CartSummaryProps) {
 
   return (
     <div className="w-full lg:w-1/3">
-      <div className="CartSummary-bg rounded-lg p-4 sm:p-5 md:p-6 lg:sticky lg:top-4 shadow-lg sm:shadow-none">
+      <div className="bg-gray-200 rounded-lg p-4 sm:p-5 md:p-6 lg:sticky lg:top-4 shadow-lg">
         {/* Mobile floating bar */}
         <MobileFloatingBar total={total} cartItems={cartItems} />
 
@@ -48,7 +48,7 @@ const MobileFloatingBar = ({
   total: number;
   cartItems: any[];
 }) => (
-  <div className="fixed bottom-0 left-0 right-0 bg-white border-t shadow-lg p-4 sm:hidden z-10">
+  <div className="fixed bottom-0 left-0 right-0 bg-white text-gray-950 border-t shadow-lg p-4 sm:hidden z-10">
     <div className="flex justify-between items-center">
       <div>
         <span className="font-bold text-base">Total:</span>

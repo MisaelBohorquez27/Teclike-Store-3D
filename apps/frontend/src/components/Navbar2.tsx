@@ -101,7 +101,7 @@ export function Navbar2() {
         <div className="flex justify-between items-center py-2">
           {/* Menú Mobile Button */}
           <button
-            className="md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-all"
+            className="md:hidden p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-all"
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Menú"
             aria-expanded={isOpen}
