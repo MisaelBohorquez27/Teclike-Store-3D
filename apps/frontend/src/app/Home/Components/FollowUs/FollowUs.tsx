@@ -126,7 +126,7 @@ export function FollowUs({
 
           <div className="grid lg:grid-cols-3 gap-8 md:gap-12">
             {/* Instagram Gallery - Ocupa 2/3 */}
-            <div className="lg:col-span-2 mt-18">
+            <div className="lg:col-span-2 mt-18 px-2">
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
                 animate={{ opacity: 1, x: 0 }}

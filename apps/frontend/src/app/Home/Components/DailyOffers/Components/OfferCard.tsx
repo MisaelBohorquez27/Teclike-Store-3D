@@ -4,17 +4,17 @@ import { Rating } from "@/components/Rating";
 import CartIcon from "@/components/CartIcon";
 import { ProductWithOffer } from "@/types/offers";
 import { motion } from "framer-motion";
-import { FiClock, FiZap, FiShoppingCart, FiEye, FiTrendingUp } from "react-icons/fi";
+import Image from "next/image"; // Importar Next Image
+import { FiClock } from "react-icons/fi";
 
 export function OfferCard({ product }: { product: ProductWithOffer }) {
-  // Calcular porcentaje de descuento si no viene en product.discount
   const discountPercentage = product.discount;
 
   return (
     <motion.div
-      whileHover={{ 
+      whileHover={{
         y: -10,
-        transition: { type: "spring", stiffness: 300 }
+        transition: { type: "spring", stiffness: 300 },
       }}
       className="group relative h-full"
     >
@@ -30,21 +30,29 @@ export function OfferCard({ product }: { product: ProductWithOffer }) {
         
         {/* Contenedor de imagen */}
         <div className="relative h-48 md:h-56 mb-4 rounded-xl overflow-hidden">
-          {/* Imagen del producto */}
-          <motion.img
-            src={product.imageUrl}
-            alt={product.name}
-            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-            loading="lazy"
-            decoding="async"
-          />
-          
+          {/* Imagen del producto optimizada */}
+          <motion.div
+            whileHover={{ scale: 1.1 }}
+            transition={{ duration: 0.5 }}
+            className="w-full h-full"
+          >
+            <Image
+              src={product.imageUrl}
+              alt={product.name}
+              fill
+              className="object-scale-down"
+              sizes="(max-width: 768px) 100vw, 
+                     (max-width: 1200px) 50vw, 
+                     33vw"
+              priority={false}
+            />
+          </motion.div>
+
           {/* Overlay de tiempo limitado */}
           <div className="absolute top-3 left-3 px-3 py-1.5 rounded-full bg-black/70 backdrop-blur-sm text-white text-xs font-medium flex items-center gap-1.5">
             <FiClock className="w-3 h-3" />
             <span>24h</span>
           </div>
-          
         </div>
 
         {/* Contenido de la card */}
@@ -64,26 +72,20 @@ export function OfferCard({ product }: { product: ProductWithOffer }) {
           {/* Precios */}
           <div className="mt-auto">
             <div className="flex items-baseline gap-2 mb-2">
-              {/* Precio original tachado */}
               <span className="text-lg text-gray-500 dark:text-gray-400 line-through">
                 {product.originalPrice}
               </span>
-              
-              {/* Badge de ahorro */}
               <span className="px-2 py-1 rounded-md bg-gradient-to-r from-green-100 to-emerald-100 dark:from-green-500/10 dark:to-emerald-500/10 text-green-600 dark:text-green-400 text-xs font-bold">
                 Ahorra {product.savings}
               </span>
             </div>
 
-            {/* Precio oferta destacado */}
             <div className="flex items-end justify-between">
               <div>
                 <div className="text-2xl font-bold text-gray-900 dark:text-white">
                   {product.discountPrice}
                 </div>
-                <p className="text-xs text-gray-400 mt-1">
-                  Precio final
-                </p>
+                <p className="text-xs text-gray-400 mt-1">Precio final</p>
               </div>
 
               {/* Botón de carrito */}
@@ -94,7 +96,6 @@ export function OfferCard({ product }: { product: ProductWithOffer }) {
               >
                 <div className="relative">
                   <CartIcon />
-                  {/* Indicador de nuevo item */}
                   <div className="absolute -top-1 -right-1 w-2 h-2 bg-green-500 rounded-full animate-ping opacity-75 group-hover/cart:hidden" />
                 </div>
               </motion.div>
