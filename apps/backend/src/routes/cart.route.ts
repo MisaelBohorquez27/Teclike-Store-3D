@@ -6,8 +6,13 @@ import {
   removeFromCart,
   clearCart,
 } from "../controllers/cart.controller";
+import { syncCartMiddleware } from "../middleware/syncCart.middleware";
+import { authMiddleware } from "../middleware/auth.middleware";
 
 const router = express.Router();
+
+router.use(authMiddleware);
+router.use(syncCartMiddleware);
 
 router.get("/", getCart);
 router.post("/add", addToCart);

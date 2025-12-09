@@ -31,6 +31,11 @@ enum OfferType {
   FIXED
 }
 
+enum RoleType {
+  ADMIN
+  CUSTOMER
+}
+
 enum OfferRecurrence {
   NONE
   DAILY
@@ -109,24 +114,28 @@ model Cart {
   updatedAt DateTime @updatedAt
 
   // Relations
-  user         User         @relation(fields: [userId], references: [id])
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade) // Asegura eliminación en cascada
   cartProducts CartProduct[]
 
+  @@index([userId]) // Ya tienes @unique, pero por si acaso
   @@map("carts")
 }
 
 model CartProduct {
-  id        Int @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   cartId    Int
   productId Int
-  quantity  Int @default(1)
+  quantity  Int      @default(1)
+  priceCents Int     
   createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   // Relations
-  cart    Cart    @relation(fields: [cartId], references: [id])
-  product Product @relation(fields: [productId], references: [id])
+  cart    Cart    @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade) 
 
   @@unique([cartId, productId])
+  @@index([cartId])
   @@map("cart_products")
 }
 
@@ -201,18 +210,16 @@ model Review {
 
 model User {
   id             Int     @id @default(autoincrement())
-  roleId         Int
+  role           RoleType @default(CUSTOMER)         
   photoURL       String?
-  firstName      String
-  lastName       String
+  username       String  @unique
   phone          String?
   email          String  @unique
   password       String
-  documentType   String?
-  documentNumber String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 
   // Relations
-  role          Role          @relation(fields: [roleId], references: [id])
   orders        Order[]
   cart          Cart?         // 1:1 (cada usuario tiene 1 carrito activo)
   reviews       Review[]
@@ -248,16 +255,6 @@ model PaymentMethod {
   payments Payment[]
 
   @@map("payment_methods")
-}
-
-model Role {
-  id   Int    @id @default(autoincrement())
-  name String @unique
-
-  // Relations
-  users User[]
-
-  @@map("roles")
 }
 
 model Address {

@@ -37,7 +37,7 @@ export async function addOrUpdateCartItem(cartId: number, productId: number, qua
     if (newQuantity > stock) throw new Error(`Solo hay ${stock} unidades disponibles`);
     return prisma.cartProduct.update({ where: { id: existing.id }, data: { quantity: newQuantity } });
   }
-  return prisma.cartProduct.create({ data: { cartId, productId, quantity } });
+  return prisma.cartProduct.create({ data: { cartId, productId, quantity, priceCents: 0 } });
 }
 
 export async function updateCartItem(cartId: number, productId: number, quantity: number) {
@@ -59,4 +59,43 @@ export async function removeCartItem(cartId: number, productId: number) {
 
 export function clearCartItems(cartId: number) {
   return prisma.cartProduct.deleteMany({ where: { cartId } });
+}
+
+export async function updateCart(userId: number, cart: any) {
+  const existingCart = await prisma.cart.findUnique({
+    where: { userId },
+    include: { cartProducts: true },
+  });
+
+  if (!existingCart) return;
+
+  // Limpiar items actuales
+  await prisma.cartProduct.deleteMany({
+    where: { cartId: existingCart.id },
+  });
+
+  // Agregar nuevos items
+  for (const item of cart.cartProducts) {
+    await prisma.cartProduct.create({
+      data: {
+        cartId: existingCart.id,
+        productId: item.productId,
+        quantity: item.quantity,
+        priceCents: item.priceCents || 0,
+      },
+    });
+  }
+
+  // Actualizar timestamp
+  await prisma.cart.update({
+    where: { userId },
+    data: { updatedAt: new Date() },
+  });
+}
+
+export function updateCartTimestamp(userId: number) {
+  return prisma.cart.update({
+    where: { userId },
+    data: { updatedAt: new Date() },
+  });
 }
