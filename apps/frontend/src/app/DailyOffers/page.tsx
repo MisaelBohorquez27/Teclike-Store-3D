@@ -1,7 +1,14 @@
 import { DailyDeals } from "@/app/DailyOffers/components/DailyDeals";
 import { CountdownTimer } from "@/app/DailyOffers/components/CountdownTimer";
 import { Subscription } from "@/components/Subscription";
-import { FiTruck, FiShield, FiRefreshCw, FiZap, FiMail, FiGift } from "react-icons/fi";
+import {
+  FiTruck,
+  FiShield,
+  FiRefreshCw,
+  FiZap,
+  FiMail,
+  FiGift,
+} from "react-icons/fi";
 
 export default function DailyDealsPage() {
   // Configuración de fechas para el countdown
@@ -21,11 +28,11 @@ export default function DailyDealsPage() {
         {/* Efectos de fondo */}
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-gradient-to-br from-cyan-900/20 via-transparent to-blue-900/20" />
-          
+
           {/* Efectos de luz */}
           <div className="absolute top-1/4 -left-32 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl" />
           <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl" />
-          
+
           {/* Patrón sutil */}
           <div className="absolute inset-0 opacity-10">
             <div className="absolute inset-0 bg-[linear-gradient(rgba(6,182,212,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(6,182,212,0.1)_1px,transparent_1px)] bg-[size:80px_80px]" />
@@ -34,16 +41,8 @@ export default function DailyDealsPage() {
 
         <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center pt-20 md:pt-24 lg:pt-28 pb-16 md:pb-20 lg:pb-24">
-            {/* Badge destacado */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-red-500/10 to-orange-500/10 border border-red-500/20 mb-6">
-              <FiZap className="w-4 h-4 text-red-400 animate-pulse" />
-              <span className="text-red-300 text-sm font-bold tracking-wide">
-                OFERTAS RELÁMPAGO
-              </span>
-            </div>
-            
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-black mb-6">
-              <span className="bg-gradient-to-r from-red-400 via-orange-400 to-yellow-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
                 ¡Solo Hoy!
               </span>
               <br />
@@ -64,16 +63,34 @@ export default function DailyDealsPage() {
             {/* Stats de ofertas */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
               {[
-                { value: "50+", label: "Ofertas Activas", color: "text-cyan-400" },
-                { value: "90%", label: "Descuento Promedio", color: "text-red-400" },
-                { value: "24h", label: "Tiempo Restante", color: "text-orange-400" },
-                { value: "500+", label: "Comprados Hoy", color: "text-green-400" },
+                {
+                  value: "10+",
+                  label: "Ofertas Activas",
+                  color: "text-cyan-400",
+                },
+                {
+                  value: "90%",
+                  label: "Descuento Promedio",
+                  color: "text-cyan-400",
+                },
+                {
+                  value: "24h",
+                  label: "Tiempo Completo",
+                  color: "text-cyan-400",
+                },
+                {
+                  value: "50+",
+                  label: "Comprados Hoy",
+                  color: "text-cyan-400",
+                },
               ].map((stat, index) => (
                 <div
                   key={index}
                   className="p-4 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10"
                 >
-                  <div className={`text-2xl md:text-3xl font-bold ${stat.color} mb-1`}>
+                  <div
+                    className={`text-2xl md:text-3xl font-bold ${stat.color} mb-1`}
+                  >
                     {stat.value}
                   </div>
                   <div className="text-xs text-gray-400">{stat.label}</div>
@@ -84,7 +101,6 @@ export default function DailyDealsPage() {
         </div>
 
         {/* Línea decorativa inferior */}
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-red-500/30 to-transparent" />
       </section>
 
       {/* Sección principal de ofertas */}
@@ -92,10 +108,10 @@ export default function DailyDealsPage() {
         className="relative py-16 md:py-20 lg:py-24"
         aria-labelledby="flash-deals-title"
       >
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-transparent" />
-        
+        <div className="absolute inset-0 bg-gradient-to-bl from-blue-900/20 via-transparent to-cyan-900/20" />
+
         <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Encabezado de sección */}
+          {/* Encabezado de sección
           <div className="text-center mb-12 md:mb-16">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
               <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
@@ -105,12 +121,13 @@ export default function DailyDealsPage() {
             <p className="text-gray-400 text-lg max-w-2xl mx-auto">
               Productos seleccionados con los mayores descuentos del día
             </p>
-          </div>
+          </div> */}
 
           <div className="relative">
             <DailyDeals />
           </div>
         </div>
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent" />
       </section>
 
       {/* Banner de Suscripción Modernizado */}
@@ -120,8 +137,8 @@ export default function DailyDealsPage() {
       >
         {/* Fondo con efectos */}
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-br from-cyan-900/30 via-transparent to-blue-900/30" />
-          <div className="absolute -top-32 -right-32 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl" />
+          <div className="absolute inset-0 bg-gradient-to-br from-cyan-900/20 via-transparent to-blue-900/20" />
+          <div className="absolute top-32 -right-32 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl" />
         </div>
 
         <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
@@ -143,8 +160,9 @@ export default function DailyDealsPage() {
                 </h2>
 
                 <p className="text-gray-300 text-lg mb-8 leading-relaxed">
-                  Suscríbete y recibe alertas de las mejores promociones antes que nadie.
-                  Ofertas flash, descuentos exclusivos y contenido especial solo para suscriptores.
+                  Suscríbete y recibe alertas de las mejores promociones antes
+                  que nadie. Ofertas flash, descuentos exclusivos y contenido
+                  especial solo para suscriptores.
                 </p>
 
                 {/* Componente de Suscripción */}
@@ -164,7 +182,9 @@ export default function DailyDealsPage() {
                       className="flex items-center justify-center gap-2 p-3 rounded-xl bg-white/5"
                     >
                       <span className="text-xl">{benefit.icon}</span>
-                      <span className="text-sm text-gray-300">{benefit.text}</span>
+                      <span className="text-sm text-gray-300">
+                        {benefit.text}
+                      </span>
                     </div>
                   ))}
                 </div>
@@ -176,11 +196,18 @@ export default function DailyDealsPage() {
 
       {/* Sección de Garantías */}
       <section className="relative py-12 md:py-16 lg:py-20">
+
+        {/* Fondo con efectos */}
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-gradient-to-bl from-blue-900/20 via-transparent to-cyan-900/20" />
+          <div className="absolute -top-32 -right-32 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl" />
+        </div>
+
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
+            <h3 className="text-2xl md:text-3xl font-bold text-gray-100 mb-4">
               Compra con
-              <span className="text-green-400"> total confianza</span>
+              <span className="text-cyan-400"> total confianza</span>
             </h3>
             <p className="text-gray-400 max-w-2xl mx-auto">
               Tu satisfacción es nuestra prioridad. Por eso ofrecemos:
@@ -194,21 +221,33 @@ export default function DailyDealsPage() {
                 title: "Envío Express",
                 description: "Entrega en 24-48 horas",
                 color: "from-cyan-500 to-blue-500",
-                features: ["Rastreo en tiempo real", "Entrega programada", "Sin costos ocultos"]
+                features: [
+                  "Rastreo en tiempo real",
+                  "Entrega programada",
+                  "Sin costos ocultos",
+                ],
               },
               {
                 icon: FiShield,
                 title: "Seguridad Garantizada",
                 description: "Transacciones 100% seguras",
                 color: "from-green-500 to-emerald-500",
-                features: ["Pago cifrado", "Protección antifraude", "Certificado SSL"]
+                features: [
+                  "Pago cifrado",
+                  "Protección antifraude",
+                  "Certificado SSL",
+                ],
               },
               {
                 icon: FiRefreshCw,
                 title: "Devolución Flexible",
                 description: "30 días para decidir",
                 color: "from-purple-500 to-pink-500",
-                features: ["Devolución gratuita", "Reembolso rápido", "Sin preguntas"]
+                features: [
+                  "Devolución gratuita",
+                  "Reembolso rápido",
+                  "Sin preguntas",
+                ],
               },
             ].map((item, index) => (
               <div
@@ -217,7 +256,9 @@ export default function DailyDealsPage() {
               >
                 <div className="flex flex-col items-center text-center">
                   {/* Icono */}
-                  <div className={`w-14 h-14 rounded-xl bg-gradient-to-r ${item.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
+                  <div
+                    className={`w-14 h-14 rounded-xl bg-gradient-to-r ${item.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}
+                  >
                     <item.icon className="w-7 h-7 text-white" />
                   </div>
 
@@ -227,9 +268,7 @@ export default function DailyDealsPage() {
                   </h4>
 
                   {/* Descripción */}
-                  <p className="text-gray-300 mb-4">
-                    {item.description}
-                  </p>
+                  <p className="text-gray-300 mb-4">{item.description}</p>
 
                   {/* Features */}
                   <div className="space-y-2">
@@ -253,7 +292,8 @@ export default function DailyDealsPage() {
             <div className="inline-flex items-center gap-3 p-4 rounded-2xl bg-gradient-to-r from-gray-900/50 to-black/50 backdrop-blur-sm border border-gray-800/50">
               <FiGift className="w-6 h-6 text-cyan-400" />
               <p className="text-gray-300">
-                <span className="text-white font-semibold">¿Tienes dudas?</span> Nuestro equipo está disponible 24/7 para ayudarte
+                <span className="text-white font-semibold">¿Tienes dudas?</span>{" "}
+                Nuestro equipo está disponible 24/7 para ayudarte
               </p>
             </div>
           </div>
