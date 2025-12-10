@@ -5,7 +5,7 @@ export function findReviewsByProduct(productId: number) {
   return prisma.review.findMany({
     where: { productId },
     include: {
-      user: { select: { id: true, firstName: true, photoURL: true } },
+      user: { select: { id: true, username: true, photoURL: true } },
       product: { select: { id: true, name: true } },
     },
     orderBy: { reviewDate: "desc" },
@@ -15,11 +15,11 @@ export function findReviewsByProduct(productId: number) {
 export function findRecentReviews(take: number) {
   return prisma.review.findMany({
     include: {
-      user: { select: { id: true, firstName: true, photoURL: true } },
+      user: { select: { id: true, username: true, photoURL: true } },
       product: { select: { id: true, name: true } },
     },
     take,
-    orderBy: { id: "desc" },
+    orderBy: { reviewDate: "desc" }, // Cambio: usar reviewDate en lugar de id
   });
 }
 
@@ -46,12 +46,13 @@ export function createReview(data: {
 }) {
   return prisma.review.create({
     data: {
-      ...data,
-      comment: data.comment ?? "",
-      rating: data.rating ?? 0,
+      userId: data.userId,
+      productId: data.productId,
+      comment: data.comment || "", // Cambio: usar || en lugar de ??
+      rating: data.rating,
     },
     include: {
-      user: { select: { id: true, firstName: true, photoURL: true } },
+      user: { select: { id: true, username: true, photoURL: true } }, // Cambio: username en lugar de us
       product: { select: { id: true, name: true } },
     },
   });

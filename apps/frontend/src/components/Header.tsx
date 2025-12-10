@@ -78,13 +78,15 @@ export function Header() {
                 </button>
               </div>
             ) : (
-              <button
+              <Button
+                variant="primary"
+                size="xs"
                 onClick={() => setIsAuthModalOpen(true)}
                 className="bg-gray-700/80 backdrop-blur-sm hover:bg-cyan-500 hover:text-gray-900 px-3 py-1.5 rounded-lg flex items-center space-x-2 hover:scale-105 transition-all duration-100 text-sm"
               >
                 <FiUser size={16} />
                 <span>Ingresar</span>
-              </button>
+              </Button>
             )}
           </div>
         </div>

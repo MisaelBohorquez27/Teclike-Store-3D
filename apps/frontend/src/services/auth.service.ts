@@ -1,6 +1,5 @@
+import httpClient from "./httpClient";
 import { AuthResponse, LoginFormData, RegisterFormData } from "../types/auth.types";
-
-const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3000/api";
 
 const TOKEN_KEY = "accessToken";
 const REFRESH_TOKEN_KEY = "refreshToken";
@@ -8,57 +7,30 @@ const USER_KEY = "user";
 
 export class AuthService {
   static async login(data: LoginFormData): Promise<AuthResponse> {
-    const response = await fetch(`${API_URL}/auth/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-
-    if (!response.ok) {
-      const error = await response.json();
-      throw new Error(error.message || "Error en login");
+    try {
+      const response = await httpClient.post<AuthResponse>("/auth/login", data);
+      this.saveTokens(response.data.accessToken, response.data.refreshToken);
+      this.saveUser(response.data.user);
+      return response.data;
+    } catch (error: any) {
+      throw new Error(error.response?.data?.message || "Error en login");
     }
-
-    const result: AuthResponse = await response.json();
-    this.saveTokens(result.accessToken, result.refreshToken);
-    this.saveUser(result.user);
-    return result;
   }
 
   static async register(data: RegisterFormData): Promise<AuthResponse> {
-    const response = await fetch(`${API_URL}/auth/register`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-
-    if (!response.ok) {
-      const error = await response.json();
-      throw new Error(error.message || "Error en registro");
+    try {
+      const response = await httpClient.post<AuthResponse>("/auth/register", data);
+      this.saveTokens(response.data.accessToken, response.data.refreshToken);
+      this.saveUser(response.data.user);
+      return response.data;
+    } catch (error: any) {
+      throw new Error(error.response?.data?.message || "Error en registro");
     }
-
-    const result: AuthResponse = await response.json();
-    this.saveTokens(result.accessToken, result.refreshToken);
-    this.saveUser(result.user);
-    return result;
   }
 
   static async logout(): Promise<void> {
     try {
-      const token = this.getAccessToken();
-      if (token) {
-        await fetch(`${API_URL}/auth/logout`, {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        });
-      }
+      await httpClient.post("/auth/logout");
     } catch (error) {
       console.error("Error en logout:", error);
     } finally {
@@ -68,50 +40,33 @@ export class AuthService {
   }
 
   static async refreshToken(): Promise<string> {
-    const refreshToken = this.getRefreshToken();
-    if (!refreshToken) {
-      throw new Error("No refresh token available");
-    }
+    try {
+      const refreshToken = this.getRefreshToken();
+      if (!refreshToken) {
+        throw new Error("No refresh token available");
+      }
 
-    const response = await fetch(`${API_URL}/auth/refresh`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ refreshToken }),
-    });
-
-    if (!response.ok) {
+      const response = await httpClient.post<AuthResponse>("/auth/refresh-token", {
+        refreshToken,
+      });
+      this.saveTokens(response.data.accessToken, response.data.refreshToken);
+      return response.data.accessToken;
+    } catch (error) {
       this.clearTokens();
-      throw new Error("Token refresh failed");
+      throw error;
     }
-
-    const result = await response.json();
-    this.saveTokens(result.accessToken, result.refreshToken);
-    return result.accessToken;
   }
 
   static async getMe(): Promise<any> {
-    const token = this.getAccessToken();
-    if (!token) {
-      throw new Error("No token available");
-    }
-
-    const response = await fetch(`${API_URL}/auth/me`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-
-    if (!response.ok) {
-      if (response.status === 401) {
+    try {
+      const response = await httpClient.get("/auth/me");
+      return response.data;
+    } catch (error: any) {
+      if (error.response?.status === 401) {
         this.clearTokens();
       }
-      throw new Error("Failed to get user");
+      throw error;
     }
-
-    return await response.json();
   }
 
   // Token management
