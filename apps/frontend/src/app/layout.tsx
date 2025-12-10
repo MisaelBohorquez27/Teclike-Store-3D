@@ -1,9 +1,9 @@
 // app/layout.tsx
 import "./globals.css";
-import { Navbar } from "@/components/Navbar";
+import { AuthProvider } from "@/context/AuthContext";
 import { Footer } from "@/components/Footer";
-import { Navbar2 } from "@/components/Navbar2";
 import { Header } from "@/components/Header";
+import { Navbar2 } from "@/components/Navbar2";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -15,9 +15,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <div className="absolute -bottom-32 -right-32 w-[28rem] h-[28rem] bg-cyan-500/10 rounded-full blur-[160px]" />
         </div>
 
-        <Header />
-        <main>{children}</main>
-        <Footer />
+        <AuthProvider>
+          <Header />
+          <Navbar2 />
+          <main>{children}</main>
+          <Footer />
+        </AuthProvider>
       </body>
     </html>
   );

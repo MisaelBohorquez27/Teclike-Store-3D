@@ -30,7 +30,7 @@ export default function CartList({
 
   return (
     <div className="w-full lg:w-2/3">
-      <div className="card-bg text-neutral rounded-lg shadow-md p-6">
+      <div className="bg-transparent text-neutral rounded-lg p-6">
         {/* Encabezados */}
         <CartTableHeader />
         {[...cart.items]

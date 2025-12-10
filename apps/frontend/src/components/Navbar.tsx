@@ -8,6 +8,9 @@ import CartIcon from "./CartIcon";
 import Button from "./PagesButtons";
 import { SearchBar } from "./SearchBar";
 import { ThemeToggle } from "./Theme";
+import { useAuth } from "../context/AuthContext";
+import { useRouter } from "next/navigation";
+import "@/styles/components/Navbar.css";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,6 +18,8 @@ export function Navbar() {
   const lastYRef = useRef(0);
   const tickingRef = useRef(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const { user, isAuthenticated, logout } = useAuth();
+  const router = useRouter();
 
   // Efecto para navbar con scroll mejorado
   useEffect(() => {
@@ -84,6 +89,11 @@ export function Navbar() {
       {text}
     </Link>
   );
+
+  const handleLogout = () => {
+    logout();
+    router.push("/auth/login");
+  };
 
   return (
     <nav
@@ -209,13 +219,36 @@ export function Navbar() {
 
               {/* Sección adicional para mobile */}
               <div className="pt-4 mt-4 border-t border-neutral-3 dark:border-neutral-4">
-                <Link
-                  href="/login"
-                  className="block py-3 px-4 btn-primary rounded-lg text-center font-semibold transition-all hover:scale-105"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Iniciar Sesión
-                </Link>
+                {isAuthenticated && user ? (
+                  <div className="flex flex-col space-y-2">
+                    <span className="text-center text-sm text-neutral-500 dark:text-neutral-400">
+                      Hola, {user.username}
+                    </span>
+                    <button
+                      onClick={handleLogout}
+                      className="block w-full py-3 px-4 btn-primary rounded-lg text-center font-semibold transition-all hover:scale-105"
+                    >
+                      Cerrar Sesión
+                    </button>
+                  </div>
+                ) : (
+                  <div className="flex flex-col space-y-2">
+                    <Link
+                      href="/login"
+                      className="block py-3 px-4 btn-primary rounded-lg text-center font-semibold transition-all hover:scale-105"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      Iniciar Sesión
+                    </Link>
+                    <Link
+                      href="/register"
+                      className="block py-3 px-4 btn-secondary rounded-lg text-center font-semibold transition-all hover:scale-105"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      Registrarse
+                    </Link>
+                  </div>
+                )}
               </div>
             </div>
           </div>

@@ -43,7 +43,7 @@ export default function CartPage() {
   };
 
   return (
-    <main className="section-bg-2 text-neutral min-h-screen pb-20 sm:pb-12 pt-24 sm:pt-28 md:pt-30">
+    <main className="bg-gray-100 text-gray-950 text-neutral min-h-screen pb-20 sm:pb-12 pt-24 sm:pt-28 md:pt-30">
       <div className="bg-transparent container mx-auto px-4 sm:px-6">
         <CartHeader itemCount={itemCount} loading={loading} />
         {renderContent()}
