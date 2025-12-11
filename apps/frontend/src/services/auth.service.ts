@@ -45,8 +45,20 @@ export class AuthService {
     } catch (error) {
       console.error("Error en logout:", error);
     } finally {
+      // Limpiar tokens y usuario SIEMPRE
       this.clearTokens();
       this.clearUser();
+      
+      // Detener sincronización automática y limpiar carrito local
+      try {
+        const { CartService } = await import('./cartService');
+        CartService.stopAutoSync();
+        CartService.clearLocalCart();
+      } catch (error) {
+        console.warn('Error limpiando carrito:', error);
+      }
+      
+      console.log('✅ Sesión cerrada correctamente');
     }
   }
 
@@ -95,18 +107,33 @@ export class AuthService {
   }
 
   static clearTokens(): void {
+    console.log('🧹 Limpiando tokens del localStorage...');
     localStorage.removeItem(TOKEN_KEY);
     localStorage.removeItem(REFRESH_TOKEN_KEY);
+    // Verificar que realmente se borraron
+    const token = localStorage.getItem(TOKEN_KEY);
+    const refreshToken = localStorage.getItem(REFRESH_TOKEN_KEY);
+    if (!token && !refreshToken) {
+      console.log('✅ Tokens limpiados correctamente');
+    } else {
+      console.error('❌ Error: Los tokens no se borraron');
+    }
   }
 
   static isTokenExpired(): boolean {
     const token = this.getAccessToken();
-    if (!token) return true;
+    if (!token) {
+      console.log('⏰ No hay token - considerado expirado');
+      return true;
+    }
 
     try {
       const payload = JSON.parse(atob(token.split(".")[1]));
-      return payload.exp * 1000 < Date.now();
+      const isExpired = payload.exp * 1000 < Date.now();
+      console.log(`⏰ Token exp: ${new Date(payload.exp * 1000).toISOString()}, Expirado: ${isExpired}`);
+      return isExpired;
     } catch {
+      console.log('⏰ Error decodificando token - considerado expirado');
       return true;
     }
   }
@@ -114,6 +141,7 @@ export class AuthService {
   // User management
   static saveUser(user: any): void {
     localStorage.setItem(USER_KEY, JSON.stringify(user));
+    console.log('💾 Usuario guardado en localStorage');
   }
 
   static getUser(): any {
@@ -122,10 +150,15 @@ export class AuthService {
   }
 
   static clearUser(): void {
+    console.log('🧹 Limpiando usuario del localStorage...');
     localStorage.removeItem(USER_KEY);
   }
 
   static isAuthenticated(): boolean {
-    return !!this.getAccessToken() && !this.isTokenExpired();
+    const token = this.getAccessToken();
+    const expired = this.isTokenExpired();
+    const result = !!token && !expired;
+    console.log(`🔐 isAuthenticated(): token=${!!token}, expirado=${expired}, resultado=${result}`);
+    return result;
   }
 }

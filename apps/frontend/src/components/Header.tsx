@@ -14,8 +14,12 @@ export function Header() {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const { isAuthenticated, user, logout } = useAuth();
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     logout();
+    // Recargar la página para asegurar que se limpie todo
+    setTimeout(() => {
+      window.location.reload();
+    }, 300);
   };
 
   return (

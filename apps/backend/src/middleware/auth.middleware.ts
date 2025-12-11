@@ -25,7 +25,7 @@ export function authMiddleware(
     const payload = authService.verifyAccessToken(token);
 
     req.user = payload;
-    req.userId = payload.id;
+    req.userId = payload.userId;
     req.isAuthenticated = true;
 
     next();

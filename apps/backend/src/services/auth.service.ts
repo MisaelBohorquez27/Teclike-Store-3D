@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import * as userRepo from "../repositories/user.repository";
+import prisma from "../prisma";
 import { User, LoginRequest, RegisterRequest, TokenPair, JWTPayload } from "../types/auth.types";
 
 const ACCESS_TOKEN_EXPIRY = "15m";
@@ -78,6 +79,15 @@ export async function register(request: RegisterRequest) {
     password: hashedPassword,
   });
 
+  // Crear carrito automáticamente para el nuevo usuario
+  await prisma.cart.create({
+    data: {
+      userId: user.id,
+    },
+  });
+
+  console.log(`✅ Carrito creado para nuevo usuario: ${user.id}`);
+
   // Generar tokens
   const tokens = generateTokens(user);
 
@@ -92,7 +102,7 @@ export async function refreshToken(token: string): Promise<TokenPair> {
     const payload = jwt.verify(token, REFRESH_SECRET) as JWTPayload;
 
     // Buscar usuario
-    const user = await userRepo.findUserById(payload.id);
+    const user = await userRepo.findUserById(payload.userId);
     if (!user) {
       throw new Error("Usuario no encontrado");
     }
@@ -115,7 +125,7 @@ export function verifyAccessToken(token: string): JWTPayload {
 export async function validateToken(token: string): Promise<User | null> {
   try {
     const payload = verifyAccessToken(token);
-    const user = await userRepo.findUserById(payload.id);
+    const user = await userRepo.findUserById(payload.userId);
     return user || null;
   } catch (error) {
     return null;

@@ -19,7 +19,7 @@ export function findProductById(id: number) {
     where: { id },
     include: {
       categoryProducts: { include: { category: true } },
-      reviews: { include: { user: { select: { id: true, firstName: true } } } },
+      reviews: { include: { user: { select: { id: true, username: true } } } },
     },
   });
 }
@@ -29,7 +29,7 @@ export function findProductBySlug(slug: string) {
     where: { slug },
     include: {
       categoryProducts: { include: { category: true } },
-      reviews: { include: { user: { select: { id: true, firstName: true } } } },
+      reviews: { include: { user: { select: { id: true, username: true } } } },
     },
   });
 }

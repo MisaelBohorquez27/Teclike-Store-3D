@@ -1,6 +1,6 @@
 import Redis from "ioredis";
 
-const redis = new Redis(process.env.REDIS_URL || "redis://localhost:6379");
+export const redis = new Redis(process.env.REDIS_URL || "redis://localhost:6379");
 const CART_EXPIRY = 24 * 60 * 60; // 24 horas
 const SYNC_INTERVAL = 5 * 60; // 5 minutos
 

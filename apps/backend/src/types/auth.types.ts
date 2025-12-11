@@ -31,14 +31,29 @@ export interface AuthResponse {
 }
 
 export interface JWTPayload {
-  id: number;
+  userId: number;
   email: string;
   username: string;
-  iat: number;
-  exp: number;
+  iat?: number;
+  exp?: number;
 }
 
 export interface TokenPair {
   accessToken: string;
   refreshToken: string;
+}
+
+export interface UserPayload { // Para request.user usa JWTPayload
+  userId: number;
+  email: string;
+  iat?: number;
+  exp?: number;
+}
+
+declare global {
+  namespace Express {
+    interface Request {
+      user?: JWTPayload;
+    }
+  }
 }

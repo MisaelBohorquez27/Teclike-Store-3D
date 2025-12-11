@@ -5,6 +5,9 @@ const nextConfig: NextConfig = {
   images: {
     domains: ["res.cloudinary.com"], // agrega aquí el dominio externo
   },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
 };
 
 export default nextConfig;

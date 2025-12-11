@@ -10,18 +10,35 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  // Verificar usuario al cargar
+  // Verificar usuario al cargar y sincronizar estado de autenticación
   useEffect(() => {
     const initAuth = async () => {
+      console.log('🔄 Inicializando AuthContext...');
       try {
-        if (AuthService.isAuthenticated()) {
+        // Verificar si hay token válido
+        const hasValidToken = AuthService.isAuthenticated();
+        console.log(`✅ Token válido: ${hasValidToken}`);
+        setIsAuthenticated(hasValidToken);
+
+        if (hasValidToken) {
           const user = AuthService.getUser();
+          console.log(`👤 Usuario cargado: ${user?.username}`);
           setUser(user);
+        } else {
+          // Si no hay token válido, limpiar todo
+          console.log('🗑️ Sin token válido - limpiando todo');
+          setUser(null);
+          AuthService.clearTokens();
+          AuthService.clearUser();
         }
       } catch (error) {
-        console.error("Error initializing auth:", error);
+        console.error("❌ Error initializing auth:", error);
+        setUser(null);
+        setIsAuthenticated(false);
         AuthService.clearTokens();
+        AuthService.clearUser();
       } finally {
         setIsLoading(false);
       }
@@ -36,9 +53,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     try {
       const response = await AuthService.login({ email, password });
       setUser(response.user);
+      setIsAuthenticated(true);
     } catch (err) {
       const message = err instanceof Error ? err.message : "Error en login";
       setError(message);
+      setIsAuthenticated(false);
+      setUser(null);
       throw err;
     } finally {
       setIsLoading(false);
@@ -61,9 +81,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         confirmPassword,
       });
       setUser(response.user);
+      setIsAuthenticated(true);
     } catch (err) {
       const message = err instanceof Error ? err.message : "Error en registro";
       setError(message);
+      setIsAuthenticated(false);
+      setUser(null);
       throw err;
     } finally {
       setIsLoading(false);
@@ -73,6 +96,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const logout = () => {
     AuthService.logout();
     setUser(null);
+    setIsAuthenticated(false);
     setError(null);
   };
 
@@ -84,7 +108,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     <AuthContext.Provider
       value={{
         user,
-        isAuthenticated: !!user,
+        isAuthenticated,
         isLoading,
         error,
         login,

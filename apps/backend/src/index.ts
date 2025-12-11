@@ -31,7 +31,7 @@ app.use(
 app.use(express.json()); // Aqui para entender json en las peticiones
 
 // Importas las Rutas y las usas
-app.use("/api/auth", authRouter); // ← AÑADE ESTO
+app.use("/api/auth", authRouter);
 app.use("/api/products", productsRouter);
 app.use("/api/offers", offersRouter);
 app.use("/api/bestSellerWeek", BestSellerWeek);

@@ -1,5 +1,5 @@
 "use client";
-import { useCart } from "@/hooks/useCart";
+import { CartResponse, useCart } from "@/hooks/useCart";
 import CartList from "./CartList";
 import { EmptyCart } from "./EmptyCart";
 import CartSummary from "./cartSummary";
@@ -14,6 +14,19 @@ export default function CartPage() {
     itemCount,
     clearCart,
   } = useCart();
+
+  const handleUpdateQuantity = async (
+    productId: number,
+    quantity: number
+  ) => {
+    await updateQuantity(productId, quantity);
+    return cart as CartResponse;
+  };
+
+  const handleRemove = async (productId: number) => {
+    await removeFromCart(productId);
+    return cart as CartResponse;
+  };
 
   const handleClearCart = async () => {
     if (!confirm("¿Estás seguro de que quieres vaciar el carrito?")) return;
@@ -33,8 +46,8 @@ export default function CartPage() {
       <div className="flex flex-col-reverse sm:flex-col lg:flex-row gap-6 sm:gap-8">
         <CartList
           cart={cart}
-          onUpdateQuantity={updateQuantity}
-          onRemove={removeFromCart}
+          onUpdateQuantity={handleUpdateQuantity}
+          onRemove={handleRemove}
           onClearCart={handleClearCart}
         />
         <CartSummary cart={cart} itemCount={itemCount} />
