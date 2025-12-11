@@ -4,7 +4,7 @@ import { PrismaClient } from '@prisma/client';
 export async function seedCoreData(prisma: PrismaClient) {
   console.log('🌱 Insertando datos core...');
 
-  // Roles
+  {/* Roles 
   const roles = await Promise.all([
     prisma.role.upsert({
       where: { name: 'Admin' },
@@ -23,7 +23,7 @@ export async function seedCoreData(prisma: PrismaClient) {
     })
   ]);
 
-  console.log('✅ Roles insertados');
+  console.log('✅ Roles insertados');*/}
 
   // Métodos de Pago
   const paymentMethods = await Promise.all([
@@ -51,5 +51,5 @@ export async function seedCoreData(prisma: PrismaClient) {
 
   console.log('✅ Métodos de pago insertados');
 
-  return { roles, paymentMethods };
+  return { paymentMethods };
 }

@@ -1,25 +1,25 @@
 "use client";
 
-import { useState, useEffect, useCallback, useMemo } from 'react';
-import { CartService } from '@/services/cartService';
-import { CartResponse } from '@/types/cart';
-import { mapCartItems } from '@/utils/cartMapper';
+import { useState, useCallback, useEffect } from "react";
+import { CartService } from "@/services/cartService";
+import { CartResponse } from "@/types/cart";
+import { mapCartItems } from "@/utils/cartMapper";
 
 interface UseCartReturn {
   cart: CartResponse | null;
   cartItems: ReturnType<typeof mapCartItems>;
   loading: boolean;
   error: string | null;
-  addToCart: (productId: number, quantity?: number) => Promise<CartResponse>;
-  updateQuantity: (productId: number, quantity: number) => Promise<CartResponse>;
-  removeFromCart: (productId: number) => Promise<CartResponse>;
-  clearCart: () => Promise<{ message: string }>;
-  refetch: () => Promise<void>;
   itemCount: number;
-  subtotal: number;
-  tax: number;
-  shipping: number;
-  total: number;
+  cartTotal: number;
+  addToCart: (productId: number, quantity?: number) => Promise<void>;
+  updateQuantity: (productId: number, quantity: number) => Promise<void>;
+  removeFromCart: (productId: number) => Promise<void>;
+  clearCart: () => Promise<void>;
+  isProductInCart: (productId: number) => boolean;
+  getProductQuantity: (productId: number) => number;
+  refetchCart: () => Promise<void>;
+  syncCartOnLogin: () => Promise<void>;
 }
 
 export const useCart = (): UseCartReturn => {
@@ -27,82 +27,119 @@ export const useCart = (): UseCartReturn => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const cartItems = useMemo(() => mapCartItems(cart), [cart]);
-
-  const itemCount = useMemo(
-    () => cartItems.reduce((count, item) => count + item.quantity, 0),
-    [cartItems]
-  );
-
-  // ⚡ Ahora usamos directamente los valores del backend
-  const subtotal = cart?.subtotal ?? 0;
-  const tax = cart?.tax ?? 0;
-  const shipping = cart?.shipping ?? 0;
-  const total = cart?.total ?? 0;
-
-  const getCart = useCallback(async () => {
+  // Obtener carrito al montar el componente
+  const fetchCart = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
       const cartData = await CartService.getCart();
       setCart(cartData);
-    } catch (err) {
-      const errorMessage =
-        err instanceof Error ? err.message : 'Error desconocido al cargar el carrito';
+    } catch (err: any) {
+      const errorMessage = err.message || "Error al cargar el carrito";
+      console.error(errorMessage);
       setError(errorMessage);
-      console.error('Error en getCart:', err);
+      setCart(CartService.getEmptyCart());
     } finally {
       setLoading(false);
     }
   }, []);
 
-  const addToCart = useCallback(async (productId: number, quantity: number = 1): Promise<CartResponse> => {
-    const updatedCart = await CartService.addToCart(productId, quantity);
-    setCart(updatedCart);
-    return updatedCart;
-  }, []);
-
-  const removeFromCart = useCallback(async (productId: number): Promise<CartResponse> => {
-    const updatedCart = await CartService.removeFromCart(productId);
-    setCart(updatedCart);
-    return updatedCart;
-  }, []);
-
-  const updateQuantity = useCallback(
-    async (productId: number, quantity: number): Promise<CartResponse> => {
-      if (quantity === 0) return await removeFromCart(productId);
-      const updatedCart = await CartService.updateQuantity(productId, quantity);
-      setCart(updatedCart);
-      return updatedCart;
-    },
-    [removeFromCart]
-  );
-
-  const clearCart = useCallback(async (): Promise<{ message: string }> => {
-  const result = await CartService.clearCart();
-  await getCart(); // ← esto asegura que el estado se actualice correctamente
-  return result;
-}, [getCart]);
+  // Sincronizar carrito cuando el usuario se loguea
+  const syncCartOnLogin = useCallback(async () => {
+    try {
+      setError(null);
+      const syncedCart = await CartService.syncLocalCartWithServer();
+      setCart(syncedCart);
+      console.log('✅ Carrito sincronizado después del login');
+    } catch (err: any) {
+      const errorMessage = err.message || "Error al sincronizar carrito";
+      console.warn(errorMessage);
+      // No lanzar error, solo avisar
+      await fetchCart(); // Cargar el carrito del servidor como fallback
+    }
+  }, [fetchCart]);
 
   useEffect(() => {
-    getCart();
-  }, [getCart]);
+    fetchCart();
+  }, [fetchCart]);
+
+  // Agregar al carrito
+  const handleAddToCart = useCallback(
+    async (productId: number, quantity: number = 1) => {
+      try {
+        setError(null);
+        const updatedCart = await CartService.addToCart(productId, quantity);
+        setCart(updatedCart);
+      } catch (err: any) {
+        const errorMessage = err.message || "Error al agregar al carrito";
+        setError(errorMessage);
+        throw err;
+      }
+    },
+    []
+  );
+
+  // Actualizar cantidad
+  const handleUpdateQuantity = useCallback(
+    async (productId: number, quantity: number) => {
+      try {
+        setError(null);
+        const updatedCart = await CartService.updateQuantity(productId, quantity);
+        setCart(updatedCart);
+      } catch (err: any) {
+        const errorMessage = err.message || "Error al actualizar cantidad";
+        setError(errorMessage);
+        throw err;
+      }
+    },
+    []
+  );
+
+  // Eliminar del carrito
+  const handleRemoveFromCart = useCallback(async (productId: number) => {
+    try {
+      setError(null);
+      const updatedCart = await CartService.removeFromCart(productId);
+      setCart(updatedCart);
+    } catch (err: any) {
+      const errorMessage = err.message || "Error al eliminar del carrito";
+      setError(errorMessage);
+      throw err;
+    }
+  }, []);
+
+  // Vaciar carrito
+  const handleClearCart = useCallback(async () => {
+    try {
+      setError(null);
+      const updatedCart = await CartService.clearCart();
+      setCart(updatedCart);
+    } catch (err: any) {
+      const errorMessage = err.message || "Error al vaciar el carrito";
+      setError(errorMessage);
+      throw err;
+    }
+  }, []);
+
+  const cartItems = mapCartItems(cart);
+  const itemCount = CartService.getCartItemCount(cart);
+  const cartTotal = CartService.getCartTotal(cart);
 
   return {
     cart,
     cartItems,
     loading,
     error,
-    addToCart,
-    updateQuantity,
-    removeFromCart,
-    clearCart,
-    refetch: getCart,
     itemCount,
-    subtotal,
-    tax,
-    shipping,
-    total,
+    cartTotal,
+    addToCart: handleAddToCart,
+    updateQuantity: handleUpdateQuantity,
+    removeFromCart: handleRemoveFromCart,
+    clearCart: handleClearCart,
+    isProductInCart: (productId) => CartService.isProductInCart(cart, productId),
+    getProductQuantity: (productId) => CartService.getProductQuantity(cart, productId),
+    refetchCart: fetchCart,
+    syncCartOnLogin,
   };
 };
 

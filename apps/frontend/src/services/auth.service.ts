@@ -11,6 +11,17 @@ export class AuthService {
       const response = await httpClient.post<AuthResponse>("/auth/login", data);
       this.saveTokens(response.data.accessToken, response.data.refreshToken);
       this.saveUser(response.data.user);
+      
+      // Sincronizar carrito local con servidor después de login
+      // Importar CartService aquí para evitar circular dependency
+      const { CartService } = await import('./cartService');
+      try {
+        await CartService.syncLocalCartWithServer();
+        console.log('✅ Carrito sincronizado después del login');
+      } catch (error) {
+        console.warn('⚠️ No se pudo sincronizar carrito:', error);
+      }
+      
       return response.data;
     } catch (error: any) {
       throw new Error(error.response?.data?.message || "Error en login");
