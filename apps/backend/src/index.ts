@@ -12,7 +12,7 @@ import PaginatedProducts from "./routes/paginatedProducts.route";
 import checkout from "./routes/chekout.route";
 import uploadRoutes from "./routes/upload.route";
 import productImages from "./routes/productImages.route";
-import authRouter from "./routes/auth.route"; // ← AÑADE ESTO
+import authRouter from "./routes/auth.route";
 
 //Cargando variables de entorno
 dotenv.config();
@@ -31,7 +31,7 @@ app.use(
 app.use(express.json()); // Aqui para entender json en las peticiones
 
 // Importas las Rutas y las usas
-app.use("/api/auth", authRouter); // ← AÑADE ESTO
+app.use("/api/auth", authRouter);
 app.use("/api/products", productsRouter);
 app.use("/api/offers", offersRouter);
 app.use("/api/bestSellerWeek", BestSellerWeek);

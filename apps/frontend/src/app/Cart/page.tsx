@@ -1,5 +1,5 @@
 "use client";
-import { useCart } from "@/hooks/useCart";
+import { useCartContext } from "@/context/CartContext";
 import CartList from "./CartList";
 import { EmptyCart } from "./EmptyCart";
 import CartSummary from "./cartSummary";
@@ -13,7 +13,20 @@ export default function CartPage() {
     removeFromCart,
     itemCount,
     clearCart,
-  } = useCart();
+  } = useCartContext();
+
+  const handleUpdateQuantity = async (
+    productId: number,
+    quantity: number
+  ) => {
+    const result = await updateQuantity(productId, quantity);
+    return result.data as any;
+  };
+
+  const handleRemove = async (productId: number) => {
+    const result = await removeFromCart(productId);
+    return result.data as any;
+  };
 
   const handleClearCart = async () => {
     if (!confirm("¿Estás seguro de que quieres vaciar el carrito?")) return;
@@ -25,19 +38,30 @@ export default function CartPage() {
   };
 
   const renderContent = () => {
+    // Debug logs
+    console.log('🔍 Cart Debug:', {
+      cart,
+      itemCount,
+      loading,
+      error,
+      hasItems: cart?.items?.length,
+    });
+
     if (loading) return <CartPageLoading />;
     if (error) return <CartPageError error={error} />;
-    if (itemCount === 0) return <EmptyCart />;
+    
+    // Verificar si realmente hay items en el carrito
+    if (!cart || !cart.items || cart.items.length === 0) return <EmptyCart />;
 
     return (
       <div className="flex flex-col-reverse sm:flex-col lg:flex-row gap-6 sm:gap-8">
         <CartList
-          cart={cart}
-          onUpdateQuantity={updateQuantity}
-          onRemove={removeFromCart}
+          cart={cart as any}
+          onUpdateQuantity={handleUpdateQuantity}
+          onRemove={handleRemove}
           onClearCart={handleClearCart}
         />
-        <CartSummary cart={cart} itemCount={itemCount} />
+        <CartSummary cart={cart as any} itemCount={itemCount} />
       </div>
     );
   };

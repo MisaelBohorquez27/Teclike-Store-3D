@@ -8,46 +8,81 @@ const USER_KEY = "user";
 export class AuthService {
   static async login(data: LoginFormData): Promise<AuthResponse> {
     try {
+      console.log('📡 Llamando a /auth/login con:', { email: data.email });
       const response = await httpClient.post<AuthResponse>("/auth/login", data);
+      console.log('✅ Respuesta del servidor:', response.data);
+      
+      // Guardar tokens y usuario INMEDIATAMENTE
       this.saveTokens(response.data.accessToken, response.data.refreshToken);
       this.saveUser(response.data.user);
+      console.log('✅ Tokens y usuario guardados en localStorage');
       
-      // Sincronizar carrito local con servidor después de login
-      // Importar CartService aquí para evitar circular dependency
-      const { CartService } = await import('./cartService');
-      try {
-        await CartService.syncLocalCartWithServer();
-        console.log('✅ Carrito sincronizado después del login');
-      } catch (error) {
-        console.warn('⚠️ No se pudo sincronizar carrito:', error);
-      }
+      // NO sincronizar carrito aquí - hacerlo después cuando el usuario cargue la página
       
       return response.data;
     } catch (error: any) {
-      throw new Error(error.response?.data?.message || "Error en login");
+      console.error('❌ Error en login:', error);
+      console.error('Respuesta del error:', error.response?.data);
+      throw new Error(error.response?.data?.message || error.message || "Error en login");
     }
   }
 
   static async register(data: RegisterFormData): Promise<AuthResponse> {
     try {
+      console.log('📡 Llamando a /auth/register con:', { email: data.email, username: data.username });
       const response = await httpClient.post<AuthResponse>("/auth/register", data);
+      console.log('✅ Respuesta del servidor:', response.data);
+      
       this.saveTokens(response.data.accessToken, response.data.refreshToken);
       this.saveUser(response.data.user);
+      console.log('✅ Usuario y tokens guardados');
+      
       return response.data;
     } catch (error: any) {
-      throw new Error(error.response?.data?.message || "Error en registro");
+      console.error('❌ Error en registro:', error);
+      console.error('Respuesta del error:', error.response?.data);
+      throw new Error(error.response?.data?.message || error.message || "Error en registro");
     }
   }
 
   static async logout(): Promise<void> {
+    console.log('📤 Iniciando logout...');
+    
+    // Intentar notificar al servidor (pero no esperar si falla)
     try {
-      await httpClient.post("/auth/logout");
+      console.log('📡 Notificando al servidor sobre logout...');
+      // No esperamos esta llamada - fire and forget con timeout corto
+      const logoutPromise = httpClient.post("/auth/logout");
+      const timeoutPromise = new Promise((_, reject) => 
+        setTimeout(() => reject(new Error('Timeout')), 2000)
+      );
+      
+      try {
+        await Promise.race([logoutPromise, timeoutPromise]);
+        console.log('✅ Servidor notificado');
+      } catch {
+        console.warn('⚠️ No se pudo notificar al servidor (continuando con limpieza)');
+      }
     } catch (error) {
-      console.error("Error en logout:", error);
-    } finally {
-      this.clearTokens();
-      this.clearUser();
+      console.error("⚠️ Error:", error);
     }
+    
+    // SIEMPRE limpiar tokens y usuario - esto es lo importante
+    console.log('🧹 Limpiando estado local...');
+    this.clearTokens();
+    this.clearUser();
+    
+    // Detener sincronización automática y limpiar carrito local
+    try {
+      const { CartService } = await import('./cartService');
+      CartService.stopAutoSync();
+      CartService.clearLocalCart();
+      console.log('🛒 Carrito local limpiado');
+    } catch (error) {
+      console.warn('⚠️ Error limpiando carrito:', error);
+    }
+    
+    console.log('✅ Logout completado - sesión cerrada en cliente');
   }
 
   static async refreshToken(): Promise<string> {
@@ -95,18 +130,33 @@ export class AuthService {
   }
 
   static clearTokens(): void {
+    console.log('🧹 Limpiando tokens del localStorage...');
     localStorage.removeItem(TOKEN_KEY);
     localStorage.removeItem(REFRESH_TOKEN_KEY);
+    // Verificar que realmente se borraron
+    const token = localStorage.getItem(TOKEN_KEY);
+    const refreshToken = localStorage.getItem(REFRESH_TOKEN_KEY);
+    if (!token && !refreshToken) {
+      console.log('✅ Tokens limpiados correctamente');
+    } else {
+      console.error('❌ Error: Los tokens no se borraron');
+    }
   }
 
   static isTokenExpired(): boolean {
     const token = this.getAccessToken();
-    if (!token) return true;
+    if (!token) {
+      console.log('⏰ No hay token - considerado expirado');
+      return true;
+    }
 
     try {
       const payload = JSON.parse(atob(token.split(".")[1]));
-      return payload.exp * 1000 < Date.now();
+      const isExpired = payload.exp * 1000 < Date.now();
+      console.log(`⏰ Token exp: ${new Date(payload.exp * 1000).toISOString()}, Expirado: ${isExpired}`);
+      return isExpired;
     } catch {
+      console.log('⏰ Error decodificando token - considerado expirado');
       return true;
     }
   }
@@ -114,6 +164,7 @@ export class AuthService {
   // User management
   static saveUser(user: any): void {
     localStorage.setItem(USER_KEY, JSON.stringify(user));
+    console.log('💾 Usuario guardado en localStorage');
   }
 
   static getUser(): any {
@@ -122,10 +173,15 @@ export class AuthService {
   }
 
   static clearUser(): void {
+    console.log('🧹 Limpiando usuario del localStorage...');
     localStorage.removeItem(USER_KEY);
   }
 
   static isAuthenticated(): boolean {
-    return !!this.getAccessToken() && !this.isTokenExpired();
+    const token = this.getAccessToken();
+    const expired = this.isTokenExpired();
+    const result = !!token && !expired;
+    console.log(`🔐 isAuthenticated(): token=${!!token}, expirado=${expired}, resultado=${result}`);
+    return result;
   }
 }

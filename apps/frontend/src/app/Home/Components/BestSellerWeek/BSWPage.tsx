@@ -1,10 +1,10 @@
 "use client";
 
-import { useCart } from "@/hooks/useCart";
+import { useCartContext } from "@/context/CartContext";
 import { BestSellersWeekGrid } from "./Components/BSWGrid";
 
 export function BestSellersWeekPage() {
-    const { addToCart } = useCart();
+    const { addToCart } = useCartContext();
 
     const handleAddToCart = async (productId: number, quantity: number) => {
         try {

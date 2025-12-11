@@ -12,10 +12,23 @@ import { AuthModal } from "./AuthModal";
 
 export function Header() {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
   const { isAuthenticated, user, logout } = useAuth();
 
-  const handleLogout = () => {
-    logout();
+  const handleLogout = async () => {
+    try {
+      setIsLoggingOut(true);
+      console.log('🚀 Iniciando logout desde Header...');
+      await logout();
+      console.log('✅ Logout ejecutado, redirigiendo...');
+      // Esperar a que se ejecute el logout completamente antes de recargar
+      setTimeout(() => {
+        window.location.href = "/";
+      }, 500);
+    } catch (error) {
+      console.error('❌ Error en logout:', error);
+      setIsLoggingOut(false);
+    }
   };
 
   return (
@@ -71,10 +84,15 @@ export function Header() {
                 </span>
                 <button
                   onClick={handleLogout}
-                  className="bg-red-600/80 backdrop-blur-sm hover:bg-red-500 hover:text-white px-3 py-1.5 rounded-lg flex items-center space-x-2 hover:scale-105 transition-all duration-100 text-sm"
+                  disabled={isLoggingOut}
+                  className={`px-3 py-1.5 rounded-lg flex items-center space-x-2 hover:scale-105 transition-all duration-100 text-sm ${
+                    isLoggingOut
+                      ? "bg-gray-600/80 text-gray-300 cursor-not-allowed"
+                      : "bg-red-600/80 backdrop-blur-sm hover:bg-red-500 hover:text-white"
+                  }`}
                 >
                   <FiUser size={16} />
-                  <span>Salir</span>
+                  <span>{isLoggingOut ? "Saliendo..." : "Salir"}</span>
                 </button>
               </div>
             ) : (

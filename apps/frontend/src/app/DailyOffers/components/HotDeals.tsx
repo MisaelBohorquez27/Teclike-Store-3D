@@ -1,11 +1,12 @@
 "use client";
 
-import { DealCard, Deal } from "@/app/DailyOffers/components/DealCard";
+import { DealCard } from "@/app/DailyOffers/components/DealCard";
 import { fetchDeals } from "@/services/deals";
 import { useEffect, useState } from "react";
+import { ProductWithOffer } from "@/types/offers";
 
 export function HotDeals() {
-  const [deals, setDeals] = useState<Deal[]>([]);
+  const [deals, setDeals] = useState<ProductWithOffer[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -26,7 +27,7 @@ export function HotDeals() {
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
       {deals.map((deal) => (
-        <DealCard key={deal.id} deal={deal} />
+        <DealCard key={deal.id} offer={deal} />
       ))}
     </div>
   );

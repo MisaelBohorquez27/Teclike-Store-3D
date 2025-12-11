@@ -1,7 +1,7 @@
 "use client";
 import { CartResponse } from "@/types/cart";
 import { CartItem } from "./CartItem";
-import { useCart } from "@/hooks/useCart";
+import { useCartContext } from "@/context/CartContext";
 
 interface CartListProps {
   cart: CartResponse | null;
@@ -18,7 +18,7 @@ export default function CartList({
   onRemove,
   onClearCart,
 }: CartListProps & { onClearCart: () => void }) {
-  const { loading, error } = useCart();
+  const { loading, error } = useCartContext();
 
   const handleClearCart = async () => {
     await onClearCart();

@@ -3,6 +3,8 @@ import { CartResponse } from '@/types/cart';
 import { validateCartStructure } from '@/utils/cartMapper';
 
 const CART_STORAGE_KEY = 'localCart';
+const SYNC_INTERVAL = 5000; // Sincronizar cada 5 segundos
+let syncTimeout: NodeJS.Timeout | null = null;
 
 export class CartService {
   /**
@@ -353,5 +355,65 @@ export class CartService {
    */
   static clearLocalCart(): void {
     localStorage.removeItem(CART_STORAGE_KEY);
+  }
+
+  /**
+   * Inicia sincronización automática con el servidor
+   * Solo sincroniza si está autenticado
+   */
+  static startAutoSync(): void {
+    // Limpiar timeout anterior si existe
+    if (syncTimeout) {
+      clearTimeout(syncTimeout);
+    }
+
+    const performSync = async () => {
+      if (this.isAuthenticated()) {
+        try {
+          const localCart = this.getLocalCart();
+          if (localCart.items.length > 0) {
+            // Sincronizar solo items nuevos o modificados
+            for (const item of localCart.items) {
+              try {
+                await this.addToCart(item.productId, item.quantity);
+              } catch (error) {
+                console.warn(`⚠️ No se pudo sincronizar producto ${item.productId}:`, error);
+              }
+            }
+            console.log('✅ Sincronización automática completada');
+          }
+        } catch (error) {
+          console.warn('⚠️ Error en sincronización automática:', error);
+        }
+      }
+
+      // Programar siguiente sincronización
+      if (this.isAuthenticated()) {
+        syncTimeout = setTimeout(performSync, SYNC_INTERVAL);
+      }
+    };
+
+    // Iniciar primera sincronización después de SYNC_INTERVAL
+    if (this.isAuthenticated()) {
+      syncTimeout = setTimeout(performSync, SYNC_INTERVAL);
+    }
+  }
+
+  /**
+   * Detiene la sincronización automática
+   */
+  static stopAutoSync(): void {
+    if (syncTimeout) {
+      clearTimeout(syncTimeout);
+      syncTimeout = null;
+    }
+  }
+
+  /**
+   * Verifica si el carrito local tiene cambios respecto al servidor
+   */
+  static hasLocalChanges(serverCart: CartResponse): boolean {
+    const localCart = this.getLocalCart();
+    return JSON.stringify(localCart.items) !== JSON.stringify(serverCart.items);
   }
 }

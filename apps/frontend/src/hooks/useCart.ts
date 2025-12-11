@@ -63,6 +63,22 @@ export const useCart = (): UseCartReturn => {
     fetchCart();
   }, [fetchCart]);
 
+  // Iniciar sincronización automática cuando el usuario está autenticado
+  useEffect(() => {
+    if (CartService.isAuthenticated()) {
+      console.log('🔄 Iniciando sincronización automática del carrito');
+      CartService.startAutoSync();
+    } else {
+      console.log('⏹️ Deteniendo sincronización automática');
+      CartService.stopAutoSync();
+    }
+
+    // Cleanup al desmontar
+    return () => {
+      CartService.stopAutoSync();
+    };
+  }, []);
+
   // Agregar al carrito
   const handleAddToCart = useCallback(
     async (productId: number, quantity: number = 1) => {
