@@ -47,6 +47,8 @@ export async function addToCart(
   productId: number,
   quantity: number
 ) {
+  console.log(`🔍 [BACKEND] addToCart llamado - userId=${userId}, productId=${productId}, quantity=${quantity}`);
+  
   // Validar producto
   const product = await cartRepo.findProductWithInventory(productId);
   if (!product) throw new Error("Producto no encontrado");
@@ -62,8 +64,12 @@ export async function addToCart(
     cart = await cartRepo.findCartWithProducts(userId);
   }
 
+  console.log(`🔍 [BACKEND] Antes de addOrUpdateCartItem - cartId=${cart!.id}`);
+  
   // Agregar o actualizar item en BD
   await cartRepo.addOrUpdateCartItem(cart!.id, productId, quantity, stock);
+
+  console.log(`🔍 [BACKEND] Después de addOrUpdateCartItem`);
 
   // Actualizar caché
   const updatedCart = await cartRepo.findCartWithProducts(userId);
@@ -72,6 +78,8 @@ export async function addToCart(
   // Marcar para sincronización
   await cacheService.markCartDirty(userId);
 
+  console.log(`✅ [BACKEND] addToCart completado - itemCount=${updatedCart?.cartProducts?.length}`);
+  
   return transformCart(updatedCart);
 }
 

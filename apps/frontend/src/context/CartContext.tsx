@@ -77,11 +77,11 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const addToCart = async (productId: number, quantity: number = 1) => {
     try {
       setError(null);
-      console.log(`➕ Agregando producto ${productId} x${quantity} al carrito...`);
+      console.log(`🔍 [CONTEXT] addToCart llamado - productId=${productId}, quantity=${quantity}`);
       const response = await CartServiceSimple.addToCart(productId, quantity);
       if (response.success && response.data) {
         setCart(response.data);
-        console.log('✅ Producto agregado, carrito actualizado');
+        console.log(`✅ [CONTEXT] Producto agregado - itemCount=${response.data.itemCount}`);
       }
       return response;
     } catch (err: any) {

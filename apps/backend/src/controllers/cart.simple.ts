@@ -24,6 +24,8 @@ export const addToCart = async (req: AuthRequest, res: Response) => {
     const userId = req.userId!;
     const { productId, quantity = 1 } = req.body;
 
+    console.log(`🔍 [CONTROLLER] addToCart - userId=${userId}, productId=${productId}, quantity=${quantity}`);
+
     if (!productId) {
       return res.status(400).json({
         success: false,
@@ -32,6 +34,9 @@ export const addToCart = async (req: AuthRequest, res: Response) => {
     }
 
     const cart = await cartService.addToCart(userId, productId, quantity);
+    
+    console.log(`✅ [CONTROLLER] Respuesta enviada - itemCount=${cart.itemCount}`);
+    
     res.json({
       success: true,
       data: cart,

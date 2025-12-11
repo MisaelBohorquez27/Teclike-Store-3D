@@ -31,13 +31,26 @@ export function findProductWithInventory(productId: number) {
 }
 
 export async function addOrUpdateCartItem(cartId: number, productId: number, quantity: number, stock: number) {
+  console.log(`🔍 [REPO] addOrUpdateCartItem - cartId=${cartId}, productId=${productId}, quantity=${quantity}`);
+  
   const existing = await prisma.cartProduct.findFirst({ where: { cartId, productId } });
+  
   if (existing) {
-    const newQuantity = existing.quantity + quantity;
+    console.log(`🔍 [REPO] Producto existe con cantidad=${existing.quantity}, incrementando +1`);
+    // Si el producto YA existe, solo incrementar de a 1 (ignorar quantity enviada)
+    const newQuantity = existing.quantity + 1;
     if (newQuantity > stock) throw new Error(`Solo hay ${stock} unidades disponibles`);
-    return prisma.cartProduct.update({ where: { id: existing.id }, data: { quantity: newQuantity } });
+    const result = await prisma.cartProduct.update({ where: { id: existing.id }, data: { quantity: newQuantity } });
+    console.log(`✅ [REPO] Actualizado a cantidad=${result.quantity}`);
+    return result;
   }
-  return prisma.cartProduct.create({ data: { cartId, productId, quantity, priceCents: 0 } });
+  
+  console.log(`🔍 [REPO] Producto nuevo, creando con cantidad=${quantity}`);
+  // Si es nuevo, usar la quantity enviada
+  if (quantity > stock) throw new Error(`Solo hay ${stock} unidades disponibles`);
+  const result = await prisma.cartProduct.create({ data: { cartId, productId, quantity, priceCents: 0 } });
+  console.log(`✅ [REPO] Creado con cantidad=${result.quantity}`);
+  return result;
 }
 
 export async function updateCartItem(cartId: number, productId: number, quantity: number) {

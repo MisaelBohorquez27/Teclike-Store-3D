@@ -29,8 +29,8 @@ export function BestSellersWeekCard({ item, onAddToCart }: ProductsProps) {
     setSuccessMessage("✅ Agregado al carrito");
     setTimeout(() => setSuccessMessage(""), 3000);
 
-    // Callback legacy si se pasa (para compatibilidad)
-    onAddToCart?.(item.id, 1);
+    // ⚠️ NO llamar onAddToCart aquí - AddToCartButton ya lo hizo
+    // onAddToCart?.(item.id, 1); <- ESTO CAUSA LA DUPLICACIÓN
   };
 
   const handleAddError = (error: string) => {

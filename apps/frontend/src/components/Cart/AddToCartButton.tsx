@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useCartContext } from "@/context/CartContext";
 import { useAuth } from "@/context/AuthContext";
 import { AuthModal } from "@/components/AuthModal";
@@ -51,6 +51,9 @@ export function AddToCartButton({
   const [quantity, setQuantity] = useState(initialQuantity);
   const [isLoading, setIsLoading] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
+  
+  // 🔒 Lock para prevenir ejecuciones concurrentes
+  const isExecutingRef = useRef(false);
 
   // Validar que hay stock
   if (maxStock <= 0) {
@@ -69,6 +72,12 @@ export function AddToCartButton({
   }
 
   const handleAddToCart = async () => {
+    // 🔒 LOCK: Prevenir ejecuciones concurrentes con useRef (más rápido que setState)
+    if (isExecutingRef.current || isLoading || cartLoading) {
+      console.log('⚠️ Operación bloqueada - ya hay una en progreso');
+      return;
+    }
+
     // Verificar si el usuario está autenticado
     if (!isAuthenticated) {
       setShowAuthModal(true);
@@ -81,11 +90,15 @@ export function AddToCartButton({
       return;
     }
 
+    // 🔒 Activar lock INMEDIATAMENTE (sincrónico)
+    isExecutingRef.current = true;
+    setIsLoading(true);
+
     try {
-      setIsLoading(true);
+      console.log(`🔍 DEBUG: Enviando addToCart(productId=${productId}, quantity=${quantity})`);
       await addToCart(productId, quantity);
 
-      console.log(`✅ ${productName} agregado al carrito (x${quantity})`);
+      console.log(`✅ ${productName} agregado al carrito - Cantidad solicitada: ${quantity}`);
       onSuccess?.();
 
       // Resetear cantidad después de agregar
@@ -96,6 +109,8 @@ export function AddToCartButton({
       onError?.(errorMessage);
     } finally {
       setIsLoading(false);
+      // 🔒 Liberar lock
+      isExecutingRef.current = false;
     }
   };
 
@@ -124,13 +139,16 @@ export function AddToCartButton({
           isLoading || cartLoading,
           ""
         )}
+        style={{
+          pointerEvents: isLoading || cartLoading ? 'none' : 'auto'
+        }}
         title={`Agregar ${quantity}x ${productName} al carrito`}
       >
         <span className="flex items-center justify-center gap-2">
           {isLoading || cartLoading ? (
             <>
-              <Spinner size={size} />
-              <span>Agregando...</span>
+              <LoadingSpinner size={size} />
+              <span className="animate-pulse">Agregando...</span>
             </>
           ) : (
             <>
@@ -169,7 +187,7 @@ function QuantitySelector({
       <button
         onClick={() => onChange(quantity - 1)}
         disabled={disabled || quantity <= 1}
-        className="p-1 hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed rounded transition-colors"
+        className="p-1 text-gray-500 hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed rounded transition-colors"
         title="Decrementar cantidad"
       >
         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -184,13 +202,13 @@ function QuantitySelector({
         value={quantity}
         onChange={(e) => onChange(parseInt(e.target.value) || 1)}
         disabled={disabled}
-        className="w-12 text-center border-0 bg-transparent font-semibold disabled:opacity-50"
+        className="w-12 text-gray-500 text-center border-0 bg-transparent font-semibold disabled:opacity-50"
       />
 
       <button
         onClick={() => onChange(quantity + 1)}
         disabled={disabled || quantity >= maxStock}
-        className="p-1 hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed rounded transition-colors"
+        className="p-1 text-gray-500 hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed rounded transition-colors"
         title="Incrementar cantidad"
       >
         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -244,12 +262,20 @@ function StockIcon() {
   );
 }
 
-function Spinner({ size = "md" }: { size: string }) {
-  const sizeClass = size === "sm" ? "w-3 h-3" : size === "lg" ? "w-5 h-5" : "w-4 h-4";
+function LoadingSpinner({ size = "md" }: { size: string }) {
+  const sizeClass = size === "sm" ? "w-4 h-4" : size === "lg" ? "w-6 h-6" : "w-5 h-5";
   return (
-    <div
-      className={`${sizeClass} animate-spin rounded-full border-2 border-gray-300 border-t-current`}
-    />
+    <div className="relative">
+      <div
+        className={`${sizeClass} animate-spin rounded-full border-3 border-transparent border-t-current border-r-current`}
+        style={{ animationDuration: '0.6s' }}
+      />
+      {/* Pulso adicional para mejor efecto visual */}
+      <div
+        className={`${sizeClass} absolute inset-0 animate-ping rounded-full bg-current opacity-20`}
+        style={{ animationDuration: '1s' }}
+      />
+    </div>
   );
 }
 

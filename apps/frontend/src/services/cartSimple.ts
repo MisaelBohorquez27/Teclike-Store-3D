@@ -45,7 +45,7 @@ export class CartServiceSimple {
    */
   static async addToCart(productId: number, quantity: number = 1): Promise<CartResponse> {
     try {
-      console.log(`🛒 Agregando ${quantity}x producto ${productId} al carrito`);
+      console.log(`� [SERVICE] addToCart llamado - productId=${productId}, quantity=${quantity}`);
       
       if (!productId || productId <= 0) {
         throw new Error('ID de producto inválido');
@@ -54,12 +54,16 @@ export class CartServiceSimple {
         throw new Error('Cantidad debe ser mayor a 0');
       }
 
-      const response = await httpClient.post<CartResponse>('/cart/add', {
+      const payload = {
         productId: Number(productId),
         quantity: Math.max(1, Math.floor(quantity)),
-      });
+      };
       
-      console.log('✅ Producto agregado:', response.data);
+      console.log(`🔍 [SERVICE] Enviando payload:`, payload);
+
+      const response = await httpClient.post<CartResponse>('/cart/add', payload);
+      
+      console.log(`✅ [SERVICE] Respuesta recibida - itemCount=${response.data.data?.itemCount}`);
       return response.data;
     } catch (error: any) {
       console.error('❌ Error agregando al carrito:', error.message);
