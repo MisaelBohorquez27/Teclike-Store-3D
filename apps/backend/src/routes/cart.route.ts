@@ -5,16 +5,14 @@ import {
   updateCartItem,
   removeFromCart,
   clearCart,
-} from "../controllers/cart.controller";
+} from "../controllers/cart.simple";
 import { authMiddleware, requireAuth } from "../middleware/auth.middleware";
-import { syncCartMiddleware } from "../middleware/syncCart.middleware";
 
 const router = express.Router();
 
 // Aplicar autenticación a todas las rutas del carrito
 router.use(authMiddleware);
-router.use(requireAuth); // Requerir autenticación en todos los endpoints
-router.use(syncCartMiddleware); // Sincronizar carrito periódicamente
+router.use(requireAuth);
 
 // Obtener carrito del usuario
 router.get("/", getCart);

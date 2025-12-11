@@ -12,6 +12,7 @@ const SYNC_INTERVAL = 5 * 60 * 1000; // 5 minutos
  * Middleware para sincronizar el carrito desde caché a BD
  * Se ejecuta automáticamente cada 5 minutos o cuando está marcado como "dirty"
  * Solo se ejecuta para usuarios autenticados
+ * NO bloquea la respuesta - usa fire and forget con timeout
  */
 export async function syncCartMiddleware(
   req: AuthRequest,
@@ -31,13 +32,21 @@ export async function syncCartMiddleware(
         now - lastSync > SYNC_INTERVAL ||
         (await cacheService.isCartDirty(userId))
       ) {
-        // Ejecutar sincronización sin bloquear la request
-        cartService.syncCartToDB(userId).catch(console.error);
+        // Ejecutar sincronización en background sin esperar (fire and forget)
+        // Con timeout de 3 segundos máximo
+        Promise.race([
+          cartService.syncCartToDB(userId),
+          new Promise((_, reject) => 
+            setTimeout(() => reject(new Error('Sync timeout')), 3000)
+          )
+        ]).catch((error) => {
+          console.warn(`⚠️ Error sincronizando carrito para usuario ${userId}:`, error.message);
+        });
       }
     }
   } catch (error) {
-    console.error("Error en sincronización de carrito:", error);
+    console.error("⚠️ Error en sincronización de carrito:", error);
     // No bloquear la request si hay error en sincronización
   }
-  next();
+  next(); // Continuar inmediatamente sin esperar sync
 }

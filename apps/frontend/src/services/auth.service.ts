@@ -8,58 +8,81 @@ const USER_KEY = "user";
 export class AuthService {
   static async login(data: LoginFormData): Promise<AuthResponse> {
     try {
+      console.log('📡 Llamando a /auth/login con:', { email: data.email });
       const response = await httpClient.post<AuthResponse>("/auth/login", data);
+      console.log('✅ Respuesta del servidor:', response.data);
+      
+      // Guardar tokens y usuario INMEDIATAMENTE
       this.saveTokens(response.data.accessToken, response.data.refreshToken);
       this.saveUser(response.data.user);
+      console.log('✅ Tokens y usuario guardados en localStorage');
       
-      // Sincronizar carrito local con servidor después de login
-      // Importar CartService aquí para evitar circular dependency
-      const { CartService } = await import('./cartService');
-      try {
-        await CartService.syncLocalCartWithServer();
-        console.log('✅ Carrito sincronizado después del login');
-      } catch (error) {
-        console.warn('⚠️ No se pudo sincronizar carrito:', error);
-      }
+      // NO sincronizar carrito aquí - hacerlo después cuando el usuario cargue la página
       
       return response.data;
     } catch (error: any) {
-      throw new Error(error.response?.data?.message || "Error en login");
+      console.error('❌ Error en login:', error);
+      console.error('Respuesta del error:', error.response?.data);
+      throw new Error(error.response?.data?.message || error.message || "Error en login");
     }
   }
 
   static async register(data: RegisterFormData): Promise<AuthResponse> {
     try {
+      console.log('📡 Llamando a /auth/register con:', { email: data.email, username: data.username });
       const response = await httpClient.post<AuthResponse>("/auth/register", data);
+      console.log('✅ Respuesta del servidor:', response.data);
+      
       this.saveTokens(response.data.accessToken, response.data.refreshToken);
       this.saveUser(response.data.user);
+      console.log('✅ Usuario y tokens guardados');
+      
       return response.data;
     } catch (error: any) {
-      throw new Error(error.response?.data?.message || "Error en registro");
+      console.error('❌ Error en registro:', error);
+      console.error('Respuesta del error:', error.response?.data);
+      throw new Error(error.response?.data?.message || error.message || "Error en registro");
     }
   }
 
   static async logout(): Promise<void> {
+    console.log('📤 Iniciando logout...');
+    
+    // Intentar notificar al servidor (pero no esperar si falla)
     try {
-      await httpClient.post("/auth/logout");
-    } catch (error) {
-      console.error("Error en logout:", error);
-    } finally {
-      // Limpiar tokens y usuario SIEMPRE
-      this.clearTokens();
-      this.clearUser();
+      console.log('📡 Notificando al servidor sobre logout...');
+      // No esperamos esta llamada - fire and forget con timeout corto
+      const logoutPromise = httpClient.post("/auth/logout");
+      const timeoutPromise = new Promise((_, reject) => 
+        setTimeout(() => reject(new Error('Timeout')), 2000)
+      );
       
-      // Detener sincronización automática y limpiar carrito local
       try {
-        const { CartService } = await import('./cartService');
-        CartService.stopAutoSync();
-        CartService.clearLocalCart();
-      } catch (error) {
-        console.warn('Error limpiando carrito:', error);
+        await Promise.race([logoutPromise, timeoutPromise]);
+        console.log('✅ Servidor notificado');
+      } catch {
+        console.warn('⚠️ No se pudo notificar al servidor (continuando con limpieza)');
       }
-      
-      console.log('✅ Sesión cerrada correctamente');
+    } catch (error) {
+      console.error("⚠️ Error:", error);
     }
+    
+    // SIEMPRE limpiar tokens y usuario - esto es lo importante
+    console.log('🧹 Limpiando estado local...');
+    this.clearTokens();
+    this.clearUser();
+    
+    // Detener sincronización automática y limpiar carrito local
+    try {
+      const { CartService } = await import('./cartService');
+      CartService.stopAutoSync();
+      CartService.clearLocalCart();
+      console.log('🛒 Carrito local limpiado');
+    } catch (error) {
+      console.warn('⚠️ Error limpiando carrito:', error);
+    }
+    
+    console.log('✅ Logout completado - sesión cerrada en cliente');
   }
 
   static async refreshToken(): Promise<string> {

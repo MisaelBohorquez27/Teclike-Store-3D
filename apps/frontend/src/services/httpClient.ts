@@ -8,6 +8,22 @@ const httpClient = axios.create({
   },
 });
 
+let isRefreshing = false;
+let failedQueue: Array<{ resolve: any; reject: any }> = [];
+
+const processQueue = (error: any, token?: string) => {
+  failedQueue.forEach(prom => {
+    if (error) {
+      prom.reject(error);
+    } else {
+      prom.resolve(token);
+    }
+  });
+  
+  failedQueue = [];
+  isRefreshing = false;
+};
+
 // ✅ Interceptor de REQUEST
 httpClient.interceptors.request.use(
   (config) => {
@@ -30,16 +46,42 @@ httpClient.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
 
-    // Si es 401 y no es un reintento, intenta refrescar token
-    if (error.response?.status === 401 && !originalRequest._retry) {
+    // ❌ No reintentar si es refresh-token o si ya reintenté
+    if (originalRequest.url?.includes('/auth/refresh-token') || originalRequest._retry) {
+      return Promise.reject(error);
+    }
+
+    // Si es 401, intenta refrescar token
+    if (error.response?.status === 401) {
+      if (isRefreshing) {
+        // Si ya se está refrescando, encolar la petición
+        return new Promise((resolve, reject) => {
+          failedQueue.push({ resolve, reject });
+        })
+          .then(token => {
+            originalRequest.headers.Authorization = `Bearer ${token}`;
+            return httpClient(originalRequest);
+          })
+          .catch(err => {
+            return Promise.reject(err);
+          });
+      }
+
       originalRequest._retry = true;
+      isRefreshing = true;
+
       try {
+        console.log('🔄 Refrescando token...');
         const newToken = await AuthService.refreshToken();
+        console.log('✅ Token refrescado:', newToken.slice(0, 20) + '...');
+        processQueue(null, newToken);
         originalRequest.headers.Authorization = `Bearer ${newToken}`;
         return httpClient(originalRequest);
       } catch (refreshError) {
+        console.error('❌ Error refrescando token:', refreshError);
+        processQueue(refreshError);
         AuthService.clearTokens();
-        window.location.href = "/login";
+        window.location.href = "/";
         return Promise.reject(refreshError);
       }
     }

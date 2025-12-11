@@ -13,7 +13,7 @@ export interface AuthContextType {
   error: string | null;
   login: (email: string, password: string) => Promise<void>;
   register: (email: string, username: string, password: string, confirmPassword: string) => Promise<void>;
-  logout: () => void;
+  logout: () => Promise<void>;
   clearError: () => void;
 }
 

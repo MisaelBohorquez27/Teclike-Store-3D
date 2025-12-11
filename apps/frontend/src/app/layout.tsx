@@ -1,6 +1,7 @@
 // app/layout.tsx
 import "./globals.css";
 import { AuthProvider } from "@/context/AuthContext";
+import { CartProvider } from "@/context/CartContext";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { Navbar2 } from "@/components/Navbar2";
@@ -16,10 +17,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </div>
 
         <AuthProvider>
-          <Header />
-          <Navbar2 />
-          <main>{children}</main>
-          <Footer />
+          <CartProvider>
+            <Header />
+            <Navbar2 />
+            <main>{children}</main>
+            <Footer />
+          </CartProvider>
         </AuthProvider>
       </body>
     </html>

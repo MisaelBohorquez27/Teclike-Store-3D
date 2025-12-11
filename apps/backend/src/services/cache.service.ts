@@ -1,51 +1,110 @@
 import Redis from "ioredis";
 
 export const redis = new Redis(process.env.REDIS_URL || "redis://localhost:6379");
+
+// Logging de conexión
+redis.on("connect", () => {
+  console.log("✅ Redis conectado exitosamente");
+});
+
+redis.on("error", (error) => {
+  console.error("❌ Error en Redis:", error.message);
+});
+
 const CART_EXPIRY = 24 * 60 * 60; // 24 horas
 const SYNC_INTERVAL = 5 * 60; // 5 minutos
 
 export async function getCachedCart(userId: number) {
-  const cached = await redis.get(`cart:${userId}`);
-  return cached ? JSON.parse(cached) : null;
+  try {
+    const cached = await redis.get(`cart:${userId}`);
+    return cached ? JSON.parse(cached) : null;
+  } catch (error) {
+    console.error(`❌ Error obteniendo carrito en caché para usuario ${userId}:`, error);
+    return null;
+  }
 }
 
 export async function setCachedCart(userId: number, cart: any) {
-  await redis.setex(`cart:${userId}`, CART_EXPIRY, JSON.stringify(cart));
+  try {
+    await redis.setex(`cart:${userId}`, CART_EXPIRY, JSON.stringify(cart));
+  } catch (error) {
+    console.error(`❌ Error guardando carrito en caché para usuario ${userId}:`, error);
+  }
 }
 
 export async function deleteCachedCart(userId: number) {
-  await redis.del(`cart:${userId}`);
+  try {
+    await redis.del(`cart:${userId}`);
+  } catch (error) {
+    console.error(`❌ Error deletando carrito en caché para usuario ${userId}:`, error);
+  }
 }
 
 export async function cartExists(userId: number) {
-  return (await redis.exists(`cart:${userId}`)) > 0;
+  try {
+    return (await redis.exists(`cart:${userId}`)) > 0;
+  } catch (error) {
+    console.error(`❌ Error verificando carrito en caché para usuario ${userId}:`, error);
+    return false;
+  }
 }
 
 export async function getCartHash(userId: number): Promise<string | null> {
-  return redis.get(`cartHash:${userId}`);
+  try {
+    return await redis.get(`cartHash:${userId}`);
+  } catch (error) {
+    console.error(`❌ Error obteniendo hash del carrito para usuario ${userId}:`, error);
+    return null;
+  }
 }
 
 export async function setCartHash(userId: number, hash: string) {
-  await redis.setex(`cartHash:${userId}`, CART_EXPIRY, hash);
+  try {
+    await redis.setex(`cartHash:${userId}`, CART_EXPIRY, hash);
+  } catch (error) {
+    console.error(`❌ Error guardando hash del carrito para usuario ${userId}:`, error);
+  }
 }
 
 export async function getLastSyncTime(userId: number): Promise<number> {
-  const time = await redis.get(`lastSync:${userId}`);
-  return time ? parseInt(time) : 0;
+  try {
+    const time = await redis.get(`lastSync:${userId}`);
+    return time ? parseInt(time) : 0;
+  } catch (error) {
+    console.error(`❌ Error obteniendo último sync para usuario ${userId}:`, error);
+    return 0;
+  }
 }
 
 export async function setLastSyncTime(userId: number) {
-  await redis.setex(`lastSync:${userId}`, CART_EXPIRY, Date.now().toString());
+  try {
+    await redis.setex(`lastSync:${userId}`, CART_EXPIRY, Date.now().toString());
+  } catch (error) {
+    console.error(`❌ Error guardando último sync para usuario ${userId}:`, error);
+  }
 }
 
 export async function markCartDirty(userId: number) {
-  await redis.setex(`cartDirty:${userId}`, SYNC_INTERVAL + 60, "1");
+  try {
+    await redis.setex(`cartDirty:${userId}`, SYNC_INTERVAL + 60, "1");
+  } catch (error) {
+    console.error(`❌ Error marcando carrito como dirty para usuario ${userId}:`, error);
+  }
 }
 
 export async function isCartDirty(userId: number): Promise<boolean> {
-  return (await redis.exists(`cartDirty:${userId}`)) > 0;
+  try {
+    return (await redis.exists(`cartDirty:${userId}`)) > 0;
+  } catch (error) {
+    console.error(`❌ Error verificando si carrito es dirty para usuario ${userId}:`, error);
+    return false;
+  }
 }
 
 export async function cleanCartDirty(userId: number) {
-  await redis.del(`cartDirty:${userId}`);
+  try {
+    await redis.del(`cartDirty:${userId}`);
+  } catch (error) {
+    console.error(`❌ Error limpiando dirty flag para usuario ${userId}:`, error);
+  }
 }

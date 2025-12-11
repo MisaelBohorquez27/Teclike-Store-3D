@@ -2,10 +2,10 @@
 
 import Link from "next/link";
 import { FiShoppingCart } from "react-icons/fi";
-import { useCart } from "@/hooks/useCart";
+import { useCartContext } from "@/context/CartContext";
 
 export default function CartIcon() {
-  const { itemCount } = useCart();
+  const { itemCount } = useCartContext();
 
   return (
     <Link href="/Cart" className="relative inline-block p-2">

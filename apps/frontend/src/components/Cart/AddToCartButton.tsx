@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useCart } from "@/hooks/useCart";
+import { useCartContext } from "@/context/CartContext";
 import { useAuth } from "@/context/AuthContext";
 import { AuthModal } from "@/components/AuthModal";
 
@@ -46,7 +46,7 @@ export function AddToCartButton({
   showQuantitySelector = false,
   initialQuantity = 1,
 }: AddToCartButtonProps) {
-  const { addToCart, loading } = useCart();
+  const { addToCart, loading: cartLoading } = useCartContext();
   const { isAuthenticated } = useAuth();
   const [quantity, setQuantity] = useState(initialQuantity);
   const [isLoading, setIsLoading] = useState(false);
@@ -111,23 +111,23 @@ export function AddToCartButton({
           quantity={quantity}
           maxStock={maxStock}
           onChange={handleQuantityChange}
-          disabled={isLoading || loading}
+          disabled={isLoading || cartLoading}
         />
       )}
 
       <button
         onClick={handleAddToCart}
-        disabled={isLoading || loading}
+        disabled={isLoading || cartLoading}
         className={getButtonClasses(
           variant,
           size,
-          isLoading || loading,
+          isLoading || cartLoading,
           ""
         )}
         title={`Agregar ${quantity}x ${productName} al carrito`}
       >
         <span className="flex items-center justify-center gap-2">
-          {isLoading || loading ? (
+          {isLoading || cartLoading ? (
             <>
               <Spinner size={size} />
               <span>Agregando...</span>

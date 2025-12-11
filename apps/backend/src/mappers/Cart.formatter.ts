@@ -13,6 +13,7 @@ export function transformCart(cart: any) {
       tax: 0,
       shipping: 0,
       total: 0,
+      itemCount: 0,
     };
   }
 
@@ -54,6 +55,9 @@ export function transformCart(cart: any) {
   // Calcular total
   const total = Number((subtotal + tax + shipping).toFixed(2));
 
+  // Calcular cantidad total de items
+  const itemCount = items.reduce((sum: number, item: any) => sum + item.quantity, 0);
+
   return {
     id: cart.id,
     userId: cart.userId,
@@ -62,5 +66,6 @@ export function transformCart(cart: any) {
     tax,
     shipping,
     total,
+    itemCount,
   };
 }

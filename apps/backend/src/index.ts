@@ -12,7 +12,7 @@ import PaginatedProducts from "./routes/paginatedProducts.route";
 import checkout from "./routes/chekout.route";
 import uploadRoutes from "./routes/upload.route";
 import productImages from "./routes/productImages.route";
-import authRouter from "./routes/auth.route"; // ← AÑADE ESTO
+import authRouter from "./routes/auth.route";
 
 //Cargando variables de entorno
 dotenv.config();

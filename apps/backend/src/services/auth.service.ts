@@ -142,6 +142,7 @@ export async function logout(userId: number) {
 function generateTokens(user: User): TokenPair {
   const payload = {
     id: user.id,
+    userId: user.id,  // ✅ Agregar userId explícitamente
     email: user.email,
     username: user.username,
   };
