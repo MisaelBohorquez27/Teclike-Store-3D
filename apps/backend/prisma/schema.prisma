@@ -11,12 +11,14 @@ datasource db {
   Enums para valores controlados
 */
 enum OrderStatus {
-  PENDING
-  PAID
-  SHIPPED
-  DELIVERED
-  CANCELLED
-  REFUNDED
+  PENDING    // Orden creada, esperando pago
+  APPROVED   // Pago aprobado por Payphone
+  REJECTED   // Pago rechazado
+  CANCELLED  // Cancelado por el usuario
+  PAID       // Alias de APPROVED (legacy)
+  SHIPPED    // Orden enviada
+  DELIVERED  // Orden entregada
+  REFUNDED   // Reembolsado
 }
 
 enum PaymentStatus {
@@ -74,21 +76,31 @@ model Product {
 }
 
 model Order {
-  id                Int       @id @default(autoincrement())
-  userId            Int
-  subtotalCents     Int
-  taxCents          Int
-  shippingCostCents Int
-  totalCents        Int
-  shippingAddress   String
-  status            OrderStatus @default(PENDING)
-  orderDate         DateTime   @default(now())
+  id                      Int          @id @default(autoincrement())
+  userId                  Int
+  clientTransactionId     String       @unique // ID único de nuestra transacción
+  payphoneTransactionId   String?      // ID de Payphone
+  subtotalCents           Int
+  taxCents                Int
+  shippingCostCents       Int
+  totalCents              Int
+  shippingAddress         String?
+  billingAddress          String?
+  email                   String?
+  phone                   String?
+  status                  OrderStatus  @default(PENDING)
+  paymentMethod           String?      // VISA, MASTERCARD, etc.
+  lastFourDigits          String?      // Últimos 4 dígitos de la tarjeta
+  orderDate               DateTime     @default(now())
+  updatedAt               DateTime     @updatedAt
 
   // Relations
-  user       User        @relation(fields: [userId], references: [id])
-  items      OrderItem[]
-  payments   Payment[]
+  user         User          @relation(fields: [userId], references: [id])
+  items        OrderItem[]
+  payments     Payment[]
 
+  @@index([userId])
+  @@index([clientTransactionId])
   @@map("orders")
 }
 
@@ -102,8 +114,9 @@ model OrderItem {
 
   // Relations
   product Product @relation(fields: [productId], references: [id])
-  order   Order   @relation(fields: [orderId], references: [id])
+  order   Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
 
+  @@index([orderId])
   @@map("order_items")
 }
 
