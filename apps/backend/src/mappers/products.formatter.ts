@@ -33,6 +33,11 @@ export function formatDetailedProduct(product: any) {
     ? product.reviews.reduce((sum: number, r: any) => sum + r.rating, 0) / product.reviews.length
     : 5;
 
+  // ✅ Obtener todas las imágenes de la BD, si no hay usar la del product
+  const imageUrls = product.images && product.images.length > 0
+    ? product.images.map((img: any) => img.imageUrl)
+    : [product.imageUrl ?? "/placeholder.png"];
+
   return {
     id: product.id,
     name: product.name,
@@ -40,7 +45,8 @@ export function formatDetailedProduct(product: any) {
     description: product.description,
     price: formatCurrency(product.priceCents, product.currency),
     currency: product.currency,
-    image: product.imageUrl ?? "/placeholder.png",
+    imageUrl: product.imageUrl ?? "/placeholder.png",
+    imageUrls,  // ✅ Array de todas las imágenes
     category,
     isNew,
     rating,
