@@ -5,7 +5,10 @@ export function findFilteredProducts(whereClause: any, skip: number, take: numbe
   return Promise.all([
     prisma.product.findMany({
       where: whereClause,
-      include: { categoryProducts: { include: { category: true } } },
+      include: { 
+        categoryProducts: { include: { category: true } },
+        images: true  // ✅ Agregar imágenes
+      },
       skip,
       take,
       orderBy: { createdAt: "desc" },
@@ -19,6 +22,7 @@ export function findProductById(id: number) {
     where: { id },
     include: {
       categoryProducts: { include: { category: true } },
+      images: true,  // ✅ Agregar imágenes
       reviews: { include: { user: { select: { id: true, username: true } } } },
     },
   });
@@ -29,6 +33,7 @@ export function findProductBySlug(slug: string) {
     where: { slug },
     include: {
       categoryProducts: { include: { category: true } },
+      images: true,  // ✅ Agregar imágenes
       reviews: { include: { user: { select: { id: true, username: true } } } },
     },
   });

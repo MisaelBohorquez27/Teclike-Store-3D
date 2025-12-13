@@ -9,32 +9,37 @@ import {
 import { authMiddleware, requireAuth } from "../middleware/auth.middleware";
 import { validate } from "../middleware/validate.middleware";
 import { loginLimiter, registerLimiter } from "../middleware/rateLimiter.middleware";
-import Joi from "joi";
+import { z } from "zod";
 
 const router = Router();
 
 // Esquemas de validación
-const loginSchema = Joi.object({
-  email: Joi.string().email().required(),
-  password: Joi.string().min(6).required()
+const loginSchema = z.object({
+  email: z.string().email("Email inválido"),
+  password: z.string().min(6, "Mínimo 6 caracteres"),
 });
 
-const registerSchema = Joi.object({
-  email: Joi.string().email().required(),
-  username: Joi.string().min(3).required(),
-  password: Joi.string().min(8).required(),
-  confirmPassword: Joi.string().min(8).required()
+const registerSchema = z.object({
+  email: z.string().email("Email inválido"),
+  username: z.string().min(3, "Mínimo 3 caracteres"),
+  password: z.string().min(8, "Mínimo 8 caracteres"),
+  confirmPassword: z.string().min(8, "Mínimo 8 caracteres"),
 });
 
 // Rutas de autenticación
-router.post('/login', loginLimiter, validate(loginSchema), login);
+router.post("/login", loginLimiter, validate(loginSchema), login);
 
-router.post('/register', registerLimiter, validate(registerSchema), register);
+router.post(
+  "/register",
+  registerLimiter,
+  validate(registerSchema),
+  register
+);
 
-router.post('/logout', authMiddleware, requireAuth, logout);
+router.post("/logout", authMiddleware, requireAuth, logout);
 
-router.post('/refresh-token', refreshToken);
+router.post("/refresh-token", refreshToken);
 
-router.get('/me', authMiddleware, requireAuth, me);
+router.get("/me", authMiddleware, requireAuth, me);
 
 export default router;

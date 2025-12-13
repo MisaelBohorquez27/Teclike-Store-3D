@@ -13,6 +13,7 @@ import checkout from "./routes/chekout.route";
 import uploadRoutes from "./routes/upload.route";
 import productImages from "./routes/productImages.route";
 import authRouter from "./routes/auth.route";
+import paymentRoutes from "./routes/payment.routes";
 
 //Cargando variables de entorno
 dotenv.config();
@@ -43,6 +44,7 @@ app.use("/api/paginated", PaginatedProducts);
 app.use("/api/checkout", checkout);
 app.use("/api/upload", uploadRoutes);
 app.use("/api/images", productImages);
+app.use("/api/payment", paymentRoutes);
 
 //Ruta de prueba para ver si el servidor funciona
 app.get("/", (req, res) => {
