@@ -4,6 +4,7 @@ import { useState, useRef } from "react";
 import { useCartContext } from "@/context/CartContext";
 import { useAuth } from "@/context/AuthContext";
 import { AuthModal } from "@/components/AuthModal";
+import Button from "../PagesButtons";
 
 interface AddToCartButtonProps {
   productId: number;
@@ -58,7 +59,7 @@ export function AddToCartButton({
   // Validar que hay stock
   if (maxStock <= 0) {
     return (
-      <button
+      <Button
         disabled
         className={getButtonClasses(variant, size, true, className)}
         title="Producto agotado"
@@ -67,7 +68,7 @@ export function AddToCartButton({
           <StockIcon />
           Agotado
         </span>
-      </button>
+      </Button>
     );
   }
 
@@ -120,7 +121,7 @@ export function AddToCartButton({
   };
 
   return (
-    <div className={`flex flex-col gap-3 ${className}`}>
+    <div className={`flex flex-row gap-3 ${className}`}>
       {showQuantitySelector && (
         <QuantitySelector
           quantity={quantity}
@@ -130,7 +131,7 @@ export function AddToCartButton({
         />
       )}
 
-      <button
+      <Button
         onClick={handleAddToCart}
         disabled={isLoading || cartLoading}
         className={getButtonClasses(
@@ -157,7 +158,7 @@ export function AddToCartButton({
             </>
           )}
         </span>
-      </button>
+      </Button>
 
       {/* Modal de autenticación */}
       {showAuthModal && (
@@ -290,10 +291,10 @@ function getButtonClasses(
   const baseClasses = "font-medium rounded-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed";
 
   const variantClasses = {
-    default: "bg-blue-600 text-white hover:bg-blue-700 active:scale-95",
-    outline: "border-2 border-blue-600 text-blue-600 hover:bg-blue-50 active:scale-95",
-    ghost: "text-blue-600 hover:bg-blue-50 active:scale-95",
-    small: "bg-blue-600 text-white text-xs py-1 px-2 hover:bg-blue-700",
+    default: "bg-cyan-700 text-white hover:bg-cyan-600 active:scale-95",
+    outline: "border-2 border-cyan-600 text-cyan-600 hover:bg-cyan-50 active:scale-95",
+    ghost: "text-cyan-600 hover:bg-cyan-50 active:scale-95",
+    small: "bg-cyan-600 text-white text-xs py-1 px-2 hover:bg-cyan-700",
   };
 
   const sizeClasses = {
