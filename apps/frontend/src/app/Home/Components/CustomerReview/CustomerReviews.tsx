@@ -89,7 +89,7 @@ export function CustomerReviews() {
 
       <div className="relative z-10 py-20 md:py-28">
         <div className="container mx-auto px-4">
-          {/* Header con métricas */}
+          {/* Header con métricas 
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -108,7 +108,7 @@ export function CustomerReviews() {
               nuestros productos
             </p>
 
-            {/* Métricas de reseñas */}
+            {/* Métricas de reseñas 
             <motion.div
               className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto"
               initial={{ opacity: 0, scale: 0.95 }}
@@ -152,7 +152,7 @@ export function CustomerReviews() {
                 <div className="text-xs text-gray-400">Satisfacción</div>
               </div>
             </motion.div>
-          </motion.div>
+          </motion.div>*/}
 
           {/* Swiper de reseñas */}
           <motion.div
