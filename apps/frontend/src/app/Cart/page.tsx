@@ -3,6 +3,7 @@ import { useCartContext } from "@/context/CartContext";
 import CartList from "./CartList";
 import { EmptyCart } from "./EmptyCart";
 import CartSummary from "./cartSummary";
+import { IoMdLock } from "react-icons/io";
 
 export default function CartPage() {
   const {
@@ -15,10 +16,7 @@ export default function CartPage() {
     clearCart,
   } = useCartContext();
 
-  const handleUpdateQuantity = async (
-    productId: number,
-    quantity: number
-  ) => {
+  const handleUpdateQuantity = async (productId: number, quantity: number) => {
     const result = await updateQuantity(productId, quantity);
     return result.data as any;
   };
@@ -39,7 +37,7 @@ export default function CartPage() {
 
   const renderContent = () => {
     // Debug logs
-    console.log('🔍 Cart Debug:', {
+    console.log("🔍 Cart Debug:", {
       cart,
       itemCount,
       loading,
@@ -49,7 +47,7 @@ export default function CartPage() {
 
     if (loading) return <CartPageLoading />;
     if (error) return <CartPageError error={error} />;
-    
+
     // Verificar si realmente hay items en el carrito
     if (!cart || !cart.items || cart.items.length === 0) return <EmptyCart />;
 
@@ -85,7 +83,16 @@ const CartHeader = ({
   loading: boolean;
 }) => (
   <div className="flex justify-between items-center mb-6 sm:mb-8 border-b border-gray-300 pb-4">
-    <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Carrito de Compras</h1>
+    <div className="flex flex-row items-center gap-6">
+      <h1 className="text-xl sm:text-2xl font-bold text-gray-900 pr-2">
+        Carrito de Compras
+      </h1>
+      <p className="text-emerald-700 font-semibold flex items-center transform translate-y-0.5">
+        <IoMdLock className="inline w-4 h-4 mr-2" />
+        Todos los datos están protegidos
+      </p>
+    </div>
+
     {!loading && itemCount > 0 && (
       <span className="text-sm px-3 py-1 rounded-full">
         {itemCount} {itemCount === 1 ? "producto" : "productos"}
@@ -118,9 +125,7 @@ const CartPageError = ({ error }: { error: string }) => (
         />
       </svg>
     </div>
-    <h3 className="text-lg font-medium mb-2">
-      Error al cargar el carrito
-    </h3>
+    <h3 className="text-lg font-medium mb-2">Error al cargar el carrito</h3>
     <p className=" mb-4">{error}</p>
     <button
       onClick={() => window.location.reload()}
