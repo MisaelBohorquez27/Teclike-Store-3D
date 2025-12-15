@@ -29,7 +29,7 @@ export default function CartList({
   if (!cart || cart.items.length === 0) return <CartEmptyState />;
 
   return (
-    <div className="w-full lg:w-2/3">
+    <div className="w-full lg:w-2/3 mt-6 lg:mt-8">
       <div className="bg-transparent text-neutral rounded-lg p-6">
         {/* Encabezados */}
         <CartTableHeader />

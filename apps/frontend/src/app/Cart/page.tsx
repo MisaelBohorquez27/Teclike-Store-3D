@@ -67,7 +67,7 @@ export default function CartPage() {
   };
 
   return (
-    <main className="bg-gray-100 text-gray-950 text-neutral min-h-screen pb-20 sm:pb-12 pt-24 sm:pt-28 md:pt-30">
+    <main className="bg-gray-100 text-gray-950 text-neutral min-h-screen pb-10 sm:pb-12 pt-8 sm:pt-10 md:pt-12">
       <div className="bg-transparent container mx-auto px-4 sm:px-6">
         <CartHeader itemCount={itemCount} loading={loading} />
         {renderContent()}
@@ -84,8 +84,8 @@ const CartHeader = ({
   itemCount: number;
   loading: boolean;
 }) => (
-  <div className="flex justify-between items-center mb-6 sm:mb-8">
-    <h1 className="text-2xl sm:text-3xl font-bold">Carrito de Compras</h1>
+  <div className="flex justify-between items-center mb-6 sm:mb-8 border-b border-gray-300 pb-4">
+    <h1 className="text-xl sm:text-2xl font-bold text-gray-900">Carrito de Compras</h1>
     {!loading && itemCount > 0 && (
       <span className="text-sm px-3 py-1 rounded-full">
         {itemCount} {itemCount === 1 ? "producto" : "productos"}
