@@ -13,7 +13,7 @@ export function ServiceCards() {
     },
     {
       title: "Preguntas sobre Productos",
-      description: "Información detallada sobre nuestros modelos 3D",
+      description: "Información detallada sobre nuestros productos",
       icon: FiHelpCircle,
       color: "from-blue-700 to-cyan-500"
     },

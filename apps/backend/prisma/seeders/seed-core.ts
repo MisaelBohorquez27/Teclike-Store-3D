@@ -4,52 +4,48 @@ import { PrismaClient } from '@prisma/client';
 export async function seedCoreData(prisma: PrismaClient) {
   console.log('🌱 Insertando datos core...');
 
-  {/* Roles 
-  const roles = await Promise.all([
-    prisma.role.upsert({
-      where: { name: 'Admin' },
-      update: {},
-      create: { name: 'Admin' }
-    }),
-    prisma.role.upsert({
-      where: { name: 'Customer' },
-      update: {},
-      create: { name: 'Customer' }
-    }),
-    prisma.role.upsert({
-      where: { name: 'Moderator' },
-      update: {},
-      create: { name: 'Moderator' }
-    })
-  ]);
+  let created = 0;
+  let updated = 0;
+  let errors = 0;
 
-  console.log('✅ Roles insertados');*/}
+  try {
+    // Métodos de Pago
+    const paymentMethodsList = [
+      'Credit Card',
+      'PayPal',
+      'Bank Transfer',
+      'Cash on Delivery'
+    ];
 
-  // Métodos de Pago
-  const paymentMethods = await Promise.all([
-    prisma.paymentMethod.upsert({
-      where: { method: 'Credit Card' },
-      update: {},
-      create: { method: 'Credit Card' }
-    }),
-    prisma.paymentMethod.upsert({
-      where: { method: 'PayPal' },
-      update: {},
-      create: { method: 'PayPal' }
-    }),
-    prisma.paymentMethod.upsert({
-      where: { method: 'Bank Transfer' },
-      update: {},
-      create: { method: 'Bank Transfer' }
-    }),
-    prisma.paymentMethod.upsert({
-      where: { method: 'Cash on Delivery' },
-      update: {},
-      create: { method: 'Cash on Delivery' }
-    })
-  ]);
+    console.log('\n💳 Insertando métodos de pago...');
+    
+    for (const methodName of paymentMethodsList) {
+      try {
+        const existingMethod = await prisma.paymentMethod.findUnique({
+          where: { method: methodName },
+        });
 
-  console.log('✅ Métodos de pago insertados');
+        if (existingMethod) {
+          updated++;
+          console.log(`↩️ Método de pago ya existe: ${methodName}`);
+          continue;
+        }
 
-  return { paymentMethods };
+        await prisma.paymentMethod.create({
+          data: { method: methodName }
+        });
+
+        created++;
+        console.log(`✅ Método de pago: ${methodName}`);
+      } catch (error) {
+        errors++;
+        console.error(`❌ Error creando método de pago "${methodName}":`, error);
+      }
+    }
+
+    console.log(`\n📊 Core Data - Métodos de pago creados: ${created}, Existentes: ${updated}, Errores: ${errors}`);
+  } catch (error) {
+    console.error('❌ Error en seedCoreData:', error);
+    throw error;
+  }
 }

@@ -6,13 +6,18 @@
         "shippingCostCents": 599,
         "totalCents": 14508,
         "shippingAddress": "123 Main Street, Anytown, USA 12345",
+        "email": "user2@example.com",
+        "phone": "+1-555-0101",
+        "status": "PENDING",
         "orderProducts": [
             {
                 "productSlug": "razer-kraken-v3",
                 "quantity": 1,
                 "priceCents": 12999
             }
-        ]
+        ],
+        "clientTransactionId": "TXN-001",
+        "payphoneTransactionId": "234567890"
     },
     {
         "userId": 2,
@@ -21,14 +26,18 @@
         "shippingCostCents": 599,
         "totalCents": 27748,
         "shippingAddress": "456 Oak Avenue, Springfield, USA 67890",
-        "status": "Shipped",
+        "email": "user2@example.com",
+        "phone": "+1-555-0101",
+        "status": "SHIPPED",
         "orderProducts": [
             {
                 "productSlug": "asus-rog-azoth",
                 "quantity": 1,
                 "priceCents": 24999
             }
-        ]
+        ],
+        "clientTransactionId": "TXN-002",
+        "payphoneTransactionId": "345678901"
     },
     {
         "userId": 3,
@@ -37,7 +46,9 @@
         "shippingCostCents": 599,
         "totalCents": 48745,
         "shippingAddress": "789 Pine Lane, Metropolis, USA 98765",
-        "status": "Delivered",
+        "email": "user3@example.com",
+        "phone": "+1-555-0102",
+        "status": "DELIVERED",
         "orderProducts": [
             {
                 "productSlug": "logitech-g502-x",
@@ -49,7 +60,9 @@
                 "quantity": 1,
                 "priceCents": 4999
             }
-        ]
+        ],
+        "clientTransactionId": "TXN-003",
+        "payphoneTransactionId": "567890123"
     },
     {
         "userId": 3,
@@ -58,7 +71,9 @@
         "shippingCostCents": 599,
         "totalCents": 94757,
         "shippingAddress": "123 Main Street, Anytown, USA 12345",
-        "status": "Delivered",
+        "email": "user3@example.com",
+        "phone": "+1-555-0102",
+        "status": "DELIVERED",
         "orderProducts": [
             {
                 "productSlug": "hyperx-cloud-alpha",
@@ -70,6 +85,8 @@
                 "quantity": 2,
                 "priceCents": 34999
             }
-        ]
+        ],
+        "clientTransactionId": "TXN-004",
+        "payphoneTransactionId": "567890123"
     }
 ]

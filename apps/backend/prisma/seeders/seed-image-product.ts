@@ -1,3 +1,4 @@
+// seeders/seed-image-product.ts
 import { PrismaClient } from "@prisma/client";
 import imageProducts from "../data/imageProduct.json";
 
@@ -8,8 +9,12 @@ type ImageEntry = {
   imageAlt?: string;
 };
 
-export async function seedImageProducts(prisma: PrismaClient) {
+export async function seedImageProducts(prismaClient: PrismaClient) {
   console.log("🖼️ Insertando imágenes de productos...");
+
+  let created = 0;
+  let skipped = 0;
+  let errors = 0;
 
   for (const image of imageProducts as ImageEntry[]) {
     try {
@@ -17,7 +22,7 @@ export async function seedImageProducts(prisma: PrismaClient) {
 
       // Si no viene productId, intentar resolver por slug
       if (!productId && image.productSlug) {
-        const product = await prisma.product.findUnique({
+        const product = await prismaClient.product.findUnique({
           where: { slug: image.productSlug },
           select: { id: true },
         });
@@ -25,21 +30,23 @@ export async function seedImageProducts(prisma: PrismaClient) {
       }
 
       if (!productId) {
-        console.warn(`⚠️ Producto no encontrado para imageUrl=${image.imageUrl}. Omitiendo.`);
+        skipped++;
+        console.warn(`⚠️ Producto no encontrado para imagen: ${image.imageUrl}`);
         continue;
       }
 
       // Verificar duplicados (mismo productId + imageUrl)
-      const exists = await prisma.productImage.findFirst({
+      const exists = await prismaClient.productImage.findFirst({
         where: { productId, imageUrl: image.imageUrl },
       });
 
       if (exists) {
-        console.log(`↩️ Imagen ya existe para productId=${productId}, url=${image.imageUrl}`);
+        skipped++;
+        console.log(`↩️ Imagen ya existe para productId=${productId}`);
         continue;
       }
 
-      await prisma.productImage.create({
+      await prismaClient.productImage.create({
         data: {
           productId,
           imageUrl: image.imageUrl,
@@ -47,24 +54,13 @@ export async function seedImageProducts(prisma: PrismaClient) {
         },
       });
 
-      console.log(`✅ Imagen añadida productId=${productId} url=${image.imageUrl}`);
+      created++;
+      console.log(`✅ Imagen añadida: ProductID=${productId}`);
     } catch (err) {
-      console.error("❌ Error insertando imagen:", err);
+      errors++;
+      console.error(`❌ Error insertando imagen:`, err);
     }
   }
 
-  console.log(`✅ Seed de imágenes completado`);
-}
-
-// Ejecutable directo
-if (require.main === module) {
-  const prisma = new PrismaClient();
-  seedImageProducts(prisma)
-    .catch((e) => {
-      console.error("❌ Error en seedImageProducts:", e);
-      process.exitCode = 1;
-    })
-    .finally(async () => {
-      await prisma.$disconnect();
-    });
+  console.log(`\n📊 Imágenes - Creadas: ${created}, Saltadas: ${skipped}, Errores: ${errors}`);
 }

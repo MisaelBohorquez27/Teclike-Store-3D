@@ -27,7 +27,7 @@ async function main() {
   console.log('------------------------------------------');
   await seedOffers(prisma);
   console.log('------------------------------------------');
-  await seedCategoryRelations();
+  await seedCategoryRelations(prisma);
   console.log('------------------------------------------');
   await seedOrders(prisma);
   console.log('------------------------------------------');

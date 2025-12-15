@@ -1,7 +1,7 @@
 export function formatReview(r: any) {
   return {
     id: r.id,
-    name: r.user?.firstName || "Cliente",
+    name: r.user?.username || "Cliente",
     avatar: r.user?.photoURL || "/default-avatar.png",
     product: r.product?.name || "Producto",
     comment: r.comment,

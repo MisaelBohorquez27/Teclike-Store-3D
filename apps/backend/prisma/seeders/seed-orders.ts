@@ -7,58 +7,94 @@ const prisma = new PrismaClient();
 function parseOrderStatus(value?: string): OrderStatus {
   if (!value) return OrderStatus.PENDING;
   const normalized = value.toString().trim().toUpperCase();
-  const valid = new Set(Object.values(OrderStatus));
-  return (valid.has(normalized as OrderStatus) ? (normalized as OrderStatus) : OrderStatus.PENDING);
+  
+  // Validar contra los valores enum disponibles
+  const validStatuses = Object.values(OrderStatus);
+  
+  if (validStatuses.includes(normalized as OrderStatus)) {
+    return normalized as OrderStatus;
+  }
+  
+  // Si no es válido, retornar PENDING como default
+  console.warn(`⚠️ Estado no válido: "${value}", usando PENDING por defecto`);
+  return OrderStatus.PENDING;
 }
 
 export async function seedOrders(prisma: PrismaClient) {
   console.log("🌱 Seeding orders...");
 
-  for (const order of ordersData) {
-    // 1. Crear la orden
-    const createdOrder = await prisma.order.create({
-      data: {
-        userId: order.userId,
-        subtotalCents: order.subtotalCents,
-        taxCents: order.taxCents,
-        shippingCostCents: order.shippingCostCents,
-        totalCents: order.totalCents,
-        shippingAddress: order.shippingAddress,
-        status: parseOrderStatus(order.status),
-      },
-    });
+  try {
+    for (const order of ordersData) {
+      try {
+        // Verificar que el usuario existe
+        const user = await prisma.user.findUnique({
+          where: { id: order.userId },
+        });
 
-    // 2. Buscar IDs de productos a partir del slug
-    const products = await prisma.product.findMany({
-      where: {
-        slug: { in: order.orderProducts.map((op) => op.productSlug) },
-      },
-    });
+        if (!user) {
+          console.warn(`⚠️ Usuario no encontrado: ID ${order.userId}, saltando orden...`);
+          continue;
+        }
 
-    const productMap = Object.fromEntries(products.map((p) => [p.slug, p.id]));
+        // 1. Crear la orden
+        const createdOrder = await prisma.order.create({
+          data: {
+            userId: order.userId,
+            clientTransactionId: order.clientTransactionId || `TXN-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+            payphoneTransactionId: order.payphoneTransactionId || null,
+            subtotalCents: order.subtotalCents,
+            taxCents: order.taxCents,
+            shippingCostCents: order.shippingCostCents,
+            totalCents: order.totalCents,
+            shippingAddress: order.shippingAddress || null,
+            billingAddress: (order as any).billingAddress || null,
+            email: (order as any).email || user.email,
+            phone: (order as any).phone || user.phone,
+            status: parseOrderStatus((order as any).status),
+            paymentMethod: (order as any).paymentMethod || null,
+            lastFourDigits: (order as any).lastFourDigits || null,
+          },
+        });
 
-    // 3. Insertar productos de la orden
-    for (const op of order.orderProducts) {
-      const productId = productMap[op.productSlug];
-      if (!productId) {
-        console.warn(`⚠️ Producto no encontrado en DB: ${op.productSlug}`);
+        // 2. Buscar IDs de productos a partir del slug
+        const products = await prisma.product.findMany({
+          where: {
+            slug: { in: order.orderProducts.map((op) => op.productSlug) },
+          },
+        });
+
+        const productMap = Object.fromEntries(products.map((p) => [p.slug, p.id]));
+
+        // 3. Insertar productos de la orden
+        for (const op of order.orderProducts) {
+          const productId = productMap[op.productSlug];
+          if (!productId) {
+            console.warn(`⚠️ Producto no encontrado: ${op.productSlug}, saltando item...`);
+            continue;
+          }
+
+          await prisma.orderItem.create({
+            data: {
+              orderId: createdOrder.id,
+              productId,
+              quantity: op.quantity,
+              priceCents: op.priceCents,
+            },
+          });
+        }
+
+        console.log(`✅ Orden creada: ID=${createdOrder.id}, Usuario=${order.userId}, Total=${createdOrder.totalCents}¢`);
+      } catch (itemError) {
+        console.error(`❌ Error procesando orden del usuario ${order.userId}:`, itemError);
         continue;
       }
-
-      await prisma.orderItem.create({
-        data: {
-          orderId: createdOrder.id,
-          productId,
-          quantity: op.quantity,
-          priceCents: op.priceCents,
-        },
-      });
     }
 
-    console.log(`✅ Orden creada con id=${createdOrder.id}`);
+    console.log("🌱 Orders seeding completed!");
+  } catch (error) {
+    console.error("❌ Error general en seeding de orders:", error);
+    throw error;
   }
-
-  console.log("🌱 Orders seeding completed!");
 }
 
 seedOrders(prisma)

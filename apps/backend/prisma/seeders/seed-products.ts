@@ -5,53 +5,56 @@ import products from "../data/products.json";
 export async function seedProducts(prisma: PrismaClient) {
   console.log("🛍️ Insertando productos...");
 
+  let created = 0;
+  let updated = 0;
+  let errors = 0;
+
   for (const productData of products) {
-    const product = await prisma.product.upsert({
-      where: { slug: productData.slug },
-      update: {},
-      create: {
-        brand: productData.brand,
-        slug: productData.slug,
-        name: productData.name,
-        description: productData.description,
-        priceCents: productData.priceCents,
-        imageUrl: productData.imageUrl,
-      },
-    });
+    try {
+      const product = await prisma.product.upsert({
+        where: { slug: productData.slug },
+        update: {
+          brand: productData.brand,
+          name: productData.name,
+          description: productData.description,
+          priceCents: productData.priceCents,
+          imageUrl: productData.imageUrl,
+        },
+        create: {
+          brand: productData.brand,
+          slug: productData.slug,
+          name: productData.name,
+          description: productData.description,
+          priceCents: productData.priceCents,
+          imageUrl: productData.imageUrl,
+        },
+      });
 
-    // Ejemplo de actualización de un producto específico
-   /* {
-      await prisma.product.update({
-      where: {
-        slug: "mouse-x11", // Usas el slug para encontrar el producto
-      },
-      data: {
-        imageUrl: "https://res.cloudinary.com/dwewy8c7p/image/upload/v1759415343/teclike-image/mewvnmlrl1dnf37ijslt.png", // Nuevo nombre
-      },
-    });
+      // Crear o actualizar inventario
+      try {
+        await prisma.inventory.upsert({
+          where: { productId: product.id },
+          update: {
+            stock: productData.inventory?.stock || 0,
+            isNew: productData.inventory?.isNew || false,
+          },
+          create: {
+            productId: product.id,
+            stock: productData.inventory?.stock || 0,
+            isNew: productData.inventory?.isNew || false,
+          },
+        });
+      } catch (inventoryError) {
+        console.warn(`⚠️ Error al crear inventario para ${product.name}:`, inventoryError);
+      }
+
+      console.log(`✅ Producto: ${product.name}`);
+      created++;
+    } catch (error) {
+      errors++;
+      console.error(`❌ Error procesando producto "${productData.name}":`, error);
     }
-
-    await prisma.product.update({
-      where: {
-        slug: "razer-kraken-v3", // Usas el slug para encontrar el producto
-      },
-      data: {
-        imageUrl:
-          "https://res.cloudinary.com/dwewy8c7p/image/upload/v1759718809/razer-KrakenV3-HyperSense_ctrspf.png", // Nuevo nombre
-      },
-    });*/
-
-    // Crear inventario
-    await prisma.inventory.upsert({
-      where: { productId: product.id },
-      update: {},
-      create: {
-        productId: product.id,
-        stock: productData.inventory.stock,
-        isNew: productData.inventory.isNew,
-      },
-    });
-
-    console.log(`✅ Producto: ${product.name}`);
   }
+
+  console.log(`\n📊 Productos - Creados: ${created}, Saltados: ${updated}, Errores: ${errors}`);
 }

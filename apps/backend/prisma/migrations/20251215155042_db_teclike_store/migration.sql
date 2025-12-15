@@ -1,11 +1,14 @@
 -- CreateEnum
-CREATE TYPE "public"."OrderStatus" AS ENUM ('PENDING', 'PAID', 'SHIPPED', 'DELIVERED', 'CANCELLED', 'REFUNDED');
+CREATE TYPE "public"."OrderStatus" AS ENUM ('PENDING', 'APPROVED', 'REJECTED', 'CANCELLED', 'PAID', 'SHIPPED', 'DELIVERED', 'REFUNDED');
 
 -- CreateEnum
 CREATE TYPE "public"."PaymentStatus" AS ENUM ('PENDING', 'COMPLETED', 'FAILED', 'REFUNDED');
 
 -- CreateEnum
 CREATE TYPE "public"."OfferType" AS ENUM ('PERCENTAGE', 'FIXED');
+
+-- CreateEnum
+CREATE TYPE "public"."RoleType" AS ENUM ('ADMIN', 'CUSTOMER');
 
 -- CreateEnum
 CREATE TYPE "public"."OfferRecurrence" AS ENUM ('NONE', 'DAILY', 'WEEKLY', 'MONTHLY', 'ANNUAL');
@@ -31,13 +34,21 @@ CREATE TABLE "public"."products" (
 CREATE TABLE "public"."orders" (
     "id" SERIAL NOT NULL,
     "userId" INTEGER NOT NULL,
+    "clientTransactionId" TEXT NOT NULL,
+    "payphoneTransactionId" TEXT,
     "subtotalCents" INTEGER NOT NULL,
     "taxCents" INTEGER NOT NULL,
     "shippingCostCents" INTEGER NOT NULL,
     "totalCents" INTEGER NOT NULL,
-    "shippingAddress" TEXT NOT NULL,
+    "shippingAddress" TEXT,
+    "billingAddress" TEXT,
+    "email" TEXT,
+    "phone" TEXT,
     "status" "public"."OrderStatus" NOT NULL DEFAULT 'PENDING',
+    "paymentMethod" TEXT,
+    "lastFourDigits" TEXT,
     "orderDate" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "orders_pkey" PRIMARY KEY ("id")
 );
@@ -70,7 +81,9 @@ CREATE TABLE "public"."cart_products" (
     "cartId" INTEGER NOT NULL,
     "productId" INTEGER NOT NULL,
     "quantity" INTEGER NOT NULL DEFAULT 1,
+    "priceCents" INTEGER NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "cart_products_pkey" PRIMARY KEY ("id")
 );
@@ -132,15 +145,14 @@ CREATE TABLE "public"."reviews" (
 -- CreateTable
 CREATE TABLE "public"."users" (
     "id" SERIAL NOT NULL,
-    "roleId" INTEGER NOT NULL,
+    "role" "public"."RoleType" NOT NULL DEFAULT 'CUSTOMER',
     "photoURL" TEXT,
-    "firstName" TEXT NOT NULL,
-    "lastName" TEXT NOT NULL,
+    "username" TEXT NOT NULL,
     "phone" TEXT,
     "email" TEXT NOT NULL,
     "password" TEXT NOT NULL,
-    "documentType" TEXT,
-    "documentNumber" TEXT,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "users_pkey" PRIMARY KEY ("id")
 );
@@ -165,14 +177,6 @@ CREATE TABLE "public"."payment_methods" (
     "method" TEXT NOT NULL,
 
     CONSTRAINT "payment_methods_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "public"."roles" (
-    "id" SERIAL NOT NULL,
-    "name" TEXT NOT NULL,
-
-    CONSTRAINT "roles_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -223,7 +227,25 @@ CREATE TABLE "public"."image_products" (
 CREATE UNIQUE INDEX "products_slug_key" ON "public"."products"("slug");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "orders_clientTransactionId_key" ON "public"."orders"("clientTransactionId");
+
+-- CreateIndex
+CREATE INDEX "orders_userId_idx" ON "public"."orders"("userId");
+
+-- CreateIndex
+CREATE INDEX "orders_clientTransactionId_idx" ON "public"."orders"("clientTransactionId");
+
+-- CreateIndex
+CREATE INDEX "order_items_orderId_idx" ON "public"."order_items"("orderId");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "carts_userId_key" ON "public"."carts"("userId");
+
+-- CreateIndex
+CREATE INDEX "carts_userId_idx" ON "public"."carts"("userId");
+
+-- CreateIndex
+CREATE INDEX "cart_products_cartId_idx" ON "public"."cart_products"("cartId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "cart_products_cartId_productId_key" ON "public"."cart_products"("cartId", "productId");
@@ -241,13 +263,13 @@ CREATE UNIQUE INDEX "offers_name_key" ON "public"."offers"("name");
 CREATE UNIQUE INDEX "offer_products_offerId_productId_key" ON "public"."offer_products"("offerId", "productId");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "users_username_key" ON "public"."users"("username");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "users_email_key" ON "public"."users"("email");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "payment_methods_method_key" ON "public"."payment_methods"("method");
-
--- CreateIndex
-CREATE UNIQUE INDEX "roles_name_key" ON "public"."roles"("name");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "user_addresses_userId_addressId_key" ON "public"."user_addresses"("userId", "addressId");
@@ -262,16 +284,16 @@ ALTER TABLE "public"."orders" ADD CONSTRAINT "orders_userId_fkey" FOREIGN KEY ("
 ALTER TABLE "public"."order_items" ADD CONSTRAINT "order_items_productId_fkey" FOREIGN KEY ("productId") REFERENCES "public"."products"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "public"."order_items" ADD CONSTRAINT "order_items_orderId_fkey" FOREIGN KEY ("orderId") REFERENCES "public"."orders"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "public"."order_items" ADD CONSTRAINT "order_items_orderId_fkey" FOREIGN KEY ("orderId") REFERENCES "public"."orders"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "public"."carts" ADD CONSTRAINT "carts_userId_fkey" FOREIGN KEY ("userId") REFERENCES "public"."users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "public"."carts" ADD CONSTRAINT "carts_userId_fkey" FOREIGN KEY ("userId") REFERENCES "public"."users"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "public"."cart_products" ADD CONSTRAINT "cart_products_cartId_fkey" FOREIGN KEY ("cartId") REFERENCES "public"."carts"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "public"."cart_products" ADD CONSTRAINT "cart_products_cartId_fkey" FOREIGN KEY ("cartId") REFERENCES "public"."carts"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "public"."cart_products" ADD CONSTRAINT "cart_products_productId_fkey" FOREIGN KEY ("productId") REFERENCES "public"."products"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "public"."cart_products" ADD CONSTRAINT "cart_products_productId_fkey" FOREIGN KEY ("productId") REFERENCES "public"."products"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "public"."category_products" ADD CONSTRAINT "category_products_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "public"."categories"("id") ON DELETE CASCADE ON UPDATE CASCADE;
@@ -290,9 +312,6 @@ ALTER TABLE "public"."reviews" ADD CONSTRAINT "reviews_userId_fkey" FOREIGN KEY 
 
 -- AddForeignKey
 ALTER TABLE "public"."reviews" ADD CONSTRAINT "reviews_productId_fkey" FOREIGN KEY ("productId") REFERENCES "public"."products"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "public"."users" ADD CONSTRAINT "users_roleId_fkey" FOREIGN KEY ("roleId") REFERENCES "public"."roles"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "public"."payments" ADD CONSTRAINT "payments_paymentMethodId_fkey" FOREIGN KEY ("paymentMethodId") REFERENCES "public"."payment_methods"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
