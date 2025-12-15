@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { FiHelpCircle, FiUser } from "react-icons/fi";
+import { FiHelpCircle, FiLogOut, FiUser } from "react-icons/fi";
 import logo from "../../public/logos/Logo3.png";
 import Button from "./PagesButtons";
 import { Navbar2 } from "./Navbar2";
@@ -18,15 +18,15 @@ export function Header() {
   const handleLogout = async () => {
     try {
       setIsLoggingOut(true);
-      console.log('🚀 Iniciando logout desde Header...');
+      console.log("🚀 Iniciando logout desde Header...");
       await logout();
-      console.log('✅ Logout ejecutado, redirigiendo...');
+      console.log("✅ Logout ejecutado, redirigiendo...");
       // Esperar a que se ejecute el logout completamente antes de recargar
       setTimeout(() => {
         window.location.href = "/";
       }, 500);
     } catch (error) {
-      console.error('❌ Error en logout:', error);
+      console.error("❌ Error en logout:", error);
       setIsLoggingOut(false);
     }
   };
@@ -80,7 +80,10 @@ export function Header() {
             {isAuthenticated && user ? (
               <div className="flex items-center space-x-3">
                 <span className="text-sm text-cyan-400 font-medium hidden sm:inline">
-                  {user.username}
+                  <div className="flex items-center gap-1">
+                    <FiUser size={15} />
+                    {user.username}
+                  </div>
                 </span>
                 <button
                   onClick={handleLogout}
@@ -88,11 +91,11 @@ export function Header() {
                   className={`px-3 py-1.5 rounded-lg flex items-center space-x-2 hover:scale-105 transition-all duration-100 text-sm ${
                     isLoggingOut
                       ? "bg-gray-600/80 text-gray-300 cursor-not-allowed"
-                      : "bg-red-600/80 backdrop-blur-sm hover:bg-red-500 hover:text-white"
+                      : "backdrop-blur-sm hover:text-gray-100 cursor-pointer text-gray-200"
                   }`}
                 >
-                  <FiUser size={16} />
                   <span>{isLoggingOut ? "Saliendo..." : "Salir"}</span>
+                  <FiLogOut size={15} />
                 </button>
               </div>
             ) : (

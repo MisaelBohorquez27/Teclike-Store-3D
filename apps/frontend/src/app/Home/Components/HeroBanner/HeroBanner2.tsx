@@ -17,6 +17,7 @@ import {
   FiServer,
 } from "react-icons/fi";
 import { BenefitsGrid } from "../Benefits/BenefitsGrid";
+import Link from "next/dist/client/link";
 
 export function HeroBanner2() {
   const isMounted = useIsMounted();
@@ -48,7 +49,6 @@ export function HeroBanner2() {
 
   return (
     <section className="relative min-h-screen overflow-hidden bg-gray-950">
-
       {/* Fondo de imagen a pantalla completa con overlay tecnológico 
       <div className="absolute inset-0">
         <Image
@@ -60,37 +60,37 @@ export function HeroBanner2() {
           className="object-cover object-center"
           sizes="100vw"
         /> 
-        <div/>
+      <div/>
         */}
-        {/* Overlay oscuro con efecto de partículas */}
-        <div className="absolute inset-0 bg-black/60 backdrop-blur-[1px]" />
-        
-        {/* Efecto de partículas animadas */}
-        <div className="absolute inset-0">
-          {[...Array(50)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute w-[2px] h-[2px] bg-blue-400 rounded-full"
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-              }}
-              animate={{
-                opacity: [0, 1, 0],
-                scale: [0, 1, 0],
-                y: [0, -30, -60],
-              }}
-              transition={{
-                duration: Math.random() * 3 + 2,
-                repeat: Infinity,
-                delay: Math.random() * 5,
-                ease: "easeOut",
-              }}
-            />
-          ))}
-        </div>
+      {/* Overlay oscuro con efecto de partículas */}
+      <div className="absolute inset-0 bg-black/60 backdrop-blur-[1px]" />
 
-        {/* Líneas de conexión futuristas 
+      {/* Efecto de partículas animadas */}
+      <div className="absolute inset-0">
+        {[...Array(50)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-[2px] h-[2px] bg-blue-400 rounded-full"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+            }}
+            animate={{
+              opacity: [0, 1, 0],
+              scale: [0, 1, 0],
+              y: [0, -30, -60],
+            }}
+            transition={{
+              duration: Math.random() * 3 + 2,
+              repeat: Infinity,
+              delay: Math.random() * 5,
+              ease: "easeOut",
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Líneas de conexión futuristas 
         <div className="absolute inset-0">
           {[...Array(8)].map((_, i) => (
             <motion.div
@@ -115,7 +115,7 @@ export function HeroBanner2() {
           ))}
         </div>*/}
 
-        {/* Grid tecnológico animado 
+      {/* Grid tecnológico animado 
         <motion.div
           className="absolute inset-0 bg-[linear-gradient(rgba(59,130,246,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.05)_1px,transparent_1px)] bg-[size:64px_64px]"
           animate={{
@@ -199,26 +199,35 @@ export function HeroBanner2() {
                 transition={{ delay: 0.3 }}
               >
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-black leading-tight">
-                  <span className="text-white">
-                    Encuentra los
-                  </span>
+                  <span className="text-white">Encuentra los</span>
                   <br />
                   <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
                     Mejores Productos
                   </span>
                 </h1>
-                
+
                 <motion.p
                   className="text-lg md:text-xl text-gray-300 leading-relaxed max-w-2xl"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.5 }}
                 >
-                  Somos una importadora que te ofrece los mejores productos del mercado. 
-                  <span className="text-blue-300 font-semibold"> Con un precio accesible, </span>
-                  <span className="text-purple-300 font-semibold"> de buena calidad </span>
+                  Somos una importadora que te ofrece los mejores productos del
+                  mercado.
+                  <span className="text-blue-300 font-semibold">
+                    {" "}
+                    Con un precio accesible,{" "}
+                  </span>
+                  <span className="text-purple-300 font-semibold">
+                    {" "}
+                    de buena calidad{" "}
+                  </span>
                   y
-                  <span className="text-cyan-300 font-semibold"> confiable</span>.
+                  <span className="text-cyan-300 font-semibold">
+                    {" "}
+                    confiable
+                  </span>
+                  .
                 </motion.p>
               </motion.div>
 
@@ -229,17 +238,19 @@ export function HeroBanner2() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.8 }}
               >
-                <Button
-                  variant="primary"
-                  size="xl"
-                  className="group relative overflow-hidden bg-gradient-to-r from-blue-950 to-blue-900 hover:from-blue-900 hover:to-blue-800 border-0 text-white font-bold py-4 px-8 rounded-2xl hover:scale-105 transition-all duration-300 shadow-2xl hover:shadow-blue-500/25"
-                >
-                  <span className="flex items-center gap-3 relative z-10">
-                    {HERO_CONFIG.buttonText}
-                    <FiArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                  </span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 transform translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
-                </Button>
+                <Link href="/Products" passHref>
+                  <Button
+                    variant="primary"
+                    size="xl"
+                    className="group relative overflow-hidden bg-gradient-to-r from-blue-950 to-blue-900 hover:from-blue-900 hover:to-blue-800 border-0 text-white font-bold py-4 px-8 rounded-2xl hover:scale-105 transition-all duration-300 shadow-2xl hover:shadow-blue-500/25"
+                  >
+                    <span className="flex items-center gap-3 relative z-10">
+                      {HERO_CONFIG.buttonText}
+                      <FiArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                    </span>
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 transform translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+                  </Button>
+                </Link>
               </motion.div>
 
               {/* Trust badges modernos
@@ -271,37 +282,44 @@ export function HeroBanner2() {
             </motion.div>
 
             {/* Panel de visualización tecnológica */}
-            <motion.div
-              className="relative"
-              {...animationProps.image}
-            >
+            <motion.div className="relative w-full h-[100px] md:h-[200px] lg:h-[300px]" {...animationProps.image}>
               {/* Terminal flotante */}
               <motion.div
-                className="relative bg-gray-900/80 backdrop-blur-md rounded-2xl border border-white/10 p-6 shadow-2xl"
+                className="relative  w-full h-full bg-gray-900/80 backdrop-blur-md rounded-2xl border border-white/10 p-6 shadow-2xl"
                 initial={{ opacity: 0, x: 50, rotateY: 10 }}
                 animate={{ opacity: 1, x: 0, rotateY: 0 }}
-                transition={{ delay: 0.9, duration: 0.8 }}
+                transition={{ delay: 0.1, duration: 0.8 }}
                 whileHover={{
                   scale: 1.02,
                   transition: { type: "spring", stiffness: 300 },
                 }}
               >
-                {/* Header del terminal */}
+                {/* Header del terminal 
                 <div className="flex items-center gap-2 mb-4">
                   <div className="flex gap-1.5">
                     <div className="w-3 h-3 bg-red-500 rounded-full" />
                     <div className="w-3 h-3 bg-yellow-500 rounded-full" />
                     <div className="w-3 h-3 bg-green-500 rounded-full" />
                   </div>
-                  <div className="text-gray-400 text-sm font-mono">terminal --dev-mode</div>
-                </div>
+                  <div className="text-gray-400 text-sm font-mono">
+                    terminal --dev-mode
+                  </div>
+                </div>*/}
 
-                {/* Contenido del terminal */}
+                {/* Contenido del terminal
                 <div className="font-mono text-sm space-y-2">
-                  <div className="text-green-400">$ npm create next-app@latest</div>
-                  <div className="text-blue-400">✔ ¿Cómo se llamará tu proyecto? ... mi-app</div>
-                  <div className="text-cyan-400">✔ ¿Usar TypeScript? ... Sí</div>
-                  <div className="text-purple-400">✔ ¿Usar Tailwind CSS? ... Sí</div>
+                  <div className="text-green-400">
+                    $ npm create next-app@latest
+                  </div>
+                  <div className="text-blue-400">
+                    ✔ ¿Cómo se llamará tu proyecto? ... mi-app
+                  </div>
+                  <div className="text-cyan-400">
+                    ✔ ¿Usar TypeScript? ... Sí
+                  </div>
+                  <div className="text-purple-400">
+                    ✔ ¿Usar Tailwind CSS? ... Sí
+                  </div>
                   <div className="text-yellow-400">🚀 Creando proyecto...</div>
                   <motion.div
                     className="text-white"
@@ -310,9 +328,22 @@ export function HeroBanner2() {
                   >
                     ████████████████████ 100%
                   </motion.div>
-                  <div className="text-green-400">✅ ¡Proyecto creado exitosamente!</div>
-                </div>
+                  <div className="text-green-400">
+                    ✅ ¡Proyecto creado exitosamente!
+                  </div>
+                </div> */}
 
+                <Image
+                  src="/ui/HeroBanner.png"
+                  alt="Fondo tecnológico futurista"
+                  fill
+                  priority
+                  quality={100}
+                  className="object-cover object-center"
+                  sizes="100vw"
+                />
+                {/* Overlay degradado para mejor legibilidad */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
                 {/* Indicadores de actividad */}
                 <div className="absolute -top-3 -right-3 bg-blue-500 rounded-full p-2 shadow-lg">
                   <FiServer className="w-4 h-4 text-white" />
@@ -350,7 +381,9 @@ export function HeroBanner2() {
             ease: "easeInOut",
           }}
         >
-          <div className="text-sm font-medium tracking-wider uppercase">EXPLORAR PRODUCTOS</div>
+          <div className="text-sm font-medium tracking-wider uppercase">
+            EXPLORAR PRODUCTOS
+          </div>
           <motion.div
             className="w-12 h-12 border-2 border-blue-400/50 rounded-full flex justify-center items-center backdrop-blur-sm bg-blue-400/10"
             whileHover={{

@@ -10,7 +10,7 @@ interface CartSummaryProps {
 export default function CartSummary({ cart, itemCount }: CartSummaryProps) {
   if (!cart) {
     return (
-      <div className="w-full lg:w-1/3">
+      <div className="w-full lg:w-1/3 mt-4 lg:mt-6">
         <div className="bg-gray-200 rounded-lg p-4 sm:p-5 md:p-6 lg:sticky lg:top-4 shadow-lg sm:shadow-none text-center text-gray-500">
           Tu carrito está vacío
         </div>
@@ -21,7 +21,7 @@ export default function CartSummary({ cart, itemCount }: CartSummaryProps) {
   const { subtotal, shipping, tax, total, items: cartItems } = cart;
 
   return (
-    <div className="w-full lg:w-1/3">
+    <div className="w-full lg:w-1/3 mt-4 lg:mt-6">
       <div className="bg-gray-200 rounded-lg p-4 sm:p-5 md:p-6 lg:sticky lg:top-4 shadow-lg">
         {/* Mobile floating bar */}
         <MobileFloatingBar total={total} cartItems={cartItems} />

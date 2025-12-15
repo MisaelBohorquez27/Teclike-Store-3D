@@ -11,8 +11,11 @@ export function InteractiveVideo() {
   const [progress, setProgress] = useState(0);
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  // Video de tecnología moderno (puedes cambiarlo por tu video)
+  // ⚙️ CONFIGURACIÓN DEL VIDEO
   const VIDEO_URL = "ui/video.mp4";
+  const VIDEO_START_TIME = 50;        // ⏱️ Comenzar en segundo 5
+  const VIDEO_DURATION = 15;         // ⏱️ Duración máxima: 15 segundos
+  const VIDEO_END_TIME = VIDEO_START_TIME + VIDEO_DURATION; // Fin automático
 
   const togglePlay = () => {
     if (videoRef.current) {
@@ -39,15 +42,43 @@ export function InteractiveVideo() {
 
     const updateProgress = () => {
       const currentTime = video.currentTime;
-      const duration = video.duration;
-      if (duration > 0) {
-        setProgress((currentTime / duration) * 100);
+      
+      // ✅ Validar que no esté antes del start
+      if (currentTime < VIDEO_START_TIME) {
+        video.currentTime = VIDEO_START_TIME;
+        return;
       }
+      
+      // ✅ Detener al alcanzar el tiempo final
+      if (currentTime >= VIDEO_END_TIME) {
+        video.currentTime = VIDEO_START_TIME;
+        video.play();
+        return;
+      }
+      
+      // Calcular progreso dentro del rango
+      const adjustedTime = currentTime - VIDEO_START_TIME;
+      const progress = (adjustedTime / VIDEO_DURATION) * 100;
+      setProgress(Math.max(0, Math.min(progress, 100)));
     };
 
     video.addEventListener("timeupdate", updateProgress);
     return () => video.removeEventListener("timeupdate", updateProgress);
-  }, []);
+  }, [VIDEO_START_TIME, VIDEO_END_TIME, VIDEO_DURATION]);
+
+  // ✅ Establecer tiempo de inicio y manejar el loop cuando el video esté listo
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const handleLoadedMetadata = () => {
+      console.log("Video cargado, estableciendo tiempo inicial:", VIDEO_START_TIME);
+      video.currentTime = VIDEO_START_TIME;
+    };
+
+    video.addEventListener("loadedmetadata", handleLoadedMetadata);
+    return () => video.removeEventListener("loadedmetadata", handleLoadedMetadata);
+  }, [VIDEO_START_TIME, VIDEO_END_TIME]);
 
   // Mostrar/ocultar controles con timeout
   useEffect(() => {
@@ -78,7 +109,6 @@ export function InteractiveVideo() {
           ref={videoRef}
           src={VIDEO_URL}
           autoPlay
-          loop
           muted={isMuted}
           playsInline
           className="absolute inset-0 w-full h-full object-cover"
@@ -94,14 +124,14 @@ export function InteractiveVideo() {
           <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-500/10 via-blue-500/10 to-purple-500/10 blur-sm" />
         </div>
 
-        {/* Barra de progreso sutil */}
+        {/* Barra de progreso sutil 
         <div className="absolute bottom-0 left-0 right-0 h-1 bg-gray-800/50">
           <motion.div
             className="h-full bg-gradient-to-r from-cyan-500 to-blue-500"
             style={{ width: `${progress}%` }}
             transition={{ duration: 0.1 }}
           />
-        </div>
+        </div>*/}
 
         {/* Controles flotantes */}
         <motion.div
@@ -126,7 +156,7 @@ export function InteractiveVideo() {
           </button>
         </motion.div>
 
-        {/* Indicador de scroll */}
+        {/* Indicador de scroll 
         <motion.div
           className="absolute bottom-12 right-8"
           animate={{ y: [0, 10, 0] }}
@@ -135,7 +165,7 @@ export function InteractiveVideo() {
           <div className="text-xs text-gray-400 rotate-90 tracking-widest">
             SCROLL
           </div>
-        </motion.div>
+        </motion.div>*/}
       </div>
 
       {/* Título minimalista 

@@ -29,20 +29,24 @@ export default function CartList({
   if (!cart || cart.items.length === 0) return <CartEmptyState />;
 
   return (
-    <div className="w-full lg:w-2/3">
-      <div className="bg-transparent text-neutral rounded-lg p-6">
+    <div className="w-full lg:w-2/3 mt-6 lg:mt-8">
+      <div className="bg-transparent text-neutral rounded-lg p-4 sm:p-6">
         {/* Encabezados */}
         <CartTableHeader />
-        {[...cart.items]
-          .sort((a, b) => b.id - a.id) // o por createdAt, o por product.name
-          .map((item) => (
-            <CartItem
-              key={item.id}
-              item={item}
-              onUpdateQuantity={onUpdateQuantity!}
-              onRemove={onRemove}
-            />
-          ))}
+        
+        {/* Items Grid */}
+        <div className="space-y-4">
+          {[...cart.items]
+            .sort((a, b) => b.id - a.id)
+            .map((item) => (
+              <CartItem
+                key={item.id}
+                item={item}
+                onUpdateQuantity={onUpdateQuantity!}
+                onRemove={onRemove}
+              />
+            ))}
+        </div>
 
         {/* Botón vaciar carrito */}
         <ClearCartButton loading={loading} onClearCart={handleClearCart} />
@@ -53,20 +57,20 @@ export default function CartList({
 
 const CartLoadingState = () => (
   <div className="w-full lg:w-2/3">
-    <div className="section-bg text-neutral rounded-lg shadow-md p-6 text-center">
-      <p className="">Cargando carrito...</p>
+    <div className="section-bg text-neutral rounded-lg shadow-md p-8 sm:p-12 text-center">
+      <p className="text-gray-400">Cargando carrito...</p>
     </div>
   </div>
 );
 
 const CartErrorState = ({ error }: { error: string }) => (
   <div className="w-full lg:w-2/3">
-    <div className="section-bg text-neutral rounded-lg shadow-md p-6 text-center text-red-500">
-      <p className="font-medium">Error al cargar el carrito</p>
-      <p className="text-sm mt-1">{error}</p>
+    <div className="section-bg text-neutral rounded-lg shadow-md p-6 sm:p-8 text-center">
+      <p className="font-medium text-red-500 mb-2">Error al cargar el carrito</p>
+      <p className="text-sm text-gray-400 mb-4">{error}</p>
       <button
         onClick={() => window.location.reload()}
-        className="mt-3 text-blue-600 hover:text-blue-800 text-sm"
+        className="px-4 py-2 text-blue-600 hover:text-blue-800 text-sm font-medium"
       >
         Reintentar
       </button>
@@ -76,13 +80,13 @@ const CartErrorState = ({ error }: { error: string }) => (
 
 const CartEmptyState = () => (
   <div className="w-full lg:w-2/3">
-    <div className="section-bg text-neutral rounded-lg shadow-md p-6 text-center">
-      <p className="text-lg mb-4">
+    <div className="section-bg text-neutral rounded-lg shadow-md p-8 sm:p-12 text-center">
+      <p className="text-lg sm:text-xl font-medium mb-4">
         No hay productos en el carrito
       </p>
       <a
         href="/products"
-        className="inline-block bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+        className="inline-block bg-blue-600 text-white px-6 sm:px-8 py-2 sm:py-3 rounded-lg hover:bg-blue-700 transition-colors font-medium"
       >
         Continuar comprando
       </a>
@@ -91,11 +95,11 @@ const CartEmptyState = () => (
 );
 
 const CartTableHeader = () => (
-  <div className="hidden md:grid grid-cols-12 gap-4 mb-4 font-medium text-sm sm:text-base">
-    <div className="col-span-5">Producto</div>
-    <div className="col-span-2 text-center">Precio</div>
-    <div className="col-span-3 text-center">Cantidad</div>
-    <div className="col-span-2 text-right">Total</div>
+  <div className="hidden md:grid grid-cols-12 gap-2 sm:gap-4 mb-4 px-4 sm:px-6 py-3 font-medium text-sm sm:text-base ">
+    <div className="col-span-6">Producto</div>
+    <div className="col-span-2 text-end">Precio</div>
+    <div className="col-span-2 text-end">Cantidad</div>
+    <div className="col-span-2 text-center">Total</div>
   </div>
 );
 
@@ -106,15 +110,15 @@ const ClearCartButton = ({
   loading: boolean;
   onClearCart: () => void;
 }) => (
-  <div className="mt-4 flex justify-end">
+  <div className="mt-2 sm:mt-4 flex justify-end">
     <button
       disabled={loading}
       onClick={onClearCart}
-      className="flex items-center text-red-500 hover:text-red-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-sm font-medium"
+      className="flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-2.5 text-red-500 hover:text-red-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-sm sm:text-base font-medium"
       title="Eliminar todos los productos del carrito"
     >
       <TrashIcon />
-      {loading ? "Vaciando..." : "Vaciar carrito"}
+      <span>{loading ? "Vaciando..." : "Vaciar carrito"}</span>
     </button>
   </div>
 );
@@ -122,7 +126,7 @@ const ClearCartButton = ({
 const TrashIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    className="h-4 w-4 mr-1"
+    className="h-4 w-4"
     fill="none"
     viewBox="0 0 24 24"
     stroke="currentColor"
@@ -135,3 +139,4 @@ const TrashIcon = () => (
     />
   </svg>
 );
+

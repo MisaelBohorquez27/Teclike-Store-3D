@@ -49,16 +49,16 @@ const EmptyCartText = () => (
 const EmptyCartActions = () => (
   <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
     <Link
-      href="/products"
-      className="inline-flex items-center justify-center px-8 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-all duration-200 transform hover:-translate-y-0.5 shadow-lg hover:shadow-xl"
+      href="/Products"
+      className="inline-flex items-center justify-center px-8 py-3 bg-cyan-600 text-white font-medium rounded-lg hover:bg-cyan-700 transition-all duration-200 transform hover:-translate-y-0.5 shadow-lg hover:shadow-xl"
     >
       <ShoppingBagIcon />
       Explorar Productos
     </Link>
     
     <Link
-      href="/offers"
-      className="inline-flex items-center justify-center px-8 py-3 border-2 border-gray-300 text-gray-700 font-medium rounded-lg hover:border-blue-600 hover:text-blue-600 transition-all duration-200"
+      href="/DailyOffers"
+      className="inline-flex items-center justify-center px-8 py-3 border-2 border-gray-300 text-gray-700 font-medium rounded-lg hover:border-cyan-600 hover:text-cyan-600 transition-all duration-200"
     >
       <TagIcon />
       Ver Ofertas
@@ -71,7 +71,7 @@ const EmptyCartInfo = () => (
     <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-sm text-gray-500">
       <div className="flex flex-col items-center">
         <TruckIcon />
-        <span className="mt-2">Envío gratis desde $100</span>
+        <span className="mt-2">Envío gratis desde $0</span>
       </div>
       <div className="flex flex-col items-center">
         <ShieldCheckIcon />

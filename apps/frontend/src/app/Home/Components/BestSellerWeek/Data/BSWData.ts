@@ -16,7 +16,7 @@ export const SWIPER_CONFIG = {
 
 export const CONTENT = {
   title: "Más vendido de la semana",
-  viewAllText: "Ver todos los productos →",
+  viewAllText: "Ver todos los productos",
   viewAllHref: "/Products",
   emptyText: "No hay productos vendidos esta semana.",
 } as const;
