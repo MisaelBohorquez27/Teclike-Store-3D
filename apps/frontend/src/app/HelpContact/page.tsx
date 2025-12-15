@@ -59,7 +59,7 @@ export default function HelpContactPage() {
                   Contacta con Nuestro Equipo
                 </h2>
                 <p className="text-gray-400 text-lg mb-8">
-                  Recibe asistencia de primer nivel para tus dudas y problemas. Nuestro equipo está disponible para ayudarte.
+                  Recibe asistencia para todas tus dudas y problemas. Nuestro equipo está disponible para ayudarte.
                 </p>
                 
                 <div className="space-y-6">
@@ -72,7 +72,7 @@ export default function HelpContactPage() {
                       <h3 className="font-semibold text-white text-lg mb-1">
                         Correo Electrónico
                       </h3>
-                      <p className="text-gray-400">soporte@vective3d.com</p>
+                      <p className="text-gray-400">soporte@teclike.com</p>
                     </div>
                   </div>
 
@@ -85,7 +85,7 @@ export default function HelpContactPage() {
                       <h3 className="font-semibold text-white text-lg mb-1">
                         Teléfono
                       </h3>
-                      <p className="text-gray-400">+1 (555) 123-4567</p>
+                      <p className="text-gray-400">+593 959814905</p>
                     </div>
                   </div>
 

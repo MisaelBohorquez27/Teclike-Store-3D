@@ -1,7 +1,5 @@
 import { PrismaClient } from "@prisma/client";
 
-const prisma = new PrismaClient();
-
 // Diccionario de palabras clave para cada categoría
 const categoryKeywords: Record<string, string[]> = {
   headsets: ["headset", "auricular", "headphone", "audífono"],
@@ -90,9 +88,14 @@ function findMatchingCategories(
   return Array.from(matchedCategories);
 }
 
-export async function seedCategoryRelations() {
-  console.log("🎯 Iniciando seeder automático de relaciones...");
+export async function seedCategoryRelations(prisma: PrismaClient) {
+  console.log("🎯 Insertando relaciones categoría-producto...");
   console.log("==============================================");
+
+  let totalRelationsCreated = 0;
+  let totalRelationsSkipped = 0;
+  let productsProcessed = 0;
+  let errors = 0;
 
   try {
     // Obtener todos los productos con sus relaciones existentes
@@ -110,88 +113,76 @@ export async function seedCategoryRelations() {
     const categories = await prisma.category.findMany();
     const categoryMap = new Map(categories.map((cat) => [cat.slug, cat]));
 
-    let totalRelationsCreated = 0;
-    let productsProcessed = 0;
-
     for (const product of products) {
       productsProcessed++;
 
-      // Obtener categorías existentes para este producto
-      const existingCategorySlugs = product.categoryProducts.map(
-        (cp) => cp.category.slug
-      );
-
-      // Encontrar categorías coincidentes basado en descripción y nombre
-      const matchedCategorySlugs = findMatchingCategories(
-        product.description || "",
-        product.name
-      );
-
-      // Filtrar categorías que ya existen
-      const newCategorySlugs = matchedCategorySlugs.filter(
-        (slug) => !existingCategorySlugs.includes(slug)
-      );
-
-      if (newCategorySlugs.length === 0) {
-        console.log(
-          `⏭️  ${product.name} - Ya tiene todas las categorías necesarias`
+      try {
+        // Obtener categorías existentes para este producto
+        const existingCategorySlugs = product.categoryProducts.map(
+          (cp) => cp.category.slug
         );
-        continue;
-      }
 
-      console.log(`\n📦 ${product.name}`);
-      console.log(
-        `   Descripción: ${product.description?.substring(0, 60)}...`
-      );
-      console.log(
-        `   Categorías detectadas: ${matchedCategorySlugs.join(", ")}`
-      );
-      console.log(`   Nuevas categorías: ${newCategorySlugs.join(", ")}`);
+        // Encontrar categorías coincidentes basado en descripción y nombre
+        const matchedCategorySlugs = findMatchingCategories(
+          product.description || "",
+          product.name
+        );
 
-      // Crear nuevas relaciones
-      for (const categorySlug of newCategorySlugs) {
-        const category = categoryMap.get(categorySlug);
+        // Filtrar categorías que ya existen
+        const newCategorySlugs = matchedCategorySlugs.filter(
+          (slug) => !existingCategorySlugs.includes(slug)
+        );
 
-        if (category) {
-          try {
-            await prisma.categoryProduct.create({
-              data: {
-                categoryId: category.id,
-                productId: product.id,
-                description: `Auto-generated relation for ${category.name} and ${product.name}`,
-              },
-            });
-            console.log(`   ✅ Relacionado con: ${category.name}`);
-            totalRelationsCreated++;
-          } catch (error) {
-            // Ignorar errores de relaciones duplicadas (puede pasar en concurrencia)
-            const message = error instanceof Error ? error.message : String(error);
-            if (!message.includes("Unique constraint")) {
-              console.log(
-                `   ❌ Error relacionando con ${category.name}: ${message}`
-              );
+        if (newCategorySlugs.length === 0) {
+          totalRelationsSkipped++;
+          console.log(
+            `⏭️  ${product.name} - Ya tiene todas las categorías`
+          );
+          continue;
+        }
+
+        console.log(`\n📦 ${product.name}`);
+        console.log(`   Nuevas categorías: ${newCategorySlugs.join(", ")}`);
+
+        // Crear nuevas relaciones
+        for (const categorySlug of newCategorySlugs) {
+          const category = categoryMap.get(categorySlug);
+
+          if (category) {
+            try {
+              await prisma.categoryProduct.create({
+                data: {
+                  categoryId: category.id,
+                  productId: product.id,
+                  description: `Auto-generada para ${category.name}`,
+                },
+              });
+              console.log(`   ✅ ${category.name}`);
+              totalRelationsCreated++;
+            } catch (relationError) {
+              const message = relationError instanceof Error ? relationError.message : String(relationError);
+              if (!message.includes("Unique constraint")) {
+                errors++;
+                console.error(`   ❌ Error: ${message}`);
+              }
             }
           }
         }
+      } catch (productError) {
+        errors++;
+        console.error(`❌ Error procesando ${product.name}:`, productError);
       }
     }
 
     console.log("\n==============================================");
-    console.log("🎉 Seeder completado exitosamente!");
-    console.log(`📊 Productos procesados: ${productsProcessed}`);
-    console.log(`🔗 Relaciones creadas: ${totalRelationsCreated}`);
+    console.log("📊 Estadísticas finales:");
+    console.log(`   • Productos procesados: ${productsProcessed}`);
+    console.log(`   • Relaciones creadas: ${totalRelationsCreated}`);
+    console.log(`   • Relaciones saltadas: ${totalRelationsSkipped}`);
+    console.log(`   • Errores: ${errors}`);
+    console.log("==============================================");
   } catch (error) {
-    console.error("❌ Error en el seeder:", error);
+    console.error("❌ Error en seedCategoryRelations:", error);
     throw error;
   }
 }
-
-// Ejecutar el seeder
-seedCategoryRelations()
-  .catch((e) => {
-    console.error("❌ Error fatal:", e);
-    process.exit(1);
-  })
-  .finally(async () => {
-    await prisma.$disconnect();
-  });
