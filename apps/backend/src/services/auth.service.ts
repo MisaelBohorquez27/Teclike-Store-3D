@@ -6,27 +6,38 @@ import { User, LoginRequest, RegisterRequest, TokenPair, JWTPayload } from "../t
 
 const ACCESS_TOKEN_EXPIRY = "15m";
 const REFRESH_TOKEN_EXPIRY = "7d";
-const JWT_SECRET = process.env.JWT_SECRET || "your-secret-key";
-const REFRESH_SECRET = process.env.REFRESH_SECRET || "your-refresh-secret";
+const JWT_SECRET = process.env.JWT_SECRET;
+const REFRESH_SECRET = process.env.REFRESH_SECRET;
+
+if (!JWT_SECRET || !REFRESH_SECRET) {
+  throw new Error("JWT_SECRET y REFRESH_SECRET son requeridos en variables de entorno");
+}
 
 export async function login(request: LoginRequest) {
   const { email, password } = request;
 
   // Validar que los campos no estén vacíos
   if (!email || !password) {
-    throw new Error("Email y contraseña son requeridos");
+    throw new Error("Credenciales inválidas");
   }
 
-  // Buscar usuario por email
-  const user = await userRepo.findUserByEmail(email);
+  // Validar formato de email
+  if (!isValidEmail(email)) {
+    throw new Error("Credenciales inválidas");
+  }
+
+  // Buscar usuario por email normalizado
+  const user = await userRepo.findUserByEmail(email.toLowerCase());
   if (!user) {
-    throw new Error("Usuario no encontrado");
+    // No revelar si existe el usuario (evitar enumeración)
+    throw new Error("Credenciales inválidas");
   }
 
   // Validar contraseña
   const isPasswordValid = await bcrypt.compare(password, user.password!);
   if (!isPasswordValid) {
-    throw new Error("Contraseña incorrecta");
+    // Mismo mensaje genérico (evitar enumeración)
+    throw new Error("Credenciales inválidas");
   }
 
   // Generar tokens
@@ -69,12 +80,12 @@ export async function register(request: RegisterRequest) {
     throw new Error("El username ya está registrado");
   }
 
-  // Encriptar contraseña
-  const hashedPassword = await bcrypt.hash(password, 10);
+  // Encriptar contraseña con salt rounds más alto (12 en lugar de 10)
+  const hashedPassword = await bcrypt.hash(password, 12);
 
-  // Crear usuario
+  // Crear usuario con email normalizado
   const user = await userRepo.createUser({
-    email,
+    email: email.toLowerCase(),
     username,
     password: hashedPassword,
   });
