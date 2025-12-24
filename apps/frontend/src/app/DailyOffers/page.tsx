@@ -69,7 +69,7 @@ export default function DailyDealsPage() {
                   color: "text-cyan-400",
                 },
                 {
-                  value: "90%",
+                  value: "40%",
                   label: "Descuento Promedio",
                   color: "text-cyan-400",
                 },
@@ -79,7 +79,7 @@ export default function DailyDealsPage() {
                   color: "text-cyan-400",
                 },
                 {
-                  value: "50+",
+                  value: "20+",
                   label: "Comprados Hoy",
                   color: "text-cyan-400",
                 },
