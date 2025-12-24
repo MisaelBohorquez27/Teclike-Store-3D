@@ -22,6 +22,13 @@ export function authMiddleware(
     }
 
     const token = authHeader.substring(7);
+    
+    // Validar que el token no esté vacío
+    if (!token || token.length === 0) {
+      req.isAuthenticated = false;
+      return next();
+    }
+    
     const payload = authService.verifyAccessToken(token);
 
     req.user = payload;
@@ -30,6 +37,7 @@ export function authMiddleware(
 
     next();
   } catch (error) {
+    // No revelar detalles del error
     req.isAuthenticated = false;
     next();
   }

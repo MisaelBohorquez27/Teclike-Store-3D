@@ -1,16 +1,30 @@
 "use client";
 
-import { ProductForCard } from "@/types/productss";
+import { AddToCartButton } from "@/components/Cart/AddToCartButton";
+import { ProductForDetail } from "@/types/productss";
 import { motion } from "framer-motion";
+import Link from "next/dist/client/link";
 import { FiEye, FiShoppingBag, FiShoppingCart, FiStar } from "react-icons/fi";
+import { useState } from "react";
 
 interface TrendingProductCardProps {
-  product: ProductForCard;
+  product: ProductForDetail;
 }
 
 export const TrendingProductCard = ({ product }: TrendingProductCardProps) => {
+  const [successMessage, setSuccessMessage] = useState("");
   const hasDiscount =
     product.discountPrice && product.discountPrice < product.price;
+
+  const handleAddSuccess = () => {
+    setSuccessMessage("✅ Agregado al carrito");
+    setTimeout(() => setSuccessMessage(""), 3000);
+  };
+
+  const handleAddError = (error: string) => {
+    setSuccessMessage(`❌ ${error}`);
+    setTimeout(() => setSuccessMessage(""), 3000);
+  };
 
   return (
     <motion.div
@@ -22,6 +36,18 @@ export const TrendingProductCard = ({ product }: TrendingProductCardProps) => {
     >
       {/* Card principal */}
       <div className="bg-gray-900/50 backdrop-blur-sm border border-gray-800/50 rounded-2xl p-4 hover:border-cyan-500/30 transition-all duration-300 h-full flex flex-col overflow-hidden group-hover:shadow-2xl group-hover:shadow-cyan-500/10">
+        {/* Mensaje de feedback */}
+        {successMessage && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            className="absolute top-2 left-2 px-3 py-1 rounded-lg bg-black/90 text-white text-xs z-30"
+          >
+            {successMessage}
+          </motion.div>
+        )}
+
         {/* Imagen con efecto */}
         <div className="relative h-48 md:h-56 mb-4 rounded-xl overflow-hidden">
           <motion.img
@@ -40,17 +66,25 @@ export const TrendingProductCard = ({ product }: TrendingProductCardProps) => {
 
           {/* Botones flotantes */}
           <div className="absolute bottom-4 left-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300">
-            <button className="flex-1 flex items-center justify-center gap-2 py-2 px-3 bg-white/10 backdrop-blur-md hover:bg-white/20 text-white text-sm rounded-lg transition-colors cursor-pointer">
+            <Link
+              href={`/Products/${product.slug}`}
+              className="flex-1 flex items-center justify-center gap-2 py-2 px-3 bg-white/10 backdrop-blur-md hover:bg-white/20 text-white text-sm rounded-lg transition-colors cursor-pointer"
+            >
               <FiEye className="w-4 h-4" />
               <span>Ver</span>
-            </button>
-            <button className="flex-1 flex items-center justify-center gap-2 py-2 px-3 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400 text-white text-sm rounded-lg transition-all cursor-pointer">
-              <FiShoppingCart className="w-4 h-4" />
-              <span>Comprar</span>
-            </button>
+            </Link>
+            {/* Botón agregar al carrito */}
+            <AddToCartButton
+              productId={product.id}
+              productName={product.name}
+              maxStock={product.stock ?? 1}
+              variant="default"
+              size="sm"
+              onSuccess={handleAddSuccess}
+              onError={handleAddError}
+            />
           </div>
         </div>
-
         {/* Contenido */}
         <div className="flex-grow">
           {/* Categoría */}
@@ -87,27 +121,29 @@ export const TrendingProductCard = ({ product }: TrendingProductCardProps) => {
 
         {/* Precio y CTA */}
         <div className="mt-auto pt-4 border-t border-gray-800/50">
-          <div className="flex justify-between items-center">
-            <div className="flex flex-col">
-              {hasDiscount ? (
-                <>
+          <div className="flex flex-col gap-3">
+            <div className="flex justify-between items-start">
+              <div className="flex flex-col">
+                {hasDiscount ? (
+                  <>
+                    <span className="text-2xl font-bold text-white">
+                      {product.currency} {product.discountPrice}
+                    </span>
+                    <span className="text-sm text-gray-500 line-through">
+                      {product.currency} {product.price}
+                    </span>
+                  </>
+                ) : (
                   <span className="text-2xl font-bold text-white">
-                    {product.currency} {product.discountPrice}
-                  </span>
-                  <span className="text-sm text-gray-500 line-through">
                     {product.currency} {product.price}
                   </span>
-                </>
-              ) : (
-                <span className="text-2xl font-bold text-white">
-                  {product.currency} {product.price}
-                </span>
-              )}
-            </div>
+                )}
+              </div>
 
-            <button className="px-4 py-2 text-gray-100 text-sm font-medium rounded-lg transition-all group-hover:scale-105">
-              <FiShoppingBag className="w-4 h-4" />
-            </button>
+              <button className="px-4 py-2 text-gray-100 text-sm font-medium rounded-lg transition-all group-hover:scale-105">
+                <FiShoppingBag className="w-4 h-4" />
+              </button>
+            </div>
           </div>
         </div>
       </div>

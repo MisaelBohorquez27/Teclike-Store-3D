@@ -5,6 +5,9 @@ const TOKEN_KEY = "accessToken";
 const REFRESH_TOKEN_KEY = "refreshToken";
 const USER_KEY = "user";
 
+// Detectar si estamos en el cliente (no en servidor)
+const isClient = typeof window !== "undefined";
+
 export class AuthService {
   static async login(data: LoginFormData): Promise<AuthResponse> {
     try {
@@ -122,24 +125,30 @@ export class AuthService {
   }
 
   static getAccessToken(): string | null {
-    return localStorage.getItem(TOKEN_KEY);
+    if (!isClient) return null;
+    try {
+      return localStorage.getItem(TOKEN_KEY);
+    } catch {
+      return null;
+    }
   }
 
   static getRefreshToken(): string | null {
-    return localStorage.getItem(REFRESH_TOKEN_KEY);
+    if (!isClient) return null;
+    try {
+      return localStorage.getItem(REFRESH_TOKEN_KEY);
+    } catch {
+      return null;
+    }
   }
 
   static clearTokens(): void {
-    console.log('🧹 Limpiando tokens del localStorage...');
-    localStorage.removeItem(TOKEN_KEY);
-    localStorage.removeItem(REFRESH_TOKEN_KEY);
-    // Verificar que realmente se borraron
-    const token = localStorage.getItem(TOKEN_KEY);
-    const refreshToken = localStorage.getItem(REFRESH_TOKEN_KEY);
-    if (!token && !refreshToken) {
-      console.log('✅ Tokens limpiados correctamente');
-    } else {
-      console.error('❌ Error: Los tokens no se borraron');
+    if (!isClient) return;
+    try {
+      localStorage.removeItem(TOKEN_KEY);
+      localStorage.removeItem(REFRESH_TOKEN_KEY);
+    } catch (error) {
+      console.error('Error limpiando tokens:', error);
     }
   }
 

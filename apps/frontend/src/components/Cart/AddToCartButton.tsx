@@ -1,9 +1,10 @@
 "use client";
 
 import { useState, useRef } from "react";
+import { createPortal } from "react-dom";
 import { useCartContext } from "@/context/CartContext";
 import { useAuth } from "@/context/AuthContext";
-import { AuthModal } from "@/components/AuthModal";
+import { AuthModal } from "@/components/Auth/AuthModal";
 import Button from "../PagesButtons";
 
 interface AddToCartButtonProps {
@@ -154,16 +155,19 @@ export function AddToCartButton({
           ) : (
             <>
               <CartIcon size={size} />
-              <span>{showQuantitySelector ? `Agregar x${quantity}` : "Añadir al carrito"}</span>
+              <span>{showQuantitySelector ? `Agregar x${quantity}` : "Agregar"}</span>
             </>
           )}
         </span>
       </Button>
 
-      {/* Modal de autenticación */}
-      {showAuthModal && (
-        <AuthModal onClose={() => setShowAuthModal(false)} />
-      )}
+      {/* Modal de autenticación - Renderizado con Portal para evitar ser cortado por overflow */}
+      {showAuthModal && typeof document !== "undefined" &&
+        createPortal(
+          <AuthModal onClose={() => setShowAuthModal(false)} />,
+          document.body
+        )
+      }
     </div>
   );
 }

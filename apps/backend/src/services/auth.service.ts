@@ -6,27 +6,41 @@ import { User, LoginRequest, RegisterRequest, TokenPair, JWTPayload } from "../t
 
 const ACCESS_TOKEN_EXPIRY = "15m";
 const REFRESH_TOKEN_EXPIRY = "7d";
-const JWT_SECRET = process.env.JWT_SECRET || "your-secret-key";
-const REFRESH_SECRET = process.env.REFRESH_SECRET || "your-refresh-secret";
+const JWT_SECRET = process.env.JWT_SECRET;
+const REFRESH_SECRET = process.env.REFRESH_SECRET;
+
+// Validación lazy - se hace cuando se necesita, no al importar
+function validateSecrets() {
+  if (!JWT_SECRET || !REFRESH_SECRET) {
+    throw new Error("JWT_SECRET y REFRESH_SECRET son requeridos en variables de entorno");
+  }
+}
 
 export async function login(request: LoginRequest) {
   const { email, password } = request;
 
   // Validar que los campos no estén vacíos
   if (!email || !password) {
-    throw new Error("Email y contraseña son requeridos");
+    throw new Error("Credenciales inválidas");
   }
 
-  // Buscar usuario por email
-  const user = await userRepo.findUserByEmail(email);
+  // Validar formato de email
+  if (!isValidEmail(email)) {
+    throw new Error("Credenciales inválidas");
+  }
+
+  // Buscar usuario por email normalizado
+  const user = await userRepo.findUserByEmail(email.toLowerCase());
   if (!user) {
-    throw new Error("Usuario no encontrado");
+    // No revelar si existe el usuario (evitar enumeración)
+    throw new Error("Credenciales inválidas");
   }
 
   // Validar contraseña
   const isPasswordValid = await bcrypt.compare(password, user.password!);
   if (!isPasswordValid) {
-    throw new Error("Contraseña incorrecta");
+    // Mismo mensaje genérico (evitar enumeración)
+    throw new Error("Credenciales inválidas");
   }
 
   // Generar tokens
@@ -59,7 +73,7 @@ export async function register(request: RegisterRequest) {
   }
 
   // Verificar que el usuario no exista
-  const existingUser = await userRepo.findUserByEmail(email);
+  const existingUser = await userRepo.findUserByEmail(email.toLowerCase());
   if (existingUser) {
     throw new Error("El email ya está registrado");
   }
@@ -69,12 +83,12 @@ export async function register(request: RegisterRequest) {
     throw new Error("El username ya está registrado");
   }
 
-  // Encriptar contraseña
-  const hashedPassword = await bcrypt.hash(password, 10);
+  // Encriptar contraseña con salt rounds más alto (12 en lugar de 10)
+  const hashedPassword = await bcrypt.hash(password, 12);
 
-  // Crear usuario
+  // Crear usuario con email normalizado
   const user = await userRepo.createUser({
-    email,
+    email: email.toLowerCase(),
     username,
     password: hashedPassword,
   });
@@ -98,8 +112,9 @@ export async function register(request: RegisterRequest) {
 }
 
 export async function refreshToken(token: string): Promise<TokenPair> {
+  validateSecrets();
   try {
-    const payload = jwt.verify(token, REFRESH_SECRET) as JWTPayload;
+    const payload = jwt.verify(token, REFRESH_SECRET!) as JWTPayload;
 
     // Buscar usuario
     const user = await userRepo.findUserById(payload.userId);
@@ -115,8 +130,9 @@ export async function refreshToken(token: string): Promise<TokenPair> {
 }
 
 export function verifyAccessToken(token: string): JWTPayload {
+  validateSecrets();
   try {
-    return jwt.verify(token, JWT_SECRET) as JWTPayload;
+    return jwt.verify(token, JWT_SECRET!) as JWTPayload;
   } catch (error) {
     throw new Error("Token inválido o expirado");
   }
@@ -140,6 +156,8 @@ export async function logout(userId: number) {
 
 // Funciones privadas
 function generateTokens(user: User): TokenPair {
+  validateSecrets();
+  
   const payload = {
     id: user.id,
     userId: user.id,  // ✅ Agregar userId explícitamente
@@ -147,11 +165,11 @@ function generateTokens(user: User): TokenPair {
     username: user.username,
   };
 
-  const accessToken = jwt.sign(payload, JWT_SECRET, {
+  const accessToken = jwt.sign(payload, JWT_SECRET!, {
     expiresIn: ACCESS_TOKEN_EXPIRY,
   });
 
-  const refreshToken = jwt.sign(payload, REFRESH_SECRET, {
+  const refreshToken = jwt.sign(payload, REFRESH_SECRET!, {
     expiresIn: REFRESH_TOKEN_EXPIRY,
   });
 

@@ -23,13 +23,17 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 //Configurando Middleware
+const allowedOrigins = (process.env.ALLOWED_ORIGINS || "http://localhost:3000").split(",");
 app.use(
   cors({
-    origin: "http://localhost:3000", //este es el frontend
-    credentials: true
+    origin: allowedOrigins,
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"]
   })
-); // Con esto se permite consultas desde el frontend
-app.use(express.json()); // Aqui para entender json en las peticiones
+);
+app.use(express.json({ limit: "10kb" })); // Limitar tamaño de payload
+app.use(express.urlencoded({ limit: "10kb", extended: true }));
 
 // Importas las Rutas y las usas
 app.use("/api/auth", authRouter);
