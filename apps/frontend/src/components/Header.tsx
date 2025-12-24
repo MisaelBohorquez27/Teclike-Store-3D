@@ -8,7 +8,7 @@ import Button from "./PagesButtons";
 import { Navbar2 } from "./Navbar2";
 import { useState } from "react";
 import { useAuth } from "@/context/AuthContext";
-import { AuthModal } from "./AuthModal";
+import { AuthModal } from "./Auth/AuthModal";
 
 export function Header() {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);

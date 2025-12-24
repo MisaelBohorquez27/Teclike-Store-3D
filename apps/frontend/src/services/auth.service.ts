@@ -151,8 +151,6 @@ export class AuthService {
       console.error('Error limpiando tokens:', error);
     }
   }
-    }
-  }
 
   static isTokenExpired(): boolean {
     const token = this.getAccessToken();

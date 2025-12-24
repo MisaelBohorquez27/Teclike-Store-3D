@@ -9,8 +9,11 @@ const REFRESH_TOKEN_EXPIRY = "7d";
 const JWT_SECRET = process.env.JWT_SECRET;
 const REFRESH_SECRET = process.env.REFRESH_SECRET;
 
-if (!JWT_SECRET || !REFRESH_SECRET) {
-  throw new Error("JWT_SECRET y REFRESH_SECRET son requeridos en variables de entorno");
+// Validación lazy - se hace cuando se necesita, no al importar
+function validateSecrets() {
+  if (!JWT_SECRET || !REFRESH_SECRET) {
+    throw new Error("JWT_SECRET y REFRESH_SECRET son requeridos en variables de entorno");
+  }
 }
 
 export async function login(request: LoginRequest) {
@@ -70,7 +73,7 @@ export async function register(request: RegisterRequest) {
   }
 
   // Verificar que el usuario no exista
-  const existingUser = await userRepo.findUserByEmail(email);
+  const existingUser = await userRepo.findUserByEmail(email.toLowerCase());
   if (existingUser) {
     throw new Error("El email ya está registrado");
   }
@@ -109,8 +112,9 @@ export async function register(request: RegisterRequest) {
 }
 
 export async function refreshToken(token: string): Promise<TokenPair> {
+  validateSecrets();
   try {
-    const payload = jwt.verify(token, REFRESH_SECRET) as JWTPayload;
+    const payload = jwt.verify(token, REFRESH_SECRET!) as JWTPayload;
 
     // Buscar usuario
     const user = await userRepo.findUserById(payload.userId);
@@ -126,8 +130,9 @@ export async function refreshToken(token: string): Promise<TokenPair> {
 }
 
 export function verifyAccessToken(token: string): JWTPayload {
+  validateSecrets();
   try {
-    return jwt.verify(token, JWT_SECRET) as JWTPayload;
+    return jwt.verify(token, JWT_SECRET!) as JWTPayload;
   } catch (error) {
     throw new Error("Token inválido o expirado");
   }
@@ -151,6 +156,8 @@ export async function logout(userId: number) {
 
 // Funciones privadas
 function generateTokens(user: User): TokenPair {
+  validateSecrets();
+  
   const payload = {
     id: user.id,
     userId: user.id,  // ✅ Agregar userId explícitamente
@@ -158,11 +165,11 @@ function generateTokens(user: User): TokenPair {
     username: user.username,
   };
 
-  const accessToken = jwt.sign(payload, JWT_SECRET, {
+  const accessToken = jwt.sign(payload, JWT_SECRET!, {
     expiresIn: ACCESS_TOKEN_EXPIRY,
   });
 
-  const refreshToken = jwt.sign(payload, REFRESH_SECRET, {
+  const refreshToken = jwt.sign(payload, REFRESH_SECRET!, {
     expiresIn: REFRESH_TOKEN_EXPIRY,
   });
 
