@@ -25,7 +25,7 @@ const Header = () => (
           Más Vendidos
         </span>
         <br />
-        <span className="text-white">de la Semana</span>
+        <span className="text-white">de la Semana.</span>
       </h1>
 
       <p className="text-gray-400 text-lg">
@@ -40,7 +40,7 @@ const Header = () => (
     </Link>
   </motion.div>
 );
-
+// Estado vacío
 const EmptyState = () => (
   <motion.div
     initial={{ opacity: 0, scale: 0.9 }}
