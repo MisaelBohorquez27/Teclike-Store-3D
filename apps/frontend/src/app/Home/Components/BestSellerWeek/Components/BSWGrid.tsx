@@ -61,6 +61,7 @@ const EmptyState = () => (
   </motion.div>
 );
 
+// Carrusel de productos más vendidos
 const BestSellersSwiper = ({
   items,
   onAddToCart,
