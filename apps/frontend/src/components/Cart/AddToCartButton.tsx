@@ -11,6 +11,8 @@ interface AddToCartButtonProps {
   productId: number;
   productName: string;
   maxStock: number;
+  productPrice?: number;
+  productImage?: string;
   onSuccess?: () => void;
   onError?: (error: string) => void;
   variant?: "default" | "outline" | "ghost" | "small";
@@ -40,6 +42,8 @@ export function AddToCartButton({
   productId,
   productName,
   maxStock,
+  productPrice,
+  productImage,
   onSuccess,
   onError,
   variant = "default",
@@ -98,7 +102,23 @@ export function AddToCartButton({
 
     try {
       console.log(`🔍 DEBUG: Enviando addToCart(productId=${productId}, quantity=${quantity})`);
-      await addToCart(productId, quantity);
+      
+      // Preparar datos del producto para optimistic update
+      // Convertir precio a número para garantizar consistencia
+      const priceAsNumber = typeof productPrice === 'string' 
+        ? parseFloat(productPrice)
+        : (productPrice || 0);
+      
+      const productData = {
+        name: productName,
+        price: isNaN(priceAsNumber) ? 0 : priceAsNumber,
+        priceString: priceAsNumber > 0 ? `$${priceAsNumber.toFixed(2)}` : '$0.00',
+        imageUrl: productImage,
+      };
+      
+      console.log('📦 Product data being sent:', { productId, productPrice, ...productData });
+      
+      await addToCart(productId, quantity, productData);
 
       console.log(`✅ ${productName} agregado al carrito - Cantidad solicitada: ${quantity}`);
       onSuccess?.();
