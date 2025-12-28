@@ -1,14 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { CustomSwiper } from "@/components/Swipper/CustomSwiper";
+import { CustomSwiper } from "@/components/swipper/CustomSwiper";
 import { useBestSellersLogic } from "../Hooks/useBestSeller";
 import { BestSellersWeekCard } from "./BSWCard";
 import { TopProductsSellLoading, TopProductsSellError } from "./BSWSellLoading";
 import { CONTENT, fadeInAnimation, SWIPER_CONFIG } from "../Data/BSWData";
 import { CartListProps } from "../Types/BSWTypes";
 import { FiTrendingUp, FiArrowRight, FiStar, FiTable } from "react-icons/fi";
-import Button from "@/components/PagesButtons";
+import Button from "@/components/common/PagesButtons";
 import Link from "next/dist/client/link";
 
 // Subcomponents

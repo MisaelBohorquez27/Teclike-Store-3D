@@ -1,5 +1,5 @@
 "use client";
-import { ImageUploader } from "@/components/ImageUpload";
+import { ImageUploader } from "@/components/unUsed/ImageUpload";
 import { ProductHero } from "./components/ProductHero";
 import { ProductList2 } from "./components/ProductList2";
 

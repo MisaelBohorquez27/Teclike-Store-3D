@@ -2,8 +2,8 @@ import { Swiper, SwiperSlide, SwiperProps } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import { ReactNode, useRef, useState } from "react";
 import SwiperCore from "swiper";
-import CarouselButtons from "@/components/Carousel/CarouselButtons";
-import { CarouselIndicators } from "@/components/Carousel/CarouselIndicators";
+import CarouselButtons from "@/components/carousel/CarouselButtons";
+import { CarouselIndicators } from "@/components/carousel/CarouselIndicators";
 import "swiper/css";
 
 interface CustomSwiperProps<T>

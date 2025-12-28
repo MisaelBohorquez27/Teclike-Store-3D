@@ -1,4 +1,4 @@
-import Button from "@/components/PagesButtons";
+import Button from "@/components/common/PagesButtons";
 import { ProductForDetail } from "@/types/productss";
 import { useState } from "react";
 import { FaClipboardCheck, FaLock, FaShieldAlt } from "react-icons/fa";

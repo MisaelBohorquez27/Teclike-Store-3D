@@ -2,11 +2,11 @@
 
 import { useTrendingProducts } from "@/hooks/useTrendingProducts";
 import { TrendingProductCard } from "./Components/TrendingProductsCard";
-import { CustomSwiper } from "@/components/Swipper/CustomSwiper";
+import { CustomSwiper } from "@/components/swipper/CustomSwiper";
 import { motion } from "framer-motion";
 import { FiArchive, FiCode, FiSpeaker, FiTrendingUp } from "react-icons/fi";
 import Link from "next/dist/client/link";
-import Button from "@/components/PagesButtons";
+import Button from "@/components/common/PagesButtons";
 
 export function TrendingProducts() {
   const { products, loading } = useTrendingProducts();

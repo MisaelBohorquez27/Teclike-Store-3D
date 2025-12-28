@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import Button from "@/components/PagesButtons";
-import { CustomSwiper } from "@/components/Swipper/CustomSwiper";
+import Button from "@/components/common/PagesButtons";
+import { CustomSwiper } from "@/components/swipper/CustomSwiper";
 import { OfferCard } from "./OfferCard";
 import { CONFIG } from "../Data/DailyOffersData";
 import { useDailyOffers } from "../Hooks/useDailyOffer";

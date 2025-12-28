@@ -1,7 +1,7 @@
 "use client";
 import { SwiperSlide } from "swiper/react";
 import "swiper/css";
-import { BaseSwiper } from "@/components/Swipper/BaseSwiper";
+import { BaseSwiper } from "@/components/swipper/BaseSwiper";
 import { InstagramPost } from "./InstagramPost";
 import { InstagramGalleryProps } from "../../Types/InstagramProps";
 

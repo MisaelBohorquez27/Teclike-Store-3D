@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import Button from "@/components/PagesButtons";
+import Button from "@/components/common/PagesButtons";
 import { useFilterState } from "@/hooks/useFilterState";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiFilter, FiX, FiCheck, FiDollarSign, FiGrid } from "react-icons/fi";

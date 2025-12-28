@@ -1,8 +1,8 @@
 "use client";
 
-import Button from "@/components/PagesButtons";
+import Button from "@/components/common/PagesButtons";
 import Image from "next/image";
-import { Rating } from "@/components/Rating";
+import { Rating } from "@/components/common/Rating";
 import { ProductWithOffer } from "@/types/offers";
 import { useState } from "react";
 import { motion } from "framer-motion";
@@ -14,7 +14,7 @@ import {
   FiTrendingUp,
   FiShoppingBag,
 } from "react-icons/fi";
-import CartIcon from "@/components/CartIcon";
+import CartIcon from "@/components/cart/CartIcon";
 
 interface DealCardProps {
   offer: ProductWithOffer;

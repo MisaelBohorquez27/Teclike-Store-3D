@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { ProductForDetail } from "@/types/productss";
-import { fetchFeatured } from "@/services/bestSellerWeek";
+import { fetchFeatured } from "@/services/WeekSales.service";
 
 export const useBestSellerWeek = () => {
   const [bestSellerWeek, setBestSellerWeek] = useState<ProductForDetail[]>([]);

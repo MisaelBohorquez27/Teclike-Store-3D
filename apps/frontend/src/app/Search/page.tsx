@@ -1,5 +1,5 @@
 "use client";
-import { SearchBar } from "@/components/SearchBar";
+import { SearchBar } from "@/components/common/SearchBar";
 import { ProductHero } from "../Products/components/ProductHero";
 import { SearchResults } from "./components/SearchResults";
 

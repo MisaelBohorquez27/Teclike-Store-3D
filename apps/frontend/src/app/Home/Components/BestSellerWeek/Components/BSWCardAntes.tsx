@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import Button from "@/components/PagesButtons";
-import CartIcon from "@/components/CartIcon";
+import Button from "@/components/common/PagesButtons";
+import CartIcon from "@/components/cart/CartIcon";
 import { ProductForDetail } from "@/types/productss";
 import { motion } from "framer-motion";
 import { FiStar, FiShoppingCart, FiTruck, FiShield, FiClock, FiTrendingUp } from "react-icons/fi";

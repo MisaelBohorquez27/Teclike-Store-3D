@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { SwiperSlide } from "swiper/react";
-import { BaseSwiper } from "@/components/Swipper/BaseSwiper";
+import { BaseSwiper } from "@/components/swipper/BaseSwiper";
 import { ReviewCard } from "./Components/ReviewCard";
 import { useReviews } from "@/hooks/useReviews";
 import { motion } from "framer-motion";

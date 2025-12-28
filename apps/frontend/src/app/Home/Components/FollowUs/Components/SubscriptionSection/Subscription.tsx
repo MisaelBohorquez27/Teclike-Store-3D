@@ -1,6 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-import { Subscription } from "@/components/Subscription";
+import { Subscription } from "@/components/common/Subscription";
 import { titleAnimation } from "@/types/followUs";
 
 export function SubscriptionSection() {

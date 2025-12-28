@@ -3,6 +3,19 @@ import * as cacheService from "./cache.service";
 import { transformCart } from "../mappers/cart.formatter";
 
 /**
+ * WRAPPER para respuesta del carrito
+ * Estandariza el formato para el frontend
+ * Frontend espera: { success: true, data: CartData }
+ */
+function wrapCartResponse(cart: any) {
+  const transformed = transformCart(cart);
+  return {
+    success: true,
+    data: transformed
+  };
+}
+
+/**
  * Obtener el carrito del usuario desde caché o BD
  * Primero intenta Redis, luego la BD
  */
@@ -30,9 +43,9 @@ export async function getCart(userId: number) {
     await cartRepo.createCart(userId);
     const newCart = await cartRepo.findCartWithProducts(userId);
     await cacheService.setCachedCart(userId, newCart);
-    return transformCart(newCart);
+    return wrapCartResponse(newCart);
   }
-  return transformCart(cart);
+  return wrapCartResponse(cart);
 }
 
 /**
@@ -80,7 +93,7 @@ export async function addToCart(
 
   console.log(`✅ [BACKEND] addToCart completado - itemCount=${updatedCart?.cartProducts?.length}`);
   
-  return transformCart(updatedCart);
+  return wrapCartResponse(updatedCart);
 }
 
 /**
@@ -123,12 +136,11 @@ export async function updateCartItem(
   // Marcar para sincronización
   await cacheService.markCartDirty(userId);
 
-  return transformCart(updatedCart);
+  return wrapCartResponse(updatedCart);
 }
 
 /**
  * Eliminar un producto del carrito
- * - Remueve del caché y marca para sincronizar
  */
 export async function removeFromCart(
   userId: number,
@@ -148,7 +160,7 @@ export async function removeFromCart(
   // Marcar para sincronización
   await cacheService.markCartDirty(userId);
 
-  return transformCart(updatedCart);
+  return wrapCartResponse(updatedCart);
 }
 
 /**
@@ -170,7 +182,7 @@ export async function clearCart(userId: number) {
 
   // Retornar carrito vacío
   const emptyCart = await cartRepo.findCartWithProducts(userId);
-  return transformCart(emptyCart);
+  return wrapCartResponse(emptyCart);
 }
 
 /**
@@ -227,18 +239,18 @@ export async function mergeCartOnLogin(userId: number, localStorageCart: any) {
 
         const mergedCart = await cartRepo.findCartWithProducts(userId);
         await cacheService.setCachedCart(userId, mergedCart);
-        return transformCart(mergedCart);
+        return wrapCartResponse(mergedCart);
       }
     } else {
       // Si existe carrito en BD, hacer merge inteligente
       if (localStorageCart && localStorageCart.items?.length > 0) {
         const mergedCart = await mergeCartItems(dbCart, localStorageCart, userId);
         await cacheService.setCachedCart(userId, mergedCart);
-        return transformCart(mergedCart);
+        return wrapCartResponse(mergedCart);
       } else {
         // No hay carrito local, usar el de BD
         await cacheService.setCachedCart(userId, dbCart);
-        return transformCart(dbCart);
+        return wrapCartResponse(dbCart);
       }
     }
 
@@ -247,10 +259,10 @@ export async function mergeCartOnLogin(userId: number, localStorageCart: any) {
       await cartRepo.createCart(userId);
       const newCart = await cartRepo.findCartWithProducts(userId);
       await cacheService.setCachedCart(userId, newCart);
-      return transformCart(newCart);
+      return wrapCartResponse(newCart);
     }
 
-    return transformCart(dbCart);
+    return wrapCartResponse(dbCart);
   } catch (error) {
     console.error("Error en merge de carrito:", error);
     throw error;
@@ -311,4 +323,76 @@ async function mergeCartItems(dbCart: any, localCart: any, userId: number) {
  */
 export async function persistCartBeforeLogout(userId: number) {
   await syncCartToDB(userId);
+}
+
+/**
+ * SINCRONIZAR CARRITO - Patrón Batching
+ * 
+ * Reemplaza TODO el carrito con los items enviados (frontend batched)
+ * Se ejecuta cada 10 segundos en frontend con todos los cambios
+ * 
+ * Lógica:
+ * 1. Obtener o crear carrito del usuario
+ * 2. Limpiar todos los items actuales
+ * 3. Agregar nuevos items de forma atómica
+ * 4. Actualizar caché
+ * 
+ * Ventaja: UNA sola transacción en BD (no N queries)
+ */
+export async function syncCart(
+  userId: number,
+  items: Array<{ productId: number; quantity: number }>
+) {
+  try {
+    console.log(`🔄 [SERVICE] Sincronizando ${items.length} items para usuario ${userId}`);
+
+    // Obtener o crear carrito
+    let cart = await cartRepo.findCart(userId);
+    if (!cart) {
+      await cartRepo.createCart(userId);
+      cart = await cartRepo.findCart(userId);
+    }
+
+    const cartId = cart!.id;
+
+    // Limpiar items anteriores (más eficiente que actualizar uno por uno)
+    await cartRepo.clearCartItems(cartId);
+
+    // Agregar nuevos items en lote
+    for (const item of items) {
+      if (item.quantity <= 0) continue; // Skip items con cantidad 0
+
+      // Validar producto y stock
+      const product = await cartRepo.findProductWithInventory(item.productId);
+      if (!product) {
+        console.warn(`⚠️ Producto ${item.productId} no encontrado - skip`);
+        continue;
+      }
+
+      const stock = product.inventory?.stock ?? 0;
+      if (stock <= 0) {
+        console.warn(`⚠️ Producto ${item.productId} sin stock - skip`);
+        continue;
+      }
+
+      // Respetar stock máximo
+      const finalQuantity = Math.min(item.quantity, stock);
+
+      // Agregar item
+      await cartRepo.addOrUpdateCartItem(cartId, item.productId, finalQuantity, stock);
+    }
+
+    // Actualizar caché con carrito sincronizado
+    const syncedCart = await cartRepo.findCartWithProducts(userId);
+    await cacheService.setCachedCart(userId, syncedCart);
+    await cacheService.cleanCartDirty(userId);
+    await cacheService.setLastSyncTime(userId);
+
+    console.log(`✅ [SERVICE] Carrito sincronizado - itemCount=${syncedCart?.cartProducts?.length}`);
+
+    return wrapCartResponse(syncedCart);
+  } catch (error) {
+    console.error(`❌ Error sincronizando carrito:`, error);
+    throw error;
+  }
 }

@@ -1,7 +1,7 @@
 "use client";
 
-import { Rating } from "@/components/Rating";
-import CartIcon from "@/components/CartIcon";
+import { Rating } from "@/components/common/Rating";
+import CartIcon from "@/components/cart/CartIcon";
 import { ProductWithOffer } from "@/types/offers";
 import { motion } from "framer-motion";
 import Image from "next/image"; // Importar Next Image
