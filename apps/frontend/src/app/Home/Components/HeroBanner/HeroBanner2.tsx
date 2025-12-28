@@ -1,6 +1,6 @@
 "use client";
 
-import Button from "@/components/PagesButtons";
+import Button from "@/components/common/PagesButtons";
 import Image from "next/image";
 import { motion, useReducedMotion, AnimatePresence } from "framer-motion";
 import { useIsMounted } from "@/hooks/useIsMounted";

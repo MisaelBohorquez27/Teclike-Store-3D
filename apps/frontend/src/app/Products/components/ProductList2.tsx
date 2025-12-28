@@ -1,8 +1,8 @@
 "use client";
 
 import { ProductCard } from "@/app/Products/components/ProductCard";
-import Pagination from "@/components/Pagination";
-import { SearchBar } from "@/components/SearchBar";
+import Pagination from "@/components/common/Pagination";
+import { SearchBar } from "@/components/common/SearchBar";
 import { FilterSidebar } from "./FilterSidebar";
 import { useProductLoader } from "@/hooks/useProductLoader";
 import { motion } from "framer-motion";

@@ -4,8 +4,8 @@ import { useState, useRef } from "react";
 import { createPortal } from "react-dom";
 import { useCartContext } from "@/context/CartContext";
 import { useAuth } from "@/context/AuthContext";
-import { AuthModal } from "@/components/Auth/AuthModal";
-import Button from "../PagesButtons";
+import { AuthModal } from "@/components/auth/AuthModal";
+import Button from "../common/PagesButtons";
 
 interface AddToCartButtonProps {
   productId: number;

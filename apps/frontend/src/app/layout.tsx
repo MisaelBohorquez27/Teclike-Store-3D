@@ -2,9 +2,9 @@
 import "./globals.css";
 import { AuthProvider } from "@/context/AuthContext";
 import { CartProvider } from "@/context/CartContext";
-import { Footer } from "@/components/Footer";
-import { Header } from "@/components/Header";
-import { Navbar2 } from "@/components/Navbar2";
+import { Footer } from "@/components/layouts/Footer";
+import { Header } from "@/components/layouts/Header";
+import { Navbar2 } from "@/components/layouts/Navbar2";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

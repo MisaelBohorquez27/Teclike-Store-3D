@@ -1,6 +1,6 @@
 "use client";
 
-import Button from "@/components/PagesButtons";
+import Button from "@/components/common/PagesButtons";
 import { useState } from "react";
 import { sendContactMessage } from "@/services/contact";
 import { motion, AnimatePresence } from "framer-motion";

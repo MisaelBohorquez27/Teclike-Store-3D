@@ -1,6 +1,6 @@
 "use client";
 
-import { AddToCartButton } from "@/components/Cart/AddToCartButton";
+import { AddToCartButton } from "@/components/cart/AddToCartButton";
 import { ProductForDetail } from "@/types/productss";
 import { motion } from "framer-motion";
 import Link from "next/dist/client/link";

@@ -10,7 +10,7 @@ import {
   FiZap,
   FiShoppingCart,
 } from "react-icons/fi";
-import { Rating } from "@/components/Rating";
+import { Rating } from "@/components/common/Rating";
 import Image from "next/image";
 
 export function ProductCard({ product }: { product: ProductForDetail }) {
