@@ -1,8 +1,8 @@
 "use client";
 
 import React, { createContext, useContext, useState, useEffect, useCallback } from "react";
-import { CartServiceSimple } from "@/services/cartSimple";
-import type { CartResponse as CartServiceResponse } from "@/services/cartSimple";
+import { CartService } from "@/services/Cart.service";
+import type { CartResponse as CartServiceResponse } from "@/services/Cart.service";
 import { useAuth } from "@/context/AuthContext";
 
 interface CartItem {
@@ -54,7 +54,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       setLoading(true);
       setError(null);
       console.log('🔄 Cargando carrito desde CartContext...');
-      const response = await CartServiceSimple.getCart();
+      const response = await CartService.getCart();
       if (response.success && response.data) {
         setCart(response.data);
         console.log('✅ Carrito cargado:', response.data);
@@ -78,7 +78,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     try {
       setError(null);
       console.log(`🔍 [CONTEXT] addToCart llamado - productId=${productId}, quantity=${quantity}`);
-      const response = await CartServiceSimple.addToCart(productId, quantity);
+      const response = await CartService.addToCart(productId, quantity);
       if (response.success && response.data) {
         setCart(response.data);
         console.log(`✅ [CONTEXT] Producto agregado - itemCount=${response.data.itemCount}`);
@@ -97,7 +97,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     try {
       setError(null);
       console.log(`🔄 Actualizando cantidad del producto ${productId} a ${quantity}...`);
-      const response = await CartServiceSimple.updateCartItem(productId, quantity);
+      const response = await CartService.updateCartItem(productId, quantity);
       if (response.success && response.data) {
         setCart(response.data);
         console.log('✅ Cantidad actualizada');
@@ -116,7 +116,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     try {
       setError(null);
       console.log(`🗑️ Eliminando producto ${productId} del carrito...`);
-      const response = await CartServiceSimple.removeFromCart(productId);
+      const response = await CartService.removeFromCart(productId);
       if (response.success && response.data) {
         setCart(response.data);
         console.log('✅ Producto eliminado');
@@ -135,7 +135,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     try {
       setError(null);
       console.log('🧹 Vaciando carrito...');
-      const response = await CartServiceSimple.clearCart();
+      const response = await CartService.clearCart();
       if (response.success && response.data) {
         setCart(response.data);
         console.log('✅ Carrito vaciado');

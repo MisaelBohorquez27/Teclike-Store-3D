@@ -5,7 +5,8 @@ import {
   updateCartItem,
   removeFromCart,
   clearCart,
-} from "../controllers/cart.simple";
+  syncCart,
+} from "../controllers/cart.controller";
 import { authMiddleware, requireAuth } from "../middleware/auth.middleware";
 
 const router = express.Router();
@@ -28,5 +29,8 @@ router.delete("/remove", removeFromCart);
 
 // Vaciar todo el carrito
 router.delete("/clear", clearCart);
+
+// Sincronizar carrito (patrón batching para frontend)
+router.post("/sync", syncCart);
 
 export default router;

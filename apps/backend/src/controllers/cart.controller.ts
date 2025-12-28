@@ -117,3 +117,62 @@ export const clearCart = async (req: AuthRequest, res: Response) => {
     handleError(res, error, "Error al vaciar el carrito");
   }
 };
+
+/**
+ * SINCRONIZAR CARRITO - Patrón Batching/Agrupamiento
+ * 
+ * Frontend envía TODOS los items del carrito (después de cambios locales)
+ * Backend reemplaza todo el carrito con estos items en una sola transacción
+ * 
+ * Ventaja: 
+ * - Una sola llamada a BD (no múltiples addToCart)
+ * - UI rápida (optimistic updates en frontend)
+ * - Sin queries N+1
+ * - Reduce carga significativamente
+ * 
+ * Flujo:
+ * 1. Frontend cambia carrito en localStorage
+ * 2. Frontend agrada cambios por 10 segundos
+ * 3. Frontend envía sync con TODOS los items
+ * 4. Backend actualiza carrito atomicamente
+ * 5. Backend responde carrito actualizado
+ */
+export const syncCart = async (req: AuthRequest, res: Response) => {
+  try {
+    const userId = req.userId!;
+    const { items } = req.body; // items = [{ productId, quantity }, ...]
+
+    if (!Array.isArray(items)) {
+      return res.status(400).json({
+        success: false,
+        message: "items debe ser un array",
+      });
+    }
+
+    // Validar formato de cada item
+    for (const item of items) {
+      if (!item.productId || item.quantity === undefined) {
+        return res.status(400).json({
+          success: false,
+          message: "Cada item debe tener productId y quantity",
+        });
+      }
+      if (item.quantity < 0) {
+        return res.status(400).json({
+          success: false,
+          message: "Cantidad no puede ser negativa",
+        });
+      }
+    }
+
+    console.log(`🔄 [SYNC] Usuario ${userId} sincronizando ${items.length} items`);
+
+    // Sincronizar carrito (reemplaza todos los items)
+    const cart = await cartService.syncCart(userId, items);
+    
+    console.log(`✅ [SYNC] Carrito sincronizado - itemCount=${cart.data?.itemCount}`);
+    res.json(cart);
+  } catch (error) {
+    handleError(res, error, "Error al sincronizar carrito");
+  }
+};

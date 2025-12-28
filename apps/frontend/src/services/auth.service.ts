@@ -75,14 +75,13 @@ export class AuthService {
     this.clearTokens();
     this.clearUser();
     
-    // Detener sincronización automática y limpiar carrito local
+    // Detener sincronización automática del carrito
     try {
-      const { CartService } = await import('./cartService');
+      const { CartService } = await import('./Cart.service');
       CartService.stopAutoSync();
-      CartService.clearLocalCart();
-      console.log('🛒 Carrito local limpiado');
+      console.log('🛒 Sincronización del carrito detenida');
     } catch (error) {
-      console.warn('⚠️ Error limpiando carrito:', error);
+      console.warn('⚠️ Error deteniendo sync:', error);
     }
     
     console.log('✅ Logout completado - sesión cerrada en cliente');
