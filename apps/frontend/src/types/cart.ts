@@ -1,5 +1,8 @@
 // Tipo para productos en la vista del carrito.
-import { ProductForCart } from "@/types/productss";
+import { ProductForCart as BaseProductForCart } from "@/types/productss";
+
+// Omitir quantity del ProductForCart que viene de productss
+export type ProductForCart = Omit<BaseProductForCart, 'quantity'>;
 
 // services/cart.ts
 export interface CartItem {
@@ -18,4 +21,5 @@ export interface CartResponse {
   tax: number;
   shipping: number;
   total: number;
+  itemCount: number;
 }

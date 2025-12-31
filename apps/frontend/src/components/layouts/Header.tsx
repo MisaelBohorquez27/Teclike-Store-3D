@@ -3,12 +3,12 @@
 import Link from "next/link";
 import Image from "next/image";
 import { FiHelpCircle, FiLogOut, FiUser } from "react-icons/fi";
-import logo from "../../public/logos/Logo3.png";
-import Button from "./PagesButtons";
+import logo from "../../../public/logos/Logo3.png";
+import Button from "@/components/common/PagesButtons";
 import { Navbar2 } from "./Navbar2";
 import { useState } from "react";
 import { useAuth } from "@/context/AuthContext";
-import { AuthModal } from "./Auth/AuthModal";
+import { AuthModal } from "@/components/auth/AuthModal";
 
 export function Header() {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);

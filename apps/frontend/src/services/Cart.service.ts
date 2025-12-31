@@ -1,25 +1,9 @@
 import httpClient from './httpClient';
-
-interface CartItem {
-  id: string | number;
-  productId: number;
-  quantity: number;
-  product?: any;
-}
-
-export interface CartResponse {
-  success: boolean;
-  data?: {
-    id: number;
-    userId: number;
-    items: CartItem[];
-    total: number;
-    itemCount: number;
-  };
-}
+import { CartResponse, CartItem } from '@/types/cart';
+import type { ProductForCart } from '@/types/cart';
 
 const CART_STORAGE_KEY = 'teclike_cart';
-const SYNC_INTERVAL = 10000; // Sincronizar cada 10 segundos
+const SYNC_INTERVAL = 3000; // Reducido a 3 segundos para mejor UX (en lugar de 10s)
 let syncTimeout: NodeJS.Timeout | null = null;
 let pendingItems: Set<number> = new Set(); // Items pendientes de sincronizar
 
@@ -50,21 +34,72 @@ export class CartService {
 
   /**
    * Obtiene el carrito (local si no está autenticado, servidor si está)
+   * ✅ MEJORADO: Prioriza cambios locales si hay pendientes
+   * Esto evita que productos eliminados vuelvan a aparecer después de recargar
    */
-  static async getCart(): Promise<CartResponse> {
+  static async getCart(): Promise<{ success: boolean; data: CartResponse }> {
     try {
       if (this.isAuthenticated()) {
         // Usuario autenticado: obtener del servidor
         console.log('📦 Obteniendo carrito del servidor...');
-        const response = await httpClient.get<CartResponse>('/cart');
         
-        // Sincronizar con localStorage
-        if (response.data?.data) {
-          this.saveLocalCart(response.data.data);
-          pendingItems.clear();
+        // Verificar si hay items pendientes en localStorage PRIMERO
+        const localCart = this.getLocalCart();
+        const hasPendingItems = localCart.items && localCart.items.length > 0 && pendingItems.size > 0;
+        
+        if (hasPendingItems) {
+          console.log(`⚠️ Detectado ${pendingItems.size} items pendientes - usando localStorage local`);
+          // Retornar el carrito local (que tiene cambios más recientes que el servidor)
+          // El sync automático se ejecutará en segundo plano
+          await this.performSync();
+          // Después del sync, recargar para obtener la versión sincronizada
+          const syncedResponse = await httpClient.get<any>('/cart');
+          if (syncedResponse.data?.data) {
+            const serverCart = syncedResponse.data.data;
+            const cartForStorage = {
+              id: serverCart.id,
+              userId: serverCart.userId,
+              items: serverCart.items || [],
+              subtotal: serverCart.subtotal || 0,
+              shipping: serverCart.shipping || 0,
+              tax: serverCart.tax || 0,
+              total: serverCart.total || 0,
+              itemCount: serverCart.itemCount || 0,
+            };
+            this.saveLocalCart(cartForStorage);
+            pendingItems.clear();
+            console.log('✅ Sincronización completada - usando carrito del servidor');
+            return { success: true, data: cartForStorage };
+          }
+          // Si falla el sync, retornar el local
+          return {
+            success: true,
+            data: localCart
+          };
+        } else {
+          // No hay pendientes, obtener carrito del servidor
+          const response = await httpClient.get<any>('/cart');
+          
+          if (response.data?.data) {
+            const serverCart = response.data.data;
+            const cartForStorage = {
+              id: serverCart.id,
+              userId: serverCart.userId,
+              items: serverCart.items || [],
+              subtotal: serverCart.subtotal || 0,
+              shipping: serverCart.shipping || 0,
+              tax: serverCart.tax || 0,
+              total: serverCart.total || 0,
+              itemCount: serverCart.itemCount || 0,
+            };
+            this.saveLocalCart(cartForStorage);
+            pendingItems.clear();
+            console.log('✅ Carrito obtenido del servidor');
+            return { success: true, data: cartForStorage };
+          }
+          
+          return response.data;
         }
-        
-        return response.data;
       } else {
         // Usuario NO autenticado: obtener del localStorage
         console.log('📦 Obteniendo carrito del localStorage...');
@@ -89,31 +124,69 @@ export class CartService {
   /**
    * Agrega producto - OPTIMISTIC UPDATE
    * Guarda en localStorage inmediatamente, sincroniza después
+   * 
+   * IMPORTANTE: Pasar datos completos del producto para optimistic update
+   * Si no los tienes, el carrito mostrará "Producto sin nombre" hasta sincronizar
    */
-  static async addToCart(productId: number, quantity: number = 1): Promise<CartResponse> {
+  static async addToCart(
+    productId: number, 
+    quantity: number = 1,
+    productData?: {
+      name?: string;
+      price?: number;
+      priceString?: string; // ✅ Aceptar priceString del frontend
+      imageUrl?: string;
+      description?: string;
+    }
+  ): Promise<{ success: boolean; data: CartResponse }> {
     try {
       if (!productId || productId <= 0) throw new Error('ID de producto inválido');
       if (quantity < 1) throw new Error('Cantidad debe ser mayor a 0');
 
-      console.log(`🛒 Agregando ${quantity}x producto ${productId}`);
+      console.log(`🛒 Agregando ${quantity}x producto ${productId}`, productData);
 
       // OPTIMISTIC: Guardar en localStorage primero (sin esperar servidor)
       const localCart = this.getLocalCart();
-      const existingItem = localCart.items.find(item => item.productId === productId);
+      const existingItem = localCart.items.find((item: CartItem) => item.productId === productId);
 
       if (existingItem) {
         existingItem.quantity += Math.floor(quantity);
       } else {
+        // Crear producto con datos disponibles
+        const priceAsNumber = typeof productData?.price === 'string' 
+          ? parseFloat(productData.price) 
+          : (productData?.price || 0);
+        
+        // ✅ Usar priceString si viene del frontend, sino calcular
+        const finalPriceString = productData?.priceString || (priceAsNumber > 0 ? `$${priceAsNumber.toFixed(2)}` : '$0.00');
+        
+        const product: ProductForCart | undefined = productData ? {
+          id: productId,
+          slug: `product-${productId}`,
+          name: productData.name || `Producto ${productId}`,
+          price: isNaN(priceAsNumber) ? 0 : priceAsNumber,
+          priceString: finalPriceString,
+          imageUrl: productData.imageUrl || '/placeholder-product.jpg',
+          inStock: true,
+          stock: 999,
+          category: 'Producto',
+          rating: 0,
+          reviewCount: 0,
+          currency: '$',
+          brand: undefined,
+        } : undefined;
+
         localCart.items.push({
           id: Math.random(),
           productId,
           quantity: Math.floor(quantity),
+          product,
         });
       }
 
       this.calculateTotals(localCart);
       this.saveLocalCart(localCart);
-      console.log('✅ Carrito actualizado localmente');
+      console.log('✅ Carrito actualizado localmente con datos completos');
 
       // Marcar como pendiente de sincronización
       pendingItems.add(productId);
@@ -136,19 +209,19 @@ export class CartService {
   /**
    * Actualiza cantidad - OPTIMISTIC UPDATE
    */
-  static async updateCartItem(productId: number, quantity: number): Promise<CartResponse> {
+  static async updateCartItem(productId: number, quantity: number): Promise<{ success: boolean; data: CartResponse }> {
     try {
       if (quantity < 0) throw new Error('Cantidad no puede ser negativa');
 
       console.log(`📝 Actualizando producto ${productId} a cantidad ${quantity}`);
 
       const localCart = this.getLocalCart();
-      const item = localCart.items.find(i => i.productId === productId);
+      const item = localCart.items.find((i: CartItem) => i.productId === productId);
 
       if (!item) throw new Error('Producto no encontrado en carrito');
 
       if (quantity === 0) {
-        localCart.items = localCart.items.filter(i => i.productId !== productId);
+        localCart.items = localCart.items.filter((i: CartItem) => i.productId !== productId);
       } else {
         item.quantity = Math.floor(quantity);
       }
@@ -174,14 +247,15 @@ export class CartService {
   }
 
   /**
-   * Elimina producto - OPTIMISTIC UPDATE
+   * Elimina producto - OPTIMISTIC UPDATE + SYNC INMEDIATO
+   * Las eliminaciones se sincronizan inmediatamente para mejor UX
    */
-  static async removeFromCart(productId: number): Promise<CartResponse> {
+  static async removeFromCart(productId: number): Promise<{ success: boolean; data: CartResponse }> {
     try {
       console.log(`🗑️ Eliminando producto ${productId}`);
 
       const localCart = this.getLocalCart();
-      localCart.items = localCart.items.filter(item => item.productId !== productId);
+      localCart.items = localCart.items.filter((item: CartItem) => item.productId !== productId);
 
       this.calculateTotals(localCart);
       this.saveLocalCart(localCart);
@@ -190,7 +264,16 @@ export class CartService {
       pendingItems.add(productId);
 
       if (this.isAuthenticated()) {
-        this.startAutoSync();
+        // ⚠️ IMPORTANTE: Las eliminaciones se sincronizan INMEDIATAMENTE
+        // para evitar que el usuario vea el producto reaparecer si recarga rápido
+        console.log('🚀 Sincronización inmediata para eliminación');
+        
+        // Cancelar sync pendiente
+        if (syncTimeout) clearTimeout(syncTimeout);
+        syncTimeout = null;
+        
+        // Ejecutar sync inmediatamente
+        await this.performSync();
       }
 
       return {
@@ -206,7 +289,7 @@ export class CartService {
   /**
    * Vacía carrito
    */
-  static async clearCart(): Promise<CartResponse> {
+  static async clearCart(): Promise<{ success: boolean; data: CartResponse }> {
     try {
       console.log('🧹 Vaciando carrito...');
 
@@ -214,6 +297,9 @@ export class CartService {
         id: 0,
         userId: 0,
         items: [],
+        subtotal: 0,
+        shipping: 0,
+        tax: 0,
         total: 0,
         itemCount: 0,
       };
@@ -271,18 +357,30 @@ export class CartService {
       const localCart = this.getLocalCart();
       
       // Enviar carrito completo (más simple y confiable que diferencias)
-      const response = await httpClient.post<CartResponse>('/cart/sync', {
-        items: localCart.items.map(item => ({
+      const response = await httpClient.post<any>('/cart/sync', {
+        items: localCart.items.map((item: CartItem) => ({
           productId: item.productId,
           quantity: item.quantity
         }))
       });
 
       if (response.data?.data) {
-        // Servidor confirma - limpiar pendientes
-        this.saveLocalCart(response.data.data);
+        // ✅ Convertir respuesta del servidor al formato del localStorage
+        const serverCart = response.data.data;
+        const cartForStorage = {
+          id: serverCart.id,
+          userId: serverCart.userId,
+          items: serverCart.items || [],
+          subtotal: serverCart.subtotal || 0,
+          shipping: serverCart.shipping || 0,
+          tax: serverCart.tax || 0,
+          total: serverCart.total || 0,
+          itemCount: serverCart.itemCount || 0,
+        };
+        
+        this.saveLocalCart(cartForStorage);
         pendingItems.clear();
-        console.log('✅ Sincronización completada');
+        console.log(`✅ Sincronización completada - itemCount=${cartForStorage.itemCount}, subtotal=$${cartForStorage.subtotal}, total=$${cartForStorage.total}`);
       }
     } catch (error) {
       console.warn('⚠️ Error en sync (reintentando en 10s):', error);
@@ -306,7 +404,7 @@ export class CartService {
    */
   private static getLocalCart() {
     if (typeof window === 'undefined') {
-      return { id: 0, userId: 0, items: [], total: 0, itemCount: 0 };
+      return { id: 0, userId: 0, items: [], subtotal: 0, shipping: 0, tax: 0, total: 0, itemCount: 0 };
     }
 
     try {
@@ -315,11 +413,14 @@ export class CartService {
         id: 0,
         userId: 0,
         items: [],
+        subtotal: 0,
+        shipping: 0,
+        tax: 0,
         total: 0,
         itemCount: 0,
       };
     } catch {
-      return { id: 0, userId: 0, items: [], total: 0, itemCount: 0 };
+      return { id: 0, userId: 0, items: [], subtotal: 0, shipping: 0, tax: 0, total: 0, itemCount: 0 };
     }
   }
 
@@ -338,10 +439,33 @@ export class CartService {
 
   /**
    * Calcula totales del carrito
+   * ✅ Ahora calcula el total real basado en precios
    */
   private static calculateTotals(cart: any): void {
     const itemCount = cart.items.reduce((sum: number, item: CartItem) => sum + item.quantity, 0);
     cart.itemCount = itemCount;
-    cart.total = itemCount > 0 ? itemCount : 0; // Placeholder, el servidor calcula el real
+    
+    // Calcular subtotal: sum(quantity × price)
+    const subtotal = cart.items.reduce((sum: number, item: CartItem) => {
+      const price = item.product?.price || 0;
+      const itemTotal = price * item.quantity;
+      return sum + itemTotal;
+    }, 0);
+    
+    cart.subtotal = Math.round(subtotal * 100) / 100;
+    
+    // Calcular impuestos (10% del subtotal)
+    const tax = Math.round(subtotal * 0.1 * 100) / 100;
+    cart.tax = tax;
+    
+    // Envío (fijo en 5 o gratis si subtotal > 50)
+    const shipping = subtotal > 50 ? 0 : 5;
+    cart.shipping = shipping;
+    
+    // Total final
+    const total = Math.round((subtotal + tax + shipping) * 100) / 100;
+    cart.total = total;
+    
+    console.log(`💰 Totales recalculados - Items: ${itemCount}, Subtotal: $${subtotal}, Tax: $${tax}, Shipping: $${shipping}, Total: $${total}`);
   }
 }

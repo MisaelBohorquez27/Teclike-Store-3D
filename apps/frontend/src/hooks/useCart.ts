@@ -12,7 +12,16 @@ interface UseCartReturn {
   error: string | null;
   itemCount: number;
   cartTotal: number;
-  addToCart: (productId: number, quantity?: number) => Promise<void>;
+  addToCart: (
+    productId: number, 
+    quantity?: number,
+    productData?: {
+      name?: string;
+      price?: number;
+      imageUrl?: string;
+      description?: string;
+    }
+  ) => Promise<void>;
   updateQuantity: (productId: number, quantity: number) => Promise<void>;
   removeFromCart: (productId: number) => Promise<void>;
   clearCart: () => Promise<void>;
@@ -81,10 +90,19 @@ export const useCart = (): UseCartReturn => {
 
   // Agregar al carrito
   const handleAddToCart = useCallback(
-    async (productId: number, quantity: number = 1) => {
+    async (
+      productId: number, 
+      quantity: number = 1,
+      productData?: {
+        name?: string;
+        price?: number;
+        imageUrl?: string;
+        description?: string;
+      }
+    ) => {
       try {
         setError(null);
-        const updatedCart = await CartService.addToCart(productId, quantity);
+        const updatedCart = await CartService.addToCart(productId, quantity, productData);
         setCart(updatedCart);
       } catch (err: any) {
         const errorMessage = err.message || "Error al agregar al carrito";

@@ -78,6 +78,8 @@ export const TrendingProductCard = ({ product }: TrendingProductCardProps) => {
               productId={product.id}
               productName={product.name}
               maxStock={product.stock ?? 1}
+              productPrice={product.priceInt || parseFloat(product.price as unknown as string) || 0}
+              productImage={product.imageUrl}
               variant="default"
               size="sm"
               onSuccess={handleAddSuccess}

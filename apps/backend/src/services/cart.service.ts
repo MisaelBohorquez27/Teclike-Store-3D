@@ -79,8 +79,11 @@ export async function addToCart(
 
   console.log(`🔍 [BACKEND] Antes de addOrUpdateCartItem - cartId=${cart!.id}`);
   
+  // ✅ Guardar el priceCents del producto al momento de agregar
+  const priceCents = product.priceCents || 0;
+  
   // Agregar o actualizar item en BD
-  await cartRepo.addOrUpdateCartItem(cart!.id, productId, quantity, stock);
+  await cartRepo.addOrUpdateCartItem(cart!.id, productId, quantity, stock, priceCents);
 
   console.log(`🔍 [BACKEND] Después de addOrUpdateCartItem`);
 
@@ -378,8 +381,11 @@ export async function syncCart(
       // Respetar stock máximo
       const finalQuantity = Math.min(item.quantity, stock);
 
-      // Agregar item
-      await cartRepo.addOrUpdateCartItem(cartId, item.productId, finalQuantity, stock);
+      // ✅ IMPORTANTE: Guardar el priceCents del producto en el momento del sync
+      const priceCents = product.priceCents || 0;
+
+      // Agregar item con precio guardado
+      await cartRepo.addOrUpdateCartItem(cartId, item.productId, finalQuantity, stock, priceCents);
     }
 
     // Actualizar caché con carrito sincronizado

@@ -11,7 +11,7 @@ import {
   FaArrowRight,
 } from "react-icons/fa";
 import { useEffect, useState } from "react";
-import { Subscription } from "./Subscription";
+import { Subscription } from "@/components/common/Subscription";
 
 interface FooterProps {
   companyName?: string;

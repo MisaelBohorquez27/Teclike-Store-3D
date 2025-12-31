@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useState, useEffect, useCallback } from "react";
 import { CartService } from "@/services/Cart.service";
-import type { CartResponse as CartServiceResponse } from "@/services/Cart.service";
+import type { CartResponse } from "@/types/cart";
 import { useAuth } from "@/context/AuthContext";
 
 interface CartItem {
@@ -16,11 +16,11 @@ interface CartData {
   id: number;
   userId: number;
   items: CartItem[];
+  subtotal: number;
+  shipping: number;
+  tax: number;
   total: number;
   itemCount: number;
-  subtotal?: number;
-  shipping?: number;
-  tax?: number;
 }
 
 interface CartContextType {
@@ -28,10 +28,20 @@ interface CartContextType {
   loading: boolean;
   error: string | null;
   itemCount: number;
-  addToCart: (productId: number, quantity?: number) => Promise<CartServiceResponse>;
-  updateQuantity: (productId: number, quantity: number) => Promise<CartServiceResponse>;
-  removeFromCart: (productId: number) => Promise<CartServiceResponse>;
-  clearCart: () => Promise<CartServiceResponse>;
+  addToCart: (
+    productId: number, 
+    quantity?: number,
+    productData?: {
+      name?: string;
+      price?: number;
+      priceString?: string;
+      imageUrl?: string;
+      description?: string;
+    }
+  ) => Promise<{ success: boolean; data: CartResponse }>;
+  updateQuantity: (productId: number, quantity: number) => Promise<{ success: boolean; data: CartResponse }>;
+  removeFromCart: (productId: number) => Promise<{ success: boolean; data: CartResponse }>;
+  clearCart: () => Promise<{ success: boolean; data: CartResponse }>;
   refreshCart: () => Promise<void>;
 }
 
@@ -74,11 +84,21 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   }, [loadCart]);
 
   // Agregar producto al carrito
-  const addToCart = async (productId: number, quantity: number = 1) => {
+  const addToCart = async (
+    productId: number, 
+    quantity: number = 1,
+    productData?: {
+      name?: string;
+      price?: number;
+      priceString?: string;
+      imageUrl?: string;
+      description?: string;
+    }
+  ) => {
     try {
       setError(null);
-      console.log(`🔍 [CONTEXT] addToCart llamado - productId=${productId}, quantity=${quantity}`);
-      const response = await CartService.addToCart(productId, quantity);
+      console.log(`🔍 [CONTEXT] addToCart llamado - productId=${productId}, quantity=${quantity}`, productData);
+      const response = await CartService.addToCart(productId, quantity, productData);
       if (response.success && response.data) {
         setCart(response.data);
         console.log(`✅ [CONTEXT] Producto agregado - itemCount=${response.data.itemCount}`);

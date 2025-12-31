@@ -13,8 +13,11 @@ export function CartItem({ item, onUpdateQuantity, onRemove }: CartItemProps) {
   const [isRemoving, setIsRemoving] = useState(false);
 
   const { product, quantity } = item;
-  const safePrice = Number(product?.price) || 0;
+  const safePrice = product?.price || 0;
+  const priceString = product?.priceString || `$${safePrice.toFixed(2)}`;
   const itemTotal = safePrice * quantity;
+  
+  console.log(`🛒 [CartItem] Product: ${product?.name}, Price: ${safePrice}, PriceString: ${priceString}`);
 
   // Cambiar cantidad
   const handleQuantityChange = async (newQuantity: number) => {
@@ -54,10 +57,10 @@ export function CartItem({ item, onUpdateQuantity, onRemove }: CartItemProps) {
       <ProductImage imageUrl={product?.imageUrl} name={product?.name} />
 
       {/* Información */}
-      <ProductInfo product={product} quantity={quantity} />
+      <ProductInfo product={product} quantity={quantity} priceString={priceString} />
 
       {/* Precio Unitario */}
-      <UnitPrice price={safePrice} />
+      <UnitPrice priceString={priceString} />
 
       {/* Selector de cantidad */}
       <QuantitySelector
@@ -88,9 +91,11 @@ const ProductImage = ({ imageUrl, name }: { imageUrl?: string; name?: string }) 
 const ProductInfo = ({
   product,
   quantity,
+  priceString,
 }: {
   product: CartResponse["items"][number]["product"];
   quantity: number;
+  priceString: string;
 }) => (
   <div className="flex-1 min-w-0">
     <h3 className="font-medium text-gray-900 text-sm sm:text-base line-clamp-2">
@@ -111,7 +116,7 @@ const ProductInfo = ({
     {/* Precio unitario en móvil */}
     <div className="sm:hidden mt-2">
       <span className="text-sm text-gray-600">
-        ${(Number(product?.price) || 0).toFixed(2)} c/u
+        {priceString} c/u
       </span>
     </div>
   </div>
@@ -139,9 +144,9 @@ const StockBadge = ({
   );
 };
 
-const UnitPrice = ({ price }: { price: number }) => (
+const UnitPrice = ({ priceString }: { priceString: string }) => (
   <div className="hidden sm:block w-20 text-center">
-    <span className="text-gray-700 font-medium text-sm">${price.toFixed(2)}</span>
+    <span className="text-gray-700 font-medium text-sm">{priceString}</span>
   </div>
 );
 
