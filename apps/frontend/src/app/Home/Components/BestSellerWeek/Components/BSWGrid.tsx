@@ -54,9 +54,14 @@ const EmptyState = () => (
       </div>
       <h3 className="text-2xl font-bold text-white mb-3">Próximos Campeones</h3>
       <p className="text-gray-400 mb-8">{CONTENT.emptyText}</p>
-      <button className="px-6 py-3 bg-gradient-to-r from-gray-800 to-gray-900 hover:from-gray-700 hover:to-gray-800 text-white font-medium rounded-xl transition-all">
-        Explorar Productos
-      </button>
+      <Link href="/Products">
+        <Button
+          size="s"
+          className="px-6 py-3 bg-gradient-to-r from-gray-800 to-gray-900 hover:from-gray-700 hover:to-gray-800 text-white font-medium rounded-xl transition-all"
+        >
+          Explorar Productos
+        </Button>
+      </Link>
     </div>
   </motion.div>
 );
