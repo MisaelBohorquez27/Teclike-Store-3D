@@ -1,20 +1,167 @@
 [
     {
-        "productId": 9,
-        "imageUrl": "https://res.cloudinary.com/dwewy8c7p/image/upload/v1759415343/teclike-image/mewvnmlrl1dnf37ijslt.png",
-        "imageAlt": "Asus ROG Azoth Gaming Laptop Front View"
+        "productId": 1,
+        "imageUrl": "https://res.cloudinary.com/dwewy8c7p/image/upload/v1767923210/IMG_3144_wz89ng.jpg",
+        "imageAlt": "e-yooso z11 Led - Vista frontal"
     },
-
+    {
+        "productId": 1,
+        "imageUrl": "https://res.cloudinary.com/dwewy8c7p/image/upload/v1767923210/IMG_3145_vogiqv.jpg",
+        "imageAlt": "e-yooso z11 Led - Vista lateral"
+    },
+    {
+        "productId": 2,
+        "imageUrl": "https://res.cloudinary.com/dwewy8c7p/image/upload/v1767923165/IMG_0733_yystzo.heic",
+        "imageAlt": "e-yooso z11 RGB Gris con negro - Vista frontal"
+    },
+    {
+        "productId": 2,
+        "imageUrl": "https://res.cloudinary.com/dwewy8c7p/image/upload/v1767923165/IMG_0710_ns7ngj.heic",
+        "imageAlt": "e-yooso z11 RGB Gris con negro - Vista lateral"
+    },
+    {
+        "productId": 3,
+        "imageUrl": "https://res.cloudinary.com/dwewy8c7p/image/upload/v1767923158/WhatsApp_Image_2026-01-08_at_09.54.08_hpd7qn.jpg",
+        "imageAlt": "e-yooso z11 RGB Negro con Gris - Vista frontal"
+    },
+    {
+        "productId": 3,
+        "imageUrl": "https://res.cloudinary.com/dwewy8c7p/image/upload/v1767927167/IMG_5280_thdeag.heic",
+        "imageAlt": "e-yooso z11 RGB Negro con Gris - Vista lateral"
+    },
+    {
+        "productId": 4,
+        "imageUrl": "https://res.cloudinary.com/dwewy8c7p/image/upload/v1767923166/2C81FE7B-1A71-4D16-B914-510BD32BF53F_hcyphj.jpg",
+        "imageAlt": "e-yooso z686 RGB Blanco Inalámbrico - Vista frontal"
+    },
+    {
+        "productId": 4,
+        "imageUrl": "https://res.cloudinary.com/dwewy8c7p/image/upload/v1767923211/IMG_2691_zlk0tn.jpg",
+        "imageAlt": "e-yooso z686 RGB Blanco Inalámbrico - Vista lateral"
+    },
+    {
+        "productId": 5,
+        "imageUrl": "https://res.cloudinary.com/dwewy8c7p/image/upload/v1767923174/IMG_0341_ylv9lm.heic",
+        "imageAlt": "e-yooso z686 RGB Negro - Vista frontal"
+    },
+    {
+        "productId": 5,
+        "imageUrl": "https://res.cloudinary.com/dwewy8c7p/image/upload/v1767923172/IMG_0334_iltir4.heic",
+        "imageAlt": "e-yooso z686 RGB Negro - Vista lateral"
+    },
+    {
+        "productId": 6,
+        "imageUrl": "https://res.cloudinary.com/dwewy8c7p/image/upload/v1767923154/IMG_0241_rervt4.heic",
+        "imageAlt": "e-yooso HZ68 RGB - Vista frontal"
+    },
+    {
+        "productId": 6,
+        "imageUrl": "https://res.cloudinary.com/dwewy8c7p/image/upload/v1767923154/IMG_0241_rervt4.heic",
+        "imageAlt": "e-yooso HZ68 RGB - Vista lateral"
+    },
+    {
+        "productId": 7,
+        "imageUrl": "https://res.cloudinary.com/dwewy8c7p/image/upload/v1767923228/IMG_6448_lrvutz.jpg",
+        "imageAlt": "MousePad Cafe - Vista frontal"
+    },
+    {
+        "productId": 8,
+        "imageUrl": "https://res.cloudinary.com/dwewy8c7p/image/upload/v1767923228/IMG_7006_h5aapx.jpg",
+        "imageAlt": "MousePad Negro - Vista frontal"
+    },
     {
         "productId": 9,
-        "imageUrl": "https://res.cloudinary.com/dwewy8c7p/image/upload/v1759718528/razer-BlackSharkV2-X_oeqe9w.png",
-        "imageAlt": "Asus ROG Azoth Gaming Laptop Front View"
+        "imageUrl": "https://res.cloudinary.com/dwewy8c7p/image/upload/v1767923206/IMG_6472_ier8tv.jpg",
+        "imageAlt": "MousePad Gris - Vista frontal"
     },
-
     {
         "productId": 9,
-        "imageUrl": "https://res.cloudinary.com/dwewy8c7p/image/upload/v1759718809/razer-KrakenV3-HyperSense_ctrspf.png",
-        "imageAlt": "Asus ROG Azoth Gaming Laptop Front View"
+        "imageUrl": "https://res.cloudinary.com/dwewy8c7p/image/upload/v1767923203/IMG_6469_vhcewj.jpg",
+        "imageAlt": "MousePad Gris - Detalle"
+    },
+    {
+        "productId": 10,
+        "imageUrl": "https://res.cloudinary.com/dwewy8c7p/image/upload/v1767923190/Copilot_20260108_203429_bwlfrq.png",
+        "imageAlt": "Kit de Limpieza - Vista frontal"
+    },
+    {
+        "productId": 10,
+        "imageUrl": "https://res.cloudinary.com/dwewy8c7p/image/upload/v1767927920/WhatsApp_Image_2026-01-08_at_22.04.46_gp1mo9.jpg",
+        "imageAlt": "Kit de Limpieza - Contenido"
+    },
+    {
+        "productId": 11,
+        "imageUrl": "https://res.cloudinary.com/dwewy8c7p/image/upload/v1767923146/WhatsApp_Image_2026-01-08_at_09.51.59s_tfx34h.jpg",
+        "imageAlt": "Audifonos Razer BlackShark V2 X - Vista frontal"
+    },
+    {
+        "productId": 11,
+        "imageUrl": "https://res.cloudinary.com/dwewy8c7p/image/upload/v1767923146/WhatsApp_Image_2026-01-08_at_09.51.59_jj1td1.jpg",
+        "imageAlt": "Audifonos Razer BlackShark V2 X - Vista lateral"
+    },
+    {
+        "productId": 12,
+        "imageUrl": "https://res.cloudinary.com/dwewy8c7p/image/upload/v1767923195/IMG_0280_gm3r3k.heic",
+        "imageAlt": "Mouse e-yooso X11 pro Negro - Vista frontal"
+    },
+    {
+        "productId": 12,
+        "imageUrl": "https://res.cloudinary.com/dwewy8c7p/image/upload/v1767923197/IMG_0303_cohgrz.heic",
+        "imageAlt": "Mouse e-yooso X11 pro Negro - Vista lateral"
+    },
+    {
+        "productId": 12,
+        "imageUrl": "https://res.cloudinary.com/dwewy8c7p/image/upload/v1767923193/IMG_0257_edgigh.heic",
+        "imageAlt": "Mouse e-yooso X11 pro Negro - Detalle"
+    },
+    {
+        "productId": 13,
+        "imageUrl": "https://res.cloudinary.com/dwewy8c7p/image/upload/v1767923218/IMG_9728_aciiy3.jpg",
+        "imageAlt": "Keycaps Celeste-Morado - Vista superior"
+    },
+    {
+        "productId": 13,
+        "imageUrl": "https://res.cloudinary.com/dwewy8c7p/image/upload/v1767923220/20230728_103513_1_jasiu7.jpg",
+        "imageAlt": "Keycaps Celeste-Morado - Detalle de colores"
+    },
+    {
+        "productId": 14,
+        "imageUrl": "https://res.cloudinary.com/dwewy8c7p/image/upload/v1767923185/IMG_0671_ahthtm.heic",
+        "imageAlt": "Keycaps Verde-Morado - Vista superior"
+    },
+    {
+        "productId": 14,
+        "imageUrl": "https://res.cloudinary.com/dwewy8c7p/image/upload/v1767923186/IMG_0689_e7biwa.heic",
+        "imageAlt": "Keycaps Verde-Morado - Detalle de colores"
+    },
+    {
+        "productId": 15,
+        "imageUrl": "https://res.cloudinary.com/dwewy8c7p/image/upload/v1767923224/IMG_6976_jlkrv9.jpg",
+        "imageAlt": "Keycaps Verde-Negro - Vista superior"
+    },
+    {
+        "productId": 15,
+        "imageUrl": "https://res.cloudinary.com/dwewy8c7p/image/upload/v1767923223/IMG_6981_aidqe3.jpg",
+        "imageAlt": "Keycaps Verde-Negro - Detalle de colores"
+    },
+    {
+        "productId": 16,
+        "imageUrl": "https://res.cloudinary.com/dwewy8c7p/image/upload/v1767923217/IMG_7426_wjexmo.jpg",
+        "imageAlt": "Keycaps Blanco-Rojo-Celeste - Vista superior"
+    },
+    {
+        "productId": 16,
+        "imageUrl": "https://res.cloudinary.com/dwewy8c7p/image/upload/v1767923216/IMG_7419_qh39i1.jpg",
+        "imageAlt": "Keycaps Blanco-Rojo-Celeste - Detalle de colores"
+    },
+    {
+        "productId": 17,
+        "imageUrl": "https://res.cloudinary.com/dwewy8c7p/image/upload/v1767923222/IMG_4950_gsa2ep.jpg",
+        "imageAlt": "Keycaps Naranja-Negro - Vista superior"
+    },
+    {
+        "productId": 17,
+        "imageUrl": "https://res.cloudinary.com/dwewy8c7p/image/upload/v1767923222/IMG_8467_hnae9f.jpg",
+        "imageAlt": "Keycaps Naranja-Negro - Detalle de colores"
     }
-
 ]
