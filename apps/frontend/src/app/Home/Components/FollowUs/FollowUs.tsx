@@ -63,7 +63,7 @@ export function FollowUs({
               <span className="text-cyan-300 text-sm font-bold tracking-wide">
                 COMUNIDAD
               </span>
-            </div>*/}
+            </div>
 
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
               <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
@@ -73,11 +73,10 @@ export function FollowUs({
             </h2>
 
             <p className="text-gray-300 text-lg md:text-xl max-w-2xl mx-auto mb-8">
-              Descubre contenido exclusivo, detrás de cámaras y sé el primero en
-              conocer nuestras novedades
-            </p>
+              Lo ultimo de nuestras redes sociales y lo que dice nuestra comunidad
+            </p>*/}
 
-            {/* Stats de Instagram */}
+            {/* Stats de Instagram 
             <motion.div
               className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto"
               initial={{ opacity: 0, y: 20 }}
@@ -121,7 +120,7 @@ export function FollowUs({
                   <div className="text-xs text-gray-400">{stat.label}</div>
                 </div>
               ))}
-            </motion.div>
+            </motion.div>*/}
           </motion.div>
 
           <div className="grid lg:grid-cols-3 gap-8 md:gap-12">
@@ -133,11 +132,17 @@ export function FollowUs({
                 transition={{ delay: 0.4 }}
               >
                 <div className="mb-8">
-                  <h3 className="text-3xl font-bold text-gray-100 mb-4">
-                    Lo último en nuestras redes
+                  <h3 className="text-4xl font-bold text-gray-100 mb-4">
+                    <span>
+                      Lo último en&nbsp;
+                    </span>
+                    <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
+                      nuestras redes
+                    </span>
                   </h3>
                   <p className="text-gray-400">
-                    Contenido fresco y exclusivo cada día
+                    Síguenos en Instagram para no perderte ninguna actualización,
+                    lanzamiento o promoción exclusiva.
                   </p>
                 </div>
 
@@ -181,21 +186,21 @@ export function FollowUs({
                 <div className="space-y-4">
                   {[
                     {
-                      user: "@techlover",
+                      user: "@_romero36",
                       comment:
-                        "¡Increíble contenido! Siempre tienen las últimas novedades tech 👏",
+                        "Hace poco compré un producto y la calidad es excelente 👏",
                       likes: 245,
                     },
                     {
-                      user: "@gadgetguru",
+                      user: "@perez_ps34",
                       comment:
-                        "La mejor comunidad para amantes de la tecnología. ¡Los sigo desde el día 1! 🔥",
+                        "Por ser cliente fiel me regalaron un mousepad, gracias teclike 🔥",
                       likes: 189,
                     },
                   ].map((testimonial, index) => (
                     <div key={index} className="p-3 rounded-xl bg-gray-800/30">
                       <div className="flex items-center gap-2 mb-2">
-                        <div className="w-6 h-6 rounded-full bg-gradient-to-r from-cyan-500 to-blu-500" />
+                        <div className="w-6 h-6 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500" />
                         <span className="text-white font-medium">
                           {testimonial.user}
                         </span>
@@ -219,12 +224,12 @@ export function FollowUs({
                 </h3>
                 <div className="flex flex-wrap gap-2">
                   {[
-                    "#TechStyle",
-                    "#Innovación",
-                    "#Tecnología",
-                    "#NuevoProducto",
-                    "#ComunidadTech",
-                    "#OfertaEspecial",
+                    "#tecladosRGB",
+                    "#gamers",
+                    "#tecnología",
+                    "#tecladosmecánicos",
+                    "#mouseGamer",
+                    "#ofertaEspecial",
                   ].map((tag) => (
                     <a
                       key={tag}
