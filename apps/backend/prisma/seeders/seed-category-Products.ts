@@ -2,9 +2,11 @@ import { PrismaClient } from "@prisma/client";
 
 // Diccionario de palabras clave para cada categoría
 const categoryKeywords: Record<string, string[]> = {
-  headsets: ["headset", "auricular", "headphone", "audífono"],
-  keyboards: ["keyboard", "teclado", "keychron", "keycap"],
-  mice: ["mouse", "ratón", "sensor", "dpi"],
+  headsets: ["headset", "auricular", "headphone", "audífono", "blackshark"],
+  keyboards: ["keyboard", "teclado", "keychron"],
+  keycaps: ["keycap", "keycaps"],
+  mouse: ["mouse", "ratón", "sensor", "dpi", "eyooso", "logitech", "razer"],
+  mousepads: ["mousepad", "pad"],
   monitors: [
     "monitor",
     "pantalla",
@@ -19,8 +21,8 @@ const categoryKeywords: Record<string, string[]> = {
   webcams: ["webcam", "cámara"],
   accessories: [
     "accesorio",
-    "pad",
-    "mousepad",
+    "kit",
+    "limpieza",
     "stand",
     "soporte",
     "cable",
@@ -75,8 +77,8 @@ function findMatchingCategories(
   for (const [categorySlug, keywords] of Object.entries(categoryKeywords)) {
     const hasMatch = keywords.some((keyword) =>
       words.some((word) => {
-        // Coincidencia exacta o parcial
-        return word.includes(keyword) || keyword.includes(word);
+        // Solo coincidencia exacta - evitar falsos positivos
+        return word === keyword;
       })
     );
 

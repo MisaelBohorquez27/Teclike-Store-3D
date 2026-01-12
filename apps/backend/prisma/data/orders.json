@@ -1,19 +1,19 @@
 [
     {
         "userId": 2,
-        "subtotalCents": 12999,
-        "taxCents": 910,
+        "subtotalCents": 6999,
+        "taxCents": 490,
         "shippingCostCents": 599,
-        "totalCents": 14508,
+        "totalCents": 8088,
         "shippingAddress": "123 Main Street, Anytown, USA 12345",
         "email": "user2@example.com",
         "phone": "+1-555-0101",
-        "status": "PENDING",
+        "status": "DELIVERED",
         "orderProducts": [
             {
-                "productSlug": "razer-kraken-v3",
+                "productSlug": "e-yooso-z11-led",
                 "quantity": 1,
-                "priceCents": 12999
+                "priceCents": 6999
             }
         ],
         "clientTransactionId": "TXN-001",
@@ -21,19 +21,29 @@
     },
     {
         "userId": 2,
-        "subtotalCents": 24999,
-        "taxCents": 1750,
+        "subtotalCents": 17397,
+        "taxCents": 1218,
         "shippingCostCents": 599,
-        "totalCents": 27748,
+        "totalCents": 19214,
         "shippingAddress": "456 Oak Avenue, Springfield, USA 67890",
         "email": "user2@example.com",
         "phone": "+1-555-0101",
         "status": "SHIPPED",
         "orderProducts": [
             {
-                "productSlug": "asus-rog-azoth",
+                "productSlug": "e-yooso-z11-rgb-gris-negro",
                 "quantity": 1,
-                "priceCents": 24999
+                "priceCents": 7499
+            },
+            {
+                "productSlug": "mousepad-cafe",
+                "quantity": 1,
+                "priceCents": 1999
+            },
+            {
+                "productSlug": "keycaps-celeste-morado",
+                "quantity": 1,
+                "priceCents": 3999
             }
         ],
         "clientTransactionId": "TXN-002",
@@ -41,52 +51,122 @@
     },
     {
         "userId": 3,
-        "subtotalCents": 44996,
-        "taxCents": 3150,
+        "subtotalCents": 22998,
+        "taxCents": 1610,
         "shippingCostCents": 599,
-        "totalCents": 48745,
+        "totalCents": 25207,
         "shippingAddress": "789 Pine Lane, Metropolis, USA 98765",
         "email": "user3@example.com",
         "phone": "+1-555-0102",
-        "status": "DELIVERED",
+        "status": "PENDING",
         "orderProducts": [
             {
-                "productSlug": "logitech-g502-x",
-                "quantity": 2,
-                "priceCents": 15999
+                "productSlug": "e-yooso-z686-rgb-blanco-inalambrico",
+                "quantity": 1,
+                "priceCents": 8999
             },
             {
-                "productSlug": "mouse-x11",
+                "productSlug": "e-yooso-hz68-rgb",
                 "quantity": 1,
-                "priceCents": 4999
+                "priceCents": 7799
+            },
+            {
+                "productSlug": "mousepad-negro",
+                "quantity": 1,
+                "priceCents": 1999
             }
         ],
         "clientTransactionId": "TXN-003",
-        "payphoneTransactionId": "567890123"
+        "payphoneTransactionId": "456789012"
     },
     {
-        "userId": 3,
-        "subtotalCents": 87998,
-        "taxCents": 6160,
+        "userId": 4,
+        "subtotalCents": 25497,
+        "taxCents": 1785,
         "shippingCostCents": 599,
-        "totalCents": 94757,
-        "shippingAddress": "123 Main Street, Anytown, USA 12345",
-        "email": "user3@example.com",
-        "phone": "+1-555-0102",
-        "status": "DELIVERED",
+        "totalCents": 27881,
+        "shippingAddress": "321 Elm Street, Capital City, USA 54321",
+        "email": "user4@example.com",
+        "phone": "+1-555-0103",
+        "status": "APPROVED",
         "orderProducts": [
             {
-                "productSlug": "hyperx-cloud-alpha",
+                "productSlug": "razer-blackshark-v2-x",
                 "quantity": 1,
-                "priceCents": 17999
+                "priceCents": 12999
             },
             {
-                "productSlug": "steelseries-arctis-pro",
-                "quantity": 2,
-                "priceCents": 34999
+                "productSlug": "kit-limpieza",
+                "quantity": 1,
+                "priceCents": 2499
+            },
+            {
+                "productSlug": "keycaps-verde-morado",
+                "quantity": 1,
+                "priceCents": 3999
             }
         ],
         "clientTransactionId": "TXN-004",
         "payphoneTransactionId": "567890123"
+    },
+    {
+        "userId": 5,
+        "subtotalCents": 30496,
+        "taxCents": 2135,
+        "shippingCostCents": 599,
+        "totalCents": 33230,
+        "shippingAddress": "654 Birch Drive, Downtown, USA 11111",
+        "email": "user5@example.com",
+        "phone": "+1-555-0104",
+        "status": "DELIVERED",
+        "orderProducts": [
+            {
+                "productSlug": "mouse-e-yooso-x11-pro-negro",
+                "quantity": 1,
+                "priceCents": 8499
+            },
+            {
+                "productSlug": "e-yooso-z686-rgb-negro",
+                "quantity": 1,
+                "priceCents": 8999
+            },
+            {
+                "productSlug": "mousepad-gris",
+                "quantity": 1,
+                "priceCents": 1999
+            },
+            {
+                "productSlug": "keycaps-verde-negro",
+                "quantity": 1,
+                "priceCents": 3999
+            }
+        ],
+        "clientTransactionId": "TXN-005",
+        "payphoneTransactionId": "678901234"
+    },
+    {
+        "userId": 3,
+        "subtotalCents": 11498,
+        "taxCents": 805,
+        "shippingCostCents": 599,
+        "totalCents": 12902,
+        "shippingAddress": "987 Maple Road, Suburb, USA 22222",
+        "email": "user3@example.com",
+        "phone": "+1-555-0102",
+        "status": "PENDING",
+        "orderProducts": [
+            {
+                "productSlug": "keycaps-blanco-rojo-celeste",
+                "quantity": 1,
+                "priceCents": 4499
+            },
+            {
+                "productSlug": "keycaps-naranja-negro",
+                "quantity": 1,
+                "priceCents": 3999
+            }
+        ],
+        "clientTransactionId": "TXN-006",
+        "payphoneTransactionId": "789012345"
     }
 ]

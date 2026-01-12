@@ -10,9 +10,19 @@
       "description": "Mechanical and membrane keyboards for gaming and work"
     },
     {
-      "name": "Mice",
-      "slug": "mice",
+      "name": "Mouse",
+      "slug": "mouse",
       "description": "Gaming and productivity mice with precision sensors"
+    },
+    {
+      "name": "Mousepads",
+      "slug": "mousepads",
+      "description": "Premium mousepads for gaming and productivity"
+    },
+    {
+      "name": "Keycaps",
+      "slug": "keycaps",
+      "description": "Custom keycaps for mechanical keyboards"
     },
     {
       "name": "Monitors",

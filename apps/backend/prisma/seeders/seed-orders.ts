@@ -4,6 +4,30 @@ import ordersData from "../data/orders.json";
 
 const prisma = new PrismaClient();
 
+interface OrderProduct {
+  productSlug: string;
+  quantity: number;
+  priceCents: number;
+}
+
+interface OrderInput {
+  userId: number;
+  subtotalCents: number;
+  taxCents: number;
+  shippingCostCents: number;
+  totalCents: number;
+  shippingAddress?: string;
+  billingAddress?: string;
+  email?: string;
+  phone?: string;
+  status?: string;
+  paymentMethod?: string;
+  lastFourDigits?: string;
+  clientTransactionId?: string;
+  payphoneTransactionId?: string;
+  orderProducts: OrderProduct[];
+}
+
 function parseOrderStatus(value?: string): OrderStatus {
   if (!value) return OrderStatus.PENDING;
   const normalized = value.toString().trim().toUpperCase();
@@ -24,8 +48,24 @@ export async function seedOrders(prisma: PrismaClient) {
   console.log("🌱 Seeding orders...");
 
   try {
-    for (const order of ordersData) {
+    for (const order of (ordersData as OrderInput[])) {
       try {
+        // Validar que tenemos un clientTransactionId
+        if (!order.clientTransactionId) {
+          console.warn(`⚠️ Orden sin clientTransactionId, generando uno...`);
+          order.clientTransactionId = `TXN-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+        }
+
+        // Verificar si la orden ya existe
+        const existingOrder = await prisma.order.findUnique({
+          where: { clientTransactionId: order.clientTransactionId },
+        });
+
+        if (existingOrder) {
+          console.log(`ℹ️ Orden ya existe: ${order.clientTransactionId}, saltando...`);
+          continue;
+        }
+
         // Verificar que el usuario existe
         const user = await prisma.user.findUnique({
           where: { id: order.userId },
@@ -40,26 +80,26 @@ export async function seedOrders(prisma: PrismaClient) {
         const createdOrder = await prisma.order.create({
           data: {
             userId: order.userId,
-            clientTransactionId: order.clientTransactionId || `TXN-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
-            payphoneTransactionId: order.payphoneTransactionId || null,
+            clientTransactionId: order.clientTransactionId,
+            payphoneTransactionId: order.payphoneTransactionId ?? undefined,
             subtotalCents: order.subtotalCents,
             taxCents: order.taxCents,
             shippingCostCents: order.shippingCostCents,
             totalCents: order.totalCents,
-            shippingAddress: order.shippingAddress || null,
-            billingAddress: (order as any).billingAddress || null,
-            email: (order as any).email || user.email,
-            phone: (order as any).phone || user.phone,
-            status: parseOrderStatus((order as any).status),
-            paymentMethod: (order as any).paymentMethod || null,
-            lastFourDigits: (order as any).lastFourDigits || null,
+            shippingAddress: order.shippingAddress ?? undefined,
+            billingAddress: order.billingAddress ?? undefined,
+            email: order.email ?? user.email,
+            phone: order.phone ?? user.phone,
+            status: parseOrderStatus(order.status),
+            paymentMethod: order.paymentMethod ?? undefined,
+            lastFourDigits: order.lastFourDigits ?? undefined,
           },
         });
 
         // 2. Buscar IDs de productos a partir del slug
         const products = await prisma.product.findMany({
           where: {
-            slug: { in: order.orderProducts.map((op) => op.productSlug) },
+            slug: { in: order.orderProducts.map((op: OrderProduct) => op.productSlug) },
           },
         });
 
@@ -85,7 +125,7 @@ export async function seedOrders(prisma: PrismaClient) {
 
         console.log(`✅ Orden creada: ID=${createdOrder.id}, Usuario=${order.userId}, Total=${createdOrder.totalCents}¢`);
       } catch (itemError) {
-        console.error(`❌ Error procesando orden del usuario ${order.userId}:`, itemError);
+        console.error(`❌ Error procesando orden:`, itemError);
         continue;
       }
     }
