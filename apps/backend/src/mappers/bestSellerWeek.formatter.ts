@@ -22,7 +22,7 @@ export function formatBestSellerProduct(product: any) {
     category,
     rating,
     reviewCount: product.reviews.length,
-    image: product.imageUrl ?? "/products/default.png",
+    imageUrl: product.imageUrl ?? "/products/default.png",
     price: formatCurrency(product.priceCents, product.currency),
     priceInt: product.priceCents / 100,
     currency: product.currency,

@@ -64,7 +64,7 @@ export function BestSellersWeekCard({ item }: ProductsProps) {
       )}
 
       {/* Columna izquierda - Imagen */}
-      <ImageColumn image={item.imageUrl ?? "/placeholder-product.jpg"} name={item.name} />
+      <ImageColumn image={item.imageUrl} name={item.name} />
 
       {/* Separador decorativo */}
       <div className="hidden lg:block">
@@ -88,14 +88,15 @@ const ImageColumn = ({ image, name }: { image: string; name: string }) => (
     <motion.div
       whileHover={{ scale: 1.05 }}
       transition={{ duration: 0.3 }}
-      className="relative overflow-hidden rounded-2xl"
+      className="relative overflow-hidden rounded-2xl h-64 md:h-80"
     >
       <Image
         src={image}
         alt={name}
-        width={600}
-        height={500}
-        className="w-full h-64 md:h-80 object-cover rounded-2xl hover:scale-105 transition-transform duration-500"
+        fill
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        className="object-scale-down"
+        priority={false}
       />
 
       {/* Overlay de hover */}
