@@ -9,7 +9,6 @@ import { useState } from "react";
 
 interface ProductsProps {
   item: ProductForDetail;
-  onAddToCart?: (id: number, quantity: number) => void; // Opcional, para compatibilidad
 }
 
 /**
@@ -21,7 +20,7 @@ interface ProductsProps {
  * - Mejor manejo de estado de carga y errores
  * - Más limpio y mantenible
  */
-export function BestSellersWeekCard({ item, onAddToCart }: ProductsProps) {
+export function BestSellersWeekCard({ item }: ProductsProps) {
   const [successMessage, setSuccessMessage] = useState("");
 
   const handleAddSuccess = () => {
@@ -65,7 +64,7 @@ export function BestSellersWeekCard({ item, onAddToCart }: ProductsProps) {
       )}
 
       {/* Columna izquierda - Imagen */}
-      <ImageColumn image={item.imageUrl ?? ""} name={item.name} />
+      <ImageColumn image={item.imageUrl ?? "/placeholder-product.jpg"} name={item.name} />
 
       {/* Separador decorativo */}
       <div className="hidden lg:block">
@@ -92,7 +91,7 @@ const ImageColumn = ({ image, name }: { image: string; name: string }) => (
       className="relative overflow-hidden rounded-2xl"
     >
       <Image
-        src={image || "/placeholder-product.jpg"}
+        src={image}
         alt={name}
         width={600}
         height={500}
