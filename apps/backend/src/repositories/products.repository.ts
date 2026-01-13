@@ -11,7 +11,6 @@ export function findFilteredProducts(whereClause: any, skip: number, take: numbe
       },
       skip,
       take,
-      orderBy: { createdAt: "desc" },
     }),
     prisma.product.count({ where: whereClause }),
   ]);

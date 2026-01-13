@@ -19,13 +19,13 @@ export function formatForCard(p: any) {
 }
 
 export function formatDetailedProduct(product: any) {
-  const formattedReviews = product.reviews.map((review: any) => ({
+  const formattedReviews = product.reviews?.map((review: any) => ({
     id: review.id,
-    user: review.user.firstName,
+    user: review.user?.username || review.user?.firstName || "Usuario Anónimo",
     rating: review.rating,
     comment: review.comment,
-    date: review.reviewDate.toISOString().split("T")[0],
-  }));
+    date: review.reviewDate?.toISOString?.().split("T")[0] || new Date().toISOString().split("T")[0],
+  })) ?? [];
 
   const isNew = (Date.now() - new Date(product.createdAt).getTime()) / (1000 * 60 * 60 * 24) <= 30;
   const category = product.categoryProducts?.[0]?.category?.name ?? "Uncategorized";

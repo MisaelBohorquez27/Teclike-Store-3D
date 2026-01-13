@@ -10,7 +10,7 @@ export async function getPaginatedProducts(query: any) {
     maxPrice,
     inStock,
     page = "1",
-    limit = "12",
+    limit = "20",
   } = query;
 
   const pageNum = parseInt(page);

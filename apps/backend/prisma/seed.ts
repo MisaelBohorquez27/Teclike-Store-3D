@@ -15,13 +15,24 @@ const prisma = new PrismaClient();
 async function main() {
   console.log('🌱 Iniciando seeder de Teclike Store...');
   console.log('==========================================');
-
-
+  // Ejecutar seeders en orden
+  await seedProducts(prisma); // primero haz un seed a productos
+  console.log('------------------------------------------');
+  await seedCoreData(prisma);
+  console.log('------------------------------------------');
+  await seedCategories(prisma);
+  console.log('------------------------------------------');
+  await seedUsers(prisma); // luego haz un seed hasta aqui
+  console.log('------------------------------------------');
+  await seedOffers(prisma);
+  console.log('------------------------------------------');
+  await seedCategoryRelations(prisma);
+  console.log('------------------------------------------');
   await seedOrders(prisma);
   console.log('------------------------------------------');
-  await seedReviews(prisma); // finalmente haz un seed a todos hasta reviews
+  await seedReviews(prisma); 
   console.log('------------------------------------------');
-  await seedImageProducts(prisma);
+  await seedImageProducts(prisma); // finalmente haz un seed a todos hasta aqui
   console.log('==========================================');
   console.log('✅ Base de datos poblada exitosamente!');
   console.log('🎯 Ofertas configuradas para diferentes temporadas');

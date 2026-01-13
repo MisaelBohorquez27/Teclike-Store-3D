@@ -10,9 +10,12 @@ export default function HelpContactPage() {
       <section className="pt-20 sm:pt-24 md:pt-28 pb-12 sm:pb-6 md:pb-10 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-cyan-800/10 to-transparent pointer-events-none" />
         <div className="container mx-auto px-4 sm:px-6 text-center relative z-10">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
-            Ayuda y Contacto
-          </h1>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-6">
+            <span className="text-white">Ayuda&nbsp;y&nbsp;</span>
+            <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
+              Contacto
+            </span>
+          </h2>
           <p className="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto">
             Estamos aquí para ayudarte en lo que necesites. Contacta con nuestro equipo experto
           </p>
