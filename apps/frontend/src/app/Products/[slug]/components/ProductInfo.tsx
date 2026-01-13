@@ -23,56 +23,59 @@ export function ProductInfo({ product }: { product: ProductForDetail }) {
     <div className="pb-7 flex flex-col gap-6">
       {/* Marca y Nombre */}
       <div>
-        <span className="text-lg font-semibold text-gray-600">
+        <span className="text-sm font-semibold text-cyan-400 uppercase tracking-wider">
           {product.brand}
         </span>
-        <h1 className="text-3xl font-bold mt-1">{product.name}</h1>
+        <h1 className="text-3xl md:text-4xl font-bold mt-2 text-white">{product.name}</h1>
       </div>
 
       {/* Rating */}
-      <div className="flex items-center">
+      <div className="flex items-center gap-2">
         {[...Array(5)].map((_, i) => (
           <span
             key={i}
-            className={`text-lg ${i < Math.floor(product.rating) ? "text-yellow-400" : "text-gray-300"}`}
+            className={`text-lg ${i < Math.floor(product.rating) ? "text-yellow-400" : "text-gray-600"}`}
           >
             ★
           </span>
         ))}
-        <span className="text-gray-500 ml-2">({product.rating.toFixed(1)})</span>
+        <span className="text-gray-300 ml-2">({product.rating.toFixed(1)})</span>
       </div>
 
       {/* Precio */}
-      <p className="text-2xl font-semibold text-gray-900">
-        {product.currency} {product.price}
-      </p>
+      <div>
+        <p className="text-sm text-gray-400 mb-1">Precio</p>
+        <p className="text-4xl font-bold text-cyan-400">
+          {product.currency} {product.price}
+        </p>
+      </div>
 
       {/* Disponibilidad */}
-      <div className="flex items-center gap-2">
-        <span className="w-3 h-3 bg-green-500 rounded-full"></span>
-        <span className="text-green-600 font-medium">Disponible</span>
+      <div className="flex items-center gap-2 p-3 bg-green-500/10 border border-green-500/30 rounded-lg w-fit">
+        <span className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></span>
+        <span className="text-green-400 font-medium">Disponible ({product.stock} en stock)</span>
       </div>
 
       {/* Descripción */}
       {product.description && (
-        <div className="text-gray-700">
+        <div className="text-gray-300 leading-relaxed border-l-2 border-cyan-500/50 pl-4">
           <p>{product.description}</p>
         </div>
       )}
 
       {/* Acciones */}
-      <div className="flex flex-col sm:flex-row gap-4 mt-2">
-        <div className="flex items-center border rounded-md overflow-hidden">
+      <div className="flex flex-col sm:flex-row gap-4 mt-4">
+        <div className="flex items-center border border-gray-700 rounded-lg overflow-hidden bg-gray-800/30">
           <button
-            className="px-3 py-2 bg-gray-100 text-gray-700 hover:bg-gray-200"
+            className="px-4 py-3 bg-gray-700/50 text-gray-300 hover:bg-gray-600/50 transition-colors"
             onClick={decrementQuantity}
             aria-label="Reducir cantidad"
           >
-            -
+            −
           </button>
-          <span className="px-4 py-2 min-w-[40px] text-center">{quantity}</span>
+          <span className="px-6 py-3 min-w-[60px] text-center text-white font-semibold">{quantity}</span>
           <button
-            className="px-3 py-2 bg-gray-100 text-gray-700 hover:bg-gray-200"
+            className="px-4 py-3 bg-gray-700/50 text-gray-300 hover:bg-gray-600/50 transition-colors"
             onClick={incrementQuantity}
             aria-label="Aumentar cantidad"
           >
@@ -89,81 +92,83 @@ export function ProductInfo({ product }: { product: ProductForDetail }) {
       </Button>
 
       {/* Metadatos del producto */}
-      <div className="mt-4 space-y-2 text-sm">
-        <div className="flex gap-2">
-          <span className="text-gray-600 font-medium">SKU:</span>
-          <span>{sku}</span>
+      <div className="mt-6 pt-6 border-t border-gray-700 space-y-3 text-sm">
+        <div className="flex gap-3 justify-between">
+          <span className="text-gray-400 font-medium">SKU:</span>
+          <span className="text-gray-200 font-mono">{sku}</span>
         </div>
-        <div className="flex gap-2">
-          <span className="text-gray-600 font-medium">Categorías:</span>
-          <span>{categories.join(", ")}</span>
+        <div className="flex gap-3 justify-between">
+          <span className="text-gray-400 font-medium">Categoría:</span>
+          <span className="text-gray-200">{categories.join(", ")}</span>
         </div>
-        <div className="flex gap-2">
-          <span className="text-gray-600 font-medium">Etiqueta:</span>
-          <span>{tag}</span>
+        <div className="flex gap-3 justify-between">
+          <span className="text-gray-400 font-medium">Categoría:</span>
+          <span className="text-gray-200">{categories.join(", ")}</span>
         </div>
-        <div className="flex gap-2">
-          <span className="text-gray-600 font-medium">Marca:</span>
-          <span>{product.brand}</span>
+        <div className="flex gap-3 justify-between">
+          <span className="text-gray-400 font-medium">Etiqueta:</span>
+          <span className="text-gray-200">{tag}</span>
+        </div>
+        <div className="flex gap-3 justify-between">
+          <span className="text-gray-400 font-medium">Marca:</span>
+          <span className="text-gray-200">{product.brand}</span>
         </div>
         {product.isNew && (
-          <div className="flex gap-2">
-            <span className="text-gray-600 font-medium">Estado:</span>
-            <span className="text-green-600">Nuevo</span>
+          <div className="flex gap-3 justify-between">
+            <span className="text-gray-400 font-medium">Estado:</span>
+            <span className="text-green-400 font-semibold">Nuevo</span>
           </div>
         )}
       </div>
 
       {/* Sección de Pagos */}
-      <div className="mt-2">
-        <h3 className="text-sm font-medium text-gray-500 mb-2">Métodos de pago:</h3>
-        <div className="flex flex-wrap gap-3 mb-4">
+      <div className="mt-6 pt-6 border-t border-gray-700">
+        <h3 className="text-sm font-semibold text-gray-300 mb-4 uppercase tracking-wide">Métodos de pago:</h3>
+        <div className="flex flex-wrap gap-3 mb-6">
           {/* Klarna */}
-          <div className="flex items-center justify-center w-16 h-10 bg-white border rounded-md">
-            <span className="text-xs font-bold">Klarna</span>
+          <div className="flex items-center justify-center w-16 h-10 bg-gray-800 border border-gray-700 rounded-md hover:border-cyan-500/50 transition-colors">
+            <span className="text-xs font-bold text-gray-300">Klarna</span>
           </div>
 
           {/* PayPal */}
-          <div className="flex items-center justify-center w-16 h-10 bg-white border rounded-md">
-            <span className="text-xs font-bold">PayPal</span>
+          <div className="flex items-center justify-center w-16 h-10 bg-gray-800 border border-gray-700 rounded-md hover:border-cyan-500/50 transition-colors">
+            <span className="text-xs font-bold text-gray-300">PayPal</span>
           </div>
 
           {/* Venmo */}
-          <div className="flex items-center justify-center w-16 h-10 bg-white border rounded-md">
-            <span className="text-xs font-bold">venmo</span>
+          <div className="flex items-center justify-center w-16 h-10 bg-gray-800 border border-gray-700 rounded-md hover:border-cyan-500/50 transition-colors">
+            <span className="text-xs font-bold text-gray-300">Venmo</span>
           </div>
 
           {/* Pay */}
-          <div className="flex items-center justify-center w-16 h-10 bg-white border rounded-md">
-            <span className="text-xs font-bold">Pay</span>
+          <div className="flex items-center justify-center w-16 h-10 bg-gray-800 border border-gray-700 rounded-md hover:border-cyan-500/50 transition-colors">
+            <span className="text-xs font-bold text-gray-300">Pay</span>
           </div>
 
           {/* VISA */}
-          <div className="flex items-center justify-center w-16 h-10 bg-white border rounded-md">
-            <span className="text-xs font-bold">VISA</span>
+          <div className="flex items-center justify-center w-16 h-10 bg-gray-800 border border-gray-700 rounded-md hover:border-cyan-500/50 transition-colors">
+            <span className="text-xs font-bold text-gray-300">VISA</span>
           </div>
 
           {/* Discover */}
-          <div className="flex items-center justify-center w-16 h-10 bg-white border rounded-md">
-            <span className="text-xs font-bold">DISC...VER</span>
+          <div className="flex items-center justify-center w-16 h-10 bg-gray-800 border border-gray-700 rounded-md hover:border-cyan-500/50 transition-colors">
+            <span className="text-xs font-bold text-gray-300">DISC</span>
           </div>
         </div>
 
         {/* Sección de Seguridad y Garantía */}
-        <div className="pt-4 border-t">
-          <div className="flex flex-col items-start gap-4 text-xs text-gray-600">
-            <div className="flex items-center gap-1">
-              <FaShieldAlt className="h-4 w-4 text-green-500" />
-              <span>Pagos seguros</span>
-            </div>
-            <div className="flex items-center gap-1">
-              <FaLock className="h-4 w-4 text-green-500" />
-              <span>Privacidad segura</span>
-            </div>
-            <div className="flex items-center gap-1">
-              <FaClipboardCheck className="h-4 w-4 text-green-500" />
-              <span>Garantía de pedidos</span>
-            </div>
+        <div className="pt-4 border-t border-gray-700 space-y-3">
+          <div className="flex items-center gap-3 text-sm text-gray-300">
+            <FaShieldAlt className="h-5 w-5 text-green-400 flex-shrink-0" />
+            <span>Pagos seguros y encriptados</span>
+          </div>
+          <div className="flex items-center gap-3 text-sm text-gray-300">
+            <FaLock className="h-5 w-5 text-blue-400 flex-shrink-0" />
+            <span>Privacidad y datos protegidos</span>
+          </div>
+          <div className="flex items-center gap-3 text-sm text-gray-300">
+            <FaClipboardCheck className="h-5 w-5 text-cyan-400 flex-shrink-0" />
+            <span>Garantía de comprador protegido</span>
           </div>
         </div>
       </div>

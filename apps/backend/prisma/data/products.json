@@ -3,66 +3,66 @@
     "id": 1,
     "brand": "e-yooso",
     "slug": "e-yooso-z11-led",
-    "name": "e-yooso z11 Led",
-    "description": "Mouse gaming con iluminación LED de alta precisión",
+    "name": "Teclado e-yooso z11 Led",
+    "description": "Teclado mecánico gaming e-yooso Z11 con iluminación, diseño ergonómico compacto para máximo control",
     "priceCents": 6999,
     "imageUrl": "https://res.cloudinary.com/dwewy8c7p/image/upload/v1767923156/LISTO_EYooso_Z_-_11_Led_S._RojoBlanco_-_Plomo_1_-PhotoRoom.png-PhotoRoom_jejpoo.png",
-    "categories": ["Mice"],
+    "categories": ["keyboards"],
     "inventory": { "stock": 28, "isNew": false }
   },
   {
     "id": 2,
     "brand": "e-yooso",
     "slug": "e-yooso-z11-rgb-gris-negro",
-    "name": "e-yooso z11 RGB Gris con negro",
-    "description": "Mouse gaming RGB con esquema de colores gris y negro",
+    "name": "Teclado e-yooso z11 RGB Gris con negro",
+    "description": "Teclado mecánico e-yooso Z11 RGB con switches de alto rendimiento, combinación de colores gris y negro, iluminación RGB personalizable",
     "priceCents": 7499,
     "imageUrl": "https://res.cloudinary.com/dwewy8c7p/image/upload/v1767923161/1_1_pc89bf.png",
-    "categories": ["Mice"],
+    "categories": ["keyboards"],
     "inventory": { "stock": 35, "isNew": false }
   },
   { 
     "id": 3,
     "brand": "e-yooso",
     "slug": "e-yooso-z11-rgb-negro-gris",
-    "name": "e-yooso z11 RGB Negro con Gris",
-    "description": "Mouse gaming RGB con esquema de colores negro y gris",
+    "name": "Teclado e-yooso z11 RGB Negro con Gris",
+    "description": "Teclado mecánico e-yooso Z11 RGB con esquema gris oscuro y negro, switches responsivos, iluminación RGB personalizable en múltiples modos",
     "priceCents": 7499,
     "imageUrl": "https://res.cloudinary.com/dwewy8c7p/image/upload/v1767923158/2_1_ak2ina.png",
-    "categories": ["Mice"],
+    "categories": ["keyboards"],
     "inventory": { "stock": 32, "isNew": false }
   },
   { 
     "id": 4,
     "brand": "e-yooso",
     "slug": "e-yooso-z686-rgb-blanco-inalambrico",
-    "name": "e-yooso z686 RGB Blanco   Inalámbrico",
-    "description": "Mouse gaming inalámbrico con RGB personalizable color blanco",
+    "name": "Teclado e-yooso z686 RGB Blanco Inalámbrico",
+    "description": "Teclado mecánico inalámbrico e-yooso Z686 en color blanco, RGB personalizable, batería de larga duración con conexión 2.4GHz estable",
     "priceCents": 8999,
     "imageUrl": "https://res.cloudinary.com/dwewy8c7p/image/upload/v1767923168/5_ylpay6.png",
-    "categories": ["Mice"],
+    "categories": ["keyboards"],
     "inventory": { "stock": 19, "isNew": false }
   },
   {
     "id": 5,
     "brand": "e-yooso",
     "slug": "e-yooso-z686-rgb-negro",
-    "name": "e-yooso z686 RGB Negro",
-    "description": "Mouse gaming inalámbrico con RGB personalizable color negro",
+    "name": "Teclado e-yooso z686 RGB Negro",
+    "description": "Teclado mecánico inalámbrico e-yooso Z686 negro, RGB personalizable en múltiples perfiles, batería potente y conexión inalámbrica confiable",
     "priceCents": 8999,
     "imageUrl": "https://res.cloudinary.com/dwewy8c7p/image/upload/v1767923168/7_xcvj8i.png",
-    "categories": ["Mice"],
+    "categories": ["keyboards"],
     "inventory": { "stock": 24, "isNew": false }
   },
   {
     "id": 6,
     "brand": "e-yooso",
     "slug": "e-yooso-hz68-rgb",
-    "name": "e-yooso HZ68 RGB",
-    "description": "Mouse gaming ergonómico HZ68 con iluminación RGB",
+    "name": "Teclado e-yooso HZ68 RGB",
+    "description": "Teclado mecánico compacto e-yooso HZ68 con iluminación RGB dinámica, diseño ergonómico con reposapolicas, ideal para gaming y productividad",
     "priceCents": 7799,
     "imageUrl": "https://res.cloudinary.com/dwewy8c7p/image/upload/v1767927341/6_lyvue8.png",
-    "categories": ["Mice"],
+    "categories": ["keyboards"],
     "inventory": { "stock": 41, "isNew": false }
   },
   {
@@ -73,7 +73,7 @@
     "description": "Mousepad de calidad premium color café",
     "priceCents": 1999,
     "imageUrl": "https://res.cloudinary.com/dwewy8c7p/image/upload/v1767923202/1_j9umw2.png",
-    "categories": ["Mousepads"],
+    "categories": ["mousepads"],
     "inventory": { "stock": 67, "isNew": false }
   },
   {
@@ -84,7 +84,7 @@
     "description": "Mousepad de calidad premium color negro",
     "priceCents": 1999,
     "imageUrl": "https://res.cloudinary.com/dwewy8c7p/image/upload/v1767923206/2_vj647c.png",
-    "categories": ["Mousepads"],
+    "categories": ["mousepads"],
     "inventory": { "stock": 73, "isNew": false }
   },
   {
@@ -95,7 +95,7 @@
     "description": "Mousepad de calidad premium color gris",
     "priceCents": 1999,
     "imageUrl": "https://res.cloudinary.com/dwewy8c7p/image/upload/v1767923202/3_pai4b3.png",
-    "categories": ["Mousepads"],
+    "categories": ["mousepads"],
     "inventory": { "stock": 55, "isNew": false }
   },
   {
@@ -106,7 +106,7 @@
     "description": "Kit completo de limpieza para periféricos gaming",
     "priceCents": 2499,
     "imageUrl": "https://res.cloudinary.com/dwewy8c7p/image/upload/v1767923191/Limpiador_ws41pp.png",
-    "categories": ["Accessories"],
+    "categories": ["accessories"],
     "inventory": { "stock": 48, "isNew": false }
   },
   {
@@ -117,7 +117,7 @@
     "description": "Auriculares gaming profesionales Razer BlackShark V2 X con audio envolvente",
     "priceCents": 12999,
     "imageUrl": "https://res.cloudinary.com/dwewy8c7p/image/upload/v1767927998/Audifono_oswiud.png",
-    "categories": ["Headsets"],
+    "categories": ["headsets"],
     "inventory": { "stock": 16, "isNew": false }
   },
   {
@@ -128,7 +128,7 @@
     "description": "Mouse gaming e-yooso X11 Pro con sensor de alta precisión color negro",
     "priceCents": 8499,
     "imageUrl": "https://res.cloudinary.com/dwewy8c7p/image/upload/v1767923198/Mouse_1_ebdzsk.png",
-    "categories": ["Mice"],
+    "categories": ["mouse"],
     "inventory": { "stock": 31, "isNew": false }
   },
   {
@@ -139,7 +139,7 @@
     "description": "Set de keycaps personalizados con colores celeste y morado",
     "priceCents": 3999,
     "imageUrl": "https://res.cloudinary.com/dwewy8c7p/image/upload/v1767923181/1_2_kpw26k.png",
-    "categories": ["Keycaps"],
+    "categories": ["keycaps"],
     "inventory": { "stock": 44, "isNew": false }
   },
   {
@@ -150,7 +150,7 @@
     "description": "Set de keycaps personalizados con colores verde y morado",
     "priceCents": 3999,
     "imageUrl": "https://res.cloudinary.com/dwewy8c7p/image/upload/v1767923183/6_1_m9ravm.png",
-    "categories": ["Keycaps"],
+    "categories": ["keycaps"],
     "inventory": { "stock": 38, "isNew": false }
   },
   {
@@ -161,7 +161,7 @@
     "description": "Set de keycaps personalizados con colores verde y negro",
     "priceCents": 3999,
     "imageUrl": "https://res.cloudinary.com/dwewy8c7p/image/upload/v1767923189/5_1_oioqg3.png",
-    "categories": ["Keycaps"],
+    "categories": ["keycaps"],
     "inventory": { "stock": 52, "isNew": false }
   },
   {
@@ -172,7 +172,7 @@
     "description": "Set de keycaps personalizados con colores blanco, rojo y celeste",
     "priceCents": 4499,
     "imageUrl": "https://res.cloudinary.com/dwewy8c7p/image/upload/v1767923176/3_2_hsvuum.png",
-    "categories": ["Keycaps"],
+    "categories": ["keycaps"],
     "inventory": { "stock": 26, "isNew": false }
   },
   {
@@ -183,7 +183,7 @@
     "description": "Set de keycaps personalizados con colores naranja y negro",
     "priceCents": 3999,
     "imageUrl": "https://res.cloudinary.com/dwewy8c7p/image/upload/v1767923181/2_2_gzxnpt.png",
-    "categories": ["Keycaps"],
+    "categories": ["keycaps"],
     "inventory": { "stock": 39, "isNew": false }
   }
 ]
