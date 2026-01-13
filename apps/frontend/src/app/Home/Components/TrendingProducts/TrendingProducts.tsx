@@ -139,9 +139,7 @@ export function TrendingProducts() {
         >
           <Link href="/Products">
             <Button className="group px-8 py-4 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-semibold rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-cyan-500/20 inline-flex items-center gap-3">
-              <FiArchive className="w-5 h-5 group-hover:rotate-180 transition-transform duration-500" />
               <span>Ver Todos los Productos</span>
-              <FiTrendingUp className="w-5 h-5 group-hover:rotate-180 transition-transform duration-500" />
             </Button>
           </Link>
         </motion.div>

@@ -29,8 +29,8 @@ export default function DailyDealsPage() {
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-gradient-to-br from-cyan-900/20 via-transparent to-blue-900/20" />
 
-          {/* Efectos de luz */}
-          <div className="absolute top-1/4 -left-32 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl" />
+          {/* Efectos de luz 
+          <div className="absolute top-1/4 -left-32 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl" />*/}
           <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl" />
 
           {/* Patrón sutil */}
@@ -41,16 +41,15 @@ export default function DailyDealsPage() {
 
         <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center pt-18 md:pt-22 lg:pt-24 pb-2 md:pb-4 lg:pb-6">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-black mb-6">
+              <span className="text-gray-100">Nuestras </span>
               <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
-                Descuentos en tus
+                Ofertas 
               </span>
-              <br />
-              <span className="text-white">Productos Favoritos</span>
             </h1>
 
             <p className="text-gray-300 text-lg md:text-xl max-w-2xl mx-auto mb-8">
-              Descubre promociones exclusivas que desaparecen en
+              Descubre promociones exclusivas que desaparecen en <br />
               <span className="text-cyan-400 font-semibold mx-1">24 horas</span>
               • Stock limitado
             </p>
@@ -130,12 +129,12 @@ export default function DailyDealsPage() {
         <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent" />
       </section>
 
-      {/* Banner de Suscripción Modernizado */}
+      {/* Banner de Suscripción Modernizado 
       <section
         className="relative py-16 md:py-20 lg:py-24 overflow-hidden"
         aria-labelledby="subscription-title"
       >
-        {/* Fondo con efectos */}
+        // Fondo con efectos
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-gradient-to-br from-cyan-900/20 via-transparent to-blue-900/20" />
           <div className="absolute top-32 -right-32 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl" />
@@ -145,12 +144,12 @@ export default function DailyDealsPage() {
           <div className="max-w-4xl mx-auto">
             <div className="bg-gradient-to-br from-gray-900/80 to-black/80 backdrop-blur-xl border border-gray-800/50 rounded-3xl p-8 md:p-12 shadow-2xl">
               <div className="text-center">
-                {/* Icono decorativo */}
+                // Icono decorativo
                 <div className="inline-flex items-center justify-center w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-gradient-to-r from-cyan-500 to-blue-500 mb-6">
                   <FiMail className="w-8 h-8 md:w-10 md:h-10 text-white" />
                 </div>
 
-                {/* Título y descripción */}
+                // Título y descripción
                 <h2
                   id="subscription-title"
                   className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4"
@@ -165,12 +164,12 @@ export default function DailyDealsPage() {
                   especial solo para suscriptores.
                 </p>
 
-                {/* Componente de Suscripción */}
+                // Componente de Suscripción
                 <div className="max-w-md mx-auto">
                   <Subscription />
                 </div>
 
-                {/* Beneficios */}
+                // Beneficios
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
                   {[
                     { icon: "🎁", text: "Ofertas exclusivas" },
@@ -192,7 +191,7 @@ export default function DailyDealsPage() {
             </div>
           </div>
         </div>
-      </section>
+      </section>*/}
 
       {/* Sección de Garantías 
       <section className="relative py-12 md:py-16 lg:py-20">

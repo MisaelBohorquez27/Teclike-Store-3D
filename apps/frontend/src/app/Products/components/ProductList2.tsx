@@ -50,7 +50,7 @@ export function ProductList2() {
 
   return (
     <div className="w-full">
-      <div className="flex flex-col lg:flex-row gap-6 md:gap-8">
+      <div className="flex flex-col lg:flex-row gap-6 md:gap-8 pb-28 md:pb-32">
         {/* Sidebar */}
         <div className="lg:w-1/4">
           <div className="relative top-24">

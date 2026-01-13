@@ -53,7 +53,7 @@ export function ProductReviews({ reviews }: ProductReviewsProps) {
                 <div className="flex items-center gap-3">
                   <div className="w-12 h-12 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
                     <span className="text-white font-bold text-sm">
-                      {review.user.charAt(0).toUpperCase()}
+                      {(review.user || "U").charAt(0).toUpperCase()}
                     </span>
                   </div>
                   <div>
