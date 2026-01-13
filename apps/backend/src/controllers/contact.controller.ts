@@ -40,19 +40,20 @@ export async function handleContact(req: Request, res: Response) {
 
   try {
     // Enviar email (no bloqueamos la respuesta si falla el email)
-    try {
-      await sendContactEmail({
-        firstName,
-        lastName,
-        email,
-        phone,
-        subject,
-        message,
-      });
-    } catch (emailError) {
-      console.error("⚠️ Email no enviado:", emailError);
-      // No fallamos la petición solo porque el email falle
-    }
+    // ⏸️ MAILER EN STANDBY - Funcionalidad desactivada temporalmente
+    // try {
+    //   await sendContactEmail({
+    //     firstName,
+    //     lastName,
+    //     email,
+    //     phone,
+    //     subject,
+    //     message,
+    //   });
+    // } catch (emailError) {
+    //   console.error("⚠️ Email no enviado:", emailError);
+    //   // No fallamos la petición solo porque el email falle
+    // }
 
     return res.json({
       success: true,
