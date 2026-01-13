@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { useCartContext } from "@/context/CartContext";
 import { useAuth } from "@/context/AuthContext";
@@ -60,6 +60,11 @@ export function AddToCartButton({
   
   // 🔒 Lock para prevenir ejecuciones concurrentes
   const isExecutingRef = useRef(false);
+
+  // ✅ Sincronizar cantidad cuando initialQuantity cambia
+  useEffect(() => {
+    setQuantity(initialQuantity);
+  }, [initialQuantity]);
 
   // Validar que hay stock
   if (maxStock <= 0) {
