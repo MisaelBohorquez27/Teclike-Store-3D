@@ -23,9 +23,9 @@ export default function CarouselButtons({ swiper, className = '' }: CarouselButt
       <button
         onClick={prevSlide}
         aria-label="Anterior"
-        className={`absolute left-1 top-1/2 -translate-y-1/2 Button-bg TextColor2 p-2 rounded-full shadow-md z-10 ${className}`}
+        className={`hidden md:flex absolute left-1 md:left-3 lg:left-6 top-1/2 -translate-y-1/2 Button-bg TextColor2 p-1.5 md:p-2 lg:p-2.5 rounded-full shadow-md z-10 hover:scale-110 transition-transform duration-200 ${className}`}
       >
-        <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
+        <svg width="24" height="24" fill="none" viewBox="0 0 24 24" className="w-5 h-5 md:w-6 md:h-6">
           <path
             d="M15 19l-7-7 7-7"
             stroke="currentColor"
@@ -39,9 +39,9 @@ export default function CarouselButtons({ swiper, className = '' }: CarouselButt
       <button
         onClick={nextSlide}
         aria-label="Siguiente"
-        className={`absolute right-1 top-1/2 -translate-y-1/2 Button-bg TextColor2 p-2 rounded-full shadow-md z-10 ${className}`}
+        className={`hidden md:flex absolute right-1 md:right-3 lg:right-6 top-1/2 -translate-y-1/2 Button-bg TextColor2 p-1.5 md:p-2 lg:p-2.5 rounded-full shadow-md z-10 hover:scale-110 transition-transform duration-200 ${className}`}
       >
-        <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
+        <svg width="24" height="24" fill="none" viewBox="0 0 24 24" className="w-5 h-5 md:w-6 md:h-6">
           <path
             d="M9 5l7 7-7 7"
             stroke="currentColor"
