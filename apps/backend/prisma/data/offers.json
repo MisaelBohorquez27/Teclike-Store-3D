@@ -6,9 +6,9 @@
     "startDate": "2025-11-25T00:00:00Z",
     "endDate": "2025-11-30T23:59:59Z",
     "products": [
-      "razer-kraken-v3",
-      "logitech-g502-x",
-      "hyperx-cloud-alpha"
+      "e-yooso-z11-led",
+      "e-yooso-z11-rgb-gris-negro",
+      "e-yooso-z686-rgb-blanco-inalambrico"
     ],
     "recurrence": "ANNUAL"
   },
@@ -19,9 +19,9 @@
     "startDate": "2025-12-15T00:00:00Z",
     "endDate": "2025-12-25T23:59:59Z",
     "products": [
-      "razer-kraken-v3",
-      "logitech-g502-x",
-      "corsair-k95-rgb"
+      "razer-blackshark-v2-x",
+      "mouse-e-yooso-x11-pro-negro",
+      "e-yooso-hz68-rgb"
     ],
     "recurrence": "ANNUAL"
   },
@@ -32,8 +32,8 @@
     "startDate": "2025-12-26T00:00:00Z",
     "endDate": "2026-01-15T23:59:59Z",
     "products": [
-      "samsung-odyssey-g7",
-      "lg-ultragear-48"
+      "e-yooso-z686-rgb-negro",
+      "kit-limpieza"
     ],
     "recurrence": "ANNUAL"
   },
@@ -44,11 +44,11 @@
     "startDate": "2025-08-29T00:00:00Z",
     "endDate": "2025-08-29T23:59:59Z",
     "products": [
-      "asus-rog-azoth",
-      "steelseries-arctis-pro",
-      "razer-kraken-v3",
-      "corsair-k95-rgb",
-      "samsung-odyssey-g7"
+      "keycaps-celeste-morado",
+      "mousepad-cafe",
+      "e-yooso-z11-rgb-negro-gris",
+      "keycaps-verde-morado",
+      "mousepad-negro"
     ],
     "recurrence": "DAILY"
   },
@@ -59,9 +59,9 @@
     "startDate": "2025-08-29T00:00:00Z",
     "endDate": "2025-08-29T23:59:59Z",
     "products": [
-      "lg-ultragear-48",
-      "hyperx-cloud-alpha",
-      "logitech-g502-x"
+      "keycaps-blanco-rojo-celeste",
+      "keycaps-verde-negro",
+      "keycaps-naranja-negro"
     ],
     "recurrence": "DAILY"
   }

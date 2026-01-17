@@ -2,11 +2,20 @@ import { PrismaClient } from "@prisma/client";
 import categories from "../data/categories.json";
 import excludeWords from "../data/exclude-words.json";
 
+// Cache global para evitar recalcular en cada llamada
+let categoryKeywordsCache: Record<string, string[]> | null = null;
+
 function getCategoryKeywords(): Record<string, string[]> {
+  if (categoryKeywordsCache) {
+    return categoryKeywordsCache;
+  }
+  
   const categoryKeywords: Record<string, string[]> = {};
   for (const cat of categories) {
     categoryKeywords[cat.slug] = (cat as any).keywords || [];
   }
+  
+  categoryKeywordsCache = categoryKeywords;
   return categoryKeywords;
 }
 
@@ -24,9 +33,9 @@ function normalizeText(text: string): string[] {
 
 function findMatchingCategories(
   description: string,
-  productName: string
+  productName: string,
+  categoryKeywords: Record<string, string[]>
 ): string[] {
-  const categoryKeywords = getCategoryKeywords();
   const words = [...normalizeText(description), ...normalizeText(productName)];
 
   const matchedCategories = new Set<string>();
@@ -58,6 +67,19 @@ export async function seedCategoryRelations(prisma: PrismaClient) {
   let errors = 0;
 
   try {
+    // Cargar keywords una sola vez
+    const categoryKeywords = getCategoryKeywords();
+
+    // Obtener todas las categorías
+    const allCategories = await prisma.category.findMany();
+    if (allCategories.length === 0) {
+      console.error("❌ ERROR CRÍTICO: No hay categorías en la BD. seedCategories debe ejecutarse primero.");
+      throw new Error("No categories found in database");
+    }
+
+    const categoryMap = new Map(allCategories.map((cat) => [cat.slug, cat]));
+    console.log(`✅ Categorías cargadas: ${allCategories.length}`);
+
     // Obtener todos los productos con sus relaciones existentes
     const products = await prisma.product.findMany({
       include: {
@@ -69,9 +91,8 @@ export async function seedCategoryRelations(prisma: PrismaClient) {
       },
     });
 
-    // Obtener todas las categorías
-    const categories = await prisma.category.findMany();
-    const categoryMap = new Map(categories.map((cat) => [cat.slug, cat]));
+    console.log(`✅ Productos a procesar: ${products.length}`);
+    console.log("==============================================\n");
 
     for (const product of products) {
       productsProcessed++;
@@ -85,7 +106,8 @@ export async function seedCategoryRelations(prisma: PrismaClient) {
         // Encontrar categorías coincidentes basado en descripción y nombre
         const matchedCategorySlugs = findMatchingCategories(
           product.description || "",
-          product.name
+          product.name,
+          categoryKeywords
         );
 
         // Filtrar categorías que ya existen
@@ -142,7 +164,7 @@ export async function seedCategoryRelations(prisma: PrismaClient) {
     console.log(`   • Errores: ${errors}`);
     console.log("==============================================");
   } catch (error) {
-    console.error("❌ Error en seedCategoryRelations:", error);
+    console.error("❌ Error general en seeding de relaciones:", error);
     throw error;
   }
 }

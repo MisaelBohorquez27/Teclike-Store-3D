@@ -15,7 +15,7 @@ console.log('DATABASE_URL:', process.env.SUPABASE_DATABASE_URL ? '✅ Configurad
 console.log('DIRECT_URL:', process.env.SUPABASE_DIRECT_URL ? '✅ Configurado' : '❌ No configurado');
 
 const prisma = new PrismaClient({
-  log: ['query', 'error', 'warn', 'info'],
+  log: ['error', 'warn'],
 });
 
 console.log('✅ PrismaClient instanciado');
