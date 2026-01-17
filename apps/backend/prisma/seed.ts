@@ -11,8 +11,8 @@ import { seedReviews } from './seeders/seed-reviews';
 import { seedImageProducts } from './seeders/seed-image-product';
 
 console.log('🔧 Inicializando PrismaClient...');
-console.log('DATABASE_URL:', process.env.SUPABASE_DATABASE_URL ? '✅ Configurado' : '❌ No configurado');
-console.log('DIRECT_URL:', process.env.SUPABASE_DIRECT_URL ? '✅ Configurado' : '❌ No configurado');
+console.log('DATABASE_URL:', process.env.DATABASE_URL ? '✅ Configurado' : '❌ No configurado');
+console.log('DIRECT_URL:', process.env.DIRECT_URL ? '✅ Configurado' : '❌ No configurado');
 
 const prisma = new PrismaClient({
   log: ['error', 'warn'],
