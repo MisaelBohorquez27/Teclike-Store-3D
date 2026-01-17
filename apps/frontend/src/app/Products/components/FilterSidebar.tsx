@@ -79,7 +79,7 @@ export function FilterSidebar() {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -20 }}
-            className="lg:sticky lg:top-24 bg-gradient-to-br from-gray-900/80 to-black/80 backdrop-blur-xl border border-gray-800/50 rounded-2xl p-6 shadow-2xl"
+            className="lg:sticky lg:top-24 bg-gradient-to-br from-gray-900/80 to-black/80 backdrop-blur-xl border border-gray-800/50 rounded-2xl p-6 shadow-2xl max-h-[calc(100vh-120px)] overflow-y-auto lg:max-h-none lg:overflow-visible"
           >
             {/* Header */}
             <div className="mb-8">
