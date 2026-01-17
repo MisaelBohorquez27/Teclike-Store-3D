@@ -1,5 +1,6 @@
 // seeders/seed-core.ts
 import { PrismaClient } from '@prisma/client';
+import paymentMethods from '../data/payment-methods.json';
 
 export async function seedCoreData(prisma: PrismaClient) {
   console.log('🌱 Insertando datos core...');
@@ -9,37 +10,29 @@ export async function seedCoreData(prisma: PrismaClient) {
   let errors = 0;
 
   try {
-    // Métodos de Pago
-    const paymentMethodsList = [
-      'Credit Card',
-      'PayPal',
-      'Bank Transfer',
-      'Cash on Delivery'
-    ];
-
     console.log('\n💳 Insertando métodos de pago...');
     
-    for (const methodName of paymentMethodsList) {
+    for (const methodData of paymentMethods) {
       try {
         const existingMethod = await prisma.paymentMethod.findUnique({
-          where: { method: methodName },
+          where: { method: methodData.method },
         });
 
         if (existingMethod) {
           updated++;
-          console.log(`↩️ Método de pago ya existe: ${methodName}`);
+          console.log(`↩️ Método de pago ya existe: ${methodData.method}`);
           continue;
         }
 
         await prisma.paymentMethod.create({
-          data: { method: methodName }
+          data: { method: methodData.method }
         });
 
         created++;
-        console.log(`✅ Método de pago: ${methodName}`);
+        console.log(`✅ Método de pago: ${methodData.method}`);
       } catch (error) {
         errors++;
-        console.error(`❌ Error creando método de pago "${methodName}":`, error);
+        console.error(`❌ Error creando método de pago "${methodData.method}":`, error);
       }
     }
 

@@ -2,51 +2,61 @@
     {
       "name": "Headsets",
       "slug": "headsets",
-      "description": "Audio headsets for gaming, music, and communication"
+      "description": "Audio headsets with advanced technology including headphones, earbuds and professional audio gear",
+      "keywords": ["headset", "auricular", "headphone", "audífono", "blackshark"]
     },
     {
       "name": "Keyboards",
       "slug": "keyboards",
-      "description": "Mechanical and membrane keyboards for gaming and work"
+      "description": "Mechanical and membrane keyboards optimized for gaming with mechanical switches and RGB lighting",
+      "keywords": ["keyboard", "teclado", "keychron"]
     },
     {
       "name": "Mouse",
       "slug": "mouse",
-      "description": "Gaming and productivity mice with precision sensors"
+      "description": "Gaming mice with precision sensors, DPI adjustment and ergonomic designs from top brands",
+      "keywords": ["mouse", "ratón", "sensor", "dpi", "eyooso", "logitech", "razer"]
     },
     {
       "name": "Mousepads",
       "slug": "mousepads",
-      "description": "Premium mousepads for gaming and productivity"
+      "description": "Premium gaming mousepads with optimized surface for smooth mouse movement and gaming comfort",
+      "keywords": ["mousepad", "pad"]
     },
     {
       "name": "Keycaps",
       "slug": "keycaps",
-      "description": "Custom keycaps for mechanical keyboards"
+      "description": "Custom keycaps for mechanical keyboards with various designs and materials",
+      "keywords": ["keycap", "keycaps"]
     },
     {
       "name": "Monitors",
       "slug": "monitors",
-      "description": "Gaming and professional displays"
+      "description": "Gaming monitors and professional displays with high refresh rates, 4K resolution and ultrawide options",
+      "keywords": ["monitor", "pantalla", "display", "screen", "ips", "led", "144hz", "4k", "ultrawide"]
     },
     {
       "name": "Webcams",
       "slug": "webcams",
-      "description": "High-quality cameras for streaming and video calls"
+      "description": "High-quality webcams optimized for streaming and video conferencing with HD/4K resolution",
+      "keywords": ["webcam", "cámara"]
     },
     {
       "name": "Accessories",
       "slug": "accessories",
-      "description": "Gaming accessories and peripherals"
+      "description": "Gaming accessories including cables, adapters, cleaning kits, stands and hubs",
+      "keywords": ["accesorio", "kit", "limpieza", "stand", "soporte", "cable", "adaptador", "hub"]
     },
     {
       "name": "Gaming Chairs",
       "slug": "gaming-chairs",
-      "description": "Ergonomic chairs for gaming and work"
+      "description": "Ergonomic gaming chairs designed for comfort and support during long gaming sessions",
+      "keywords": ["silla", "chair", "gaming chair"]
     },
     {
       "name": "Consoles",
       "slug": "consoles",
-      "description": "Gaming consoles and accessories"
+      "description": "Gaming consoles including PlayStation, Xbox, Nintendo Switch and their accessories",
+      "keywords": ["console", "playstation", "xbox", "nintendo", "switch", "ps5", "xbox series"]
     }
 ]

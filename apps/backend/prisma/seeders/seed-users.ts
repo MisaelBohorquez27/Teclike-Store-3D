@@ -1,6 +1,7 @@
 // seeders/seed-users.ts
 import { PrismaClient, RoleType } from "@prisma/client";
 import * as bcrypt from "bcrypt";
+import usersData from "../data/users.json";
 
 export async function seedUsers(prisma: PrismaClient) {
   console.log("👥 Insertando usuarios...");
@@ -11,36 +12,7 @@ export async function seedUsers(prisma: PrismaClient) {
   let errors = 0;
 
   try {
-    const hashedPassword = await bcrypt.hash("password123", 10);
-
-    const users = [
-      {
-        role: RoleType.ADMIN,
-        photoURL: "https://example.com/photo1.jpg",
-        username: "Admin",
-        phone: "+1234567890",
-        email: "admin@teclike.com",
-        password: hashedPassword,
-      },
-      {
-        role: RoleType.CUSTOMER,
-        photoURL: "https://example.com/photo2.jpg",
-        username: "JohnDoe",
-        phone: "+1987654321",
-        email: "john@teclike.com",
-        password: hashedPassword,
-      },
-      {
-        role: RoleType.CUSTOMER,
-        photoURL: "https://example.com/photo3.jpg",
-        username: "JaneSmith",
-        phone: "+1122334455",
-        email: "jane@teclike.com",
-        password: hashedPassword,
-      },
-    ];
-
-    for (const userData of users) {
+    for (const userData of usersData) {
       try {
         // Verificar si el usuario ya existe
         const existingUser = await prisma.user.findUnique({
@@ -49,19 +21,22 @@ export async function seedUsers(prisma: PrismaClient) {
 
         if (existingUser) {
           skipped++;
-          console.log(`⏭️  ${userData.username} - Ya existe (${userData.email})`);
+          console.log(`⏭️  ${userData.firstName} - Ya existe (${userData.email})`);
           continue;
         }
+
+        // Hash password
+        const hashedPassword = await bcrypt.hash(userData.password || "password123", 10);
 
         // Crear nuevo usuario
         const newUser = await prisma.user.create({
           data: {
-            role: userData.role,
-            photoURL: userData.photoURL,
-            username: userData.username,
-            phone: userData.phone,
+            role: (userData.role === "Admin" ? RoleType.ADMIN : RoleType.CUSTOMER),
+            photoURL: userData.photoURL || "https://example.com/default-photo.jpg",
+            username: userData.firstName,
+            phone: userData.phone || "",
             email: userData.email,
-            password: userData.password,
+            password: hashedPassword,
           },
         });
 
@@ -81,11 +56,11 @@ export async function seedUsers(prisma: PrismaClient) {
         }
 
         created++;
-        console.log(`✅ ${userData.username} creado exitosamente`);
+        console.log(`✅ ${userData.firstName} creado exitosamente`);
       } catch (userError) {
         errors++;
         const errorMsg = userError instanceof Error ? userError.message : String(userError);
-        console.error(`❌ Error con ${userData.username}: ${errorMsg}`);
+        console.error(`❌ Error con ${userData.firstName}: ${errorMsg}`);
       }
     }
 

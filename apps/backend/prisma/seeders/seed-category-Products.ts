@@ -1,57 +1,14 @@
 import { PrismaClient } from "@prisma/client";
+import categories from "../data/categories.json";
+import excludeWords from "../data/exclude-words.json";
 
-// Diccionario de palabras clave para cada categoría
-const categoryKeywords: Record<string, string[]> = {
-  headsets: ["headset", "auricular", "headphone", "audífono", "blackshark"],
-  keyboards: ["keyboard", "teclado", "keychron"],
-  keycaps: ["keycap", "keycaps"],
-  mouse: ["mouse", "ratón", "sensor", "dpi", "eyooso", "logitech", "razer"],
-  mousepads: ["mousepad", "pad"],
-  monitors: [
-    "monitor",
-    "pantalla",
-    "display",
-    "screen",
-    "ips",
-    "led",
-    "144hz",
-    "4k",
-    "ultrawide",
-  ],
-  webcams: ["webcam", "cámara"],
-  accessories: [
-    "accesorio",
-    "kit",
-    "limpieza",
-    "stand",
-    "soporte",
-    "cable",
-    "adaptador",
-    "hub",
-  ],
-  "gaming-chairs": ["silla", "chair", "gaming chair"],
-  consoles: [
-    "console",
-    "playstation",
-    "xbox",
-    "nintendo",
-    "switch",
-    "ps5",
-    "xbox series",
-  ],
-};
-
-// Palabras a excluir (evitar falsos positivos)
-const excludeWords = [
-  "the",
-  "and",
-  "with",
-  "for",
-  "your",
-  "this",
-  "that",
-  "from",
-];
+function getCategoryKeywords(): Record<string, string[]> {
+  const categoryKeywords: Record<string, string[]> = {};
+  for (const cat of categories) {
+    categoryKeywords[cat.slug] = (cat as any).keywords || [];
+  }
+  return categoryKeywords;
+}
 
 function normalizeText(text: string): string[] {
   if (!text) return [];
@@ -69,6 +26,7 @@ function findMatchingCategories(
   description: string,
   productName: string
 ): string[] {
+  const categoryKeywords = getCategoryKeywords();
   const words = [...normalizeText(description), ...normalizeText(productName)];
 
   const matchedCategories = new Set<string>();
