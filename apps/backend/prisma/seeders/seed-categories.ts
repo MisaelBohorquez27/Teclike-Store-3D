@@ -11,22 +11,37 @@ export async function seedCategories(prisma: PrismaClient) {
 
   for (const categoryData of categories) {
     try {
+      // Extraer solo los campos del schema de Prisma
+      // Ignorar keywords (se usan solo para matching automático)
+      const { slug, name, description } = categoryData;
+      
       const result = await prisma.category.upsert({
-        where: { slug: categoryData.slug },
-        update: {},
-        create: categoryData
+        where: { slug },
+        update: {
+          name,
+          description,
+        },
+        create: {
+          name,
+          slug,
+          description,
+        }
       });
       
-      if (result) {
-        created++;
-        console.log(`✅ Categoría: ${categoryData.name}`);
-      }
+      created++;
+      console.log(`✅ Categoría: ${name}`);
     } catch (error) {
       errors++;
-      console.error(`❌ Error procesando categoría "${categoryData.name}":`, error);
+      const errorMsg = error instanceof Error ? error.message : String(error);
+      console.error(`❌ Error procesando categoría "${categoryData.name}": ${errorMsg}`);
     }
   }
 
-  console.log(`\n📊 Categorías - Creadas: ${created}, Errores: ${errors}`);
+  console.log(`\n📊 Categorías - Creadas/Actualizadas: ${created}, Errores: ${errors}`);
+  
+  if (errors > 0) {
+    throw new Error(`Error creando categorías: ${errors} fallos`);
+  }
+  
   return categories;
 }

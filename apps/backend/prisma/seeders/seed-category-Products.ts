@@ -1,57 +1,23 @@
 import { PrismaClient } from "@prisma/client";
+import categories from "../data/categories.json";
+import excludeWords from "../data/exclude-words.json";
 
-// Diccionario de palabras clave para cada categoría
-const categoryKeywords: Record<string, string[]> = {
-  headsets: ["headset", "auricular", "headphone", "audífono", "blackshark"],
-  keyboards: ["keyboard", "teclado", "keychron"],
-  keycaps: ["keycap", "keycaps"],
-  mouse: ["mouse", "ratón", "sensor", "dpi", "eyooso", "logitech", "razer"],
-  mousepads: ["mousepad", "pad"],
-  monitors: [
-    "monitor",
-    "pantalla",
-    "display",
-    "screen",
-    "ips",
-    "led",
-    "144hz",
-    "4k",
-    "ultrawide",
-  ],
-  webcams: ["webcam", "cámara"],
-  accessories: [
-    "accesorio",
-    "kit",
-    "limpieza",
-    "stand",
-    "soporte",
-    "cable",
-    "adaptador",
-    "hub",
-  ],
-  "gaming-chairs": ["silla", "chair", "gaming chair"],
-  consoles: [
-    "console",
-    "playstation",
-    "xbox",
-    "nintendo",
-    "switch",
-    "ps5",
-    "xbox series",
-  ],
-};
+// Cache global para evitar recalcular en cada llamada
+let categoryKeywordsCache: Record<string, string[]> | null = null;
 
-// Palabras a excluir (evitar falsos positivos)
-const excludeWords = [
-  "the",
-  "and",
-  "with",
-  "for",
-  "your",
-  "this",
-  "that",
-  "from",
-];
+function getCategoryKeywords(): Record<string, string[]> {
+  if (categoryKeywordsCache) {
+    return categoryKeywordsCache;
+  }
+  
+  const categoryKeywords: Record<string, string[]> = {};
+  for (const cat of categories) {
+    categoryKeywords[cat.slug] = (cat as any).keywords || [];
+  }
+  
+  categoryKeywordsCache = categoryKeywords;
+  return categoryKeywords;
+}
 
 function normalizeText(text: string): string[] {
   if (!text) return [];
@@ -67,7 +33,8 @@ function normalizeText(text: string): string[] {
 
 function findMatchingCategories(
   description: string,
-  productName: string
+  productName: string,
+  categoryKeywords: Record<string, string[]>
 ): string[] {
   const words = [...normalizeText(description), ...normalizeText(productName)];
 
@@ -100,6 +67,19 @@ export async function seedCategoryRelations(prisma: PrismaClient) {
   let errors = 0;
 
   try {
+    // Cargar keywords una sola vez
+    const categoryKeywords = getCategoryKeywords();
+
+    // Obtener todas las categorías
+    const allCategories = await prisma.category.findMany();
+    if (allCategories.length === 0) {
+      console.error("❌ ERROR CRÍTICO: No hay categorías en la BD. seedCategories debe ejecutarse primero.");
+      throw new Error("No categories found in database");
+    }
+
+    const categoryMap = new Map(allCategories.map((cat) => [cat.slug, cat]));
+    console.log(`✅ Categorías cargadas: ${allCategories.length}`);
+
     // Obtener todos los productos con sus relaciones existentes
     const products = await prisma.product.findMany({
       include: {
@@ -111,9 +91,8 @@ export async function seedCategoryRelations(prisma: PrismaClient) {
       },
     });
 
-    // Obtener todas las categorías
-    const categories = await prisma.category.findMany();
-    const categoryMap = new Map(categories.map((cat) => [cat.slug, cat]));
+    console.log(`✅ Productos a procesar: ${products.length}`);
+    console.log("==============================================\n");
 
     for (const product of products) {
       productsProcessed++;
@@ -127,7 +106,8 @@ export async function seedCategoryRelations(prisma: PrismaClient) {
         // Encontrar categorías coincidentes basado en descripción y nombre
         const matchedCategorySlugs = findMatchingCategories(
           product.description || "",
-          product.name
+          product.name,
+          categoryKeywords
         );
 
         // Filtrar categorías que ya existen
@@ -184,7 +164,7 @@ export async function seedCategoryRelations(prisma: PrismaClient) {
     console.log(`   • Errores: ${errors}`);
     console.log("==============================================");
   } catch (error) {
-    console.error("❌ Error en seedCategoryRelations:", error);
+    console.error("❌ Error general en seeding de relaciones:", error);
     throw error;
   }
 }

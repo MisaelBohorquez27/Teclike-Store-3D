@@ -2,8 +2,6 @@
 import { OrderStatus, PrismaClient } from "@prisma/client";
 import ordersData from "../data/orders.json";
 
-const prisma = new PrismaClient();
-
 interface OrderProduct {
   productSlug: string;
   quantity: number;
@@ -137,11 +135,3 @@ export async function seedOrders(prisma: PrismaClient) {
   }
 }
 
-seedOrders(prisma)
-  .catch((e) => {
-    console.error("❌ Error seeding orders:", e);
-    process.exit(1);
-  })
-  .finally(async () => {
-    await prisma.$disconnect();
-  });

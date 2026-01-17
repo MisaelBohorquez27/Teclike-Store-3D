@@ -1,0 +1,14 @@
+[
+  {
+    "method": "Credit Card"
+  },
+  {
+    "method": "PayPal"
+  },
+  {
+    "method": "Bank Transfer"
+  },
+  {
+    "method": "Cash on Delivery"
+  }
+]
