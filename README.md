@@ -5,16 +5,18 @@ A store Teclike with 3D modeling that change and innovate the shoping industry e
 ![Next.js](https://img.shields.io/badge/Next.js-14.0-black?style=for-the-badge&logo=next.js)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=for-the-badge&logo=typescript)
 ![Prisma](https://img.shields.io/badge/Prisma-5.0-2D3748?style=for-the-badge&logo=prisma)
+![Node.js](https://img.shields.io/badge/Node.js-18-green?style=for-the-badge&logo=node.js)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3-38BDF8?style=for-the-badge&logo=tailwindcss)
 
 Una plataforma moderna de e-commerce especializada en la venta de modelos 3D de alta calidad para diseñadores, arquitectos y creadores digitales.
 
 ## Características Principales
 
-- **Catálogo de Productos 3D** - Modelos organizados por categorías
-- **Sistema de Reseñas** - Valoraciones y comentarios de usuarios
-- **Carrito de Compras** - Gestión completa de pedidos
+- **Carrito de Compras** - Gestión de pedidos
 - **Diseño Responsive** - Optimizado para todos los dispositivos
-- **Panel de Administración** - Gestión de productos y órdenes
+- **Diseño Moderno** - Adaptado al concepto de la tienda.
+- **Paginas de Productos, Ofertas y Help Contact** - Vista de Productos con Ofertas y sistema de ayuda
+- **Sistema de Reseñas** - Productos con reseñas y comentarios de usuarios
 
 ## Stack Tecnológico
 
@@ -107,7 +109,7 @@ pnpm --filter db prisma migrate reset
 ### Habilidades Técnicas:
 - **Frontend**: Next.js, React, TypeScript, TailwindCSS
 - **Backend**: Node.js, Express, Prisma, PostgreSQL
-- **DevOps**: Docker, Vercel, Railway, GitHub Actions
+- **DevOps**: Docker, Vercel, GitHub Actions, Render, Supabase
 - **Herramientas**: Git, Figma, VS Code, Postman
 
 ### ¿Preguntas o colaboraciones?
@@ -116,4 +118,6 @@ pnpm --filter db prisma migrate reset
 - 💼 Oportunidades laborales
 - ❓ Preguntas técnicas sobre el proyecto
 - 🐛 Reportar bugs o sugerir mejoras
+
+Licencia: MIT © 2026 Misael Bohorquez
 
