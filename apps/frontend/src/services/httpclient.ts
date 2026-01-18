@@ -2,7 +2,7 @@ import axios from "axios";
 import { AuthService } from "./auth.service";
 
 const httpClient = axios.create({
-  baseURL: process.env.API_BASE_URL || "http://localhost:5000/api",
+  baseURL: process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5000/api",
   headers: {
     "Content-Type": "application/json",
   },

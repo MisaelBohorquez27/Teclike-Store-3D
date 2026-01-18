@@ -23,7 +23,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 //Configurando Middleware
-const allowedOrigins = (process.env.ALLOWED_ORIGINS || "http://localhost:3000").split(",");
+const allowedOrigins = (process.env.ALLOWED_ORIGINS || "http://localhost:3000,https://teclike-store-3-d-frontend.vercel.app").split(",");
 app.use(
   cors({
     origin: allowedOrigins,
