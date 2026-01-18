@@ -1,0 +1,18 @@
+[
+  {
+    "question": "¿Los productos tienen garantía?",
+    "answer": "Todos nuestros productos cuentan con garantía limitada. Si encuentras algún defecto o problema, contáctanos para asistencia."
+  },
+  {
+    "question": "¿En qué tiempo llegan los productos?",
+    "answer": "El tiempo de entrega es inmediata pero varía según la ubicación, generalmente es de 2 a 3 días hábiles."
+  },
+  {
+    "question": "¿Las compras vienen con facturación?",
+    "answer": "Si, todas las compras incluyen factura electrónica que se envía a tu correo después de la compra."
+  },
+  {
+    "question": "¿Qué métodos de pago aceptan?",
+    "answer": "Aceptamos tarjetas de crédito/débito, PayPal y transferencias bancarias. Todos los pagos son procesados de forma segura."
+  }
+]
