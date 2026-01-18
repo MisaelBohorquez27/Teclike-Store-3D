@@ -96,7 +96,7 @@ export function DealCard({
     >
       {/* Badge de descuento */}
       <div className="absolute -top-2 -right-2 z-20">
-        <div className="px-3 py-1.5 rounded-full bg-gradient-to-br from-cyan-600 to-cyan-600 text-white text-sm font-bold shadow-lg transform rotate-3">
+        <div className="px-3 py-1.5 rounded-full bg-linear-to-br from-cyan-600 to-cyan-600 text-white text-sm font-bold shadow-lg transform rotate-3">
           {discountPercentage}
         </div>
       </div>
@@ -104,7 +104,7 @@ export function DealCard({
       {/* Badge de flash deal */}
       {offer.isFlashDeal && (
         <div className="absolute -top-2 -left-2 z-20">
-          <div className="flex items-center gap-1 px-2 py-1 rounded-full bg-gradient-to-r from-red-500 to-orange-500 text-white text-xs font-bold shadow-lg">
+          <div className="flex items-center gap-1 px-2 py-1 rounded-full bg-linear-to-r from-red-500 to-orange-500 text-white text-xs font-bold shadow-lg">
             <FiZap className="w-3 h-3 animate-pulse" />
             <span>FLASH</span>
           </div>
@@ -112,7 +112,7 @@ export function DealCard({
       )}
 
       {/* Card principal */}
-      <div className="bg-gradient-to-br from-gray-900/90 to-gray-800/90 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-4 hover:border-cyan-500/50 transition-all duration-300 h-full flex flex-col overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-cyan-500/10">
+      <div className="bg-linear-to-br from-gray-900/90 to-gray-800/90 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-4 hover:border-cyan-500/50 transition-all duration-300 h-full flex flex-col overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-cyan-500/10">
         {/* Contenedor de imagen */}
         <div className="relative mb-4 rounded-xl overflow-hidden">
           {/* Imagen principal */}
@@ -158,7 +158,7 @@ export function DealCard({
               </button>
               <button
                 onClick={handleAddToCart}
-                className="flex-1 flex items-center justify-center gap-2 py-2 px-3 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400 text-white text-sm rounded-lg transition-all cursor-pointer"
+                className="flex-1 flex items-center justify-center gap-2 py-2 px-3 bg-linear-to-r from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400 text-white text-sm rounded-lg transition-all cursor-pointer"
               >
                 <FiShoppingCart className="w-4 h-4" />
                 <span>Comprar</span>
@@ -172,7 +172,7 @@ export function DealCard({
           {/* Marca (opcional) */}
           {showBrand && offer.brand && (
             <div className="mb-2">
-              <span className="inline-block px-3 py-1 rounded-full bg-gradient-to-r from-blue-100 to-cyan-100 dark:from-cyan-500/10 dark:to-cyan-500/10 text-cyan-600 dark:text-cyan-400 text-xs font-medium">
+              <span className="inline-block px-3 py-1 rounded-full bg-linear-to-r from-blue-100 to-cyan-100 dark:from-cyan-500/10 dark:to-cyan-500/10 text-cyan-600 dark:text-cyan-400 text-xs font-medium">
                 {offer.brand}
               </span>
             </div>
@@ -201,7 +201,7 @@ export function DealCard({
 
           {/* Tiempo restante detallado */}
           {showTimer && offer.isFlashDeal && offer.timeLeft && (
-            <div className="my-3 p-3 rounded-lg bg-gradient-to-r from-orange-500/10 to-red-500/10 border border-orange-500/20">
+            <div className="my-3 p-3 rounded-lg bg-linear-to-r from-orange-500/10 to-red-500/10 border border-orange-500/20">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <FiClock className="w-3 h-3 text-orange-400 animate-pulse" />
@@ -229,7 +229,7 @@ export function DealCard({
 
               {/* Badge de ahorro */}
               {offer.savings && offer.savings !== "$0.00" && (
-                <span className="px-2 py-1 rounded-md bg-gradient-to-r from-green-100 to-emerald-100 dark:from-green-500/10 dark:to-emerald-500/10 text-green-600 dark:text-green-400 text-xs font-bold">
+                <span className="px-2 py-1 rounded-md bg-linear-to-r from-green-100 to-emerald-100 dark:from-green-500/10 dark:to-emerald-500/10 text-green-600 dark:text-green-400 text-xs font-bold">
                   Ahorras {offer.savings}
                 </span>
               )}
@@ -264,7 +264,7 @@ export function DealCard({
             className={`
               w-full hover:border-transparent transition-all duration-200
               hover:scale-105 active:scale-95 group/btn
-              bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500
+              bg-linear-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500
               text-white font-medium border-0
               ${config.button}
             `}

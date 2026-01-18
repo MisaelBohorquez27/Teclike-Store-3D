@@ -53,7 +53,7 @@ export function Subscription() {
               aria-label="Email for newsletter subscription"
             />
             <div
-              className="absolute inset-0 rounded-xl bg-gradient-to-r from-cyan-500/10 to-blue-500/10 
+              className="absolute inset-0 rounded-xl bg-linear-to-r from-cyan-500/10 to-blue-500/10 
                             opacity-0 hover:opacity-100 transition-opacity pointer-events-none"
             ></div>
           </div>

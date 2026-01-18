@@ -31,14 +31,14 @@ export function TrendingProducts() {
     >
       {/* Efectos de fondo */}
       <div className="absolute inset-0">
-        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-cyan-500/20 to-transparent" />
-        <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-purple-500/20 to-transparent" />
+        <div className="absolute top-0 left-0 w-full h-px bg-linear-to-r from-transparent via-cyan-500/20 to-transparent" />
+        <div className="absolute bottom-0 left-0 w-full h-px bg-linear-to-r from-transparent via-purple-500/20 to-transparent" />
 
         {/* Efectos de partículas */}
         {[...Array(3)].map((_, i) => (
           <div
             key={i}
-            className="absolute w-64 h-64 rounded-full bg-gradient-to-r from-cyan-500/5 to-blue-500/5 blur-3xl"
+            className="absolute w-64 h-64 rounded-full bg-linear-to-r from-cyan-500/5 to-blue-500/5 blur-3xl"
             style={{
               top: `${20 + i * 30}%`,
               left: `${i * 40}%`,
@@ -56,13 +56,13 @@ export function TrendingProducts() {
           className="text-center mb-12 md:mb-16"
         >
           {/*  
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-cyan-500/10 to-blue-500/10 border border-cyan-500/20 mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-linear-to-r from-cyan-500/10 to-blue-500/10 border border-cyan-500/20 mb-6">
             <FiTrendingUp className="w-4 h-4 text-cyan-400" />
             <span className="text-cyan-300 text-sm font-medium">TENDENCIA</span>
           </div>*/}
 
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-            <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-cyan-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
               Destacados&nbsp;
             </span>
             <span className="text-white">del Momento</span>
@@ -138,7 +138,7 @@ export function TrendingProducts() {
           className="text-center mt-16"
         >
           <Link href="/Products">
-            <Button className="group px-8 py-4 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-semibold rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-cyan-500/20 inline-flex items-center gap-3">
+            <Button className="group px-8 py-4 bg-linear-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-semibold rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-cyan-500/20 inline-flex items-center gap-3">
               <span>Ver Todos los Productos</span>
             </Button>
           </Link>

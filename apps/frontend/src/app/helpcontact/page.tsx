@@ -5,14 +5,14 @@ import { FiMail, FiPhone, FiClock } from "react-icons/fi";
 
 export default function HelpContactPage() {
   return (
-    <main className="min-h-screen bg-gradient-to-b from-gray-950 via-black to-gray-950">
+    <main className="min-h-screen bg-linear-to-b from-gray-950 via-black to-gray-950">
       {/* Hero Banner */}
       <section className="pt-20 sm:pt-24 md:pt-28 pb-12 sm:pb-6 md:pb-10 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-cyan-800/10 to-transparent pointer-events-none" />
+        <div className="absolute inset-0 bg-linear-to-b from-cyan-800/10 to-transparent pointer-events-none" />
         <div className="container mx-auto px-4 sm:px-6 text-center relative z-10">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-6">
             <span className="text-white">Ayuda&nbsp;y&nbsp;</span>
-            <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-cyan-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
               Contacto
             </span>
           </h2>
@@ -37,7 +37,7 @@ export default function HelpContactPage() {
       </section>
 
       {/* Sección de Preguntas Frecuentes */}
-      <section className="bg-gradient-to-br from-gray-900/60 to-black/60 py-12 sm:py-16 md:py-20 border-y border-gray-800/50">
+      <section className="bg-linear-to-br from-gray-900/60 to-black/60 py-12 sm:py-16 md:py-20 border-y border-gray-800/50">
         <div className="container mx-auto px-4 sm:px-6">
           <div className="text-center mb-12 sm:mb-16">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
@@ -68,7 +68,7 @@ export default function HelpContactPage() {
                 <div className="space-y-6">
                   {/* Email */}
                   <div className="flex gap-4 items-start">
-                    <div className="p-3 rounded-lg bg-blue-600/20 text-blue-400 flex-shrink-0 mt-1">
+                    <div className="p-3 rounded-lg bg-blue-600/20 text-blue-400 shrink-0 mt-1">
                       <FiMail className="w-5 h-5" />
                     </div>
                     <div>
@@ -81,7 +81,7 @@ export default function HelpContactPage() {
 
                   {/* Teléfono */}
                   <div className="flex gap-4 items-start">
-                    <div className="p-3 rounded-lg bg-purple-600/20 text-purple-400 flex-shrink-0 mt-1">
+                    <div className="p-3 rounded-lg bg-purple-600/20 text-purple-400 shrink-0 mt-1">
                       <FiPhone className="w-5 h-5" />
                     </div>
                     <div>
@@ -94,7 +94,7 @@ export default function HelpContactPage() {
 
                   {/* Horario */}
                   <div className="flex gap-4 items-start">
-                    <div className="p-3 rounded-lg bg-emerald-600/20 text-emerald-400 flex-shrink-0 mt-1">
+                    <div className="p-3 rounded-lg bg-emerald-600/20 text-emerald-400 shrink-0 mt-1">
                       <FiClock className="w-5 h-5" />
                     </div>
                     <div>
@@ -109,7 +109,7 @@ export default function HelpContactPage() {
               </div>
 
               {/* Formulario de contacto */}
-              <div className="bg-gradient-to-br from-gray-900/80 to-black/80 rounded-xl p-6 sm:p-8 border border-gray-800/50 h-fit">
+              <div className="bg-linear-to-br from-gray-900/80 to-black/80 rounded-xl p-6 sm:p-8 border border-gray-800/50 h-fit">
                 <h2 className="text-2xl sm:text-3xl font-bold text-white mb-6">
                   Envíanos un Mensaje
                 </h2>

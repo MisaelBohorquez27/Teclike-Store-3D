@@ -26,7 +26,7 @@ const DailyOffersHeader = () => (
   >
     {/* Título */}
     <h1 className="text-5xl md:text-6xl lg:text-7xl font-black mb-4 lg:mb-6">
-      <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
+      <span className="bg-linear-to-r from-cyan-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
         {CONFIG.content.title.split(" ")[0]}
       </span>
       <br />
@@ -44,14 +44,14 @@ const DailyOffersHeader = () => (
     <Link href={CONFIG.content.buttonHref}>
       <Button
         size="m"
-        className="group relative overflow-hidden bg-gradient-to-r from-cyan-600 via-cyan-600 to-blue-600 hover:from-cyan-500 hover:via-cyan-400 hover:to-blue-400 text-gray-100 hover:text-gray-100 font-bold px-8 py-4 rounded-xl hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-cyan-500/25"
+        className="group relative overflow-hidden bg-linear-to-r from-cyan-600 via-cyan-600 to-blue-600 hover:from-cyan-500 hover:via-cyan-400 hover:to-blue-400 text-gray-100 hover:text-gray-100 font-bold px-8 py-4 rounded-xl hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-cyan-500/25"
       >
         <span className="flex items-center gap-3 relative z-10">
           <FiZap className="w-5 h-5" />
           {CONFIG.content.buttonText}
           <FiArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
         </span>
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 transform translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+        <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/20 to-transparent -skew-x-12 transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
       </Button>
     </Link>
 
@@ -74,7 +74,7 @@ const DailyOffersHeader = () => (
 const OffersSwiper = ({ offers }: { offers: ProductWithOffer[] }) => (
   <div className="relative">
     {/* Efecto de borde */}
-    <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-400/10 via-blue-400/10 to-cyan-400/10 rounded-3xl blur-sm" />
+    <div className="absolute -inset-0.5 bg-linear-to-r from-blue-400/10 via-blue-400/10 to-cyan-400/10 rounded-3xl blur-sm" />
 
     <CustomSwiper
       items={offers}
@@ -120,8 +120,8 @@ const SwiperContent = ({ offers, loading }: DailyOffersContentProps) => {
         animate={{ opacity: 1, scale: 1 }}
         className="text-center py-12"
       >
-        <div className="inline-flex flex-col items-center gap-4 p-8 rounded-2xl bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm border border-gray-800/50">
-          <div className="w-16 h-16 rounded-full bg-gradient-to-r from-gray-800 to-gray-900 flex items-center justify-center">
+        <div className="inline-flex flex-col items-center gap-4 p-8 rounded-2xl bg-linear-to-br from-gray-900/50 to-black/50 backdrop-blur-sm border border-gray-800/50">
+          <div className="w-16 h-16 rounded-full bg-linear-to-r from-gray-800 to-gray-900 flex items-center justify-center">
             <FiFilter className="w-8 h-8 text-gray-600" />
           </div>
           <div>
@@ -164,7 +164,7 @@ export const DailyOffersContent = ({
           className="absolute inset-0 
   bg-[linear-gradient(rgba(0,255,255,0.05)_1px,transparent_1px),
      linear-gradient(90deg,rgba(0,255,255,0.05)_1px,transparent_1px)] 
-  bg-[size:64px_64px]"
+  bg-size-[64px_64px]"
         />
       </div>
 

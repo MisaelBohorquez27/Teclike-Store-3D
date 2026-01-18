@@ -19,7 +19,7 @@ export default function CartIcon() {
           <span 
             className="
               absolute -top-0.5 -right-1
-              bg-gradient-to-r from-cyan-500 to-blue-500 
+              bg-linear-to-r from-cyan-500 to-blue-500 
               text-white text-xs font-bold 
               min-w-[20px] h-5 px-1
               flex items-center justify-center 

@@ -10,7 +10,7 @@ import { useState, useEffect, useRef } from "react";
 
 // Skeleton EXACTO mismo tamaño que ProductCard
 const ProductSkeleton = () => (
-  <div className="h-[420px] bg-gradient-to-br from-gray-900/60 to-black/60 backdrop-blur-sm border border-gray-800/50 rounded-2xl p-4 animate-pulse">
+  <div className="h-105 bg-linear-to-br from-gray-900/60 to-black/60 backdrop-blur-sm border border-gray-800/50 rounded-2xl p-4 animate-pulse">
     <div className="h-48 mb-4 rounded-xl bg-gray-800/50" />
     <div className="space-y-3">
       <div className="h-4 bg-gray-800/50 rounded w-1/4" />

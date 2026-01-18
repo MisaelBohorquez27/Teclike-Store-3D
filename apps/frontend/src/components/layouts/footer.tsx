@@ -82,15 +82,15 @@ export function Footer({
   };
 
   return (
-    <footer className="relative section-bg text-neutral bg-gradient-to-br overflow-hidden">
+    <footer className="relative section-bg text-neutral bg-linear-to-br overflow-hidden">
       {/* Efectos de fondo */}
       <div className="absolute inset-0">
         {/* Gradiente base */}
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-950/80 via-black/50 to-gray-950/80" />
+        <div className="absolute inset-0 bg-linear-to-br from-gray-950/80 via-black/50 to-gray-950/80" />
 
         {/* Patrón de grid sutil */}
         <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0 bg-[linear-gradient(rgba(6,182,212,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(6,182,212,0.05)_1px,transparent_1px)] bg-[size:64px_64px]" />
+          <div className="absolute inset-0 bg-[linear-gradient(rgba(6,182,212,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(6,182,212,0.05)_1px,transparent_1px)] bg-size-[64px_64px]" />
         </div>
 
         {/* Efectos de luz */}
@@ -98,11 +98,11 @@ export function Footer({
         <div className="absolute -bottom-64 -right-64 w-128 h-128 bg-blue-500/5 rounded-full blur-3xl" />
 
         {/* Línea decorativa superior */}
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-500/30 to-transparent" />
+        <div className="absolute top-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-gray-500/30 to-transparent" />
       </div>
 
       {/* Patrón de grid sutil */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:64px_64px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,black,transparent)]"></div>
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-size-[64px_64px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,black,transparent)]"></div>
 
       <div className="relative z-10 container mx-auto px-4 pt-20 pb-8">
         {/* Main Content Grid */}
@@ -111,7 +111,7 @@ export function Footer({
           <div className="xl:col-span-1">
             <div className="mb-8">
               {/* Logo/Title con efecto neón */}
-              <h3 className="text-3xl font-bold mb-4 drop-shadow-lg bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
+              <h3 className="text-3xl font-bold mb-4 drop-shadow-lg bg-linear-to-r from-cyan-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
                 {footerData.company.name}
                 <span className="text-4xl">.</span>
               </h3>
@@ -226,7 +226,7 @@ export function Footer({
 
           {/* Newsletter con efecto glassmorphism */}
           <div className="lg:col-span-2 xl:col-span-1">
-            <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/20 shadow-2xl">
+            <div className="bg-linear-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/20 shadow-2xl">
               <h3 className="text-lg font-semibold mb-4 text-gradient-primary">
                 Mantente Actualizado
               </h3>
@@ -293,7 +293,7 @@ export function Footer({
       </div>
 
       {/* Efecto de partículas en el borde inferior */}
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-500 to-transparent"></div>
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-cyan-500 to-transparent"></div>
     </footer>
   );
 }

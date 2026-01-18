@@ -50,8 +50,8 @@ export function HeroBanner() {
       {/* Efectos de fondo modernos */}
       <div className="absolute inset-0 hero-bg">
         {/* Grid pattern sutil */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(99,102,241,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(99,102,241,0.03)_1px,transparent_1px)] bg-[size:64px_64px] [mask-image:radial-gradient(ellipse_80%_80%_at_50%_50%,black,transparent)]" />
-
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(99,102,241,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(99,102,241,0.03)_1px,transparent_1px)] bg-size-[64px_64px] mask-[radial-gradient(ellipse_80%_80%_at_50%_50%,black,transparent)]" />
+        
         {/* Gradientes animados */}
         <motion.div
           className="absolute -top-40 -right-32 w-80 h-80 primary-bg rounded-full mix-blend-multiply filter blur-3xl opacity-20"
@@ -83,7 +83,7 @@ export function HeroBanner() {
           {[...Array(3)].map((_, i) => (
             <motion.div
               key={i}
-              className="absolute h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent"
+              className="absolute h-px bg-linear-to-r from-transparent via-primary/30 to-transparent"
               style={{
                 top: `${20 + i * 30}%`,
                 left: "10%",
@@ -131,7 +131,7 @@ export function HeroBanner() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3 }}
                 >
-                  <span className="bg-gradient-to-r from-primary via-primary-hover text-primary bg-clip-text text-transparent">
+                  <span className="bg-linear-to-r from-primary via-primary-hover text-primary bg-clip-text text-transparent">
                     {HERO_CONFIG.title.split(" ")[0]}
                   </span>
                   <br />
@@ -167,7 +167,7 @@ export function HeroBanner() {
                     <Button
                       variant="primary"
                       size="xl"
-                      className="group hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl bg-gradient-to-r from-primary to-primary-hover"
+                      className="group hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl bg-linear-to-r from-primary to-primary-hover"
                     >
                       <span className="flex items-center gap-3">
                         {HERO_CONFIG.buttonText}
@@ -201,7 +201,7 @@ export function HeroBanner() {
                     {[...Array(4)].map((_, i) => (
                       <div
                         key={i}
-                        className="w-8 h-8 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 border-2 border-white dark:border-neutral-4"
+                        className="w-8 h-8 rounded-full bg-linear-to-r from-blue-500 to-purple-500 border-2 border-white dark:border-neutral-4"
                       />
                     ))}
                   </div>
@@ -222,7 +222,7 @@ export function HeroBanner() {
                 <div className="relative">
                   {/* Efecto de backdrop */}
                   <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-primary/20 to-cyan-500/20 rounded-3xl blur-3xl -z-10"
+                    className="absolute inset-0 bg-linear-to-r from-primary/20 to-cyan-500/20 rounded-3xl blur-3xl -z-10"
                     animate={{
                       opacity: [0.3, 0.5, 0.3],
                       scale: [1, 1.05, 1],
@@ -257,7 +257,7 @@ export function HeroBanner() {
                     />
 
                     {/* Overlay de gradiente */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
+                    <div className="absolute inset-0 bg-linear-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
                   </motion.div>
 
                   {/* Elementos flotantes decorativos */}

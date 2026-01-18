@@ -117,17 +117,17 @@ export function InteractiveVideo() {
         />
 
         {/* Overlay sutil para mejor contraste */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/20" />
+        <div className="absolute inset-0 bg-linear-to-b from-black/20 via-transparent to-black/20" />
 
         {/* Efecto de borde luminoso */}
         <div className="absolute inset-0 border-[12px] border-transparent">
-          <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-500/10 via-blue-500/10 to-purple-500/10 blur-sm" />
+          <div className="absolute -inset-0.5 bg-linear-to-r from-cyan-500/10 via-blue-500/10 to-purple-500/10 blur-sm" />
         </div>
 
         {/* Barra de progreso sutil 
         <div className="absolute bottom-0 left-0 right-0 h-1 bg-gray-800/50">
           <motion.div
-            className="h-full bg-gradient-to-r from-cyan-500 to-blue-500"
+            className="h-full bg-linear-to-r from-cyan-500 to-blue-500"
             style={{ width: `${progress}%` }}
             transition={{ duration: 0.1 }}
           />
@@ -177,7 +177,7 @@ export function InteractiveVideo() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 5 }}
           >
-            <span className="bg-gradient-to-r from-blue-900 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-blue-900 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
               INNOVACIÓN
             </span>
           </motion.h1>

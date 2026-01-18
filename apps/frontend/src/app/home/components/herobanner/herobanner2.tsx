@@ -70,7 +70,7 @@ export function HeroBanner2() {
         {[...Array(50)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-[2px] h-[2px] bg-blue-400 rounded-full"
+            className="absolute w-0.5 h-0.5 bg-blue-400 rounded-full"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
@@ -89,84 +89,6 @@ export function HeroBanner2() {
           />
         ))}
       </div>
-
-      {/* Líneas de conexión futuristas 
-        <div className="absolute inset-0">
-          {[...Array(8)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute h-px bg-gradient-to-r from-transparent via-blue-500/40 to-transparent"
-              style={{
-                top: `${15 + i * 12}%`,
-                left: "5%",
-                right: "5%",
-              }}
-              animate={{
-                opacity: [0, 0.6, 0],
-                scaleX: [0, 1, 0],
-              }}
-              transition={{
-                duration: 4,
-                repeat: Infinity,
-                delay: i * 0.8,
-                ease: "easeInOut",
-              }}
-            />
-          ))}
-        </div>*/}
-
-      {/* Grid tecnológico animado 
-        <motion.div
-          className="absolute inset-0 bg-[linear-gradient(rgba(59,130,246,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.05)_1px,transparent_1px)] bg-[size:64px_64px]"
-          animate={{
-            backgroundPosition: ["0% 0%", "100% 100%"],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-        />
-
-        {/* Orbital rings 
-        <motion.div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 border border-blue-500/20 rounded-full"
-          animate={{
-            rotate: 360,
-            scale: [1, 1.2, 1],
-          }}
-          transition={{
-            rotate: {
-              duration: 20,
-              repeat: Infinity,
-              ease: "linear",
-            },
-            scale: {
-              duration: 8,
-              repeat: Infinity,
-              ease: "easeInOut",
-            },
-          }}
-        />
-        <motion.div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 border border-purple-500/20 rounded-full"
-          animate={{
-            rotate: -360,
-            scale: [1.2, 1, 1.2],
-          }}
-          transition={{
-            rotate: {
-              duration: 15,
-              repeat: Infinity,
-              ease: "linear",
-            },
-            scale: {
-              duration: 6,
-              repeat: Infinity,
-              ease: "easeInOut",
-            },
-          }}
-        /> abajo de esto iria el div para la imagen*/}
 
       {/* Contenido principal */}
       <div className="relative z-10 min-h-screen flex items-start top-30 ">
@@ -201,7 +123,7 @@ export function HeroBanner2() {
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-black leading-tight">
                   <span className="text-white">Encuentra los</span>
                   <br />
-                  <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+                  <span className="bg-linear-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
                     Mejores Productos
                   </span>
                 </h1>
@@ -242,13 +164,13 @@ export function HeroBanner2() {
                   <Button
                     variant="primary"
                     size="xl"
-                    className="group relative overflow-hidden bg-gradient-to-r from-blue-950 to-blue-900 hover:from-blue-900 hover:to-blue-800 border-0 text-white font-bold py-4 px-8 rounded-2xl hover:scale-105 transition-all duration-300 shadow-2xl hover:shadow-blue-500/25"
+                    className="group relative overflow-hidden bg-linear-to-r from-blue-950 to-blue-900 hover:from-blue-900 hover:to-blue-800 border-0 text-white font-bold py-4 px-8 rounded-2xl hover:scale-105 transition-all duration-300 shadow-2xl hover:shadow-blue-500/25"
                   >
                     <span className="flex items-center gap-3 relative z-10">
                       {HERO_CONFIG.buttonText}
                       <FiArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                     </span>
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 transform translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+                    <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/20 to-transparent -skew-x-12 transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
                   </Button>
                 </Link>
               </motion.div>
@@ -265,7 +187,7 @@ export function HeroBanner2() {
                     {[...Array(4)].map((_, i) => (
                       <motion.div
                         key={i}
-                        className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 border-2 border-gray-900 shadow-lg"
+                        className="w-10 h-10 rounded-full bg-linear-to-r from-blue-500 to-purple-500 border-2 border-gray-900 shadow-lg"
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: 1.1 + i * 0.1 }}
@@ -282,7 +204,7 @@ export function HeroBanner2() {
             </motion.div>
 
             {/* Panel de visualización tecnológica */}
-            <motion.div className="relative w-full h-[100px] md:h-[200px] lg:h-[300px]" {...animationProps.image}>
+            <motion.div className="relative w-full h-25 md:h-50 lg:h-75" {...animationProps.image}>
               {/* Terminal flotante */}
               <motion.div
                 className="relative  w-full h-full bg-gray-900/80 backdrop-blur-md rounded-2xl border border-white/10 p-6 shadow-2xl"
@@ -343,7 +265,7 @@ export function HeroBanner2() {
                   sizes="100vw"
                 />
                 {/* Overlay degradado para mejor legibilidad */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-linear-to-t from-black/50 via-transparent to-transparent" />
                 {/* Indicadores de actividad */}
                 <div className="absolute -top-3 -right-3 bg-blue-500 rounded-full p-2 shadow-lg">
                   <FiServer className="w-4 h-4 text-white" />

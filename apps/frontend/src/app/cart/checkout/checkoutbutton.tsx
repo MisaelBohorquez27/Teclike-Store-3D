@@ -87,7 +87,7 @@ export function CheckoutButton({
     <div className="flex flex-col gap-2">
       <button
         onClick={handleCheckout}
-        className={`bg-gradient-to-r from-blue-600 to-cyan-600 text-white py-3 px-8 rounded-lg font-semibold hover:from-blue-700 hover:to-cyan-700 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed active:scale-95 ${className}`}
+        className={`bg-linear-to-r from-blue-600 to-cyan-600 text-white py-3 px-8 rounded-lg font-semibold hover:from-blue-700 hover:to-cyan-700 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed active:scale-95 ${className}`}
         disabled={itemsArray.length === 0 || isLoading}
       >
         {isLoading ? (

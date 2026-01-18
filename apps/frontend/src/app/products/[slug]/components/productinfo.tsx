@@ -99,7 +99,7 @@ export function ProductInfo({ product }: { product: ProductForDetail }) {
           >
             −
           </button>
-          <span className="px-6 py-3 min-w-[60px] text-center text-white font-semibold">
+          <span className="px-6 py-3 min-w-15 text-center text-white font-semibold">
             {quantity}
           </span>
           <button
@@ -128,7 +128,7 @@ export function ProductInfo({ product }: { product: ProductForDetail }) {
           <Button
             variant="secondary"
             size="m"
-            className="group px-4 py-3 bg-gradient-to-r from-gray-600 to-gray-600 hover:from-gray-500 hover:to-gray-500 text-white font-semibold rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-gray-500/20 inline-flex items-center gap-3"
+            className="group px-4 py-3 bg-linear-to-r from-gray-600 to-gray-600 hover:from-gray-500 hover:to-gray-500 text-white font-semibold rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-gray-500/20 inline-flex items-center gap-3"
           >
             <span>Ver más productos</span>
           </Button>
@@ -214,15 +214,15 @@ export function ProductInfo({ product }: { product: ProductForDetail }) {
         {/* Sección de Seguridad y Garantía */}
         <div className="pt-4 border-t border-gray-700 space-y-3">
           <div className="flex items-center gap-3 text-sm text-gray-300">
-            <FaShieldAlt className="h-5 w-5 text-green-400 flex-shrink-0" />
+            <FaShieldAlt className="h-5 w-5 text-green-400 shrink-0" />
             <span>Pagos seguros y encriptados</span>
           </div>
           <div className="flex items-center gap-3 text-sm text-gray-300">
-            <FaLock className="h-5 w-5 text-blue-400 flex-shrink-0" />
+            <FaLock className="h-5 w-5 text-blue-400 shrink-0" />
             <span>Privacidad y datos protegidos</span>
           </div>
           <div className="flex items-center gap-3 text-sm text-gray-300">
-            <FaClipboardCheck className="h-5 w-5 text-cyan-400 flex-shrink-0" />
+            <FaClipboardCheck className="h-5 w-5 text-cyan-400 shrink-0" />
             <span>Garantía de comprador protegido</span>
           </div>
         </div>

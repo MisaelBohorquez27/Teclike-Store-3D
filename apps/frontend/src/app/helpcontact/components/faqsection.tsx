@@ -27,8 +27,8 @@ export function FaqSection() {
             onClick={() => toggleFaq(index)}
             className="w-full text-left"
           >
-            <div className="bg-gradient-to-r from-gray-800 to-gray-600 p-0.5 rounded-lg transition-all duration-300 group-hover:shadow-lg group-hover:shadow-gray-500/50">
-              <div className={`bg-gradient-to-r from-gray-900/80 to-black/70 rounded-lg px-5 py-4 transition-all duration-300 border border-gray-800/30 ${
+            <div className="bg-linear-to-r from-gray-800 to-gray-600 p-0.5 rounded-lg transition-all duration-300 group-hover:shadow-lg group-hover:shadow-gray-500/50">
+              <div className={`bg-linear-to-r from-gray-900/80 to-black/70 rounded-lg px-5 py-4 transition-all duration-300 border border-gray-800/30 ${
                 activeIndex === index ? 'from-gray-800/80 to-black/90' : 'group-hover:from-gray-800/80 group-hover:to-black/90'
               }`}>
                 <div className="flex justify-between items-center gap-4">

@@ -42,11 +42,11 @@ export function BestSellersWeekCard({ item }: ProductsProps) {
     <motion.div
       whileHover={{ scale: 1.02 }}
       transition={{ type: "spring", stiffness: 300 }}
-      className="relative bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-md border border-gray-800/50 rounded-3xl p-6 md:p-8 flex flex-col lg:flex-row gap-6 md:gap-8 shadow-xl hover:shadow-2xl hover:shadow-yellow-500/10 transition-all duration-50"
+      className="relative bg-linear-to-br from-gray-900/50 to-black/50 backdrop-blur-md border border-gray-800/50 rounded-3xl p-6 md:p-8 flex flex-col lg:flex-row gap-6 md:gap-8 shadow-xl hover:shadow-2xl hover:shadow-yellow-500/10 transition-all duration-50"
     >
       {/* Badge de TOP VENDEDOR */}
       <div className="absolute top-4 left-4 z-20">
-        <div className="flex items-center gap-1 px-3 py-1.5 rounded-full bg-gradient-to-r from-cyan-500 to-cyan-500 text-gray-200 text-sm font-bold shadow-lg">
+        <div className="flex items-center gap-1 px-3 py-1.5 rounded-full bg-linear-to-r from-cyan-500 to-cyan-500 text-gray-200 text-sm font-bold shadow-lg">
           <FiTrendingUp className="w-3 h-3" />
           <span>TOP</span>
         </div>
@@ -69,7 +69,7 @@ export function BestSellersWeekCard({ item }: ProductsProps) {
 
       {/* Separador decorativo */}
       <div className="hidden lg:block">
-        <div className="w-px h-full bg-gradient-to-b from-transparent via-gray-700/50 to-transparent" />
+        <div className="w-px h-full bg-linear-to-b from-transparent via-gray-700/50 to-transparent" />
       </div>
 
       {/* Columna derecha - Contenido */}
@@ -101,7 +101,7 @@ const ImageColumn = ({ image, name }: { image: string; name: string }) => (
       />
 
       {/* Overlay de hover */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300" />
+      <div className="absolute inset-0 bg-linear-to-t from-black/40 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300" />
 
       {/* Badge de disponibilidad */}
       <div className="absolute top-4 left-4 px-3 py-1.5 rounded-full bg-black/70 backdrop-blur-sm text-white text-xs font-medium">
@@ -212,7 +212,7 @@ const StockIndicator = ({ stock }: { stock: number }) => (
     {/* Progress bar */}
     <div className="w-full h-2 bg-gray-800 rounded-full overflow-hidden">
       <div
-        className="h-full bg-gradient-to-r from-green-500 to-emerald-500 rounded-full transition-all duration-500"
+        className="h-full bg-linear-to-r from-green-500 to-emerald-500 rounded-full transition-all duration-500"
         style={{ width: `${Math.min((stock / 100) * 100, 100)}%` }}
       />
     </div>

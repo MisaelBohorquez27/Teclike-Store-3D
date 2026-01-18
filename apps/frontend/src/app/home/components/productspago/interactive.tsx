@@ -178,11 +178,11 @@ export function TechProductShowcase() {
     <section className="relative min-h-screen bg-gray-950 overflow-hidden">
       {/* Fondo con efecto de partículas */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-black to-gray-900" />
+        <div className="absolute inset-0 bg-linear-to-br from-gray-900 via-black to-gray-900" />
         
         {/* Grid pattern sutil */}
         <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0 bg-[linear-gradient(rgba(59,130,246,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.1)_1px,transparent_1px)] bg-[size:64px_64px]" />
+          <div className="absolute inset-0 bg-[linear-gradient(rgba(59,130,246,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.1)_1px,transparent_1px)] bg-size-[64px_64px]" />
         </div>
 
         {/* Efectos de luz */}
@@ -199,11 +199,11 @@ export function TechProductShowcase() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12 md:mb-16"
         >
-          <span className="inline-block px-4 py-2 rounded-full bg-gradient-to-r from-blue-600/20 to-purple-600/20 border border-blue-500/30 text-blue-300 text-sm font-medium mb-4">
+          <span className="inline-block px-4 py-2 rounded-full bg-linear-to-r from-blue-600/20 to-purple-600/20 border border-blue-500/30 text-blue-300 text-sm font-medium mb-4">
             TECNOLOGÍA DE VANGUARDIA
           </span>
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6">
-            <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-purple-400 bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-blue-400 via-cyan-400 to-purple-400 bg-clip-text text-transparent">
               Descubre
             </span>
             <br />
@@ -235,8 +235,8 @@ export function TechProductShowcase() {
             />
 
             {/* Overlay de gradiente */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-black/40" />
+            <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-linear-to-r from-black/40 via-transparent to-black/40" />
 
             {/* Controles del video */}
             <AnimatePresence>
@@ -401,7 +401,7 @@ export function TechProductShowcase() {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <button className="flex-1 flex items-center justify-center gap-3 py-4 px-6 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white font-semibold rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-blue-500/25">
+              <button className="flex-1 flex items-center justify-center gap-3 py-4 px-6 bg-linear-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white font-semibold rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-blue-500/25">
                 <FiShoppingCart className="w-5 h-5" />
                 <span>Añadir al Carrito</span>
               </button>

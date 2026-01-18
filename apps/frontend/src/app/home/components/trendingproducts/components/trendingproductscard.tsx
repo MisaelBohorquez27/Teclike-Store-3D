@@ -62,7 +62,7 @@ export const TrendingProductCard = ({ product }: TrendingProductCardProps) => {
           />
 
           {/* Overlay de imagen */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
           {/* Botones flotantes */}
           <div className="absolute bottom-4 left-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300">
@@ -88,7 +88,7 @@ export const TrendingProductCard = ({ product }: TrendingProductCardProps) => {
           </div>
         </div>
         {/* Contenido */}
-        <div className="flex-grow">
+        <div className="grow">
           {/* Categoría */}
           <div className="mb-2">
             <span className="text-xs text-cyan-400 font-medium bg-cyan-500/10 px-2 py-1 rounded-full">

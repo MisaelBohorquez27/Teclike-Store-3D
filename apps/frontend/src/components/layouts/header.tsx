@@ -34,10 +34,10 @@ export function Header() {
   return (
     <header className="relative w-full top-0 left-0 right-0 z-50 shadow-lg pt-3.5 pb-3 text-gray-300">
       {/* Fondo con degradado elegante */}
-      <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950 to-gray-950" />
+      <div className="absolute inset-0 bg-linear-to-t from-gray-950 via-gray-950 to-gray-950" />
 
       {/* Efecto de brillo sutil */}
-      <div className="absolute inset-0 bg-gradient-to-b from-cyan-500/5 via-transparent to-transparent" />
+      <div className="absolute inset-0 bg-linear-to-b from-cyan-500/5 via-transparent to-transparent" />
 
       {/* Contenido */}
       <div className="w-full">
@@ -48,7 +48,7 @@ export function Header() {
               href="/"
               className="flex items-center transition-all duration-300 hover:scale-105 group relative font-bold gap-2"
             >
-              <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-lg blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute -inset-1 bg-linear-to-r from-cyan-500/20 to-blue-500/20 rounded-lg blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               <Image
                 src={logo}
                 alt="Teclike Logo"

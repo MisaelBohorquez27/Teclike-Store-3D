@@ -15,29 +15,29 @@ function ProductSkeleton() {
         <div className="flex flex-col lg:flex-row gap-4 md:gap-12 lg:gap-16">
           {/* Galería skeleton */}
           <div className="w-full lg:w-1/2 mt-6 lg:mt-8 p-4 sm:p-8 md:p-10 lg:p-6 rounded-xl">
-            <div className="aspect-square bg-gradient-to-r from-gray-700 via-gray-600 to-gray-700 rounded-lg animate-pulse" />
+            <div className="aspect-square bg-linear-to-r from-gray-700 via-gray-600 to-gray-700 rounded-lg animate-pulse" />
           </div>
 
           {/* Info skeleton */}
           <div className="w-full lg:w-1/2 mt-6 lg:mt-8 p-4 sm:p-8 md:p-10 card-bg rounded-xl">
             <div className="space-y-4">
-              <div className="h-8 bg-gradient-to-r from-gray-700 via-gray-600 to-gray-700 rounded animate-pulse w-3/4" />
-              <div className="h-6 bg-gradient-to-r from-gray-700 via-gray-600 to-gray-700 rounded animate-pulse w-1/2" />
+              <div className="h-8 bg-linear-to-r from-gray-700 via-gray-600 to-gray-700 rounded animate-pulse w-3/4" />
+              <div className="h-6 bg-linear-to-r from-gray-700 via-gray-600 to-gray-700 rounded animate-pulse w-1/2" />
               <div className="space-y-2">
-                <div className="h-4 bg-gradient-to-r from-gray-700 via-gray-600 to-gray-700 rounded animate-pulse" />
-                <div className="h-4 bg-gradient-to-r from-gray-700 via-gray-600 to-gray-700 rounded animate-pulse w-5/6" />
+                <div className="h-4 bg-linear-to-r from-gray-700 via-gray-600 to-gray-700 rounded animate-pulse" />
+                <div className="h-4 bg-linear-to-r from-gray-700 via-gray-600 to-gray-700 rounded animate-pulse w-5/6" />
               </div>
-              <div className="h-12 bg-gradient-to-r from-cyan-600 to-blue-600 rounded animate-pulse w-1/2 mt-6" />
+              <div className="h-12 bg-linear-to-r from-cyan-600 to-blue-600 rounded animate-pulse w-1/2 mt-6" />
             </div>
           </div>
         </div>
 
         {/* Reviews skeleton */}
         <div className="rounded-xl px-6 md:px-8 mt-8">
-          <div className="h-6 bg-gradient-to-r from-gray-700 via-gray-600 to-gray-700 rounded animate-pulse w-1/4 mb-6" />
+          <div className="h-6 bg-linear-to-r from-gray-700 via-gray-600 to-gray-700 rounded animate-pulse w-1/4 mb-6" />
           <div className="space-y-4">
             {[1, 2, 3].map((i) => (
-              <div key={i} className="h-20 bg-gradient-to-r from-gray-700 via-gray-600 to-gray-700 rounded animate-pulse" />
+              <div key={i} className="h-20 bg-linear-to-r from-gray-700 via-gray-600 to-gray-700 rounded animate-pulse" />
             ))}
           </div>
         </div>

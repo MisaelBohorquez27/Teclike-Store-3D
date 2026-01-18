@@ -60,7 +60,7 @@ export function FilterSidebar() {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => setIsMobileOpen(!isMobileOpen)}
-          className="w-full flex items-center justify-center gap-3 px-6 py-3 bg-gradient-to-r from-gray-900 to-black hover:from-gray-800 hover:to-gray-900 border border-gray-800 hover:border-cyan-500/30 rounded-xl text-white font-medium transition-all duration-300"
+          className="w-full flex items-center justify-center gap-3 px-6 py-3 bg-linear-to-r from-gray-900 to-black hover:from-gray-800 hover:to-gray-900 border border-gray-800 hover:border-cyan-500/30 rounded-xl text-white font-medium transition-all duration-300"
         >
           <FiFilter className="w-5 h-5" />
           <span>Filtros</span>
@@ -79,13 +79,13 @@ export function FilterSidebar() {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -20 }}
-            className="lg:sticky lg:top-24 bg-gradient-to-br from-gray-900/80 to-black/80 backdrop-blur-xl border border-gray-800/50 rounded-2xl p-6 shadow-2xl max-h-[calc(100vh-120px)] overflow-y-auto lg:max-h-none lg:overflow-visible"
+            className="lg:sticky lg:top-24 bg-linear-to-br from-gray-900/80 to-black/80 backdrop-blur-xl border border-gray-800/50 rounded-2xl p-6 shadow-2xl max-h-[calc(100vh-120px)] overflow-y-auto lg:max-h-none lg:overflow-visible"
           >
             {/* Header */}
             <div className="mb-8">
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 rounded-lg bg-gradient-to-r from-cyan-500/10 to-blue-500/10 border border-cyan-500/20">
+                  <div className="p-2 rounded-lg bg-linear-to-r from-cyan-500/10 to-blue-500/10 border border-cyan-500/20">
                     <FiFilter className="w-5 h-5 text-cyan-400" />
                   </div>
                   <h3 className="text-xl font-bold text-white">Filtros</h3>
@@ -114,7 +114,7 @@ export function FilterSidebar() {
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="mb-6 p-3 rounded-xl bg-gradient-to-r from-cyan-500/10 to-blue-500/10 border border-cyan-500/20"
+                  className="mb-6 p-3 rounded-xl bg-linear-to-r from-cyan-500/10 to-blue-500/10 border border-cyan-500/20"
                 >
                   <div className="flex items-center justify-between">
                     <span className="text-sm text-cyan-300">Filtros activos: {activeFiltersCount}</span>
@@ -165,7 +165,7 @@ export function FilterSidebar() {
                         />
                         <div className={`w-5 h-5 rounded border flex items-center justify-center transition-all ${
                           selectedCategories.includes(category)
-                            ? 'bg-gradient-to-r from-cyan-500 to-blue-500 border-transparent'
+                            ? 'bg-linear-to-r from-cyan-500 to-blue-500 border-transparent'
                             : 'border-gray-700 group-hover:border-gray-600'
                         }`}>
                           {selectedCategories.includes(category) && (
@@ -220,7 +220,7 @@ export function FilterSidebar() {
                         }`}>
                           <div className={`w-2.5 h-2.5 rounded-full transition-all ${
                             selectedPrice === range.value
-                              ? 'bg-gradient-to-r from-green-500 to-emerald-500'
+                              ? 'bg-linear-to-r from-green-500 to-emerald-500'
                               : 'bg-transparent'
                           }`} />
                         </div>
@@ -247,7 +247,7 @@ export function FilterSidebar() {
                   <span>$1000</span>
                 </div>
                 <div className="relative h-2 bg-gray-800 rounded-full">
-                  <div className="absolute h-full w-1/2 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full" />
+                  <div className="absolute h-full w-1/2 bg-linear-to-r from-cyan-500 to-blue-500 rounded-full" />
                   <div className="absolute top-1/2 left-1/4 w-4 h-4 bg-white rounded-full border-2 border-cyan-500 -translate-y-1/2 -translate-x-1/2" />
                   <div className="absolute top-1/2 left-3/4 w-4 h-4 bg-white rounded-full border-2 border-blue-500 -translate-y-1/2 -translate-x-1/2" />
                 </div>
@@ -263,7 +263,7 @@ export function FilterSidebar() {
               <Button
                 variant="primary"
                 size="m"
-                className="w-full group relative overflow-hidden bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-cyan-500/20"
+                className="w-full group relative overflow-hidden bg-linear-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold py-3 px-6 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-cyan-500/20"
                 onClick={handleApplyFilters}
               >
                 <span className="flex items-center justify-center gap-2 relative z-10">
@@ -275,7 +275,7 @@ export function FilterSidebar() {
                     </span>
                   )}
                 </span>
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -skew-x-12 transform translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+                <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/10 to-transparent -skew-x-12 transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
               </Button>
             </motion.div>
 

@@ -20,13 +20,13 @@ export function OfferCard({ product }: { product: ProductWithOffer }) {
     >
       {/* Badge de descuento */}
       <div className="absolute -top-2 -right-2 z-20">
-        <div className="px-3 py-1.5 rounded-full bg-gradient-to-br from-cyan-600 to-cyan-600 text-white text-sm font-bold shadow-lg transform rotate-3">
+        <div className="px-3 py-1.5 rounded-full bg-linear-to-br from-cyan-600 to-cyan-600 text-white text-sm font-bold shadow-lg transform rotate-3">
           {discountPercentage}
         </div>
       </div>
 
       {/* Card principal */}
-      <div className="bg-gradient-to-br from-gray-900/90 to-gray-800/90 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-4 hover:border-cyan-500/50 transition-all duration-300 h-full flex flex-col overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-cyan-500/10">
+      <div className="bg-linear-to-br from-gray-900/90 to-gray-800/90 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-4 hover:border-cyan-500/50 transition-all duration-300 h-full flex flex-col overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-cyan-500/10">
         
         {/* Contenedor de imagen */}
         <div className="relative h-48 md:h-56 mb-4 rounded-xl overflow-hidden">
@@ -59,7 +59,7 @@ export function OfferCard({ product }: { product: ProductWithOffer }) {
         <div className="flex-grow">
           {/* Categoría */}
           <div className="mb-3">
-            <span className="inline-block px-3 py-1 rounded-full bg-gradient-to-r from-blue-100 to-cyan-100 dark:from-cyan-500/10 dark:to-cyan-500/10 text-cyan-600 dark:text-cyan-400 text-xs font-medium">
+            <span className="inline-block px-3 py-1 rounded-full bg-linear-to-r from-blue-100 to-cyan-100 dark:from-cyan-500/10 dark:to-cyan-500/10 text-cyan-600 dark:text-cyan-400 text-xs font-medium">
               {product.offerType || "Oferta Especial"}
             </span>
           </div>
@@ -75,7 +75,7 @@ export function OfferCard({ product }: { product: ProductWithOffer }) {
               <span className="text-lg text-gray-500 dark:text-gray-400 line-through">
                 {product.originalPrice}
               </span>
-              <span className="px-2 py-1 rounded-md bg-gradient-to-r from-green-100 to-emerald-100 dark:from-green-500/10 dark:to-emerald-500/10 text-green-600 dark:text-green-400 text-xs font-bold">
+              <span className="px-2 py-1 rounded-md bg-linear-to-r from-green-100 to-emerald-100 dark:from-green-500/10 dark:to-emerald-500/10 text-green-600 dark:text-green-400 text-xs font-bold">
                 Ahorra {product.savings}
               </span>
             </div>

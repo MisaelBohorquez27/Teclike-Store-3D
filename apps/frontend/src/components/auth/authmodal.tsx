@@ -165,12 +165,12 @@ export function AuthModal({ onClose }: AuthModalProps) {
     <>
       {/* Overlay */}
       <div
-        className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[100]"
+        className="fixed inset-0 bg-black/50 backdrop-blur-sm z-100"
         onClick={onClose}
       />
 
       {/* Modal */}
-      <div className="fixed inset-0 flex items-center justify-center z-[101] p-4">
+      <div className="fixed inset-0 flex items-center justify-center z-101 p-4">
         <div className="bg-gray-900 border border-cyan-500/30 rounded-2xl shadow-2xl w-full max-w-md max-h-[90vh] overflow-y-auto">
           {/* Header */}
           <div className="flex justify-between items-center p-6 border-b border-cyan-500/20">
@@ -299,7 +299,7 @@ export function AuthModal({ onClose }: AuthModalProps) {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full py-2 px-4 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white font-semibold rounded-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed mt-6"
+                className="w-full py-2 px-4 bg-linear-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white font-semibold rounded-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed mt-6"
               >
                 {isLoading ? "Cargando..." : mode === "login" ? "Iniciar Sesión" : "Registrarse"}
               </button>

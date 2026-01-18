@@ -94,7 +94,7 @@ export function Navbar2() {
       className={`fixed w-full md:top-0 left-0 right-0 z-40 transition-all duration-500 flex items-center justify-center bg-transparent`}
     >      
       {/* Línea decorativa inferior */}
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-cyan-500/30 to-transparent" />
       
       <div className="container px-4 w-full max-w-7xl ">
         

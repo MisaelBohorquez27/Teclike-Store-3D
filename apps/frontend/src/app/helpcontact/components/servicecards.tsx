@@ -68,13 +68,13 @@ export function ServiceCards() {
             whileHover={{ y: -8, transition: { duration: 0.3 } }}
             className="group relative"
           >
-            <div className="absolute inset-0 bg-gradient-to-r opacity-0 group-hover:opacity-100 rounded-xl blur-xl transition-opacity duration-500" style={{
+            <div className="absolute inset-0 bg-linear-to-r opacity-0 group-hover:opacity-100 rounded-xl blur-xl transition-opacity duration-500" style={{
               backgroundImage: `linear-gradient(135deg, var(--tw-gradient-stops))`
             }} />
-            <div className={`relative bg-gradient-to-br ${service.color} p-0.5 rounded-xl`}>
-              <div className="bg-gradient-to-br from-gray-900/80 to-black/80 rounded-xl p-6 h-full flex flex-col justify-center text-center hover:from-gray-800/80 hover:to-black/90 transition-all duration-300 border border-gray-800/30">
+            <div className={`relative bg-linear-to-br ${service.color} p-0.5 rounded-xl`}>
+              <div className="bg-linear-to-br from-gray-900/80 to-black/80 rounded-xl p-6 h-full flex flex-col justify-center text-center hover:from-gray-800/80 hover:to-black/90 transition-all duration-300 border border-gray-800/30">
                 <div className="flex justify-center mb-4">
-                  <div className={`p-3 rounded-lg bg-gradient-to-br ${service.color}`}>
+                  <div className={`p-3 rounded-lg bg-linear-to-br ${service.color}`}>
                     <Icon className="w-6 h-6 text-gray-100" />
                   </div>
                 </div>

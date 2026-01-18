@@ -24,7 +24,7 @@ export function ProductCard({ product }: { product: ProductForDetail }) {
         className="group relative h-full"
       >
         {/* Card principal */}
-        <div className="bg-gradient-to-br from-gray-900/60 to-black/60 backdrop-blur-sm border border-gray-800/50 rounded-2xl p-4 hover:border-cyan-500/30 transition-all duration-300 h-full flex flex-col overflow-hidden group-hover:shadow-2xl group-hover:shadow-cyan-500/10">
+        <div className="bg-linear-to-br from-gray-900/60 to-black/60 backdrop-blur-sm border border-gray-800/50 rounded-2xl p-4 hover:border-cyan-500/30 transition-all duration-300 h-full flex flex-col overflow-hidden group-hover:shadow-2xl group-hover:shadow-cyan-500/10">
           {/* Imagen del Producto */}
           <div className="relative aspect-square mb-4 rounded-xl overflow-hidden">
             {/* Imagen del producto optimizada */}
@@ -45,7 +45,7 @@ export function ProductCard({ product }: { product: ProductForDetail }) {
             </motion.div>
 
             {/* Overlay de imagen */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
             {/* Botones flotante */}
             <div className="absolute bottom-4 left-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300">
@@ -53,7 +53,7 @@ export function ProductCard({ product }: { product: ProductForDetail }) {
                 <FiEye className="w-4 h-4" />
                 <span className="truncate">Detalles</span>
               </button>
-              <button className="flex-1 flex items-center justify-center gap-2 py-2 px-3 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400 text-white text-sm rounded-lg transition-all cursor-pointer">
+              <button className="flex-1 flex items-center justify-center gap-2 py-2 px-3 bg-linear-to-r from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400 text-white text-sm rounded-lg transition-all cursor-pointer">
                 <FiShoppingCart className="w-4 h-4" />
                 <span>Comprar</span>
               </button>
@@ -61,7 +61,7 @@ export function ProductCard({ product }: { product: ProductForDetail }) {
           </div>
 
           {/* Contenido */}
-          <div className="flex-grow space-y-3">
+          <div className="grow space-y-3">
             {/* Categoría */}
             <div>
               <span className="text-xs text-cyan-400 font-medium bg-cyan-500/10 px-2 py-1 rounded-full">
