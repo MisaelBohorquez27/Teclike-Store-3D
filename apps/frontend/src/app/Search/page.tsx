@@ -1,4 +1,5 @@
 "use client";
+import { Suspense } from "react";
 import { SearchBar } from "@/components/common/SearchBar";
 import { ProductHero } from "../Products/components/ProductHero";
 import { SearchResults } from "./components/SearchResults";
@@ -14,7 +15,9 @@ export default function SearchPage() {
         </div>
         <div className="w-full flex justify-center">
           {/* Grid de productos */}
-          <SearchResults />
+          <Suspense fallback={<div className="text-center py-10"><div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto"></div></div>}>
+            <SearchResults />
+          </Suspense>
         </div>
       </div>
     </main>

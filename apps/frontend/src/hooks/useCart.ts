@@ -41,13 +41,13 @@ export const useCart = (): UseCartReturn => {
     try {
       setLoading(true);
       setError(null);
-      const cartData = await CartService.getCart();
-      setCart(cartData);
+      const response = await CartService.getCart();
+      setCart(response.data);
     } catch (err: any) {
       const errorMessage = err.message || "Error al cargar el carrito";
       console.error(errorMessage);
       setError(errorMessage);
-      setCart(CartService.getEmptyCart());
+      setCart(null);
     } finally {
       setLoading(false);
     }
@@ -57,14 +57,12 @@ export const useCart = (): UseCartReturn => {
   const syncCartOnLogin = useCallback(async () => {
     try {
       setError(null);
-      const syncedCart = await CartService.syncLocalCartWithServer();
-      setCart(syncedCart);
+      await fetchCart();
       console.log('✅ Carrito sincronizado después del login');
     } catch (err: any) {
       const errorMessage = err.message || "Error al sincronizar carrito";
       console.warn(errorMessage);
       // No lanzar error, solo avisar
-      await fetchCart(); // Cargar el carrito del servidor como fallback
     }
   }, [fetchCart]);
 
@@ -102,8 +100,8 @@ export const useCart = (): UseCartReturn => {
     ) => {
       try {
         setError(null);
-        const updatedCart = await CartService.addToCart(productId, quantity, productData);
-        setCart(updatedCart);
+        const response = await CartService.addToCart(productId, quantity, productData);
+        setCart(response.data);
       } catch (err: any) {
         const errorMessage = err.message || "Error al agregar al carrito";
         setError(errorMessage);
@@ -118,8 +116,8 @@ export const useCart = (): UseCartReturn => {
     async (productId: number, quantity: number) => {
       try {
         setError(null);
-        const updatedCart = await CartService.updateQuantity(productId, quantity);
-        setCart(updatedCart);
+        const response = await CartService.updateCartItem(productId, quantity);
+        setCart(response.data);
       } catch (err: any) {
         const errorMessage = err.message || "Error al actualizar cantidad";
         setError(errorMessage);
@@ -133,8 +131,8 @@ export const useCart = (): UseCartReturn => {
   const handleRemoveFromCart = useCallback(async (productId: number) => {
     try {
       setError(null);
-      const updatedCart = await CartService.removeFromCart(productId);
-      setCart(updatedCart);
+      const response = await CartService.removeFromCart(productId);
+      setCart(response.data);
     } catch (err: any) {
       const errorMessage = err.message || "Error al eliminar del carrito";
       setError(errorMessage);
@@ -146,8 +144,8 @@ export const useCart = (): UseCartReturn => {
   const handleClearCart = useCallback(async () => {
     try {
       setError(null);
-      const updatedCart = await CartService.clearCart();
-      setCart(updatedCart);
+      const response = await CartService.clearCart();
+      setCart(response.data);
     } catch (err: any) {
       const errorMessage = err.message || "Error al vaciar el carrito";
       setError(errorMessage);
@@ -155,9 +153,22 @@ export const useCart = (): UseCartReturn => {
     }
   }, []);
 
+  // Calcular estadísticas del carrito
+  const itemCount = cart?.itemCount || 0;
+  const cartTotal = cart?.total || 0;
+  
+  // Verificar si producto está en carrito
+  const isProductInCart = (productId: number): boolean => {
+    return cart?.items?.some(item => item.productId === productId) || false;
+  };
+
+  // Obtener cantidad de un producto
+  const getProductQuantity = (productId: number): number => {
+    const item = cart?.items?.find(item => item.productId === productId);
+    return item?.quantity || 0;
+  };
+
   const cartItems = mapCartItems(cart);
-  const itemCount = CartService.getCartItemCount(cart);
-  const cartTotal = CartService.getCartTotal(cart);
 
   return {
     cart,
@@ -170,8 +181,8 @@ export const useCart = (): UseCartReturn => {
     updateQuantity: handleUpdateQuantity,
     removeFromCart: handleRemoveFromCart,
     clearCart: handleClearCart,
-    isProductInCart: (productId) => CartService.isProductInCart(cart, productId),
-    getProductQuantity: (productId) => CartService.getProductQuantity(cart, productId),
+    isProductInCart,
+    getProductQuantity,
     refetchCart: fetchCart,
     syncCartOnLogin,
   };

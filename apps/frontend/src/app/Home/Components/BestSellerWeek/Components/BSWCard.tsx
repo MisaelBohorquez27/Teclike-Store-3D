@@ -9,6 +9,7 @@ import { useState } from "react";
 
 interface ProductsProps {
   item: ProductForDetail;
+  onAddToCart?: (id: number, quantity: number) => void;
 }
 
 /**

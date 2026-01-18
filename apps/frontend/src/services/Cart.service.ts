@@ -7,22 +7,6 @@ const SYNC_INTERVAL = 3000; // Reducido a 3 segundos para mejor UX (en lugar de 
 let syncTimeout: NodeJS.Timeout | null = null;
 let pendingItems: Set<number> = new Set(); // Items pendientes de sincronizar
 
-/**
- * Servicio de Carrito - PATRÓN SENIOR
- * 
- * ESTRATEGIA:
- * 1. localStorage para cliente offline (rápido, sin latencia)
- * 2. Auto-sync batched (no a cada cambio, agrupa cambios)
- * 3. Optimistic updates (UI responde inmediatamente)
- * 4. Sync solo cambios pendientes (eficiente en BD)
- * 
- * FLUJO:
- * - Usuario no autenticado: Solo localStorage
- * - Usuario autenticado: localStorage + sync a servidor
- * - Cambios se guardan en localStorage primero (optimistic)
- * - Cada 10s se sincronizan cambios pendientes al servidor
- * - Si falla sync, se reintenta (con backoff)
- */
 export class CartService {
   /**
    * Verifica si el usuario está autenticado

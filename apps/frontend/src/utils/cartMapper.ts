@@ -13,6 +13,7 @@ export function validateCartStructure(cartData: any): CartResponse {
       tax: 0,
       shipping: 0,
       total: 0,
+      itemCount: 0,
     };
   }
 
@@ -26,6 +27,7 @@ export function validateCartStructure(cartData: any): CartResponse {
       tax: 0,
       shipping: 0,
       total: 0,
+      itemCount: 0,
     };
   }
 
@@ -65,6 +67,7 @@ export function validateCartStructure(cartData: any): CartResponse {
     tax: Number(cartData.tax) || 0,
     shipping: Number(cartData.shipping) || 0,
     total: Number(cartData.total) || 0,
+    itemCount: Number(cartData.itemCount) || 0,
   };
 }
 
