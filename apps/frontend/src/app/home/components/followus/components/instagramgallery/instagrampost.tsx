@@ -1,7 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { hoverAnimation } from "@/types/followUs";
+import { hoverAnimation } from "@/types/followus";
 import { InstagramPostProps } from "../../types/instagramprops";
 
 export function InstagramPost({ post, instagramUrl }: InstagramPostProps) {

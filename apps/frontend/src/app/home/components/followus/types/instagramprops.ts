@@ -1,5 +1,5 @@
 //Tipos para InstagramGallery.tsx e InstagramPost.tsx
-import { InstagramPost as InstagramPostType } from "@/types/followUs";
+import { InstagramPost as InstagramPostType } from "@/types/followus";
 
 export interface InstagramPostProps {
   post: {

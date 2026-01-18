@@ -10,7 +10,7 @@ import {
   DEFAULT_INSTAGRAM_URL,
   DEFAULT_USERNAME,
   titleAnimation,
-} from "@/types/followUs";
+} from "@/types/followus";
 import {
   FiInstagram,
   FiHeart,

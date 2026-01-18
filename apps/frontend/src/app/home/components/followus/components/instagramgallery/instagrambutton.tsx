@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import { FiInstagram } from "react-icons/fi";
 import Button from "@/components/common/pagesbuttons";
-import { fadeInAnimation } from "@/types/followUs";
+import { fadeInAnimation } from "@/types/followus";
 import { InstagramButtonProps } from "../../types/instagramprops";
 
 export function InstagramButton({ instagramUrl, username }: InstagramButtonProps) {
