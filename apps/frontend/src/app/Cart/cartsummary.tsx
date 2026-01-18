@@ -1,5 +1,5 @@
 "use client";
-import { CheckoutButton } from "./checkout/CheckoutButton";
+import { CheckoutButton } from "./checkout/checkoutbutton";
 import { CartResponse } from "@/types/cart";
 
 interface CartSummaryProps {

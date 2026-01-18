@@ -1,8 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { BENEFITS } from "./data/DataBenefits";
-import { Benefit } from "./types/TypesBenefits";
+import { BENEFITS } from "./data/databenefits";
+import { Benefit } from "./types/typesbenefits";
 
 // Main Component
 export function BenefitsGrid() {

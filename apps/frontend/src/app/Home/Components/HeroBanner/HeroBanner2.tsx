@@ -16,7 +16,7 @@ import {
   FiCode,
   FiServer,
 } from "react-icons/fi";
-import { BenefitsGrid } from "../Benefits/BenefitsGrid";
+import { BenefitsGrid } from "../Benefits/benefitsgrid";
 import Link from "next/dist/client/link";
 
 export function HeroBanner2() {

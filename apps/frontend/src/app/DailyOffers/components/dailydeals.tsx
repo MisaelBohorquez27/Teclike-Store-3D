@@ -1,6 +1,6 @@
 "use client";
 
-import { DealCard } from "@/app/DailyOffers/components/DealCard";
+import { DealCard } from "@/app/DailyOffers/components/dealcard";
 import { useDailyOffers } from "@/hooks/useDailyOffers";
 
 export function DailyDeals() {

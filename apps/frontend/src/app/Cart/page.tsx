@@ -1,8 +1,8 @@
 "use client";
 import { useCartContext } from "@/context/CartContext";
-import CartList from "./CartList";
-import { EmptyCart } from "./EmptyCart";
-import CartSummary from "./cartSummary";
+import CartList from "./cartlist";
+import { EmptyCart } from "./emptycart";
+import CartSummary from "./cartsummary";
 import { IoMdLock } from "react-icons/io";
 
 export default function CartPage() {

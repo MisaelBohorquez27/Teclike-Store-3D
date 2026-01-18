@@ -1,5 +1,5 @@
 import { FaHandHoldingUsd, FaShieldAlt, FaShippingFast, FaStar } from "react-icons/fa";
-import { Benefit } from "../types/TypesBenefits";
+import { Benefit } from "../types/typesbenefits";
 
 export const BENEFITS: Benefit[] = [
   {

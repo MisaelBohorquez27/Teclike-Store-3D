@@ -1,5 +1,5 @@
-import { DailyDeals } from "@/app/DailyOffers/components/DailyDeals";
-import { CountdownTimer } from "@/app/DailyOffers/components/CountdownTimer";
+import { DailyDeals } from "@/app/DailyOffers/components/dailydeals";
+import { CountdownTimer } from "@/app/DailyOffers/components/countdowntimer";
 import { Subscription } from "@/components/common/Subscription";
 import {
   FiTruck,

@@ -1,6 +1,6 @@
-import { FaqSection } from "@/app/HelpContact/components/FaqSection";
-import { ContactForm } from "@/app/HelpContact/components/ContactForm";
-import { ServiceCards } from "@/app/HelpContact/components/ServiceCards";
+import { FaqSection } from "@/app/HelpContact/components/faqsection";
+import { ContactForm } from "@/app/HelpContact/components/contactform";
+import { ServiceCards } from "@/app/HelpContact/components/servicecards";
 import { FiMail, FiPhone, FiClock } from "react-icons/fi";
 
 export default function HelpContactPage() {

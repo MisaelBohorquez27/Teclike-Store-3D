@@ -3,8 +3,8 @@
 import { motion } from "framer-motion";
 import { CustomSwiper } from "@/components/swipper/CustomSwiper";
 import { useBestSellersLogic } from "../Hooks/useBestSeller";
-import { BestSellersWeekCard } from "./BSWCard";
-import { TopProductsSellLoading, TopProductsSellError } from "./BSWSellLoading";
+import { BestSellersWeekCard } from "./bswcard";
+import { TopProductsSellLoading, TopProductsSellError } from "./bswsellloading";
 import { CONTENT, fadeInAnimation, SWIPER_CONFIG } from "../Data/BSWData";
 import { CartListProps } from "../Types/BSWTypes";
 import { FiTrendingUp, FiArrowRight, FiStar, FiTable } from "react-icons/fi";

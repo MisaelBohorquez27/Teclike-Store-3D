@@ -2,14 +2,14 @@
 
 import React from "react";
 import { useAuth } from "@/context/AuthContext";
-import { DailyOffers } from "@/app/Home/Components/DailyOffers/DailyOffersPage";
+import { DailyOffers } from "@/app/Home/Components/DailyOffers/dailyofferspage";
 import { HeroBanner } from "@/app/Home/Components/HeroBanner/HeroBanner";
 import { TrendingProducts } from "@/app/Home/Components/TrendingProducts/TrendingProducts";
-import { CustomerReviews } from "@/app/Home/Components/CustomerReview/CustomerReviews";
+import { CustomerReviews } from "@/app/Home/Components/CustomerReview/customerreviews";
 import {
   BenefitsGrid,
   BenefitsGridWithHeading,
-} from "@/app/Home/Components/Benefits/BenefitsGrid";
+} from "@/app/Home/Components/Benefits/benefitsgrid";
 import { FollowUs } from "@/app/Home/Components/FollowUs/FollowUs";
 import { BestSellersWeekPage } from "@/app/Home/Components/BestSellerWeek/BSWPage";
 import { HeroBanner2 } from "./Components/HeroBanner/HeroBanner2";

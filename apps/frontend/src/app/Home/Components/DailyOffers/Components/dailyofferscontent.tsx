@@ -3,9 +3,9 @@
 import Link from "next/link";
 import Button from "@/components/common/PagesButtons";
 import { CustomSwiper } from "@/components/swipper/CustomSwiper";
-import { OfferCard } from "./OfferCard";
-import { CONFIG } from "../Data/DailyOffersData";
-import { useDailyOffers } from "../Hooks/useDailyOffer";
+import { OfferCard } from "./offercard";
+import { CONFIG } from "../Data/dailyoffersdata";
+import { useDailyOffers } from "../Hooks/usedailyoffer";
 import { ProductWithOffer } from "@/types/offers";
 import { motion } from "framer-motion";
 import { FiClock, FiArrowRight, FiZap, FiFilter } from "react-icons/fi";

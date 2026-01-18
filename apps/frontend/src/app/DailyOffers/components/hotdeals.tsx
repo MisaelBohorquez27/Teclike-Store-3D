@@ -1,6 +1,6 @@
 "use client";
 
-import { DealCard } from "@/app/DailyOffers/components/DealCard";
+import { DealCard } from "@/app/DailyOffers/components/dealcard";
 import { fetchDeals } from "@/services/deals";
 import { useEffect, useState } from "react";
 import { ProductWithOffer } from "@/types/offers";
