@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { InstagramGallery } from "./components/instagramgallery/instagramgallery";
 import { InstagramButton } from "./components/instagramgallery/instagrambutton";
+import { SubscriptionSection } from "./components/subscriptionsection/subscription";
 import {
   FollowUsProps,
   DEFAULT_POSTS,

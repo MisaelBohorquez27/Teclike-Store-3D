@@ -1,4 +1,4 @@
-import httpClient from "./httpClient";
+import httpClient from "./httpclient";
 import { AuthResponse, LoginFormData, RegisterFormData } from "../types/auth.types";
 
 const TOKEN_KEY = "accessToken";

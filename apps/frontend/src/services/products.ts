@@ -1,5 +1,5 @@
 // src/services/products.service.ts
-import httpClient from "./httpClient";
+import httpClient from "./httpclient";
 import { PaginatedResponse, ProductForDetail, ProductQueryOptions } from "@/types/productss";
 
 /* -------------------- Base Fetch -------------------- */

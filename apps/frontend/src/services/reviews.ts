@@ -1,6 +1,6 @@
 // src/services/reviews.ts
 import type { Review } from "../types/review"; // ajusta la ruta
-import httpClient from "./httpClient";
+import httpClient from "./httpclient";
 
 export async function fetchFeaturedReviews(limit = 6): Promise<Review[]> {
   const response = await httpClient.get<Review[]>(

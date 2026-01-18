@@ -1,5 +1,5 @@
 import { ProductForCard } from "@/types/productss";
-import httpClient from "./httpClient";
+import httpClient from "./httpclient";
 
 // 🔹 Obtener productos destacados (new, popular, discounted)
 export async function fetchFeaturedProducts(

@@ -1,4 +1,4 @@
-import httpClient from './httpClient';
+import httpClient from './httpclient';
 import { CheckoutSummary, CreateOrderData, Order } from '@/types/checkout';
 
 export class CheckoutService {

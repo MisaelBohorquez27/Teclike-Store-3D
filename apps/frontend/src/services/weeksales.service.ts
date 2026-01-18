@@ -1,4 +1,4 @@
-import httpClient from "./httpClient";
+import httpClient from "./httpclient";
 import { ProductForDetail } from "@/types/productss";
 
 // Fetch productos más vendidos de la semana

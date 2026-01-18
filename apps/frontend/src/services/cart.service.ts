@@ -1,4 +1,4 @@
-import httpClient from './httpClient';
+import httpClient from './httpclient';
 import { CartResponse, CartItem } from '@/types/cart';
 import type { ProductForCart } from '@/types/cart';
 

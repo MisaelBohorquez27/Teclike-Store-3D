@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useCallback, useEffect } from "react";
-import { CheckoutService } from "@/services/checkoutService";
+import { CheckoutService } from "@/services/checkoutservice";
 import { CheckoutSummary } from "@/types/checkout";
 
 interface UseCheckoutReturn {

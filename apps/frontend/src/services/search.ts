@@ -1,6 +1,6 @@
 // services/search.ts
 import { SearchResult, SearchSuggestion } from "../types/search";
-import httpClient from "./httpClient";
+import httpClient from "./httpclient";
 
 export async function fetchSearchResults(
   query: string,

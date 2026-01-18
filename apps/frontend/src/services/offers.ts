@@ -1,5 +1,5 @@
 // src/services/offers.ts
-import httpClient from "./httpClient";
+import httpClient from "./httpclient";
 import { OffersResponse } from "@/types/offers";
 
 export async function fetchFeaturedOffers(limit = Number): Promise<OffersResponse> {

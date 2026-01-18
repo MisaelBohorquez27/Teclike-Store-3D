@@ -2,7 +2,7 @@
  * Servicio para manejar pagos en el frontend
  */
 
-import httpClient from './httpClient';
+import httpClient from './httpclient';
 
 export interface CreatePaymentRequest {
   email?: string;
