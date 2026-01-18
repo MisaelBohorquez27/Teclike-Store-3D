@@ -4,7 +4,7 @@ services:
     runtime: node
     plan: free
     buildCommand: cd /opt/render/project && pnpm install --frozen-lockfile && pnpm --filter backend build && pnpm --filter backend prisma generate
-    startCommand: node dist/index.js
+    startCommand: node apps/backend/dist/index.js
     envVars:
       - key: NODE_ENV
         value: production
