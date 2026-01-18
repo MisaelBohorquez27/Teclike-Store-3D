@@ -13,8 +13,8 @@ export function InteractiveVideo() {
 
   // ⚙️ CONFIGURACIÓN DEL VIDEO
   const VIDEO_URL = "ui/blog.mp4";
-  const VIDEO_START_TIME = 50;        // ⏱️ Comenzar en segundo 5
-  const VIDEO_DURATION = 15;         // ⏱️ Duración máxima: 15 segundos
+  const VIDEO_START_TIME = 0;        // ⏱️ Comenzar en segundo 0
+  const VIDEO_DURATION = 22;         // ⏱️ Duración máxima: 15 segundos
   const VIDEO_END_TIME = VIDEO_START_TIME + VIDEO_DURATION; // Fin automático
 
   const togglePlay = () => {
