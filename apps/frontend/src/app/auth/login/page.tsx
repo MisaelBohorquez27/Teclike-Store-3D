@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/authcontext";
 import Link from "next/link";
-import "@/styles/pages/Login.css";
+import "@/styles/pages/login.css";
 
 export default function LoginPage() {
   const router = useRouter();

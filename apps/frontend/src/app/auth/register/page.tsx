@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/authcontext";
 import Link from "next/link";
-import "@/styles/pages/Register.css";
+import "@/styles/pages/register.css";
 
 export default function RegisterPage() {
   const router = useRouter();
