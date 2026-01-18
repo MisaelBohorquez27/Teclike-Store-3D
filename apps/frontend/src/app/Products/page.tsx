@@ -1,6 +1,6 @@
 "use client";
 import { Suspense } from "react";
-import { ImageUploader } from "@/components/unUsed/ImageUpload";
+import { ImageUploader } from "@/components/unused/ImageUpload";
 import { ProductHero } from "./components/ProductHero";
 import { ProductList2 } from "./components/ProductList2";
 

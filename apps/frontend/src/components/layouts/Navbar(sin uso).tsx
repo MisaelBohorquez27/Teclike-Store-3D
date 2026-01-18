@@ -7,7 +7,7 @@ import logo from "../../public/logos/Logo4.png";
 import CartIcon from "../cart/CartIcon";
 import Button from "../common/PagesButtons";
 import { SearchBar } from "../common/SearchBar";
-import { ThemeToggle } from "../unUsed/Theme";
+import { ThemeToggle } from "../unused/Theme";
 import { useAuth } from "../../context/AuthContext";
 import { useRouter } from "next/navigation";
 import "@/styles/components/Navbar.css";
