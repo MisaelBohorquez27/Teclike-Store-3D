@@ -6,16 +6,17 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "concurrently \"pnpm --filter frontend dev\" \"pnpm --filter backend-api dev\"",
-    "build": "pnpm --filter frontend build",
-    "start": "pnpm --filter frontend start",
+    "dev": "concurrently \"pnpm --filter frontend dev\" \"pnpm --filter backend dev\"",
+    "build": "pnpm --filter backend build && pnpm --filter frontend build",
+    "build:backend": "pnpm --filter backend build",
+    "start": "node apps/backend/dist/index.js",
     "lint": "run-p lint:*",
     "lint:frontend": "pnpm --filter frontend lint",
-    "lint:backend": "cd apps/backend-api && black . && flake8",
-    "prisma:generate": "pnpm --filter db generate",
-    "prisma:migrate": "pnpm --filter db migrate:dev",
-    "docker:up": "docker-compose -f infra/docker-compose.yml up -d",
-    "docker:down": "docker-compose -f infra/docker-compose.yml down"
+    "lint:backend": "pnpm --filter backend lint",
+    "prisma:generate": "pnpm --filter backend prisma generate",
+    "prisma:migrate": "pnpm --filter backend prisma migrate dev",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down"
   },
   "devDependencies": {
     "@types/node": "^24.3.0",

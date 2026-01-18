@@ -8,6 +8,7 @@
  */
 
 import axios from 'axios';
+import { OrderStatus } from '@prisma/client';
 import {
   PayphoneCreatePaymentRequest,
   PayphoneCreatePaymentResponse,
@@ -125,15 +126,15 @@ export async function verifyPayphonePayment(
  * @param statusCode - Código de estado de Payphone
  * @returns Estado mapeado
  */
-export function mapPayphoneStatus(statusCode: number): string {
-  const statusMap: Record<number, string> = {
-    1: 'APPROVED',   // Aprobado
-    2: 'PENDING',    // Pendiente
-    3: 'REJECTED',   // Rechazado
-    4: 'CANCELLED',  // Cancelado
+export function mapPayphoneStatus(statusCode: number): OrderStatus {
+  const statusMap: Record<number, OrderStatus> = {
+    1: OrderStatus.APPROVED,   // Aprobado
+    2: OrderStatus.PENDING,    // Pendiente
+    3: OrderStatus.REJECTED,   // Rechazado
+    4: OrderStatus.CANCELLED,  // Cancelado
   };
 
-  return statusMap[statusCode] || 'PENDING';
+  return statusMap[statusCode] || OrderStatus.PENDING;
 }
 
 /**

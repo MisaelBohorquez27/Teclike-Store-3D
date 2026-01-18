@@ -4,7 +4,7 @@
  */
 
 import { Request, Response } from 'express';
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, OrderStatus } from '@prisma/client';
 import * as payphoneService from '../services/payphone.service';
 import * as cartService from '../services/cart.service';
 import { handleError } from '../utils/errorHandler';
@@ -39,7 +39,8 @@ export async function createPayment(req: AuthRequest, res: Response) {
     console.log('💳 [PAYMENT] Iniciando creación de pago para usuario:', userId);
 
     // 1. Obtener el carrito del usuario
-    const cart = await cartService.getCart(userId);
+    const cartResponse = await cartService.getCart(userId);
+    const cart = cartResponse.data;
     
     if (!cart || !cart.items || cart.items.length === 0) {
       return res.status(400).json({
@@ -67,7 +68,7 @@ export async function createPayment(req: AuthRequest, res: Response) {
       data: {
         userId: userId,
         clientTransactionId: clientTransactionId,
-        status: 'PENDING',
+        status: OrderStatus.PENDING,
         subtotalCents: subtotalCents,
         taxCents: taxCents,
         shippingCostCents: shippingCents,
@@ -76,16 +77,16 @@ export async function createPayment(req: AuthRequest, res: Response) {
         phone: phone,
         shippingAddress: shippingAddress || 'Dirección no especificada',
         billingAddress: billingAddress,
-        orderProducts: {
+        items: {
           create: cart.items.map((item: any) => ({
             productId: item.productId,
             quantity: item.quantity,
-            priceCents: item.product?.priceInt || 0,
+            priceCents: item.product?.priceCents || 0,
           })),
         },
       },
       include: {
-        orderProducts: {
+        items: {
           include: {
             product: true,
           },
@@ -127,7 +128,7 @@ export async function createPayment(req: AuthRequest, res: Response) {
     if (payphoneResponse.transactionStatus === 1) {
       await prisma.order.update({
         where: { id: order.id },
-        data: { status: 'APPROVED' },
+        data: { status: OrderStatus.APPROVED },
       });
 
       // Vaciar carrito
@@ -191,7 +192,7 @@ export async function payphoneWebhook(req: Request, res: Response) {
         clientTransactionId: webhookData.clientTxId,
       },
       include: {
-        orderProducts: true,
+        items: true,
       },
     });
 
@@ -266,7 +267,7 @@ export async function getPaymentStatus(req: AuthRequest, res: Response) {
         userId: userId, // Solo el dueño puede ver su orden
       },
       include: {
-        orderProducts: {
+        items: {
           include: {
             product: true,
           },

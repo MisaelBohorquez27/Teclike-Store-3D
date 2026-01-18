@@ -33,14 +33,11 @@ export const addToCart = async (req: AuthRequest, res: Response) => {
       });
     }
 
-    const cart = await cartService.addToCart(userId, productId, quantity);
+    const cartResponse = await cartService.addToCart(userId, productId, quantity);
     
-    console.log(`✅ [CONTROLLER] Respuesta enviada - itemCount=${cart.itemCount}`);
+    console.log(`✅ [CONTROLLER] Respuesta enviada - itemCount=${cartResponse.data.itemCount}`);
     
-    res.json({
-      success: true,
-      data: cart,
-    });
+    res.json(cartResponse);
   } catch (error) {
     handleError(res, error, "Error al agregar al carrito");
   }
