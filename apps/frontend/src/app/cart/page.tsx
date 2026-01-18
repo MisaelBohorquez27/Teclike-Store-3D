@@ -36,15 +36,6 @@ export default function CartPage() {
   };
 
   const renderContent = () => {
-    // Debug logs
-    console.log("🔍 Cart Debug:", {
-      cart,
-      itemCount,
-      loading,
-      error,
-      hasItems: cart?.items?.length,
-    });
-
     if (loading) return <CartPageLoading />;
     if (error) return <CartPageError error={error} />;
 

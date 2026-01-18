@@ -137,7 +137,7 @@ export function TrendingProducts() {
           transition={{ delay: 0.3, duration: 0.6 }}
           className="text-center mt-16"
         >
-          <Link href="/Products">
+          <Link href="/products">
             <Button className="group px-8 py-4 bg-linear-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-semibold rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-cyan-500/20 inline-flex items-center gap-3">
               <span>Ver Todos los Productos</span>
             </Button>

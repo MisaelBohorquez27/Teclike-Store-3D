@@ -12,7 +12,7 @@ export function InteractiveVideo() {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   // ⚙️ CONFIGURACIÓN DEL VIDEO
-  const VIDEO_URL = "ui/video.mp4";
+  const VIDEO_URL = "ui/blog.mp4";
   const VIDEO_START_TIME = 50;        // ⏱️ Comenzar en segundo 5
   const VIDEO_DURATION = 15;         // ⏱️ Duración máxima: 15 segundos
   const VIDEO_END_TIME = VIDEO_START_TIME + VIDEO_DURATION; // Fin automático
@@ -120,7 +120,7 @@ export function InteractiveVideo() {
         <div className="absolute inset-0 bg-linear-to-b from-black/20 via-transparent to-black/20" />
 
         {/* Efecto de borde luminoso */}
-        <div className="absolute inset-0 border-[12px] border-transparent">
+        <div className="absolute inset-0 border-12 border-transparent">
           <div className="absolute -inset-0.5 bg-linear-to-r from-cyan-500/10 via-blue-500/10 to-purple-500/10 blur-sm" />
         </div>
 

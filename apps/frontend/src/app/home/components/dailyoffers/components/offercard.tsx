@@ -56,7 +56,7 @@ export function OfferCard({ product }: { product: ProductWithOffer }) {
         </div>
 
         {/* Contenido de la card */}
-        <div className="flex-grow">
+        <div className="grow">
           {/* Categoría */}
           <div className="mb-3">
             <span className="inline-block px-3 py-1 rounded-full bg-linear-to-r from-blue-100 to-cyan-100 dark:from-cyan-500/10 dark:to-cyan-500/10 text-cyan-600 dark:text-cyan-400 text-xs font-medium">

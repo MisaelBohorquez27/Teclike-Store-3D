@@ -32,7 +32,7 @@ const Header = () => (
         Los productos que están conquistando a nuestros clientes esta semana
       </p>
     </div>
-    <Link href="/Products">
+    <Link href="/products">
       <Button className="group inline-flex items-center gap-3 px-6 py-3 rounded-xl bg-linear-to-r from-gray-900 to-black hover:from-gray-800 hover:to-gray-900 border border-gray-800 hover:border-amber-500/30 text-white font-medium transition-all duration-300 hover:scale-105">
         <span>{CONTENT.viewAllText}</span>
         <FiArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -54,7 +54,7 @@ const EmptyState = () => (
       </div>
       <h3 className="text-2xl font-bold text-white mb-3">Próximos Campeones</h3>
       <p className="text-gray-400 mb-8">{CONTENT.emptyText}</p>
-      <Link href="/Products">
+      <Link href="/products">
         <Button
           size="s"
           className="px-6 py-3 bg-linear-to-r from-gray-800 to-gray-900 hover:from-gray-700 hover:to-gray-800 text-white font-medium rounded-xl transition-all"

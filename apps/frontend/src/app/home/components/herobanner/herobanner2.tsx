@@ -99,19 +99,6 @@ export function HeroBanner2() {
               className="text-white space-y-8"
               {...animationProps.text}
             >
-              {/* Badge futurista 
-              <motion.div
-                className="inline-flex items-center gap-3 px-4 py-3 rounded-full border border-blue-500/30 bg-blue-500/10 backdrop-blur-sm"
-                initial={{ opacity: 0, y: 20, scale: 0.9 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                transition={{ delay: 0.2, type: "spring" }}
-              >
-                <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse" />
-                <span className="text-blue-300 font-medium text-sm">
-                  TECNOLOGÍA DE VANGUARDIA
-                </span>
-                <FiCpu className="w-4 h-4 text-blue-400" />
-              </motion.div>*/}
 
               {/* Título principal mejorado */}
               <motion.div
@@ -160,7 +147,7 @@ export function HeroBanner2() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.8 }}
               >
-                <Link href="/Products" passHref>
+                <Link href="/products" passHref>
                   <Button
                     variant="primary"
                     size="xl"

@@ -67,7 +67,7 @@ export const TrendingProductCard = ({ product }: TrendingProductCardProps) => {
           {/* Botones flotantes */}
           <div className="absolute bottom-4 left-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300">
             <Link
-              href={`/Products/${product.slug}`}
+              href={`/products/${product.slug}`}
               className="flex-1 flex items-center justify-center gap-2 py-2 px-3 bg-white/10 backdrop-blur-md hover:bg-white/20 text-white text-sm rounded-lg transition-colors cursor-pointer"
             >
               <FiEye className="w-4 h-4" />

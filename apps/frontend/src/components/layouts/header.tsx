@@ -65,7 +65,7 @@ export function Header() {
           {/* Acciones del header */}
           <div className="flex items-center space-x-4 md:space-x-6 z-50">
             {/* Botón Contacto */}
-            <Link href="/HelpContact">
+            <Link href="/helpcontact">
               <Button
                 variant="primary"
                 size="xs"

@@ -67,11 +67,11 @@ export function Footer({
     },
     links: [
       { href: "/", label: "Home", emoji: "🏠" },
-      { href: "/Products", label: "Productos", emoji: "🎨" },
+      { href: "/products", label: "Productos", emoji: "🎨" },
       { href: "#Reviews", label: "Reseñas", emoji: "📁" },
-      { href: "/DailyOffers", label: "Ofertas", emoji: "🔥" },
+      { href: "/dailyoffers", label: "Ofertas", emoji: "🔥" },
       { href: "#FollowUs", label: "Sobre Nosotros", emoji: "👥" },
-      { href: "/HelpContact", label: "Contacto", emoji: "📞" },
+      { href: "/helpcontact", label: "Contacto", emoji: "📞" },
     ],
     legal: [
       { href: "/", label: "Privacy Policy" },
@@ -94,15 +94,15 @@ export function Footer({
         </div>
 
         {/* Efectos de luz */}
-        <div className="absolute -top-64 -left-64 w-128 h-128 bg-cyan-500/5 rounded-full blur-3xl" />
-        <div className="absolute -bottom-64 -right-64 w-128 h-128 bg-blue-500/5 rounded-full blur-3xl" />
+        <div className="absolute -top-64 -left-64 w-lg h-lg bg-cyan-500/5 rounded-full blur-3xl" />
+        <div className="absolute -bottom-64 -right-64 w-lg h-lg bg-blue-500/5 rounded-full blur-3xl" />
 
         {/* Línea decorativa superior */}
         <div className="absolute top-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-gray-500/30 to-transparent" />
       </div>
 
       {/* Patrón de grid sutil */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-size-[64px_64px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,black,transparent)]"></div>
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-size-[64px_64px] mask-[radial-gradient(ellipse_80%_50%_at_50%_50%,black,transparent)]"></div>
 
       <div className="relative z-10 container mx-auto px-4 pt-20 pb-8">
         {/* Main Content Grid */}

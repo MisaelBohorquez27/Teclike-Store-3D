@@ -124,7 +124,7 @@ export function ProductInfo({ product }: { product: ProductForDetail }) {
           onSuccess={handleAddSuccess}
           onError={handleAddError}
         />
-        <Link href="/Products">
+        <Link href="/products">
           <Button
             variant="secondary"
             size="m"

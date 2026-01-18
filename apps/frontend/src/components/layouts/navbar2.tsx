@@ -116,8 +116,8 @@ export function Navbar2() {
           <div className="hidden md:flex items-center justify-center relative left-1/2 transform -translate-x-1/2 backdrop-blur-md bg-gray-950/50 rounded-xl px-4 py-1.5 shadow-lg w-full max-w-md">
             <div className="flex items-center space-x-4">
               <NavLink href="/" text="Inicio" />
-              <NavLink href="/Products" text="Productos" />
-              <NavLink href="/DailyOffers" text="Oferta" />
+              <NavLink href="/products" text="Productos" />
+              <NavLink href="/dailyoffers" text="Oferta" />
 
               {/* CartIcon junto a los links, con espacio extra */}
               <div className="ml-6 mr-2 hover:scale-110 transition-transform">
@@ -133,11 +133,11 @@ export function Navbar2() {
                 <div className="flex flex-col space-y-2">
                   <NavLink href="/" text="Inicio" icon={FiHeart} />
                   <NavLink
-                    href="/Products"
+                    href="/products"
                     text="Productos"
                     icon={FiShoppingBag}
                   />
-                  <NavLink href="/DailyOffers" text="Oferta" />
+                  <NavLink href="/dailyoffers" text="Oferta" />
 
                   {/* Wishlist Mobile */}
                   <Link

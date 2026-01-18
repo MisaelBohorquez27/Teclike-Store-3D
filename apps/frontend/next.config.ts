@@ -11,8 +11,9 @@ const nextConfig: NextConfig = {
     ],
   },
   turbopack: {
-    root: ".",
+    root: process.cwd(),
   },
+  outputFileTracingRoot: process.cwd(),
 };
 
 export default nextConfig;

@@ -49,7 +49,7 @@ const EmptyCartText = () => (
 const EmptyCartActions = () => (
   <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
     <Link
-      href="/Products"
+      href="/products"
       className="inline-flex items-center justify-center px-8 py-3 bg-cyan-600 text-white font-medium rounded-lg hover:bg-cyan-700 transition-all duration-200 transform hover:-translate-y-0.5 shadow-lg hover:shadow-xl"
     >
       <ShoppingBagIcon />
@@ -57,7 +57,7 @@ const EmptyCartActions = () => (
     </Link>
     
     <Link
-      href="/DailyOffers"
+      href="/dailyoffers"
       className="inline-flex items-center justify-center px-8 py-3 border-2 border-gray-300 text-gray-700 font-medium rounded-lg hover:border-cyan-600 hover:text-cyan-600 transition-all duration-200"
     >
       <TagIcon />

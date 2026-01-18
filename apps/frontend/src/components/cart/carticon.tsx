@@ -8,7 +8,7 @@ export default function CartIcon() {
   const { itemCount } = useCartContext();
 
   return (
-    <Link href="/Cart" className="relative inline-block p-2">
+    <Link href="/cart" className="relative inline-block p-2">
       <div >
         <FiShoppingCart
           size={24}
@@ -21,7 +21,7 @@ export default function CartIcon() {
               absolute -top-0.5 -right-1
               bg-linear-to-r from-cyan-500 to-blue-500 
               text-white text-xs font-bold 
-              min-w-[20px] h-5 px-1
+              min-w-5 h-5 px-1
               flex items-center justify-center 
               rounded-full shadow-lg
               animate-bounce-once
