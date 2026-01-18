@@ -1,4 +1,4 @@
-import { ContactMessage } from "@/types/contactMessage";
+import { ContactMessage } from "@/types/contactmessage";
 
 export async function sendContactMessage(data: ContactMessage) {
   const res = await fetch("http://localhost:5000/api/contact", {

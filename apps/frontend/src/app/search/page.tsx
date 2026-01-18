@@ -1,7 +1,7 @@
 "use client";
 import { Suspense } from "react";
 import { SearchBar } from "@/components/common/searchbar";
-import { ProductHero } from "../Products/components/producthero";
+import { ProductHero } from "../products/components/producthero";
 import { SearchResults } from "./components/searchresults";
 
 export default function SearchPage() {
