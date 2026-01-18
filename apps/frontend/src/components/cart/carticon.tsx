@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { FiShoppingCart } from "react-icons/fi";
-import { useCartContext } from "@/context/CartContext";
+import { useCartContext } from "@/context/cartcontext";
 
 export default function CartIcon() {
   const { itemCount } = useCartContext();

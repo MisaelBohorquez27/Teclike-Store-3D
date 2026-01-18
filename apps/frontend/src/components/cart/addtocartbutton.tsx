@@ -2,10 +2,10 @@
 
 import { useState, useRef, useEffect } from "react";
 import { createPortal } from "react-dom";
-import { useCartContext } from "@/context/CartContext";
-import { useAuth } from "@/context/AuthContext";
-import { AuthModal } from "@/components/auth/AuthModal";
-import Button from "../common/PagesButtons";
+import { useCartContext } from "@/context/cartcontext";
+import { useAuth } from "@/context/authcontext";
+import { AuthModal } from "@/components/auth/authmodal";
+import Button from "../common/pagesbuttons";
 
 interface AddToCartButtonProps {
   productId: number;

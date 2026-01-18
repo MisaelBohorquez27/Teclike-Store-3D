@@ -1,10 +1,10 @@
 "use client";
 import { useParams } from "next/navigation";
-import { ProductInfo } from "./components/ProductInfo";
-import { ProductTabs } from "./components/ProductTabs";
-import { ProductReviews } from "./components/ProductReviews";
-import { ProductGallery } from "./components/ProductGallery";
-import { useProductInfo } from "@/hooks/useProductInfo";
+import { ProductInfo } from "./components/productinfo";
+import { ProductTabs } from "./components/producttabs";
+import { ProductReviews } from "./components/productreviews";
+import { ProductGallery } from "./components/productgallery";
+import { useProductInfo } from "@/hooks/useproductinfo";
 import { Icon } from "lucide-react";
 
 // Componente de Skeleton Loading

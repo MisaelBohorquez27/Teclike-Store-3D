@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import { CustomSwiper } from "@/components/swipper/CustomSwiper";
+import { CustomSwiper } from "@/components/swipper/customswiper";
 
 export function ProductGallery({
   description,

@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { hoverAnimation } from "@/types/followUs";
-import { InstagramPostProps } from "../../Types/InstagramProps";
+import { InstagramPostProps } from "../../Types/instagramprops";
 
 export function InstagramPost({ post, instagramUrl }: InstagramPostProps) {
   return (

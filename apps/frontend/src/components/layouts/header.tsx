@@ -4,11 +4,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { FiHelpCircle, FiLogOut, FiUser } from "react-icons/fi";
 import logo from "../../../public/logos/Logo3.png";
-import Button from "@/components/common/PagesButtons";
-import { Navbar2 } from "./Navbar2";
+import Button from "@/components/common/pagesbuttons";
+import { Navbar2 } from "./navbar2";
 import { useState } from "react";
-import { useAuth } from "@/context/AuthContext";
-import { AuthModal } from "@/components/auth/AuthModal";
+import { useAuth } from "@/context/authcontext";
+import { AuthModal } from "@/components/auth/authmodal";
 
 export function Header() {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);

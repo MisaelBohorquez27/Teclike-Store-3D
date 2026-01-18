@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { FiMenu, FiX, FiHeart, FiShoppingBag } from "react-icons/fi";
-import CartIcon from "../cart/CartIcon";
+import CartIcon from "../cart/carticon";
 
 export function Navbar2() {
   const [isOpen, setIsOpen] = useState(false);

@@ -1,10 +1,10 @@
 "use client";
 
-import { ProductCard } from "@/app/Products/components/ProductCard";
-import Pagination from "@/components/common/Pagination";
-import { SearchBar } from "@/components/common/SearchBar";
-import { FilterSidebar } from "./FilterSidebar";
-import { useProductLoader } from "@/hooks/useProductLoader";
+import { ProductCard } from "@/app/Products/components/productcard";
+import Pagination from "@/components/common/pagination";
+import { SearchBar } from "@/components/common/searchbar";
+import { FilterSidebar } from "./filtersidebar";
+import { useProductLoader } from "@/hooks/useproductloader";
 import { motion } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
 

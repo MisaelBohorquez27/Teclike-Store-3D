@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { ProductCard } from "@/app/Products/components/ProductCard";
-import Pagination from "@/components/common/Pagination";
-import { fetchSearchResults } from "@/services/Search";
+import { ProductCard } from "@/app/Products/components/productcard";
+import Pagination from "@/components/common/pagination";
+import { fetchSearchResults } from "@/services/search";
 import { ProductForDetail } from "@/types/productss";
 
 export function SearchResults() {

@@ -1,6 +1,6 @@
 "use client";
 
-import { useCartContext } from "@/context/CartContext";
+import { useCartContext } from "@/context/cartcontext";
 import { BestSellersWeekGrid } from "./Components/bswgrid";
 
 export function BestSellersWeekPage() {

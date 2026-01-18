@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { FiX } from "react-icons/fi";
-import { useAuth } from "@/context/AuthContext";
+import { useAuth } from "@/context/authcontext";
 import { useRouter } from "next/navigation";
 
 interface AuthModalProps {

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { PaymentService } from "@/services/payment.service";
-import { useAuth } from "@/context/AuthContext";
+import { useAuth } from "@/context/authcontext";
 
 interface CheckoutButtonProps {
   items?: any[];

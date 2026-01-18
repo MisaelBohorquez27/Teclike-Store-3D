@@ -1,9 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { InstagramGallery } from "./Components/InstagramGallery/InstagramGallery";
-import { InstagramButton } from "./Components/InstagramGallery/InstagramButton";
-import { SubscriptionSection } from "./Components/SubscriptionSection/Subscription";
+import { InstagramGallery } from "./Components/InstagramGallery/instagramgallery";
+import { InstagramButton } from "./Components/InstagramGallery/instagrambutton";
+import { SubscriptionSection } from "./Components/SubscriptionSection/subscription";
 import {
   FollowUsProps,
   DEFAULT_POSTS,

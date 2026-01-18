@@ -77,7 +77,7 @@ export class AuthService {
     
     // Detener sincronización automática del carrito
     try {
-      const { CartService } = await import('./Cart.service');
+      const { CartService } = await import('./cart.service');
       CartService.stopAutoSync();
       console.log('🛒 Sincronización del carrito detenida');
     } catch (error) {

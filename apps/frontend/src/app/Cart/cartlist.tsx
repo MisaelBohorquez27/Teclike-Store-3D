@@ -1,7 +1,7 @@
 "use client";
 import { CartResponse } from "@/types/cart";
 import { CartItem } from "./cartitem";
-import { useCartContext } from "@/context/CartContext";
+import { useCartContext } from "@/context/cartcontext";
 
 interface CartListProps {
   cart: CartResponse | null;

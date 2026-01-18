@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
-import { useSearch } from "@/hooks/useSearch";
+import { useSearch } from "@/hooks/usesearch";
 import { SearchSuggestion } from "@/types/search";
 import { FiSearch, FiX, FiClock, FiTrendingUp } from "react-icons/fi";
 

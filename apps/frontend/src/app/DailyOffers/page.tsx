@@ -1,6 +1,6 @@
 import { DailyDeals } from "@/app/DailyOffers/components/dailydeals";
 import { CountdownTimer } from "@/app/DailyOffers/components/countdowntimer";
-import { Subscription } from "@/components/common/Subscription";
+import { Subscription } from "@/components/common/subscription";
 import {
   FiTruck,
   FiShield,

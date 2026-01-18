@@ -1,7 +1,7 @@
 "use client";
 
 import { Suspense } from "react";
-import { PaymentCallbackContent } from "./PaymentCallbackContent";
+import { PaymentCallbackContent } from "./paymentcallbackcontent";
 
 /**
  * Página de callback después del pago con Payphone

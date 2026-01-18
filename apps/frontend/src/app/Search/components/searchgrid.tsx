@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { SearchProductCard } from "./searchProductCard";
+import { SearchProductCard } from "./searchproductcard";
 import { SearchResult } from "@/types/search";
 
 export function SearchGrid({

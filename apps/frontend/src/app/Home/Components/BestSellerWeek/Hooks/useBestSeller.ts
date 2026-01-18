@@ -1,4 +1,4 @@
-import { useBestSellerWeek } from "@/hooks/useBestSellerWeek";
+import { useBestSellerWeek } from "@/hooks/usebestsellerweek";
 import { CartListProps } from "../Types/BSWTypes";
 
 // Hook para la lógica del componente

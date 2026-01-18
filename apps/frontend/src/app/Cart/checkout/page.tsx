@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { AuthService } from "@/services/auth.service";
-import { CheckoutSummaryCard } from "@/components/checkout/CheckoutSummaryCard";
+import { CheckoutSummaryCard } from "@/components/checkout/checkoutsummarycard";
 
 export default function CheckoutPage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);

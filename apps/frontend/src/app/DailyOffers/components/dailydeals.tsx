@@ -1,7 +1,7 @@
 "use client";
 
 import { DealCard } from "@/app/DailyOffers/components/dealcard";
-import { useDailyOffers } from "@/hooks/useDailyOffers";
+import { useDailyOffers } from "@/hooks/usedailyoffers";
 
 export function DailyDeals() {
   const {offers, loading} = useDailyOffers();

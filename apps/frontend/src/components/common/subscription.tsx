@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { FaArrowRight } from "react-icons/fa";
-import Button from "./PagesButtons";
+import Button from "./pagesbuttons";
 
 export function Subscription() {
   const [email, setEmail] = useState("");

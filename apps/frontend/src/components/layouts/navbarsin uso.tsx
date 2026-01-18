@@ -4,11 +4,10 @@ import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 import { FiMenu, FiX, FiSearch, FiUser } from "react-icons/fi";
 import logo from "../../public/logos/Logo4.png";
-import CartIcon from "../cart/CartIcon";
-import Button from "../common/PagesButtons";
-import { SearchBar } from "../common/SearchBar";
-import { ThemeToggle } from "../unused/Theme";
-import { useAuth } from "../../context/AuthContext";
+import CartIcon from "../cart/carticon";
+import Button from "../common/pagesbuttons";
+import { SearchBar } from "../common/searchbar";
+import { useAuth } from "../../context/authcontext";
 import { useRouter } from "next/navigation";
 import "@/styles/components/Navbar.css";
 
@@ -192,7 +191,6 @@ export function Navbar() {
             </Link>
 
             <CartIcon />
-            <ThemeToggle />
           </div>
         </div>
 

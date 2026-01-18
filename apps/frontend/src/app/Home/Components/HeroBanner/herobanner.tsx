@@ -1,11 +1,11 @@
 "use client";
 
-import Button from "@/components/common/PagesButtons";
+import Button from "@/components/common/pagesbuttons";
 import Image from "next/image";
 import { motion, useReducedMotion, AnimatePresence } from "framer-motion";
-import { useIsMounted } from "@/hooks/useIsMounted";
-import { HERO_CONFIG } from "./Data/HeroData";
-import { getAnimationProps } from "./Props/HeroProps";
+import { useIsMounted } from "@/hooks/useismounted";
+import { HERO_CONFIG } from "./Data/herodata";
+import { getAnimationProps } from "./Props/heroprops";
 import {
   FiArrowRight,
   FiZap,

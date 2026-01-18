@@ -1,4 +1,4 @@
-import { Rating } from "@/components/common/Rating";
+import { Rating } from "@/components/common/rating";
 import { Review } from "@/types/review";
 import { Quote } from "lucide-react";
 

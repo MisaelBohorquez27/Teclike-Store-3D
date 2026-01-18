@@ -1,9 +1,9 @@
 "use client";
 import { motion } from "framer-motion";
 import { FiInstagram } from "react-icons/fi";
-import Button from "@/components/common/PagesButtons";
+import Button from "@/components/common/pagesbuttons";
 import { fadeInAnimation } from "@/types/followUs";
-import { InstagramButtonProps } from "../../Types/InstagramProps";
+import { InstagramButtonProps } from "../../Types/instagramprops";
 
 export function InstagramButton({ instagramUrl, username }: InstagramButtonProps) {
   return (

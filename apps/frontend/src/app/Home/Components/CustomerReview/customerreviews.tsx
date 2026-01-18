@@ -2,9 +2,9 @@
 
 import Image from "next/image";
 import { SwiperSlide } from "swiper/react";
-import { BaseSwiper } from "@/components/swipper/BaseSwiper";
+import { BaseSwiper } from "@/components/swipper/baseswiper";
 import { ReviewCard } from "./Components/reviewcard";
-import { useReviews } from "@/hooks/useReviews";
+import { useReviews } from "@/hooks/usereviews";
 import { motion } from "framer-motion";
 import {
   FiMessageSquare,

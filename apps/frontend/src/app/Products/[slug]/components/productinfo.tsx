@@ -1,5 +1,5 @@
-import { AddToCartButton } from "@/components/cart/AddToCartButton";
-import Button from "@/components/common/PagesButtons";
+import { AddToCartButton } from "@/components/cart/addtocartbutton";
+import Button from "@/components/common/pagesbuttons";
 import { ProductForDetail } from "@/types/productss";
 import Link from "next/dist/client/link";
 import { useState } from "react";

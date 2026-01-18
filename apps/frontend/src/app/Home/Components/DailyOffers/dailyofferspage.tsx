@@ -1,5 +1,5 @@
 "use client";
-import { useDailyOffers } from "@/hooks/useDailyOffers";
+import { useDailyOffers } from "@/hooks/usedailyoffers";
 import { DailyOffersContent } from "./Components/dailyofferscontent";
 import { FiClock, FiFilter } from "react-icons/fi";
 import { motion } from "framer-motion";

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useCallback, useEffect } from "react";
-import { CartService } from "@/services/Cart.service";
+import { CartService } from "@/services/cart.service";
 import { CartResponse } from "@/types/cart";
 import { mapCartItems } from "@/utils/cartMapper";
 
