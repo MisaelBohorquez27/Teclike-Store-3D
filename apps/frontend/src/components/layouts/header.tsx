@@ -2,17 +2,19 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { FiHelpCircle, FiLogOut, FiUser } from "react-icons/fi";
+import { FiHelpCircle, FiLogOut, FiUser, FiMenu, FiX } from "react-icons/fi";
 import logo from "../../../public/logos/Logo3.png";
 import Button from "@/components/common/pagesbuttons";
 import { Navbar2 } from "./navbar2";
 import { useState } from "react";
 import { useAuth } from "@/context/authcontext";
 import { AuthModal } from "@/components/auth/authmodal";
+import CartIcon from "@/components/cart/carticon";
 
 export function Header() {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [isLoggingOut, setIsLoggingOut] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { isAuthenticated, user, logout } = useAuth();
 
   const handleLogout = async () => {
@@ -32,7 +34,7 @@ export function Header() {
   };
 
   return (
-    <header className="relative w-full top-0 left-0 right-0 z-50 shadow-lg pt-3.5 pb-3 text-gray-300">
+    <header className="relative w-full top-0 left-0 right-0 z-50 shadow-lg pt-2 pb-2 md:pt-3.5 md:pb-3 text-gray-300">
       {/* Fondo con degradado elegante */}
       <div className="absolute inset-0 bg-linear-to-t from-gray-950 via-gray-950 to-gray-950" />
 
@@ -41,12 +43,12 @@ export function Header() {
 
       {/* Contenido */}
       <div className="w-full">
-        <div className="flex justify-between items-center py-1 px-4 md:px-8 lg:px-12 xl:px-16">
+        <div className="flex justify-between items-center py-1 px-3 sm:px-4 md:px-8 lg:px-12 xl:px-16 gap-3 md:gap-0">
           {/* Logo con efecto */}
-          <div className="flex items-center z-50">
+          <div className="flex items-center z-50 shrink-0">
             <Link
               href="/"
-              className="flex items-center transition-all duration-300 hover:scale-105 group relative font-bold gap-2"
+              className="flex items-center transition-all duration-300 hover:scale-105 group relative font-bold gap-1 md:gap-2"
             >
               <div className="absolute -inset-1 bg-linear-to-r from-cyan-500/20 to-blue-500/20 rounded-lg blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               <Image
@@ -54,48 +56,51 @@ export function Header() {
                 alt="Teclike Logo"
                 width={140}
                 height={44}
-                className="h-8 w-auto md:h-10 relative z-10 brightness-110 drop-shadow-md"
+                className="h-6 md:h-8 lg:h-10 w-auto relative z-10 brightness-110 drop-shadow-md"
                 priority
               />
-              TECLIKE
+              <span className="hidden sm:inline text-sm md:text-base">TECLIKE</span>
             </Link>
           </div>
-          <Navbar2 />
+
+          {/* Navbar desktop */}
+          <Navbar2 isMobileMenuOpen={isMobileMenuOpen} setIsMobileMenuOpen={setIsMobileMenuOpen} />
 
           {/* Acciones del header */}
-          <div className="flex items-center space-x-4 md:space-x-6 z-50">
-            {/* Botón Contacto */}
-            <Link href="/helpcontact">
+          <div className="flex items-center gap-2 md:gap-4 z-50 shrink-0">
+            {/* Botón Contacto - oculto en mobile */}
+            <Link href="/helpcontact" className="hidden sm:block">
               <Button
                 variant="primary"
                 size="xs"
-                className="bg-gray-800/80 backdrop-blur-sm hover:bg-gray-700/90 hover:text-gray-100 flex items-center space-x-2 hover:scale-105 transition-all duration-200"
+                className="bg-gray-800/80 backdrop-blur-sm hover:bg-gray-700/90 hover:text-gray-100 flex items-center space-x-2 hover:scale-105 transition-all duration-200 text-xs md:text-sm"
               >
                 <FiHelpCircle size={16} />
-                <span>Contacto</span>
+                <span className="hidden md:inline">Contacto</span>
               </Button>
             </Link>
 
             {/* Botón Login / Usuario */}
             {isAuthenticated && user ? (
-              <div className="flex items-center space-x-3">
-                <span className="text-sm text-cyan-400 font-medium hidden sm:inline">
+              <div className="flex items-center gap-1 md:gap-3">
+                <span className="text-xs md:text-sm text-cyan-400 font-medium hidden sm:inline whitespace-nowrap">
                   <div className="flex items-center gap-1">
-                    <FiUser size={15} />
-                    {user.username}
+                    <FiUser size={14} />
+                    <span className="hidden md:inline">{user.username}</span>
                   </div>
                 </span>
                 <button
                   onClick={handleLogout}
                   disabled={isLoggingOut}
-                  className={`px-3 py-1.5 rounded-lg flex items-center space-x-2 hover:scale-105 transition-all duration-100 text-sm ${
+                  className={`px-2 py-1.5 md:px-3 rounded-lg flex items-center space-x-1 md:space-x-2 hover:scale-105 transition-all duration-100 text-xs md:text-sm whitespace-nowrap ${
                     isLoggingOut
                       ? "bg-gray-600/80 text-gray-300 cursor-not-allowed"
                       : "backdrop-blur-sm hover:text-gray-100 cursor-pointer text-gray-200"
                   }`}
                 >
-                  <span>{isLoggingOut ? "Saliendo..." : "Salir"}</span>
-                  <FiLogOut size={15} />
+                  <span className="hidden sm:inline">{isLoggingOut ? "Saliendo..." : "Salir"}</span>
+                  <span className="sm:hidden">{isLoggingOut ? "..." : "Salir"}</span>
+                  <FiLogOut size={14} />
                 </button>
               </div>
             ) : (
@@ -103,12 +108,30 @@ export function Header() {
                 variant="primary"
                 size="xs"
                 onClick={() => setIsAuthModalOpen(true)}
-                className="bg-gray-700/80 backdrop-blur-sm hover:bg-cyan-500 hover:text-gray-900 px-3 py-1.5 rounded-lg flex items-center space-x-2 hover:scale-105 transition-all duration-100 text-sm"
+                className="bg-gray-700/80 backdrop-blur-sm hover:bg-cyan-500 hover:text-gray-900 px-2 md:px-3 py-1.5 rounded-lg flex items-center space-x-1 md:space-x-2 hover:scale-105 transition-all duration-100 text-xs md:text-sm whitespace-nowrap"
               >
-                <FiUser size={16} />
-                <span>Ingresar</span>
+                <FiUser size={14} />
+                <span className="hidden sm:inline">Ingresar</span>
               </Button>
             )}
+
+            {/* Carrito en mobile */}
+            <div className="md:hidden hover:scale-110 transition-transform">
+              <CartIcon />
+            </div>
+
+            {/* Botón menú mobile */}
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="md:hidden p-2 rounded-lg hover:bg-gray-800 transition-all z-50"
+              aria-label="Menú"
+            >
+              {isMobileMenuOpen ? (
+                <FiX size={20} />
+              ) : (
+                <FiMenu size={20} />
+              )}
+            </button>
           </div>
         </div>
       </div>
