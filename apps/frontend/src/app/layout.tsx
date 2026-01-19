@@ -4,7 +4,6 @@ import { AuthProvider } from "@/context/authcontext";
 import { CartProvider } from "@/context/cartcontext";
 import { Footer } from "@/components/layouts/footer";
 import { Header } from "@/components/layouts/header";
-import { Navbar2 } from "@/components/layouts/navbar2";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -19,7 +18,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <AuthProvider>
           <CartProvider>
             <Header />
-            <Navbar2 isMobileMenuOpen={false} setIsMobileMenuOpen={() => {}} />
             <main>{children}</main>
             <Footer />
           </CartProvider>
