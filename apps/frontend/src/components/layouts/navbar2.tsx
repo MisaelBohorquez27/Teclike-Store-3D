@@ -2,15 +2,11 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { FiHeart, FiShoppingBag, FiHome, FiZap } from "react-icons/fi";
+import { FiMenu, FiX, FiHeart, FiShoppingBag, FiHome, FiZap } from "react-icons/fi";
 import CartIcon from "../cart/carticon";
 
-interface Navbar2Props {
-  isMobileMenuOpen: boolean;
-  setIsMobileMenuOpen: (open: boolean) => void;
-}
-
-export function Navbar2({ isMobileMenuOpen, setIsMobileMenuOpen }: Navbar2Props) {
+export function Navbar2() {
+  const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [textColor, setTextColor] = useState(
     "text-gray-900 dark:text-gray-300"
@@ -23,6 +19,7 @@ export function Navbar2({ isMobileMenuOpen, setIsMobileMenuOpen }: Navbar2Props)
       setIsScrolled(scrollY > 100);
 
       // Determinar el color basado en el fondo actual
+      // Esta es una implementación básica - puedes mejorarla según tus secciones
       const currentSection = getCurrentSection();
 
       // Lógica para cambiar color según el fondo de la sección
@@ -39,11 +36,12 @@ export function Navbar2({ isMobileMenuOpen, setIsMobileMenuOpen }: Navbar2Props)
 
   // Función auxiliar para determinar si el fondo es oscuro
   const isDarkBackground = (sectionId: string | null): boolean => {
+    // Define aquí qué secciones tienen fondo oscuro
     const darkSections = ["hero", "about", "services", "contact"];
     return sectionId ? darkSections.includes(sectionId) : false;
   };
 
-  // Función para obtener la sección actual
+  // Función para obtener la sección actual (simplificada)
   const getCurrentSection = (): string | null => {
     const sections = document.querySelectorAll("section[id]");
     let currentSection = null;
@@ -58,6 +56,17 @@ export function Navbar2({ isMobileMenuOpen, setIsMobileMenuOpen }: Navbar2Props)
     return currentSection;
   };
 
+  // Cerrar menú al cambiar tamaño de pantalla
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768) {
+        setIsOpen(false);
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   // Componente auxiliar para los links
   const NavLink = ({
     href,
@@ -71,7 +80,7 @@ export function Navbar2({ isMobileMenuOpen, setIsMobileMenuOpen }: Navbar2Props)
     <Link
       href={href}
       className={`flex items-center text-gray-200 hover:text-white gap-2 py-2 px-4 transition-all duration-300 font-medium hover:scale-105`}
-      onClick={() => setIsMobileMenuOpen(false)}
+      onClick={() => setIsOpen(false)}
     >
       {Icon && (
         <Icon className="w-4 h-4 transition-transform group-hover:scale-110" />
@@ -81,59 +90,79 @@ export function Navbar2({ isMobileMenuOpen, setIsMobileMenuOpen }: Navbar2Props)
   );
 
   return (
-    <>
-      {/* Navbar Desktop */}
-      <nav className={`hidden md:flex w-auto items-center justify-center bg-transparent`}>
-        {/* Línea decorativa inferior */}
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-cyan-500/30 to-transparent hidden md:block" />
+    <nav
+      className={`hidden md:flex w-full md:top-0 left-0 right-0 z-40 transition-all duration-500 items-center justify-center bg-transparent`}
+    >      
+      {/* Línea decorativa inferior */}
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-cyan-500/30 to-transparent" />
+      
+      <div className="container px-4 w-full max-w-7xl ">
         
-        <div className="flex justify-center items-center backdrop-blur-md bg-gray-950/50 rounded-xl px-4 py-1.5 shadow-lg">
-          <div className="flex items-center space-x-4">
-            <NavLink href="/" text="Inicio" />
-            <NavLink href="/products" text="Productos" />
-            <NavLink href="/dailyoffers" text="Oferta" />
+        <div className="flex justify-between items-center py-2">
+          {/* Menú Mobile Button */}
+          <button
+            className="md:hidden p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-all"
+            onClick={() => setIsOpen(!isOpen)}
+            aria-label="Menú"
+            aria-expanded={isOpen}
+          >
+            {isOpen ? (
+              <FiX size={20} className={textColor} />
+            ) : (
+              <FiMenu size={20} className={textColor} />
+            )}
+          </button>
+          {/* Contenedor del menú centrado */}
+          <div className="hidden md:flex items-center justify-center relative left-1/2 transform -translate-x-1/2 backdrop-blur-md bg-gray-950/50 rounded-xl px-4 py-1.5 shadow-lg w-full max-w-md">
+            <div className="flex items-center space-x-4">
+              <NavLink href="/" text="Inicio" />
+              <NavLink href="/products" text="Productos" />
+              <NavLink href="/dailyoffers" text="Oferta" />
 
-            {/* CartIcon junto a los links */}
-            <div className="ml-6 mr-2 hover:scale-110 transition-transform">
-              <CartIcon />
+              {/* CartIcon junto a los links, con espacio extra */}
+              <div className="ml-6 mr-2 hover:scale-110 transition-transform">
+                <CartIcon />
+              </div>
             </div>
           </div>
+
+          {/* Menú Mobile */}
+          {isOpen && (
+            <div className="md:hidden absolute top-full left-0 w-full bg-white dark:bg-gray-900 backdrop-blur-lg border-t border-gray-200 dark:border-gray-800 shadow-xl animate-in fade-in slide-in-from-top-2 duration-300">
+              <div className="container mx-auto px-4 py-4">
+                <div className="flex flex-col space-y-2">
+                  <NavLink href="/" text="Inicio" icon={FiHome} />
+                  <NavLink
+                    href="/products"
+                    text="Productos"
+                    icon={FiShoppingBag}
+                  />
+                  <NavLink href="/dailyoffers" text="Oferta" icon={FiZap} />
+
+                  {/* Wishlist Mobile */}
+                  <Link
+                    href="/wishlist"
+                    className={`flex items-center gap-3 py-3 px-4 transition-all duration-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 font-medium ${textColor}`}
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <FiHeart className="w-4 h-4" />
+                    <span>Mi Lista de Deseos</span>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* CartIcon en móvil (visible cuando el menú está cerrado) */}
+          {!isOpen && (
+            <div className="md:hidden ml-auto">
+              <div className="hover:scale-110 transition-transform">
+                <CartIcon />
+              </div>
+            </div>
+          )}
         </div>
-      </nav>
-
-      {/* Menú Mobile */}
-      {isMobileMenuOpen && (
-        <div className="md:hidden fixed top-16 left-0 w-full bg-white dark:bg-gray-900 backdrop-blur-lg border-b border-gray-200 dark:border-gray-800 shadow-xl z-40 animate-in fade-in slide-in-from-top-2 duration-300">
-          <div className="px-4 py-4 space-y-2">
-            <NavLink href="/" text="Inicio" icon={FiHome} />
-            <NavLink
-              href="/products"
-              text="Productos"
-              icon={FiShoppingBag}
-            />
-            <NavLink href="/dailyoffers" text="Oferta" icon={FiZap} />
-
-            {/* Wishlist Mobile */}
-            <Link
-              href="/wishlist"
-              className={`flex items-center gap-3 py-3 px-4 transition-all duration-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 font-medium ${textColor}`}
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              <FiHeart className="w-4 h-4" />
-              <span>Mi Lista de Deseos</span>
-            </Link>
-
-            {/* Links adicionales en mobile */}
-            <Link
-              href="/helpcontact"
-              className={`flex items-center gap-3 py-3 px-4 transition-all duration-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 font-medium ${textColor}`}
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              <span>Contacto</span>
-            </Link>
-          </div>
-        </div>
-      )}
-    </>
+      </div>
+    </nav>
   );
 }

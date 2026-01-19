@@ -88,7 +88,7 @@ export function HeroBanner2() {
       {/* Contenido principal */}
       <div className="relative z-10 min-h-screen flex items-start top-30 ">
         <div className="container mx-auto px-4 w-full max-w-7xl">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Text Content - Mejorado */}
             <motion.div
               className="text-white space-y-8"
@@ -102,7 +102,7 @@ export function HeroBanner2() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
               >
-                <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-black leading-tight">
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-black leading-tight">
                   <span className="text-white">Encuentra los</span>
                   <br />
                   <span className="bg-linear-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
@@ -111,7 +111,7 @@ export function HeroBanner2() {
                 </h1>
 
                 <motion.p
-                  className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-300 leading-relaxed max-w-2xl"
+                  className="text-lg md:text-xl text-gray-300 leading-relaxed max-w-2xl"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.5 }}
@@ -159,7 +159,7 @@ export function HeroBanner2() {
             </motion.div>
 
             {/* Panel de visualización tecnológica */}
-            <motion.div className="relative w-full h-48 sm:h-64 md:h-80 lg:h-96" {...animationProps.image}>
+            <motion.div className="relative w-full h-25 md:h-50 lg:h-75" {...animationProps.image}>
               {/* Terminal flotante */}
               <motion.div
                 className="relative  w-full h-full bg-gray-900/80 backdrop-blur-md rounded-2xl border border-white/10 p-6 shadow-2xl"
