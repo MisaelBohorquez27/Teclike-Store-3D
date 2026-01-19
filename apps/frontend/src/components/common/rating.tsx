@@ -159,7 +159,7 @@ export function Rating({
       {(showValue || showCount) && (
         <div className={`flex items-center ${config.gap} ${config.text} text-gray-600`}>
           {showValue && (
-            <span className="font-medium min-w-[2.5rem]">
+            <span className="font-medium min-w-10">
               {roundedValue.toFixed(half ? 1 : 0)}/{max}
             </span>
           )}

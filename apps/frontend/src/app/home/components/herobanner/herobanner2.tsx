@@ -8,7 +8,12 @@ import { HERO_CONFIG } from "./data/herodata";
 import { getAnimationProps } from "./props/heroprops";
 import {
   FiArrowRight,
+  FiTrendingUp,
+  FiUsers,
   FiArrowDown,
+  FiCpu,
+  FiGlobe,
+  FiCode,
   FiServer,
 } from "react-icons/fi";
 import { BenefitsGrid } from "../benefits/benefitsgrid";
@@ -156,6 +161,33 @@ export function HeroBanner2() {
                   </Button>
                 </Link>
               </motion.div>
+
+              {/* Trust badges modernos
+              <motion.div
+                className="flex items-center gap-6 pt-8 pb-4 border-t border-white/10"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1 }}
+              >
+                <div className="flex items-center gap-3">
+                  <div className="flex -space-x-3">
+                    {[...Array(4)].map((_, i) => (
+                      <motion.div
+                        key={i}
+                        className="w-10 h-10 rounded-full bg-linear-to-r from-blue-500 to-purple-500 border-2 border-gray-900 shadow-lg"
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 1.1 + i * 0.1 }}
+                        whileHover={{ scale: 1.1, y: -2 }}
+                      />
+                    ))}
+                  </div>
+                  <div className="text-sm">
+                    <div className="font-semibold text-white">+1k clientes</div>
+                    <div className="text-gray-400">Confían en nosotros</div>
+                  </div>
+                </div>
+              </motion.div> */}
             </motion.div>
 
             {/* Panel de visualización tecnológica */}
