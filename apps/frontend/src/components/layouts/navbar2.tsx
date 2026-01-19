@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { FiMenu, FiX, FiHeart, FiShoppingBag } from "react-icons/fi";
+import { FiMenu, FiX, FiHeart, FiShoppingBag, FiHome, FiZap } from "react-icons/fi";
 import CartIcon from "../cart/carticon";
 
 export function Navbar2() {
@@ -131,13 +131,13 @@ export function Navbar2() {
             <div className="md:hidden absolute top-full left-0 w-full bg-white dark:bg-gray-900 backdrop-blur-lg border-t border-gray-200 dark:border-gray-800 shadow-xl animate-in fade-in slide-in-from-top-2 duration-300">
               <div className="container mx-auto px-4 py-4">
                 <div className="flex flex-col space-y-2">
-                  <NavLink href="/" text="Inicio" icon={FiHeart} />
+                  <NavLink href="/" text="Inicio" icon={FiHome} />
                   <NavLink
                     href="/products"
                     text="Productos"
                     icon={FiShoppingBag}
                   />
-                  <NavLink href="/dailyoffers" text="Oferta" />
+                  <NavLink href="/dailyoffers" text="Oferta" icon={FiZap} />
 
                   {/* Wishlist Mobile */}
                   <Link

@@ -66,9 +66,20 @@ export const login = async (
 
 export const register = async (
   req: AuthRequest,
-  res: Response<AuthResponse>
+  res: Response
 ) => {
   try {
+    // ❌ REGISTRO TEMPORALMENTE DESACTIVADO
+    // El registro de usuarios está deshabilitado para evitar múltiples registros simultáneos
+    // Solo se permite el acceso con credenciales de admin
+    
+    return res.status(403).json({
+      success: false,
+      message: "Por el momento el registro no está activado para usuarios recurrentes",
+    });
+
+    // ⬇️ CÓDIGO ANTERIOR COMENTADO - NO SE USA
+    /*
     const { email, username, password, confirmPassword } =
       req.body as RegisterRequest;
 
@@ -86,6 +97,7 @@ export const register = async (
       refreshToken: result.refreshToken,
       message: "Usuario registrado exitosamente",
     });
+    */
   } catch (error) {
     handleError(res, error, "Error en registro");
   }
