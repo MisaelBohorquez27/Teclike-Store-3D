@@ -67,7 +67,7 @@ export function SearchBar({
     if (!trimmedQuery) return;
 
     saveToRecentSearches(trimmedQuery);
-    router.push(`/Search?q=${encodeURIComponent(trimmedQuery)}`);
+    router.push(`/search?q=${encodeURIComponent(trimmedQuery)}`);
     setShowSuggestions(false);
     setIsFocused(false);
     inputRef.current?.blur();

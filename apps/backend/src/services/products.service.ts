@@ -48,7 +48,7 @@ export async function getPaginatedProducts(query: any) {
     const categories = category.split(",").map((c: string) => c.trim()).filter(Boolean);
     if (categories.length > 0) {
       whereClause.categoryProducts = {
-        some: { category: { name: { in: categories } } },
+        some: { category: { name: { in: categories, mode: "insensitive" as const } } },
       };
     }
   }
