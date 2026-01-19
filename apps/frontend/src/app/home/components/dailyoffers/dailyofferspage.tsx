@@ -27,7 +27,7 @@ export function DailyOffers() {
           </div>
         </motion.div>
 
-        <div className="w-full rounded-lg md:rounded-xl px-2 md:px-4 bg-opacity-10 backdrop-blur-md shadow-lg py-6 md:py-8 lg:py-12 h-full flex flex-col lg:flex-row items-center justify-center lg:justify-between">
+        <div className="w-full min-w-full rounded-lg md:rounded-xl px-2 md:px-4 bg-opacity-10 backdrop-blur-md shadow-lg py-6 md:py-8 lg:py-12 h-full flex flex-col lg:flex-row items-center justify-center lg:justify-between">
           <DailyOffersContent offers={offers} loading={loading} />
         </div>
       </div>

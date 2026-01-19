@@ -140,63 +140,65 @@ export function FilterSidebar() {
               )}
             </div>
 
-            {/* Categories Section */}
-            <div className="mb-8">
-              <div className="flex items-center gap-2 mb-4">
-                <FiGrid className="w-4 h-4 text-cyan-400" />
-                <h4 className="text-lg font-semibold text-white">Categorías</h4>
-              </div>
-              
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                {categories.map((category, index) => (
-                  <motion.div
-                    key={category}
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.03 }}
-                  >
-                    <label className="group flex items-center gap-3 p-3 rounded-xl hover:bg-white/5 transition-all duration-300 cursor-pointer">
-                      <div className="relative">
-                        <input
-                          type="checkbox"
-                          checked={selectedCategories.includes(category)}
-                          onChange={() => toggleCategory(category)}
-                          className="sr-only"
-                        />
-                        <div className={`w-5 h-5 rounded border flex items-center justify-center transition-all ${
-                          selectedCategories.includes(category)
-                            ? 'bg-linear-to-r from-cyan-500 to-blue-500 border-transparent'
-                            : 'border-gray-700 group-hover:border-gray-600'
-                        }`}>
-                          {selectedCategories.includes(category) && (
-                            <FiCheck className="w-3 h-3 text-white" />
-                          )}
+            {/* Grid Layout: 2 columns on mobile, 1 on desktop */}
+            <div className="grid grid-cols-1 lg:grid-cols-1 gap-6 mb-8">
+              {/* Categories Section */}
+              <div>
+                <div className="flex items-center gap-2 mb-4">
+                  <FiGrid className="w-4 h-4 text-cyan-400" />
+                  <h4 className="text-lg font-semibold text-white">Categorías</h4>
+                </div>
+                
+                <div className="space-y-2">
+                  {categories.map((category, index) => (
+                    <motion.div
+                      key={category}
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.03 }}
+                    >
+                      <label className="group flex items-center gap-3 p-3 rounded-xl hover:bg-white/5 transition-all duration-300 cursor-pointer">
+                        <div className="relative">
+                          <input
+                            type="checkbox"
+                            checked={selectedCategories.includes(category)}
+                            onChange={() => toggleCategory(category)}
+                            className="sr-only"
+                          />
+                          <div className={`w-5 h-5 rounded border flex items-center justify-center transition-all ${
+                            selectedCategories.includes(category)
+                              ? 'bg-linear-to-r from-cyan-500 to-blue-500 border-transparent'
+                              : 'border-gray-700 group-hover:border-gray-600'
+                          }`}>
+                            {selectedCategories.includes(category) && (
+                              <FiCheck className="w-3 h-3 text-white" />
+                            )}
+                          </div>
                         </div>
-                      </div>
-                      <span className={`text-sm transition-colors ${
-                        selectedCategories.includes(category)
-                          ? 'text-gray-100 font-medium'
-                          : 'text-gray-400 group-hover:text-gray-200'
-                      }`}>
-                        {category}
-                      </span>
-                      <span className="ml-auto text-xs text-gray-500">
-                        {categoryCounts[category] ?? "-"}
-                      </span>
-                    </label>
-                  </motion.div>
-                ))}
+                        <span className={`text-sm transition-colors ${
+                          selectedCategories.includes(category)
+                            ? 'text-gray-100 font-medium'
+                            : 'text-gray-400 group-hover:text-gray-200'
+                        }`}>
+                          {category}
+                        </span>
+                        <span className="ml-auto text-xs text-gray-500">
+                          {categoryCounts[category] ?? "-"}
+                        </span>
+                      </label>
+                    </motion.div>
+                  ))}
+                </div>
               </div>
-            </div>
 
-            {/* Price Range Section */}
-            <div className="mb-8">
-              <div className="flex items-center gap-2 mb-4">
-                <FiDollarSign className="w-4 h-4 text-green-400" />
-                <h4 className="text-lg font-semibold text-white">Rango de Precio</h4>
-              </div>
-              
-              <div className="space-y-2">
+              {/* Price Range Section */}
+              <div>
+                <div className="flex items-center gap-2 mb-4">
+                  <FiDollarSign className="w-4 h-4 text-green-400" />
+                  <h4 className="text-lg font-semibold text-white">Rango de Precio</h4>
+                </div>
+                
+                <div className="space-y-2">
                 {priceRanges.map((range, index) => (
                   <motion.div
                     key={range.value}
@@ -235,6 +237,7 @@ export function FilterSidebar() {
                     </label>
                   </motion.div>
                 ))}
+              </div>
               </div>
             </div>
 

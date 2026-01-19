@@ -154,7 +154,7 @@ export const DailyOffersContent = ({
   loading,
 }: DailyOffersContentProps) => {
   return (
-    <section className="relative bg-gray-900/50 backdrop-blur-sm border border-cyan-900/50 overflow-hidden rounded-3xl">
+    <section className="relative w-full min-w-full bg-gray-900/50 backdrop-blur-sm border border-cyan-900/50 overflow-hidden rounded-3xl">
       {/* Efectos de fondo */}
       <div className="absolute inset-0">
         {/* Patrón de grid sutil */}
