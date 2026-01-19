@@ -13,7 +13,7 @@ export function InstagramGallery({ posts, instagramUrl }: InstagramGalleryProps)
       spaceBetween={16}
       speed={3000}
       loop
-      className="pb-4"
+      className="pb-2 md:pb-4 w-full overflow-hidden"
     >
       {posts.map((post) => (
         <SwiperSlide key={post.id} style={{ width: "auto" }}>

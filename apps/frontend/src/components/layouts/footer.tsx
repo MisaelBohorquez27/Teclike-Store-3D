@@ -106,29 +106,29 @@ export function Footer({
 
       <div className="relative z-10 container mx-auto px-4 pt-20 pb-8">
         {/* Main Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-8 xl:gap-12 mb-16">
+        <div className="grid grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-4 md:gap-8 xl:gap-12 mb-16">
           {/* Brand Section - Full width on mobile, then normal */}
-          <div className="xl:col-span-1">
+          <div className="col-span-2 lg:col-span-1 xl:col-span-1">
             <div className="mb-8">
               {/* Logo/Title con efecto neón */}
-              <h3 className="text-3xl font-bold mb-4 drop-shadow-lg bg-linear-to-r from-cyan-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
+              <h3 className="text-2xl sm:text-3xl font-bold mb-4 drop-shadow-lg bg-linear-to-r from-cyan-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
                 {footerData.company.name}
-                <span className="text-4xl">.</span>
+                <span className="text-3xl sm:text-4xl">.</span>
               </h3>
 
-              <p className="text-sm leading-relaxed mb-6 backdrop-blur-sm  rounded-lg p-4 border card-bg-2">
+              <p className="text-xs sm:text-sm leading-relaxed mb-6 backdrop-blur-sm rounded-lg p-3 sm:p-4 border card-bg-2">
                 {footerData.company.description}
               </p>
             </div>
 
             {/* Social Media con efectos hover */}
-            <div className="flex space-x-3">
+            <div className="flex space-x-2 sm:space-x-3">
               {footerData.company.socialMedia.map((social) => (
                 <a
                   key={social.label}
                   href={social.href}
                   className={`
-                    relative p-3 rounded-xl bg-white/5 border border-white/10 
+                    relative p-2 sm:p-3 rounded-lg sm:rounded-xl bg-white/5 border border-white/10 
                     backdrop-blur-sm transition-all duration-300 group
                     hover:bg-white/10 hover:border-white/20 hover:scale-110 
                     ${social.color} hover:shadow-lg hover:shadow-cyan-500/25
@@ -136,8 +136,8 @@ export function Footer({
                   aria-label={`Follow us on ${social.label}`}
                 >
                   <social.icon
-                    size={18}
-                    className="transition-transform group-hover:scale-110"
+                    size={16}
+                    className="transition-transform group-hover:scale-110 sm:w-4.5 sm:h-4.5"
                   />
                 </a>
               ))}
@@ -146,21 +146,21 @@ export function Footer({
 
           {/* Quick Links con emojisss */}
           <div>
-            <h3 className="text-lg font-semibold mb-6 text-gradient-primary flex items-center">
+            <h3 className="text-base sm:text-lg font-semibold mb-4 sm:mb-6 text-gradient-primary flex items-center">
               <span className="w-2 h-2 primary-bg rounded-full mr-2 animate-pulse"></span>
               Explora
             </h3>
-            <nav className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <nav className="grid grid-cols-1 gap-1.5 sm:gap-2">
               {footerData.links.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
-                  className="group flex items-center space-x-3 p-3 rounded-lg transition-all duration-300 hover:bg-white/5 hover:translate-x-2 border border-transparent hover:border-white/10"
+                  className="group flex items-center space-x-2 sm:space-x-3 p-2 sm:p-3 rounded-lg transition-all duration-300 hover:bg-white/5 hover:translate-x-2 border border-transparent hover:border-white/10"
                 >
-                  <span className="text-lg transform group-hover:scale-110 transition-transform">
+                  <span className="text-base sm:text-lg transform group-hover:scale-110 transition-transform">
                     {link.emoji}
                   </span>
-                  <span className="text-neutral-1 font-medium text-sm">
+                  <span className="text-neutral-1 font-medium text-xs sm:text-sm">
                     {link.label}
                   </span>
                   <FaArrowRight
@@ -174,11 +174,11 @@ export function Footer({
 
           {/* Contact Info con iconos animadosss */}
           <div>
-            <h3 className="text-lg font-semibold mb-6 text-gradient-primary flex items-center">
+            <h3 className="text-base sm:text-lg font-semibold mb-4 sm:mb-6 text-gradient-primary flex items-center">
               <span className="w-2 h-2 primary-bg rounded-full mr-2 animate-pulse"></span>
               Contacto
             </h3>
-            <div className="space-y-4">
+            <div className="space-y-2 sm:space-y-4">
               {[
                 {
                   icon: FaMapMarkerAlt,
@@ -200,22 +200,22 @@ export function Footer({
               ].map((item, index) => (
                 <div
                   key={index}
-                  className="flex items-start space-x-4 p-3 rounded-lg transition-all duration-300 hover:bg-white/5 group"
+                  className="flex items-start space-x-2 sm:space-x-4 p-2 sm:p-3 rounded-lg transition-all duration-300 hover:bg-white/5 group"
                 >
                   <div
-                    className={`p-2 rounded-lg bg-white/5 group-hover:bg-white/10 transition-colors ${item.color}`}
+                    className={`p-2 rounded-lg bg-white/5 group-hover:bg-white/10 transition-colors ${item.color} shrink-0`}
                   >
-                    <item.icon size={16} className="animate-float" />
+                    <item.icon size={14} className="sm:w-4 sm:h-4 animate-float" />
                   </div>
                   {item.href ? (
                     <a
                       href={item.href}
-                      className="text-neutral-1 text-sm leading-relaxed transition-colors flex-1"
+                      className="text-neutral-1 text-xs sm:text-sm leading-relaxed transition-colors flex-1 wrap-break-words"
                     >
                       {item.text}
                     </a>
                   ) : (
-                    <span className="text-neutral-1 text-sm leading-relaxed transition-colors flex-1">
+                    <span className="text-neutral-1 text-xs sm:text-sm leading-relaxed transition-colors flex-1 wrap-break-words">
                       {item.text}
                     </span>
                   )}
@@ -225,19 +225,19 @@ export function Footer({
           </div>
 
           {/* Newsletter con efecto glassmorphism */}
-          <div className="lg:col-span-2 xl:col-span-1">
-            <div className="bg-linear-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/20 shadow-2xl">
-              <h3 className="text-lg font-semibold mb-4 text-gradient-primary">
+          <div className="col-span-2 lg:col-span-2 xl:col-span-1">
+            <div className="bg-linear-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl p-4 sm:p-6 border border-white/20 shadow-2xl">
+              <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4 text-gradient-primary">
                 Mantente Actualizado
               </h3>
 
-              <p className="text-neutral text-sm mb-6">
+              <p className="text-neutral text-xs sm:text-sm mb-4 sm:mb-6">
                 Subscríbete para no perder ni una novedad sobre nuestros productos
               </p>
 
               <Subscription />
 
-              <p className="text-xs text-gray-400 mt-4 text-center">
+              <p className="text-xs text-gray-400 mt-3 sm:mt-4 text-center">
                 Sin spam. Cancele su suscripción en cualquier momento.
               </p>
             </div>
@@ -249,7 +249,7 @@ export function Footer({
           <div className="flex flex-col lg:flex-row justify-between items-center space-y-4 lg:space-y-0">
             {/* Copyright */}
             <div className="text-center lg:text-left">
-              <p className="text-sm text-gray-400">
+              <p className="text-xs sm:text-sm text-gray-400">
                 © {currentYear} {footerData.company.name}. Todos los derechos reservados
               </p>
             </div>
@@ -266,7 +266,7 @@ export function Footer({
                 </a>
               ))}
             </nav> */}
-            <nav className="flex flex-wrap justify-center lg:justify-end gap-6 text-sm">
+            <nav className="flex flex-wrap justify-center lg:justify-end gap-3 sm:gap-6 text-xs sm:text-sm">
                 <a
                   className="text-gray-400 hover:text-cyan-300 transition-colors duration-200 hover:underline underline-offset-4 cursor-pointer"
                 >

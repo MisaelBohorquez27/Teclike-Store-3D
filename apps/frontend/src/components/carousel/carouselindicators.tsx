@@ -13,8 +13,8 @@ export function CarouselIndicators({
   items,
   currentIndex,
   onIndicatorClick,
-  activeClass = 'bg-[#2963af] w-5',
-  inactiveClass = 'bg-gray-300 w-3'
+  activeClass = 'bg-cyan-600 w-5',
+  inactiveClass = 'bg-blue-600 w-3'
   
 }: CarouselIndicatorsProps) {
   return (

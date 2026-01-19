@@ -8,12 +8,7 @@ import { HERO_CONFIG } from "./data/herodata";
 import { getAnimationProps } from "./props/heroprops";
 import {
   FiArrowRight,
-  FiTrendingUp,
-  FiUsers,
   FiArrowDown,
-  FiCpu,
-  FiGlobe,
-  FiCode,
   FiServer,
 } from "react-icons/fi";
 import { BenefitsGrid } from "../benefits/benefitsgrid";
@@ -93,7 +88,7 @@ export function HeroBanner2() {
       {/* Contenido principal */}
       <div className="relative z-10 min-h-screen flex items-start top-30 ">
         <div className="container mx-auto px-4 w-full max-w-7xl">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-12 items-center">
             {/* Text Content - Mejorado */}
             <motion.div
               className="text-white space-y-8"
@@ -107,7 +102,7 @@ export function HeroBanner2() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
               >
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-black leading-tight">
+                <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-black leading-tight">
                   <span className="text-white">Encuentra los</span>
                   <br />
                   <span className="bg-linear-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
@@ -116,7 +111,7 @@ export function HeroBanner2() {
                 </h1>
 
                 <motion.p
-                  className="text-lg md:text-xl text-gray-300 leading-relaxed max-w-2xl"
+                  className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-300 leading-relaxed max-w-2xl"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.5 }}
@@ -161,37 +156,10 @@ export function HeroBanner2() {
                   </Button>
                 </Link>
               </motion.div>
-
-              {/* Trust badges modernos
-              <motion.div
-                className="flex items-center gap-6 pt-8 pb-4 border-t border-white/10"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1 }}
-              >
-                <div className="flex items-center gap-3">
-                  <div className="flex -space-x-3">
-                    {[...Array(4)].map((_, i) => (
-                      <motion.div
-                        key={i}
-                        className="w-10 h-10 rounded-full bg-linear-to-r from-blue-500 to-purple-500 border-2 border-gray-900 shadow-lg"
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 1.1 + i * 0.1 }}
-                        whileHover={{ scale: 1.1, y: -2 }}
-                      />
-                    ))}
-                  </div>
-                  <div className="text-sm">
-                    <div className="font-semibold text-white">+1k clientes</div>
-                    <div className="text-gray-400">Confían en nosotros</div>
-                  </div>
-                </div>
-              </motion.div> */}
             </motion.div>
 
             {/* Panel de visualización tecnológica */}
-            <motion.div className="relative w-full h-25 md:h-50 lg:h-75" {...animationProps.image}>
+            <motion.div className="relative w-full h-48 sm:h-64 md:h-80 lg:h-96" {...animationProps.image}>
               {/* Terminal flotante */}
               <motion.div
                 className="relative  w-full h-full bg-gray-900/80 backdrop-blur-md rounded-2xl border border-white/10 p-6 shadow-2xl"

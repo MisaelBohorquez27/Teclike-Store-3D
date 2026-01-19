@@ -17,10 +17,10 @@ const Header = () => (
     initial={{ opacity: 0, y: -20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.6 }}
-    className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-10 md:mb-12 gap-6"
+    className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-8 md:mb-10 lg:mb-12 gap-4 md:gap-6"
   >
     <div className="max-w-2xl">
-      <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+      <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-2 md:mb-4">
         <span className="bg-linear-to-r from-blue-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent">
           Más Vendidos
         </span>
@@ -28,14 +28,14 @@ const Header = () => (
         <span className="text-white">de la Semana.</span>
       </h1>
 
-      <p className="text-gray-400 text-lg">
+      <p className="text-gray-400 text-sm sm:text-base md:text-lg">
         Los productos que están conquistando a nuestros clientes esta semana
       </p>
     </div>
     <Link href="/products">
-      <Button className="group inline-flex items-center gap-3 px-6 py-3 rounded-xl bg-linear-to-r from-gray-900 to-black hover:from-gray-800 hover:to-gray-900 border border-gray-800 hover:border-amber-500/30 text-white font-medium transition-all duration-300 hover:scale-105">
+      <Button className="group inline-flex items-center gap-2 md:gap-3 px-4 md:px-6 py-2 md:py-3 text-sm md:text-base rounded-lg md:rounded-xl bg-linear-to-r from-gray-900 to-black hover:from-gray-800 hover:to-gray-900 border border-gray-800 hover:border-amber-500/30 text-white font-medium transition-all duration-300 hover:scale-105 whitespace-nowrap">
         <span>{CONTENT.viewAllText}</span>
-        <FiArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+        <FiArrowRight className="w-4 md:w-5 h-4 md:h-5 group-hover:translate-x-1 transition-transform" />
       </Button>
     </Link>
   </motion.div>
@@ -46,18 +46,18 @@ const EmptyState = () => (
     initial={{ opacity: 0, scale: 0.9 }}
     animate={{ opacity: 1, scale: 1 }}
     transition={{ duration: 0.5 }}
-    className="text-center py-16"
+    className="text-center py-8 md:py-16"
   >
-    <div className="max-w-md mx-auto">
-      <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-linear-to-br from-gray-800 to-gray-900 flex items-center justify-center">
-        <FiTrendingUp className="w-10 h-10 text-gray-600" />
+    <div className="max-w-md mx-auto px-4">
+      <div className="w-16 md:w-20 h-16 md:h-20 mx-auto mb-4 md:mb-6 rounded-full bg-linear-to-br from-gray-800 to-gray-900 flex items-center justify-center">
+        <FiTrendingUp className="w-8 md:w-10 h-8 md:h-10 text-gray-600" />
       </div>
-      <h3 className="text-2xl font-bold text-white mb-3">Próximos Campeones</h3>
-      <p className="text-gray-400 mb-8">{CONTENT.emptyText}</p>
+      <h3 className="text-xl md:text-2xl font-bold text-white mb-2 md:mb-3">Próximos Campeones</h3>
+      <p className="text-gray-400 text-sm md:text-base mb-6 md:mb-8">{CONTENT.emptyText}</p>
       <Link href="/products">
         <Button
           size="s"
-          className="px-6 py-3 bg-linear-to-r from-gray-800 to-gray-900 hover:from-gray-700 hover:to-gray-800 text-white font-medium rounded-xl transition-all"
+          className="px-4 md:px-6 py-2 md:py-3 text-sm md:text-base bg-linear-to-r from-gray-800 to-gray-900 hover:from-gray-700 hover:to-gray-800 text-white font-medium rounded-lg md:rounded-xl transition-all"
         >
           Explorar Productos
         </Button>
@@ -95,8 +95,6 @@ const BestSellersSwiper = ({
         disableOnInteraction: false,
         pauseOnMouseEnter: true,
       }}
-      navigation
-      pagination={{ clickable: true }}
     />
 
     <div className="hidden lg:block absolute -right-6 top-1/2 -translate-y-1/2">
@@ -113,7 +111,7 @@ const Container = ({ children }: { children: React.ReactNode }) => (
       <div className="absolute inset-0 bg-[linear-gradient(rgba(250,204,21,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(250,204,21,0.03)_1px,transparent_1px)] bg-size-[80px_80px]" />
     </div>
 
-    <div className="relative z-10 py-8 md:py-14">
+    <div className="relative z-10 py-6 md:py-8 lg:py-14">
       <div className="container mx-auto px-4">{children}</div>
     </div>
   </section>

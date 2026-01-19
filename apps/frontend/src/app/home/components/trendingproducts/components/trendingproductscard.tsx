@@ -49,7 +49,7 @@ export const TrendingProductCard = ({ product }: TrendingProductCardProps) => {
         )}
 
         {/* Imagen con efecto */}
-        <div className="relative h-48 md:h-56 mb-4 rounded-xl overflow-hidden">
+        <div className="relative h-40 sm:h-48 md:h-56 mb-4 rounded-xl overflow-hidden">
           <motion.img
             src={product.imageUrl}
             alt={product.name}
@@ -97,7 +97,7 @@ export const TrendingProductCard = ({ product }: TrendingProductCardProps) => {
           </div>
 
           {/* Nombre del producto */}
-          <h3 className="font-bold text-lg text-white mb-2 line-clamp-2 group-hover:text-cyan-300 transition-colors truncate">
+          <h3 className="font-bold text-base sm:text-lg text-white mb-2 line-clamp-2 group-hover:text-cyan-300 transition-colors truncate">
             {product.name}
           </h3>
 
@@ -107,7 +107,7 @@ export const TrendingProductCard = ({ product }: TrendingProductCardProps) => {
               {[...Array(5)].map((_, i) => (
                 <FiStar
                   key={i}
-                  className={`w-4 h-4 ${
+                  className={`w-3 sm:w-4 h-3 sm:h-4 ${
                     i < Math.floor(product.rating || 4.5)
                       ? "text-yellow-400 fill-yellow-400"
                       : "text-gray-600"
@@ -128,21 +128,21 @@ export const TrendingProductCard = ({ product }: TrendingProductCardProps) => {
               <div className="flex flex-col">
                 {hasDiscount ? (
                   <>
-                    <span className="text-2xl font-bold text-white">
+                    <span className="text-xl sm:text-2xl font-bold text-white">
                       {product.currency} {product.discountPrice}
                     </span>
-                    <span className="text-sm text-gray-500 line-through">
+                    <span className="text-xs sm:text-sm text-gray-500 line-through">
                       {product.currency} {product.price}
                     </span>
                   </>
                 ) : (
-                  <span className="text-2xl font-bold text-white">
+                  <span className="text-xl sm:text-2xl font-bold text-white">
                     {product.currency} {product.price}
                   </span>
                 )}
               </div>
 
-              <button className="px-4 py-2 text-gray-100 text-sm font-medium rounded-lg transition-all group-hover:scale-105">
+              <button className="px-3 sm:px-4 py-2 text-gray-100 text-sm font-medium rounded-lg transition-all group-hover:scale-105">
                 <FiShoppingBag className="w-4 h-4" />
               </button>
             </div>

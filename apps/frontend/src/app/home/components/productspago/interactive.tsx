@@ -422,7 +422,7 @@ export function TechProductShowcase() {
                       setCurrentProduct(product);
                       setIsPlaying(true);
                     }}
-                    className={`flex-shrink-0 w-24 h-24 rounded-xl overflow-hidden border-2 transition-all ${
+                    className={`shrink-0 w-24 h-24 rounded-xl overflow-hidden border-2 transition-all ${
                       product.id === currentProduct.id
                         ? "border-cyan-500 scale-105"
                         : "border-gray-800 hover:border-gray-700"

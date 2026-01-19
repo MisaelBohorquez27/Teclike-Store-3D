@@ -147,7 +147,7 @@ export function FilterSidebar() {
                 <h4 className="text-lg font-semibold text-white">Categorías</h4>
               </div>
               
-              <div className="space-y-2">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 {categories.map((category, index) => (
                   <motion.div
                     key={category}
@@ -237,22 +237,6 @@ export function FilterSidebar() {
                 ))}
               </div>
             </div>
-
-            {/* Custom Price Range Slider (Opcional) 
-            <div className="mb-8">
-              <div className="mb-4">
-                <h4 className="text-sm font-medium text-gray-400 mb-2">Rango personalizado</h4>
-                <div className="flex items-center justify-between text-xs text-gray-500 mb-2">
-                  <span>$0</span>
-                  <span>$1000</span>
-                </div>
-                <div className="relative h-2 bg-gray-800 rounded-full">
-                  <div className="absolute h-full w-1/2 bg-linear-to-r from-cyan-500 to-blue-500 rounded-full" />
-                  <div className="absolute top-1/2 left-1/4 w-4 h-4 bg-white rounded-full border-2 border-cyan-500 -translate-y-1/2 -translate-x-1/2" />
-                  <div className="absolute top-1/2 left-3/4 w-4 h-4 bg-white rounded-full border-2 border-blue-500 -translate-y-1/2 -translate-x-1/2" />
-                </div>
-              </div>
-            </div>*/}
 
             {/* Apply Filters Button */}
             <motion.div

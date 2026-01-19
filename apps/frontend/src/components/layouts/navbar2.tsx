@@ -148,14 +148,6 @@ export function Navbar2() {
                     <FiHeart className="w-4 h-4" />
                     <span>Mi Lista de Deseos</span>
                   </Link>
-
-                  {/* Carrito en mobile */}
-                  <div
-                    className="py-3 px-4 flex justify-end"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    <CartIcon />
-                  </div>
                 </div>
               </div>
             </div>

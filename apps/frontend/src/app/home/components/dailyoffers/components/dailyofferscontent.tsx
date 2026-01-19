@@ -25,7 +25,7 @@ const DailyOffersHeader = () => (
     className="relative text-center lg:text-left lg:max-w-md lg:px-4 xl:px-6 lg:w-1/3"
   >
     {/* Título */}
-    <h1 className="text-5xl md:text-6xl lg:text-7xl font-black mb-4 lg:mb-6">
+    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black mb-2 md:mb-4 lg:mb-6">
       <span className="bg-linear-to-r from-cyan-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
         {CONFIG.content.title.split(" ")[0]}
       </span>
@@ -36,7 +36,7 @@ const DailyOffersHeader = () => (
     </h1>
 
     {/* Descripción */}
-    <p className="text-gray-200 text-lg md:text-xl leading-relaxed mb-8">
+    <p className="text-gray-200 text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed mb-4 md:mb-8">
       {CONFIG.content.description}
     </p>
 
@@ -44,27 +44,27 @@ const DailyOffersHeader = () => (
     <Link href={CONFIG.content.buttonHref}>
       <Button
         size="m"
-        className="group relative overflow-hidden bg-linear-to-r from-cyan-600 via-cyan-600 to-blue-600 hover:from-cyan-500 hover:via-cyan-400 hover:to-blue-400 text-gray-100 hover:text-gray-100 font-bold px-8 py-4 rounded-xl hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-cyan-500/25"
+        className="group relative overflow-hidden bg-linear-to-r from-cyan-600 via-cyan-600 to-blue-600 hover:from-cyan-500 hover:via-cyan-400 hover:to-blue-400 text-gray-100 hover:text-gray-100 font-bold px-6 md:px-8 py-3 md:py-4 text-sm md:text-base rounded-xl hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-cyan-500/25"
       >
         <span className="flex items-center gap-3 relative z-10">
-          <FiZap className="w-5 h-5" />
+          <FiZap className="w-4 md:w-5 h-4 md:h-5" />
           {CONFIG.content.buttonText}
-          <FiArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+          <FiArrowRight className="w-4 md:w-5 h-4 md:h-5 group-hover:translate-x-1 transition-transform" />
         </span>
         <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/20 to-transparent -skew-x-12 transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
       </Button>
     </Link>
 
     {/* Stats */}
-    <div className="flex flex-wrap gap-4 mt-8">
+    <div className="flex flex-wrap gap-2 md:gap-4 mt-4 md:mt-8 justify-center lg:justify-start">
       {[
         { value: "10+", label: "Ofertas Activas" },
         { value: "95%", label: "Clientes Satisfechos" },
         { value: "24/7", label: "Soporte" },
       ].map((stat, index) => (
         <div key={index} className="text-center">
-          <div className="text-2xl font-bold text-gray-100">{stat.value}</div>
-          <div className="text-xs text-gray-400">{stat.label}</div>
+          <div className="text-lg md:text-2xl font-bold text-gray-100">{stat.value}</div>
+          <div className="text-xs md:text-xs text-gray-400">{stat.label}</div>
         </div>
       ))}
     </div>
@@ -87,8 +87,6 @@ const OffersSwiper = ({ offers }: { offers: ProductWithOffer[] }) => (
         disableOnInteraction: false,
         pauseOnMouseEnter: true,
       }}
-      navigation
-      pagination={{ clickable: true }}
     />
   </div>
 );
@@ -101,7 +99,7 @@ const SwiperContent = ({ offers, loading }: DailyOffersContentProps) => {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="text-center py-12"
+        className="w-full text-center py-12 min-h-96"
       >
         <div className="inline-block">
           <div className="w-12 h-12 border-4 border-blue-500/30 border-t-cyan-500 rounded-full animate-spin mb-4"></div>
@@ -118,7 +116,7 @@ const SwiperContent = ({ offers, loading }: DailyOffersContentProps) => {
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="text-center py-12"
+        className="w-full text-center py-12 min-h-96 flex items-center justify-center"
       >
         <div className="inline-flex flex-col items-center gap-4 p-8 rounded-2xl bg-linear-to-br from-gray-900/50 to-black/50 backdrop-blur-sm border border-gray-800/50">
           <div className="w-16 h-16 rounded-full bg-linear-to-r from-gray-800 to-gray-900 flex items-center justify-center">
@@ -168,23 +166,13 @@ export const DailyOffersContent = ({
         />
       </div>
 
-      <div className="relative container mx-auto px-4 py-16 md:py-24">
-        <div className="flex flex-col lg:flex-row items-center gap-6 lg:gap-8 xl:gap-10">
+      <div className="relative container mx-auto px-4 py-8 md:py-16 lg:py-24">
+        <div className="flex flex-col lg:flex-row items-center gap-4 md:gap-6 lg:gap-8 xl:gap-10">
           <DailyOffersHeader />
 
-          <div className="relative w-full lg:w-2/3 pr-4">
+          <div className="relative w-full lg:w-2/3">
             <SwiperContent offers={offers} loading={loading} />
 
-            {/* Indicador de scroll 
-            <div className="hidden lg:block absolute -left-8 top-1/2 -translate-y-1/2">
-              <div className="text-xs text-gray-500 rotate-90 tracking-widest whitespace-nowrap">
-                DESLIZAR PARA VER MÁS
-              </div>
-            </div>
-            
-            <div className="hidden lg:block absolute -right-8 top-1/2 -translate-y-1/2">
-              <div className="text-xs text-gray-500 rotate-90 tracking-widest">→</div>
-            </div>*/}
           </div>
         </div>
       </div>

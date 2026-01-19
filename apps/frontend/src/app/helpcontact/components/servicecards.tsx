@@ -53,7 +53,7 @@ export function ServiceCards() {
 
   return (
     <motion.div
-      className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6"
+      className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3 md:gap-4 lg:gap-6"
       variants={containerVariants}
       initial="hidden"
       whileInView="visible"
@@ -72,16 +72,16 @@ export function ServiceCards() {
               backgroundImage: `linear-gradient(135deg, var(--tw-gradient-stops))`
             }} />
             <div className={`relative bg-linear-to-br ${service.color} p-0.5 rounded-xl`}>
-              <div className="bg-linear-to-br from-gray-900/80 to-black/80 rounded-xl p-6 h-full flex flex-col justify-center text-center hover:from-gray-800/80 hover:to-black/90 transition-all duration-300 border border-gray-800/30">
-                <div className="flex justify-center mb-4">
-                  <div className={`p-3 rounded-lg bg-linear-to-br ${service.color}`}>
-                    <Icon className="w-6 h-6 text-gray-100" />
+              <div className="bg-linear-to-br from-gray-900/80 to-black/80 rounded-xl p-2 sm:p-3 md:p-4 lg:p-6 h-full flex flex-col justify-center text-center hover:from-gray-800/80 hover:to-black/90 transition-all duration-300 border border-gray-800/30">
+                <div className="flex justify-center mb-2 sm:mb-3 md:mb-4">
+                  <div className={`p-1.5 sm:p-2 md:p-3 rounded-lg bg-linear-to-br ${service.color}`}>
+                    <Icon className="w-4 sm:w-5 md:w-6 lg:w-7 h-4 sm:h-5 md:h-6 lg:h-7 text-gray-100" />
                   </div>
                 </div>
-                <h3 className="text-lg font-bold text-gray-100 mb-2">
+                <h3 className="text-xs sm:text-sm md:text-base lg:text-lg font-bold text-gray-100 mb-1 sm:mb-2">
                   {service.title}
                 </h3>
-                <p className="text-sm text-gray-300 leading-relaxed">
+                <p className="text-xs sm:text-xs md:text-sm lg:text-sm text-gray-300 leading-relaxed">
                   {service.description}
                 </p>
               </div>

@@ -64,14 +64,14 @@ export function ProductList2() {
         {/* Contenido Principal */}
         <div className="lg:w-3/4">
           {/* Encabezado */}
-          <div className="flex items-center justify-between mb-6">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-3 mb-4 md:mb-6">
             <div>
-              <h2 className="text-2xl font-bold text-white">Productos</h2>
-              <p className="text-gray-400 text-sm mt-1">
+              <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-white">Productos</h2>
+              <p className="text-gray-400 text-xs md:text-sm mt-1">
                 {loading ? "Cargando..." : `${products.length} resultados`}
               </p>
             </div>
-            <div className={`px-3 py-1.5 rounded-full transition-all duration-300 ${
+            <div className={`px-2 sm:px-3 py-1 sm:py-1.5 rounded-full transition-all duration-300 text-xs md:text-sm whitespace-nowrap ${
               loading 
                 ? "bg-cyan-500/20 text-cyan-300" 
                 : "bg-gray-800/50 text-gray-300"
@@ -91,7 +91,7 @@ export function ProductList2() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.3 }}
-                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+                className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-2 sm:gap-3 md:gap-4 lg:gap-6"
               >
                 {loading ? (
                   // Skeletons (MISMA CANTIDAD que los productos esperados)

@@ -36,20 +36,20 @@ export function BenefitsGridWithHeading() {
 // Subcomponents
 const BenefitCard = ({ benefit, index }: { benefit: Benefit; index: number }) => (
   <motion.div
-    className="p-6 text-center group hover:transform hover:scale-105 transition-transform duration-300 bg-white/3 backdrop-blur-sm border border-white/10 hover:border-blue-500/30 rounded-2xl"
+    className="p-2 sm:p-4 md:p-6 text-center group hover:transform hover:scale-105 transition-transform duration-300 bg-white/3 backdrop-blur-sm border border-white/10 hover:border-blue-500/30 rounded-lg sm:rounded-xl md:rounded-2xl"
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ delay: 0.1 * index }}
     whileHover={{ scale: 1.05 }}
   >
     <benefit.Icon
-      className="w-5 h-5 md:w-7 md:h-7 mb-4 mx-auto text-blue-400 "
+      className="w-4 h-4 sm:w-5 sm:h-5 md:w-7 md:h-7 mb-2 sm:mb-3 md:mb-4 mx-auto text-blue-400"
       aria-hidden={true}
     />
-    <h3 className="text-md md:text-lg font-semibold text-white mb-2">
+    <h3 className="text-xs sm:text-sm md:text-lg font-semibold text-white mb-1 md:mb-2">
       {benefit.title}
     </h3>
-    <p className="text-gray-300 text-sm md:text-base leading-relaxed">
+    <p className="text-gray-300 text-xs sm:text-xs md:text-base leading-relaxed hidden sm:block">
       {benefit.description}
     </p>
   </motion.div>
@@ -67,7 +67,7 @@ const BenefitsGridContainer = ({ children }: { children: React.ReactNode }) => (
 
 const BenefitsList = ({ benefits }: { benefits: Benefit[] }) => (
   <div
-    className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8"
+    className="grid grid-cols-4 gap-2 sm:gap-4 md:gap-6 lg:gap-8"
     role="list"
     aria-label="Lista de beneficios"
   >
