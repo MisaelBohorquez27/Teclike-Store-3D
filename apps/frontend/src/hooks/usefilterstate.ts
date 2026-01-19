@@ -51,7 +51,7 @@ export function useFilterState(searchParams: URLSearchParams, router: ReturnType
     params.set("page", "1");
 
     // Mantener la query (q) si existe
-    router.push(`/Products?${params.toString()}`);
+    router.push(`/products?${params.toString()}`);
   }, [selectedCategories, selectedPrice, searchParams, router]);
 
   return {

@@ -78,7 +78,15 @@ export function CheckoutButton({
       // podría no ejecutarse. El webhook manejará la confirmación.
     } catch (err: any) {
       console.error('❌ [CHECKOUT] Error en checkout:', err);
-      setError(err.message || 'Error al procesar el pago. Intenta nuevamente.');
+      
+      // Detectar si es un error 401 (no autorizado)
+      const isUnauthorized = err.response?.status === 401 || err.message?.includes('401');
+      
+      if (isUnauthorized) {
+        setError('El Carrito no esta disponible para el modo prueba');
+      } else {
+        setError(err.message || 'Error al procesar el pago. Intenta nuevamente.');
+      }
       setIsLoading(false);
     }
   };
