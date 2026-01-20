@@ -2,21 +2,14 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import {
-  FiMenu,
-  FiX,
-  FiHeart,
-  FiShoppingBag,
-  FiHome,
-  FiTag,
-} from "react-icons/fi";
+import { FiMenu, FiX, FiHeart, FiShoppingBag, FiHome, FiTag } from "react-icons/fi";
 import CartIcon from "../cart/carticon";
 
 export function Navbar2() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [textColor, setTextColor] = useState(
-    "text-gray-900 dark:text-gray-300",
+    "text-gray-900 dark:text-gray-300"
   );
 
   // Detectar scroll y cambiar color según el fondo
@@ -99,11 +92,12 @@ export function Navbar2() {
   return (
     <nav
       className={`fixed w-full md:top-0 left-0 right-0 z-40 transition-all duration-500 flex items-center justify-center bg-transparent`}
-    >
+    >      
       {/* Línea decorativa inferior */}
       <div className="absolute bottom-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-cyan-500/30 to-transparent" />
-
+      
       <div className="container px-4 w-full max-w-7xl ">
+        
         <div className="flex justify-between items-center py-2">
           {/* Menú Mobile Button */}
           <button
@@ -144,13 +138,13 @@ export function Navbar2() {
                     icon={FiShoppingBag}
                   />
                   <NavLink href="/dailyoffers" text="Oferta" icon={FiTag} />
+
                   {/* Carrito en mobile */}
                   <div
-                    className="py-3 px-4 flex justify-start"
+                    className="py-3 px-4 flex justify-end"
                     onClick={() => setIsOpen(false)}
                   >
-                    <CartIcon />&nbsp;
-                    <span className="sr-only">carrito</span>
+                    <CartIcon />
                   </div>
                 </div>
               </div>
