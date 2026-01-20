@@ -2,14 +2,21 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { FiMenu, FiX, FiHeart, FiShoppingBag } from "react-icons/fi";
+import {
+  FiMenu,
+  FiX,
+  FiHeart,
+  FiShoppingBag,
+  FiHome,
+  FiTag,
+} from "react-icons/fi";
 import CartIcon from "../cart/carticon";
 
 export function Navbar2() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [textColor, setTextColor] = useState(
-    "text-gray-900 dark:text-gray-300"
+    "text-gray-900 dark:text-gray-300",
   );
 
   // Detectar scroll y cambiar color según el fondo
@@ -92,12 +99,11 @@ export function Navbar2() {
   return (
     <nav
       className={`fixed w-full md:top-0 left-0 right-0 z-40 transition-all duration-500 flex items-center justify-center bg-transparent`}
-    >      
+    >
       {/* Línea decorativa inferior */}
       <div className="absolute bottom-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-cyan-500/30 to-transparent" />
-      
+
       <div className="container px-4 w-full max-w-7xl ">
-        
         <div className="flex justify-between items-center py-2">
           {/* Menú Mobile Button */}
           <button
@@ -131,23 +137,13 @@ export function Navbar2() {
             <div className="md:hidden absolute top-full left-0 w-full bg-white dark:bg-gray-900 backdrop-blur-lg border-t border-gray-200 dark:border-gray-800 shadow-xl animate-in fade-in slide-in-from-top-2 duration-300">
               <div className="container mx-auto px-4 py-4">
                 <div className="flex flex-col space-y-2">
-                  <NavLink href="/" text="Inicio" icon={FiHeart} />
+                  <NavLink href="/" text="Inicio" icon={FiHome} />
                   <NavLink
                     href="/products"
                     text="Productos"
                     icon={FiShoppingBag}
                   />
-                  <NavLink href="/dailyoffers" text="Oferta" />
-
-                  {/* Wishlist Mobile */}
-                  <Link
-                    href="/wishlist"
-                    className={`flex items-center gap-3 py-3 px-4 transition-all duration-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 font-medium ${textColor}`}
-                    onClick={() => setIsOpen(false)}
-                  >
-                    <FiHeart className="w-4 h-4" />
-                    <span>Mi Lista de Deseos</span>
-                  </Link>
+                  <NavLink href="/dailyoffers" text="Oferta" icon={FiTag} />
 
                   {/* Carrito en mobile */}
                   <div
@@ -157,15 +153,6 @@ export function Navbar2() {
                     <CartIcon />
                   </div>
                 </div>
-              </div>
-            </div>
-          )}
-
-          {/* CartIcon en móvil (visible cuando el menú está cerrado) */}
-          {!isOpen && (
-            <div className="md:hidden ml-auto">
-              <div className="hover:scale-110 transition-transform">
-                <CartIcon />
               </div>
             </div>
           )}
