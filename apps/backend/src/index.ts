@@ -23,7 +23,36 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 //Configurando Middleware
-const allowedOrigins = (process.env.ALLOWED_ORIGINS || "http://localhost:3000,https://teclike-store-3-d-frontend.vercel.app").split(",");
+const buildAllowedOrigins = (): string[] => {
+  const origins: string[] = [];
+  
+  // Agregar el frontend URL en producción
+  if (process.env.FRONTEND_URL) {
+    origins.push(process.env.FRONTEND_URL);
+  }
+  
+  // Agregar el frontend URL local en desarrollo
+  if (process.env.FRONTEND_URL_LOCAL) {
+    origins.push(process.env.FRONTEND_URL_LOCAL);
+  }
+  
+  // Agregar otros orígenes desde ALLOWED_ORIGINS si existen
+  if (process.env.ALLOWED_ORIGINS) {
+    origins.push(...process.env.ALLOWED_ORIGINS.split(","));
+  }
+  
+  // Valor por defecto si no hay nada configurado
+  if (origins.length === 0) {
+    origins.push("http://localhost:3000");
+  }
+  
+  return origins.map(origin => origin.trim());
+};
+
+const allowedOrigins = buildAllowedOrigins();
+
+console.log("📍 CORS allowed origins:", allowedOrigins);
+
 app.use(
   cors({
     origin: allowedOrigins,
