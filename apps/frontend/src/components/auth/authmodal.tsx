@@ -93,58 +93,38 @@ export function AuthModal({ onClose }: AuthModalProps) {
       if (!validateLoginForm()) return;
 
       try {
-        console.log('🔐 Iniciando login...');
         await login(formData.email, formData.password);
-        console.log('✅ Login completado');
-        
-        // Verificar que los tokens se guardaron
-        const token = localStorage.getItem('accessToken');
-        console.log('✅ Token guardado en localStorage:', !!token);
         
         // Cerrar modal
         onClose();
         
         // Esperar un poco y hacer reload simple
-        console.log('⏳ Esperando 500ms antes de recargar...');
         setTimeout(() => {
-          console.log('🔄 Recargando página...');
           window.location.reload();
         }, 500);
       } catch (err) {
-        console.error("❌ Login error:", err);
         const errorMsg = err instanceof Error ? err.message : "Error desconocido en login";
-        console.error("Mensaje de error:", errorMsg);
       }
     } else {
       if (!validateRegisterForm()) return;
 
       try {
-        console.log('📝 Iniciando registro...');
         await register(
           formData.email,
           formData.username,
           formData.password,
           formData.confirmPassword
         );
-        console.log('✅ Registro completado');
-        
-        // Verificar que los tokens se guardaron
-        const token = localStorage.getItem('accessToken');
-        console.log('✅ Token guardado en localStorage:', !!token);
         
         // Cerrar modal
         onClose();
         
         // Esperar un poco y hacer reload simple
-        console.log('⏳ Esperando 500ms antes de recargar...');
         setTimeout(() => {
-          console.log('🔄 Recargando página...');
           window.location.reload();
         }, 500);
       } catch (err) {
-        console.error("❌ Register error:", err);
         const errorMsg = err instanceof Error ? err.message : "Error desconocido en registro";
-        console.error("Mensaje de error:", errorMsg);
       }
     }
   };

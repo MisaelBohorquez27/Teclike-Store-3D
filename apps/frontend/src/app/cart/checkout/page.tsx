@@ -165,7 +165,7 @@ export default function CheckoutPage() {
           <div className="lg:col-span-1">
             <CheckoutSummaryCard
               onProceedToPay={() => {
-                console.log("Proceder a pago");
+              // Proceed to payment
               }}
               isLoading={false}
             />

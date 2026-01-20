@@ -31,7 +31,7 @@ export default function CartPage() {
     try {
       await clearCart(); // ← ya incluye getCart internamente
     } catch (err) {
-      console.error("Error al vaciar carrito:", err);
+      // Clear cart error
     }
   };
 

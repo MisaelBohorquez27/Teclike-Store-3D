@@ -63,7 +63,7 @@ export default function LoginPage() {
       await login(formData.email, formData.password);
       router.push("/");
     } catch (err) {
-      console.error("Login error:", err);
+      // Login error
     }
   };
 

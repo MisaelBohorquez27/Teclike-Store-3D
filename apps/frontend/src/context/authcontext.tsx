@@ -95,17 +95,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const logout = async () => {
-    console.log('👋 Ejecutando logout...');
     try {
       await AuthService.logout();
-      console.log('✅ AuthService.logout() completado');
     } catch (error) {
-      console.error('❌ Error en AuthService.logout():', error);
     } finally {
       setUser(null);
       setIsAuthenticated(false);
       setError(null);
-      console.log('✅ Estado de React actualizado');
     }
   };
 

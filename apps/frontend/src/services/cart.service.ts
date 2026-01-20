@@ -212,7 +212,6 @@ export class CartService {
         data: localCart
       };
     } catch (error: any) {
-      console.error('❌ Error actualizando carrito:', error.message);
       throw error;
     }
   }
@@ -223,8 +222,6 @@ export class CartService {
    */
   static async removeFromCart(productId: number): Promise<{ success: boolean; data: CartResponse }> {
     try {
-      console.log(`🗑️ Eliminando producto ${productId}`);
-
       const localCart = this.getLocalCart();
       localCart.items = localCart.items.filter((item: CartItem) => item.productId !== productId);
       this.calculateTotals(localCart);

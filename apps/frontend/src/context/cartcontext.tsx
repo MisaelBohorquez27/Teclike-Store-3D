@@ -150,7 +150,6 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     } catch (err: any) {
       const message = err.message || "Error al vaciar carrito";
       setError(message);
-      console.error("❌ Error vaciando carrito:", message);
       throw err;
     }
   };

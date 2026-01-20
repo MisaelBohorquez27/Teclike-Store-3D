@@ -2,6 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /* config options here */
+  productionBrowserSourceMaps: false, // 🔐 Deshabilitar source maps en producción
   images: {
     remotePatterns: [
       {

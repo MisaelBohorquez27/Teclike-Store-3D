@@ -12,7 +12,9 @@ export function HotDeals() {
   useEffect(() => {
     fetchDeals()
       .then((data) => setDeals(data))
-      .catch((err) => console.error("❌ Error cargando ofertas:", err))
+      .catch((err) => {
+        // Load offers error
+      })
       .finally(() => setLoading(false));
   }, []);
 

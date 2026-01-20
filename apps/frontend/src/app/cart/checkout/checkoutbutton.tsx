@@ -50,7 +50,7 @@ export function CheckoutButton({
     setError(null);
 
     try {
-      console.log('🛒 [CHECKOUT] Iniciando proceso de pago...');
+
 
       // 1. Crear orden y obtener link de pago
       const response = await PaymentService.createPayment({
@@ -65,20 +65,12 @@ export function CheckoutButton({
         throw new Error(response.message || 'Error al generar el link de pago');
       }
 
-      console.log('✅ [CHECKOUT] Orden creada:', {
-        orderId: response.data.orderId,
-        status: response.data.status,
-      });
-
       // 2. Redirigir a Payphone
-      console.log('🔄 [CHECKOUT] Redirigiendo a Payphone...');
       PaymentService.redirectToPayment(response.data.paymentUrl);
 
       // Nota: El usuario será redirigido, así que el código después de esto
       // podría no ejecutarse. El webhook manejará la confirmación.
     } catch (err: any) {
-      console.error('❌ [CHECKOUT] Error en checkout:', err);
-      
       // Detectar si es un error 401 (no autorizado)
       const isUnauthorized = err.response?.status === 401 || err.message?.includes('401');
       

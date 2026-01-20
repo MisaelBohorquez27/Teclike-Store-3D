@@ -72,7 +72,6 @@ export function InteractiveVideo() {
     if (!video) return;
 
     const handleLoadedMetadata = () => {
-      console.log("Video cargado, estableciendo tiempo inicial:", VIDEO_START_TIME);
       video.currentTime = VIDEO_START_TIME;
     };
 

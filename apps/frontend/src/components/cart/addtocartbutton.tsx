@@ -85,7 +85,6 @@ export function AddToCartButton({
   const handleAddToCart = async () => {
     // 🔒 LOCK: Prevenir ejecuciones concurrentes con useRef (más rápido que setState)
     if (isExecutingRef.current || isLoading || cartLoading) {
-      console.log('⚠️ Operación bloqueada - ya hay una en progreso');
       return;
     }
 
@@ -106,8 +105,6 @@ export function AddToCartButton({
     setIsLoading(true);
 
     try {
-      console.log(`🔍 DEBUG: Enviando addToCart(productId=${productId}, quantity=${quantity})`);
-      
       // Preparar datos del producto para optimistic update
       // Convertir precio a número para garantizar consistencia
       const priceAsNumber = typeof productPrice === 'string' 
@@ -121,18 +118,13 @@ export function AddToCartButton({
         imageUrl: productImage,
       };
       
-      console.log('📦 Product data being sent:', { productId, productPrice, ...productData });
-      
       await addToCart(productId, quantity, productData);
-
-      console.log(`✅ ${productName} agregado al carrito - Cantidad solicitada: ${quantity}`);
       onSuccess?.();
 
       // Resetear cantidad después de agregar
       setQuantity(initialQuantity);
     } catch (error: any) {
       const errorMessage = error.message || "Error al agregar al carrito";
-      console.error(errorMessage);
       onError?.(errorMessage);
     } finally {
       setIsLoading(false);

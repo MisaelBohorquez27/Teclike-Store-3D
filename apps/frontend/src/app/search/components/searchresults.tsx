@@ -38,7 +38,9 @@ export function SearchResults() {
         );
         setTotalPages(res.pagination?.totalPages ?? 1);
       })
-      .catch((err) => console.error("Error en búsqueda:", err))
+      .catch((err) => {
+        // Search error
+      })
       .finally(() => setLoading(false));
   }, [query, currentPage, postsPerPage]);
 

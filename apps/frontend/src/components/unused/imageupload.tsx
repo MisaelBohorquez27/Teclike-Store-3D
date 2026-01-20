@@ -18,7 +18,7 @@ export function ImageUploader() {
       setPreview(imageUrl);
       // Aquí puedes guardar imageUrl en tu base de datos o estado global
     } catch (err) {
-      console.error("❌ Error al subir imagen:", err);
+      // Upload error
     } finally {
       setLoading(false);
     }

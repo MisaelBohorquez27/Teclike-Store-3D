@@ -11,7 +11,7 @@ export function BestSellersWeekPage() {
             await addToCart(productId, quantity);
             // Puedes agregar feedback visual aquí
         } catch (error) {
-            console.error("Error al agregar al carrito:", error);
+            // Add to cart error
         }
     };
 

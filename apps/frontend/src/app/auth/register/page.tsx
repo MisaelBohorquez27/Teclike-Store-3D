@@ -86,7 +86,7 @@ export default function RegisterPage() {
       );
       router.push("/");
     } catch (err) {
-      console.error("Register error:", err);
+      // Register error
     }
   };
 

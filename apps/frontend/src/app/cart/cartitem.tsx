@@ -17,7 +17,6 @@ export function CartItem({ item, onUpdateQuantity, onRemove }: CartItemProps) {
   const priceString = product?.priceString || `$${safePrice.toFixed(2)}`;
   const itemTotal = safePrice * quantity;
   
-  console.log(`🛒 [CartItem] Product: ${product?.name}, Price: ${safePrice}, PriceString: ${priceString}`);
 
   // Cambiar cantidad
   const handleQuantityChange = async (newQuantity: number) => {
@@ -27,7 +26,7 @@ export function CartItem({ item, onUpdateQuantity, onRemove }: CartItemProps) {
     try {
       await onUpdateQuantity(product.id, newQuantity);
     } catch (error) {
-      console.error("Error al actualizar cantidad:", error);
+      // Update quantity error
     } finally {
       setIsUpdating(false);
     }
@@ -42,7 +41,7 @@ export function CartItem({ item, onUpdateQuantity, onRemove }: CartItemProps) {
     try {
       await onRemove(product.id);
     } catch (error) {
-      console.error("Error al eliminar producto:", error);
+      // Remove product error
     } finally {
       setIsRemoving(false);
     }
@@ -79,7 +78,7 @@ export function CartItem({ item, onUpdateQuantity, onRemove }: CartItemProps) {
 
 // --- Subcomponents ---
 const ProductImage = ({ imageUrl, name }: { imageUrl?: string; name?: string }) => (
-  <div className="flex-shrink-0 w-20 h-20 sm:w-24 sm:h-24">
+  <div className="shrink-0 w-20 h-20 sm:w-24 sm:h-24">
     <img
       src={imageUrl || "/placeholder-product.jpg"}
       alt={name || "Producto"}

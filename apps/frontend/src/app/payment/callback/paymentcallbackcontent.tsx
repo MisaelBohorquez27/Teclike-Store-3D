@@ -28,8 +28,6 @@ export function PaymentCallbackContent() {
           return;
         }
 
-        console.log('🔍 [CALLBACK] Verificando estado de orden:', orderId);
-
         // Consultar el estado de la orden
         const response = await PaymentService.getPaymentStatus(parseInt(orderId));
 
@@ -53,7 +51,6 @@ export function PaymentCallbackContent() {
           setStatus('error');
         }
       } catch (err: any) {
-        console.error('❌ Error en callback:', err);
         setError(err.message || 'Error procesando el callback de pago');
         setStatus('error');
       }
