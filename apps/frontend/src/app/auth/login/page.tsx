@@ -84,6 +84,7 @@ export default function LoginPage() {
               value={formData.email}
               onChange={handleChange}
               placeholder="tu@email.com"
+              autoComplete="email"
               disabled={isLoading}
               className={validationErrors.email ? "input-error" : ""}
             />
@@ -101,6 +102,7 @@ export default function LoginPage() {
               value={formData.password}
               onChange={handleChange}
               placeholder="••••••••"
+              autoComplete="current-password"
               disabled={isLoading}
               className={validationErrors.password ? "input-error" : ""}
             />

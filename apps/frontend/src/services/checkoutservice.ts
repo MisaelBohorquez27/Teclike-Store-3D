@@ -8,7 +8,6 @@ export class CheckoutService {
   static async getCheckoutSummary(): Promise<CheckoutSummary> {
     try {
       const response = await httpClient.get<CheckoutSummary>('/checkout');
-      console.log('✅ Resumen de checkout obtenido:', response.data);
       return response.data;
     } catch (error: any) {
       if (error.response?.status === 401) {
@@ -30,7 +29,6 @@ export class CheckoutService {
   static async createOrder(orderData: CreateOrderData): Promise<Order> {
     try {
       const response = await httpClient.post<Order>('/checkout/create', orderData);
-      console.log('✅ Orden creada:', response.data);
       return response.data;
     } catch (error: any) {
       if (error.response?.status === 401) {
@@ -58,7 +56,6 @@ export class CheckoutService {
         orderId,
         ...paymentDetails,
       });
-      console.log('✅ Pago procesado:', response.data);
       return response.data;
     } catch (error: any) {
       throw new Error(

@@ -43,9 +43,12 @@ export function Subscription() {
           <div className="relative">
             <input
               type="email"
+              id="newsletter-email"
+              name="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="tu.email@ejemplo.com"
+              autoComplete="email"
               required
               className="w-full px-4 py-3 rounded-xl text-white placeholder-gray-400 
                          focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 

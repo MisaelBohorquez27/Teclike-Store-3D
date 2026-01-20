@@ -1,5 +1,6 @@
 import httpClient from "./httpclient";
 import { AuthResponse, LoginFormData, RegisterFormData } from "../types/auth.types";
+import { debug } from "../utils/debug";
 
 const TOKEN_KEY = "accessToken";
 const REFRESH_TOKEN_KEY = "refreshToken";
@@ -11,49 +12,47 @@ const isClient = typeof window !== "undefined";
 export class AuthService {
   static async login(data: LoginFormData): Promise<AuthResponse> {
     try {
-      console.log('📡 Llamando a /auth/login con:', { email: data.email });
+      debug.log('📡 Llamando a /auth/login');
       const response = await httpClient.post<AuthResponse>("/auth/login", data);
-      console.log('✅ Respuesta del servidor:', response.data);
+      debug.log('✅ Respuesta del servidor OK');
       
       // Guardar tokens y usuario INMEDIATAMENTE
       this.saveTokens(response.data.accessToken, response.data.refreshToken);
       this.saveUser(response.data.user);
-      console.log('✅ Tokens y usuario guardados en localStorage');
+      debug.log('✅ Tokens y usuario guardados');
       
       // NO sincronizar carrito aquí - hacerlo después cuando el usuario cargue la página
       
       return response.data;
     } catch (error: any) {
-      console.error('❌ Error en login:', error);
-      console.error('Respuesta del error:', error.response?.data);
+      debug.error('❌ Error en login');
       throw new Error(error.response?.data?.message || error.message || "Error en login");
     }
   }
 
   static async register(data: RegisterFormData): Promise<AuthResponse> {
     try {
-      console.log('📡 Llamando a /auth/register con:', { email: data.email, username: data.username });
+      debug.log('📡 Llamando a /auth/register');
       const response = await httpClient.post<AuthResponse>("/auth/register", data);
-      console.log('✅ Respuesta del servidor:', response.data);
+      debug.log('✅ Respuesta del servidor OK');
       
       this.saveTokens(response.data.accessToken, response.data.refreshToken);
       this.saveUser(response.data.user);
-      console.log('✅ Usuario y tokens guardados');
+      debug.log('✅ Usuario y tokens guardados');
       
       return response.data;
     } catch (error: any) {
-      console.error('❌ Error en registro:', error);
-      console.error('Respuesta del error:', error.response?.data);
+      debug.error('❌ Error en registro');
       throw new Error(error.response?.data?.message || error.message || "Error en registro");
     }
   }
 
   static async logout(): Promise<void> {
-    console.log('📤 Iniciando logout...');
+    debug.log('📤 Iniciando logout...');
     
     // Intentar notificar al servidor (pero no esperar si falla)
     try {
-      console.log('📡 Notificando al servidor sobre logout...');
+      debug.log('📡 Notificando al servidor sobre logout...');
       // No esperamos esta llamada - fire and forget con timeout corto
       const logoutPromise = httpClient.post("/auth/logout");
       const timeoutPromise = new Promise((_, reject) => 

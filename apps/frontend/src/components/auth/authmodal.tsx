@@ -207,6 +207,7 @@ export function AuthModal({ onClose }: AuthModalProps) {
                   value={formData.email}
                   onChange={handleChange}
                   placeholder="tu@email.com"
+                  autoComplete="email"
                   disabled={isLoading}
                   className={`w-full px-4 py-2 bg-gray-800/50 border rounded-lg text-white placeholder-gray-500 transition-colors ${
                     validationErrors.email
@@ -232,6 +233,7 @@ export function AuthModal({ onClose }: AuthModalProps) {
                     value={formData.username}
                     onChange={handleChange}
                     placeholder="tu_usuario"
+                    autoComplete="username"
                     disabled={isLoading}
                     className={`w-full px-4 py-2 bg-gray-800/50 border rounded-lg text-white placeholder-gray-500 transition-colors ${
                       validationErrors.username
@@ -256,6 +258,7 @@ export function AuthModal({ onClose }: AuthModalProps) {
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
+                  autoComplete="new-password"
                   placeholder="••••••••"
                   disabled={isLoading}
                   className={`w-full px-4 py-2 bg-gray-800/50 border rounded-lg text-white placeholder-gray-500 transition-colors ${
@@ -281,6 +284,7 @@ export function AuthModal({ onClose }: AuthModalProps) {
                     name="confirmPassword"
                     value={formData.confirmPassword}
                     onChange={handleChange}
+                    autoComplete="new-password"
                     placeholder="••••••••"
                     disabled={isLoading}
                     className={`w-full px-4 py-2 bg-gray-800/50 border rounded-lg text-white placeholder-gray-500 transition-colors ${

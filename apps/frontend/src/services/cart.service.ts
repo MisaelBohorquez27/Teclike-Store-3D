@@ -25,14 +25,12 @@ export class CartService {
     try {
       if (this.isAuthenticated()) {
         // Usuario autenticado: obtener del servidor
-        console.log('📦 Obteniendo carrito del servidor...');
         
         // Verificar si hay items pendientes en localStorage PRIMERO
         const localCart = this.getLocalCart();
         const hasPendingItems = localCart.items && localCart.items.length > 0 && pendingItems.size > 0;
         
         if (hasPendingItems) {
-          console.log(`⚠️ Detectado ${pendingItems.size} items pendientes - usando localStorage local`);
           // Retornar el carrito local (que tiene cambios más recientes que el servidor)
           // El sync automático se ejecutará en segundo plano
           await this.performSync();
@@ -52,7 +50,6 @@ export class CartService {
             };
             this.saveLocalCart(cartForStorage);
             pendingItems.clear();
-            console.log('✅ Sincronización completada - usando carrito del servidor');
             return { success: true, data: cartForStorage };
           }
           // Si falla el sync, retornar el local
@@ -78,7 +75,6 @@ export class CartService {
             };
             this.saveLocalCart(cartForStorage);
             pendingItems.clear();
-            console.log('✅ Carrito obtenido del servidor');
             return { success: true, data: cartForStorage };
           }
           
@@ -86,7 +82,6 @@ export class CartService {
         }
       } else {
         // Usuario NO autenticado: obtener del localStorage
-        console.log('📦 Obteniendo carrito del localStorage...');
         const localCart = this.getLocalCart();
         return {
           success: true,
@@ -94,7 +89,6 @@ export class CartService {
         };
       }
     } catch (error: any) {
-      console.error('❌ Error obteniendo carrito:', error.message);
       
       // Fallback a localStorage si falla servidor
       const localCart = this.getLocalCart();
@@ -126,8 +120,6 @@ export class CartService {
     try {
       if (!productId || productId <= 0) throw new Error('ID de producto inválido');
       if (quantity < 1) throw new Error('Cantidad debe ser mayor a 0');
-
-      console.log(`🛒 Agregando ${quantity}x producto ${productId}`, productData);
 
       // OPTIMISTIC: Guardar en localStorage primero (sin esperar servidor)
       const localCart = this.getLocalCart();
@@ -170,7 +162,6 @@ export class CartService {
 
       this.calculateTotals(localCart);
       this.saveLocalCart(localCart);
-      console.log('✅ Carrito actualizado localmente con datos completos');
 
       // Marcar como pendiente de sincronización
       pendingItems.add(productId);
@@ -185,7 +176,6 @@ export class CartService {
         data: localCart
       };
     } catch (error: any) {
-      console.error('❌ Error agregando al carrito:', error.message);
       throw error;
     }
   }
@@ -196,8 +186,6 @@ export class CartService {
   static async updateCartItem(productId: number, quantity: number): Promise<{ success: boolean; data: CartResponse }> {
     try {
       if (quantity < 0) throw new Error('Cantidad no puede ser negativa');
-
-      console.log(`📝 Actualizando producto ${productId} a cantidad ${quantity}`);
 
       const localCart = this.getLocalCart();
       const item = localCart.items.find((i: CartItem) => i.productId === productId);
@@ -212,7 +200,6 @@ export class CartService {
 
       this.calculateTotals(localCart);
       this.saveLocalCart(localCart);
-      console.log('✅ Carrito actualizado localmente');
 
       pendingItems.add(productId);
 
@@ -240,17 +227,14 @@ export class CartService {
 
       const localCart = this.getLocalCart();
       localCart.items = localCart.items.filter((item: CartItem) => item.productId !== productId);
-
       this.calculateTotals(localCart);
       this.saveLocalCart(localCart);
-      console.log('✅ Producto eliminado localmente');
 
       pendingItems.add(productId);
 
       if (this.isAuthenticated()) {
         // ⚠️ IMPORTANTE: Las eliminaciones se sincronizan INMEDIATAMENTE
         // para evitar que el usuario vea el producto reaparecer si recarga rápido
-        console.log('🚀 Sincronización inmediata para eliminación');
         
         // Cancelar sync pendiente
         if (syncTimeout) clearTimeout(syncTimeout);
@@ -265,7 +249,6 @@ export class CartService {
         data: localCart
       };
     } catch (error: any) {
-      console.error('❌ Error eliminando del carrito:', error.message);
       throw error;
     }
   }
@@ -275,8 +258,6 @@ export class CartService {
    */
   static async clearCart(): Promise<{ success: boolean; data: CartResponse }> {
     try {
-      console.log('🧹 Vaciando carrito...');
-
       const emptyCart = {
         id: 0,
         userId: 0,
@@ -296,18 +277,15 @@ export class CartService {
         try {
           await httpClient.delete('/cart/clear');
         } catch (error) {
-          console.warn('⚠️ Error limpiando en servidor:', error);
+          // Silent fail - no exponer errores
         }
       }
-
-      console.log('✅ Carrito vaciado');
 
       return {
         success: true,
         data: emptyCart
       };
     } catch (error: any) {
-      console.error('❌ Error vaciando carrito:', error.message);
       throw error;
     }
   }
@@ -331,13 +309,10 @@ export class CartService {
    */
   private static async performSync(): Promise<void> {
     if (!this.isAuthenticated() || pendingItems.size === 0) {
-      console.log('⏭️ Sync cancelado: no autenticado o sin cambios');
       return;
     }
 
     try {
-      console.log(`🔄 Sincronizando ${pendingItems.size} items pendientes...`);
-      
       const localCart = this.getLocalCart();
       
       // Enviar carrito completo (más simple y confiable que diferencias)
@@ -364,10 +339,8 @@ export class CartService {
         
         this.saveLocalCart(cartForStorage);
         pendingItems.clear();
-        console.log(`✅ Sincronización completada - itemCount=${cartForStorage.itemCount}, subtotal=$${cartForStorage.subtotal}, total=$${cartForStorage.total}`);
       }
     } catch (error) {
-      console.warn('⚠️ Error en sync (reintentando en 10s):', error);
       // Reintentar en 10 segundos
       this.startAutoSync();
     }
@@ -449,7 +422,5 @@ export class CartService {
     // Total final
     const total = Math.round((subtotal + tax + shipping) * 100) / 100;
     cart.total = total;
-    
-    console.log(`💰 Totales recalculados - Items: ${itemCount}, Subtotal: $${subtotal}, Tax: $${tax}, Shipping: $${shipping}, Total: $${total}`);
   }
 }

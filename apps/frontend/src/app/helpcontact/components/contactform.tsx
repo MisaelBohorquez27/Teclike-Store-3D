@@ -94,6 +94,7 @@ export function ContactForm() {
             placeholder="John"
             value={formData.firstName}
             onChange={handleChange}
+            autoComplete="given-name"
             className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 hover:border-gray-600"
             required
           />
@@ -114,6 +115,7 @@ export function ContactForm() {
             placeholder="Doe"
             value={formData.lastName}
             onChange={handleChange}
+            autoComplete="family-name"
             className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 hover:border-gray-600"
             required
           />
@@ -139,6 +141,7 @@ export function ContactForm() {
             name="email"
             placeholder="tu@email.com"
             value={formData.email}
+            autoComplete="email"
             onChange={handleChange}
             className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 hover:border-gray-600"
             required
@@ -162,6 +165,7 @@ export function ContactForm() {
             name="phone"
             placeholder="+57 320 000 0000"
             value={formData.phone}
+            autoComplete="tel"
             onChange={handleChange}
             className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 hover:border-gray-600"
           />

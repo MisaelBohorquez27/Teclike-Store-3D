@@ -227,11 +227,14 @@ function QuantitySelector({
 
       <input
         type="number"
+        id="product-quantity"
+        name="quantity"
         min="1"
         max={maxStock}
         value={quantity}
         onChange={(e) => onChange(parseInt(e.target.value) || 1)}
         disabled={disabled}
+        autoComplete="off"
         className="w-12 text-gray-500 text-center border-0 bg-transparent font-semibold disabled:opacity-50"
       />
 

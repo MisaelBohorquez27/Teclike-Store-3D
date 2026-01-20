@@ -69,7 +69,10 @@ export default function CheckoutPage() {
                   </label>
                   <input
                     type="text"
+                    id="shipping-address"
+                    name="address"
                     placeholder="Ingresa tu dirección"
+                    autoComplete="street-address"
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
@@ -81,7 +84,9 @@ export default function CheckoutPage() {
                     </label>
                     <input
                       type="text"
-                      placeholder="Ciudad"
+                      id="shipping-city"
+                      name="city"
+                      autoComplete="address-level2"
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
                   </div>
@@ -91,6 +96,10 @@ export default function CheckoutPage() {
                     </label>
                     <input
                       type="text"
+                      id="shipping-state"
+                      name="state"
+                      placeholder="Estado"
+                      autoComplete="address-level1
                       placeholder="Estado"
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
@@ -104,7 +113,8 @@ export default function CheckoutPage() {
                     </label>
                     <input
                       type="text"
-                      placeholder="Código Postal"
+                      id="shipping-postal"
+                      autoComplete="postal-code"
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
                   </div>
@@ -114,6 +124,11 @@ export default function CheckoutPage() {
                     </label>
                     <input
                       type="text"
+                      id="shipping-country"
+                      name="country"
+                      placeholder="País"
+                      autoComplete="country-nametry"
+                      name="country"
                       placeholder="País"
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />

@@ -211,6 +211,8 @@ export function SearchBar({
           <input
             ref={inputRef}
             type="text"
+            id="search-input"
+            name="search"
             value={query}
             onChange={handleInputChange}
             onKeyDown={handleKeyDown}
@@ -218,6 +220,7 @@ export function SearchBar({
             onBlur={handleBlur}
             placeholder={placeholder}
             autoFocus={autoFocus}
+            autoComplete="off"
             className={getInputStyles()}
             style={{ paddingLeft: variant === 'minimal' ? '20px' : '30px' }}
           />

@@ -1,5 +1,6 @@
 import axios from "axios";
 import { AuthService } from "./auth.service";
+import { debug } from "../utils/debug";
 
 const httpClient = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5000/api",
@@ -71,14 +72,14 @@ httpClient.interceptors.response.use(
       isRefreshing = true;
 
       try {
-        console.log('🔄 Refrescando token...');
+        debug.log('🔄 Refrescando token...');
         const newToken = await AuthService.refreshToken();
-        console.log('✅ Token refrescado:', newToken.slice(0, 20) + '...');
+        debug.log('✅ Token refrescado');
         processQueue(null, newToken);
         originalRequest.headers.Authorization = `Bearer ${newToken}`;
         return httpClient(originalRequest);
       } catch (refreshError) {
-        console.error('❌ Error refrescando token:', refreshError);
+        debug.error('❌ Error refrescando token');
         processQueue(refreshError);
         AuthService.clearTokens();
         window.location.href = "/";

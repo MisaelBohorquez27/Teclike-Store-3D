@@ -18,15 +18,12 @@ export function Header() {
   const handleLogout = async () => {
     try {
       setIsLoggingOut(true);
-      console.log("🚀 Iniciando logout desde Header...");
       await logout();
-      console.log("✅ Logout ejecutado, redirigiendo...");
       // Esperar a que se ejecute el logout completamente antes de recargar
       setTimeout(() => {
         window.location.href = "/";
       }, 500);
     } catch (error) {
-      console.error("❌ Error en logout:", error);
       setIsLoggingOut(false);
     }
   };

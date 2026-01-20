@@ -55,21 +55,13 @@ export class PaymentService {
     paymentData: CreatePaymentRequest
   ): Promise<CreatePaymentResponse> {
     try {
-      console.log('💳 [PAYMENT] Creando pago...');
-
       const response = await httpClient.post<CreatePaymentResponse>(
         '/payment/create',
         paymentData
       );
 
-      console.log('✅ [PAYMENT] Pago creado:', {
-        orderId: response.data.data?.orderId,
-        status: response.data.data?.status,
-      });
-
       return response.data;
     } catch (error: any) {
-      console.error('❌ [PAYMENT] Error creando pago:', error.message);
       throw error;
     }
   }
@@ -82,20 +74,12 @@ export class PaymentService {
    */
   static async getPaymentStatus(orderId: number): Promise<PaymentStatusResponse> {
     try {
-      console.log('🔍 [PAYMENT] Consultando estado de orden:', orderId);
-
       const response = await httpClient.get<PaymentStatusResponse>(
         `/payment/status/${orderId}`
       );
 
-      console.log('✅ [PAYMENT] Estado obtenido:', {
-        orderId,
-        status: response.data.data?.status,
-      });
-
       return response.data;
     } catch (error: any) {
-      console.error('❌ [PAYMENT] Error consultando estado:', error.message);
       throw error;
     }
   }
@@ -107,7 +91,6 @@ export class PaymentService {
    */
   static redirectToPayment(paymentUrl: string): void {
     if (typeof window !== 'undefined') {
-      console.log('🔄 [PAYMENT] Redirigiendo a Payphone...');
       window.location.href = paymentUrl;
     }
   }

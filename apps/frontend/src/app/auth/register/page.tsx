@@ -107,6 +107,7 @@ export default function RegisterPage() {
               value={formData.email}
               onChange={handleChange}
               placeholder="tu@email.com"
+              autoComplete="email"
               disabled={isLoading}
               className={validationErrors.email ? "input-error" : ""}
             />
@@ -124,6 +125,7 @@ export default function RegisterPage() {
               value={formData.username}
               onChange={handleChange}
               placeholder="tu_usuario"
+              autoComplete="username"
               disabled={isLoading}
               className={validationErrors.username ? "input-error" : ""}
             />
@@ -141,6 +143,7 @@ export default function RegisterPage() {
               value={formData.password}
               onChange={handleChange}
               placeholder="••••••••"
+              autoComplete="new-password"
               disabled={isLoading}
               className={validationErrors.password ? "input-error" : ""}
             />
@@ -158,6 +161,7 @@ export default function RegisterPage() {
               value={formData.confirmPassword}
               onChange={handleChange}
               placeholder="••••••••"
+              autoComplete="new-password"
               disabled={isLoading}
               className={validationErrors.confirmPassword ? "input-error" : ""}
             />
