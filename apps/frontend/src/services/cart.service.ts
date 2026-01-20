@@ -337,8 +337,12 @@ export class CartService {
         this.saveLocalCart(cartForStorage);
         pendingItems.clear();
       }
-    } catch (error) {
-      // Reintentar en 10 segundos
+    } catch (error: any) {
+      // Ignorar errores 401 (no autenticado) - es esperado
+      if (error.response?.status === 401) {
+        return;
+      }
+      // Reintentar en 10 segundos para otros errores
       this.startAutoSync();
     }
   }

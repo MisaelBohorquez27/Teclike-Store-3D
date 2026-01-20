@@ -1,5 +1,15 @@
 "use client";
 
+/**
+ * COMPONENTE DE CHECKOUT - EN CONSTRUCCIÓN
+ * 
+ * Este componente maneja la funcionalidad de pago con Payphone.
+ * Actualmente está en fase de desarrollo/prueba.
+ * El código está completo y funcionará cuando el backend de pagos sea activado.
+ * 
+ * TODO: Implementar integración completa con Payphone cuando sea necesario
+ */
+
 import { useState } from "react";
 import { PaymentService } from "@/services/payment.service";
 import { useAuth } from "@/context/authcontext";
@@ -75,7 +85,7 @@ export function CheckoutButton({
       const isUnauthorized = err.response?.status === 401 || err.message?.includes('401');
       
       if (isUnauthorized) {
-        setError('El Carrito no esta disponible para el modo prueba');
+        setError('Carrito no disponible para el modo prueba.');
       } else {
         setError(err.message || 'Error al procesar el pago. Intenta nuevamente.');
       }
