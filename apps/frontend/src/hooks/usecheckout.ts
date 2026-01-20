@@ -24,10 +24,9 @@ export const useCheckout = (): UseCheckoutReturn => {
       setError(null);
       const checkoutSummary = await CheckoutService.getCheckoutSummary();
       setSummary(checkoutSummary);
-      console.log('✅ Resumen cargado:', checkoutSummary);
+
     } catch (err: any) {
       const errorMessage = err.message || "Error al cargar el resumen";
-      console.error(errorMessage);
       setError(errorMessage);
       setSummary(null);
     } finally {

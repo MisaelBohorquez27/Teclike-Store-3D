@@ -12,7 +12,6 @@ export const useTrendingProducts = () => {
         const response = await fetchAllProducts();
         setProducts(response.items);
       } catch (error) {
-        console.error("Error loading trending products:", error);
       } finally {
         setLoading(false);
       }

@@ -22,7 +22,6 @@ export function useSearch() {
         const results = await fetchSearchSuggestions(value);
         setSuggestions(results);
       } catch (error) {
-        console.error(error);
         setSuggestions([]);
       } finally {
         setIsLoading(false);

@@ -1,15 +1,7 @@
 import Redis from "ioredis";
+import { debug } from "../utils/debug";
 
 export const redis = new Redis(process.env.REDIS_URL || "redis://localhost:6379");
-
-// Logging de conexión
-redis.on("connect", () => {
-  console.log("✅ Redis conectado exitosamente");
-});
-
-redis.on("error", (error) => {
-  console.error("❌ Error en Redis:", error.message);
-});
 
 const CART_EXPIRY = 24 * 60 * 60; // 24 horas
 const SYNC_INTERVAL = 5 * 60; // 5 minutos
@@ -19,7 +11,6 @@ export async function getCachedCart(userId: number) {
     const cached = await redis.get(`cart:${userId}`);
     return cached ? JSON.parse(cached) : null;
   } catch (error) {
-    console.error(`❌ Error obteniendo carrito en caché para usuario ${userId}:`, error);
     return null;
   }
 }
@@ -28,7 +19,7 @@ export async function setCachedCart(userId: number, cart: any) {
   try {
     await redis.setex(`cart:${userId}`, CART_EXPIRY, JSON.stringify(cart));
   } catch (error) {
-    console.error(`❌ Error guardando carrito en caché para usuario ${userId}:`, error);
+    // Cache error
   }
 }
 
@@ -36,7 +27,7 @@ export async function deleteCachedCart(userId: number) {
   try {
     await redis.del(`cart:${userId}`);
   } catch (error) {
-    console.error(`❌ Error deletando carrito en caché para usuario ${userId}:`, error);
+    // Cache error
   }
 }
 
@@ -44,7 +35,6 @@ export async function cartExists(userId: number) {
   try {
     return (await redis.exists(`cart:${userId}`)) > 0;
   } catch (error) {
-    console.error(`❌ Error verificando carrito en caché para usuario ${userId}:`, error);
     return false;
   }
 }

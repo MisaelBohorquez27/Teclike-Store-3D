@@ -3,6 +3,7 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { User, AuthContextType } from "@/types/auth.types";
 import { AuthService } from "@/services/auth.service";
+import { debug } from "@/utils/debug";
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
@@ -15,26 +16,26 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   // Verificar usuario al cargar y sincronizar estado de autenticación
   useEffect(() => {
     const initAuth = async () => {
-      console.log('🔄 Inicializando AuthContext...');
+      debug.log('🔄 Inicializando AuthContext...');
       try {
         // Verificar si hay token válido
         const hasValidToken = AuthService.isAuthenticated();
-        console.log(`✅ Token válido: ${hasValidToken}`);
+        debug.log(`✅ Token válido: ${hasValidToken}`);
         setIsAuthenticated(hasValidToken);
 
         if (hasValidToken) {
           const user = AuthService.getUser();
-          console.log(`👤 Usuario cargado: ${user?.username}`);
+          debug.log(`👤 Usuario cargado: ${user?.username}`);
           setUser(user);
         } else {
           // Si no hay token válido, limpiar todo
-          console.log('🗑️ Sin token válido - limpiando todo');
+          debug.log('🗑️ Sin token válido - limpiando todo');
           setUser(null);
           AuthService.clearTokens();
           AuthService.clearUser();
         }
       } catch (error) {
-        console.error("❌ Error initializing auth:", error);
+        debug.error("❌ Error initializing auth:", error);
         setUser(null);
         setIsAuthenticated(false);
         AuthService.clearTokens();

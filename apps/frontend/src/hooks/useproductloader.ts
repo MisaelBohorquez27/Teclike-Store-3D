@@ -67,7 +67,6 @@ export function useProductLoader() {
       setTotalPages(res.pagination?.totalPages ?? 1);
       setCurrentPage(page);
     } catch (err) {
-      console.error("❌ Error cargando productos:", err);
       setProducts([]);
       setTotalPages(1);
     } finally {

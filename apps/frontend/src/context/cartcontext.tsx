@@ -63,16 +63,13 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     try {
       setLoading(true);
       setError(null);
-      console.log('🔄 Cargando carrito desde CartContext...');
       const response = await CartService.getCart();
       if (response.success && response.data) {
         setCart(response.data);
-        console.log('✅ Carrito cargado:', response.data);
       }
     } catch (err: any) {
       const message = err.message || "Error al cargar el carrito";
       setError(message);
-      console.error("❌ Error cargando carrito:", message);
     } finally {
       setLoading(false);
     }
@@ -97,17 +94,14 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   ) => {
     try {
       setError(null);
-      console.log(`🔍 [CONTEXT] addToCart llamado - productId=${productId}, quantity=${quantity}`, productData);
       const response = await CartService.addToCart(productId, quantity, productData);
       if (response.success && response.data) {
         setCart(response.data);
-        console.log(`✅ [CONTEXT] Producto agregado - itemCount=${response.data.itemCount}`);
       }
       return response;
     } catch (err: any) {
       const message = err.message || "Error al agregar al carrito";
       setError(message);
-      console.error("❌ Error agregando al carrito:", message);
       throw err;
     }
   };
@@ -116,17 +110,14 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const updateQuantity = async (productId: number, quantity: number) => {
     try {
       setError(null);
-      console.log(`🔄 Actualizando cantidad del producto ${productId} a ${quantity}...`);
       const response = await CartService.updateCartItem(productId, quantity);
       if (response.success && response.data) {
         setCart(response.data);
-        console.log('✅ Cantidad actualizada');
       }
       return response;
     } catch (err: any) {
       const message = err.message || "Error al actualizar cantidad";
       setError(message);
-      console.error("❌ Error actualizando cantidad:", message);
       throw err;
     }
   };
@@ -135,17 +126,14 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const removeFromCart = async (productId: number) => {
     try {
       setError(null);
-      console.log(`🗑️ Eliminando producto ${productId} del carrito...`);
       const response = await CartService.removeFromCart(productId);
       if (response.success && response.data) {
         setCart(response.data);
-        console.log('✅ Producto eliminado');
       }
       return response;
     } catch (err: any) {
       const message = err.message || "Error al remover del carrito";
       setError(message);
-      console.error("❌ Error eliminando del carrito:", message);
       throw err;
     }
   };
@@ -154,11 +142,9 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const clearCart = async () => {
     try {
       setError(null);
-      console.log('🧹 Vaciando carrito...');
       const response = await CartService.clearCart();
       if (response.success && response.data) {
         setCart(response.data);
-        console.log('✅ Carrito vaciado');
       }
       return response;
     } catch (err: any) {

@@ -19,7 +19,6 @@ export function useReviews(): UseReviewsReturn {
         const data = await fetchFeaturedReviews();
         setReviews(data);
       } catch (err) {
-        console.error("Error fetching reviews:", err);
       } finally {
         setLoading(false);
       }

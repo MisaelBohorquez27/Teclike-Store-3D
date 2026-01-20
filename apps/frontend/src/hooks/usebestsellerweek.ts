@@ -13,7 +13,6 @@ export const useBestSellerWeek = () => {
         const data = await fetchFeatured();
         setBestSellerWeek(data);
       } catch (err) {
-        console.error("Error fetching best sellers:", err);
         setError("Error al cargar los productos más vendidos");
       } finally {
         setLoading(false);

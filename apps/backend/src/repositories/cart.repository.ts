@@ -37,12 +37,9 @@ export async function addOrUpdateCartItem(
   stock: number,
   priceCents: number = 0
 ) {
-  console.log(`🔍 [REPO] addOrUpdateCartItem - cartId=${cartId}, productId=${productId}, quantity=${quantity}, priceCents=${priceCents}`);
-  
   const existing = await prisma.cartProduct.findFirst({ where: { cartId, productId } });
   
   if (existing) {
-    console.log(`🔍 [REPO] Producto existe con cantidad=${existing.quantity}, incrementando +1`);
     // Si el producto YA existe, solo incrementar de a 1 (ignorar quantity enviada)
     const newQuantity = existing.quantity + 1;
     if (newQuantity > stock) throw new Error(`Solo hay ${stock} unidades disponibles`);
@@ -50,17 +47,14 @@ export async function addOrUpdateCartItem(
       where: { id: existing.id }, 
       data: { quantity: newQuantity, priceCents } 
     });
-    console.log(`✅ [REPO] Actualizado a cantidad=${result.quantity}, priceCents=${result.priceCents}`);
     return result;
   }
   
-  console.log(`🔍 [REPO] Producto nuevo, creando con cantidad=${quantity}, priceCents=${priceCents}`);
   // Si es nuevo, usar la quantity enviada
   if (quantity > stock) throw new Error(`Solo hay ${stock} unidades disponibles`);
   const result = await prisma.cartProduct.create({ 
     data: { cartId, productId, quantity, priceCents } 
   });
-  console.log(`✅ [REPO] Creado con cantidad=${result.quantity}, priceCents=${result.priceCents}`);
   return result;
 }
 

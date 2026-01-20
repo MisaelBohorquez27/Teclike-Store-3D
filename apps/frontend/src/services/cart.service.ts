@@ -390,7 +390,6 @@ export class CartService {
     try {
       localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
     } catch (error) {
-      console.error('Error guardando carrito:', error);
     }
   }
 

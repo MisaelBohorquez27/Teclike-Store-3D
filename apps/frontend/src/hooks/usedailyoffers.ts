@@ -12,7 +12,6 @@ export const useDailyOffers = (limit = Number) => {
         const data = await fetchFeaturedOffers(limit);
         setOffers(data.data);
       } catch (error) {
-        console.error("Error fetching featured offers:", error);
       } finally {
         setLoading(false);
       }

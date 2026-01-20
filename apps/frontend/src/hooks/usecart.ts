@@ -45,7 +45,6 @@ export const useCart = (): UseCartReturn => {
       setCart(response.data);
     } catch (err: any) {
       const errorMessage = err.message || "Error al cargar el carrito";
-      console.error(errorMessage);
       setError(errorMessage);
       setCart(null);
     } finally {
@@ -58,10 +57,8 @@ export const useCart = (): UseCartReturn => {
     try {
       setError(null);
       await fetchCart();
-      console.log('✅ Carrito sincronizado después del login');
     } catch (err: any) {
       const errorMessage = err.message || "Error al sincronizar carrito";
-      console.warn(errorMessage);
       // No lanzar error, solo avisar
     }
   }, [fetchCart]);
@@ -73,10 +70,8 @@ export const useCart = (): UseCartReturn => {
   // Iniciar sincronización automática cuando el usuario está autenticado
   useEffect(() => {
     if (CartService.isAuthenticated()) {
-      console.log('🔄 Iniciando sincronización automática del carrito');
       CartService.startAutoSync();
     } else {
-      console.log('⏹️ Deteniendo sincronización automática');
       CartService.stopAutoSync();
     }
 

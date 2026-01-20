@@ -4,7 +4,6 @@ export class StorageHelper {
       const cartJson = localStorage.getItem('cart');
       return cartJson ? JSON.parse(cartJson) : [];
     } catch (error) {
-      console.error('Error reading cart from localStorage:', error);
       return [];
     }
   }
@@ -17,7 +16,7 @@ export class StorageHelper {
       };
       localStorage.setItem('cart', JSON.stringify(cartWithTimestamp));
     } catch (error) {
-      console.error('Error saving cart to localStorage:', error);
+      // Storage error
     }
   }
 
@@ -25,7 +24,7 @@ export class StorageHelper {
     try {
       localStorage.removeItem('cart');
     } catch (error) {
-      console.error('Error clearing cart from localStorage:', error);
+      // Storage error
     }
   }
 

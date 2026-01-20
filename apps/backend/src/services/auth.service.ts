@@ -92,15 +92,12 @@ export async function register(request: RegisterRequest) {
     username,
     password: hashedPassword,
   });
-
   // Crear carrito automáticamente para el nuevo usuario
   await prisma.cart.create({
     data: {
       userId: user.id,
     },
   });
-
-  console.log(`✅ Carrito creado para nuevo usuario: ${user.id}`);
 
   // Generar tokens
   const tokens = generateTokens(user);
