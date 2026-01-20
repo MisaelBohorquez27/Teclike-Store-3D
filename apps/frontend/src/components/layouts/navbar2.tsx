@@ -144,13 +144,13 @@ export function Navbar2() {
                     icon={FiShoppingBag}
                   />
                   <NavLink href="/dailyoffers" text="Oferta" icon={FiTag} />
-
                   {/* Carrito en mobile */}
                   <div
-                    className="py-3 px-4 flex justify-end"
+                    className="py-3 px-4 flex justify-start"
                     onClick={() => setIsOpen(false)}
                   >
-                    <CartIcon />
+                    <CartIcon />&nbsp;
+                    <span className="sr-only">carrito</span>
                   </div>
                 </div>
               </div>
