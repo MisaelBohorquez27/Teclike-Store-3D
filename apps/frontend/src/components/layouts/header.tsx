@@ -56,7 +56,6 @@ export function Header() {
               TECLIKE
             </Link>
           </div>
-          <Navbar2 />
 
           {/* Acciones del header */}
           <div className="flex items-center space-x-4 md:space-x-6 z-50">
