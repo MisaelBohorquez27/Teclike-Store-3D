@@ -126,9 +126,7 @@ export default function CheckoutPage() {
                       id="shipping-country"
                       name="country"
                       placeholder="País"
-                      autoComplete="country-nametry"
-                      name="country"
-                      placeholder="País"
+                      autoComplete="country-name"
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
                   </div>
