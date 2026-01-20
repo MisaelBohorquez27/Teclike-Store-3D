@@ -5,6 +5,7 @@ import Image from "next/image";
 import { FiHelpCircle, FiLogOut, FiUser } from "react-icons/fi";
 import logo from "../../../public/logos/Logo3.png";
 import Button from "@/components/common/pagesbuttons";
+import { Navbar2 } from "./navbar2";
 import { useState } from "react";
 import { useAuth } from "@/context/authcontext";
 import { AuthModal } from "@/components/auth/authmodal";
@@ -55,6 +56,10 @@ export function Header() {
               />
               TECLIKE
             </Link>
+          </div>
+          {/* Navbar2 - Solo visible en pantallas medianas (md) o mayores */}
+          <div className="hidden md:block">
+            <Navbar2 />
           </div>
 
           {/* Acciones del header */}
